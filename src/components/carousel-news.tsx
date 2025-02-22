@@ -94,7 +94,7 @@ export default function CarouselNews({
       </h1>
       <h2 className="text-xl mb-5">Fique por dentro das notícias</h2>
       <SelectLocal onChange={handleLocalChange} />
-      <div className="flex gap-2 items-center justify-between px-2 w-[80vw] mt-5">
+      <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
         <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
         <Link
           href={`/noticias`}
@@ -106,7 +106,10 @@ export default function CarouselNews({
 
       <div className="flex w-full gap-3 justify-center">
         {loading || localLoading ? (
-          <Slider {...settings} className="w-[80vw] my-5 gap-2 overflow-hidden">
+          <Slider
+            {...settings}
+            className="w-[80vw] lg:max-w-[1200px]  my-5 gap-2 overflow-hidden"
+          >
             {Array.from({ length: 4 }).map((_, index) => (
               <SkeletonNew key={index} />
             ))}
@@ -116,14 +119,17 @@ export default function CarouselNews({
             <p>Nenhuma notícia cadastrada.</p>
           </div>
         ) : (
-          <Slider {...settings} className="w-[80vw] my-5 mx-10 gap-2 ">
+          <Slider
+            {...settings}
+            className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
+          >
             {data.map((product: New) => {
               if (!page) {
                 setPage(product.page)
               }
               return (
                 <div
-                  className="justify-between flex flex-col h-[300px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                  className="justify-between flex flex-col h-[300px] md:h-[400px]  rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
                   key={product.id}
                 >
                   <div className="border-b-[3px] border-primary h-[50%] pb-2">
