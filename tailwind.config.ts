@@ -1,18 +1,28 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 export default {
+  darkMode: 'class',
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: '#233876',
+        secundary: '#1fb6ff',
+        bgdark: '#121214',
+        bgdarksecundary: '#1a1a1e',
+        textdark: '#EEEEEE',
+        bglight: '#F4F4F5',
+        bglightsecundary: '#E4E4E7',
+        textlight: '#262626',
+      },
+      fontFamily: {
+        Roboto: ['var(--font-roboto)'],
       },
     },
   },
   plugins: [],
-} satisfies Config;
+} satisfies Config

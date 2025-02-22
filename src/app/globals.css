@@ -2,20 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+.switch svg {
+  padding: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: gray; 
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #1fb6ff;
+  border-radius: 10px;
+  border: 3px solid gray;
+}
+
+.social-header svg {
+  font-size: 20px;
+}
+
+.slick-prev:before, .slick-next:before, .slick-dots li.slick-active button:before, .slick-dots li button:before {
+  color: #233876!important;
+}
+
+.highligt .slick-prev:before, .highligt .slick-next:before, .highligt .slick-dots li.slick-active button:before, .highligt .slick-dots li button:before {
+  color: #233876 !important;
+  font-size: 15px !important;
+}
+
+.highligt .slick-slide>div {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.slick-slide>div {
+  margin: 0 6px;
+}
+
+
+
+
+@layer base {
+  body {
+    @apply dark:bg-bgdark bg-bglight dark:text-textdark text-textlight;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
