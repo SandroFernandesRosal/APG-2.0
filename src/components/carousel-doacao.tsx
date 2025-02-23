@@ -4,53 +4,40 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
-import Image from 'next/image'
-import { New } from '@/data/types/new'
+import { Doacao } from '@/data/types/doacao'
+import RemoveDoacao from './crud/RemoveDoacao'
+import AddDoacao from './crud/AddDoacao'
 import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
-import { useData, useLocal } from '@/store/useStore'
+import EditDoacao from './crud/EditDoacao'
 import SkeletonNew from './skeleton/SkeletonNew'
-import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
-import AddNew from './crud/AddNew'
-import EditNew from './crud/EditNew'
-import RemoveNew from './crud/RemoveNew'
 
-export default function CarouselNews({
+export default function CarouselDoacao({
   titleproducts,
 }: {
   titleproducts: string
 }) {
-  const { data, setData } = useData()
-  const { local, setLocal } = useLocal()
+  const [data, setData] = useState<Doacao[]>([])
   const [loading, setLoading] = useState(true)
-  const [localLoading, setLocalLoading] = useState(false)
-  const [page, setPage] = useState('')
-  const [openNew, setOpenNew] = useState(false)
+  const [openDoacao, setOpenDoacao] = useState(false)
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const [selectedProduct, setSelectedProduct] = useState<New | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<Doacao | null>(null)
 
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/news/${local}`)
+      .get(`/doacao`)
       .then((response) => {
-        setData(response.data.newsTotal)
+        setData(response.data)
         setLoading(false)
-        setLocalLoading(false)
       })
       .catch((err) => {
         console.log(err)
         setLoading(false)
-        setLocalLoading(false)
       })
-  }, [setData, local])
-
-  const handleLocalChange = (newLocal: string) => {
-    setLocalLoading(true)
-    setLocal(newLocal)
-  }
+  }, [])
 
   const settings = {
     dots: true,
@@ -97,36 +84,41 @@ export default function CarouselNews({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary">
+      <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary relative">
         <h1 className="text-xl font-bold text-primary dark:text-secundary">
-          Notícias
+          Ajude a igreja
         </h1>
-        <h2 className="text-xl mb-5">Fique por dentro das notícias</h2>
+        <h2 className="text-xl mb-5">
+          Faça uma doação por pix ou transferência bancária
+        </h2>
 
         {token && (
           <>
-            {openNew === false && (
+            {openDoacao === false && (
               <button
-                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                onClick={() => setOpenNew(true)}
+                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                onClick={() => setOpenDoacao(true)}
               >
-                Adicionar notícia
+                Adicionar igreja
               </button>
             )}
 
-            {openNew && (
+            {openDoacao && (
               <div className="md:min-w-[35%]">
                 {' '}
-                <AddNew openNew={openNew} setOpenNew={setOpenNew} />
+                <AddDoacao
+                  openDoacao={openDoacao}
+                  setOpenDoacao={setOpenDoacao}
+                />
               </div>
             )}
           </>
         )}
-        <SelectLocal onChange={handleLocalChange} />
+
         <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
-            href={`/noticias`}
+            href={`/enderecos`}
             className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
           >
             <span>Ver todos</span> <FaPlus />
@@ -134,10 +126,10 @@ export default function CarouselNews({
         </div>
 
         <div className="flex w-full gap-3 justify-center">
-          {loading || localLoading ? (
+          {loading ? (
             <Slider
               {...settings}
-              className="w-[80vw] lg:max-w-[1200px]  my-5 gap-2 overflow-hidden"
+              className="w-[80vw] lg:max-w-[1200px] my-5 gap-2 overflow-hidden"
             >
               {Array.from({ length: 4 }).map((_, index) => (
                 <SkeletonNew key={index} />
@@ -145,43 +137,38 @@ export default function CarouselNews({
             </Slider>
           ) : data.length === 0 ? (
             <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
-              <p>Nenhuma notícia cadastrada.</p>
+              <p>Nenhuma igreja cadastrada.</p>
             </div>
           ) : (
             <Slider
               {...settings}
               className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
             >
-              {data.map((product: New) => {
-                if (!page) {
-                  setPage(product.page)
-                }
+              {data.map((product: Doacao) => {
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px]  rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
                     key={product.id}
                   >
-                    <div className="border-b-[3px] border-primary dark:border-secundary h-[50%] pb-2">
-                      <Link
-                        href={`/noticias/${product.page}/${product.id}`}
-                        className="group h-full"
-                      >
-                        <Image
-                          src={product.coverUrl}
-                          width={500}
-                          height={500}
-                          alt={product.title}
-                          className="group-hover:scale-105 transition-transform duration-500 p-2 h-full rounded-t-md"
-                        />
-                      </Link>
+                    <div className="border-b-[3px] border-primary dark:border-secundary  flex text-xl justify-around w-full h-[50%]  py-1 flex-col items-center">
+                      <h1 className="font-bold ">{product.local}</h1>{' '}
+                      <span className=" flex items-center   text-gray-900 dark:text-white">
+                        {product.banco}
+                      </span>
+                      <span className=" text-gray-500 dark:text-gray-400">
+                        C: {product.conta}
+                      </span>
+                      <span className=" text-gray-500 dark:text-gray-400">
+                        Ag: {product.agencia}
+                      </span>
+                      <span className=" text-gray-500 dark:text-gray-400">
+                        {product.nomebanco}
+                      </span>
                     </div>
-                    <div className="flex flex-col my-2 min-h-[100px] md:min-h-[70px] gap-2 justify-between">
-                      <Link href={`/${product.page}/${product.id}`}>
-                        <p className="text-center px-1">{product.title}</p>
-                      </Link>
-                      <div className="flex flex-wrap justify-evenly px-2 gap-2">
-                        {product.content}
-                      </div>
+                    <div className="flex flex-col justify-center items-center h-[50%]">
+                      <span>Chave pix:</span>
+                      <h1>{product.pix}</h1>
+                      <h2>{product.nomepix}</h2>
 
                       {token && (
                         <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
@@ -196,7 +183,7 @@ export default function CarouselNews({
                               Editar
                             </button>
                           ) : null}
-                          <RemoveNew id={product.id} />
+                          <RemoveDoacao id={product.id} />
                         </div>
                       )}
                     </div>
@@ -207,15 +194,17 @@ export default function CarouselNews({
           )}
         </div>
       </section>
-
       {openEdit && selectedProduct && (
-        <EditNew
+        <EditDoacao
+          localInitial={selectedProduct.local}
+          bancoInitial={selectedProduct.banco}
+          contaInitial={selectedProduct.conta}
+          agenciaInitial={selectedProduct.agencia}
+          nomebancoInitial={selectedProduct.nomebanco}
+          pixInitial={selectedProduct.pix}
+          nomepixInitial={selectedProduct.nomepix}
           id={selectedProduct.id}
-          titulo={selectedProduct.title}
-          conteudo={selectedProduct.content}
-          img={selectedProduct.coverUrl}
           setOpenEdit={setOpenEdit}
-          destacar={selectedProduct.destaque}
         />
       )}
     </>

@@ -1,11 +1,17 @@
 'use client'
 import Cookies from 'js-cookie'
-
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { api } from '@/lib/api'
+
+interface EditEnderecoProps {
+  setOpenEdit: (open: string | null) => void
+  id: string
+  localInitial: string
+  ruaInitial: string
+  cepInitial: string
+}
 
 export default function EditEndereco({
   setOpenEdit,
@@ -13,15 +19,15 @@ export default function EditEndereco({
   localInitial,
   ruaInitial,
   cepInitial,
-}) {
-  const [local, setLocal] = useState('')
-  const [rua, setRua] = useState('')
-  const [cep, setCep] = useState('')
+}: EditEnderecoProps) {
+  const [local, setLocal] = useState<string>(localInitial)
+  const [rua, setRua] = useState<string>(ruaInitial)
+  const [cep, setCep] = useState<string>(cepInitial)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     try {
@@ -43,7 +49,7 @@ export default function EditEndereco({
       const endereco = response.data
 
       if (response.status === 200 && endereco) {
-        setOpenEdit(false)
+        setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
         return endereco
@@ -65,43 +71,43 @@ export default function EditEndereco({
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
         Editar endereço{' '}
         <AiFillCloseCircle
-          onClick={() => setOpenEdit(false)}
+          onClick={() => setOpenEdit(null)}
           className="cursor-pointer text-2xl font-bold text-black dark:text-white"
         />
       </h1>
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="local"
         required={true}
         placeholder="Digite o local"
-        defaultValue={localInitial}
+        value={local}
         onChange={(e) => setLocal(e.target.value)}
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="rua"
         required={true}
         placeholder="Digite nome da rua"
-        defaultValue={ruaInitial}
+        value={rua}
         onChange={(e) => setRua(e.target.value)}
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark "
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark "
         type="text"
         name="cep"
         required={true}
         placeholder="Digite o cep"
-        defaultValue={cepInitial}
+        value={cep}
         onChange={(e) => setCep(e.target.value)}
       />
 
       <button
         type="submit"
-        className="z-20  m-1 mr-2 flex cursor-pointer items-center justify-center  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  px-6  font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white  p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
       >
         Enviar
       </button>

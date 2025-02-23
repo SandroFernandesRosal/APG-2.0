@@ -11,6 +11,10 @@ import { useEffect, useState } from 'react'
 import { useDataAgenda, useLocal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
+import { useToken } from '@/hooks/useToken'
+import AddAgenda from './crud/AddAgenda'
+import EditAgenda from './crud/EditAgenda'
+import RemoveAgenda from './crud/RemoveAgenda'
 
 export default function CarouselAgenda({
   titleproducts,
@@ -21,6 +25,10 @@ export default function CarouselAgenda({
   const { local, setLocal } = useLocal()
   const [loading, setLoading] = useState(true)
   const [localLoading, setLocalLoading] = useState(false)
+  const [openAgenda, setOpenAgenda] = useState(false)
+  const token = useToken()
+  const [openEdit, setOpenEdit] = useState<string | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<Agenda | null>(null)
 
   useEffect(() => {
     setLoading(true)
@@ -87,68 +95,119 @@ export default function CarouselAgenda({
   }
 
   return (
-    <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary">
-      <h1 className="text-xl font-bold text-primary dark:text-secundary">
-        Agenda
-      </h1>
-      <h2 className="text-xl mb-5">Todos os nossos eventos</h2>
-      <SelectLocal onChange={handleLocalChange} />
-      <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
-        <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
-        <Link
-          href={`/agenda`}
-          className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
-        >
-          <span>Ver todos</span> <FaPlus />
-        </Link>
-      </div>
+    <>
+      <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary">
+        <h1 className="text-xl font-bold text-primary dark:text-secundary">
+          Agenda
+        </h1>
+        <h2 className="text-xl mb-5">Todos os nossos eventos</h2>
 
-      <div className="flex w-full gap-3 justify-center">
-        {loading || localLoading ? (
-          <Slider
-            {...settings}
-            className="w-[80vw] lg:max-w-[1200px] my-5 gap-2 overflow-hidden"
-          >
-            {Array.from({ length: 4 }).map((_, index) => (
-              <SkeletonNew key={index} />
-            ))}
-          </Slider>
-        ) : dataAgenda.length === 0 ? (
-          <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
-            <p>Nenhum evento cadastrado.</p>
-          </div>
-        ) : (
-          <Slider
-            {...settings}
-            className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
-          >
-            {dataAgenda.map((product: Agenda) => {
-              return (
-                <div
-                  className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
-                  key={product.id}
-                >
-                  <div className="border-b-[3px] border-primary flex text-xl font-bold justify-center w-full  py-2">
-                    {product.day}
-                  </div>
-                  <ul className="relative   mt-10  flex place-self-center w-[80%] overflow-visible border-l border-zinc-300 dark:border-zinc-800">
-                    <li className="mb-5 ml-6">
-                      <span className="absolute  -left-1 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
-                      <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white">
-                        {product.name}
-                      </h3>
+        {token && (
+          <>
+            {openAgenda === false && (
+              <button
+                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                onClick={() => setOpenAgenda(true)}
+              >
+                Adicionar evento
+              </button>
+            )}
 
-                      <p className="font-normal text-gray-500 dark:text-gray-400">
-                        {product.hour}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              )
-            })}
-          </Slider>
+            {openAgenda && (
+              <div className="md:min-w-[35%]">
+                {' '}
+                <AddAgenda
+                  openAgenda={openAgenda}
+                  setOpenAgenda={setOpenAgenda}
+                />
+              </div>
+            )}
+          </>
         )}
-      </div>
-    </section>
+        <SelectLocal onChange={handleLocalChange} />
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
+          <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
+          <Link
+            href={`/agenda`}
+            className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
+          >
+            <span>Ver todos</span> <FaPlus />
+          </Link>
+        </div>
+
+        <div className="flex w-full gap-3 justify-center">
+          {loading || localLoading ? (
+            <Slider
+              {...settings}
+              className="w-[80vw] lg:max-w-[1200px] my-5 gap-2 overflow-hidden"
+            >
+              {Array.from({ length: 4 }).map((_, index) => (
+                <SkeletonNew key={index} />
+              ))}
+            </Slider>
+          ) : dataAgenda.length === 0 ? (
+            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
+              <p>Nenhum evento cadastrado.</p>
+            </div>
+          ) : (
+            <Slider
+              {...settings}
+              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
+            >
+              {dataAgenda.map((product: Agenda) => {
+                return (
+                  <div
+                    className="flex justify-between  flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                    key={product.id}
+                  >
+                    <div className="border-b-[3px] border-primary dark:border-secundary flex text-xl font-bold justify-center w-full  py-2">
+                      {product.day}
+                    </div>
+                    <ul className="relative   mt-10  flex place-self-center w-[80%] overflow-visible border-l border-zinc-300 dark:border-zinc-800">
+                      <li className="mb-5 ml-6">
+                        <span className="absolute  -left-1 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
+                        <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white">
+                          {product.name}
+                        </h3>
+
+                        <p className="font-normal text-gray-500 dark:text-gray-400">
+                          {product.hour}
+                        </p>
+                      </li>
+                    </ul>
+                    {token && (
+                      <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
+                        {openEdit !== product.id ? (
+                          <button
+                            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                            onClick={() => {
+                              setOpenEdit(product.id)
+                              setSelectedProduct(product)
+                            }}
+                          >
+                            Editar
+                          </button>
+                        ) : null}
+                        <RemoveAgenda id={product.id} />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </Slider>
+          )}
+        </div>
+      </section>
+
+      {openEdit && selectedProduct && (
+        <EditAgenda
+          id={selectedProduct.id}
+          title={selectedProduct.name}
+          hora={selectedProduct.hour}
+          dia={selectedProduct.day}
+          setOpenEdit={setOpenEdit}
+        />
+      )}
+    </>
   )
 }

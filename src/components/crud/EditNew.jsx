@@ -15,6 +15,7 @@ export default function EditNew({
   titulo,
   conteudo,
   destacar,
+  
 }) {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -60,6 +61,7 @@ export default function EditNew({
           coverUrl,
           page: local,
           destaque,
+          
         },
         {
           headers: {
@@ -123,7 +125,7 @@ export default function EditNew({
             width={200}
             height={100}
             alt={titulo}
-            className=" aspect-video"
+            className=" aspect-video p-1 border-[1px] border-primary dark:border-secundary"
           />
         ) : (
           <Image
@@ -131,13 +133,13 @@ export default function EditNew({
             alt={titulo}
             width={500}
             height={250}
-            className=" aspect-video w-[70%] md:w-[50%]"
+            className=" aspect-video w-[70%] md:w-[50%] p-1 border-[1px] border-primary dark:border-secundary"
           />
         )}
       </label>
 
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark md:w-[50%]"
+        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark md:w-[50%]"
         type="text"
         name="title"
         id="title"
@@ -148,7 +150,7 @@ export default function EditNew({
       />
 
       <textarea
-        className="mb-1 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark md:w-[50%]"
+        className="mb-4   w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark md:w-[50%]"
         type="text"
         name="content"
         id="content"
@@ -166,7 +168,7 @@ export default function EditNew({
         onChange={onFileSelected}
       />
 
-      <div className="mb-4 flex items-center gap-2  p-2">
+<div className="mb-4 flex items-center gap-2  p-2">
         <input
           type="checkbox"
           id="destaque"
@@ -186,7 +188,7 @@ export default function EditNew({
 
       <button
         type="submit"
-        className="z-20  m-1 mr-2 flex cursor-pointer items-center justify-center  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  px-6  font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
       >
         Enviar
       </button>

@@ -1,21 +1,27 @@
 'use client'
 import Cookies from 'js-cookie'
-
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { api } from '@/lib/api'
 
-export default function AddEndereco({ openEndereco, setOpenEndereco }) {
-  const [local, setLocal] = useState('')
-  const [rua, setRua] = useState('')
-  const [cep, setCep] = useState('')
+interface AddEnderecoProps {
+  openEndereco: boolean
+  setOpenEndereco: (open: boolean) => void
+}
+
+export default function AddEndereco({
+  openEndereco,
+  setOpenEndereco,
+}: AddEnderecoProps) {
+  const [local, setLocal] = useState<string>('')
+  const [rua, setRua] = useState<string>('')
+  const [cep, setCep] = useState<string>('')
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     try {
@@ -66,32 +72,35 @@ export default function AddEndereco({ openEndereco, setOpenEndereco }) {
         )}
       </h1>
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="local"
         placeholder="Digite um local"
+        value={local}
         onChange={(e) => setLocal(e.target.value)}
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="rua"
         placeholder="Digite o nome da rua"
+        value={rua}
         onChange={(e) => setRua(e.target.value)}
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="cep"
         placeholder="Digite o cep"
+        value={cep}
         onChange={(e) => setCep(e.target.value)}
       />
 
       <button
         type="submit"
-        className="z-20  m-1 mr-2 flex cursor-pointer items-center justify-center  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  px-6  font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
       >
         Enviar
       </button>

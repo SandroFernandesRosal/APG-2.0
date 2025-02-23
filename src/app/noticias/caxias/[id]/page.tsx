@@ -57,7 +57,7 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
             <div className="mt-2 flex gap-3">
               {openEdit === false && (
                 <button
-                  className="m-1  rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 px-2  text-white shadow-light  hover:from-blue-900 hover:to-slate-900 dark:shadow-dark md:px-3  md:text-lg md:font-bold"
+                  className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                   onClick={() => setOpenEdit(true)}
                 >
                   Editar

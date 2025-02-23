@@ -25,7 +25,7 @@ export default function Noticias() {
           <>
             {openNew === false && (
               <div
-                className="mb-4 flex cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglight p-2 placeholder-black outline-none  hover:bg-gradient-to-r hover:from-blue-900 hover:to-slate-900 hover:text-white focus:ring-0 dark:border-zinc-800 dark:bg-bgdark dark:placeholder-white "
+                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                 onClick={() => setOpenNew(true)}
               >
                 Adicionar Notícia

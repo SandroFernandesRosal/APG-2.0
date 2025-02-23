@@ -41,7 +41,7 @@ export default function RemoveNew({ id }) {
     <button
       onClick={handleSubmit}
       disabled={isDeleting}
-      className="m-[5px] rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r  from-slate-950 to-blue-900  px-2 text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700  md:px-3 md:text-lg  md:font-bold"
+     className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
     >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>

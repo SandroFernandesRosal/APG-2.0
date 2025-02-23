@@ -1,25 +1,26 @@
 'use client'
 import Cookies from 'js-cookie'
-
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
-import { useState } from 'react'
+import { useState, MouseEvent } from 'react'
 import { api } from '@/lib/api'
 
-export default function RemoveAgenda({ id }) {
-  const { local } = useLocal()
+interface RemoveDoacaoProps {
+  id: string
+}
+
+export default function RemoveDoacao({ id }: RemoveDoacaoProps) {
   const router = useRouter()
   const token = Cookies.get('tokennn')
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault()
 
     if (isDeleting) return
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/agenda/${local}/${id}`, {
+      const response = await api.delete(`/doacao/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -30,10 +31,10 @@ export default function RemoveAgenda({ id }) {
         router.push('/')
         window.location.href = '/'
       } else {
-        console.error('Erro ao remover da agenda:', response.statusText)
+        console.error('Erro ao remover doação:', response.statusText)
       }
     } catch (error) {
-      console.error('Erro ao remover da agenda:', error)
+      console.error('Erro ao remover doação:', error)
     } finally {
       setIsDeleting(false)
     }
@@ -43,7 +44,7 @@ export default function RemoveAgenda({ id }) {
     <button
       onClick={handleSubmit}
       disabled={isDeleting}
-      className="m-[5px]  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r  from-slate-950 to-blue-900  px-1 text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700  md:px-3 md:text-lg md:font-bold"
+      className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
     >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>
