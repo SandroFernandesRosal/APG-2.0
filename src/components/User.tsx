@@ -28,7 +28,7 @@ export default async function UserComponent() {
               alt="imagem de perfil"
               width={40}
               height={40}
-              className="m-2 h-[40px] w-[40px] rounded-full border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 p-[2px] font-bold hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+              className="p-[2px] mr-1 h-[40px] w-[40px] rounded-full border-[1px] border-primary  dark:border-secundary"
             />
             <p className="text-lg font-bold text-black dark:text-white">
               {name}
@@ -37,7 +37,7 @@ export default async function UserComponent() {
           <div className="flex items-center">
             <Link
               href={'/perfil/adm'}
-              className="m-2 flex h-[32px] items-center rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 px-2 text-lg font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+              className="rounded-md mx-2 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
             >
               Perfil
             </Link>
