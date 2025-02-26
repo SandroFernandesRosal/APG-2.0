@@ -1,11 +1,20 @@
 'use client'
 import Cookies from 'js-cookie'
 
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { api } from '@/lib/api'
+
+interface EditContatoProps {
+  setOpenEdit: (open: string | null) => void
+  id: string
+  localInitial: string
+  whatsappInitial: string
+  facebookInitial: string
+  instagramInitial: string
+}
 
 export default function EditContatos({
   setOpenEdit,
@@ -13,17 +22,17 @@ export default function EditContatos({
   localInitial,
   whatsappInitial,
   facebookInitial,
-  instagranInitial,
-}) {
-  const [local, setLocal] = useState('')
-  const [whatsapp, setWhatsapp] = useState('')
-  const [facebook, setFacebook] = useState('')
-  const [instagran, setInstagran] = useState('')
+  instagramInitial,
+}: EditContatoProps) {
+  const [local, setLocal] = useState<string>(localInitial)
+  const [whatsapp, setWhatsapp] = useState<string>(whatsappInitial)
+  const [facebook, setFacebook] = useState<string>(facebookInitial)
+  const [instagram, setInstagram] = useState<string>(instagramInitial)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     try {
@@ -33,7 +42,7 @@ export default function EditContatos({
           local: local || localInitial,
           whatsapp: whatsapp || whatsappInitial,
           facebook: facebook || facebookInitial,
-          instagran: instagran || instagranInitial,
+          instagram: instagram || instagramInitial,
         },
         {
           headers: {
@@ -46,7 +55,7 @@ export default function EditContatos({
       const contato = response.data
 
       if (response.status === 200 && contato) {
-        setOpenEdit(false)
+        setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
         return contato
@@ -68,12 +77,12 @@ export default function EditContatos({
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
         Editar contato{' '}
         <AiFillCloseCircle
-          onClick={() => setOpenEdit(false)}
+          onClick={() => setOpenEdit(null)}
           className="cursor-pointer text-2xl font-bold text-black dark:text-white"
         />
       </h1>
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="local"
         required={true}
@@ -83,7 +92,7 @@ export default function EditContatos({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="whatsapp"
         required={true}
@@ -93,17 +102,17 @@ export default function EditContatos({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark "
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark "
         type="text"
         name="instagran"
         required={true}
         placeholder="Digite o instagran"
-        defaultValue={instagranInitial}
-        onChange={(e) => setInstagran(e.target.value)}
+        defaultValue={instagramInitial}
+        onChange={(e) => setInstagram(e.target.value)}
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark "
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark "
         type="text"
         name="facebook"
         required={true}
@@ -114,7 +123,7 @@ export default function EditContatos({
 
       <button
         type="submit"
-        className="hover:to-slate-900border-[1px]  z-20 m-1 mr-2 flex cursor-pointer items-center  justify-center rounded-lg border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  px-6  font-bold text-white hover:from-blue-900 dark:border-zinc-700"
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
       >
         Enviar
       </button>

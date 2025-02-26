@@ -1,14 +1,20 @@
-import { New } from '@/data/types/new'
+import { Agenda } from '@/data/types/agenda'
 import { useEffect, useState } from 'react'
-import { useData, useLocal, useSearch, useDataSearch } from '@/store/useStore'
+import {
+  useDataAgenda,
+  useLocal,
+  useSearch,
+  useDataSearch,
+} from '@/store/useStore'
 import { api } from '@/lib/api'
 
 import ResultLength from './ResultLength'
-import ItemNew from './item-new'
+
+import ItemAgenda from './item-agenda'
 import SkeletonNew from './skeleton/SkeletonNew'
 
-export default function News() {
-  const { data, setData } = useData() || { data: [] }
+export default function Eventos() {
+  const { dataAgenda, setDataAgenda } = useDataAgenda() || { dataAgenda: [] }
   const { search } = useSearch()
   const { dataSearch, setDataSearch } = useDataSearch()
   const { local } = useLocal()
@@ -20,7 +26,7 @@ export default function News() {
 
   useEffect(() => {
     api
-      .get(`/news/${local}/search?search=${search}`)
+      .get(`/agenda/${local}/search?search=${search}`)
       .then((response) => {
         setDataSearch(response.data)
       })
@@ -28,33 +34,34 @@ export default function News() {
   }, [local, setDataSearch, search])
 
   useEffect(() => {
+    setLoading(true)
     api
-      .get(`/news/${local}?offset=${offset}`)
+      .get(`/agenda/${local}?offset=${offset}`)
       .then((response) => {
         console.log('Dados iniciais:', response.data)
 
-        setData(Array.isArray(response.data) ? response.data : [])
+        setDataAgenda(Array.isArray(response.data) ? response.data : [])
         setLoading(false)
 
         setHasMore(response.data.length === itemsPerPage)
       })
       .catch((err) => {
         console.log(err)
-        setData([])
+        setDataAgenda([])
         setLoading(false)
       })
-  }, [setData, local, offset])
+  }, [setDataAgenda, local, offset])
 
   const loadMore = () => {
     const newOffset = offset + itemsPerPage
 
     api
-      .get(`/news/${local}?offset=${newOffset}`)
+      .get(`/agenda/${local}?offset=${newOffset}`)
       .then((response) => {
         console.log('Novos dados carregados:', response.data)
 
         if (Array.isArray(response.data) && response.data.length > 0) {
-          setData((prevData: New[]) => {
+          setDataAgenda((prevData: Agenda[]) => {
             const newData = [...prevData, ...response.data]
             console.log('Nova lista de dados:', newData)
             return newData
@@ -80,35 +87,31 @@ export default function News() {
 
       {search ? <ResultLength dataSearch={dataSearch} /> : null}
 
-      <div className="flex justify-center gap-5 flex-wrap w-full px-2">
+      <div className="flex justify-center gap-5 flex-wrap w-full">
         {search
           ? dataSearch &&
             dataSearch.length > 0 &&
-            dataSearch.map((product: New) => (
-              <ItemNew
+            dataSearch.map((product: Agenda) => (
+              <ItemAgenda
                 key={product.id}
                 id={product.id}
-                coverUrl={product.coverUrl}
-                content={product.content}
-                title={product.title}
+                name={product.name}
+                day={product.day}
+                hour={product.hour}
                 createdAt={product.createdAt}
-                destaque={false}
-                page={product.page}
                 updatedAt={product.updatedAt}
               />
             ))
-          : loading
-            ? Array.isArray(data) &&
-              data.map((product: New) => (
-                <ItemNew
+          : !loading
+            ? Array.isArray(dataAgenda) &&
+              dataAgenda.map((product: Agenda) => (
+                <ItemAgenda
                   key={product.id}
                   id={product.id}
-                  coverUrl={product.coverUrl}
-                  content={product.content}
-                  title={product.title}
+                  name={product.name}
+                  day={product.day}
+                  hour={product.hour}
                   createdAt={product.createdAt}
-                  destaque={false}
-                  page={product.page}
                   updatedAt={product.updatedAt}
                 />
               ))
@@ -126,10 +129,8 @@ export default function News() {
         </button>
       )}
 
-      {!search && !hasMore && data.length > 0 && (
-        <p className="mt-4 text-gray-500">
-          Não há mais notícias para carregar.
-        </p>
+      {!search && !hasMore && dataAgenda.length > 0 && (
+        <p className="mt-4 text-gray-500">Não há mais eventos para carregar.</p>
       )}
     </div>
   )

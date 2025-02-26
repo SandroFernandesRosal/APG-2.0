@@ -37,7 +37,7 @@ export default function CarouselMinisterio({
     api
       .get(`/ministerio/${local}`)
       .then((response) => {
-        setDataMinisterio(response.data.ministerioTotal)
+        setDataMinisterio(response.data)
         setLoading(false)
         setLocalLoading(false)
       })
@@ -168,7 +168,7 @@ export default function CarouselMinisterio({
                         width={130}
                         height={130}
                         alt={product.title}
-                        className="group-hover:scale-105 transition-transform duration-500 p-1 object-center rounded-full border-[1px] border-primary dark:border-secundary"
+                        className="group-hover:scale-105 transition-transform duration-500 p-1 w-[100px] h-[100px] md:w-[130px] md:h-[130px] rounded-full border-[1px] border-primary dark:border-secundary"
                       />
                     </div>
                     <div className="flex flex-col my-2 min-h-[100px] md:min-h-[70px] gap-2 justify-between items-center">

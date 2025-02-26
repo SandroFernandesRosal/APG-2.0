@@ -1,14 +1,22 @@
-import { New } from '@/data/types/new'
+import { Ministerio } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
-import { useData, useLocal, useSearch, useDataSearch } from '@/store/useStore'
+import {
+  useDataMinisterio,
+  useLocal,
+  useSearch,
+  useDataSearch,
+} from '@/store/useStore'
 import { api } from '@/lib/api'
 
 import ResultLength from './ResultLength'
-import ItemNew from './item-new'
+
+import ItemMinisterio from './item-ministerio'
 import SkeletonNew from './skeleton/SkeletonNew'
 
-export default function News() {
-  const { data, setData } = useData() || { data: [] }
+export default function Ministerioo() {
+  const { dataMinisterio, setDataMinisterio } = useDataMinisterio() || {
+    dataMinisterio: [],
+  }
   const { search } = useSearch()
   const { dataSearch, setDataSearch } = useDataSearch()
   const { local } = useLocal()
@@ -20,7 +28,7 @@ export default function News() {
 
   useEffect(() => {
     api
-      .get(`/news/${local}/search?search=${search}`)
+      .get(`/ministerio/${local}/search?search=${search}`)
       .then((response) => {
         setDataSearch(response.data)
       })
@@ -28,33 +36,34 @@ export default function News() {
   }, [local, setDataSearch, search])
 
   useEffect(() => {
+    setLoading(true)
     api
-      .get(`/news/${local}?offset=${offset}`)
+      .get(`/ministerio/${local}?offset=${offset}`)
       .then((response) => {
         console.log('Dados iniciais:', response.data)
 
-        setData(Array.isArray(response.data) ? response.data : [])
+        setDataMinisterio(Array.isArray(response.data) ? response.data : [])
         setLoading(false)
 
         setHasMore(response.data.length === itemsPerPage)
       })
       .catch((err) => {
         console.log(err)
-        setData([])
+        setDataMinisterio([])
         setLoading(false)
       })
-  }, [setData, local, offset])
+  }, [setDataMinisterio, local, offset])
 
   const loadMore = () => {
     const newOffset = offset + itemsPerPage
 
     api
-      .get(`/news/${local}?offset=${newOffset}`)
+      .get(`/ministerio/${local}?offset=${newOffset}`)
       .then((response) => {
         console.log('Novos dados carregados:', response.data)
 
         if (Array.isArray(response.data) && response.data.length > 0) {
-          setData((prevData: New[]) => {
+          setDataMinisterio((prevData: Ministerio[]) => {
             const newData = [...prevData, ...response.data]
             console.log('Nova lista de dados:', newData)
             return newData
@@ -80,35 +89,33 @@ export default function News() {
 
       {search ? <ResultLength dataSearch={dataSearch} /> : null}
 
-      <div className="flex justify-center gap-5 flex-wrap w-full px-2">
+      <div className="flex justify-center gap-5 flex-wrap w-full">
         {search
           ? dataSearch &&
             dataSearch.length > 0 &&
-            dataSearch.map((product: New) => (
-              <ItemNew
-                key={product.id}
+            dataSearch.map((product: Ministerio) => (
+              <ItemMinisterio
                 id={product.id}
-                coverUrl={product.coverUrl}
-                content={product.content}
+                key={product.id}
                 title={product.title}
+                name={product.name}
+                local={product.local}
+                coverUrl={product.coverUrl}
                 createdAt={product.createdAt}
-                destaque={false}
-                page={product.page}
                 updatedAt={product.updatedAt}
               />
             ))
-          : loading
-            ? Array.isArray(data) &&
-              data.map((product: New) => (
-                <ItemNew
-                  key={product.id}
+          : !loading
+            ? Array.isArray(dataMinisterio) &&
+              dataMinisterio.map((product: Ministerio) => (
+                <ItemMinisterio
                   id={product.id}
-                  coverUrl={product.coverUrl}
-                  content={product.content}
+                  key={product.id}
                   title={product.title}
+                  name={product.name}
+                  local={product.local}
+                  coverUrl={product.coverUrl}
                   createdAt={product.createdAt}
-                  destaque={false}
-                  page={product.page}
                   updatedAt={product.updatedAt}
                 />
               ))
@@ -126,10 +133,8 @@ export default function News() {
         </button>
       )}
 
-      {!search && !hasMore && data.length > 0 && (
-        <p className="mt-4 text-gray-500">
-          Não há mais notícias para carregar.
-        </p>
+      {!search && !hasMore && dataMinisterio.length > 0 && (
+        <p className="mt-4 text-gray-500">Não há mais líder para carregar.</p>
       )}
     </div>
   )

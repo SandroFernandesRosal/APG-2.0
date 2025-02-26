@@ -164,8 +164,8 @@ export default function CarouselEndereco({
                       <Image
                         src={maps}
                         alt="mapa"
-                        width={180}
-                        height={100}
+                        width={150}
+                        height={150}
                         className="max-w-[100px] md:max-w-[180px]"
                       />
                       {token && (

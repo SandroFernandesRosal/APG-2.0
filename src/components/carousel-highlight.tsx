@@ -20,11 +20,11 @@ export default function CarouselHighlight() {
     api
       .get(`/news/${local}`)
       .then((response) => {
-        setData(response.data.newsTotal)
+        setData(response.data)
         setLoading(false)
       })
       .catch((err) => {
-        console.log(err)
+        console.log('Erro na requisição:', err) // Log de erro
         setLoading(false)
       })
   }, [setData, local])
@@ -73,21 +73,21 @@ export default function CarouselHighlight() {
       <div className="flex w-full gap-3 justify-center">
         {loading ? (
           <SkeletonHighlight />
-        ) : data.length === 0 ? (
-          <div className="flex flex-col  overflow-hidden border-[1px] w-full rounded-3xl h-[200px] border-zinc-300 dark:border-zinc-800 p-5  justify-center items-center">
+        ) : !data || null || data.length === 0 ? (
+          <div className="flex flex-col overflow-hidden border-[1px] w-full rounded-3xl h-[400px] max-w-[600px] border-zinc-300 dark:border-zinc-800 p-5 justify-center items-center">
             <p>Nenhuma notícia cadastrada.</p>
           </div>
         ) : (
-          <Slider {...settings} className="h-full  w-[100vw] my-5 mx-10">
+          <Slider {...settings} className="h-full w-[100vw] my-5 mx-10">
             {data.map((item: New) => {
               return (
                 <div
-                  className="flex flex-col  h-full  place-items-center   overflow-hidden"
+                  className="flex flex-col h-full place-items-center overflow-hidden"
                   key={item.id}
                 >
                   <Link
                     href={`/noticias/${item.page}/${item.id}`}
-                    className="group flex justify-center items-center h-[400px]  max-w-[600px]  overflow-hidden border-[1px] border-zinc-300 dark:border-zinc-800  rounded-3xl w-full"
+                    className="group flex justify-center items-center h-[400px] max-w-[600px] overflow-hidden border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl w-full"
                   >
                     <Image
                       src={item.coverUrl}
@@ -95,7 +95,7 @@ export default function CarouselHighlight() {
                       height={500}
                       alt={item.title}
                       priority
-                      className="group-hover:scale-105 transition-transform duration-500 h-full w-full md:object-fill md:object-center  rounded-xl"
+                      className="group-hover:scale-105 transition-transform duration-500 h-full w-full md:object-fill md:object-center rounded-xl"
                     />
                   </Link>
                 </div>

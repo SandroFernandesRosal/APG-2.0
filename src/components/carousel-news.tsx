@@ -36,7 +36,7 @@ export default function CarouselNews({
     api
       .get(`/news/${local}`)
       .then((response) => {
-        setData(response.data.newsTotal)
+        setData(response.data)
         setLoading(false)
         setLocalLoading(false)
       })

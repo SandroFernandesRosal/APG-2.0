@@ -127,6 +127,8 @@ export default function AddMinisterio({
         <Image
           src={preview}
           alt="Imagem do lider"
+          width={200}
+          height={200}
           className="aspect-video w-[200px]"
         />
       )}

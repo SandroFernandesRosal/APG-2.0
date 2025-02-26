@@ -1,22 +1,30 @@
 'use client'
 import Cookies from 'js-cookie'
 
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { api } from '@/lib/api'
 
-export default function AddContatos({ openContato, setOpenContato }) {
-  const [local, setLocal] = useState('')
-  const [whatsapp, setWhatsapp] = useState('')
-  const [facebook, setFacebook] = useState('')
-  const [instagran, setInstagran] = useState('')
+interface AddContatoProps {
+  openContato: boolean
+  setOpenContato: (open: boolean) => void
+}
+
+export default function AddContatos({
+  openContato,
+  setOpenContato,
+}: AddContatoProps) {
+  const [local, setLocal] = useState<string>('')
+  const [whatsapp, setWhatsapp] = useState<string>('')
+  const [facebook, setFacebook] = useState<string>('')
+  const [instagram, setInstagram] = useState<string>('')
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     try {
@@ -26,7 +34,7 @@ export default function AddContatos({ openContato, setOpenContato }) {
           local,
           whatsapp,
           facebook,
-          instagran,
+          instagram,
         },
         {
           headers: {
@@ -68,7 +76,7 @@ export default function AddContatos({ openContato, setOpenContato }) {
         )}
       </h1>
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="local"
         required={true}
@@ -77,7 +85,7 @@ export default function AddContatos({ openContato, setOpenContato }) {
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="whatsapp"
         required={true}
@@ -86,16 +94,16 @@ export default function AddContatos({ openContato, setOpenContato }) {
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="instagran"
         required={true}
         placeholder="Digite o instagran"
-        onChange={(e) => setInstagran(e.target.value)}
+        onChange={(e) => setInstagram(e.target.value)}
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="facebook"
         required={true}
@@ -104,7 +112,7 @@ export default function AddContatos({ openContato, setOpenContato }) {
       />
       <button
         type="submit"
-        className="z-20  m-1 mr-2 flex cursor-pointer items-center justify-center  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  px-6  font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
       >
         Enviar
       </button>

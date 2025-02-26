@@ -20,7 +20,7 @@ export default function Socials({
   title,
   id,
 }: SocialsProps) {
-  const [openEdit, setOpenEdit] = useState(false)
+  const [openEdit, setOpenEdit] = useState<string | null>(null)
   const token = Cookies.get('tokennn')
   return (
     <>
@@ -55,14 +55,16 @@ export default function Socials({
 
         {token && (
           <div className="flex w-full justify-around md:gap-2">
-            {openEdit === false && (
+            {openEdit !== id ? (
               <button
-                className="m-2 rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 px-2 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700 md:px-3 md:text-lg"
-                onClick={() => setOpenEdit(true)}
+                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                onClick={() => {
+                  setOpenEdit(id)
+                }}
               >
                 Editar
               </button>
-            )}
+            ) : null}
             <RemoveContatos id={id} />
           </div>
         )}
@@ -73,7 +75,7 @@ export default function Socials({
           localInitial={title}
           whatsappInitial={numerowhatsapp}
           facebookInitial={nomefacebook}
-          instagranInitial={nomeinstagram}
+          instagramInitial={nomeinstagram}
           id={id}
           setOpenEdit={setOpenEdit}
         />

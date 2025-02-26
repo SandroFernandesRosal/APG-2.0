@@ -35,7 +35,7 @@ export default function CarouselAgenda({
     api
       .get(`/agenda/${local}`)
       .then((response) => {
-        setDataAgenda(response.data.agendaTotal)
+        setDataAgenda(response.data)
         setLoading(false)
         setLocalLoading(false)
       })

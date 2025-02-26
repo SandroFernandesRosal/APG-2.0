@@ -28,7 +28,7 @@ export default function NoticiaVilaDaPenha({ params }: ParamsProps) {
     api
       .get(`/news/${local}`)
       .then((response) => {
-        setData(response.data.newsTotal)
+        setData(response.data)
       })
       .catch((err) => console.log(err))
   }, [local, setData])
