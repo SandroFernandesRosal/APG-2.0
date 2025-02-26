@@ -1,5 +1,5 @@
-import EditPerfil from '@/components/EditPerfil'
+import EditPerfil from "../../../components/EditPerfil"
 
-export default async function editPerfilPage() {
+export default function editPerfilPage() {
   return <EditPerfil />
 }
