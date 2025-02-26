@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { BiNews, BiHomeHeart } from 'react-icons/bi'
-import { TfiEmail } from 'react-icons/tfi'
+
 import { AiOutlineSchedule } from 'react-icons/ai'
-import { BsBook, BsFillPersonLinesFill } from 'react-icons/bs'
+import { BsFillPersonLinesFill } from 'react-icons/bs'
 import { FaHandHoldingHeart, FaMapMarkerAlt } from 'react-icons/fa'
 import { VscHeartFilled } from 'react-icons/vsc'
 
@@ -94,18 +94,7 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
           <p>Agenda</p>
         </div>
       </Link>
-      <Link href="/biblia">
-        <div
-          className={`flex flex-col items-center justify-center hover:text-primary dark:hover:text-secundary lg:text-lg ${
-            activePage === '/biblia'
-              ? 'border-b-2 border-primary text-primary dark:border-secundary dark:text-secundary dark:hover:text-secundary'
-              : ''
-          }`}
-          onClick={() => handleClick('/biblia')}
-        >
-          <BsBook className="text-primary dark:text-secundary" /> <p>Bíblia</p>
-        </div>
-      </Link>
+
       <Link href="/noticias">
         <div
           className={`flex flex-col items-center justify-center hover:text-primary dark:hover:text-secundary lg:text-lg ${
@@ -130,19 +119,6 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
         >
           <VscHeartFilled className="text-primary dark:text-secundary" />{' '}
           <p>Testemunhos</p>
-        </div>
-      </Link>
-      <Link href="/contato">
-        <div
-          className={`flex flex-col items-center justify-center hover:text-primary dark:hover:text-secundary lg:text-lg ${
-            activePage === '/contato'
-              ? 'border-b-2 border-primary text-primary dark:border-secundary dark:text-secundary dark:hover:text-secundary'
-              : ''
-          }`}
-          onClick={() => handleClick('/contato')}
-        >
-          <TfiEmail className="text-primary dark:text-secundary" />{' '}
-          <p>Contato</p>
         </div>
       </Link>
     </nav>

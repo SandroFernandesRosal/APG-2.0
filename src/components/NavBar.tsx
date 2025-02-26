@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import ChangeTheme from './ChangeTheme'
 import { BiNews, BiHomeHeart } from 'react-icons/bi'
-import { TfiEmail } from 'react-icons/tfi'
+
 import { AiOutlineSchedule } from 'react-icons/ai'
-import { BsBook, BsFillPersonLinesFill } from 'react-icons/bs'
+import { BsFillPersonLinesFill } from 'react-icons/bs'
 import {
   FaHandHoldingHeart,
   FaMapMarkerAlt,
@@ -88,14 +88,7 @@ export default function NavBar({ handleMenu, menu, user }: NavBarProps) {
           <AiOutlineSchedule className="text-primary dark:text-secundary" />
           <p>Agenda</p>
         </Link>
-        <Link
-          href="/biblia"
-          className="flex items-center gap-5  text-xl hover:text-primary  dark:hover:text-secundary"
-          onClick={handleMenu}
-        >
-          <BsBook className="text-primary dark:text-secundary" />
-          <p>Bíblia</p>
-        </Link>
+
         <Link
           href="/noticias"
           className="flex items-center gap-5  text-xl hover:text-primary dark:border-secundary dark:hover:text-secundary"
@@ -111,14 +104,6 @@ export default function NavBar({ handleMenu, menu, user }: NavBarProps) {
         >
           <VscHeartFilled className="text-primary dark:text-secundary" />
           <p>Testemunhos</p>
-        </Link>
-        <Link
-          href="/contato"
-          className="flex items-center gap-5  text-xl hover:text-primary  dark:hover:text-secundary"
-          onClick={handleMenu}
-        >
-          <TfiEmail className="text-primary dark:text-secundary" />
-          <p>Contato</p>
         </Link>
       </div>
     </nav>
