@@ -142,7 +142,7 @@ export default function EditTestemunho({
                   src={img}
                   height={200}
                   width={200}
-                  alt=""
+                  alt="imagem"
                   className=" aspect-video w-[200px]"
                 />
               </label>
