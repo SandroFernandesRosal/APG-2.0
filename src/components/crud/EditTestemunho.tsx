@@ -5,33 +5,47 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { AiFillCloseCircle } from 'react-icons/ai'
-
 import { api } from '@/lib/api'
+import { UserIgreja } from '@/data/types/userigreja'
+
+interface EditTestemunhoProps {
+  setOpenEdit: (value: string | null) => void
+  id: string
+  img?: string
+  conteudo: string
+  name: string
+  avatarUrl?: string
+  userIgreja: UserIgreja
+}
 
 export default function EditTestemunho({
   setOpenEdit,
-
   id,
   img,
   conteudo,
   name,
   avatarUrl,
-}) {
-  const [content, setContent] = useState('')
-  const [preview, setPreview] = useState(null)
-  const formRef = useRef(null)
+}: EditTestemunhoProps) {
+  const [content, setContent] = useState(conteudo)
+  const [preview, setPreview] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const router = useRouter()
   const token = Cookies.get('tokenigreja')
   const tokenAdm = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const form = formRef.current
-    const fileToUpload = form.querySelector('input[type="file"]').files[0]
+    if (!form) return
 
-    let coverUrl = ''
+    const fileInput = form.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    const fileToUpload = fileInput?.files?.[0]
+
+    let coverUrl = img || ''
 
     if (fileToUpload) {
       const formData = new FormData()
@@ -45,8 +59,6 @@ export default function EditTestemunho({
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
       }
-    } else {
-      coverUrl = img
     }
 
     try {
@@ -78,48 +90,47 @@ export default function EditTestemunho({
       console.log(newss)
       return null
     } catch (error) {
-      console.error('Erro ao criar testemunho:', error)
+      console.error('Erro ao editar testemunho:', error)
     }
   }
 
-  function onFileSelected(event) {
+  function onFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
-    if (!files) {
+    if (!files || files.length === 0) {
       return
     }
 
     const previewUrl = URL.createObjectURL(files[0])
-
     setPreview(previewUrl)
   }
 
   return (
     <form
       ref={formRef}
-      className="fixed  left-0 top-0  flex min-h-screen  w-[100vw] flex-col items-start  gap-3 bg-black/50 px-6 py-4 pt-[165px]  text-black   backdrop-blur-lg dark:text-white md:flex-row md:items-start md:justify-center"
+      className="fixed left-0 top-0 flex min-h-screen w-[100vw] flex-col items-start gap-3 bg-black/50 px-6 py-4 pt-[165px] text-black backdrop-blur-lg dark:text-white md:flex-row md:items-start md:justify-center"
       onSubmit={handleSubmit}
     >
-      <Image
-        width={300}
-        height={300}
-        src={avatarUrl}
-        alt={name}
-        className="mx-1 h-[100px] w-[100px] rounded-full border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  p-[4px] text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
-      />
+      {avatarUrl && (
+        <Image
+          width={120}
+          height={120}
+          src={avatarUrl}
+          alt={name}
+          className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary  dark:border-secundary"
+        />
+      )}
 
-      <div className="border-zinc-400md:w-[70%] flex w-full flex-col gap-2 rounded-2xl border-[1px]  bg-bglight dark:border-zinc-700 dark:bg-bgdark lg:min-w-[700px]">
+      <div className="flex w-full flex-col gap-2 rounded-2xl border-[1px] border-zinc-300 bg-bglight dark:border-zinc-800 dark:bg-bgdark md:w-[70%] lg:min-w-[700px]">
         <div className="flex items-center justify-between">
-          {' '}
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpenEdit(null)} className="pr-1">
-            <AiFillCloseCircle className="text-2xl font-bold text-red-500" />
-          </button>{' '}
+            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/40 dark:hover:text-secundary/40" />
+          </button>
         </div>
 
         <textarea
-          className="mx-1 flex w-full  flex-col gap-2 border-none bg-bglight  outline-none ring-0 focus:ring-0  dark:bg-bgdark"
-          type="text"
+          className="mx-1 flex w-full flex-col gap-2 border-none bg-bglight outline-none ring-0 focus:ring-0 dark:bg-bgdark"
           name="content"
           defaultValue={conteudo}
           required
@@ -129,38 +140,44 @@ export default function EditTestemunho({
 
         {preview ? (
           <div className="mb-4 flex w-full items-center justify-center">
-            <img src={preview} alt="" className=" aspect-video w-[200px]" />
+            <Image
+              src={preview}
+              width={200}
+              height={200}
+              alt="Preview"
+              className="aspect-video w-[200px]"
+            />
           </div>
         ) : (
           <>
             {img && (
               <label
                 htmlFor="coverUrl"
-                className=" flex cursor-pointer items-center justify-center gap-2  font-bold"
+                className="flex cursor-pointer items-center justify-center gap-2 font-bold"
               >
                 <Image
                   src={img}
                   height={200}
                   width={200}
                   alt="imagem"
-                  className=" aspect-video w-[200px]"
+                  className="aspect-video w-[200px]"
                 />
               </label>
             )}
           </>
         )}
+
         <div className="mx-2 mb-2 flex w-full flex-wrap justify-center gap-4">
           <label
             htmlFor="coverUrl"
-            className=" flex w-full cursor-pointer items-center justify-center gap-2  text-center font-bold"
+            className="flex w-full cursor-pointer items-center justify-center gap-2 text-center font-bold"
           >
-            <FaCameraRetro className="text-xl  text-primary dark:text-secundary" />{' '}
-            Anexar foto {img && 'nova '}
-            (Opcional)
+            <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+            Anexar foto {img && 'nova '}(Opcional)
           </label>
           <button
             type="submit"
-            className="z-20  m-2 mr-2 flex cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400  bg-gradient-to-r from-slate-950 to-blue-900 px-6  font-bold  text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
+            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
           >
             Editar
           </button>

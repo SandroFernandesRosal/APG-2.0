@@ -1,20 +1,15 @@
 import { cookies } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
+import { UserIgreja } from '@/data/types/userigreja'
 
-interface User {
-  id: string
-  name: string
-  email: string
-}
-
-export async function getUserIgreja(): Promise<User | string> {
+export async function getUserIgreja(): Promise<UserIgreja> {
   const cookieStore = await cookies()
   const tokenigreja = cookieStore.get('tokenigreja')?.value
 
   try {
-    const user: User = jwtDecode(tokenigreja as string)
+    const user: UserIgreja = jwtDecode(tokenigreja as string)
     return user
   } catch {
-    return ''
+    return {} as UserIgreja
   }
 }

@@ -6,4 +6,5 @@ export interface Testemunho {
   content: string
   createdAt: string
   updatedAt: string
+  userId: string
 }

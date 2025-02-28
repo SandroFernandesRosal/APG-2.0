@@ -13,12 +13,18 @@ import { MdArrowBack, MdArrowForward } from 'react-icons/md'
 import { api } from '@/lib/api'
 import { useDataTestemunho } from '@/store/useStore'
 import SkeletonTestemunhos from './skeleton/SkeletonTestemunhos'
+import { UserIgreja } from '@/data/types/userigreja'
+import { Testemunho } from '@/data/types/testemunho'
 
-export default function TestemunhoLine({ userIgreja }) {
+export default function TestemunhoLine({
+  userIgreja,
+}: {
+  userIgreja: UserIgreja
+}) {
   const [open, setOpen] = useState(false)
   const { dataTestemunho, setDataTestemunho } = useDataTestemunho()
   const [loading, setLoading] = useState(true)
-  const [openEdit, setOpenEdit] = useState(null)
+  const [openEdit, setOpenEdit] = useState<string | null>(null)
 
   const tokenIgreja = useTokenIgreja()
   const token = useToken()
@@ -28,10 +34,9 @@ export default function TestemunhoLine({ userIgreja }) {
   const [isDisabledPrev, setIsDisabledPrev] = useState(true)
   const newsPerPage = 4
 
-  function formatDate(dateString) {
+  function formatDate(dateString: string): string {
     const date = new Date(dateString)
-    const formattedDate = format(date, 'dd/MM/yyyy HH:mm')
-    return formattedDate
+    return format(date, 'dd/MM/yyyy HH:mm')
   }
 
   const loadNextPage = () => {
@@ -64,7 +69,7 @@ export default function TestemunhoLine({ userIgreja }) {
 
   useEffect(() => {
     api
-      .get(`/testemunhos`)
+      .get('/testemunhos')
       .then((response) => {
         setDataTestemunho(response.data.testemunhoTotal)
         setLoading(false)
@@ -74,63 +79,57 @@ export default function TestemunhoLine({ userIgreja }) {
 
   return (
     <>
-      <section className="mb-8 flex  w-[100vw] flex-col items-center rounded-[35px] border-[1px]  border-zinc-400  bg-bglightsecundary px-1 pb-4 dark:border-zinc-700 dark:bg-bgdarksecundary   md:w-[90vw] md:rounded-xl">
-        <div className="flex flex-col items-center  md:min-w-[35%]">
-          <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary ">
+      <section className="mb-8 flex w-full flex-col items-center   pb-4  md:rounded-xl">
+        <div className="flex flex-col items-center md:min-w-[35%] pt-2">
+          <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
             Testemunhos
           </h1>
-          <p className="mb-4 text-xl ">O agir de Deus em nossas vidas</p>
+          <p className="mb-4 text-xl">O agir de Deus em nossas vidas</p>
         </div>
 
         {!tokenIgreja ||
           (token && (
             <>
-              {' '}
               <div className="flex w-full flex-wrap items-end justify-center gap-1">
                 Faça
                 <Link
                   href={'/login/igreja'}
-                  className="cursor-pointer items-center  rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 px-2  font-bold text-white  hover:from-blue-900 hover:to-slate-900"
+                  className="cursor-pointer rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                 >
                   login
                 </Link>{' '}
                 ou{' '}
                 <Link
                   href={'/register'}
-                  className="cursor-pointer  rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 px-2  font-bold text-white  hover:from-blue-900 hover:to-slate-900"
+                  className="cursor-pointer rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                 >
                   Registre-se
                 </Link>
                 e envie seu testemunho.
-              </div>{' '}
+              </div>
             </>
           ))}
 
         {tokenIgreja && (
           <>
             {open === false && (
-              <div
-                className="mb-4 flex cursor-pointer rounded-lg border-none bg-bglight bg-gradient-to-r from-slate-950 to-blue-900 p-2 text-white placeholder-black shadow-light outline-none hover:bg-gradient-to-r hover:from-blue-900 hover:to-slate-900  focus:ring-0 dark:bg-bgdark  dark:placeholder-white dark:shadow-dark"
+              <button
+                className="mb-4 rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                 onClick={() => setOpen(true)}
               >
                 Adicionar testemunho
-                {open === true && (
+                {open && (
                   <AiFillCloseCircle
                     onClick={() => setOpen(false)}
                     className="cursor-pointer text-2xl font-bold text-black dark:text-white"
                   />
                 )}
-              </div>
+              </button>
             )}
 
             {open && (
               <div className="md:min-w-[35%]">
-                {' '}
-                <AddTestemunho
-                  userIgreja={userIgreja}
-                  open={open}
-                  setOpen={setOpen}
-                />
+                <AddTestemunho userIgreja={userIgreja} setOpen={setOpen} />
               </div>
             )}
           </>
@@ -143,26 +142,27 @@ export default function TestemunhoLine({ userIgreja }) {
             </p>
           ) : (
             <>
-              {newsToDisplay.map((item) => (
+              {newsToDisplay.map((item: Testemunho) => (
                 <div
                   key={item.id}
-                  className="flex w-[100vw] flex-col items-start gap-3  px-6 py-4   md:flex-row md:justify-center"
+                  className="flex w-full flex-col items-start gap-3 px-6 py-4 md:flex-row md:justify-center"
                 >
-                  <Image
-                    width={300}
-                    height={300}
-                    src={item.avatarUrl}
-                    alt={item.name}
-                    className="mx-1 h-[100px] w-[100px] rounded-full bg-gradient-to-r from-slate-950 to-blue-900 p-[3px] text-white shadow-light  hover:from-blue-900 hover:to-slate-900 dark:shadow-dark"
-                  />
+                  {item.avatarUrl && (
+                    <Image
+                      width={120}
+                      height={120}
+                      src={item.avatarUrl}
+                      alt={item.name}
+                      className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary  dark:border-secundary"
+                    />
+                  )}
 
-                  <div className="flex w-full flex-col gap-2   rounded-2xl bg-bglight shadow-light  dark:bg-bgdark  dark:shadow-dark md:w-[70%]  lg:min-w-[700px]">
+                  <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary  md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
                     <div className="flex items-center justify-between px-3">
-                      {' '}
-                      <p className=" text-lg font-bold">{item.name}</p>
+                      <p className="text-lg font-bold">{item.name}</p>
                       <span className="text-sm">
                         {formatDate(item.createdAt)}
-                      </span>{' '}
+                      </span>
                     </div>
 
                     <p className="pl-3">{item.content}</p>
@@ -173,7 +173,7 @@ export default function TestemunhoLine({ userIgreja }) {
                           height={500}
                           src={item.coverUrl}
                           alt={item.name}
-                          className="m-2 w-[80%]  rounded-xl shadow-light dark:shadow-dark md:max-w-[500px]"
+                          className="m-2 w-[80%] rounded-xl shadow-light dark:shadow-dark md:max-w-[500px]"
                         />
                       </div>
                     )}
@@ -182,7 +182,7 @@ export default function TestemunhoLine({ userIgreja }) {
                       <div className="mb-2 flex justify-center gap-4">
                         {openEdit === null && (
                           <button
-                            className="m-2 rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 p-2 px-3 text-lg font-bold text-white  shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark  md:text-lg"
+                            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                             onClick={() => setOpenEdit(item.id)}
                           >
                             Editar
@@ -216,32 +216,28 @@ export default function TestemunhoLine({ userIgreja }) {
 
         {!loading && newsToDisplay.length > 0 && (
           <>
-            <div className="flex">
+            <div className="flex gap-3">
               <button
                 onClick={loadPreviousPage}
                 disabled={isDisabledPrev}
-                className={`m-2 mb-4 flex h-full w-[50px] cursor-pointer items-center justify-center rounded-xl  p-2 font-bold text-white shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark ${
-                  isDisabledPrev
-                    ? 'bg-gradient-to-r from-slate-950/20 to-blue-900/20'
-                    : 'bg-gradient-to-r from-slate-950 to-blue-900 '
-                } `}
+                className={`rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold" ${
+                  isDisabledPrev && 'border-zinc-300 dark:border-zinc-800'
+                }`}
               >
                 <MdArrowBack className="text-3xl font-bold text-white" />
               </button>
               <button
                 onClick={loadNextPage}
                 disabled={isDisabledNext}
-                className={`m-2 mb-4 flex h-full w-[50px] cursor-pointer items-center justify-center rounded-xl  p-2 font-bold  shadow-light  hover:from-blue-900 hover:to-slate-900 dark:shadow-dark ${
-                  isDisabledNext
-                    ? 'bg-gradient-to-r from-slate-950/20 to-blue-900/20'
-                    : 'bg-gradient-to-r from-slate-950 to-blue-900 '
-                } `}
+                className={`rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold" ${
+                  isDisabledPrev && 'border-zinc-300 dark:border-zinc-800'
+                }`}
               >
                 <MdArrowForward className="text-3xl font-bold text-white" />
               </button>
             </div>
 
-            <p className=" font-bold">
+            <p className="font-bold">
               Página {displayCurrentPage} de {totalPages}
             </p>
           </>

@@ -7,22 +7,36 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 import { api } from '@/lib/api'
+import { UserIgreja } from '@/data/types/userigreja'
 
-export default function AddTestemunho({ setOpen, userIgreja }) {
+interface AddTestemunhoProps {
+  setOpen: (value: boolean) => void
+  userIgreja: UserIgreja
+}
+
+export default function AddTestemunho({
+  setOpen,
+  userIgreja,
+}: AddTestemunhoProps) {
   const [content, setContent] = useState('')
-  const [preview, setPreview] = useState(null)
-  const formRef = useRef(null)
+  const [preview, setPreview] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const router = useRouter()
   const token = Cookies.get('tokenigreja')
 
   const { name, avatarUrl } = userIgreja
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const form = formRef.current
-    const fileToUpload = form.querySelector('input[type="file"]').files[0]
+    if (!form) return
+
+    const fileInput = form.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    const fileToUpload = fileInput?.files?.[0]
 
     let coverUrl = ''
 
@@ -73,44 +87,43 @@ export default function AddTestemunho({ setOpen, userIgreja }) {
     }
   }
 
-  function onFileSelected(event) {
+  function onFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
-    if (!files) {
+    if (!files || files.length === 0) {
       return
     }
 
     const previewUrl = URL.createObjectURL(files[0])
-
     setPreview(previewUrl)
   }
-
   return (
     <form
       ref={formRef}
       className="z-20 flex w-[100vw] flex-col items-start gap-3  px-6 py-4   md:flex-row md:justify-center"
       onSubmit={handleSubmit}
     >
-      <Image
-        width={300}
-        height={300}
-        src={avatarUrl}
-        alt={name}
-        className=" h-[100px] w-[100px] rounded-full border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900   p-[4px] text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
-      />
+      {avatarUrl && (
+        <Image
+          width={120}
+          height={120}
+          src={avatarUrl}
+          alt={name}
+          className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary  dark:border-secundary"
+        />
+      )}
 
-      <div className="flex w-full flex-col   gap-2 rounded-2xl border-[1px] border-zinc-400  bg-bglight dark:border-zinc-700 dark:bg-bgdark md:w-[70%]  lg:min-w-[700px]">
+      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary  md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
         <div className="flex items-center justify-between">
           {' '}
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpen(false)} className="pr-1">
-            <AiFillCloseCircle className="text-2xl font-bold text-red-500 hover:text-red-500/50" />
+            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/40 dark:hover:text-secundary/40" />
           </button>{' '}
         </div>
 
         <textarea
-          className="mx-1 flex w-full  flex-col gap-2 border-none bg-bglight  outline-none ring-0 focus:ring-0  dark:bg-bgdark"
-          type="text"
+          className="mx-1 flex w-full  flex-col gap-2 border-none bg-bglightsecundary  outline-none ring-0 focus:ring-0  dark:bg-bgdarksecundary"
           name="content"
           required
           placeholder="Escreva seu testemunho"
@@ -119,7 +132,13 @@ export default function AddTestemunho({ setOpen, userIgreja }) {
 
         {preview && (
           <div className="mb-4 flex w-full items-center justify-center">
-            <img src={preview} alt="" className=" aspect-video w-[200px]" />
+            <Image
+              src={preview}
+              width={200}
+              height={200}
+              alt="imagem perfil"
+              className=" aspect-video w-[200px]"
+            />
           </div>
         )}
         <div className="mx-2 mb-2 flex w-full justify-center gap-4">
@@ -132,7 +151,7 @@ export default function AddTestemunho({ setOpen, userIgreja }) {
           </label>
           <button
             type="submit"
-            className="z-20  m-1 mr-2 flex cursor-pointer items-center justify-center  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900  px-6 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700 "
+            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
           >
             Enviar
           </button>

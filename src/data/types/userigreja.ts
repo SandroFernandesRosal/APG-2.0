@@ -3,4 +3,6 @@ export interface UserIgreja {
   login: string
   name: string
   avatarUrl?: string
+  sub?: string
+  userId: string
 }
