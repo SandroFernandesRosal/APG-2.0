@@ -12,14 +12,12 @@ import { useData, useLocal } from '@/store/useStore'
 import SkeletonHighlight from './skeleton/SkeletonHighlight'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-// Interface para as propriedades das setas
 interface ArrowProps {
-  className?: string // Classe CSS da seta
-  style?: React.CSSProperties // Estilos inline da seta
-  onClick?: () => void // Função chamada ao clicar na seta
+  className?: string
+  style?: React.CSSProperties
+  onClick?: () => void
 }
 
-// Componentes personalizados para as setas com tipagem manual
 const NextArrow = ({ className, style, onClick }: ArrowProps) => {
   return (
     <div
@@ -34,7 +32,7 @@ const NextArrow = ({ className, style, onClick }: ArrowProps) => {
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 1,
-        right: '10px', // Posição da seta direita
+        right: '10px',
       }}
       onClick={onClick}
     >
@@ -57,7 +55,7 @@ const PrevArrow = ({ className, style, onClick }: ArrowProps) => {
         width: '40px',
         height: '40px',
         zIndex: 1,
-        left: '10px', // Posição da seta esquerda
+        left: '10px',
       }}
       onClick={onClick}
     >
