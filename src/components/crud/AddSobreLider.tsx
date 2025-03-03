@@ -1,25 +1,34 @@
 'use client'
 import Cookies from 'js-cookie'
-import { useState, useRef } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { api } from '@/lib/api'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaCameraRetro } from 'react-icons/fa'
+import Image from 'next/image'
 
-export default function AddSobreLider({ open, setOpen }) {
-  const [title, setTitle] = useState('')
-  const [name, setName] = useState('')
-  const formRef = useRef(null)
-  const [preview, setPreview] = useState(null)
+interface AddSobreLiderProps {
+  open: boolean
+  setOpen: (open: boolean) => void
+}
+
+export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
+  const [title, setTitle] = useState<string>('')
+  const [name, setName] = useState<string>('')
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const [preview, setPreview] = useState<string | null>(null)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const form = formRef.current
-    const fileToUpload = form.querySelector('input[type="file"]').files[0]
+    const fileInput = form?.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    const fileToUpload = fileInput?.files?.[0]
 
     let coverUrl = ''
 
@@ -37,7 +46,6 @@ export default function AddSobreLider({ open, setOpen }) {
         coverUrl = uploadResponse.data.fileUrl
       } catch (error) {
         console.error('Error uploading file:', error)
-
         return
       }
     }
@@ -73,7 +81,7 @@ export default function AddSobreLider({ open, setOpen }) {
     }
   }
 
-  function onFileSelected(event) {
+  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
     if (!files) {
@@ -105,16 +113,21 @@ export default function AddSobreLider({ open, setOpen }) {
         htmlFor="coverUrl"
         className="mb-3 flex cursor-pointer items-center gap-2  font-bold"
       >
-        {' '}
         <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
         Anexar foto (até 5mb)
       </label>
       {preview && (
-        <img src={preview} alt="" className=" aspect-video w-[200px]" />
+        <Image
+          src={preview}
+          width={200}
+          height={200}
+          alt={`imagem de ${name}`}
+          className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+        />
       )}
 
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="name"
         placeholder="Nome"
@@ -122,7 +135,7 @@ export default function AddSobreLider({ open, setOpen }) {
       />
 
       <input
-        className="mb-4   w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark "
+        className="mb-4   w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark "
         type="text"
         name="title"
         placeholder="Cargo de liderança"
@@ -140,7 +153,7 @@ export default function AddSobreLider({ open, setOpen }) {
 
       <button
         type="submit"
-        className="z-20 my-3 flex w-[100px] cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400  bg-gradient-to-r from-slate-950 to-blue-900  font-bold text-white hover:from-blue-900 hover:to-slate-900  dark:border-zinc-700 "
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white p-2 px-6 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
       >
         Enviar
       </button>

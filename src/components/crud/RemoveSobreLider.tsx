@@ -2,15 +2,18 @@
 import Cookies from 'js-cookie'
 import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
+import { useState, MouseEvent } from 'react'
 
-import { useState } from 'react'
+interface RemoveSobreLiderProps {
+  id: string
+}
 
-export default function RemoveSobreLider({ id }) {
+export default function RemoveSobreLider({ id }: RemoveSobreLiderProps) {
   const router = useRouter()
   const token = Cookies.get('tokennn')
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault()
 
     if (isDeleting) return
@@ -40,7 +43,7 @@ export default function RemoveSobreLider({ id }) {
     <button
       onClick={handleSubmit}
       disabled={isDeleting}
-      className="m-3 rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r  from-slate-950 to-blue-900  px-3 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700 "
+      className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
     >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>

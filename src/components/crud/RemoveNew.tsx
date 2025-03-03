@@ -3,15 +3,19 @@ import Cookies from 'js-cookie'
 import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
-import { useState } from 'react'
+import { useState, MouseEvent } from 'react'
 
-export default function RemoveNew({ id }) {
+interface RemoveNewProps {
+  id: string
+}
+
+export default function RemoveNew({ id }: RemoveNewProps) {
   const { local } = useLocal()
   const router = useRouter()
   const token = Cookies.get('tokennn')
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault()
 
     if (isDeleting) return
@@ -41,7 +45,7 @@ export default function RemoveNew({ id }) {
     <button
       onClick={handleSubmit}
       disabled={isDeleting}
-     className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
+      className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
     >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>

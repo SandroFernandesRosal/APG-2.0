@@ -10,6 +10,61 @@ import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useData, useLocal } from '@/store/useStore'
 import SkeletonHighlight from './skeleton/SkeletonHighlight'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+
+// Interface para as propriedades das setas
+interface ArrowProps {
+  className?: string // Classe CSS da seta
+  style?: React.CSSProperties // Estilos inline da seta
+  onClick?: () => void // Função chamada ao clicar na seta
+}
+
+// Componentes personalizados para as setas com tipagem manual
+const NextArrow = ({ className, style, onClick }: ArrowProps) => {
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'flex',
+        background: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1,
+        right: '10px', // Posição da seta direita
+      }}
+      onClick={onClick}
+    >
+      <FaArrowRight style={{ color: 'white', fontSize: '20px' }} />
+    </div>
+  )
+}
+
+const PrevArrow = ({ className, style, onClick }: ArrowProps) => {
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'flex',
+        background: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '40px',
+        height: '40px',
+        zIndex: 1,
+        left: '10px', // Posição da seta esquerda
+      }}
+      onClick={onClick}
+    >
+      <FaArrowLeft style={{ color: 'white', fontSize: '20px' }} />
+    </div>
+  )
+}
 
 export default function CarouselHighlight() {
   const { data, setData } = useData()
@@ -24,7 +79,7 @@ export default function CarouselHighlight() {
         setLoading(false)
       })
       .catch((err) => {
-        console.log('Erro na requisição:', err) // Log de erro
+        console.log('Erro na requisição:', err)
         setLoading(false)
       })
   }, [setData, local])
@@ -37,6 +92,8 @@ export default function CarouselHighlight() {
     slidesToScroll: 1,
     autoplay: true,
     initialSlide: 0,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -69,38 +126,36 @@ export default function CarouselHighlight() {
   }
 
   return (
-    <section className="highligt text-textprimary flex flex-col items-center  mb-5 justify-center w-full overflow-hidden">
+    <section className="highligt text-textprimary flex flex-col items-center mb-5 justify-center w-full">
       <div className="flex w-full gap-3 justify-center">
         {loading ? (
           <SkeletonHighlight />
-        ) : !data || null || data.length === 0 ? (
-          <div className="flex flex-col overflow-hidden border-[1px] w-full rounded-3xl h-[400px] max-w-[600px] border-zinc-300 dark:border-zinc-800 p-5 justify-center items-center">
+        ) : !data || data.length === 0 ? (
+          <div className="flex flex-col overflow-hidden border-[1px] w-full rounded-3xl h-[400px] p-5 justify-center items-center">
             <p>Nenhuma notícia cadastrada.</p>
           </div>
         ) : (
-          <Slider {...settings} className="h-full w-[100vw] my-5 mx-10">
-            {data.map((item: New) => {
-              return (
-                <div
-                  className="flex flex-col h-full place-items-center overflow-hidden"
-                  key={item.id}
+          <Slider {...settings} className="h-full w-[100vw] mx-10 relative">
+            {data.map((item: New) => (
+              <div
+                className="flex flex-col h-full place-items-center overflow-hidden"
+                key={item.id}
+              >
+                <Link
+                  href={`/noticias/${item.page}/${item.id}`}
+                  className="group flex justify-center items-center h-[400px] overflow-hidden w-full"
                 >
-                  <Link
-                    href={`/noticias/${item.page}/${item.id}`}
-                    className="group flex justify-center items-center h-[400px] max-w-[600px] overflow-hidden border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl w-full"
-                  >
-                    <Image
-                      src={item.coverUrl}
-                      width={900}
-                      height={500}
-                      alt={item.title}
-                      priority
-                      className="group-hover:scale-105 transition-transform duration-500 h-full w-full md:object-fill md:object-center rounded-xl"
-                    />
-                  </Link>
-                </div>
-              )
-            })}
+                  <Image
+                    src={item.coverUrl}
+                    width={900}
+                    height={500}
+                    alt={item.title}
+                    priority
+                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full md:object-fill md:object-center"
+                  />
+                </Link>
+              </div>
+            ))}
           </Slider>
         )}
       </div>

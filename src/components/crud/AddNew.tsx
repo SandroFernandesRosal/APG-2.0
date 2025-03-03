@@ -2,32 +2,41 @@
 import Cookies from 'js-cookie'
 import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { api } from '@/lib/api'
+import Image from 'next/image'
 
-export default function AddNew({ openNew, setOpenNew }) {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [destaque, setDestaque] = useState(false)
-  const [preview, setPreview] = useState(null)
-  const formRef = useRef(null)
+interface AddNewProps {
+  openNew: boolean
+  setOpenNew: (open: boolean) => void
+}
+
+export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
+  const [title, setTitle] = useState<string>('')
+  const [content, setContent] = useState<string>('')
+  const [destaque, setDestaque] = useState<boolean>(false)
+  const [preview, setPreview] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const { local } = useLocal()
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const form = formRef.current
-    const fileToUpload = form.querySelector('input[type="file"]').files[0]
+    const fileInput = form?.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    const fileToUpload = fileInput?.files?.[0]
 
     let coverUrl = ''
 
     if (!fileToUpload) {
-      alert('você precisa adicionar uma imagem.')
+      alert('Você precisa adicionar uma imagem.')
       return
     }
 
@@ -42,6 +51,7 @@ export default function AddNew({ openNew, setOpenNew }) {
         coverUrl = uploadResponse.data.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
+        return
       }
     }
 
@@ -73,13 +83,14 @@ export default function AddNew({ openNew, setOpenNew }) {
       }
 
       console.log(newss)
-      return null
     } catch (error) {
       console.error('Erro ao criar notícia:', error)
     }
+
+    return null
   }
 
-  function onFileSelected(event) {
+  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
     if (!files) {
@@ -94,7 +105,7 @@ export default function AddNew({ openNew, setOpenNew }) {
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0  z-30 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-black/50 backdrop-blur-lg"
+      className="fixed left-0 top-0 z-30 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-black/50 backdrop-blur-lg"
       onSubmit={handleSubmit}
     >
       <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
@@ -109,18 +120,23 @@ export default function AddNew({ openNew, setOpenNew }) {
 
       <label
         htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer items-center gap-2  font-bold"
+        className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
       >
-        {' '}
         <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
         Anexar foto (até 5mb)
       </label>
       {preview && (
-        <img src={preview} alt="" className=" aspect-video w-[200px]" />
+        <Image
+          src={preview}
+          width={200}
+          height={200}
+          alt="Imagem"
+          className="aspect-video w-[200px]"
+        />
       )}
 
       <input
-        className="mb-4 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="title"
         required
@@ -129,8 +145,7 @@ export default function AddNew({ openNew, setOpenNew }) {
       />
 
       <textarea
-        className="mb-1  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
-        type="text"
+        className="mb-1 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         name="content"
         required
         placeholder="Conteúdo da notícia"
@@ -142,12 +157,12 @@ export default function AddNew({ openNew, setOpenNew }) {
         type="file"
         name="coverUrl"
         id="coverUrl"
-        required={true}
+        required
         placeholder="Digite a url da notícia"
         onChange={onFileSelected}
       />
 
-      <div className="my-4 flex items-center gap-2  ">
+      <div className="my-4 flex items-center gap-2">
         <input
           type="checkbox"
           id="destaque"
@@ -166,7 +181,7 @@ export default function AddNew({ openNew, setOpenNew }) {
 
       <button
         type="submit"
-         className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white p-2 px-6 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
       >
         Enviar
       </button>

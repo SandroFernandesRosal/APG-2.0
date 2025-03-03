@@ -5,27 +5,32 @@ import AddSobreContent from './crud/AddSobreContent'
 import { useToken } from '@/hooks/useToken'
 import EditSobreContent from './crud/EditSobreContent'
 import RemoveSobreContent from './crud/RemoveSobreContent'
+import { Sobre } from '@/data/types/sobre'
 
-export default function ContentQuemSomos({ dataSobre }) {
+interface ContentQuemSomosProps {
+  dataSobre: Sobre[]
+}
+
+export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
   const [open, setOpen] = useState(false)
-  const [openEdit, setOpenEdit] = useState(null)
+  const [openEdit, setOpenEdit] = useState<string | null>(null)
   const token = useToken()
+
   return (
     <Suspense fallback={<div>Carregando...</div>}>
       {token && (
         <>
           {open === false && (
-            <div
-              className="mb-4 flex cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglight p-2 placeholder-black outline-none  hover:bg-gradient-to-r hover:from-blue-900 hover:to-slate-900 hover:text-white focus:ring-0 dark:border-zinc-700 dark:bg-bgdark dark:placeholder-white "
+            <button
+              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
               onClick={() => setOpen(true)}
             >
               Adicionar história
-            </div>
+            </button>
           )}
 
           {open && (
             <div className="md:min-w-[35%]">
-              {' '}
               <AddSobreContent open={open} setOpen={setOpen} />
             </div>
           )}
@@ -44,21 +49,19 @@ export default function ContentQuemSomos({ dataSobre }) {
             src={item.coverUrl}
             height={800}
             width={800}
-            alt=""
-            className="m-2 w-[90%] max-w-[800px] rounded-2xl shadow-light dark:shadow-dark"
+            alt={`imagem de ${item.title}`}
+            className="m-2 w-[90%] max-w-[800px] rounded-xl border-[1px] border-zinc-300 dark:border-zinc-800 p-2"
           />
           {token && (
             <div className="mb-2 flex w-full justify-center gap-2 text-white">
-              {openEdit === null && (
+              {openEdit !== item.id ? (
                 <button
-                  className="m-2  rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r  from-slate-950 to-blue-900  px-3  font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700 md:px-3 md:text-lg"
+                  className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
                   onClick={() => setOpenEdit(item.id)}
                 >
                   Editar
                 </button>
-              )}
-
-              {openEdit === item.id && (
+              ) : (
                 <EditSobreContent
                   conteudo={item.content}
                   titulo={item.title}
@@ -67,6 +70,7 @@ export default function ContentQuemSomos({ dataSobre }) {
                   setOpenEdit={setOpenEdit}
                 />
               )}
+
               <RemoveSobreContent id={item.id} />
             </div>
           )}

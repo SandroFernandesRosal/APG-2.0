@@ -23,13 +23,16 @@ export default async function UserComponent() {
       {user && (
         <div className="flex flex-col items-start gap-1 md:flex-row md:items-center">
           <div className="flex items-center gap-1">
-            <Image
-              src={avatarUrl || '/default-avatar.png'}
-              alt="imagem de perfil"
-              width={40}
-              height={40}
-              className="p-[2px] mr-1 h-[40px] w-[40px] rounded-full border-[1px] border-primary  dark:border-secundary"
-            />
+            {avatarUrl && (
+              <Image
+                src={avatarUrl}
+                alt="imagem de perfil"
+                width={40}
+                height={40}
+                className="p-[2px] mr-1 h-[40px] w-[40px] rounded-full border-[1px] border-primary  dark:border-secundary"
+              />
+            )}
+
             <p className="text-lg font-bold text-black dark:text-white">
               {name}
             </p>

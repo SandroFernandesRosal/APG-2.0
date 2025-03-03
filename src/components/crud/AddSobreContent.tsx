@@ -2,26 +2,37 @@
 import Cookies from 'js-cookie'
 import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-
 import { api } from '@/lib/api'
+import Image from 'next/image'
 
-export default function AddSobreContent({ open, setOpen }) {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+interface AddSobreContentProps {
+  open: boolean
+  setOpen: (open: boolean) => void
+}
 
-  const [preview, setPreview] = useState(null)
-  const formRef = useRef(null)
+export default function AddSobreContent({
+  open,
+  setOpen,
+}: AddSobreContentProps) {
+  const [title, setTitle] = useState<string>('')
+  const [content, setContent] = useState<string>('')
+
+  const [preview, setPreview] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const form = formRef.current
-    const fileToUpload = form.querySelector('input[type="file"]').files[0]
+    const fileInput = form?.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    const fileToUpload = fileInput?.files?.[0]
 
     let coverUrl = ''
 
@@ -41,6 +52,7 @@ export default function AddSobreContent({ open, setOpen }) {
         coverUrl = uploadResponse.data.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
+        return
       }
     }
 
@@ -70,13 +82,14 @@ export default function AddSobreContent({ open, setOpen }) {
       }
 
       console.log(newss)
-      return null
     } catch (error) {
       console.error('Erro ao criar notícia:', error)
     }
+
+    return null
   }
 
-  function onFileSelected(event) {
+  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
     if (!files) {
@@ -108,12 +121,17 @@ export default function AddSobreContent({ open, setOpen }) {
         htmlFor="coverUrl"
         className="mb-3 flex cursor-pointer items-center gap-2  font-bold"
       >
-        {' '}
         <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
         Anexar foto (até 50mb)
       </label>
       {preview && (
-        <img src={preview} alt="" className=" aspect-video w-[200px]" />
+        <Image
+          width={200}
+          height={200}
+          src={preview}
+          alt={`imagem de ${title}`}
+          className="aspect-video w-[200px]"
+        />
       )}
 
       <input
@@ -127,7 +145,6 @@ export default function AddSobreContent({ open, setOpen }) {
 
       <textarea
         className="mb-1  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:placeholder-textdark"
-        type="text"
         name="content"
         required
         placeholder="Escreva a história"
@@ -139,7 +156,7 @@ export default function AddSobreContent({ open, setOpen }) {
         type="file"
         name="coverUrl"
         id="coverUrl"
-        required={true}
+        required
         placeholder="Digite a url da notícia"
         onChange={onFileSelected}
       />

@@ -127,14 +127,14 @@ export default function AddMinisterio({
         <Image
           src={preview}
           alt="Imagem do lider"
-          width={200}
-          height={200}
-          className="aspect-video w-[200px]"
+          width={150}
+          height={150}
+          className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
         />
       )}
 
       <input
-        className="mb-4 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-none border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="mb-4 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px]  border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
         type="text"
         name="name"
         placeholder="Nome"

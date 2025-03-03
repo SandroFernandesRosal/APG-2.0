@@ -17,7 +17,7 @@ export default function NoticiaVilaDaPenha({ params }: ParamsProps) {
 
   const { local } = useLocal()
   const { data, setData } = useData()
-  const [openEdit, setOpenEdit] = useState(false)
+  const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [updated, setUpdated] = useState(false)
 
   const token = useToken()
@@ -55,16 +55,14 @@ export default function NoticiaVilaDaPenha({ params }: ParamsProps) {
         <div className="flex w-full items-center justify-around">
           {token && selectedItem && (
             <div className="flex gap-3 p-2">
-              {openEdit === false && (
+              {openEdit !== selectedItem.id ? (
                 <button
                   className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                  onClick={() => setOpenEdit(true)}
+                  onClick={() => setOpenEdit(selectedItem.id)}
                 >
                   Editar
                 </button>
-              )}
-
-              {openEdit && (
+              ) : (
                 <EditNew
                   img={selectedItem.coverUrl}
                   titulo={selectedItem.title}
@@ -74,6 +72,7 @@ export default function NoticiaVilaDaPenha({ params }: ParamsProps) {
                   setOpenEdit={setOpenEdit}
                 />
               )}
+
               <RemoveNew id={id} />
             </div>
           )}

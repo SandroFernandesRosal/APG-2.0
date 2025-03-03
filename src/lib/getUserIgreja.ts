@@ -10,6 +10,6 @@ export async function getUserIgreja(): Promise<UserIgreja> {
     const user: UserIgreja = jwtDecode(tokenigreja as string)
     return user
   } catch {
-    return {} as UserIgreja
+    return null as unknown as UserIgreja
   }
 }

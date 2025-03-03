@@ -2,11 +2,18 @@
 import Cookies from 'js-cookie'
 import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-
 import { api } from '@/lib/api'
 import Image from 'next/image'
+
+interface EditSobreContentProps {
+  setOpenEdit: (open: string | null) => void
+  id: string
+  img: string
+  titulo: string
+  conteudo: string
+}
 
 export default function EditSobreContent({
   setOpenEdit,
@@ -14,22 +21,23 @@ export default function EditSobreContent({
   img,
   titulo,
   conteudo,
-}) {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-
-  const [preview, setPreview] = useState(null)
-
-  const formRef = useRef(null)
+}: EditSobreContentProps) {
+  const [title, setTitle] = useState<string>('')
+  const [content, setContent] = useState<string>('')
+  const [preview, setPreview] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const form = formRef.current
-    const fileToUpload = form.querySelector('input[type="file"]').files[0]
+    const fileInput = form?.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    const fileToUpload = fileInput?.files?.[0]
 
     let coverUrl = ''
 
@@ -42,7 +50,6 @@ export default function EditSobreContent({
         coverUrl = uploadResponse.data.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
-
         return
       }
     } else {
@@ -77,7 +84,8 @@ export default function EditSobreContent({
 
     return null
   }
-  function onFileSelected(event) {
+
+  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
     if (!files) {
@@ -108,9 +116,8 @@ export default function EditSobreContent({
         className="mb-3 flex cursor-pointer flex-col items-center gap-2  font-bold"
       >
         <p className="flex items-center gap-3">
-          {' '}
           <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-          Anexar nava imagem (até 5mb){' '}
+          Anexar nova imagem (até 5mb)
         </p>
 
         {preview ? (
@@ -119,7 +126,7 @@ export default function EditSobreContent({
             width={200}
             height={100}
             alt={titulo}
-            className=" aspect-video"
+            className="aspect-video"
           />
         ) : (
           <Image
@@ -127,28 +134,27 @@ export default function EditSobreContent({
             alt={titulo}
             width={500}
             height={250}
-            className=" aspect-video w-[70%] md:w-[50%]"
+            className="aspect-video w-[70%] md:w-[50%]"
           />
         )}
       </label>
 
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400  bg-bglightsecundary p-2 text-center font-bold text-black placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:text-white dark:placeholder-textdark  md:w-[50%]"
+        className="mb-4 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold text-black placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:text-white dark:placeholder-textdark md:w-[50%]"
         type="text"
         name="title"
         id="title"
-        required={true}
+        required
         defaultValue={titulo}
         placeholder="Você precisa digitar um título"
         onChange={(e) => setTitle(e.target.value.toLowerCase())}
       />
 
       <textarea
-        className="mb-1 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold  text-black placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:text-white dark:placeholder-textdark md:w-[50%]"
-        type="text"
+        className="mb-1 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold text-black placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:text-white dark:placeholder-textdark md:w-[50%]"
         name="content"
         id="content"
-        required={true}
+        required
         defaultValue={conteudo}
         placeholder="Você precisa digitar um conteúdo"
         onChange={(e) => setContent(e.target.value)}
@@ -164,7 +170,7 @@ export default function EditSobreContent({
 
       <button
         type="submit"
-        className="z-20 my-3 flex w-[100px] cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400  bg-gradient-to-r  from-slate-950 to-blue-900 font-bold text-white hover:from-blue-900  hover:to-slate-900  dark:border-zinc-700 "
+        className="z-20 my-3 flex w-[100px] cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
       >
         Enviar
       </button>
