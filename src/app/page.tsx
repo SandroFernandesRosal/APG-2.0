@@ -7,7 +7,7 @@ import CarouselNews from '@/components/carousel-news'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col   items-center gap-5 pt-20 md:pt-[100px]">
+    <main className="flex min-h-screen flex-col   items-center pt-20 md:pt-[80px]">
       <CarouselHighlight />
       <CarouselNews titleproducts="Últimas noticias" />
       <CarouselAgenda titleproducts="Últimos eventos" />

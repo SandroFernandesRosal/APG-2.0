@@ -133,7 +133,7 @@ export default function CarouselHighlight() {
             <p>Nenhuma notícia cadastrada.</p>
           </div>
         ) : (
-          <Slider {...settings} className="h-full w-[100vw] mx-10 relative">
+          <Slider {...settings} className="h-full w-[100%]">
             {data.map((item: New) => (
               <div
                 className="flex flex-col h-full place-items-center overflow-hidden"
@@ -141,7 +141,7 @@ export default function CarouselHighlight() {
               >
                 <Link
                   href={`/noticias/${item.page}/${item.id}`}
-                  className="group flex justify-center items-center h-[400px] overflow-hidden w-full"
+                  className="group flex justify-center items-center h-[400px] md:h-[600px] overflow-hidden w-full"
                 >
                   <Image
                     src={item.coverUrl}
@@ -149,7 +149,8 @@ export default function CarouselHighlight() {
                     height={500}
                     alt={item.title}
                     priority
-                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full md:object-fill md:object-center"
+                    quality={100}
+                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full  object-fill"
                   />
                 </Link>
               </div>

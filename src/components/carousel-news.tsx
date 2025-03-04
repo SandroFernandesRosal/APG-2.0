@@ -15,6 +15,7 @@ import { useToken } from '@/hooks/useToken'
 import AddNew from './crud/AddNew'
 import EditNew from './crud/EditNew'
 import RemoveNew from './crud/RemoveNew'
+import { Minus } from 'lucide-react'
 
 export default function CarouselNews({
   titleproducts,
@@ -97,11 +98,18 @@ export default function CarouselNews({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary md:w-[90%]">
-        <h1 className="text-xl font-bold text-primary dark:text-secundary">
-          Notícias
+      <section className="text-textprimary flex flex-col items-center py-4 mt-5  justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
+        <h1 className="text-xl font-bold flex">
+          <Minus
+            size={45}
+            strokeWidth={3}
+            className="text-secundary dark:text-primary  flex place-self-end"
+          />
+
+          <span className="text-primary dark:text-secundary text-2xl">
+            Notícias{' '}
+          </span>
         </h1>
-        <h2 className="text-xl mb-5">Fique por dentro das notícias</h2>
 
         {token && (
           <>
@@ -158,7 +166,7 @@ export default function CarouselNews({
                 }
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px]  rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                    className="justify-between flex flex-col h-[300px] md:h-[400px]  rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
                     key={product.id}
                   >
                     <div className="border-b-[3px] border-primary dark:border-secundary h-[50%] pb-2">

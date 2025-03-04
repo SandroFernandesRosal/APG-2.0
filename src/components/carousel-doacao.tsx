@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import EditDoacao from './crud/EditDoacao'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
+import { Minus } from 'lucide-react'
 
 export default function CarouselDoacao({
   titleproducts,
@@ -84,13 +85,18 @@ export default function CarouselDoacao({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary md:w-[90%]">
-        <h1 className="text-xl font-bold text-primary dark:text-secundary">
-          Ajude a igreja
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
+        <h1 className="text-xl font-bold flex">
+          <Minus
+            size={45}
+            strokeWidth={3}
+            className="text-secundary dark:text-primary  flex place-self-end"
+          />
+
+          <span className="text-primary dark:text-secundary text-2xl">
+            Ajude a igreja
+          </span>
         </h1>
-        <h2 className="text-xl mb-5">
-          Faça uma doação por pix ou transferência bancária
-        </h2>
 
         {token && (
           <>
@@ -136,7 +142,7 @@ export default function CarouselDoacao({
               ))}
             </Slider>
           ) : data.length === 0 ? (
-            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
+            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-400 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
               <p>Nenhuma igreja cadastrada.</p>
             </div>
           ) : (
@@ -147,7 +153,7 @@ export default function CarouselDoacao({
               {data.map((product: Doacao) => {
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
                     key={product.id}
                   >
                     <div className="border-b-[3px] border-primary dark:border-secundary  flex text-xl justify-around w-full h-[50%]  py-1 flex-col items-center">

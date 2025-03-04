@@ -17,15 +17,16 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
   return (
     <ul className="flex flex-wrap justify-center pb-3">
       <li
-        className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglight p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary  hover:text-white focus:ring-0 dark:border-zinc-800 dark:bg-bgdark dark:placeholder-white ${
-          local === 'viladapenha' && 'bg-primary dark:bg-primary text-white'
+        className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-primary text-primary font-bold hover:border-secundary dark:border-secundary dark:text-secundary dark:hover:text-white p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary   hover:text-white focus:ring-0  dark:placeholder-white ${
+          local === 'viladapenha' &&
+          'bg-primary dark:bg-primary text-white dark:text-white border-secundary'
         }`}
         onClick={() => handleLocalSelection('viladapenha')}
       >
         Vila da Penha
       </li>
       <li
-        className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglight p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary hover:text-white focus:ring-0 dark:border-zinc-800 dark:bg-bgdark dark:placeholder-white ${
+        className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-primary text-primary font-bold hover:border-secundary dark:border-secundary dark:text-secundary dark:hover:text-white  p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary hover:text-white focus:ring-0   dark:placeholder-white ${
           local === 'caxias' && 'bg-primary dark:bg-primary text-white'
         }`}
         onClick={() => handleLocalSelection('caxias')}
@@ -33,7 +34,7 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
         Vila Maria Helena
       </li>
       <li
-        className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglight p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary hover:text-white focus:ring-0 dark:border-zinc-800 dark:bg-bgdark dark:placeholder-white ${
+        className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-primary text-primary font-bold hover:border-secundary dark:border-secundary dark:text-secundary dark:hover:text-white  p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary hover:text-white focus:ring-0  dark:placeholder-white ${
           local === 'tomazinho' && 'bg-primary dark:bg-primary text-white'
         }`}
         onClick={() => handleLocalSelection('tomazinho')}

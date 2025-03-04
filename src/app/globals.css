@@ -27,7 +27,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .slick-prev:before, .slick-next:before, .slick-dots li.slick-active button:before, .slick-dots li button:before {
-  color: #233876!important;
+  color: #1c6187!important;
   
 }
 
@@ -36,7 +36,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .highligt .slick-prev:before, .highligt .slick-next:before, .highligt .slick-dots li.slick-active button:before, .highligt .slick-dots li button:before {
-  color: #233876 !important;
+  color: #1c6187 !important;
   font-size: 15px !important;
 }
 

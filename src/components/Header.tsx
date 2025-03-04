@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useActivePage } from '@/store/useStore'
 import { usePathname } from 'next/navigation'
-import { AiOutlineClose } from 'react-icons/ai'
-import { GiHamburgerMenu } from 'react-icons/gi'
+
 import { FaUserCircle } from 'react-icons/fa'
+import { AlignRight, X } from 'lucide-react'
 import NavBar from './NavBar'
 import NavBarMd from './NavBarMd'
 
@@ -45,15 +45,16 @@ export default function Header({ children }: HeaderProps) {
   return (
     <>
       <header className="font-Roboto fixed z-50 flex flex-col top-0">
-        <div className="flex h-20 w-[100vw] items-center justify-evenly overflow-hidden border-b-2 border-solid border-b-secundary bg-bglightsecundary dark:bg-bgdarksecundary">
+        <div className="flex h-20 w-[100vw] items-center justify-around overflow-hidden border-b-2 border-solid border-b-primary dark:border-b-secundary bg-bglight dark:bg-bgdark">
           <Link href="/" onClick={() => handleClick('/')}>
             <Image
               src={logo}
-              height={50}
-              width={200}
+              height={60}
+              width={60}
               priority
+              quality={100}
               alt="logo do site"
-              className="h-[50px] w-[200px]"
+              className="w-[60px] h-full"
             />
           </Link>
 
@@ -67,21 +68,24 @@ export default function Header({ children }: HeaderProps) {
               href={'/login/igreja'}
               className="hidden md:flex md:flex-col md:items-center"
             >
-              <FaUserCircle className="text-3xl font-bold text-secundary" />
-              <span className="text-sm font-bold text-secundary">Entrar</span>
+              <FaUserCircle className="text-3xl font-bold text-primary dark:text-secundary" />
+              <span className="text-sm font-bold text-primary dark:text-secundary">
+                Entrar
+              </span>
             </Link>
           )}
 
-          <div
-            onClick={handleMenu}
-            className={
-              'dark:hover:blue-500/50 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border-[2px] border-secundary hover:bg-gradient-to-r  hover:from-blue-900 hover:to-slate-900  md:hidden'
-            }
-          >
+          <div onClick={handleMenu} className={'md:hidden'}>
             {menu === false ? (
-              <GiHamburgerMenu className="text-[22px] text-secundary" />
+              <AlignRight
+                size={40}
+                className=" text-primary hover:text-secundary dark:text-secundary dark:hover:text-primary cursor-pointer"
+              />
             ) : (
-              <AiOutlineClose className="text-[25px]  text-secundary" />
+              <X
+                size={40}
+                className=" text-primary hover:text-secundary dark:text-secundary dark:hover:text-primary cursor-pointer"
+              />
             )}
           </div>
         </div>

@@ -15,6 +15,7 @@ import { useToken } from '@/hooks/useToken'
 import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
+import { Minus } from 'lucide-react'
 
 export default function CarouselAgenda({
   titleproducts,
@@ -96,11 +97,18 @@ export default function CarouselAgenda({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 mb-5 justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800 rounded-3xl dark:bg-bgdarksecundary md:w-[90%]">
-        <h1 className="text-xl font-bold text-primary dark:text-secundary">
-          Agenda
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglightsecundary w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdarksecundary ">
+        <h1 className="text-xl font-bold flex">
+          <Minus
+            size={45}
+            strokeWidth={3}
+            className="text-secundary dark:text-primary  flex place-self-end"
+          />
+
+          <span className="text-primary dark:text-secundary text-2xl">
+            Agenda
+          </span>
         </h1>
-        <h2 className="text-xl mb-5">Todos os nossos eventos</h2>
 
         {token && (
           <>
@@ -146,7 +154,7 @@ export default function CarouselAgenda({
               ))}
             </Slider>
           ) : dataAgenda.length === 0 ? (
-            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
+            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-400 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
               <p>Nenhum evento cadastrado.</p>
             </div>
           ) : (
@@ -157,7 +165,7 @@ export default function CarouselAgenda({
               {dataAgenda.map((product: Agenda) => {
                 return (
                   <div
-                    className="flex justify-between  flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                    className="flex justify-between  flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
                     key={product.id}
                   >
                     <div className="border-b-[3px] border-primary dark:border-secundary flex text-xl font-bold justify-center w-full  py-2">
