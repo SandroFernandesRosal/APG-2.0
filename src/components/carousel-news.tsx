@@ -53,6 +53,13 @@ export default function CarouselNews({
     setLocal(newLocal)
   }
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    const day = date.getDate()
+    const month = date.toLocaleString('default', { month: 'short' })
+    return `${day} ${month}`
+  }
+
   const settings = {
     dots: true,
     infinite: false,
@@ -98,7 +105,7 @@ export default function CarouselNews({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 mt-5  justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
+      <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
         <h1 className="text-xl font-bold flex">
           <Minus
             size={45}
@@ -156,58 +163,74 @@ export default function CarouselNews({
               <p>Nenhuma notícia cadastrada.</p>
             </div>
           ) : (
-            <Slider
-              {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
-            >
+            <Slider {...settings} className="w-[80vw] lg:max-w-[1200px] my-5">
               {data.map((product: New) => {
                 if (!page) {
                   setPage(product.page)
                 }
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px]  rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                    className="justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
                     key={product.id}
                   >
-                    <div className="border-b-[3px] border-primary dark:border-secundary h-[50%] pb-2">
+                    <div className="h-[100%] relative overflow-hidden">
                       <Link
                         href={`/noticias/${product.page}/${product.id}`}
-                        className="group h-full"
+                        className="group h-full rounded-md overflow-hidden"
                       >
+                        <div className="absolute inset-0 overflow-hidden hover:bg-primary/40 z-10 rounded-md"></div>
+
                         <Image
                           src={product.coverUrl}
                           width={500}
                           height={500}
                           alt={product.title}
-                          className="group-hover:scale-105 transition-transform duration-500 p-2 h-full rounded-t-md"
+                          className="group-hover:scale-105 transition-transform duration-500 h-full rounded-md object-cover object-center opacity-90"
                         />
                       </Link>
                     </div>
-                    <div className="flex flex-col my-2 min-h-[100px] md:min-h-[70px] gap-2 justify-between">
-                      <Link href={`/${product.page}/${product.id}`}>
-                        <p className="text-center px-1">{product.title}</p>
+
+                    <div className="flex flex-col my-2 min-h-[100px] md:min-h-[70px] gap-2 justify-between absolute bottom-24 left-4">
+                      <Link
+                        href={`/${product.page}/${product.id}`}
+                        className="text-primary"
+                      >
+                        <p className="text-center px-1 text-xl text-white font-semibold font-Roboto">
+                          {product.title}
+                        </p>
                       </Link>
-                      <div className="flex flex-wrap justify-evenly px-2 gap-2">
+                      <div className="flex px-2 text-white font-Roboto">
                         {product.content}
                       </div>
-
-                      {token && (
-                        <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
-                          {openEdit !== product.id ? (
-                            <button
-                              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                              onClick={() => {
-                                setOpenEdit(product.id)
-                                setSelectedProduct(product)
-                              }}
-                            >
-                              Editar
-                            </button>
-                          ) : null}
-                          <RemoveNew id={product.id} />
-                        </div>
-                      )}
                     </div>
+
+                    <Link
+                      href={`/${product.page}/${product.id}`}
+                      className="border-primary border-2 rounded-md text-primary absolute bottom-5 left-5 text-center px-2 md:text-xl font-bold"
+                    >
+                      Ler notícia
+                    </Link>
+
+                    <span className="absolute top-3 right-3 bg-primary rounded-md p-1 text-white">
+                      {formatDate(product.createdAt)}
+                    </span>
+
+                    {token && (
+                      <div className=" flex w-full items-start justify-around text-white py-3  h-[170px]">
+                        {openEdit !== product.id ? (
+                          <button
+                            className="rounded-md border-[1px]  border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
+                            onClick={() => {
+                              setOpenEdit(product.id)
+                              setSelectedProduct(product)
+                            }}
+                          >
+                            Editar
+                          </button>
+                        ) : null}
+                        <RemoveNew id={product.id} />
+                      </div>
+                    )}
                   </div>
                 )
               })}
