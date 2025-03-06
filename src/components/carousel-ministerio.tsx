@@ -16,6 +16,8 @@ import AddMinisterio from './crud/AddMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 import { Minus } from 'lucide-react'
+import MinisterioHighlight from './ministerio-highlight'
+import CarouselLideres from './carousel-lideres'
 
 export default function CarouselMinisterio({
   titleproducts,
@@ -99,8 +101,41 @@ export default function CarouselMinisterio({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4  justify-center overflow-hidden bg-bglight w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
-        <h1 className="text-xl font-bold flex">
+      <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden bg-bglight w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
+        <section className="flex flex-col bg-white dark:bg-bgdark w-full py-5 ">
+          <div className="flex flex-wrap justify-center gap-5 items-center px-5">
+            <Image
+              src="/img/logo.png"
+              width={200}
+              height={200}
+              alt="logo da igreja"
+            />
+            <div className="flex flex-col">
+              <h1 className="text-3xl font-bold text-primary text-center md:text-start">
+                Ministerio Alcançados pela Graça
+              </h1>
+              <div className="flex flex-col items-start gap-3">
+                <h2 className="text-xl  italic">
+                  &quot;Porque pela graça sois salvos, por meio da fé.&ldquo; -
+                  Efésios 2:8
+                </h2>
+                <Link
+                  href={'/sobre'}
+                  className="rounded-md border-2 font-bold border-primary hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary md:px-3 md:text-lg md:font-bold"
+                >
+                  Conheça nossa Igreja
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="h-[500px] md:h-[600px] w-full bg-primary md:my-48 my-32 relative text-center">
+            <MinisterioHighlight />
+            <h1 className="text-3xl pt-4">Conheça nossos líderes</h1>
+            <CarouselLideres />
+          </div>
+        </section>
+        <h1 className="text-xl font-bold flex ">
           <Minus
             size={45}
             strokeWidth={3}
@@ -135,7 +170,7 @@ export default function CarouselMinisterio({
           </>
         )}
         <SelectLocal onChange={handleLocalChange} />
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 ">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
             href={`/ministerio`}
@@ -162,12 +197,12 @@ export default function CarouselMinisterio({
           ) : (
             <Slider
               {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
+              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
               {dataMinisterio.map((product: Ministerio) => {
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 bg-bglight dark:bg-bgdark"
                     key={product.id}
                   >
                     <div className="border-b-[3px] border-primary dark:border-secundary h-[50%] py-2 flex justify-center items-center">

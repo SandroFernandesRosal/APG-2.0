@@ -10,8 +10,8 @@ export default function Home() {
     <main className="flex min-h-screen flex-col   items-center pt-20 md:pt-[80px]">
       <CarouselHighlight />
       <CarouselNews titleproducts="Últimas noticias" />
-      <CarouselAgenda titleproducts="Últimos eventos" />
       <CarouselMinisterio titleproducts="Membros" />
+      <CarouselAgenda titleproducts="Últimos eventos" />
       <CarouselEndereco titleproducts="Endereços" />
       <CarouselDoacao titleproducts="Doações" />
     </main>

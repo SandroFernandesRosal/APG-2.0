@@ -16,6 +16,7 @@ import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
 import { Minus } from 'lucide-react'
+import Image from 'next/image'
 
 export default function CarouselAgenda({
   titleproducts,
@@ -165,26 +166,33 @@ export default function CarouselAgenda({
               {dataAgenda.map((product: Agenda) => {
                 return (
                   <div
-                    className="flex justify-between  flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                    className="flex justify-center relative content-center flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 "
                     key={product.id}
                   >
-                    <div className="border-b-[3px] border-primary dark:border-secundary flex text-xl font-bold justify-center w-full  py-2">
+                    <Image
+                      src={'/img/agenda.png'}
+                      width={500}
+                      height={500}
+                      alt="imagem de evento"
+                      className="absolute top-0 inset-0 h-full w-full "
+                    />
+                    <div className=" bg-primary   text-white dark:border-secundary flex text-xl  justify-center w-[80%] place-self-center  rounded-md ">
                       {product.day}
                     </div>
-                    <ul className="relative   mt-10  flex place-self-center w-[80%] overflow-visible border-l border-zinc-300 dark:border-zinc-800">
-                      <li className="mb-5 ml-6">
-                        <span className="absolute  -left-1 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
-                        <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white">
+                    <ul className="relative   mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-800 border-[1px] ">
+                      <li className="  w-full">
+                        <span className="absolute  left-2 top-5 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
+                        <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400 place-content-center">
                           {product.name}
                         </h3>
 
-                        <p className="font-normal text-gray-500 dark:text-gray-400">
+                        <p className="font-normal text-gray-500 dark:text-gray-400 place-content-center flex">
                           {product.hour}
                         </p>
                       </li>
                     </ul>
                     {token && (
-                      <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
+                      <div className=" mb-1 mt-2 flex w-full flex-1 items-end justify-around text-white">
                         {openEdit !== product.id ? (
                           <button
                             className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
