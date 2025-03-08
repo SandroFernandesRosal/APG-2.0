@@ -4,15 +4,6 @@ import { useState, FormEvent, ChangeEvent } from 'react'
 import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 
-interface PageProps {
-  params: {
-    [key: string]: string
-  }
-  searchParams?: {
-    [key: string]: string | string[] | undefined
-  }
-}
-
 interface ApiError {
   response?: {
     status: number
@@ -23,7 +14,7 @@ interface ApiError {
   message?: string
 }
 
-interface ResetPasswordPageProps extends PageProps {
+interface ResetPasswordPageProps {
   params: {
     token: string
   }
