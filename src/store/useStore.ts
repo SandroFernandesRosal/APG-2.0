@@ -2,7 +2,8 @@ import { create } from 'zustand'
 import Cookies from 'js-cookie'
 import { Contato } from '@/data/types/contato'
 import { New } from '@/data/types/new'
-import { Sobre } from '@/data/types/sobre'
+
+import { SobreLider } from '@/data/types/sobrelider'
 import { Ministerio } from '@/data/types/ministerio'
 import { Agenda } from '@/data/types/agenda'
 import { Testemunho } from '@/data/types/testemunho'
@@ -48,8 +49,8 @@ interface MenuState {
 }
 
 interface DataSobreState {
-  dataSobre: Sobre[]
-  setDataSobre: (state: Sobre[]) => void
+  dataSobre: SobreLider[]
+  setDataSobre: (state: SobreLider[]) => void
 }
 
 interface ActivePageState {
