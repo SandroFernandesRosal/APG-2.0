@@ -92,12 +92,13 @@ export default function CarouselLideres() {
         <h1 className="md:text-4xl text-2xl font-bold text-white">
           Conheça nossos fundadores e resposáveis
         </h1>
+
         <ArrowDown size={40} className="text-white" />
         {token && (
           <>
             {openNew === false && (
               <button
-                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold bg-white font-bold"
                 onClick={() => setOpenNew(true)}
               >
                 Adicionar Líder

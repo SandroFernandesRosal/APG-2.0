@@ -1,12 +1,14 @@
 import { api } from '@/lib/api'
 import LiderQuemSomos from '@/components/LiderQuemSomos'
 import ContentQuemSomos from '@/components/ContentQuemSomos'
+import { SobreLider } from '@/data/types/sobrelider'
+import { Sobre } from '@/data/types/sobre'
 
 export default async function QuemSomos() {
-  const response = await api.get('/sobre')
+  const response = await api.get<Sobre[]>('/sobre')
   const dataSobre = response.data
 
-  const responseLider = await api.get('/sobre/lider')
+  const responseLider = await api.get<SobreLider[]>('/sobre/lider')
   const dataSobreLider = responseLider.data
 
   return (
