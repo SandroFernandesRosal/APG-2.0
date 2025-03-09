@@ -70,7 +70,9 @@ interface DataLineState {
 
 interface DataMinisterioState {
   dataMinisterio: Ministerio[]
-  setDataMinisterio: (state: Ministerio[]) => void
+  setDataMinisterio: (
+    state: Ministerio[] | ((prevData: Ministerio[]) => Ministerio[]),
+  ) => void
 }
 
 interface DataAgendaState {
@@ -153,7 +155,13 @@ export const useDataLine = create<DataLineState>((set) => ({
 
 export const useDataMinisterio = create<DataMinisterioState>((set) => ({
   dataMinisterio: [],
-  setDataMinisterio: (state) => set({ dataMinisterio: state }),
+  setDataMinisterio: (state) => {
+    if (typeof state === 'function') {
+      set((prev) => ({ dataMinisterio: state(prev.dataMinisterio) }))
+    } else {
+      set({ dataMinisterio: state })
+    }
+  },
 }))
 
 export const useDataAgenda = create<DataAgendaState>((set) => ({

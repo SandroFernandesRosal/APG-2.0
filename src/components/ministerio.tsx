@@ -1,39 +1,21 @@
 import { Ministerio } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
-import {
-  useDataMinisterio,
-  useLocal,
-  useSearch,
-  useDataSearch,
-} from '@/store/useStore'
+import { useDataMinisterio, useLocal, useSearch } from '@/store/useStore'
 import { api } from '@/lib/api'
-
-import ResultLength from './ResultLength'
 
 import ItemMinisterio from './item-ministerio'
 import SkeletonNew from './skeleton/SkeletonNew'
 
 export default function Ministerioo() {
-  const { dataMinisterio, setDataMinisterio } = useDataMinisterio() || {
-    dataMinisterio: [],
-  }
+  const { dataMinisterio, setDataMinisterio } = useDataMinisterio()
   const { search } = useSearch()
-  const { dataSearch, setDataSearch } = useDataSearch()
+
   const { local } = useLocal()
   const [loading, setLoading] = useState(true)
   const [offset, setOffset] = useState(0)
   const [hasMore, setHasMore] = useState(true)
 
   const itemsPerPage = 12
-
-  useEffect(() => {
-    api
-      .get(`/ministerio/${local}/search?search=${search}`)
-      .then((response) => {
-        setDataSearch(response.data)
-      })
-      .catch((err) => console.log(err))
-  }, [local, setDataSearch, search])
 
   useEffect(() => {
     setLoading(true)
@@ -63,11 +45,10 @@ export default function Ministerioo() {
         console.log('Novos dados carregados:', response.data)
 
         if (Array.isArray(response.data) && response.data.length > 0) {
-          setDataMinisterio((prevData: Ministerio[]) => {
-            const newData = [...prevData, ...response.data]
-            console.log('Nova lista de dados:', newData)
-            return newData
-          })
+          setDataMinisterio((prevData: Ministerio[]) => [
+            ...prevData,
+            ...response.data,
+          ])
           setOffset(newOffset)
         }
 
@@ -87,13 +68,10 @@ export default function Ministerioo() {
         </h1>
       )}
 
-      {search ? <ResultLength dataSearch={dataSearch} /> : null}
-
       <div className="flex justify-center gap-5 flex-wrap w-full">
-        {search
-          ? dataSearch &&
-            dataSearch.length > 0 &&
-            dataSearch.map((product: Ministerio) => (
+        {!loading
+          ? Array.isArray(dataMinisterio) &&
+            dataMinisterio.map((product: Ministerio) => (
               <ItemMinisterio
                 id={product.id}
                 key={product.id}
@@ -105,26 +83,12 @@ export default function Ministerioo() {
                 updatedAt={product.updatedAt}
               />
             ))
-          : !loading
-            ? Array.isArray(dataMinisterio) &&
-              dataMinisterio.map((product: Ministerio) => (
-                <ItemMinisterio
-                  id={product.id}
-                  key={product.id}
-                  title={product.title}
-                  name={product.name}
-                  local={product.local}
-                  coverUrl={product.coverUrl}
-                  createdAt={product.createdAt}
-                  updatedAt={product.updatedAt}
-                />
-              ))
-            : Array.from({ length: 4 }).map((_, index) => (
-                <SkeletonNew key={index} />
-              ))}
+          : Array.from({ length: 4 }).map((_, index) => (
+              <SkeletonNew key={index} />
+            ))}
       </div>
 
-      {!search && hasMore && (
+      {hasMore && (
         <button
           onClick={loadMore}
           className="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition"
@@ -133,7 +97,7 @@ export default function Ministerioo() {
         </button>
       )}
 
-      {!search && !hasMore && dataMinisterio.length > 0 && (
+      {!hasMore && dataMinisterio.length > 0 && (
         <p className="mt-4 text-gray-500">Não há mais líder para carregar.</p>
       )}
     </div>
