@@ -17,6 +17,8 @@ export default function AddEndereco({
   const [local, setLocal] = useState<string>('')
   const [rua, setRua] = useState<string>('')
   const [cep, setCep] = useState<string>('')
+  const [numero, setNumero] = useState<string>('')
+  const [cidade, setCidade] = useState<string>('')
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
@@ -31,6 +33,8 @@ export default function AddEndereco({
           local,
           rua,
           cep,
+          numero,
+          cidade,
         },
         {
           headers: {
@@ -87,6 +91,24 @@ export default function AddEndereco({
         placeholder="Digite o nome da rua"
         value={rua}
         onChange={(e) => setRua(e.target.value)}
+      />
+
+      <input
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        type="text"
+        name="numero"
+        placeholder="Digite o número da igreja"
+        value={numero}
+        onChange={(e) => setNumero(e.target.value)}
+      />
+
+      <input
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        type="text"
+        name="cidade"
+        placeholder="Digite o nome da cidade"
+        value={cidade}
+        onChange={(e) => setCidade(e.target.value)}
       />
 
       <input

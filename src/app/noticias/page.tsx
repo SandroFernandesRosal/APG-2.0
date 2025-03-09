@@ -11,7 +11,7 @@ export default function Noticias() {
   const [openNew, setOpenNew] = useState(false)
   const token = useToken()
   return (
-    <main className="mb-8  mt-24 flex flex-col items-center justify-center  gap-4 rounded-[35px] bg-transparent md:mx-4 md:mt-[145px]   md:items-start  md:p-2 md:px-2  lg:mx-[5%]  lg:mt-[160px] lg:bg-bglightsecundary lg:shadow-light  lg:dark:bg-bgdarksecundary lg:dark:shadow-dark">
+    <main className="mb-8  mt-24 flex flex-col items-center justify-center  gap-4  md:mx-4 md:mt-[145px]   md:items-start  md:p-2 md:px-2  lg:mx-[5%]  lg:mt-[160px] ">
       <div className=" w-full  flex-col items-center  md:min-w-[35%] flex">
         <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary flex ">
           Notícias

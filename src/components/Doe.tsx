@@ -24,7 +24,7 @@ export default function Doe() {
   }, [])
 
   return (
-    <div className="mb-4 flex w-[100vw] flex-col items-center rounded-[35px] border-[1px] border-zinc-400 bg-bglightsecundary dark:border-zinc-700 dark:bg-bgdarksecundary md:w-[90vw] md:rounded-xl">
+    <div className="mb-4 flex w-[100vw] flex-col items-center">
       <div className="mb-5 flex-col items-center text-center">
         <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
           Ajude a igreja

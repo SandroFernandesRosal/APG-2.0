@@ -1,12 +1,11 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaMapMarkerAlt } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import { Endereco } from '@/data/types/endereco'
-import maps from '../../public/img/map.png'
-import Image from 'next/image'
+
 import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -21,7 +20,7 @@ export default function CarouselEndereco({
 }: {
   titleproducts: string
 }) {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<Endereco[]>([])
   const [loading, setLoading] = useState(true)
   const token = useToken()
   const [openEndereco, setOpenEndereco] = useState(false)
@@ -41,6 +40,14 @@ export default function CarouselEndereco({
         setLoading(false)
       })
   }, [])
+
+  const formatarEnderecoParaGoogleMaps = (endereco: Endereco) => {
+    const { rua, numero, local, cidade, cep } = endereco
+    const enderecoFormatado = `${rua},${numero},${local},${cidade},${cep}`
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      enderecoFormatado,
+    )}`
+  }
 
   const settings = {
     dots: true,
@@ -87,14 +94,13 @@ export default function CarouselEndereco({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4  justify-center overflow-hidden bg-bglightsecundary w-full border-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdarksecundary ">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full border-[1px] border-zinc-300 dark:border-zinc-800 dark:bg-bgdark">
         <h1 className="text-xl font-bold flex">
           <Minus
             size={45}
             strokeWidth={3}
-            className="text-secundary dark:text-primary  flex place-self-end"
+            className="text-secundary dark:text-primary flex place-self-end"
           />
-
           <span className="text-primary dark:text-secundary text-2xl">
             Endereços
           </span>
@@ -104,7 +110,7 @@ export default function CarouselEndereco({
           <>
             {openEndereco === false && (
               <button
-                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white p-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
                 onClick={() => setOpenEndereco(true)}
               >
                 Adicionar endereço
@@ -113,7 +119,6 @@ export default function CarouselEndereco({
 
             {openEndereco && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddEndereco
                   openEndereco={openEndereco}
                   setOpenEndereco={setOpenEndereco}
@@ -150,37 +155,42 @@ export default function CarouselEndereco({
           ) : (
             <Slider
               {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
+              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
               {data.map((product: Endereco) => {
+                const googleMapsLink = formatarEnderecoParaGoogleMaps(product)
+
                 return (
                   <div
                     className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
                     key={product.id}
                   >
-                    <div className="border-b-[3px] border-primary dark:border-secundary flex text-xl font-bold justify-around w-full h-[50%]  py-2 flex-col items-center">
-                      <h1>{product.local}</h1>{' '}
-                      <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white">
-                        {product.rua}
+                    <div className="border-b-[3px] border-primary px-2 dark:border-secundary flex text-xl font-bold justify-around w-full h-[50%] py-2 flex-col items-center">
+                      <h1>{product.local}</h1>
+                      <h3 className="flex items-center font-semibold text-gray-900 dark:text-white">
+                        {product.rua}, {product.numero}, {product.cidade}
                       </h3>
                       <span className="font-normal text-gray-500 dark:text-gray-400">
                         CEP: {product.cep}
                       </span>
                     </div>
-                    <div className="flex flex-col justify-center items-center h-[50%]">
-                      {' '}
-                      <Image
-                        src={maps}
-                        alt="mapa"
-                        width={150}
-                        height={150}
-                        className="max-w-[100px] md:max-w-[180px]"
-                      />
+                    <div className="flex flex-col justify-center items-center  h-[50%]">
+                      <a
+                        href={googleMapsLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center gap-2 hover:opacity-80 transition-opacity"
+                      >
+                        <FaMapMarkerAlt className="text-4xl text-primary dark:text-secundary" />
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Ver no Google Maps
+                        </span>
+                      </a>
                       {token && (
-                        <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
+                        <div className="mb-1 flex w-full flex-1 items-end justify-around text-white">
                           {openEdit !== product.id ? (
                             <button
-                              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
                               onClick={() => {
                                 setOpenEdit(product.id)
                                 setSelectedProduct(product)
@@ -206,6 +216,8 @@ export default function CarouselEndereco({
           ruaInitial={selectedProduct.rua}
           cepInitial={selectedProduct.cep}
           id={selectedProduct.id}
+          numeroInitial={selectedProduct.numero}
+          cidadeInitial={selectedProduct.cidade}
           setOpenEdit={setOpenEdit}
         />
       )}

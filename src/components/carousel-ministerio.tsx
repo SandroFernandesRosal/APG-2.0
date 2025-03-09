@@ -102,7 +102,7 @@ export default function CarouselMinisterio({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden bg-bglight w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
-        <section className="flex flex-col bg-white dark:bg-bgdark w-full py-5 ">
+        <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <div className="flex flex-wrap justify-center gap-5 items-center px-5">
             <Image
               src="/img/logo.png"

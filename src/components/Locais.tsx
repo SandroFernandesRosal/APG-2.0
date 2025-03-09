@@ -24,7 +24,7 @@ export default function Locais() {
   }, [])
 
   return (
-    <section className="mb-5 flex w-[100vw] flex-col items-center rounded-[35px] border-[1px] border-zinc-400 bg-bglightsecundary dark:border-zinc-700 dark:bg-bgdarksecundary md:w-[90vw] md:rounded-xl">
+    <section className="mb-5 flex w-[100vw] flex-col items-center">
       <h1 className="m-0 mt-1 text-lg font-bold text-primary dark:text-secundary">
         Endereços
       </h1>
@@ -64,8 +64,9 @@ export default function Locais() {
                 local={item.local}
                 rua={item.rua}
                 cep={item.cep}
-                createdAt={item.createdAt}
-                updatedAt={item.updatedAt}
+                cidade={item.cidade}
+                numero={item.numero}
+                item={item}
               />
             ))
           )

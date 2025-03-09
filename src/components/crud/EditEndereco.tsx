@@ -11,6 +11,8 @@ interface EditEnderecoProps {
   localInitial: string
   ruaInitial: string
   cepInitial: string
+  numeroInitial: string
+  cidadeInitial: string
 }
 
 export default function EditEndereco({
@@ -19,10 +21,14 @@ export default function EditEndereco({
   localInitial,
   ruaInitial,
   cepInitial,
+  numeroInitial,
+  cidadeInitial,
 }: EditEnderecoProps) {
   const [local, setLocal] = useState<string>(localInitial)
   const [rua, setRua] = useState<string>(ruaInitial)
   const [cep, setCep] = useState<string>(cepInitial)
+  const [numero, setNumero] = useState<string>(numeroInitial)
+  const [cidade, setCidade] = useState<string>(cidadeInitial)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
@@ -37,6 +43,8 @@ export default function EditEndereco({
           local: local || localInitial,
           rua: rua || ruaInitial,
           cep: cep || cepInitial,
+          numero: numero || numeroInitial,
+          cidade: cidade || cidadeInitial,
         },
         {
           headers: {
@@ -93,6 +101,26 @@ export default function EditEndereco({
         placeholder="Digite nome da rua"
         value={rua}
         onChange={(e) => setRua(e.target.value)}
+      />
+
+      <input
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        type="text"
+        name="numero"
+        required={true}
+        placeholder="Digite o número da igreja"
+        value={numero}
+        onChange={(e) => setNumero(e.target.value)}
+      />
+
+      <input
+        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        type="text"
+        name="cidade"
+        required={true}
+        placeholder="Digite a cidade"
+        value={cidade}
+        onChange={(e) => setCidade(e.target.value)}
       />
 
       <input
