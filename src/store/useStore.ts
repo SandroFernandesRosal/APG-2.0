@@ -15,7 +15,7 @@ interface SearchState {
 
 interface DataState {
   data: New[]
-  setData: (state: New[]) => void
+  setData: (state: New[] | ((prevData: New[]) => New[])) => void
 }
 
 interface LocalState {
@@ -29,8 +29,8 @@ interface LoadingState {
 }
 
 interface DataSearchState {
-  dataSearch: string[]
-  setDataSearch: (state: string[]) => void
+  dataSearch: New[]
+  setDataSearch: (state: New[] | ((prevData: New[]) => New[])) => void
 }
 
 interface OpenNewState {
@@ -92,7 +92,13 @@ export const useSearch = create<SearchState>((set) => ({
 
 export const useData = create<DataState>((set) => ({
   data: [],
-  setData: (state) => set({ data: state }),
+  setData: (state) => {
+    if (typeof state === 'function') {
+      set((prev) => ({ data: state(prev.data) }))
+    } else {
+      set({ data: state })
+    }
+  },
 }))
 
 export const useLocal = create<LocalState>((set) => {
@@ -115,7 +121,13 @@ export const useLoading = create<LoadingState>((set) => ({
 
 export const useDataSearch = create<DataSearchState>((set) => ({
   dataSearch: [],
-  setDataSearch: (state) => set({ dataSearch: state }),
+  setDataSearch: (state) => {
+    if (typeof state === 'function') {
+      set((prev) => ({ dataSearch: state(prev.dataSearch) }))
+    } else {
+      set({ dataSearch: state })
+    }
+  },
 }))
 
 export const useOpenNew = create<OpenNewState>((set) => ({

@@ -1,8 +1,10 @@
-interface ResultLengthProps {
-  dataSearch: { id: number; title: string; content: string }[]
+import { New } from '@/data/types/new'
+
+interface NewProps {
+  dataSearch: New[]
 }
 
-export default function ResultLength({ dataSearch }: ResultLengthProps) {
+export default function ResultLength({ dataSearch }: NewProps) {
   return (
     <>
       {dataSearch.length === 0 ? (

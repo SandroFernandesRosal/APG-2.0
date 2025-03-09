@@ -92,7 +92,7 @@ export default function News() {
                 content={product.content}
                 title={product.title}
                 createdAt={product.createdAt}
-                destaque={false}
+                destaque={product.destaque}
                 page={product.page}
                 updatedAt={product.updatedAt}
               />
