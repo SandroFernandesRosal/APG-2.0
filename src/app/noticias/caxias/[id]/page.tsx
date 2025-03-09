@@ -51,7 +51,7 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
 
   return (
     <main className="flex min-h-screen flex-col  items-center gap-5 pt-24 md:pt-[165px]">
-      <article className="mb-5  flex w-full flex-col items-center  rounded-[35px] bg-bglightsecundary shadow-light dark:bg-bgdarksecundary dark:shadow-dark md:w-[90vw]">
+      <article className="mb-5  flex w-full flex-col items-center">
         <div className="flex w-full items-center justify-around">
           {token && selectedItem && (
             <div className="mt-2 flex gap-3">

@@ -190,7 +190,7 @@ export default function CarouselNews({
 
                     <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full ">
                       <Link
-                        href={`/${product.page}/${product.id}`}
+                        href={`/noticias/${product.page}/${product.id}`}
                         className="text-primary z-30"
                       >
                         <p className="text-center px-1 text-xl text-white font-semibold ">
@@ -203,7 +203,7 @@ export default function CarouselNews({
                     </div>
 
                     <Link
-                      href={`/${product.page}/${product.id}`}
+                      href={`/noticias/${product.page}/${product.id}`}
                       className="rounded-md text-white bg-primary absolute bottom-5 left-5 text-center px-2 md:text-xl border-[1px] border-secundary z-20"
                     >
                       Ler notícia

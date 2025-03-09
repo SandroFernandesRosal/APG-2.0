@@ -97,7 +97,7 @@ export default function News() {
                 updatedAt={product.updatedAt}
               />
             ))
-          : loading
+          : !loading
             ? Array.isArray(data) &&
               data.map((product: New) => (
                 <ItemNew
