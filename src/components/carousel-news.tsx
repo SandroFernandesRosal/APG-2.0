@@ -121,10 +121,7 @@ export default function CarouselNews({
         {token && (
           <>
             {openNew === false && (
-              <button
-                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                onClick={() => setOpenNew(true)}
-              >
+              <button className="button" onClick={() => setOpenNew(true)}>
                 Adicionar notícia
               </button>
             )}
@@ -217,7 +214,7 @@ export default function CarouselNews({
                       <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
                         {openEdit !== product.id ? (
                           <button
-                            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
+                            className="button"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

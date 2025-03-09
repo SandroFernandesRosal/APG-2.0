@@ -94,7 +94,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           setLogin(e.target.value)
         }
         placeholder="Email cadastrado"
-        className="mb-3 rounded-lg border-none ring-0 focus:border-none focus:text-textlight focus:ring-0 dark:text-black focus:dark:text-black"
+        className="input"
       />
 
       <input
@@ -105,13 +105,10 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           setPassword(e.target.value)
         }
         placeholder="Nova senha"
-        className="mb-3 rounded-lg border-none ring-0 focus:border-none focus:text-textlight focus:ring-0 dark:text-black focus:dark:text-black"
+        className="input"
       />
 
-      <button
-        type="submit"
-        className="z-20 m-2 flex w-[100px] cursor-pointer items-center justify-center rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 font-bold text-white shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark"
-      >
+      <button type="submit" className="button">
         Redefinir Senha
       </button>
     </form>

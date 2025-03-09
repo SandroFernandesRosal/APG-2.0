@@ -119,10 +119,7 @@ export default function CarouselMinisterio({
                   &quot;Porque pela graça sois salvos, por meio da fé.&ldquo; -
                   Efésios 2:8
                 </h2>
-                <Link
-                  href={'/sobre'}
-                  className="rounded-md border-2 font-bold border-primary hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary md:px-3 md:text-lg md:font-bold"
-                >
+                <Link href={'/sobre'} className="button">
                   Conheça nossa Igreja
                 </Link>
               </div>
@@ -135,7 +132,7 @@ export default function CarouselMinisterio({
             <CarouselLideres />
           </div>
         </section>
-        <h1 className="text-xl font-bold flex ">
+        <h1 className="text-xl font-bold flex mt-14">
           <Minus
             size={45}
             strokeWidth={3}
@@ -151,7 +148,7 @@ export default function CarouselMinisterio({
           <>
             {openMinisterio === false && (
               <button
-                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                className="button"
                 onClick={() => setOpenMinisterio(true)}
               >
                 Adicionar líder
@@ -202,41 +199,50 @@ export default function CarouselMinisterio({
               {dataMinisterio.map((product: Ministerio) => {
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 bg-bglight dark:bg-bgdark"
+                    className="justify-between relative  flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 bg-bglight dark:bg-bgdark group"
                     key={product.id}
                   >
-                    <div className="border-b-[3px] border-primary dark:border-secundary h-[50%] py-2 flex justify-center items-center">
-                      <Image
-                        src={product.coverUrl}
-                        width={130}
-                        height={130}
-                        alt={product.title}
-                        className="group-hover:scale-105 transition-transform duration-500 p-1 w-[100px] h-[100px] md:w-[130px] md:h-[130px] rounded-full border-[1px] border-primary dark:border-secundary"
-                      />
+                    <div className="h-[100%] relative overflow-hidden">
+                      <div className="group h-full rounded-md overflow-hidden">
+                        <Image
+                          src={product.coverUrl}
+                          width={500}
+                          height={500}
+                          alt={product.title}
+                          quality={100}
+                          className="group-hover:scale-105 transition-transform duration-500 h-full w-full rounded-md object-cover object-center opacity-90"
+                        />
+                      </div>
                     </div>
-                    <div className="flex flex-col my-2 min-h-[100px] md:min-h-[70px] gap-2 justify-between items-center">
-                      <h1 className="text-center px-1">{product.name}</h1>
 
-                      <span>{product.title}</span>
+                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center text-white cursor-pointer border-primary dark:border-secundary border-t-2 ">
+                      <div className="text-primary z-30">
+                        <p className="text-center px-1 text-xl text-white font-semibold ">
+                          {product.name}
+                        </p>
+                      </div>
+                      <div className="flex px-2 text-white z-30">
+                        {product.title}
+                      </div>
                       <span>{product.local}</span>
-
-                      {token && (
-                        <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
-                          {openEdit !== product.id ? (
-                            <button
-                              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                              onClick={() => {
-                                setOpenEdit(product.id)
-                                setSelectedProduct(product)
-                              }}
-                            >
-                              Editar
-                            </button>
-                          ) : null}
-                          <RemoveMinisterio id={product.id} />
-                        </div>
-                      )}
                     </div>
+
+                    {token && (
+                      <div className=" mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
+                        {openEdit !== product.id ? (
+                          <button
+                            className="button"
+                            onClick={() => {
+                              setOpenEdit(product.id)
+                              setSelectedProduct(product)
+                            }}
+                          >
+                            Editar
+                          </button>
+                        ) : null}
+                        <RemoveMinisterio id={product.id} />
+                      </div>
+                    )}
                   </div>
                 )
               })}

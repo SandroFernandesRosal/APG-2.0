@@ -39,7 +39,7 @@ export default function ItemDoe({
           <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
             {openEdit !== id ? (
               <button
-                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                className="button"
                 onClick={() => {
                   setOpenEdit(id)
                 }}

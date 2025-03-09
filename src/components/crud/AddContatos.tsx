@@ -76,7 +76,7 @@ export default function AddContatos({
         )}
       </h1>
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="local"
         required={true}
@@ -85,7 +85,7 @@ export default function AddContatos({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg   border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="whatsapp"
         required={true}
@@ -94,7 +94,7 @@ export default function AddContatos({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="instagran"
         required={true}
@@ -103,17 +103,14 @@ export default function AddContatos({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="facebook"
         required={true}
         placeholder="Digite o facebook"
         onChange={(e) => setFacebook(e.target.value)}
       />
-      <button
-        type="submit"
-        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-      >
+      <button type="submit" className="button">
         Enviar
       </button>
     </form>

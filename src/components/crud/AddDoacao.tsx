@@ -75,12 +75,12 @@ export default function AddDoacao({
         {openDoacao === true && (
           <AiFillCloseCircle
             onClick={() => setOpenDoacao(false)}
-            className="cursor-pointer text-2xl font-bold text-black dark:text-white"
+            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
           />
         )}
       </h1>
       <input
-        className="mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="local"
         placeholder="Digite um local"
@@ -88,7 +88,7 @@ export default function AddDoacao({
       />
 
       <input
-        className="my-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="banco"
         placeholder="Digite o nome do banco"
@@ -96,7 +96,7 @@ export default function AddDoacao({
       />
 
       <input
-        className="mb-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-2 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="conta"
         placeholder="Digite número da conta"
@@ -104,7 +104,7 @@ export default function AddDoacao({
       />
 
       <input
-        className="mb-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight shadow-light outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="agencia"
         placeholder="Digite a agência"
@@ -112,7 +112,7 @@ export default function AddDoacao({
       />
 
       <input
-        className="mb-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="nomeBanco"
         placeholder="Nome do beneficiário"
@@ -120,7 +120,7 @@ export default function AddDoacao({
       />
 
       <input
-        className="mb-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="pix"
         placeholder="Digite a chave pix"
@@ -128,17 +128,14 @@ export default function AddDoacao({
       />
 
       <input
-        className="mb-4 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="nomePix"
         placeholder="Nome do beneficiário"
         onChange={(e) => setNomePix(e.target.value)}
       />
 
-      <button
-        type="submit"
-        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white p-2 px-6 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
-      >
+      <button type="submit" className="button">
         Enviar
       </button>
     </form>

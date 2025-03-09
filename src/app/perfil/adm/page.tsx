@@ -9,7 +9,7 @@ export default async function PerfilAdm() {
 
   return (
     <div className="mb-2 mt-4 flex min-h-screen flex-col items-center gap-5 pt-24 md:mt-0 md:pt-[165px]">
-      <div className="mb-4 flex min-h-screen w-[100vw] flex-col items-center rounded-[35px] bg-bglightsecundary px-1 pb-4 shadow-light dark:bg-bgdarksecundary dark:shadow-dark md:w-[90vw] md:rounded-xl">
+      <div className="mb-4 flex min-h-screen w-full flex-col items-center">
         {user ? (
           <>
             <div className="flex flex-col items-center md:min-w-[35%]">
@@ -18,7 +18,7 @@ export default async function PerfilAdm() {
               </h1>
               <p className="mb-4 text-xl">Verifique seus dados</p>
             </div>
-            <div className="flex flex-col items-center gap-1">
+            <div className="flex flex-col items-center gap-1 rounded-md border-[1px] w-[70%] max-w-[400px] h-[400px] justify-evenly p-4 border-zinc-300 dark:border-zinc-700">
               {user.avatarUrl && (
                 <Image
                   src={user.avatarUrl}
@@ -29,14 +29,13 @@ export default async function PerfilAdm() {
                 />
               )}
 
-              <h1 className="text-lg font-bold">{user.name}</h1>
-              <p>{user.login}</p>
+              <h1 className="text-lg font-bold truncate w-[100%] text-center">
+                {user.name}
+              </h1>
+              <p className="truncate w-[100%]">{user.login}</p>
 
               <div className="flex w-full justify-between gap-2">
-                <Link
-                  href={'/perfil/adm/editar'}
-                  className="m-2 flex items-center rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 px-2 text-lg font-bold text-white shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark"
-                >
+                <Link href={'/perfil/adm/editar'} className="button">
                   Editar perfil
                 </Link>
                 <RemoveUserAdm id={user.id} />
@@ -49,10 +48,7 @@ export default async function PerfilAdm() {
               Você não está logado como administrador
             </h1>
 
-            <Link
-              href={'/login/adm'}
-              className="z-20 m-1 mr-2 mt-3 flex cursor-pointer items-center justify-center rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 px-6 font-bold text-white shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark"
-            >
+            <Link href={'/login/adm'} className="button">
               login
             </Link>
           </>

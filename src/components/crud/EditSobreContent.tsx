@@ -107,7 +107,7 @@ export default function EditSobreContent({
         Editar Notícia{' '}
         <AiFillCloseCircle
           onClick={() => setOpenEdit(null)}
-          className="cursor-pointer text-2xl font-bold text-black dark:text-white"
+          className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
         />
       </h1>
 
@@ -140,7 +140,7 @@ export default function EditSobreContent({
       </label>
 
       <input
-        className="mb-4 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold text-black placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:text-white dark:placeholder-textdark md:w-[50%]"
+        className="input"
         type="text"
         name="title"
         id="title"
@@ -151,7 +151,7 @@ export default function EditSobreContent({
       />
 
       <textarea
-        className="mb-1 mt-2 w-[80%] max-w-[600px] cursor-pointer rounded-lg border-[1px] border-zinc-400 bg-bglightsecundary p-2 text-center font-bold text-black placeholder-textlight outline-none focus:ring-0 dark:border-zinc-700 dark:bg-bgdarksecundary dark:text-white dark:placeholder-textdark md:w-[50%]"
+        className="input"
         name="content"
         id="content"
         required
@@ -168,10 +168,7 @@ export default function EditSobreContent({
         onChange={onFileSelected}
       />
 
-      <button
-        type="submit"
-        className="z-20 my-3 flex w-[100px] cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
-      >
+      <button type="submit" className="button">
         Enviar
       </button>
     </form>

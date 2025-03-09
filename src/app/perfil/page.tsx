@@ -9,7 +9,7 @@ export default async function Perfil() {
 
   return (
     <div className="mb-2 mt-4 flex min-h-screen flex-col items-center gap-5 pt-24 md:mt-0 md:pt-[165px]">
-      <div className="mb-4 flex min-h-screen w-[100vw] flex-col items-center rounded-[35px] bg-bglightsecundary px-1 pb-4 shadow-light dark:bg-bgdarksecundary dark:shadow-dark md:w-[90vw] md:rounded-xl">
+      <div className="mb-4 flex min-h-screen w-full flex-col items-center ">
         {user ? (
           <>
             <div className="flex flex-col items-center md:min-w-[35%]">
@@ -18,7 +18,7 @@ export default async function Perfil() {
               </h1>
               <p className="mb-4 text-xl">Verifique seus dados</p>
             </div>
-            <div className="flex flex-col items-center gap-1">
+            <div className="flex flex-col items-center gap-1 rounded-md border-[1px] w-[70%] max-w-[400px] h-[400px] justify-evenly p-4 border-zinc-300 dark:border-zinc-700">
               {user.avatarUrl && (
                 <Image
                   src={user.avatarUrl}
@@ -29,14 +29,13 @@ export default async function Perfil() {
                 />
               )}
 
-              <h1 className="text-lg font-bold">{user.name}</h1>
-              <p>{user.login}</p>
+              <h1 className="text-lg font-bold truncate w-[100%] text-center">
+                {user.name}
+              </h1>
+              <p className="truncate w-[100%]">{user.login}</p>
 
               <div className="flex w-full justify-between gap-2">
-                <Link
-                  href={'/perfil/editar'}
-                  className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                >
+                <Link href={'/perfil/editar'} className="button">
                   Editar perfil
                 </Link>
                 <RemoveUserIgreja id={user.id} />
@@ -50,17 +49,11 @@ export default async function Perfil() {
             </h1>
             <div className="flex w-full flex-wrap items-end justify-center gap-1 font-bold">
               Faça
-              <Link
-                href={'/login/igreja'}
-                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-              >
+              <Link href={'/login/igreja'} className="button">
                 login
               </Link>{' '}
               ou{' '}
-              <Link
-                href={'/register'}
-                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-              >
+              <Link href={'/register'} className="button">
                 Registre-se
               </Link>
             </div>

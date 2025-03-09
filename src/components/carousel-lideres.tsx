@@ -88,7 +88,7 @@ export default function CarouselLideres() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center  justify-center overflow-hidden  w-full absolute -bottom-36 md:-bottom-48 gap-2 ">
+      <section className="text-textprimary flex flex-col items-center  justify-center overflow-hidden  w-full absolute -bottom-[180px] md:-bottom-[233px] gap-2 ">
         <h1 className="md:text-4xl text-2xl font-bold text-white">
           Conheça nossos fundadores e resposáveis
         </h1>
@@ -97,10 +97,7 @@ export default function CarouselLideres() {
         {token && (
           <>
             {openNew === false && (
-              <button
-                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold bg-white font-bold"
-                onClick={() => setOpenNew(true)}
-              >
+              <button className="button" onClick={() => setOpenNew(true)}>
                 Adicionar Líder
               </button>
             )}
@@ -149,8 +146,8 @@ export default function CarouselLideres() {
                       </div>
                     </div>
 
-                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center ">
-                      <div className="text-primary z-30">
+                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center cursor-pointer border-primary dark:border-secundary border-t-2">
+                      <div className="text-primary z-30 ">
                         <p className="text-center px-1 text-xl text-white font-semibold ">
                           {product.name}
                         </p>
@@ -164,7 +161,7 @@ export default function CarouselLideres() {
                       <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
                         {openEdit !== product.id ? (
                           <button
-                            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
+                            className="button"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

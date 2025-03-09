@@ -69,7 +69,7 @@ export default function ItemNew({
         <div className="flex w-full absolute top-16 right-0 items-start justify-around text-white py-3 h-[170px]">
           {openEdit !== id ? (
             <button
-              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold"
+              className="button"
               onClick={() => {
                 setOpenEdit(id)
               }}

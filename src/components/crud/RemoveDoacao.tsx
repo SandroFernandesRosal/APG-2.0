@@ -41,11 +41,7 @@ export default function RemoveDoacao({ id }: RemoveDoacaoProps) {
   }
 
   return (
-    <button
-      onClick={handleSubmit}
-      disabled={isDeleting}
-      className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-    >
+    <button onClick={handleSubmit} disabled={isDeleting} className="button">
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>
   )

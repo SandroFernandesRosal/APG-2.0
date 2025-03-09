@@ -114,10 +114,7 @@ export default function CarouselAgenda({
         {token && (
           <>
             {openAgenda === false && (
-              <button
-                className="rounded-md mb-4 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                onClick={() => setOpenAgenda(true)}
-              >
+              <button className="button" onClick={() => setOpenAgenda(true)}>
                 Adicionar evento
               </button>
             )}
@@ -176,13 +173,13 @@ export default function CarouselAgenda({
                       alt="imagem de evento"
                       className="absolute top-0 inset-0 h-full w-full "
                     />
-                    <div className=" bg-primary   text-white dark:border-secundary flex text-xl  justify-center w-[80%] place-self-center  rounded-md ">
+                    <div className=" bg-primary   text-white dark:border-secundary flex text-xl  justify-center w-[80%] place-self-center  rounded-md">
                       {product.day}
                     </div>
-                    <ul className="relative   mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px] ">
+                    <ul className="relative    mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px] ">
                       <li className="  w-full">
                         <span className="absolute  left-2 top-5 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
-                        <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700place-content-center">
+                        <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700 place-content-center">
                           {product.name}
                         </h3>
 
@@ -195,7 +192,7 @@ export default function CarouselAgenda({
                       <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
                         {openEdit !== product.id ? (
                           <button
-                            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold z-20"
+                            className="button"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

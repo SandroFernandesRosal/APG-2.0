@@ -108,7 +108,7 @@ export default function EditTestemunho({
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 flex min-h-screen w-[100vw] flex-col items-start gap-3 bg-black/50 px-6 py-4 pt-[165px] text-black backdrop-blur-lg dark:text-white md:flex-row md:items-start md:justify-center"
+      className="fixed left-0 top-0 flex min-h-screen w-[100vw] flex-col items-start gap-3 bg-black/50 px-6 py-4 pt-[165px] text-black backdrop-blur-lg dark:text-white md:flex-row md:items-start md:justify-center z-30"
       onSubmit={handleSubmit}
     >
       {avatarUrl && (
@@ -125,7 +125,7 @@ export default function EditTestemunho({
         <div className="flex items-center justify-between">
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpenEdit(null)} className="pr-1">
-            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/40 dark:hover:text-secundary/40" />
+            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
           </button>
         </div>
 
@@ -175,10 +175,7 @@ export default function EditTestemunho({
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto {img && 'nova '}(Opcional)
           </label>
-          <button
-            type="submit"
-            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-          >
+          <button type="submit" className="button">
             Editar
           </button>
         </div>

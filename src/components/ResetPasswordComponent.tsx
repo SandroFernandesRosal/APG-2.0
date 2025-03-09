@@ -54,7 +54,7 @@ export default function ResetPasswordComponent({
           value={login}
           onChange={(e) => setLogin(e.target.value)}
           placeholder="Digite seu email"
-          className="mb-3 rounded-lg border-none ring-0 focus:border-none focus:text-textlight focus:ring-0 dark:text-black focus:dark:text-black"
+          className="input"
         />
         <input
           type="password"
@@ -62,9 +62,11 @@ export default function ResetPasswordComponent({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Nova senha"
-          className="mb-3 rounded-lg border-none ring-0 focus:border-none focus:text-textlight focus:ring-0 dark:text-black focus:dark:text-black"
+          className="input"
         />
-        <button type="submit">Redefinir Senha</button>
+        <button type="submit" className="button">
+          Redefinir Senha
+        </button>
       </form>
     </div>
   )

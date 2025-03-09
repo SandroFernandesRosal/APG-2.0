@@ -118,10 +118,7 @@ export default function News() {
       </div>
 
       {!search && hasMore && (
-        <button
-          onClick={loadMore}
-          className="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition"
-        >
+        <button onClick={loadMore} className="button">
           Carregar mais
         </button>
       )}

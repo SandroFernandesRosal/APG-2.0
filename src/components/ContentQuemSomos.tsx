@@ -21,10 +21,7 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
       {token && (
         <>
           {open === false && (
-            <button
-              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-              onClick={() => setOpen(true)}
-            >
+            <button className="button" onClick={() => setOpen(true)}>
               Adicionar história
             </button>
           )}
@@ -55,10 +52,7 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
           {token && (
             <div className="mb-2 flex w-full justify-center gap-2 text-white">
               {openEdit !== item.id ? (
-                <button
-                  className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                  onClick={() => setOpenEdit(item.id)}
-                >
+                <button className="button" onClick={() => setOpenEdit(item.id)}>
                   Editar
                 </button>
               ) : (

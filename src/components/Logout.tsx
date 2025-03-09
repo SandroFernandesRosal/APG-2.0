@@ -13,10 +13,7 @@ export default function Logout() {
   }
 
   return (
-    <button
-      className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-      onClick={Sair}
-    >
+    <button className="button" onClick={Sair}>
       Sair
     </button>
   )

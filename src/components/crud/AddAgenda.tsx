@@ -70,12 +70,12 @@ export default function AddAgenda({
         {openAgenda === true && (
           <AiFillCloseCircle
             onClick={() => setOpenAgenda(false)}
-            className="cursor-pointer text-2xl font-bold text-black dark:text-white"
+            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
           />
         )}
       </h1>
       <input
-        className="mb-4 mt-2  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="day"
         placeholder="Dia da semana"
@@ -83,7 +83,7 @@ export default function AddAgenda({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark "
+        className="input "
         type="text"
         name="name"
         placeholder="Nome do evento"
@@ -91,17 +91,14 @@ export default function AddAgenda({
       />
 
       <input
-        className="mb-4  w-[80%] max-w-[600px] cursor-pointer rounded-lg  border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center  font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+        className="input"
         type="text"
         name="hour"
         placeholder="Horário do evento"
         onChange={(e) => setHour(e.target.value)}
       />
 
-      <button
-        type="submit"
-        className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 px-6 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-      >
+      <button type="submit" className="button">
         Enviar
       </button>
     </form>

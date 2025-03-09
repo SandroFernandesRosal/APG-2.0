@@ -109,7 +109,7 @@ export default function EditUserIgreja({
     <>
       {token ? (
         <div className="mt-[80px] flex w-full justify-center md:mt-[140px]">
-          <div className="my-10 flex min-h-screen w-[100vw] flex-col items-center rounded-[35px] border-[1px] border-zinc-300 bg-bglightsecundary dark:border-zinc-800 dark:bg-bgdarksecundary md:w-[90vw] md:rounded-xl">
+          <div className="my-10 flex min-h-screen w-[100vw] flex-col items-center ">
             <h1 className="mt-2 text-lg font-bold text-primary dark:text-secundary">
               Editar perfil
             </h1>
@@ -147,7 +147,7 @@ export default function EditUserIgreja({
               </label>
 
               <input
-                className="mt-2 w-[200px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+                className="input"
                 type="text"
                 name="name"
                 defaultValue={nome}
@@ -157,7 +157,7 @@ export default function EditUserIgreja({
               />
 
               <input
-                className=" w-[200px] cursor-pointer rounded-lg border-[1px] border-zinc-100 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+                className="input"
                 type="text"
                 name="login"
                 value={email}
@@ -168,7 +168,7 @@ export default function EditUserIgreja({
               />
 
               <input
-                className=" w-[200px] cursor-pointer rounded-lg border-[1px] border-zinc-300 bg-bglightsecundary p-1 text-center font-bold placeholder-textlight outline-none focus:ring-0 dark:border-zinc-800 dark:bg-bgdarksecundary dark:placeholder-textdark"
+                className=" input"
                 type="password"
                 name="password"
                 required
@@ -185,10 +185,7 @@ export default function EditUserIgreja({
                 onChange={onFileSelected}
               />
 
-              <button
-                type="submit"
-                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-              >
+              <button type="submit" className="button">
                 Editar
               </button>
             </form>
@@ -205,17 +202,11 @@ export default function EditUserIgreja({
             </div>
 
             <div className="flex gap-3">
-              <Link
-                href={'/login/igreja'}
-                className="z-20 m-2 mr-2 mt-3 flex cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 px-6 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
-              >
+              <Link href={'/login/igreja'} className="button">
                 login
               </Link>
 
-              <Link
-                href={'/register'}
-                className="z-20 m-2 mr-2 mt-3 flex cursor-pointer items-center justify-center rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 px-6 font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
-              >
+              <Link href={'/register'} className="button">
                 Registre-se
               </Link>
             </div>

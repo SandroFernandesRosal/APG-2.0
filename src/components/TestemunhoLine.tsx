@@ -92,17 +92,11 @@ export default function TestemunhoLine({
             <>
               <div className="flex w-full flex-wrap items-end justify-center gap-1">
                 Faça
-                <Link
-                  href={'/login/igreja'}
-                  className="cursor-pointer rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                >
+                <Link href={'/login/igreja'} className="button">
                   login
                 </Link>{' '}
                 ou{' '}
-                <Link
-                  href={'/register'}
-                  className="cursor-pointer rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                >
+                <Link href={'/register'} className="button">
                   Registre-se
                 </Link>
                 e envie seu testemunho.
@@ -113,10 +107,7 @@ export default function TestemunhoLine({
         {tokenIgreja && (
           <>
             {open === false && (
-              <button
-                className="mb-4 rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                onClick={() => setOpen(true)}
-              >
+              <button className="button" onClick={() => setOpen(true)}>
                 Adicionar testemunho
                 {open && (
                   <AiFillCloseCircle
@@ -182,7 +173,7 @@ export default function TestemunhoLine({
                       <div className="mb-2 flex justify-center gap-4">
                         {openEdit === null && (
                           <button
-                            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                            className="button"
                             onClick={() => setOpenEdit(item.id)}
                           >
                             Editar

@@ -41,11 +41,7 @@ export default function RemoveUserAdm({ id }: RemoveUserAdmProps) {
   }
 
   return (
-    <button
-      onClick={handleSubmit}
-      disabled={isDeleting}
-      className="m-2 rounded-lg border-[1px] border-zinc-400 bg-gradient-to-r from-slate-950 to-blue-900 p-1 px-3 text-lg font-bold text-white hover:from-blue-900 hover:to-slate-900 dark:border-zinc-700"
-    >
+    <button onClick={handleSubmit} disabled={isDeleting} className="button">
       {isDeleting ? 'Removendo...' : 'Remover perfil'}
     </button>
   )

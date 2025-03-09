@@ -118,7 +118,7 @@ export default function AddTestemunho({
           {' '}
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpen(false)} className="pr-1">
-            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/40 dark:hover:text-secundary/40" />
+            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
           </button>{' '}
         </div>
 
@@ -149,10 +149,7 @@ export default function AddTestemunho({
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto (Opcional)
           </label>
-          <button
-            type="submit"
-            className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-          >
+          <button type="submit" className="button">
             Enviar
           </button>
         </div>

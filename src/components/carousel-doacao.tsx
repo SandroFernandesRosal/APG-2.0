@@ -101,10 +101,7 @@ export default function CarouselDoacao({
         {token && (
           <>
             {openDoacao === false && (
-              <button
-                className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   p-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                onClick={() => setOpenDoacao(true)}
-              >
+              <button className="button" onClick={() => setOpenDoacao(true)}>
                 Adicionar igreja
               </button>
             )}
@@ -180,7 +177,7 @@ export default function CarouselDoacao({
                         <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
                           {openEdit !== product.id ? (
                             <button
-                              className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+                              className="button"
                               onClick={() => {
                                 setOpenEdit(product.id)
                                 setSelectedProduct(product)
