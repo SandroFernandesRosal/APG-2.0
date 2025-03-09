@@ -29,8 +29,8 @@ interface LoadingState {
 }
 
 interface DataSearchState {
-  dataSearch: New[]
-  setDataSearch: (state: New[]) => void
+  dataSearch: string[]
+  setDataSearch: (state: string[]) => void
 }
 
 interface OpenNewState {
@@ -75,7 +75,7 @@ interface DataMinisterioState {
 
 interface DataAgendaState {
   dataAgenda: Agenda[]
-  setDataAgenda: (state: Agenda[]) => void
+  setDataAgenda: (state: Agenda[] | ((prevData: Agenda[]) => Agenda[])) => void
 }
 
 interface DataTestemunhoState {
@@ -158,7 +158,13 @@ export const useDataMinisterio = create<DataMinisterioState>((set) => ({
 
 export const useDataAgenda = create<DataAgendaState>((set) => ({
   dataAgenda: [],
-  setDataAgenda: (state) => set({ dataAgenda: state }),
+  setDataAgenda: (state) => {
+    if (typeof state === 'function') {
+      set((prev) => ({ dataAgenda: state(prev.dataAgenda) }))
+    } else {
+      set({ dataAgenda: state })
+    }
+  },
 }))
 
 export const useDataTestemunho = create<DataTestemunhoState>((set) => ({

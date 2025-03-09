@@ -1,37 +1,20 @@
 import { Agenda } from '@/data/types/agenda'
 import { useEffect, useState } from 'react'
-import {
-  useDataAgenda,
-  useLocal,
-  useSearch,
-  useDataSearch,
-} from '@/store/useStore'
+import { useDataAgenda, useLocal, useSearch } from '@/store/useStore'
 import { api } from '@/lib/api'
-
-import ResultLength from './ResultLength'
 
 import ItemAgenda from './item-agenda'
 import SkeletonNew from './skeleton/SkeletonNew'
 
 export default function Eventos() {
-  const { dataAgenda, setDataAgenda } = useDataAgenda() || { dataAgenda: [] }
+  const { dataAgenda, setDataAgenda } = useDataAgenda()
   const { search } = useSearch()
-  const { dataSearch, setDataSearch } = useDataSearch()
   const { local } = useLocal()
   const [loading, setLoading] = useState(true)
   const [offset, setOffset] = useState(0)
   const [hasMore, setHasMore] = useState(true)
 
   const itemsPerPage = 12
-
-  useEffect(() => {
-    api
-      .get(`/agenda/${local}/search?search=${search}`)
-      .then((response) => {
-        setDataSearch(response.data)
-      })
-      .catch((err) => console.log(err))
-  }, [local, setDataSearch, search])
 
   useEffect(() => {
     setLoading(true)
@@ -61,11 +44,7 @@ export default function Eventos() {
         console.log('Novos dados carregados:', response.data)
 
         if (Array.isArray(response.data) && response.data.length > 0) {
-          setDataAgenda((prevData: Agenda[]) => {
-            const newData = [...prevData, ...response.data]
-            console.log('Nova lista de dados:', newData)
-            return newData
-          })
+          setDataAgenda((prevData: Agenda[]) => [...prevData, ...response.data])
           setOffset(newOffset)
         }
 
@@ -85,13 +64,10 @@ export default function Eventos() {
         </h1>
       )}
 
-      {search ? <ResultLength dataSearch={dataSearch} /> : null}
-
       <div className="flex justify-center gap-5 flex-wrap w-full">
-        {search
-          ? dataSearch &&
-            dataSearch.length > 0 &&
-            dataSearch.map((product: Agenda) => (
+        {!loading
+          ? Array.isArray(dataAgenda) &&
+            dataAgenda.map((product: Agenda) => (
               <ItemAgenda
                 key={product.id}
                 id={product.id}
@@ -102,25 +78,12 @@ export default function Eventos() {
                 updatedAt={product.updatedAt}
               />
             ))
-          : !loading
-            ? Array.isArray(dataAgenda) &&
-              dataAgenda.map((product: Agenda) => (
-                <ItemAgenda
-                  key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  day={product.day}
-                  hour={product.hour}
-                  createdAt={product.createdAt}
-                  updatedAt={product.updatedAt}
-                />
-              ))
-            : Array.from({ length: 4 }).map((_, index) => (
-                <SkeletonNew key={index} />
-              ))}
+          : Array.from({ length: 4 }).map((_, index) => (
+              <SkeletonNew key={index} />
+            ))}
       </div>
 
-      {!search && hasMore && (
+      {hasMore && (
         <button
           onClick={loadMore}
           className="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition"
@@ -129,7 +92,7 @@ export default function Eventos() {
         </button>
       )}
 
-      {!search && !hasMore && dataAgenda.length > 0 && (
+      {!hasMore && dataAgenda.length > 0 && (
         <p className="mt-4 text-gray-500">Não há mais eventos para carregar.</p>
       )}
     </div>

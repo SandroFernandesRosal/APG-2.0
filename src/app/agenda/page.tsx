@@ -1,7 +1,6 @@
 'use client'
 import SelectLocal from '@/components/SelectLocal'
 import Eventos from '@/components/eventos'
-import Search from '@/components/Search'
 
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
@@ -45,8 +44,6 @@ export default function AgendaPage() {
         )}
 
         <SelectLocal onChange={(newLocal) => console.log(newLocal)} />
-
-        <Search />
       </div>
       <Eventos />
     </main>
