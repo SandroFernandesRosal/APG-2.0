@@ -14,7 +14,7 @@ interface NavBarMdProps {
 export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
   return (
     <nav
-      className={`font-Roboto font-bold hidden  items-center justify-center gap-3 overflow-x-auto bg-bglight/30 p-3 pb-[5px] backdrop-blur-sm dark:bg-bgdark/30 md:flex md:rounded-lg  md:self-center lg:gap-4`}
+      className={`font-Roboto font-bold hidden  items-center justify-center gap-3 overflow-x-auto bg-bglight/50 p-3 pb-[5px] backdrop-blur-sm dark:bg-bgdark/50 md:flex md:rounded-lg  md:self-center lg:gap-4`}
     >
       <Link href="/">
         <div

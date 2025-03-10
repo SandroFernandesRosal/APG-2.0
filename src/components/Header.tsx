@@ -13,8 +13,10 @@ import Link from 'next/link'
 import ChangeTheme from './ChangeTheme'
 import Image from 'next/image'
 import logo from '../../public/img/logo.png'
+import logob from '../../public/img/logob.png'
 import { useToken } from '@/hooks/useToken'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
+import { useTheme } from 'next-themes'
 
 interface HeaderProps {
   children: React.ReactNode
@@ -22,6 +24,7 @@ interface HeaderProps {
 
 export default function Header({ children }: HeaderProps) {
   const [menu, setMenu] = useState(false)
+  const { theme } = useTheme()
 
   const token = useToken()
   const tokenIgreja = useTokenIgreja()
@@ -47,15 +50,27 @@ export default function Header({ children }: HeaderProps) {
       <header className="font-Roboto fixed z-50 flex flex-col top-0">
         <div className="flex h-20 w-[100vw] items-center justify-around overflow-hidden border-b-2 border-solid border-b-primary dark:border-b-secundary bg-bglight dark:bg-bgdark">
           <Link href="/" onClick={() => handleClick('/')}>
-            <Image
-              src={logo}
-              height={60}
-              width={60}
-              priority
-              quality={100}
-              alt="logo do site"
-              className="w-[60px] h-full"
-            />
+            {theme === 'dark' ? (
+              <Image
+                src={logob}
+                height={60}
+                width={60}
+                priority
+                quality={100}
+                alt="logo do site"
+                className="w-[60px] h-full"
+              />
+            ) : (
+              <Image
+                src={logo}
+                height={60}
+                width={60}
+                priority
+                quality={100}
+                alt="logo do site"
+                className="w-[60px] h-full"
+              />
+            )}
           </Link>
 
           <div className="hidden  md:flex">
@@ -79,12 +94,12 @@ export default function Header({ children }: HeaderProps) {
             {menu === false ? (
               <AlignRight
                 size={40}
-                className=" text-primary hover:text-secundary dark:text-secundary dark:hover:text-primary cursor-pointer"
+                className=" text-primary hover:text-primary/50 dark:text-white dark:hover:text-secundary cursor-pointer"
               />
             ) : (
               <X
                 size={40}
-                className=" text-primary hover:text-secundary dark:text-secundary dark:hover:text-primary cursor-pointer"
+                className=" text-primary hover:text-secundary dark:text-white dark:hover:text-secundary cursor-pointer"
               />
             )}
           </div>

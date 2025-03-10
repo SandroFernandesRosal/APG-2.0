@@ -3,6 +3,7 @@ import LogoutIgreja from './LogoutIgreja'
 import Image from 'next/image'
 import ChangeTheme from './ChangeTheme'
 import Link from 'next/link'
+import ItemUserIgreja from './item-user-igreja'
 
 interface UserIgreja {
   name: string
@@ -22,7 +23,9 @@ export default async function UserComponentIgreja() {
     <>
       {userIgreja && (
         <div className="flex flex-col items-start gap-1 md:flex-row md:items-center">
-          <div className="flex items-center gap-1">
+          <ItemUserIgreja name={name} avatarUrl={avatarUrl} />
+
+          <div className="flex items-center gap-1 md:hidden">
             {avatarUrl && (
               <Image
                 src={avatarUrl}
@@ -37,11 +40,8 @@ export default async function UserComponentIgreja() {
               {name}
             </p>
           </div>
-          <div className="flex items-center">
-            <Link
-              href={'/perfil'}
-              className="rounded-md mx-2 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-            >
+          <div className="flex items-center md:hidden">
+            <Link href={'/perfil'} className="button mr-2">
               Perfil
             </Link>
             <LogoutIgreja />
