@@ -30,7 +30,7 @@ export default function ItemUserIgreja({ avatarUrl, name }: userProps) {
         )}
       </div>
 
-      {!open && (
+      {open && (
         <div className="flex items-center absolute top-16 right-5 bg-bglightsecundary dark:bg-bgdarksecundary p-2 z-30 rounded-md gap-2 border-[1px] border-zinc-300 dark:border-zinc-700 cursor-pointer">
           <X
             className="text-primary dark:text-secundary cursor-pointer hover:text-secundary/50 dark:hover:text-primary/50"

@@ -17,6 +17,7 @@ import logob from '../../public/img/logob.png'
 import { useToken } from '@/hooks/useToken'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
 import { useTheme } from 'next-themes'
+import { SearchForm } from './search-form'
 
 interface HeaderProps {
   children: React.ReactNode
@@ -48,7 +49,7 @@ export default function Header({ children }: HeaderProps) {
   return (
     <>
       <header className="font-Roboto fixed z-50 flex flex-col top-0">
-        <div className="flex h-20 w-[100vw] items-center justify-around overflow-hidden border-b-2 border-solid border-b-primary dark:border-b-secundary bg-bglight dark:bg-bgdark">
+        <div className="flex h-20 w-[100vw] items-center justify-evenly overflow-hidden border-b-2 border-solid border-b-primary dark:border-b-secundary bg-bglight dark:bg-bgdark">
           <Link href="/" onClick={() => handleClick('/')}>
             {theme === 'dark' ? (
               <Image
@@ -73,22 +74,24 @@ export default function Header({ children }: HeaderProps) {
             )}
           </Link>
 
-          <div className="hidden  md:flex">
-            <ChangeTheme />
+          <div className="flex justify-center items-center ">
+            <SearchForm />
           </div>
-          {token || tokenIgreja ? (
-            <div className="hidden text-white md:flex">{children}</div>
-          ) : (
-            <Link
-              href={'/login/igreja'}
-              className="hidden md:flex md:flex-col md:items-center"
-            >
-              <FaUserCircle className="text-3xl font-bold text-primary dark:text-secundary" />
-              <span className="text-sm font-bold text-primary dark:text-secundary">
-                Entrar
-              </span>
-            </Link>
-          )}
+          <div className="items-center gap-4 hidden md:flex">
+            <div className="hidden md:flex">
+              <ChangeTheme />
+            </div>
+            {token || tokenIgreja ? (
+              <div className="hidden text-white md:flex">{children}</div>
+            ) : (
+              <Link
+                href={'/login/igreja'}
+                className="hidden md:flex md:flex-col md:items-center"
+              >
+                <FaUserCircle className="text-3xl font-bold text-primary dark:text-white hover:text-primary/50 dark:hover:text-secundary" />
+              </Link>
+            )}
+          </div>
 
           <div onClick={handleMenu} className={'md:hidden'}>
             {menu === false ? (

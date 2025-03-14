@@ -82,13 +82,17 @@ export default function CarouselHighlight() {
       })
   }, [setData, local])
 
+  const highlightedNews = data
+    .filter((item: New) => item.destaque === true)
+    .slice(0, 8)
+
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: highlightedNews.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: highlightedNews.length > 1,
     initialSlide: 0,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -98,7 +102,7 @@ export default function CarouselHighlight() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: highlightedNews.length > 1,
           dots: true,
         },
       },
@@ -107,7 +111,7 @@ export default function CarouselHighlight() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: highlightedNews.length > 1,
           dots: true,
         },
       },
@@ -116,7 +120,7 @@ export default function CarouselHighlight() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: highlightedNews.length > 1,
           dots: true,
         },
       },
@@ -128,13 +132,13 @@ export default function CarouselHighlight() {
       <div className="flex w-full gap-3 justify-center">
         {loading ? (
           <SkeletonHighlight />
-        ) : !data || data.length === 0 ? (
-          <div className="flex flex-col overflow-hidden border-[1px] w-full rounded-3xl h-[400px] p-5 justify-center items-center">
+        ) : highlightedNews.length === 0 ? (
+          <div className="flex flex-col overflow-hidden border-[1px] w-full h-[400px] p-5 justify-center items-center">
             <p>Nenhuma notícia cadastrada.</p>
           </div>
         ) : (
           <Slider {...settings} className="h-full w-[100%]">
-            {data.map((item: New) => (
+            {highlightedNews.map((item: New) => (
               <div
                 className="flex flex-col h-full place-items-center overflow-hidden"
                 key={item.id}
@@ -150,7 +154,7 @@ export default function CarouselHighlight() {
                     alt={item.title}
                     priority
                     quality={100}
-                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full  object-fill"
+                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full object-fill"
                   />
                 </Link>
               </div>
