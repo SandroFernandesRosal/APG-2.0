@@ -35,7 +35,7 @@ export function SearchForm() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Buscar notícia..."
-        className=" w-full text-sm outline-none placeholder:text-black dark:placeholder:text-white/50 focus:ring-0 border-none rounded-full px-1"
+        className=" w-full bg-transparent text-sm outline-none placeholder:text-black dark:placeholder:text-white/50 focus:ring-0 border-none rounded-full px-1"
         required
       />
     </form>
