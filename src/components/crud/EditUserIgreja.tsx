@@ -80,6 +80,21 @@ export default function EditUserIgreja({
       const newss = response.data
 
       if (response.status === 200 && newss) {
+        await api.put(
+          `/testemunhos`,
+          {
+            userId: id,
+            name: name || nome,
+            avatarUrl: avatarUrl || PlaceHolder,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+
         Cookies.remove('tokenigreja')
         router.push('/login/igreja')
         window.location.href = '/login/igreja'

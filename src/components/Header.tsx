@@ -59,7 +59,7 @@ export default function Header({ children }: HeaderProps) {
                 priority
                 quality={100}
                 alt="logo do site"
-                className="w-[60px] h-full"
+                className="w-full h-full"
               />
             ) : (
               <Image
@@ -69,7 +69,7 @@ export default function Header({ children }: HeaderProps) {
                 priority
                 quality={100}
                 alt="logo do site"
-                className="w-[60px] h-full"
+                className="w-full  h-full"
               />
             )}
           </Link>
@@ -88,7 +88,10 @@ export default function Header({ children }: HeaderProps) {
                 href={'/login/igreja'}
                 className="hidden md:flex md:flex-col md:items-center"
               >
-                <FaUserCircle className="text-3xl font-bold text-primary dark:text-white hover:text-primary/50 dark:hover:text-secundary" />
+                <FaUserCircle
+                  size={40}
+                  className="font-bold text-primary dark:text-white hover:text-primary/50 dark:hover:text-secundary"
+                />
               </Link>
             )}
           </div>

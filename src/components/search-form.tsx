@@ -27,7 +27,7 @@ export function SearchForm() {
   return (
     <form
       onSubmit={handleSearch}
-      className="flex  items-center  rounded-lg w-full p-1 border-[1px] border-zinc-400 dark:border-zinc-700"
+      className="flex  items-center  rounded-md w-full p-1 border-[1px] border-zinc-400 dark:border-zinc-700"
     >
       <Search className="w-7 h-7 text-primary dark:text-secundary" />
       <input
