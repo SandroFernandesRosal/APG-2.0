@@ -164,12 +164,10 @@ export default function CarouselEndereco({
                   >
                     <div className="border-b-[3px] border-primary px-2 dark:border-secundary flex text-xl font-bold justify-around w-full h-[50%] py-2 flex-col items-center">
                       <h1>{product.local}</h1>
-                      <h3 className="flex items-center font-semibold text-gray-900 dark:text-white">
+                      <h2 className="flex items-center font-semibold text-gray-900 dark:text-white">
                         {product.rua}, {product.numero}, {product.cidade}
-                      </h3>
-                      <span className="font-normal text-gray-500 dark:text-gray-400">
-                        CEP: {product.cep}
-                      </span>
+                      </h2>
+                      <span className="font-normal ">CEP: {product.cep}</span>
                     </div>
                     <div className="flex flex-col justify-center items-center  h-[50%]">
                       <a
@@ -179,9 +177,7 @@ export default function CarouselEndereco({
                         className="flex flex-col items-center gap-2 hover:opacity-80 transition-opacity"
                       >
                         <FaMapMarkerAlt className="text-4xl text-primary dark:text-secundary" />
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
-                          Ver no Google Maps
-                        </span>
+                        <span className="text-sm ">Ver no Google Maps</span>
                       </a>
                       {token && (
                         <div className="mb-1 flex w-full flex-1 items-end justify-around text-white">

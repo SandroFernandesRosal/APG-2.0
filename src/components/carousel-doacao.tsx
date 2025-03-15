@@ -158,15 +158,9 @@ export default function CarouselDoacao({
                       <span className=" flex items-center   text-gray-900 dark:text-white">
                         {product.banco}
                       </span>
-                      <span className=" text-gray-500 dark:text-gray-400">
-                        C: {product.conta}
-                      </span>
-                      <span className=" text-gray-500 dark:text-gray-400">
-                        Ag: {product.agencia}
-                      </span>
-                      <span className=" text-gray-500 dark:text-gray-400">
-                        {product.nomebanco}
-                      </span>
+                      <span>C: {product.conta}</span>
+                      <span>Ag: {product.agencia}</span>
+                      <span>{product.nomebanco}</span>
                     </div>
                     <div className="flex flex-col justify-center items-center h-[50%]">
                       <span>Chave pix:</span>

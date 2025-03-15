@@ -105,7 +105,7 @@ export default function CarouselNews({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full b">
+      <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full">
         <h1 className="text-xl font-bold flex">
           <Minus
             size={45}
@@ -167,11 +167,13 @@ export default function CarouselNews({
                 }
                 return (
                   <div
-                    className="justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group"
+                    className={`justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10'} `}
                     key={product.id}
                   >
                     <div className="h-[100%] relative overflow-hidden">
                       <Link
+                        aria-hidden="true"
+                        tabIndex={-1}
                         href={`/noticias/${product.page}/${product.id}`}
                         className="group h-full rounded-md overflow-hidden"
                       >
@@ -187,6 +189,8 @@ export default function CarouselNews({
 
                     <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full ">
                       <Link
+                        aria-hidden="true"
+                        tabIndex={-1}
                         href={`/noticias/${product.page}/${product.id}`}
                         className="text-primary z-30"
                       >
@@ -200,6 +204,8 @@ export default function CarouselNews({
                     </div>
 
                     <Link
+                      aria-hidden="true"
+                      tabIndex={-1}
                       href={`/noticias/${product.page}/${product.id}`}
                       className="rounded-md text-white bg-primary absolute bottom-5 left-5 text-center px-2 md:text-xl border-[1px] border-secundary z-20"
                     >
@@ -214,6 +220,8 @@ export default function CarouselNews({
                       <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
                         {openEdit !== product.id ? (
                           <button
+                            aria-hidden="true"
+                            tabIndex={-1}
                             className="button"
                             onClick={() => {
                               setOpenEdit(product.id)

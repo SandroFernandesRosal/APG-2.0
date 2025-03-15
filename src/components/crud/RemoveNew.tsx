@@ -42,7 +42,13 @@ export default function RemoveNew({ id }: RemoveNewProps) {
   }
 
   return (
-    <button onClick={handleSubmit} disabled={isDeleting} className="button">
+    <button
+      onClick={handleSubmit}
+      disabled={isDeleting}
+      className="button"
+      aria-hidden="true"
+      tabIndex={-1}
+    >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>
   )

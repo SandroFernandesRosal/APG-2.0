@@ -176,18 +176,18 @@ export default function CarouselAgenda({
                     <div className=" bg-primary   text-white dark:border-secundary flex text-xl  justify-center w-[80%] place-self-center  rounded-md">
                       {product.day}
                     </div>
-                    <ul className="relative    mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px] ">
-                      <li className="  w-full">
+                    <div className="relative    mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px] ">
+                      <div className="  w-full">
                         <span className="absolute  left-2 top-5 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
-                        <h3 className=" flex items-center  font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700 place-content-center">
+                        <h1 className=" flex items-center  font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700 place-content-center">
                           {product.name}
-                        </h3>
+                        </h1>
 
-                        <p className="font-normal text-gray-500 dark:text-gray-400 place-content-center flex">
+                        <p className="font-normal place-content-center flex">
                           {product.hour}
                         </p>
-                      </li>
-                    </ul>
+                      </div>
+                    </div>
                     {token && (
                       <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
                         {openEdit !== product.id ? (

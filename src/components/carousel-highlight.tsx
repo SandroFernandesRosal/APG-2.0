@@ -144,17 +144,19 @@ export default function CarouselHighlight() {
                 key={item.id}
               >
                 <Link
+                  aria-hidden="true"
+                  tabIndex={-1}
                   href={`/noticias/${item.page}/${item.id}`}
                   className="group flex justify-center items-center h-[400px] md:h-[600px] overflow-hidden w-full"
                 >
                   <Image
                     src={item.coverUrl}
                     width={900}
-                    height={500}
+                    height={600}
                     alt={item.title}
                     priority
                     quality={100}
-                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full object-fill"
+                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full object-fill "
                   />
                 </Link>
               </div>

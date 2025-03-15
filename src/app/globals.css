@@ -28,9 +28,11 @@ body::-webkit-scrollbar-thumb {
 
 .slick-prev:before, .slick-next:before, .slick-dots li.slick-active button:before, .slick-dots li button:before {
   
-  @apply !text-primary dark:!text-secundary;
+  @apply !text-primary dark:!text-secundary !text-2xl ;
   
 }
+
+
 
 .highligt .slick-prev:before, .highligt .slick-next:before {
   display: none!important;
@@ -60,7 +62,7 @@ height: 100vh !important;
 }
 
 .button {
-  @apply rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold z-20 text-center
+  @apply rounded-md border-[1px] border-primary hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white px-2 text-primary dark:text-secundary dark:hover:text-white dark:border-secundary/50 md:px-3 md:text-lg md:font-bold z-20 text-center font-bold mb-4
 }
 
 .input {

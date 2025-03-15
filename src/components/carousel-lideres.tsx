@@ -97,7 +97,10 @@ export default function CarouselLideres() {
         {token && (
           <>
             {openNew === false && (
-              <button className="button" onClick={() => setOpenNew(true)}>
+              <button
+                className="button !text-white !border-white"
+                onClick={() => setOpenNew(true)}
+              >
                 Adicionar Líder
               </button>
             )}
@@ -130,7 +133,7 @@ export default function CarouselLideres() {
               {dataSobre.map((product: SobreLider) => {
                 return (
                   <div
-                    className="justify-between relative flex flex-col h-[250px] md:h-[350px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group"
+                    className={`justify-between relative flex flex-col h-[250px] md:h-[350px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10'}`}
                     key={product.id}
                   >
                     <div className="h-[100%] relative overflow-hidden">
