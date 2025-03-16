@@ -188,7 +188,7 @@ export default function CarouselNews({
                           width={200}
                           height={500}
                           alt={product.title}
-                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-y-150"
+                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-150"
                         />
                       </Link>
                     </div>

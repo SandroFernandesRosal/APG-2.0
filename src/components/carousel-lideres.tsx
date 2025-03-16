@@ -88,9 +88,9 @@ export default function CarouselLideres() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center  justify-center overflow-hidden  w-full absolute -bottom-[180px] md:-bottom-[233px] gap-2 ">
+      <section className="text-textprimary flex flex-col items-center  justify-center overflow-hidden  w-full absolute -bottom-[184px] md:-bottom-[250px] gap-2 ">
         <h1 className="md:text-4xl text-2xl font-bold text-white">
-          Conheça nossos fundadores e resposáveis
+          Conheça nossos fundadores e responsáveis
         </h1>
 
         <ArrowDown size={40} className="text-white" />
@@ -133,25 +133,34 @@ export default function CarouselLideres() {
               {dataSobre.map((product: SobreLider) => {
                 return (
                   <div
-                    className={`justify-between relative flex flex-col h-[250px] md:h-[350px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10 md:mb-14'}`}
+                    className={`justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10 md:mb-14'}`}
                     key={product.id}
                   >
-                    <div className="h-[100%] relative overflow-hidden">
-                      <div className="group h-full rounded-md overflow-hidden">
-                        <Image
-                          src={product.coverUrl}
-                          width={500}
-                          height={500}
-                          alt={product.title}
-                          quality={100}
-                          className="group-hover:scale-105 transition-transform duration-500 h-full w-full rounded-md object-cover object-center opacity-90"
+                    <div className="h-[100%] relative overflow-hidden ">
+                      <div className="group h-full rounded-md overflow-hidden relative ">
+                        <div
+                          className="absolute inset-0 bg-cover bg-center blur-sm scale-110 transition-transform duration-500 group-hover:scale-115"
+                          style={{
+                            backgroundImage: `url(${product.coverUrl})`,
+                          }}
                         />
+
+                        <div className="absolute inset-0 flex items-center justify-center ">
+                          <Image
+                            src={product.coverUrl}
+                            width={300}
+                            height={300}
+                            alt={product.title}
+                            quality={100}
+                            className="relative z-10 h-auto w-auto max-h-full max-w-full group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center cursor-pointer border-primary dark:border-secundary border-t-2">
-                      <div className="text-primary z-30 ">
-                        <p className="text-center px-1 text-xl text-white font-semibold ">
+                    <div className="hidden z-10 group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center cursor-pointer border-primary dark:border-secundary border-t-2">
+                      <div className="text-primary z-30">
+                        <p className="text-center px-1 text-xl text-white font-semibold">
                           {product.name}
                         </p>
                       </div>

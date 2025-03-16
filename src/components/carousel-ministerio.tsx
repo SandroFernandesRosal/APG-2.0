@@ -222,19 +222,25 @@ export default function CarouselMinisterio({
                     key={product.id}
                   >
                     <div className="h-[100%] relative overflow-hidden">
-                      <div className="group h-full rounded-md overflow-hidden">
+                      <div className="group h-full  rounded-md overflow-hidden relative">
+                        <div
+                          className="absolute inset-0 bg-cover bg-center  blur-sm scale-110"
+                          style={{
+                            backgroundImage: `url(${product.coverUrl})`,
+                          }}
+                        />
                         <Image
                           src={product.coverUrl}
                           width={500}
                           height={500}
                           alt={product.title}
                           quality={100}
-                          className="group-hover:scale-105 transition-transform duration-500 h-full w-full rounded-md object-cover object-center opacity-90"
+                          className="relative z-10 h-full w-full rounded-md object-contain object-center group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                     </div>
 
-                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center text-white cursor-pointer border-primary dark:border-secundary border-t-2 ">
+                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md z-10  bg-black/80 w-full justify-center items-center text-white cursor-pointer border-primary dark:border-secundary border-t-2 ">
                       <div className="text-primary z-30">
                         <p className="text-center px-1 text-xl text-white font-semibold ">
                           {product.name}
