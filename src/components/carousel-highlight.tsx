@@ -150,7 +150,7 @@ export default function CarouselHighlight() {
                   className="group flex justify-center items-center h-[300px] md:h-[500px] overflow-hidden w-full relative"
                 >
                   <div
-                    className="absolute inset-0 bg-cover bg-center blur-sm "
+                    className="absolute inset-0 bg-cover bg-center blur-sm scale-110 "
                     style={{ backgroundImage: `url(${item.coverUrl})` }}
                   />
                   <Image
@@ -160,7 +160,7 @@ export default function CarouselHighlight() {
                     alt={item.title}
                     priority
                     quality={100}
-                    className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 "
+                    className="relative z-10 h-full w-full object-contain  transition-transform duration-500 group-hover:scale-110 "
                   />
                 </Link>
               </div>
