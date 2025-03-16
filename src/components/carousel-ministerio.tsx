@@ -218,7 +218,7 @@ export default function CarouselMinisterio({
               {dataMinisterio.map((product: Ministerio) => {
                 return (
                   <div
-                    className={`justify-between mb-12 relative  flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 bg-bglight dark:bg-bgdark group ${token && 'mb-10'}`}
+                    className={`justify-between mb-12 relative  flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
                     key={product.id}
                   >
                     <div className="h-[100%] relative overflow-hidden">

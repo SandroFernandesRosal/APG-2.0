@@ -147,16 +147,20 @@ export default function CarouselHighlight() {
                   aria-hidden="true"
                   tabIndex={-1}
                   href={`/noticias/${item.page}/${item.id}`}
-                  className="group flex justify-center items-center h-[400px] md:h-[600px] overflow-hidden w-full"
+                  className="group flex justify-center items-center h-[300px] md:h-[500px] overflow-hidden w-full relative"
                 >
+                  <div
+                    className="absolute inset-0 bg-cover bg-center blur-sm "
+                    style={{ backgroundImage: `url(${item.coverUrl})` }}
+                  />
                   <Image
                     src={item.coverUrl}
-                    width={900}
-                    height={600}
+                    width={1100}
+                    height={500}
                     alt={item.title}
                     priority
                     quality={100}
-                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full object-fill "
+                    className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 "
                   />
                 </Link>
               </div>

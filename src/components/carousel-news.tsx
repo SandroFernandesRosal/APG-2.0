@@ -167,7 +167,7 @@ export default function CarouselNews({
                 }
                 return (
                   <div
-                    className={`justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10'} `}
+                    className={`justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10 md:mb-14'} `}
                     key={product.id}
                   >
                     <div className="h-[100%] relative overflow-hidden">
@@ -175,19 +175,25 @@ export default function CarouselNews({
                         aria-hidden="true"
                         tabIndex={-1}
                         href={`/noticias/${product.page}/${product.id}`}
-                        className="group h-full rounded-md overflow-hidden"
+                        className="group h-full rounded-md overflow-hidden relative"
                       >
+                        <div
+                          className="absolute inset-0 bg-cover bg-center blur-sm"
+                          style={{
+                            backgroundImage: `url(${product.coverUrl})`,
+                          }}
+                        />
                         <Image
                           src={product.coverUrl}
-                          width={500}
+                          width={200}
                           height={500}
                           alt={product.title}
-                          className="group-hover:scale-105 transition-transform duration-500 h-full rounded-md object-cover object-center opacity-90"
+                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-y-150"
                         />
                       </Link>
                     </div>
 
-                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full ">
+                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full z-10 ">
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
