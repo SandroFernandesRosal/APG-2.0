@@ -1,8 +1,6 @@
 'use client'
 import SelectLocal from '@/components/SelectLocal'
 
-import Search from '@/components/Search'
-
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 
@@ -46,8 +44,6 @@ export default function MinisterioPage() {
         )}
 
         <SelectLocal onChange={(newLocal) => console.log(newLocal)} />
-
-        <Search />
       </div>
       <Ministerioo />
     </main>

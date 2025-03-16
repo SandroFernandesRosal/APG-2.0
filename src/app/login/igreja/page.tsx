@@ -65,25 +65,21 @@ export default function RegisterIgreja() {
   }
 
   return (
-    <div className="mt-[80px] flex w-full  justify-center md:mt-[140px]">
-      <div className="my-10 flex min-h-screen w-[100vw] flex-col items-center rounded-[35px] bg-bglightsecundary shadow-light dark:bg-bgdarksecundary dark:shadow-dark  md:w-[90vw] md:rounded-xl">
+    <div className="flex w-full  justify-center  min-h-screen pt-28 md:pt-[185px]">
+      <div className=" flex  flex-col items-center border-[1px] border-zinc-400 dark:border-zinc-700 w-[70%] max-w-[500px] h-full rounded-md ">
         <h1 className="mt-2 text-lg font-bold text-primary dark:text-secundary ">
           Login
         </h1>
         <p className="mb-5 text-xl">Use suas credenciais</p>
 
         <form
-          className="flex w-[75%] max-w-[500px] flex-col items-center gap-3 rounded-xl bg-bglight p-3 shadow-light dark:bg-bgdark dark:shadow-dark md:mb-5"
+          className="flex w-full flex-col items-center gap-3 rounded-xl  p-3  md:mb-5"
           onSubmit={handleSubmit}
         >
-          <h1 className="text-xl font-bold text-primary dark:text-secundary">
-            Preencha os campos abaixo:
-          </h1>
-
           <p className="font-bold text-red-800">{error}</p>
 
           <input
-            className="shadow-ligh mb-[10px] w-[90%] cursor-pointer rounded-lg border-none  bg-bglightsecundary p-[5px] text-center font-bold placeholder-textlight shadow-light outline-none focus:ring-0  dark:bg-bgdarksecundary dark:placeholder-textdark dark:shadow-dark"
+            className="input"
             type="text"
             name="login"
             placeholder="Digite seu e-mail"
@@ -91,17 +87,14 @@ export default function RegisterIgreja() {
           />
 
           <input
-            className="shadow-ligh mb-[10px] w-[90%] cursor-pointer rounded-lg border-none  bg-bglightsecundary p-[5px] text-center font-bold placeholder-textlight shadow-light outline-none focus:ring-0  dark:bg-bgdarksecundary dark:placeholder-textdark dark:shadow-dark"
+            className="input"
             type="password"
             name="password"
             placeholder="Digite sua senha"
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button
-            type="submit"
-            className="z-20  flex w-[100px] cursor-pointer items-center justify-center rounded-lg bg-gradient-to-r from-slate-950 to-blue-900  font-bold text-white  shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark"
-          >
+          <button type="submit" className="button">
             Entrar
           </button>
 

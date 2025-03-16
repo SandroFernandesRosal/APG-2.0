@@ -1,7 +1,6 @@
 'use client'
 import SelectLocal from '@/components/SelectLocal'
 import News from '@/components/news'
-import Search from '@/components/Search'
 
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
@@ -41,8 +40,6 @@ export default function Noticias() {
         )}
 
         <SelectLocal onChange={(newLocal) => console.log(newLocal)} />
-
-        <Search />
       </div>
       <News />
     </main>

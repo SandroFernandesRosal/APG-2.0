@@ -1,3 +1,5 @@
+'use client'
+
 import { Ministerio } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
 import { useDataMinisterio, useLocal, useSearch } from '@/store/useStore'
