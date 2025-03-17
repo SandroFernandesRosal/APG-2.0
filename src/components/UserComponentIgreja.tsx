@@ -41,7 +41,7 @@ export default async function UserComponentIgreja() {
             </p>
           </div>
           <div className="flex items-center md:hidden">
-            <Link href={'/perfil'} className="button mr-2">
+            <Link href={'/perfil'} className="button mr-2 !mb-0">
               Perfil
             </Link>
             <LogoutIgreja />

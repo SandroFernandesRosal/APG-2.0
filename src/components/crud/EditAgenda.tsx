@@ -107,7 +107,7 @@ export default function EditAgenda({
         onChange={(e) => setHour(e.target.value)}
       />
 
-      <button type="submit" className="button">
+      <button type="submit" className="button !mb-0">
         Enviar
       </button>
     </form>

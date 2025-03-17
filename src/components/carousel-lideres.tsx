@@ -98,7 +98,7 @@ export default function CarouselLideres() {
           <>
             {openNew === false && (
               <button
-                className="button !text-white !border-white"
+                className="text-white  border-secundary border-[1px] px-2 rounded-md hover:text-secundary"
                 onClick={() => setOpenNew(true)}
               >
                 Adicionar Líder
@@ -173,7 +173,7 @@ export default function CarouselLideres() {
                       <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
                         {openEdit !== product.id ? (
                           <button
-                            className="button"
+                            className="button !mb-0"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

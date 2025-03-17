@@ -44,8 +44,8 @@ export default function CarouselDoacao({
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: true,
     initialSlide: 0,
     arrows: true,
@@ -61,10 +61,10 @@ export default function CarouselDoacao({
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -73,8 +73,8 @@ export default function CarouselDoacao({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -150,7 +150,7 @@ export default function CarouselDoacao({
               {data.map((product: Doacao) => {
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                    className="justify-between flex flex-col h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
                     key={product.id}
                   >
                     <div className="border-b-[3px] border-primary dark:border-secundary  flex text-xl justify-around w-full h-[50%]  py-1 flex-col items-center">
@@ -171,7 +171,7 @@ export default function CarouselDoacao({
                         <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
                           {openEdit !== product.id ? (
                             <button
-                              className="button"
+                              className="button !mb-0"
                               onClick={() => {
                                 setOpenEdit(product.id)
                                 setSelectedProduct(product)

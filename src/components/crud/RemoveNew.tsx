@@ -45,7 +45,7 @@ export default function RemoveNew({ id }: RemoveNewProps) {
     <button
       onClick={handleSubmit}
       disabled={isDeleting}
-      className="button"
+      className="button !mb-0"
       aria-hidden="true"
       tabIndex={-1}
     >

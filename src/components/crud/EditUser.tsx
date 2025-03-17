@@ -180,7 +180,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
                 onChange={onFileSelected}
               />
 
-              <button type="submit" className="buttom">
+              <button type="submit" className="button !mb-0">
                 Editar
               </button>
             </form>
@@ -197,11 +197,11 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
             </div>
 
             <div className="flex gap-3">
-              <Link href={'/login/igreja'} className="buttom">
+              <Link href={'/login/igreja'} className="button !mb-0">
                 login
               </Link>
 
-              <Link href={'/register'} className="buttom">
+              <Link href={'/register'} className="button !mb-0">
                 Registre-se
               </Link>
             </div>

@@ -3,25 +3,60 @@ import { Endereco } from '@/data/types/endereco'
 import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
-import ItemEndereco from './item-endereco'
+import ItemEndereco from './ItemEndereco'
 import AddEndereco from './crud/AddEndereco'
 import SkeletonEndereco from './skeleton/SkeletonEndereco'
+import EditEndereco from './crud/EditEndereco'
 
 export default function Locais() {
   const [data, setData] = useState<Endereco[]>([])
   const [loading, setLoading] = useState(true)
   const [openEndereco, setOpenEndereco] = useState(false)
+  const [openEdit, setOpenEdit] = useState<string | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<Endereco | null>(null)
+  const [coordinates, setCoordinates] = useState<{
+    [key: string]: [number, number]
+  }>({})
   const token = useToken()
 
   useEffect(() => {
+    setLoading(true)
     api
       .get('/endereco')
       .then((response) => {
         setData(response.data)
         setLoading(false)
+        response.data.forEach((endereco: Endereco) => {
+          geocodeAddress(endereco)
+        })
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        setLoading(false)
+      })
   }, [])
+
+  const geocodeAddress = async (endereco: Endereco) => {
+    const { rua, numero, local, cidade, cep } = endereco
+    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      enderecoFormatado,
+    )}`
+
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      if (data && data.length > 0) {
+        const { lat, lon } = data[0]
+        setCoordinates((prev) => ({
+          ...prev,
+          [endereco.id]: [parseFloat(lat), parseFloat(lon)],
+        }))
+      }
+    } catch (error) {
+      console.error('Erro ao geocodificar endereço:', error)
+    }
+  }
 
   return (
     <section className="mb-5 flex w-[100vw] flex-col items-center">
@@ -56,14 +91,13 @@ export default function Locais() {
           ) : (
             data.map((item) => (
               <ItemEndereco
-                id={item.id}
                 key={item.id}
-                local={item.local}
-                rua={item.rua}
-                cep={item.cep}
-                cidade={item.cidade}
-                numero={item.numero}
                 item={item}
+                token={token}
+                openEdit={openEdit}
+                setOpenEdit={setOpenEdit}
+                setSelectedProduct={setSelectedProduct}
+                coordinates={coordinates[item.id]}
               />
             ))
           )
@@ -71,6 +105,18 @@ export default function Locais() {
           <SkeletonEndereco />
         )}
       </div>
+
+      {openEdit && selectedProduct && (
+        <EditEndereco
+          localInitial={selectedProduct.local}
+          ruaInitial={selectedProduct.rua}
+          cepInitial={selectedProduct.cep}
+          id={selectedProduct.id}
+          numeroInitial={selectedProduct.numero}
+          cidadeInitial={selectedProduct.cidade}
+          setOpenEdit={setOpenEdit}
+        />
+      )}
     </section>
   )
 }

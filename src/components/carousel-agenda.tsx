@@ -57,8 +57,8 @@ export default function CarouselAgenda({
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: true,
     initialSlide: 0,
     arrows: true,
@@ -74,10 +74,10 @@ export default function CarouselAgenda({
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -86,8 +86,8 @@ export default function CarouselAgenda({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -163,7 +163,7 @@ export default function CarouselAgenda({
               {dataAgenda.map((product: Agenda) => {
                 return (
                   <div
-                    className="flex justify-center relative content-center flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 "
+                    className="flex justify-center relative content-center flex-col h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800 "
                     key={product.id}
                   >
                     <Image
@@ -192,7 +192,7 @@ export default function CarouselAgenda({
                       <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
                         {openEdit !== product.id ? (
                           <button
-                            className="button"
+                            className="button !mb-0"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

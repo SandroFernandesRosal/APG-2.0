@@ -43,7 +43,11 @@ export default function RemoveAgenda({ id }: RemoveAgendaProps) {
   }
 
   return (
-    <button onClick={handleSubmit} disabled={isDeleting} className="button">
+    <button
+      onClick={handleSubmit}
+      disabled={isDeleting}
+      className="button !mb-0"
+    >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>
   )

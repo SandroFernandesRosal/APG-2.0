@@ -12,7 +12,7 @@ export default function ItemAgenda({ id, day, name, hour }: Agenda) {
   const token = useToken()
   return (
     <div
-      className="flex flex-col justify-center relative content-center  h-[300px] md:h-[400px] w-[47%] max-w-[200px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+      className="flex flex-col  justify-center relative content-center  h-[400px]  w-[47%] max-w-[300px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
       key={id}
     >
       <Image
@@ -42,7 +42,7 @@ export default function ItemAgenda({ id, day, name, hour }: Agenda) {
           <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
             {openEdit !== id ? (
               <button
-                className="button"
+                className="button !mb-0"
                 onClick={() => {
                   setOpenEdit(id)
                 }}

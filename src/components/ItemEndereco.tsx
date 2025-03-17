@@ -1,5 +1,4 @@
 'use client'
-import { useState, useEffect } from 'react'
 import { Endereco } from '@/data/types/endereco'
 import EditEndereco from './crud/EditEndereco'
 import RemoveEndereco from './crud/RemoveEndereco'
@@ -21,6 +20,7 @@ export interface ItemEnderecoProps {
   openEdit: string | null
   setOpenEdit: (id: string | null) => void
   setSelectedProduct: (product: Endereco | null) => void
+  coordinates: [number, number] | null
 }
 
 export default function ItemEndereco({
@@ -29,32 +29,8 @@ export default function ItemEndereco({
   openEdit,
   setOpenEdit,
   setSelectedProduct,
+  coordinates,
 }: ItemEnderecoProps) {
-  const [coordinates, setCoordinates] = useState<[number, number] | null>(null)
-
-  useEffect(() => {
-    geocodeAddress(item)
-  }, [item])
-
-  const geocodeAddress = async (endereco: Endereco) => {
-    const { rua, numero, local, cidade, cep } = endereco
-    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      enderecoFormatado,
-    )}`
-
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0]
-        setCoordinates([parseFloat(lat), parseFloat(lon)])
-      }
-    } catch (error) {
-      console.error('Erro ao geocodificar endereço:', error)
-    }
-  }
-
   const openGoogleMaps = (coords: Endereco) => {
     const { rua, numero, local, cidade, cep } = coords
     const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
@@ -64,10 +40,10 @@ export default function ItemEndereco({
 
   return (
     <div
-      className={`flex justify-between h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 ${token && 'mb-20 md:mb-24'}`}
+      className={`flex flex-col items-center justify-between h-[400px] w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800 ${token && 'mb-20 md:mb-24'}`}
       key={item.id}
     >
-      <div className="flex justify-center items-center h-[50%]">
+      <div className="flex justify-center items-center h-[100%] w-[100%] z-0">
         {coordinates ? (
           <MapContainer
             center={coordinates}
@@ -86,7 +62,7 @@ export default function ItemEndereco({
           <p>Carregando mapa...</p>
         )}
       </div>
-      <div className="px-2 gap-1 flex md:text-xl justify-evenly py-1 h-[50%] flex-col items-center">
+      <div className="px-2 gap-1 flex md:text-xl justify-evenly py-1 h-[50%] w-[100%] flex-col items-center">
         <h1 className="text-primary dark:text-secundary text-xl">
           {item.local}
         </h1>
@@ -95,7 +71,7 @@ export default function ItemEndereco({
         </h2>
         <span className="">CEP: {item.cep}</span>
 
-        <button onClick={() => openGoogleMaps(item)} className="button mb-0">
+        <button onClick={() => openGoogleMaps(item)} className="button mb-0 ">
           Abrir mapa
         </button>
       </div>
@@ -103,7 +79,7 @@ export default function ItemEndereco({
         <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
           {openEdit !== item.id ? (
             <button
-              className="button"
+              className="button !mb-0"
               onClick={() => {
                 setOpenEdit(item.id)
                 setSelectedProduct(item)

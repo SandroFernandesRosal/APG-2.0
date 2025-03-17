@@ -193,7 +193,7 @@ export default function EditNew({
         </label>
       </div>
 
-      <button type="submit" className="button">
+      <button type="submit" className="button !mb-0">
         Enviar
       </button>
     </form>

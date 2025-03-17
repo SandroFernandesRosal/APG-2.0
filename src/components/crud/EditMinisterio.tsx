@@ -184,7 +184,7 @@ export default function EditMinisterio({
         onChange={onFileSelected}
       />
 
-      <button type="submit" className="button">
+      <button type="submit" className="button !mb-0">
         Enviar
       </button>
     </form>

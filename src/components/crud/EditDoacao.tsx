@@ -160,7 +160,7 @@ export default function EditDoacao({
         onChange={(e) => setNomePix(e.target.value)}
       />
 
-      <button type="submit" className="button">
+      <button type="submit" className="button !mb-0">
         Enviar
       </button>
     </form>

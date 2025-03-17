@@ -41,7 +41,11 @@ export default function RemoveEndereco({ id }: RemoveEnderecoProps) {
   }
 
   return (
-    <button onClick={handleSubmit} disabled={isDeleting} className="button">
+    <button
+      onClick={handleSubmit}
+      disabled={isDeleting}
+      className="button !mb-0"
+    >
       {isDeleting ? 'Removendo...' : 'Remover'}
     </button>
   )

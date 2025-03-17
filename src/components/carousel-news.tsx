@@ -56,16 +56,17 @@ export default function CarouselNews({
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const day = date.getDate()
-    const month = date.toLocaleString('default', { month: 'short' })
-    return `${day} ${month}`
+    const month = date.toLocaleString('default', { month: 'long' })
+    const year = date.getFullYear()
+    return `${day} de ${month} de ${year}`
   }
 
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: true,
     initialSlide: 0,
     arrows: true,
@@ -81,10 +82,10 @@ export default function CarouselNews({
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -93,8 +94,8 @@ export default function CarouselNews({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -141,7 +142,7 @@ export default function CarouselNews({
             href={`/noticias`}
             className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
           >
-            <span>Ver todos</span> <FaPlus />
+            <span>Ver todas</span> <FaPlus />
           </Link>
         </div>
 
@@ -167,10 +168,10 @@ export default function CarouselNews({
                 }
                 return (
                   <div
-                    className={`justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 group ${token && 'mb-10 md:mb-14'} `}
+                    className={`justify-between relative flex flex-col h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800    group ${token && 'mb-20 md:mb-24'} `}
                     key={product.id}
                   >
-                    <div className="h-[100%] relative overflow-hidden">
+                    <div className="h-[50%] relative overflow-hidden">
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
@@ -178,7 +179,7 @@ export default function CarouselNews({
                         className="group h-full rounded-md overflow-hidden relative"
                       >
                         <div
-                          className="absolute inset-0 bg-cover bg-center blur-sm"
+                          className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
                           style={{
                             backgroundImage: `url(${product.coverUrl})`,
                           }}
@@ -188,47 +189,45 @@ export default function CarouselNews({
                           width={200}
                           height={500}
                           alt={product.title}
-                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-150"
+                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110"
                         />
                       </Link>
                     </div>
 
-                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full z-10 ">
+                    <div className="flex flex-col gap-1 justify-around   h-[50%] w-full z-10 mx-2">
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
                         href={`/noticias/${product.page}/${product.id}`}
                         className="text-primary z-30"
                       >
-                        <p className="text-center px-1 text-xl text-white font-semibold ">
+                        <h1 className="text-center  text-xl  font-semibold text-primary dark:text-secundary">
                           {product.title}
-                        </p>
+                        </h1>
                       </Link>
-                      <div className="flex px-2 text-white z-30">
-                        {product.content}
+                      <div className="flex  text-lg">
+                        {product.content.slice(0, 50).concat('...')}
                       </div>
+
+                      <span className=" text-sm  flex flex-wrap   items-center ">
+                        {formatDate(product.createdAt)}
+                      </span>
+                      <Link
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        href={`/noticias/${product.page}/${product.id}`}
+                        className="button  !mb-0 flex items-center justify-center self-center"
+                      >
+                        Ler notícia
+                      </Link>
                     </div>
-
-                    <Link
-                      aria-hidden="true"
-                      tabIndex={-1}
-                      href={`/noticias/${product.page}/${product.id}`}
-                      className="rounded-md text-white bg-primary absolute bottom-5 left-5 text-center px-2 md:text-xl border-[1px] border-secundary z-20"
-                    >
-                      Ler notícia
-                    </Link>
-
-                    <span className="absolute top-3 right-3 text-sm bg-primary rounded-md p-1 text-white border-[1px] border-secundary z-20 flex flex-wrap w-10   justify-center items-center text-center">
-                      {formatDate(product.createdAt)}
-                    </span>
-
                     {token && (
-                      <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
+                      <div className="flex w-full items-start justify-around text-white py-3 ">
                         {openEdit !== product.id ? (
                           <button
                             aria-hidden="true"
                             tabIndex={-1}
-                            className="button"
+                            className="button !mb-0"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

@@ -13,7 +13,7 @@ export default function Logout() {
   }
 
   return (
-    <button className="button" onClick={Sair}>
+    <button className="button !mb-0" onClick={Sair}>
       Sair
     </button>
   )

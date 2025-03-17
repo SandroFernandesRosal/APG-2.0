@@ -200,7 +200,7 @@ export default function EditUserIgreja({
                 onChange={onFileSelected}
               />
 
-              <button type="submit" className="button">
+              <button type="submit" className="button !mb-0">
                 Editar
               </button>
             </form>
@@ -217,11 +217,11 @@ export default function EditUserIgreja({
             </div>
 
             <div className="flex gap-3">
-              <Link href={'/login/igreja'} className="button">
+              <Link href={'/login/igreja'} className="button !mb-0">
                 login
               </Link>
 
-              <Link href={'/register'} className="button">
+              <Link href={'/register'} className="button !mb-0">
                 Registre-se
               </Link>
             </div>

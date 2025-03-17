@@ -41,7 +41,11 @@ export default function RemoveUserIgreja({ id }: RemoveUserIgrejaProps) {
   }
 
   return (
-    <button onClick={handleSubmit} disabled={isDeleting} className="button">
+    <button
+      onClick={handleSubmit}
+      disabled={isDeleting}
+      className="button !mb-0"
+    >
       {isDeleting ? 'Removendo...' : 'Remover perfil'}
     </button>
   )

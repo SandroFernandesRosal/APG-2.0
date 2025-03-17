@@ -64,8 +64,8 @@ export default function CarouselMinisterio({
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: true,
     initialSlide: 0,
     arrows: true,
@@ -81,10 +81,10 @@ export default function CarouselMinisterio({
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -93,8 +93,8 @@ export default function CarouselMinisterio({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -218,11 +218,11 @@ export default function CarouselMinisterio({
               {dataMinisterio.map((product: Ministerio) => {
                 return (
                   <div
-                    className={`justify-between mb-12 relative  flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700 bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
+                    className={`justify-between mb-12 relative  flex flex-col h-[400px]  border-[1px] border-zinc-300 dark:border-zinc-800   bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
                     key={product.id}
                   >
-                    <div className="h-[100%] relative overflow-hidden">
-                      <div className="group h-full  rounded-md overflow-hidden relative">
+                    <div className="h-[60%] relative overflow-hidden">
+                      <div className="group h-full  overflow-hidden relative ">
                         <div
                           className="absolute inset-0 bg-cover bg-center  blur-sm scale-110"
                           style={{
@@ -235,20 +235,18 @@ export default function CarouselMinisterio({
                           height={500}
                           alt={product.title}
                           quality={100}
-                          className="relative z-10 h-full w-full rounded-md object-contain object-center group-hover:scale-105 transition-transform duration-500"
+                          className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                     </div>
 
-                    <div className="hidden group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md z-10  bg-black/80 w-full justify-center items-center text-white cursor-pointer border-primary dark:border-secundary border-t-2 ">
-                      <div className="text-primary z-30">
-                        <p className="text-center px-1 text-xl text-white font-semibold ">
+                    <div className="flex flex-col gap-1  h-[40%]  w-full justify-evenly items-center text-xl">
+                      <div className="text-primary dark:text-secundary z-30">
+                        <p className="text-center  font-bold ">
                           {product.name}
                         </p>
                       </div>
-                      <div className="flex px-2 text-white z-30">
-                        {product.title}
-                      </div>
+                      <div className="flex px-2  z-30 ">{product.title}</div>
                       <span>{product.local}</span>
                     </div>
 
@@ -256,7 +254,7 @@ export default function CarouselMinisterio({
                       <div className=" mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
                         {openEdit !== product.id ? (
                           <button
-                            className="button"
+                            className="button !mb-0"
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)

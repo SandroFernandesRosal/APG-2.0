@@ -175,7 +175,7 @@ export default function EditTestemunho({
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto {img && 'nova '}(Opcional)
           </label>
-          <button type="submit" className="button">
+          <button type="submit" className="button !mb-0">
             Editar
           </button>
         </div>

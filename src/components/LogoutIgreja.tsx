@@ -13,7 +13,7 @@ export default function LogoutIgreja() {
   }
 
   return (
-    <button className="button" onClick={Sair}>
+    <button className="button !mb-0" onClick={Sair}>
       Sair
     </button>
   )

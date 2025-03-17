@@ -149,7 +149,7 @@ export default function AddTestemunho({
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto (Opcional)
           </label>
-          <button type="submit" className="button">
+          <button type="submit" className="button !mb-0">
             Enviar
           </button>
         </div>

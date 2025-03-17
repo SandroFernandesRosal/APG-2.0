@@ -1,11 +1,10 @@
 'use client'
-import { FaPlus, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPlus } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import { Endereco } from '@/data/types/endereco'
-
 import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -14,6 +13,17 @@ import EditEndereco from './crud/EditEndereco'
 import RemoveEndereco from './crud/RemoveEndereco'
 import AddEndereco from './crud/AddEndereco'
 import { Minus } from 'lucide-react'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
+
+const HouseIcon = new L.Icon({
+  iconUrl:
+    'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconSize: [22, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+})
 
 export default function CarouselEndereco({
   titleproducts,
@@ -26,6 +36,9 @@ export default function CarouselEndereco({
   const [openEndereco, setOpenEndereco] = useState(false)
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<Endereco | null>(null)
+  const [coordinates, setCoordinates] = useState<{
+    [key: string]: [number, number]
+  }>({})
 
   useEffect(() => {
     setLoading(true)
@@ -34,6 +47,9 @@ export default function CarouselEndereco({
       .then((response) => {
         setData(response.data)
         setLoading(false)
+        response.data.forEach((endereco: Endereco) => {
+          geocodeAddress(endereco)
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -41,20 +57,41 @@ export default function CarouselEndereco({
       })
   }, [])
 
-  const formatarEnderecoParaGoogleMaps = (endereco: Endereco) => {
+  const geocodeAddress = async (endereco: Endereco) => {
     const { rua, numero, local, cidade, cep } = endereco
-    const enderecoFormatado = `${rua},${numero},${local},${cidade},${cep}`
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
       enderecoFormatado,
     )}`
+
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      if (data && data.length > 0) {
+        const { lat, lon } = data[0]
+        setCoordinates((prev) => ({
+          ...prev,
+          [endereco.id]: [parseFloat(lat), parseFloat(lon)],
+        }))
+      }
+    } catch (error) {
+      console.error('Erro ao geocodificar endereço:', error)
+    }
+  }
+
+  const openGoogleMaps = (coords: Endereco) => {
+    const { rua, numero, local, cidade, cep } = coords
+    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
+    const url = `https://www.google.com/maps/search/?api=1&query=${enderecoFormatado}`
+    window.open(url, '_blank')
   }
 
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     autoplay: true,
     initialSlide: 0,
     arrows: true,
@@ -62,18 +99,18 @@ export default function CarouselEndereco({
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -82,8 +119,8 @@ export default function CarouselEndereco({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
           arrows: true,
@@ -155,47 +192,65 @@ export default function CarouselEndereco({
               className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
               {data.map((product: Endereco) => {
-                const googleMapsLink = formatarEnderecoParaGoogleMaps(product)
+                const coords = coordinates[product.id]
 
                 return (
                   <div
-                    className="justify-between flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                    className={`flex  justify-between  h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800   ${token && 'mb-20 md:mb-24'}`}
                     key={product.id}
                   >
-                    <div className="border-b-[3px] border-primary px-2 dark:border-secundary flex text-xl font-bold justify-around w-full h-[50%] py-2 flex-col items-center">
-                      <h1>{product.local}</h1>
-                      <h2 className="flex items-center font-semibold text-gray-900 dark:text-white">
-                        {product.rua}, {product.numero}, {product.cidade}
-                      </h2>
-                      <span className="font-normal ">CEP: {product.cep}</span>
-                    </div>
-                    <div className="flex flex-col justify-center items-center  h-[50%]">
-                      <a
-                        href={googleMapsLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col items-center gap-2 hover:opacity-80 transition-opacity"
-                      >
-                        <FaMapMarkerAlt className="text-4xl text-primary dark:text-secundary" />
-                        <span className="text-sm ">Ver no Google Maps</span>
-                      </a>
-                      {token && (
-                        <div className="mb-1 flex w-full flex-1 items-end justify-around text-white">
-                          {openEdit !== product.id ? (
-                            <button
-                              className="button"
-                              onClick={() => {
-                                setOpenEdit(product.id)
-                                setSelectedProduct(product)
-                              }}
-                            >
-                              Editar
-                            </button>
-                          ) : null}
-                          <RemoveEndereco id={product.id} />
-                        </div>
+                    <div className="flex  justify-center items-center  h-[50%] ">
+                      {coords ? (
+                        <MapContainer
+                          center={coords}
+                          zoom={13}
+                          className="h-full w-full"
+                        >
+                          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                          <Marker position={coords} icon={HouseIcon}>
+                            <Popup>
+                              {product.local}, {product.rua}, {product.numero},{' '}
+                              {product.cidade}, {product.cep}
+                            </Popup>
+                          </Marker>
+                        </MapContainer>
+                      ) : (
+                        <p>Carregando mapa...</p>
                       )}
                     </div>
+                    <div className=" px-2 gap-1 flex md:text-xl justify-evenly py-1   h-[50%] flex-col items-center">
+                      <h1 className="text-primary dark:text-secundary text-xl">
+                        {product.local}
+                      </h1>
+                      <h2 className=" text-center">
+                        {product.rua}, {product.numero}, {product.cidade}
+                      </h2>
+                      <span className="">CEP: {product.cep}</span>
+
+                      <button
+                        onClick={() => openGoogleMaps(product)}
+                        className="button mb-0"
+                      >
+                        {' '}
+                        Abrir mapa
+                      </button>
+                    </div>
+                    {token && (
+                      <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
+                        {openEdit !== product.id ? (
+                          <button
+                            className="button !mb-0"
+                            onClick={() => {
+                              setOpenEdit(product.id)
+                              setSelectedProduct(product)
+                            }}
+                          >
+                            Editar
+                          </button>
+                        ) : null}
+                        <RemoveEndereco id={product.id} />
+                      </div>
+                    )}
                   </div>
                 )
               })}
