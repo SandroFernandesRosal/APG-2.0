@@ -161,7 +161,7 @@ export default function CarouselNews({
               <p>Nenhuma notícia cadastrada.</p>
             </div>
           ) : (
-            <Slider {...settings} className="w-[80vw] lg:max-w-[1200px] my-5">
+            <Slider {...settings} className="w-[80vw] lg:max-w-[1200px] my-5 ">
               {data.map((product: New) => {
                 if (!page) {
                   setPage(product.page)
@@ -186,10 +186,10 @@ export default function CarouselNews({
                         />
                         <Image
                           src={product.coverUrl}
-                          width={200}
+                          width={500}
                           height={500}
                           alt={product.title}
-                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110"
+                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110 "
                         />
                       </Link>
                     </div>

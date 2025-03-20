@@ -9,12 +9,12 @@ export default function MinisterioHighlight() {
           width={500}
           height={240}
           alt="imagem de uma cruz"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center pl-1 py-1 "
         />
-        <div className="absolute text-white px-1">
+        <div className="absolute text-white px-1 ">
           {' '}
-          <h1 className="text-lg font-bold  ">10 Pastores</h1>
-          <h2>Pregando a palavra de Deus</h2>
+          <h1 className="text-lg font-bold  ">Novos Começos</h1>
+          <h2>Em Cristo, há sempre esperança</h2>
         </div>
       </div>
 
@@ -24,12 +24,12 @@ export default function MinisterioHighlight() {
           width={680}
           height={340}
           alt="imagem de uma cruz"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center p-1"
         />
         <div className="absolute text-white px-1">
           {' '}
-          <h1 className="text-lg font-bold">500 Membros</h1>
-          <h2>No Rio de Janeiro</h2>
+          <h1 className="text-lg font-bold">Restauração Divina</h1>
+          <h2>Deus transforma todas as coisas</h2>
         </div>
       </div>
 
@@ -39,12 +39,12 @@ export default function MinisterioHighlight() {
           width={500}
           height={240}
           alt="imagem de uma cruz"
-          className="w-[100%] h-full object-cover object-center"
+          className="w-[100%] h-full object-cover object-center pr-1 py-1"
         />
         <div className="absolute text-white px-1">
           {' '}
-          <h1 className="text-lg font-bold  ">3 Locais</h1>
-          <h2>Vila da Penha</h2>
+          <h1 className="text-lg font-bold  ">Família em Cristo</h1>
+          <h2>Unidos pelo mesmo propósito</h2>
         </div>
       </div>
     </div>

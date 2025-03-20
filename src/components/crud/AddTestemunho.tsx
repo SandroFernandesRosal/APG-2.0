@@ -113,7 +113,7 @@ export default function AddTestemunho({
         />
       )}
 
-      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary  md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
+      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary  md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800 mt-4">
         <div className="flex items-center justify-between">
           {' '}
           <p className="pl-3 text-lg font-bold">{name}</p>

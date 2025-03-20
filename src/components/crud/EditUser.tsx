@@ -142,7 +142,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
               </label>
 
               <input
-                className=" input"
+                className=" input mt-4"
                 type="text"
                 name="name"
                 defaultValue={nome}

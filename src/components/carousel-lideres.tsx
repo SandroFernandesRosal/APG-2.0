@@ -88,7 +88,9 @@ export default function CarouselLideres() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center  justify-center overflow-hidden  w-full absolute -bottom-[184px] md:-bottom-[250px] gap-2 ">
+      <section
+        className={`text-textprimary flex flex-col items-center  justify-center overflow-hidden  w-full absolute -bottom-[184px] md:-bottom-[250px] gap-2 ${dataSobre.length < 1 && 'bottom-0 md:bottom-0'}`}
+      >
         <h1 className="md:text-4xl text-2xl font-bold text-white">
           Conheça nossos fundadores e responsáveis
         </h1>
@@ -98,7 +100,7 @@ export default function CarouselLideres() {
           <>
             {openNew === false && (
               <button
-                className="text-white  border-secundary border-[1px] px-2 rounded-md hover:text-secundary"
+                className="text-white  border-secundary border-[1px] px-2 rounded-md hover:text-secundary font-bold"
                 onClick={() => setOpenNew(true)}
               >
                 Adicionar Líder
@@ -126,7 +128,7 @@ export default function CarouselLideres() {
             </Slider>
           ) : dataSobre.length === 0 ? (
             <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
-              <p>Nenhuma notícia cadastrada.</p>
+              <p>Nenhum líder cadastrado.</p>
             </div>
           ) : (
             <Slider {...settings} className="w-[80vw] lg:max-w-[1200px] my-5">

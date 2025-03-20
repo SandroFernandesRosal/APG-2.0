@@ -67,7 +67,7 @@ export default function EditAgenda({
 
   return (
     <form
-      className="fixed left-0 top-0 z-30 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-black/50 backdrop-blur-lg md:mt-5"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
@@ -78,7 +78,7 @@ export default function EditAgenda({
         />
       </h1>
       <input
-        className="input"
+        className="input mt-2"
         type="text"
         name="day"
         required={true}

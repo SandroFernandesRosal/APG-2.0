@@ -138,16 +138,30 @@ export default function CarouselMinisterio({
                   &quot;Porque pela graça sois salvos, por meio da fé.&ldquo; -
                   Efésios 2:8
                 </h2>
-                <Link href={'/sobre'} className="button">
+                <Link href={'/sobre'} className="button p-2">
                   Conheça nossa Igreja
                 </Link>
+              </div>
+
+              <div className="flex flex-wrap   w-full justify-center items-center gap-5 text-white font-bold text-lg pt-8">
+                <div className=" w-[200px] bg-primary rounded-lg p-5 border-4 border-double border-zinc-300 text-center">
+                  3 Unidades
+                </div>{' '}
+                <div className="w-[200px] bg-primary rounded-lg p-5 border-4 border-double border-zinc-300 text-center">
+                  {' '}
+                  + 500 membros
+                </div>{' '}
+                <div className="w-[200px] bg-primary rounded-lg p-5 border-4 border-double border-zinc-300 text-center">
+                  {' '}
+                  + 5 anos
+                </div>
               </div>
             </div>
           </div>
 
           <div className="h-[500px] md:h-[600px] w-full bg-primary md:my-48 my-32 relative text-center">
             <MinisterioHighlight />
-            <h1 className="text-3xl pt-4">Conheça nossos líderes</h1>
+
             <CarouselLideres />
           </div>
         </section>

@@ -71,7 +71,7 @@ export default function EditContatos({
 
   return (
     <form
-      className="fixed left-0 top-0 z-30 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-black/50 text-black backdrop-blur-lg dark:text-white md:mt-5"
+      className="fixed left-0 top-0 z-50 flex min-h-screenw-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark dark:text-white "
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
@@ -82,7 +82,7 @@ export default function EditContatos({
         />
       </h1>
       <input
-        className="input"
+        className="input mt-2"
         type="text"
         name="local"
         required={true}

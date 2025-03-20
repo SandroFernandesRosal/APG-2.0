@@ -122,7 +122,7 @@ export default function EditTestemunho({
       )}
 
       <div className="flex w-full flex-col gap-2 rounded-2xl border-[1px] border-zinc-300 bg-bglight dark:border-zinc-800 dark:bg-bgdark md:w-[70%] lg:min-w-[700px]">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-4">
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpenEdit(null)} className="pr-1">
             <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />

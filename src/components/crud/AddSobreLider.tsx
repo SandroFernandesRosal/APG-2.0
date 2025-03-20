@@ -96,7 +96,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-20 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-black/50 backdrop-blur-lg"
+      className="fixed left-0 top-0  flex min-h-screen z-50 w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
@@ -127,7 +127,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
       )}
 
       <input
-        className="input"
+        className="input mt-4"
         type="text"
         name="name"
         placeholder="Nome"
