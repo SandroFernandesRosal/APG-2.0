@@ -201,7 +201,7 @@ export default function CarouselNews({
                         href={`/noticias/${product.page}/${product.id}`}
                         className="text-primary z-30"
                       >
-                        <h1 className="text-center  text-xl  font-semibold text-primary dark:text-secundary">
+                        <h1 className=" text-lg  font-semibold text-primary dark:text-secundary">
                           {product.title}
                         </h1>
                       </Link>

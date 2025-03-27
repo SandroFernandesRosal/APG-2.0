@@ -44,9 +44,11 @@ export default async function Search({ searchParams }: SearchProps) {
     redirect('/')
   }
 
-  const newsVp = await searchVp(query)
-  const newsVmh = await searchVmh(query)
-  const newsTomazinho = await searchTomazinho(query)
+  const normalizedQuery = query.toLowerCase()
+
+  const newsVp = await searchVp(normalizedQuery)
+  const newsVmh = await searchVmh(normalizedQuery)
+  const newsTomazinho = await searchTomazinho(normalizedQuery)
 
   return (
     <div className="flex flex-col gap-16 pt-[150px] md:pt-[180px] px-8 min-h-screen pb-10">
@@ -60,78 +62,89 @@ export default async function Search({ searchParams }: SearchProps) {
           <div className="flex flex-col gap-4 items-center">
             <p className="text-center text-lg">Nenhum resultado encontrado</p>
             <Link href={'/'} className="button">
-              {' '}
               Voltar para a página inicial
             </Link>
           </div>
         )}
 
       {newsVp.length > 0 && (
-        <div className="flex flex-col  gap-4">
+        <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-semibold">Notícias de Vila da Penha</h1>
           <div className="flex flex-wrap justify-center gap-4">
             {newsVp.map((item: New) => {
-              return (
-                <ItemNew
-                  id={item.id}
-                  coverUrl={item.coverUrl}
-                  title={item.title}
-                  content={item.content}
-                  createdAt={item.createdAt}
-                  page={item.page}
-                  destaque={item.destaque}
-                  key={item.id}
-                  updatedAt={item.updatedAt}
-                />
-              )
+              const normalizedTitle = item.title.toLowerCase()
+              if (normalizedTitle.includes(normalizedQuery)) {
+                return (
+                  <ItemNew
+                    id={item.id}
+                    coverUrl={item.coverUrl}
+                    title={item.title}
+                    content={item.content}
+                    createdAt={item.createdAt}
+                    page={item.page}
+                    destaque={item.destaque}
+                    key={item.id}
+                    updatedAt={item.updatedAt}
+                  />
+                )
+              }
+              return null
             })}
           </div>
         </div>
       )}
 
       {newsVmh.length > 0 && (
-        <div className="flex flex-col  gap-4">
+        <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-semibold">
             Notícias de Vila Maria Helena
           </h1>
           <div className="flex flex-wrap justify-center gap-4">
             {newsVmh.map((item: New) => {
-              return (
-                <ItemNew
-                  id={item.id}
-                  coverUrl={item.coverUrl}
-                  title={item.title}
-                  content={item.content}
-                  createdAt={item.createdAt}
-                  page={item.page}
-                  destaque={item.destaque}
-                  key={item.id}
-                  updatedAt={item.updatedAt}
-                />
-              )
+              const normalizedTitle = item.title.toLowerCase()
+              if (normalizedTitle.includes(normalizedQuery)) {
+                return (
+                  <ItemNew
+                    id={item.id}
+                    coverUrl={item.coverUrl}
+                    title={item.title}
+                    content={item.content}
+                    createdAt={item.createdAt}
+                    page={item.page}
+                    destaque={item.destaque}
+                    key={item.id}
+                    updatedAt={item.updatedAt}
+                  />
+                )
+              }
+              return null
             })}
           </div>
         </div>
       )}
 
       {newsTomazinho.length > 0 && (
-        <div className="flex flex-col  gap-4">
+        <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-semibold">Notícias de Tomazinho</h1>
           <div className="flex flex-wrap justify-center gap-4">
             {newsTomazinho.map((item: New) => {
-              return (
-                <ItemNew
-                  id={item.id}
-                  coverUrl={item.coverUrl}
-                  title={item.title}
-                  content={item.content}
-                  createdAt={item.createdAt}
-                  page={item.page}
-                  destaque={item.destaque}
-                  key={item.id}
-                  updatedAt={item.updatedAt}
-                />
-              )
+              const normalizedTitle = item.title.toLowerCase()
+              if (normalizedTitle.includes(normalizedQuery)) {
+                return (
+                  <ItemNew
+                    id={item.id}
+                    coverUrl={item.coverUrl}
+                    title={item.title}
+                    content={item.content}
+                    createdAt={item.createdAt}
+                    page={item.page}
+                    destaque={item.destaque}
+                    key={item.id}
+                    updatedAt={item.updatedAt}
+                  />
+                )
+              }
+              return null
             })}
           </div>
         </div>

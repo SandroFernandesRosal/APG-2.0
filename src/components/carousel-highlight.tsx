@@ -150,7 +150,7 @@ export default function CarouselHighlight() {
                   className="group flex justify-center items-center h-[300px] md:h-[500px] overflow-hidden w-full relative"
                 >
                   <div
-                    className="absolute inset-0 bg-cover bg-center blur-sm scale-110 "
+                    className="absolute inset-0 bg-cover bg-center blur-md scale-110 "
                     style={{ backgroundImage: `url(${item.coverUrl})` }}
                   />
                   <Image
