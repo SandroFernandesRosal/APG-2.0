@@ -179,7 +179,7 @@ export default function CarouselAgenda({
                     <div className="relative    mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px] ">
                       <div className="  w-full">
                         <span className="absolute  left-2 top-5 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
-                        <h1 className=" flex items-center  font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700 place-content-center">
+                        <h1 className=" flex items-center text-center font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700 place-content-center">
                           {product.name}
                         </h1>
 

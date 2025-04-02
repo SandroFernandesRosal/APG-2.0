@@ -21,6 +21,7 @@ import CarouselLideres from './carousel-lideres'
 import { useTheme } from 'next-themes'
 import logo from '../../public/img/logo.png'
 import logob from '../../public/img/logob.png'
+import CarouselEndereco from './carousel-endereco'
 
 export default function CarouselMinisterio({
   titleproducts,
@@ -107,30 +108,33 @@ export default function CarouselMinisterio({
     <>
       <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden bg-bglight w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
-          <div className="flex flex-wrap justify-center gap-5 items-center px-5">
-            {theme === 'dark' ? (
-              <Image
-                src={logob}
-                height={200}
-                width={200}
-                priority
-                quality={100}
-                alt="logo do site"
-                className="w-[200px] h-[200px]"
-              />
-            ) : (
-              <Image
-                src={logo}
-                height={200}
-                width={200}
-                priority
-                quality={100}
-                alt="logo do site"
-                className="w-[200px] h-[200px]"
-              />
-            )}
-            <div className="flex flex-col">
-              <h1 className="text-3xl mb-2 font-bold text-primary dark:text-white text-center md:text-start">
+          <div className="flex  flex-col lg:flex-row justify-center gap-2    ">
+            <div className="w-full lg:max-w-[400px] flex justify-center bg-bglightsecundary dark:bg-bgdarksecundary py-5">
+              {theme === 'dark' ? (
+                <Image
+                  src={logob}
+                  height={200}
+                  width={200}
+                  priority
+                  quality={100}
+                  alt="logo do site"
+                  className="w-[200px] "
+                />
+              ) : (
+                <Image
+                  src={logo}
+                  height={200}
+                  width={200}
+                  priority
+                  quality={100}
+                  alt="logo do site"
+                  className="w-[200px] "
+                />
+              )}
+            </div>
+
+            <div className="flex flex-col w-full  bg-primary text-white justify-center py-5  px-5">
+              <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
                 Ministerio Alcançados pela Graça
               </h1>
               <div className="flex flex-col items-start gap-3">
@@ -138,26 +142,29 @@ export default function CarouselMinisterio({
                   &quot;Porque pela graça sois salvos, por meio da fé.&ldquo; -
                   Efésios 2:8
                 </h2>
-                <Link href={'/sobre'} className="button p-2">
-                  Conheça nossa Igreja
-                </Link>
-              </div>
 
-              <div className="flex flex-wrap   w-full justify-center items-center gap-5 text-white font-bold text-lg pt-8">
-                <div className=" w-[200px] bg-primary rounded-lg p-5 border-4 border-double border-zinc-300 text-center">
-                  3 Unidades
-                </div>{' '}
-                <div className="w-[200px] bg-primary rounded-lg p-5 border-4 border-double border-zinc-300 text-center">
-                  {' '}
-                  + 500 membros
-                </div>{' '}
-                <div className="w-[200px] bg-primary rounded-lg p-5 border-4 border-double border-zinc-300 text-center">
-                  {' '}
-                  + 5 anos
+                <div>
+                  <p className="mb-4">
+                    Fundada em X de X de X, somos a Igreja Evangélica Alcançados
+                    pela Graça, uma comunidade de fé comprometida com a
+                    proclamação do evangelho e a edificação dos cristãos.
+                    Atuamos em três localidades, levando a mensagem de Cristo e
+                    promovendo comunhão e crescimento espiritual. Nossa missão é
+                    alcançar vidas com a graça de Deus, fortalecendo famílias e
+                    edificando discípulos.
+                  </p>
+                  <Link
+                    href={'/sobre'}
+                    className="button p-2 !text-white  !border-secundary"
+                  >
+                    Conheça nossa Igreja
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
+
+          <CarouselEndereco />
 
           <div className="h-[500px] md:h-[600px] w-full bg-primary md:my-48 my-32 relative text-center">
             <MinisterioHighlight />

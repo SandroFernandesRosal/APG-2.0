@@ -1,9 +1,9 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Link from 'next/link'
+
 import { Endereco } from '@/data/types/endereco'
 import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
@@ -12,10 +12,11 @@ import { useToken } from '@/hooks/useToken'
 import EditEndereco from './crud/EditEndereco'
 import RemoveEndereco from './crud/RemoveEndereco'
 import AddEndereco from './crud/AddEndereco'
-import { Minus } from 'lucide-react'
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+import { Minus } from 'lucide-react'
 
 const HouseIcon = new L.Icon({
   iconUrl:
@@ -25,11 +26,7 @@ const HouseIcon = new L.Icon({
   popupAnchor: [0, -32],
 })
 
-export default function CarouselEndereco({
-  titleproducts,
-}: {
-  titleproducts: string
-}) {
+export default function CarouselEndereco() {
   const [data, setData] = useState<Endereco[]>([])
   const [loading, setLoading] = useState(true)
   const token = useToken()
@@ -131,15 +128,16 @@ export default function CarouselEndereco({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full border-[1px] border-zinc-300 dark:border-zinc-800 dark:bg-bgdark">
-        <h1 className="text-xl font-bold flex">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full  dark:bg-bgdark mt-4">
+        <h1 className="text-xl font-bold flex ">
           <Minus
             size={45}
             strokeWidth={3}
-            className="text-secundary dark:text-primary flex place-self-end"
+            className="text-secundary dark:text-primary  flex place-self-end"
           />
+
           <span className="text-primary dark:text-secundary text-2xl">
-            Endereços
+            Estamos localizados em
           </span>
         </h1>
 
@@ -161,16 +159,6 @@ export default function CarouselEndereco({
             )}
           </>
         )}
-
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
-          <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
-          <Link
-            href={`/enderecos`}
-            className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
-          >
-            <span>Ver todos</span> <FaPlus />
-          </Link>
-        </div>
 
         <div className="flex w-full gap-3 justify-center">
           {loading ? (

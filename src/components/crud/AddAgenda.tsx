@@ -42,7 +42,7 @@ export default function AddAgenda({
         },
       )
 
-      const agenda = response.data.agendaTotal
+      const agenda = response.data
 
       if (response.status === 200 && agenda) {
         setOpenAgenda(false)

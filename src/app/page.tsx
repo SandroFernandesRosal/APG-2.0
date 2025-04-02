@@ -1,6 +1,6 @@
 import CarouselAgenda from '@/components/carousel-agenda'
 import CarouselDoacao from '@/components/carousel-doacao'
-import CarouselEndereco from '@/components/carousel-endereco'
+
 import CarouselHighlight from '@/components/carousel-highlight'
 import CarouselMinisterio from '@/components/carousel-ministerio'
 import CarouselNews from '@/components/carousel-news'
@@ -12,7 +12,6 @@ export default function Home() {
       <CarouselNews titleproducts="Últimas noticias" />
       <CarouselMinisterio titleproducts="Membros" />
       <CarouselAgenda titleproducts="Últimos eventos" />
-      <CarouselEndereco titleproducts="Endereços" />
       <CarouselDoacao titleproducts="Doações" />
     </main>
   )
