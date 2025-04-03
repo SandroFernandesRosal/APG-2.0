@@ -15,7 +15,6 @@ import { useToken } from '@/hooks/useToken'
 import AddNew from './crud/AddNew'
 import EditNew from './crud/EditNew'
 import RemoveNew from './crud/RemoveNew'
-import { Minus } from 'lucide-react'
 
 export default function CarouselNews({
   titleproducts,
@@ -107,18 +106,6 @@ export default function CarouselNews({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full">
-        <h1 className="text-xl font-bold flex">
-          <Minus
-            size={45}
-            strokeWidth={3}
-            className="text-secundary dark:text-primary  flex place-self-end"
-          />
-
-          <span className="text-primary dark:text-secundary text-2xl">
-            Notícias{' '}
-          </span>
-        </h1>
-
         {token && (
           <>
             {openNew === false && (
@@ -136,7 +123,7 @@ export default function CarouselNews({
           </>
         )}
         <SelectLocal onChange={handleLocalChange} />
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
             href={`/noticias`}

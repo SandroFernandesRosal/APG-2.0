@@ -16,7 +16,9 @@ import AddEndereco from './crud/AddEndereco'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-import { Minus } from 'lucide-react'
+
+import Link from 'next/link'
+import { FaPlus } from 'react-icons/fa'
 
 const HouseIcon = new L.Icon({
   iconUrl:
@@ -129,18 +131,6 @@ export default function CarouselEndereco() {
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full  dark:bg-bgdark mt-4">
-        <h1 className="text-xl font-bold flex ">
-          <Minus
-            size={45}
-            strokeWidth={3}
-            className="text-secundary dark:text-primary  flex place-self-end"
-          />
-
-          <span className="text-primary dark:text-secundary text-2xl">
-            Estamos localizados em
-          </span>
-        </h1>
-
         {token && (
           <>
             {openEndereco === false && (
@@ -159,6 +149,16 @@ export default function CarouselEndereco() {
             )}
           </>
         )}
+
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
+          <h1 className="md:text-2xl w-full font-bold">Endereços</h1>
+          <Link
+            href={`/enderecos`}
+            className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
+          >
+            <span>Ver todos</span> <FaPlus />
+          </Link>
+        </div>
 
         <div className="flex w-full gap-3 justify-center">
           {loading ? (

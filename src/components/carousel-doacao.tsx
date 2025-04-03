@@ -1,5 +1,5 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+import { FaHandHoldingHeart, FaPlus } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react'
 import EditDoacao from './crud/EditDoacao'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
-import { Minus } from 'lucide-react'
 
 export default function CarouselDoacao({
   titleproducts,
@@ -85,18 +84,36 @@ export default function CarouselDoacao({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglightsecundary w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdarksecundary ">
-        <h1 className="text-xl font-bold flex">
-          <Minus
-            size={45}
-            strokeWidth={3}
-            className="text-secundary dark:text-primary  flex place-self-end"
-          />
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800   ">
+        <div className="flex  flex-col lg:flex-row justify-center gap-2   mb-5 ">
+          <div className="w-full lg:max-w-[400px] flex justify-center bg-bglightsecundary dark:bg-bgdarksecundary py-5 items-center">
+            <FaHandHoldingHeart size={150} className="text-primary" />
+          </div>
 
-          <span className="text-primary dark:text-secundary text-2xl">
-            Ajude a igreja
-          </span>
-        </h1>
+          <div className="flex flex-col w-full  bg-primary text-white justify-center py-5  px-5">
+            <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
+              Contribua com Amor e Generosidade
+            </h1>
+            <div className="flex flex-col items-start gap-3">
+              <h2 className="text-xl  italic">
+                &quot;Cada um dê conforme determinou em seu coração, não com
+                pesar ou por obrigação, pois Deus ama quem dá com
+                alegria.&quot;2 Coríntios 9:7
+              </h2>
+
+              <div>
+                <p className="mb-4">
+                  A doação é um ato voluntário de fé e gratidão. Quando
+                  contribuímos, participamos da obra de Deus, permitindo que Sua
+                  mensagem alcance mais vidas e que a igreja cumpra sua missão.
+                  Seja com ofertas ou qualquer valor no coração, sua
+                  generosidade faz a diferença. Que cada contribuição seja um
+                  reflexo do amor de Deus em nós!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {token && (
           <>
@@ -118,13 +135,13 @@ export default function CarouselDoacao({
           </>
         )}
 
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
-            href={`/enderecos`}
+            href={`/doacao`}
             className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
           >
-            <span>Ver todos</span> <FaPlus />
+            <span>Ver todas</span> <FaPlus />
           </Link>
         </div>
 

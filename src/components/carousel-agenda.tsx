@@ -1,5 +1,5 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+import { FaHandHoldingHeart, FaPlus } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -15,7 +15,7 @@ import { useToken } from '@/hooks/useToken'
 import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
-import { Minus } from 'lucide-react'
+
 import Image from 'next/image'
 
 export default function CarouselAgenda({
@@ -98,18 +98,29 @@ export default function CarouselAgenda({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglightsecundary w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdarksecundary ">
-        <h1 className="text-xl font-bold flex">
-          <Minus
-            size={45}
-            strokeWidth={3}
-            className="text-secundary dark:text-primary  flex place-self-end"
-          />
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full mb-10">
+        <div className="flex  flex-col lg:flex-row justify-center gap-2   mb-5 ">
+          <div className="w-full lg:max-w-[400px] flex justify-center bg-bglightsecundary dark:bg-bgdarksecundary py-5 items-center">
+            <FaHandHoldingHeart size={150} className="text-primary" />
+          </div>
 
-          <span className="text-primary dark:text-secundary text-2xl">
-            Agenda
-          </span>
-        </h1>
+          <div className="flex flex-col w-full  bg-primary text-white justify-center py-5  px-5">
+            <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
+              Acompanhe nossa agenda
+            </h1>
+            <div className="flex flex-col items-start gap-3">
+              <div>
+                <p className="mb-4">
+                  Nossa igreja está sempre de portas abertas para receber você!
+                  Fique por dentro dos dias de culto, eventos especiais e
+                  momentos de comunhão. Cada encontro é uma oportunidade de
+                  crescer na fé e fortalecer os laços com Deus e com a
+                  comunidade.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {token && (
           <>
@@ -131,7 +142,7 @@ export default function CarouselAgenda({
           </>
         )}
         <SelectLocal onChange={handleLocalChange} />
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5">
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
             href={`/agenda`}

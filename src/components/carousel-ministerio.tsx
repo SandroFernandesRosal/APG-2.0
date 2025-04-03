@@ -15,9 +15,7 @@ import { useToken } from '@/hooks/useToken'
 import AddMinisterio from './crud/AddMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
-import { Minus } from 'lucide-react'
-import MinisterioHighlight from './ministerio-highlight'
-import CarouselLideres from './carousel-lideres'
+
 import { useTheme } from 'next-themes'
 import logo from '../../public/img/logo.png'
 import logob from '../../public/img/logob.png'
@@ -106,7 +104,7 @@ export default function CarouselMinisterio({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden bg-bglight w-full border-b-[1px] border-zinc-300 dark:border-zinc-800  dark:bg-bgdark ">
+      <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden ">
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <div className="flex  flex-col lg:flex-row justify-center gap-2    ">
             <div className="w-full lg:max-w-[400px] flex justify-center bg-bglightsecundary dark:bg-bgdarksecundary py-5">
@@ -145,9 +143,9 @@ export default function CarouselMinisterio({
 
                 <div>
                   <p className="mb-4">
-                    Fundada em X de X de X, somos a Igreja Evangélica Alcançados
-                    pela Graça, uma comunidade de fé comprometida com a
-                    proclamação do evangelho e a edificação dos cristãos.
+                    Fundada em XX de X de XXXX, somos a Igreja Evangélica
+                    Alcançados pela Graça, uma comunidade de fé comprometida com
+                    a proclamação do evangelho e a edificação dos cristãos.
                     Atuamos em três localidades, levando a mensagem de Cristo e
                     promovendo comunhão e crescimento espiritual. Nossa missão é
                     alcançar vidas com a graça de Deus, fortalecendo famílias e
@@ -165,24 +163,7 @@ export default function CarouselMinisterio({
           </div>
 
           <CarouselEndereco />
-
-          <div className="h-[500px] md:h-[600px] w-full bg-primary md:my-48 my-32 relative text-center">
-            <MinisterioHighlight />
-
-            <CarouselLideres />
-          </div>
         </section>
-        <h1 className="text-xl font-bold flex mt-14">
-          <Minus
-            size={45}
-            strokeWidth={3}
-            className="text-secundary dark:text-primary  flex place-self-end"
-          />
-
-          <span className="text-primary dark:text-secundary text-2xl">
-            Ministério
-          </span>
-        </h1>
 
         {token && (
           <>
@@ -207,7 +188,7 @@ export default function CarouselMinisterio({
           </>
         )}
         <SelectLocal onChange={handleLocalChange} />
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 ">
+        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
             href={`/ministerio`}
