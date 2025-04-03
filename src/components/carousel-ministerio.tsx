@@ -16,8 +16,6 @@ import AddMinisterio from './crud/AddMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 
-import { useTheme } from 'next-themes'
-import logo from '../../public/img/logo.png'
 import logob from '../../public/img/logob.png'
 import CarouselEndereco from './carousel-endereco'
 
@@ -36,7 +34,6 @@ export default function CarouselMinisterio({
   const [selectedProduct, setSelectedProduct] = useState<Ministerio | null>(
     null,
   )
-  const { theme } = useTheme()
 
   useEffect(() => {
     setLoading(true)
@@ -108,28 +105,17 @@ export default function CarouselMinisterio({
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <div className="flex flex-col-reverse md:flex-row justify-center ">
             <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
-              <div className="absolute inset-0 bg-[url(/img/logob.png)] bg-cover bg-center blur-sm"></div>
-              {theme === 'dark' ? (
-                <Image
-                  src={logob}
-                  height={200}
-                  width={200}
-                  priority
-                  quality={100}
-                  alt="logo do site"
-                  className="relative z-10 w-[200px] object-contain md:h-full"
-                />
-              ) : (
-                <Image
-                  src={logo}
-                  height={200}
-                  width={200}
-                  priority
-                  quality={100}
-                  alt="logo do site"
-                  className="relative z-10 w-[200px] object-contain md:h-full "
-                />
-              )}
+              <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110"></div>
+
+              <Image
+                src={logob}
+                height={200}
+                width={200}
+                priority
+                quality={100}
+                alt="logo do site"
+                className="relative z-10 w-[200px] object-contain md:h-full "
+              />
             </div>
 
             <div className="flex flex-col w-full bg-primary text-white justify-center py-5 px-5">
