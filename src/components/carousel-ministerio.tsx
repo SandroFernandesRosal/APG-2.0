@@ -107,7 +107,7 @@ export default function CarouselMinisterio({
       <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden ">
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <div className="flex flex-col-reverse md:flex-row justify-center ">
-            <div className="w-full lg:max-w-[400px] flex justify-center items-center relative overflow-hidden">
+            <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
               <div className="absolute inset-0 bg-[url(/img/logob.png)] bg-cover bg-center blur-sm"></div>
               {theme === 'dark' ? (
                 <Image
@@ -167,7 +167,7 @@ export default function CarouselMinisterio({
         </section>
 
         <div className="flex relative flex-col-reverse md:flex-row-reverse justify-center  mb-5">
-          <div className="w-full lg:max-w-[400px] flex justify-center items-center relative overflow-hidden">
+          <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
             <div className="absolute inset-0 bg-[url(/img/ministerio.jpg)] bg-cover bg-center blur-sm scale-110 "></div>
             <Image
               src={'/img/ministerio.jpg'}

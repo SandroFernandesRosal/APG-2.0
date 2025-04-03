@@ -100,7 +100,7 @@ export default function CarouselAgenda({
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full mb-10">
         <div className="flex md:flex-row justify-center  mb-5 flex-col-reverse">
-          <div className="w-full lg:max-w-[400px] flex justify-center items-center relative overflow-hidden">
+          <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
             <div className="absolute inset-0 bg-[url(/img/agenda2.png)] bg-cover bg-center blur-sm scale-110"></div>
             <Image
               src={'/img/agenda2.png'}
