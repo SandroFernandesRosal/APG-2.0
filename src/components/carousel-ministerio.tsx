@@ -106,8 +106,9 @@ export default function CarouselMinisterio({
     <>
       <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden ">
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
-          <div className="flex  flex-col lg:flex-row justify-center gap-2    ">
-            <div className="w-full lg:max-w-[400px] flex justify-center bg-bglightsecundary dark:bg-bgdarksecundary py-5">
+          <div className="flex flex-col-reverse md:flex-row justify-center ">
+            <div className="w-full lg:max-w-[400px] flex justify-center items-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url(/img/logob.png)] bg-cover bg-center blur-sm"></div>
               {theme === 'dark' ? (
                 <Image
                   src={logob}
@@ -116,7 +117,7 @@ export default function CarouselMinisterio({
                   priority
                   quality={100}
                   alt="logo do site"
-                  className="w-[200px] "
+                  className="relative z-10 w-[200px] object-contain md:h-full"
                 />
               ) : (
                 <Image
@@ -126,17 +127,17 @@ export default function CarouselMinisterio({
                   priority
                   quality={100}
                   alt="logo do site"
-                  className="w-[200px] "
+                  className="relative z-10 w-[200px] object-contain md:h-full "
                 />
               )}
             </div>
 
-            <div className="flex flex-col w-full  bg-primary text-white justify-center py-5  px-5">
+            <div className="flex flex-col w-full bg-primary text-white justify-center py-5 px-5">
               <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
                 Ministerio Alcançados pela Graça
               </h1>
               <div className="flex flex-col items-start gap-3">
-                <h2 className="text-xl  italic">
+                <h2 className="text-xl italic">
                   &quot;Porque pela graça sois salvos, por meio da fé.&ldquo; -
                   Efésios 2:8
                 </h2>
@@ -153,7 +154,7 @@ export default function CarouselMinisterio({
                   </p>
                   <Link
                     href={'/sobre'}
-                    className="button p-2 !text-white  !border-secundary"
+                    className="button p-2 !text-white !border-secundary"
                   >
                     Conheça nossa Igreja
                   </Link>
@@ -164,6 +165,38 @@ export default function CarouselMinisterio({
 
           <CarouselEndereco />
         </section>
+
+        <div className="flex relative flex-col-reverse md:flex-row-reverse justify-center  mb-5">
+          <div className="w-full lg:max-w-[400px] flex justify-center items-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url(/img/ministerio.jpg)] bg-cover bg-center blur-sm scale-110 "></div>
+            <Image
+              src={'/img/ministerio.jpg'}
+              height={300}
+              width={300}
+              priority
+              quality={100}
+              alt="imagem de agenda"
+              className="object-contain w-full h-[200px] md:h-full relative z-10"
+            />
+          </div>
+
+          <div className="flex flex-col w-full bg-primary text-white justify-center py-5 px-5">
+            <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
+              Nosso ministério
+            </h1>
+            <div className="flex flex-col items-start gap-3">
+              <div>
+                <p className="mb-4">
+                  A Igreja Alcançados pela Graça é liderada por um ministério
+                  comprometido com o chamado de Deus, servindo com amor e
+                  dedicação para guiar a igreja no caminho da fé. Cada membro do
+                  ministério tem um papel essencial na edificação da igreja e no
+                  cumprimento da missão que Deus nos confiou.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {token && (
           <>

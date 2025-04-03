@@ -1,5 +1,5 @@
 'use client'
-import { FaHandHoldingHeart, FaPlus } from 'react-icons/fa'
+import { FaPlus } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import EditDoacao from './crud/EditDoacao'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
+import Image from 'next/image'
 
 export default function CarouselDoacao({
   titleproducts,
@@ -85,20 +86,29 @@ export default function CarouselDoacao({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800   ">
-        <div className="flex  flex-col lg:flex-row justify-center gap-2   mb-5 ">
-          <div className="w-full lg:max-w-[400px] flex justify-center bg-bglightsecundary dark:bg-bgdarksecundary py-5 items-center">
-            <FaHandHoldingHeart size={150} className="text-primary" />
+        <div className="flex flex-col md:flex-row-reverse justify-center  mb-5">
+          <div className="w-full lg:max-w-[400px] flex justify-center items-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url(/img/agenda2.png)] bg-cover bg-center blur-sm scale-110"></div>
+            <Image
+              src={'/img/agenda2.png'}
+              height={300}
+              width={300}
+              priority
+              quality={100}
+              alt="imagem de agenda"
+              className="object-contain w-full h-[200px] md:h-full relative z-10"
+            />
           </div>
 
-          <div className="flex flex-col w-full  bg-primary text-white justify-center py-5  px-5">
+          <div className="flex flex-col w-full bg-primary text-white justify-center py-5 px-5">
             <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
               Contribua com Amor e Generosidade
             </h1>
             <div className="flex flex-col items-start gap-3">
-              <h2 className="text-xl  italic">
+              <h2 className="text-xl italic">
                 &quot;Cada um dê conforme determinou em seu coração, não com
-                pesar ou por obrigação, pois Deus ama quem dá com
-                alegria.&quot;2 Coríntios 9:7
+                pesar ou por obrigação, pois Deus ama quem dá com alegria.&quot;
+                2 Coríntios 9:7
               </h2>
 
               <div>
@@ -106,9 +116,6 @@ export default function CarouselDoacao({
                   A doação é um ato voluntário de fé e gratidão. Quando
                   contribuímos, participamos da obra de Deus, permitindo que Sua
                   mensagem alcance mais vidas e que a igreja cumpra sua missão.
-                  Seja com ofertas ou qualquer valor no coração, sua
-                  generosidade faz a diferença. Que cada contribuição seja um
-                  reflexo do amor de Deus em nós!
                 </p>
               </div>
             </div>
