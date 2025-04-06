@@ -86,7 +86,7 @@ export default function CarouselDoacao({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800   ">
-        <div className="flex flex-col md:flex-row-reverse justify-center  mb-5">
+        <div className="flex flex-col md:flex-row-reverse justify-center  mb-5 w-full">
           <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
             <div className="absolute inset-0 bg-[url(/img/doacao.png)] bg-cover bg-center blur-sm scale-110"></div>
             <Image

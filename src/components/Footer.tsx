@@ -55,7 +55,7 @@ export default function Footer() {
       </div>
       <div>
         <Link
-          href="https://sandrofernandesdev.netlify.app/"
+          href="https://www.sandrodev.com.br"
           target="_blank"
           className="mb-5 flex w-full flex-wrap items-center justify-center gap-1 text-textlight dark:text-textdark"
         >

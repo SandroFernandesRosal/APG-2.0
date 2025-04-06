@@ -57,7 +57,7 @@ export default function Socials({
           <div className="flex w-full justify-around md:gap-2">
             {openEdit !== id ? (
               <button
-                className="button"
+                className="button !mb-0"
                 onClick={() => {
                   setOpenEdit(id)
                 }}
