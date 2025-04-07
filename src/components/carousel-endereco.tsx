@@ -17,9 +17,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
-import Link from 'next/link'
-import { FaPlus } from 'react-icons/fa'
-
 const HouseIcon = new L.Icon({
   iconUrl:
     'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -149,16 +146,6 @@ export default function CarouselEndereco() {
             )}
           </>
         )}
-
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
-          <h1 className="md:text-2xl w-full font-bold">Endereços</h1>
-          <Link
-            href={`/enderecos`}
-            className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
-          >
-            <span>Ver todos</span> <FaPlus />
-          </Link>
-        </div>
 
         <div className="flex w-full gap-3 justify-center">
           {loading ? (

@@ -3,6 +3,7 @@ import LiderQuemSomos from '@/components/LiderQuemSomos'
 import ContentQuemSomos from '@/components/ContentQuemSomos'
 import { SobreLider } from '@/data/types/sobrelider'
 import { Sobre } from '@/data/types/sobre'
+import QuemSomosHeader from '@/components/quemsomos-header'
 
 export default async function QuemSomos() {
   const response = await api.get<Sobre[]>('/sobre')
@@ -12,14 +13,10 @@ export default async function QuemSomos() {
   const dataSobreLider = responseLider.data
 
   return (
-    <main className="mb-2 mt-4 flex min-h-screen flex-col items-center  pt-24 md:mt-0 md:pt-[165px]">
+    <main className="mb-2  flex min-h-screen flex-col items-center  pt-20 md:mt-0 md:pt-[165px]">
       <article className="mb-5 flex w-full flex-col items-center pb-5 ">
-        <div className="flex flex-col items-center">
-          <h1 className="text-lg font-bold text-primary dark:text-secundary">
-            Nossa história
-          </h1>
-          <p className="mb-5 text-xl">A vondede de Deus</p>
-        </div>
+        <QuemSomosHeader />
+
         <LiderQuemSomos dataSobreLider={dataSobreLider} />
         <ContentQuemSomos dataSobre={dataSobre} />
       </article>

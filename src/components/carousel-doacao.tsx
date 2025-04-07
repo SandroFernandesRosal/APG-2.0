@@ -1,9 +1,9 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Link from 'next/link'
+
 import { Doacao } from '@/data/types/doacao'
 import RemoveDoacao from './crud/RemoveDoacao'
 import AddDoacao from './crud/AddDoacao'
@@ -14,11 +14,7 @@ import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
 
-export default function CarouselDoacao({
-  titleproducts,
-}: {
-  titleproducts: string
-}) {
+export default function CarouselDoacao() {
   const [data, setData] = useState<Doacao[]>([])
   const [loading, setLoading] = useState(true)
   const [openDoacao, setOpenDoacao] = useState(false)
@@ -141,16 +137,6 @@ export default function CarouselDoacao({
             )}
           </>
         )}
-
-        <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
-          <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
-          <Link
-            href={`/doacao`}
-            className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
-          >
-            <span>Ver todas</span> <FaPlus />
-          </Link>
-        </div>
 
         <div className="flex w-full gap-3 justify-center">
           {loading ? (

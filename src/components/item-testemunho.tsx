@@ -58,7 +58,10 @@ export default function ItemTestemunho({
         {token || (userIgreja && userIgreja.sub === item.userId) ? (
           <div className="mb-2 flex justify-center gap-4">
             {openEdit === null && (
-              <button className="button" onClick={() => setOpenEdit(item.id)}>
+              <button
+                className="button !mb-0"
+                onClick={() => setOpenEdit(item.id)}
+              >
                 Editar
               </button>
             )}

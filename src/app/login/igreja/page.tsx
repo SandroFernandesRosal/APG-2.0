@@ -104,6 +104,13 @@ export default function RegisterIgreja() {
           >
             Esqueceu a senha?
           </Link>
+
+          <Link
+            href={'/register'}
+            className="font-bold text-primary dark:text-secundary"
+          >
+            Ainda não tem conta? Crie uma agora mesmo!
+          </Link>
         </form>
       </div>
     </div>

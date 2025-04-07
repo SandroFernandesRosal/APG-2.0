@@ -76,13 +76,6 @@ export default function TestemunhoLine({
   return (
     <div className="flex flex-col items-center self-center mb-4 w-full">
       <section className="mb-8 flex w-full flex-col items-center pb-4 md:rounded-xl">
-        <div className="flex flex-col items-center md:min-w-[35%] pt-2">
-          <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
-            Testemunhos
-          </h1>
-          <p className="mb-4 text-xl">O agir de Deus em nossas vidas</p>
-        </div>
-
         {!tokenIgreja ||
           (token && (
             <div className="flex w-full flex-wrap items-end justify-center gap-1">
@@ -120,8 +113,8 @@ export default function TestemunhoLine({
           </>
         )}
 
-        {!loading
-          ? Array.isArray(dataTestemunho) &&
+        {!loading ? (
+          Array.isArray(dataTestemunho) && dataTestemunho.length > 0 ? (
             dataTestemunho.map((item: Testemunho) => (
               <ItemTestemunho
                 key={item.id}
@@ -129,9 +122,14 @@ export default function TestemunhoLine({
                 userIgreja={userIgreja}
               />
             ))
-          : Array.from({ length: 4 }).map((_, index) => (
-              <SkeletonTestemunhos key={index} />
-            ))}
+          ) : (
+            <p className="text-gray-500">Nenhum testemunho ainda.</p>
+          )
+        ) : (
+          Array.from({ length: 4 }).map((_, index) => (
+            <SkeletonTestemunhos key={index} />
+          ))
+        )}
 
         {hasMore && (
           <button onClick={loadMore} className="button">

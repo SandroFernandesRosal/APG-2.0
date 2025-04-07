@@ -119,21 +119,21 @@ export default function RegisterIgreja() {
 
   return (
     <div className="mt-[80px] flex w-full justify-center md:mt-[140px]">
-      <div className="my-10 flex min-h-screen w-[100vw] flex-col items-center rounded-[35px] bg-bglightsecundary shadow-light dark:bg-bgdarksecundary dark:shadow-dark md:w-[90vw] md:rounded-xl">
+      <div className="my-10 flex min-h-screen w-[100vw] flex-col items-center md:rounded-xl">
         <h1 className="mt-2 text-lg font-bold text-primary dark:text-secundary">
-          Fazer login
+          Registre-se
         </h1>
-        <p className="mb-5 text-xl">Use suas credenciais</p>
+        <p className="mb-5 text-xl">preencha os campos abaixo</p>
         <form
           ref={formRef}
-          className="flex w-[75%] max-w-[500px] flex-col items-center gap-3 rounded-xl bg-bglight p-3 shadow-light dark:bg-bgdark dark:shadow-dark md:mb-5"
+          className="flex w-[75%] max-w-[500px] flex-col items-center gap-3  p-3  md:mb-5 border-[1px] border-zinc-400 dark:border-zinc-700 rounded-md py-5"
           onSubmit={handleSubmit}
         >
           <label
             htmlFor="avatarUrl"
             className="flex cursor-pointer flex-col items-center gap-2 font-bold"
           >
-            <p className="flex gap-2">
+            <p className="flex gap-2 my-4">
               <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
               Anexar foto de perfil (opcional)
             </p>
@@ -143,13 +143,13 @@ export default function RegisterIgreja() {
                 alt="Preview"
                 width={150}
                 height={150}
-                className="h-[150px] w-[150px] rounded-full border-2 border-primary"
+                className="h-[150px] w-[150px] rounded-full border-2 border-primary dark:border-secundary mb-4 p-1"
               />
             )}
           </label>
 
           <input
-            className="mt-2 w-[200px] cursor-pointer rounded-lg border-none bg-bglightsecundary p-2 text-center font-bold placeholder-textlight shadow-light outline-none focus:ring-0 dark:bg-bgdarksecundary dark:placeholder-textdark dark:shadow-dark"
+            className="input"
             type="text"
             name="name"
             required
@@ -158,7 +158,7 @@ export default function RegisterIgreja() {
           />
 
           <input
-            className="mt-2 w-[200px] cursor-pointer rounded-lg border-none bg-bglightsecundary p-2 text-center font-bold placeholder-textlight shadow-light outline-none focus:ring-0 dark:bg-bgdarksecundary dark:placeholder-textdark dark:shadow-dark"
+            className="input"
             type="text"
             name="login"
             required
@@ -167,7 +167,7 @@ export default function RegisterIgreja() {
           />
 
           <input
-            className="mt-2 w-[200px] cursor-pointer rounded-lg border-none bg-bglightsecundary p-2 text-center font-bold placeholder-textlight shadow-light outline-none focus:ring-0 dark:bg-bgdarksecundary dark:placeholder-textdark dark:shadow-dark"
+            className="input"
             type="password"
             name="password"
             required
@@ -186,10 +186,7 @@ export default function RegisterIgreja() {
             onChange={onFileSelected}
           />
 
-          <button
-            type="submit"
-            className="z-20 my-3 flex w-[100px] cursor-pointer items-center justify-center rounded-lg bg-gradient-to-r from-slate-950 to-blue-900 font-bold text-white shadow-light hover:from-blue-900 hover:to-slate-900 dark:shadow-dark"
-          >
+          <button type="submit" className="button ">
             Cadastrar
           </button>
         </form>

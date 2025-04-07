@@ -6,19 +6,15 @@ import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 
 import AddAgenda from '@/components/crud/AddAgenda'
+import AgendaHeader from '@/components/agenda-header'
 
 export default function AgendaPage() {
   const [openAgenda, setOpenAgenda] = useState(false)
   const token = useToken()
   return (
-    <main className="mb-8  mt-24 flex flex-col items-center justify-center  gap-4  md:mx-4 md:mt-[145px]   md:items-start  md:p-2 md:px-2  lg:mx-[5%]  lg:mt-[160px] ">
+    <main className="mb-8  mt-20 flex flex-col items-center justify-center  gap-4   md:mt-[145px]   md:items-start    lg:mt-[160px] ">
       <div className=" w-full  flex-col items-center  md:min-w-[35%] flex">
-        <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary flex ">
-          Agenda
-        </h1>
-        <p className=" px-2 text-center text-xl flex mb-4">
-          Fique por dentro dos eventos
-        </p>
+        <AgendaHeader />
 
         {token && (
           <>

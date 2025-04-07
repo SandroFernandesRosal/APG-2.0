@@ -3,13 +3,12 @@ import TestemunhoLine from '@/components/TestemunhoLine'
 import { UserIgreja } from '@/data/types/userigreja'
 import TestemunhosHeader from '@/components/testemunho-header'
 
-export default async function TestemunhosPage() {
+export default async function Testemunhos() {
   const userIgreja: UserIgreja = await getUserIgreja()
-
   return (
-    <main className="mb-2  flex min-h-screen flex-col items-center gap-5 pt-20 md:mt-0 md:pt-[165px]">
+    <div>
       <TestemunhosHeader />
       <TestemunhoLine userIgreja={userIgreja} />
-    </main>
+    </div>
   )
 }

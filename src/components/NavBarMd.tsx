@@ -16,19 +16,6 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
     <nav
       className={`font-Roboto font-bold hidden  items-center justify-center gap-3 overflow-x-auto bg-bglight/50 p-3 pb-[5px] backdrop-blur-sm dark:bg-bgdark/50 md:flex md:rounded-lg  md:self-center lg:gap-4`}
     >
-      <Link href="/">
-        <div
-          className={`flex flex-col items-center justify-center hover:text-primary lg:text-lg ${
-            activePage === '/'
-              ? 'border-b-2 border-primary text-primary dark:border-secundary dark:text-secundary dark:hover:text-secundary'
-              : ''
-          }`}
-          onClick={() => handleClick('/')}
-        >
-          <BiHomeHeart className="text-primary dark:text-secundary" />{' '}
-          <p>Home</p>
-        </div>
-      </Link>
       <Link href="/quemsomos">
         <div
           className={`flex flex-col items-center justify-center hover:text-primary dark:hover:text-secundary lg:text-lg ${
