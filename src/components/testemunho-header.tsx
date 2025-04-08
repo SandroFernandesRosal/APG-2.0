@@ -4,7 +4,7 @@ export default function TestemunhosHeader() {
   return (
     <div className="flex relative flex-col-reverse md:flex-row justify-center w-full mb-5">
       <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
-        <div className="absolute inset-0 bg-[url(/img/testemunhos.jpg)] bg-cover bg-center blur-sm scale-110"></div>
+        <div className="absolute inset-0 bg-[url(/img/testemunho.png)] bg-cover bg-center blur-sm scale-110"></div>
         <Image
           src={'/img/testemunho.png'}
           height={300}

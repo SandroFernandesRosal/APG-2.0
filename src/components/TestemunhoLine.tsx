@@ -38,8 +38,6 @@ export default function TestemunhoLine({
     api
       .get(`/testemunhos?offset=${offset}`)
       .then((response) => {
-        console.log('Dados iniciais:', response.data)
-
         setDataTestemunho(Array.isArray(response.data) ? response.data : [])
         setLoading(false)
 
@@ -58,8 +56,6 @@ export default function TestemunhoLine({
     api
       .get(`/testemunhos?offset=${newOffset}`)
       .then((response) => {
-        console.log('Novos dados carregados:', response.data)
-
         if (Array.isArray(response.data) && response.data.length > 0) {
           setDataTestemunho((prevData: Testemunho[]) => {
             const newData: Testemunho[] = [...prevData, ...response.data]

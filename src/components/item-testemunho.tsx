@@ -48,6 +48,7 @@ export default function ItemTestemunho({
             <Image
               width={500}
               height={500}
+              priority
               src={item.coverUrl}
               alt={item.name}
               className="m-2 w-[80%] rounded-xl shadow-light dark:shadow-dark md:max-w-[500px]"

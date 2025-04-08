@@ -1,15 +1,9 @@
-import { getUserIgreja } from '@/lib/getUserIgreja'
-import TestemunhoLine from '@/components/TestemunhoLine'
-import { UserIgreja } from '@/data/types/userigreja'
-import TestemunhosHeader from '@/components/testemunho-header'
+import Testemunhos from '@/components/Testemunhos'
 
-export default async function TestemunhosPage() {
-  const userIgreja: UserIgreja = await getUserIgreja()
-
+export default function TestemunhosPage() {
   return (
     <main className="mb-2  flex min-h-screen flex-col items-center gap-5 pt-20 md:mt-0 md:pt-[165px]">
-      <TestemunhosHeader />
-      <TestemunhoLine userIgreja={userIgreja} />
+      <Testemunhos />
     </main>
   )
 }
