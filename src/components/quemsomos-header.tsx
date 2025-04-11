@@ -4,7 +4,7 @@ import logob from '../../public/img/logob.png'
 
 export default function QuemSomosHeader() {
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-center w-full">
+    <div className="flex flex-col-reverse md:flex-row justify-center w-full mb-4">
       <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
         <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110"></div>
 
