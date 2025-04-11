@@ -60,11 +60,6 @@ export default function Locais() {
 
   return (
     <section className="mb-5 flex w-[100vw] flex-col items-center">
-      <h1 className="m-0 mt-1 text-lg font-bold text-primary dark:text-secundary">
-        Endereços
-      </h1>
-      <p className="mb-5 text-xl">Todos os nossos endereços</p>
-
       {token && (
         <>
           {openEndereco === false && (

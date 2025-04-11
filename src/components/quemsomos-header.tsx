@@ -4,18 +4,18 @@ import logob from '../../public/img/logob.png'
 
 export default function QuemSomosHeader() {
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-center ">
+    <div className="flex flex-col-reverse md:flex-row justify-center w-full">
       <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
-        <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110"></div>
+        <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110 "></div>
 
         <Image
           src={logob}
-          height={200}
-          width={200}
+          height={150}
+          width={150}
           priority
           quality={100}
           alt="logo do site"
-          className="relative z-10 w-[200px] object-contain md:h-full "
+          className="object-contain z-10 w-full h-[150px]  "
         />
       </div>
 

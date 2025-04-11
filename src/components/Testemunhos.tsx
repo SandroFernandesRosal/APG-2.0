@@ -6,7 +6,7 @@ import TestemunhosHeader from '@/components/testemunho-header'
 export default async function Testemunhos() {
   const userIgreja: UserIgreja = await getUserIgreja()
   return (
-    <div>
+    <div className="w-full">
       <TestemunhosHeader />
       <TestemunhoLine userIgreja={userIgreja} />
     </div>

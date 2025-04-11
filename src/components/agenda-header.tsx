@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function AgendaHeader() {
   return (
-    <div className="flex md:flex-row justify-center  mb-5 flex-col-reverse">
+    <div className="flex md:flex-row justify-center  mb-5 flex-col-reverse w-full">
       <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
         <div className="absolute inset-0 bg-[url(/img/agenda2.png)] bg-cover bg-center blur-sm scale-110"></div>
         <Image
@@ -12,7 +12,7 @@ export default function AgendaHeader() {
           priority
           quality={100}
           alt="imagem de agenda"
-          className="object-contain w-full h-[200px] md:h-full relative z-10"
+          className="object-contain w-full h-[300px]  relative z-10"
         />
       </div>
 

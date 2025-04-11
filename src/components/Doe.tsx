@@ -25,15 +25,6 @@ export default function Doe() {
 
   return (
     <div className="mb-4 flex w-[100vw] flex-col items-center">
-      <div className="mb-5 flex-col items-center text-center">
-        <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
-          Ajude a igreja
-        </h1>
-        <p className="px-[5px] text-xl">
-          Faça uma doação por pix ou transferência bancária
-        </p>
-      </div>
-
       {token && (
         <>
           {openDoacao === false && (
