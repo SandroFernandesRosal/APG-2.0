@@ -12,7 +12,7 @@ export default function MinisterioHeader() {
           priority
           quality={100}
           alt="imagem de agenda"
-          className="object-contain w-full h-[300px]  relative z-10"
+          className="object-contain w-full h-full  relative z-10"
         />
       </div>
 

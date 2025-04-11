@@ -6,7 +6,7 @@ export default function QuemSomosHeader() {
   return (
     <div className="flex flex-col-reverse md:flex-row justify-center w-full">
       <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
-        <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110 "></div>
+        <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110"></div>
 
         <Image
           src={logob}
@@ -15,7 +15,7 @@ export default function QuemSomosHeader() {
           priority
           quality={100}
           alt="logo do site"
-          className="object-contain z-10 w-full h-[150px]  "
+          className="object-contain z-10   "
         />
       </div>
 

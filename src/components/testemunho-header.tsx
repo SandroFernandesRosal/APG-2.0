@@ -12,7 +12,7 @@ export default function TestemunhosHeader() {
           priority
           quality={100}
           alt="imagem de testemunhos"
-          className="object-contain w-full h-[200px] md:h-full relative z-10"
+          className="object-contain w-full h-full relative z-10"
         />
       </div>
 

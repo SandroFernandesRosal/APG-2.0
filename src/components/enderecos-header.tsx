@@ -12,7 +12,7 @@ export default function EnderecosHeader() {
           priority
           quality={100}
           alt="imagem de endereços"
-          className="object-contain w-full  md:h-full relative z-10"
+          className="object-contain w-full  h-full relative z-10"
         />
       </div>
 
