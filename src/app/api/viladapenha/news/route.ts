@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  const offsetParam = searchParams.get('offset')
-  const offset = offsetParam ? parseInt(offsetParam, 10) : 0
+  const offset = parseInt(searchParams.get('offset') || '0', 10)
   const itemsPerPage = 12
 
-  const ministerios = await prisma.ministerioTomazinho.findMany({
+  const news = await prisma.new.findMany({
     orderBy: { createdAt: 'desc' },
     skip: offset,
     take: itemsPerPage,
   })
 
-  return NextResponse.json(ministerios)
+  return NextResponse.json(news)
 }
 
 export async function POST(req: NextRequest) {
@@ -23,18 +23,24 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
 
   const body = await req.json()
-  const { name, title, local, isPublic, coverUrl } = body
 
-  const ministerio = await prisma.ministerioTomazinho.create({
+  const schema = z.object({
+    content: z.string(),
+    coverUrl: z.string(),
+    title: z.string(),
+    isPublic: z.coerce.boolean().default(false),
+    destaque: z.coerce.boolean().default(false),
+    page: z.string(),
+  })
+
+  const data = schema.parse(body)
+
+  const created = await prisma.new.create({
     data: {
-      name,
-      title,
-      local,
-      isPublic: Boolean(isPublic),
-      coverUrl,
+      ...data,
       userId: user.sub,
     },
   })
 
-  return NextResponse.json(ministerio)
+  return NextResponse.json(created)
 }

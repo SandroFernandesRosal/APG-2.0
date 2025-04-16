@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   const offset = offsetParam ? parseInt(offsetParam, 10) : 0
   const itemsPerPage = 12
 
-  const ministerios = await prisma.ministerioTomazinho.findMany({
+  const ministerios = await prisma.ministerio.findMany({
     orderBy: { createdAt: 'desc' },
     skip: offset,
     take: itemsPerPage,
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
   const { name, title, local, isPublic, coverUrl } = body
 
-  const ministerio = await prisma.ministerioTomazinho.create({
+  const ministerio = await prisma.ministerio.create({
     data: {
       name,
       title,

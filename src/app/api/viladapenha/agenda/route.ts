@@ -4,37 +4,37 @@ import { authMiddleware } from '@/lib/auth'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  const offsetParam = searchParams.get('offset')
-  const offset = offsetParam ? parseInt(offsetParam, 10) : 0
+  const offset = parseInt(searchParams.get('offset') || '0', 10)
   const itemsPerPage = 12
 
-  const ministerios = await prisma.ministerioTomazinho.findMany({
+  const agenda = await prisma.agenda.findMany({
     orderBy: { createdAt: 'desc' },
     skip: offset,
     take: itemsPerPage,
   })
 
-  return NextResponse.json(ministerios)
+  return NextResponse.json(agenda)
 }
 
 export async function POST(req: NextRequest) {
   const user = await authMiddleware(req)
-  if (!user)
+  if (!user) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const body = await req.json()
-  const { name, title, local, isPublic, coverUrl } = body
+  const { name, day, hour, isPublic, destaque } = body
 
-  const ministerio = await prisma.ministerioTomazinho.create({
+  const agenda = await prisma.agenda.create({
     data: {
       name,
-      title,
-      local,
+      day,
+      hour,
       isPublic: Boolean(isPublic),
-      coverUrl,
+      destaque: Boolean(destaque),
       userId: user.sub,
     },
   })
 
-  return NextResponse.json(ministerio)
+  return NextResponse.json(agenda)
 }
