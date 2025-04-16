@@ -63,7 +63,7 @@ export async function POST(req: Request) {
     )
 
     const response = NextResponse.json({ user, token, refreshToken })
-    response.cookies.set('tokenigreja', token, {
+    response.cookies.set('tokennn', token, {
       httpOnly: true,
       sameSite: 'strict',
       path: '/',

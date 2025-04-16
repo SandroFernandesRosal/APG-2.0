@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { authMiddlewareMember } from '@/lib/auth-member'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -20,9 +21,11 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = paramsSchema.parse(await params)
+
   const testemunho = await prisma.testemunho.findUniqueOrThrow({
     where: { id },
   })
+
   return NextResponse.json(testemunho)
 }
 
@@ -30,8 +33,10 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const user = await authMiddleware(req)
-  if (!user) {
+  const admin = await authMiddleware(req)
+  const member = await authMiddlewareMember(req)
+
+  if (!admin && !member) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -44,39 +49,56 @@ export async function PUT(
     where: { id },
   })
 
-  const isAdmin = await prisma.user.findUnique({ where: { id: user.sub } })
-  const isCreator = user.sub === testemunho.userId
+  const isOwner = member?.sub === testemunho.userId
 
-  if (!isAdmin && !isCreator) {
-    return NextResponse.json({ message: 'Sem permissão.' }, { status: 403 })
+  if (admin || isOwner) {
+    const updated = await prisma.testemunho.update({
+      where: { id },
+      data: {
+        name,
+        coverUrl,
+        avatarUrl,
+        content,
+        isPublic,
+      },
+    })
+
+    return NextResponse.json(updated)
   }
 
-  const atualizado = await prisma.testemunho.update({
-    where: { id },
-    data: {
-      name,
-      coverUrl,
-      avatarUrl,
-      content,
-      isPublic,
-    },
-  })
-
-  return NextResponse.json(atualizado)
+  return NextResponse.json(
+    { error: 'Você não tem permissão para editar este testemunho.' },
+    { status: 403 },
+  )
 }
 
 export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const user = await authMiddleware(req)
-  if (!user) {
+  const admin = await authMiddleware(req)
+  const member = await authMiddlewareMember(req)
+
+  if (!admin && !member) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
   const { id } = paramsSchema.parse(await params)
 
-  await prisma.testemunho.delete({ where: { id } })
+  const testemunho = await prisma.testemunho.findUniqueOrThrow({
+    where: { id },
+  })
 
-  return NextResponse.json({ message: 'Testemunho deletado com sucesso.' })
+  const isOwner = member?.sub === testemunho.userId
+
+  if (admin || isOwner) {
+    await prisma.testemunho.delete({ where: { id } })
+
+    return NextResponse.json({ message: 'Testemunho deletado com sucesso.' })
+  }
+
+  return NextResponse.json(
+    { error: 'Você não tem permissão para deletar este testemunho.' },
+    { status: 403 },
+  )
 }

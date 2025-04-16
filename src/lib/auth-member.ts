@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
 import jwt from 'jsonwebtoken'
 
-export async function authMiddleware(req: NextRequest) {
-  const token = req.cookies.get('tokennn')?.value
+export async function authMiddlewareMember(req: NextRequest) {
+  const token = req.cookies.get('tokenigreja')?.value
 
   if (!token) return null
 
