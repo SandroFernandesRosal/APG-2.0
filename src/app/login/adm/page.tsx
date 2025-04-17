@@ -3,16 +3,6 @@ import Link from 'next/link'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
-import { api } from '@/lib/api'
-
-interface ApiError {
-  response?: {
-    status: number
-    data: {
-      error: string
-    }
-  }
-}
 
 export default function Register() {
   const [login, setLogin] = useState<string>('')
@@ -24,56 +14,41 @@ export default function Register() {
     event.preventDefault()
 
     try {
-      const response = await api.post('/login', {
-        login,
-        password,
+      const response = await fetch('/api/auth/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ login, password }),
       })
 
-      const user = response.data
+      const user = await response.json()
 
-      if (user.error) {
-        setError(user.error)
-        return null
+      if (!response.ok) {
+        setError(user.error || 'Erro ao fazer login.')
+        return
       }
 
       if (response.status === 200 && user) {
-        const token = user.token
-        Cookies.set('tokennn', token)
-
+        Cookies.set('tokennn', user.token)
         router.push('/')
         window.location.href = '/'
-        return token
       }
-    } catch (error) {
-      const apiError = error as ApiError
-
-      if (
-        apiError.response &&
-        (apiError.response.status === 400 ||
-          apiError.response.status === 404 ||
-          apiError.response.status === 500) &&
-        apiError.response.data &&
-        apiError.response.data.error
-      ) {
-        setError(apiError.response.data.error)
-      } else {
-        setError('Erro ao redefinir a senha. Tente novamente mais tarde.')
-      }
+    } catch {
+      setError('Erro ao redefinir a senha. Tente novamente mais tarde.')
     }
-
-    return null
   }
 
   return (
-    <div className="flex w-full  justify-center  min-h-screen pt-28 md:pt-[185px]">
-      <div className=" flex  flex-col items-center border-[1px] border-zinc-400 dark:border-zinc-700 w-[70%] max-w-[500px] h-full rounded-md ">
-        <h1 className="mt-2 text-lg font-bold text-primary dark:text-secundary ">
+    <div className="flex w-full justify-center min-h-screen pt-28 md:pt-[185px]">
+      <div className="flex flex-col items-center border-[1px] border-zinc-400 dark:border-zinc-700 w-[70%] max-w-[500px] h-full rounded-md">
+        <h1 className="mt-2 text-lg font-bold text-primary dark:text-secundary">
           Login Adm
         </h1>
         <p className="mb-5 text-xl">Use suas credenciais</p>
 
         <form
-          className="flex w-full flex-col items-center gap-3 rounded-xl  p-3  md:mb-5"
+          className="flex w-full flex-col items-center gap-3 rounded-xl p-3 md:mb-5"
           onSubmit={handleSubmit}
         >
           <h1 className="text-xl font-bold text-primary dark:text-secundary">
