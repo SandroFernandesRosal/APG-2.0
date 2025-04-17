@@ -1,11 +1,11 @@
 'use client'
+
 import Cookies from 'js-cookie'
 import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 
 interface AddNewProps {
@@ -14,9 +14,9 @@ interface AddNewProps {
 }
 
 export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
-  const [title, setTitle] = useState<string>('')
-  const [content, setContent] = useState<string>('')
-  const [destaque, setDestaque] = useState<boolean>(false)
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [destaque, setDestaque] = useState(false)
   const [preview, setPreview] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement | null>(null)
 
@@ -33,84 +33,72 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
     ) as HTMLInputElement
     const fileToUpload = fileInput?.files?.[0]
 
-    let coverUrl = ''
-
     if (!fileToUpload) {
       alert('Você precisa adicionar uma imagem.')
       return
     }
 
-    if (fileToUpload) {
-      const formData = new FormData()
-      formData.append('file', fileToUpload)
+    let coverUrl = ''
+    const formData = new FormData()
+    formData.append('file', fileToUpload)
 
-      try {
-        const uploadResponse = await api.post('/upload', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        })
-        coverUrl = uploadResponse.data.fileUrl
-      } catch (error) {
-        console.error('Erro ao carregar arquivo:', error)
-        return
-      }
+    try {
+      const uploadResponse = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const uploadResult = await uploadResponse.json()
+      coverUrl = uploadResult.fileUrl
+    } catch (error) {
+      console.error('Erro ao fazer upload da imagem:', error)
+      return
     }
 
     try {
-      const response = await api.post(
-        `/news/${local}`,
-        {
+      const response = await fetch(`/api/${local}/news`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           title,
           content,
           coverUrl,
           page: local,
           destaque,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const newss = response.data
-
-      if (response.status === 200 && newss) {
+      if (response.ok) {
         setOpenNew(false)
-        router.push('/')
-        window.location.href = '/'
-        return newss
+        router.refresh()
+      } else {
+        const data = await response.json()
+        console.error('Erro ao postar notícia:', data)
       }
-
-      console.log(newss)
     } catch (error) {
-      console.error('Erro ao criar notícia:', error)
+      console.error('Erro ao enviar notícia:', error)
     }
-
-    return null
   }
 
   function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
-
-    if (!files) {
-      return
-    }
-
+    if (!files) return
     const previewUrl = URL.createObjectURL(files[0])
-
     setPreview(previewUrl)
   }
 
   return (
     <form
       ref={formRef}
-      className="fixed  left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
     >
       <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar Notícia{' '}
-        {openNew === true && (
+        Adicionar Notícia
+        {openNew && (
           <AiFillCloseCircle
             onClick={() => setOpenNew(false)}
             className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
@@ -122,9 +110,10 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
         htmlFor="coverUrl"
         className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
       >
-        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
         Anexar foto (até 5mb)
       </label>
+
       {preview && (
         <Image
           src={preview}
@@ -158,7 +147,6 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
         name="coverUrl"
         id="coverUrl"
         required
-        placeholder="Digite a url da notícia"
         onChange={onFileSelected}
       />
 
