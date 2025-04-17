@@ -1,9 +1,9 @@
 'use client'
+
 import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 
 interface EditEnderecoProps {
   setOpenEdit: (open: string | null) => void
@@ -24,11 +24,11 @@ export default function EditEndereco({
   numeroInitial,
   cidadeInitial,
 }: EditEnderecoProps) {
-  const [local, setLocal] = useState<string>(localInitial)
-  const [rua, setRua] = useState<string>(ruaInitial)
-  const [cep, setCep] = useState<string>(cepInitial)
-  const [numero, setNumero] = useState<string>(numeroInitial)
-  const [cidade, setCidade] = useState<string>(cidadeInitial)
+  const [local, setLocal] = useState(localInitial)
+  const [rua, setRua] = useState(ruaInitial)
+  const [cep, setCep] = useState(cepInitial)
+  const [numero, setNumero] = useState(numeroInitial)
+  const [cidade, setCidade] = useState(cidadeInitial)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
@@ -37,35 +37,33 @@ export default function EditEndereco({
     event.preventDefault()
 
     try {
-      const response = await api.put(
-        `/endereco/${id}`,
-        {
+      const response = await fetch(`/api/endereco/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           local: local || localInitial,
           rua: rua || ruaInitial,
           cep: cep || cepInitial,
           numero: numero || numeroInitial,
           cidade: cidade || cidadeInitial,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const endereco = response.data
+      const endereco = await response.json()
 
-      if (response.status === 200 && endereco) {
+      if (response.ok) {
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
         return endereco
       }
 
-      console.log(endereco)
+      console.error('Erro na resposta:', endereco)
     } catch (error) {
-      console.error('Erro ao editar evento:', error)
+      console.error('Erro ao editar endereço:', error)
     }
 
     return null
@@ -73,8 +71,8 @@ export default function EditEndereco({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
         Editar endereço{' '}
@@ -83,11 +81,12 @@ export default function EditEndereco({
           className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
         />
       </h1>
+
       <input
         className="input mt-2"
         type="text"
         name="local"
-        required={true}
+        required
         placeholder="Digite o local"
         value={local}
         onChange={(e) => setLocal(e.target.value)}
@@ -97,7 +96,7 @@ export default function EditEndereco({
         className="input"
         type="text"
         name="rua"
-        required={true}
+        required
         placeholder="Digite nome da rua"
         value={rua}
         onChange={(e) => setRua(e.target.value)}
@@ -107,7 +106,7 @@ export default function EditEndereco({
         className="input"
         type="text"
         name="numero"
-        required={true}
+        required
         placeholder="Digite o número da igreja"
         value={numero}
         onChange={(e) => setNumero(e.target.value)}
@@ -117,17 +116,17 @@ export default function EditEndereco({
         className="input"
         type="text"
         name="cidade"
-        required={true}
+        required
         placeholder="Digite a cidade"
         value={cidade}
         onChange={(e) => setCidade(e.target.value)}
       />
 
       <input
-        className="input "
+        className="input"
         type="text"
         name="cep"
-        required={true}
+        required
         placeholder="Digite o cep"
         value={cep}
         onChange={(e) => setCep(e.target.value)}

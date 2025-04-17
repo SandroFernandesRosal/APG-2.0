@@ -4,7 +4,6 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 
 interface AddAgendaProps {
   openAgenda: boolean
@@ -27,22 +26,20 @@ export default function AddAgenda({
     event.preventDefault()
 
     try {
-      const response = await api.post(
-        `/agenda/${local}`,
-        {
+      const response = await fetch(`/api/${local}/agenda`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           day,
           name,
           hour,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const agenda = response.data
+      const agenda = await response.json()
 
       if (response.status === 200 && agenda) {
         setOpenAgenda(false)
@@ -83,7 +80,7 @@ export default function AddAgenda({
       />
 
       <input
-        className="input "
+        className="input"
         type="text"
         name="name"
         placeholder="Nome do evento"

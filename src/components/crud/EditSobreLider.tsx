@@ -4,7 +4,6 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 
 interface EditSobreLiderProps {
@@ -46,8 +45,15 @@ export default function EditSobreLider({
         const uploadFormData = new FormData()
         uploadFormData.append('file', fileToUpload)
 
-        const uploadResponse = await api.post('/upload', uploadFormData)
-        coverUrl = uploadResponse.data.fileUrl
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadFormData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const uploadData = await uploadResponse.json()
+        coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
         return
@@ -57,25 +63,24 @@ export default function EditSobreLider({
     }
 
     try {
-      const response = await api.put(
-        `/sobre/lider/${id}`,
-        {
+      const response = await fetch(`/api/sobrelider/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
           title: title || titulo,
           name: name || nome,
           coverUrl,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+      })
 
       if (response.status === 200) {
         setOpenEdit(null)
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
-        return response.data
+        return response.json()
       }
 
       console.error('Erro ao editar um líder:', response.statusText)

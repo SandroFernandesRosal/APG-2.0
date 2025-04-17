@@ -5,7 +5,6 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 
 interface EditContatoProps {
   setOpenEdit: (open: string | null) => void
@@ -36,25 +35,23 @@ export default function EditContatos({
     event.preventDefault()
 
     try {
-      const response = await api.put(
-        `/contato/${id}`,
-        {
+      const response = await fetch(`/api/contato/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           local: local || localInitial,
           whatsapp: whatsapp || whatsappInitial,
           facebook: facebook || facebookInitial,
           instagram: instagram || instagramInitial,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const contato = response.data
+      const contato = await response.json()
 
-      if (response.status === 200 && contato) {
+      if (response.ok && contato) {
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
@@ -71,7 +68,7 @@ export default function EditContatos({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screenw-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark dark:text-white "
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark dark:text-white"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
@@ -85,7 +82,7 @@ export default function EditContatos({
         className="input mt-2"
         type="text"
         name="local"
-        required={true}
+        required
         placeholder="Digite o local"
         defaultValue={localInitial}
         onChange={(e) => setLocal(e.target.value)}
@@ -95,28 +92,28 @@ export default function EditContatos({
         className="input"
         type="text"
         name="whatsapp"
-        required={true}
+        required
         placeholder="Digite o número"
         defaultValue={whatsappInitial}
         onChange={(e) => setWhatsapp(e.target.value)}
       />
 
       <input
-        className="input "
+        className="input"
         type="text"
-        name="instagran"
-        required={true}
-        placeholder="Digite o instagran"
+        name="instagram"
+        required
+        placeholder="Digite o Instagram"
         defaultValue={instagramInitial}
         onChange={(e) => setInstagram(e.target.value)}
       />
 
       <input
-        className="input "
+        className="input"
         type="text"
         name="facebook"
-        required={true}
-        placeholder="Digite o facebook"
+        required
+        placeholder="Digite o Facebook"
         defaultValue={facebookInitial}
         onChange={(e) => setFacebook(e.target.value)}
       />

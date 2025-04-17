@@ -6,7 +6,6 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-import { api } from '@/lib/api'
 import { UserIgreja } from '@/data/types/userigreja'
 
 interface AddTestemunhoProps {
@@ -45,43 +44,42 @@ export default function AddTestemunho({
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await api.post('/upload', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
         })
-        coverUrl = uploadResponse.data.fileUrl
+
+        const data = await uploadResponse.json()
+        coverUrl = data.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
       }
     }
 
     try {
-      const response = await api.post(
-        `/testemunhos`,
-        {
+      const response = await fetch('/api/testemunhos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           name,
           content,
           coverUrl,
           avatarUrl,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const newss = response.data
-
-      if (response.status === 200 && newss) {
+      if (response.ok) {
+        const newTestemunho = await response.json()
         setOpen(false)
         router.push('/testemunhos')
         window.location.href = '/testemunhos'
-        return newss
+        return newTestemunho
       }
 
-      console.log(newss)
-      return null
+      console.log('Erro ao criar testemunho:', response.statusText)
     } catch (error) {
       console.error('Erro ao criar testemunho:', error)
     }
@@ -97,6 +95,7 @@ export default function AddTestemunho({
     const previewUrl = URL.createObjectURL(files[0])
     setPreview(previewUrl)
   }
+
   return (
     <form
       ref={formRef}
@@ -115,15 +114,14 @@ export default function AddTestemunho({
 
       <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary  md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800 mt-4">
         <div className="flex items-center justify-between">
-          {' '}
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpen(false)} className="pr-1">
             <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
-          </button>{' '}
+          </button>
         </div>
 
         <textarea
-          className="mx-1 flex w-full  flex-col gap-2 border-none bg-bglightsecundary  outline-none ring-0 focus:ring-0  dark:bg-bgdarksecundary"
+          className="mx-1 flex w-full flex-col gap-2 border-none bg-bglightsecundary outline-none ring-0 focus:ring-0 dark:bg-bgdarksecundary"
           name="content"
           required
           placeholder="Escreva seu testemunho"
@@ -137,14 +135,14 @@ export default function AddTestemunho({
               width={200}
               height={200}
               alt="imagem perfil"
-              className=" aspect-video w-[200px]"
+              className="aspect-video w-[200px]"
             />
           </div>
         )}
         <div className="mx-2 mb-2 flex w-full justify-center gap-4">
           <label
             htmlFor="coverUrl"
-            className=" flex cursor-pointer items-center gap-2  font-bold"
+            className="flex cursor-pointer items-center gap-2 font-bold"
           >
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto (Opcional)

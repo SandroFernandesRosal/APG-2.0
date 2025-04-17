@@ -1,39 +1,32 @@
 'use client'
 import Cookies from 'js-cookie'
+
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
-interface EditDoacaoProps {
+
+interface EditContatoProps {
   setOpenEdit: (open: string | null) => void
   id: string
   localInitial: string
-  bancoInitial: string
-  contaInitial: string
-  agenciaInitial: string
-  nomebancoInitial: string
-  pixInitial: string
-  nomepixInitial: string
+  whatsappInitial: string
+  facebookInitial: string
+  instagramInitial: string
 }
 
-export default function EditDoacao({
+export default function EditContatos({
   setOpenEdit,
   id,
   localInitial,
-  bancoInitial,
-  contaInitial,
-  agenciaInitial,
-  nomebancoInitial,
-  pixInitial,
-  nomepixInitial,
-}: EditDoacaoProps) {
-  const [local, setLocal] = useState<string>(localInitial)
-  const [banco, setBanco] = useState<string>(bancoInitial)
-  const [conta, setConta] = useState<string>(contaInitial)
-  const [agencia, setAgencia] = useState<string>(agenciaInitial)
-  const [nomebanco, setNomeBanco] = useState<string>(nomebancoInitial)
-  const [pix, setPix] = useState<string>(pixInitial)
-  const [nomepix, setNomePix] = useState<string>(nomepixInitial)
+  whatsappInitial,
+  facebookInitial,
+  instagramInitial,
+}: EditContatoProps) {
+  const [local, setLocal] = useState(localInitial)
+  const [whatsapp, setWhatsapp] = useState(whatsappInitial)
+  const [facebook, setFacebook] = useState(facebookInitial)
+  const [instagram, setInstagram] = useState(instagramInitial)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
@@ -42,59 +35,53 @@ export default function EditDoacao({
     event.preventDefault()
 
     try {
-      const response = await api.put(
-        `/doacao/${id}`,
-        {
-          local: local || localInitial,
-          banco: banco || bancoInitial,
-          conta: conta || contaInitial,
-          agencia: agencia || agenciaInitial,
-          nomebanco: nomebanco || nomebancoInitial,
-          pix: pix || pixInitial,
-          nomepix: nomepix || nomepixInitial,
+      const response = await fetch(`/api/contato/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        body: JSON.stringify({
+          local,
+          whatsapp,
+          facebook,
+          instagram,
+        }),
+      })
 
-      const doacao = response.data
+      const data = await response.json()
 
-      if (response.status === 200 && doacao) {
+      if (response.ok) {
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
-        return doacao
+        return data
       }
 
-      console.log(doacao)
+      console.log(data)
     } catch (error) {
-      console.error('Erro ao editar doação:', error)
+      console.error('Erro ao editar contato:', error)
     }
-
-    return null
   }
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark dark:text-white"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Editar doação{' '}
+        Editar contato{' '}
         <AiFillCloseCircle
           onClick={() => setOpenEdit(null)}
-          className="cursor-pointer text-2xl font-bold text-black dark:text-white"
+          className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
         />
       </h1>
+
       <input
         className="input mt-2"
         type="text"
         name="local"
-        required={true}
+        required
         placeholder="Digite o local"
         value={local}
         onChange={(e) => setLocal(e.target.value)}
@@ -103,61 +90,31 @@ export default function EditDoacao({
       <input
         className="input"
         type="text"
-        name="banco"
-        required={true}
-        placeholder="Digite o nome do banco"
-        value={banco}
-        onChange={(e) => setBanco(e.target.value)}
+        name="whatsapp"
+        required
+        placeholder="Digite o número"
+        value={whatsapp}
+        onChange={(e) => setWhatsapp(e.target.value)}
       />
 
       <input
         className="input"
         type="text"
-        name="conta"
-        required={true}
-        placeholder="Digite número da conta"
-        value={conta}
-        onChange={(e) => setConta(e.target.value)}
-      />
-
-      <input
-        className="input "
-        type="text"
-        name="agencia"
-        required={true}
-        placeholder="Digite número da agência"
-        value={agencia}
-        onChange={(e) => setAgencia(e.target.value)}
-      />
-
-      <input
-        className="input "
-        type="text"
-        name="nomebanco"
-        required={true}
-        placeholder="Digite nome titular da conta"
-        value={nomebanco}
-        onChange={(e) => setNomeBanco(e.target.value)}
-      />
-
-      <input
-        className="input "
-        type="text"
-        name="pix"
-        required={true}
-        placeholder="Digite o pix"
-        value={pix}
-        onChange={(e) => setPix(e.target.value)}
+        name="instagram"
+        required
+        placeholder="Digite o Instagram"
+        value={instagram}
+        onChange={(e) => setInstagram(e.target.value)}
       />
 
       <input
         className="input"
         type="text"
-        name="nomepix"
-        required={true}
-        placeholder="Digite nome do titular do pix"
-        value={nomepix}
-        onChange={(e) => setNomePix(e.target.value)}
+        name="facebook"
+        required
+        placeholder="Digite o Facebook"
+        value={facebook}
+        onChange={(e) => setFacebook(e.target.value)}
       />
 
       <button type="submit" className="button !mb-0">

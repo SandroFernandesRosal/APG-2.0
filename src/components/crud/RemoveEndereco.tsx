@@ -2,7 +2,6 @@
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { useState, MouseEvent } from 'react'
-import { api } from '@/lib/api'
 
 interface RemoveEnderecoProps {
   id: string
@@ -20,14 +19,15 @@ export default function RemoveEndereco({ id }: RemoveEnderecoProps) {
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/endereco/${id}`, {
+      const response = await fetch(`/api/endereco/${id}`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/')
         window.location.href = '/'
       } else {

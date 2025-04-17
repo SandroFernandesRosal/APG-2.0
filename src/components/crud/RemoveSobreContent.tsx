@@ -1,6 +1,5 @@
 'use client'
 import Cookies from 'js-cookie'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { useState, MouseEvent } from 'react'
 
@@ -20,13 +19,15 @@ export default function RemoveSobreContent({ id }: RemoveSobreContentProps) {
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/sobre/${id}`, {
+      const response = await fetch(`/api/sobre/${id}`, {
+        method: 'DELETE',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
       } else {

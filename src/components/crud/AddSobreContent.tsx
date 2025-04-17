@@ -4,7 +4,6 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 
 interface AddSobreContentProps {
@@ -37,7 +36,7 @@ export default function AddSobreContent({
     let coverUrl = ''
 
     if (!fileToUpload) {
-      alert('você precisa adicionar uma imagem.')
+      alert('Você precisa adicionar uma imagem.')
       return
     }
 
@@ -46,10 +45,12 @@ export default function AddSobreContent({
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await api.post('/upload/sobre', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
         })
-        coverUrl = uploadResponse.data.fileUrl
+        const uploadData = await uploadResponse.json()
+        coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
         return
@@ -57,22 +58,20 @@ export default function AddSobreContent({
     }
 
     try {
-      const response = await api.post(
-        `/sobre`,
-        {
+      const response = await fetch('/api/sobre', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           title,
           content,
           coverUrl,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const newss = response.data
+      const newss = await response.json()
 
       if (response.status === 200 && newss) {
         setOpen(false)
@@ -83,7 +82,7 @@ export default function AddSobreContent({
 
       console.log(newss)
     } catch (error) {
-      console.error('Erro ao criar notícia:', error)
+      console.error('Erro ao criar história:', error)
     }
 
     return null

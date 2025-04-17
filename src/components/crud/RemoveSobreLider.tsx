@@ -1,6 +1,5 @@
 'use client'
 import Cookies from 'js-cookie'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { useState, MouseEvent } from 'react'
 
@@ -20,20 +19,22 @@ export default function RemoveSobreLider({ id }: RemoveSobreLiderProps) {
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/sobre/lider/${id}`, {
+      const response = await fetch(`/api/sobrelider/${id}`, {
+        method: 'DELETE',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
       } else {
-        console.error('Erro ao remover um líder:', response.statusText)
+        console.error('Erro ao remover líder:', response.statusText)
       }
     } catch (error) {
-      console.error('Erro ao remover um líder:', error)
+      console.error('Erro ao remover líder:', error)
     } finally {
       setIsDeleting(false)
     }

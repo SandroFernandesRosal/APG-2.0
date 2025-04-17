@@ -5,7 +5,6 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 
 interface AddContatoProps {
   openContato: boolean
@@ -28,23 +27,21 @@ export default function AddContatos({
     event.preventDefault()
 
     try {
-      const response = await api.post(
-        '/contato',
-        {
+      const response = await fetch('/api/contato', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           local,
           whatsapp,
           facebook,
           instagram,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const contato = response.data
+      const contato = await response.json()
 
       if (response.status === 200 && contato) {
         setOpenContato(false)

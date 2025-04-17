@@ -3,7 +3,6 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useToken } from '@/hooks/useToken'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
@@ -44,10 +43,15 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await api.post('/upload', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
         })
-        avatarUrl = uploadResponse.data.fileUrl
+        const uploadData = await uploadResponse.json()
+        avatarUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao carregar foto:', error)
       }
@@ -56,23 +60,21 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
     }
 
     try {
-      const response = await api.put(
-        `/register/${id}`,
-        {
+      const response = await fetch(`/api/auth/admin/register/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           name: name || nome,
           login: login || email,
           avatarUrl: avatarUrl || PlaceHolder,
           password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const newss = response.data
+      const newss = await response.json()
 
       if (response.status === 200 && newss) {
         Cookies.remove('tokennn')
@@ -125,24 +127,24 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
                 {preview ? (
                   <Image
                     src={preview}
-                    alt=""
+                    alt="Preview"
                     width={150}
                     height={150}
-                    className="flex  h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+                    className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
                   />
                 ) : (
                   <Image
                     src={img}
-                    alt=""
+                    alt="Avatar"
                     width={150}
                     height={150}
-                    className="flex  h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+                    className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
                   />
                 )}
               </label>
 
               <input
-                className=" input mt-4"
+                className="input mt-4"
                 type="text"
                 name="name"
                 defaultValue={nome}
@@ -176,7 +178,6 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
                 type="file"
                 name="avatarUrl"
                 id="avatarUrl"
-                placeholder="Digite a url da notícia"
                 onChange={onFileSelected}
               />
 

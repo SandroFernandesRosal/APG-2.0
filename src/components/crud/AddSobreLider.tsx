@@ -2,7 +2,6 @@
 import Cookies from 'js-cookie'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/api'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaCameraRetro } from 'react-icons/fa'
 import Image from 'next/image'
@@ -15,8 +14,8 @@ interface AddSobreLiderProps {
 export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
   const [title, setTitle] = useState<string>('')
   const [name, setName] = useState<string>('')
-  const formRef = useRef<HTMLFormElement | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
@@ -30,78 +29,70 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
     ) as HTMLInputElement
     const fileToUpload = fileInput?.files?.[0]
 
-    let coverUrl = ''
-
     if (!fileToUpload) {
       alert('Você precisa adicionar uma imagem.')
       return
     }
 
-    if (fileToUpload) {
+    let coverUrl = ''
+
+    try {
       const uploadFormData = new FormData()
       uploadFormData.append('file', fileToUpload)
 
-      try {
-        const uploadResponse = await api.post('/upload', uploadFormData)
-        coverUrl = uploadResponse.data.fileUrl
-      } catch (error) {
-        console.error('Error uploading file:', error)
-        return
-      }
+      const uploadResponse = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      })
+
+      const data = await uploadResponse.json()
+      coverUrl = data.fileUrl
+    } catch (error) {
+      console.error('Erro ao carregar arquivo:', error)
+      return
     }
 
     try {
-      const res = await api.post(
-        `/sobre/lider`,
-        {
-          name,
-          title,
-          coverUrl,
+      const res = await fetch('/api/sobrelider', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        body: JSON.stringify({ name, title, coverUrl }),
+      })
 
-      const lider = res.data
-
-      if (res.status === 200 && lider) {
+      if (res.ok) {
+        const lider = await res.json()
         setOpen(false)
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
         return lider
       }
-      console.log(lider)
-      return null
+
+      console.log('Erro ao criar líder:', res.statusText)
     } catch (error) {
-      console.error('Error during API request:', error)
+      console.error('Erro durante a requisição à API:', error)
     }
   }
 
   function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
-
-    if (!files) {
-      return
+    if (files?.length) {
+      const previewUrl = URL.createObjectURL(files[0])
+      setPreview(previewUrl)
     }
-
-    const previewUrl = URL.createObjectURL(files[0])
-
-    setPreview(previewUrl)
   }
 
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0  flex min-h-screen z-50 w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 flex min-h-screen z-50 w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar lider{' '}
-        {open === true && (
+        Adicionar líder{' '}
+        {open && (
           <AiFillCloseCircle
             onClick={() => setOpen(false)}
             className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
@@ -111,18 +102,19 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
 
       <label
         htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer items-center gap-2  font-bold"
+        className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
       >
         <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
         Anexar foto (até 5mb)
       </label>
+
       {preview && (
         <Image
           src={preview}
           width={200}
           height={200}
-          alt={`imagem de ${name}`}
-          className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+          alt={`Imagem de ${name}`}
+          className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
         />
       )}
 
@@ -135,7 +127,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
       />
 
       <input
-        className="input "
+        className="input"
         type="text"
         name="title"
         placeholder="Cargo de liderança"
@@ -147,7 +139,6 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
         type="file"
         name="coverUrl"
         id="coverUrl"
-        placeholder="Digite a url do perfil"
         onChange={onFileSelected}
       />
 

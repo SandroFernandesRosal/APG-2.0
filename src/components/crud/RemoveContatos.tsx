@@ -1,10 +1,7 @@
 'use client'
 import Cookies from 'js-cookie'
-
 import { useRouter } from 'next/navigation'
-
 import { useState, MouseEvent } from 'react'
-import { api } from '@/lib/api'
 
 interface RemoveContatoProps {
   id: string
@@ -22,14 +19,15 @@ export default function RemoveContatos({ id }: RemoveContatoProps) {
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/contato/${id}`, {
+      const response = await fetch(`/api/contato/${id}`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/')
         window.location.href = '/'
       } else {

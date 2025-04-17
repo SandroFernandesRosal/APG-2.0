@@ -3,7 +3,6 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
@@ -24,12 +23,10 @@ export default function EditUserIgreja({
   const [name, setName] = useState<string>('')
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const PlaceHolder =
-    'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
-
   const [preview, setPreview] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement | null>(null)
-
+  const PlaceHolder =
+    'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
   const router = useRouter()
   const token = useTokenIgreja()
 
@@ -49,10 +46,15 @@ export default function EditUserIgreja({
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await api.post('/upload', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
-        avatarUrl = uploadResponse.data.fileUrl
+        const data = await uploadResponse.json()
+        avatarUrl = data.fileUrl || img || PlaceHolder
       } catch (error) {
         console.error('Erro ao carregar foto:', error)
       }
@@ -61,50 +63,43 @@ export default function EditUserIgreja({
     }
 
     try {
-      const response = await api.put(
-        `/register/igreja/${id}`,
-        {
+      const response = await fetch(`/api/auth/register/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           name: name || nome,
           login: login || email,
-          avatarUrl: avatarUrl || PlaceHolder,
+          avatarUrl,
           password,
-        },
-        {
+        }),
+      })
+
+      if (response.ok) {
+        await fetch('/api/testemunhos', {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-        },
-      )
-
-      const newss = response.data
-
-      if (response.status === 200 && newss) {
-        await api.put(
-          `/testemunhos`,
-          {
+          body: JSON.stringify({
             userId: id,
             name: name || nome,
-            avatarUrl: avatarUrl || PlaceHolder,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        )
+            avatarUrl,
+          }),
+        })
 
         Cookies.remove('tokenigreja')
         router.push('/login/igreja')
-        window.location.href = '/login/igreja'
-        return newss
+        return
       }
 
-      console.log(newss)
-      return null
+      const errorData = await response.json()
+      console.error('Erro ao editar:', errorData)
     } catch (error) {
-      console.error('Erro ao editar', error)
+      console.error('Erro ao editar:', error)
     }
   }
 
@@ -152,7 +147,10 @@ export default function EditUserIgreja({
                   />
                 ) : (
                   <Image
-                    src={img || PlaceHolder}
+                    src={
+                      img ||
+                      'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
+                    }
                     alt="Profile"
                     width={150}
                     height={150}
@@ -183,7 +181,7 @@ export default function EditUserIgreja({
               />
 
               <input
-                className=" input"
+                className="input"
                 type="password"
                 name="password"
                 required

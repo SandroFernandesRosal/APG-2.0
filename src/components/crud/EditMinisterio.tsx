@@ -1,11 +1,11 @@
 'use client'
+
 import Cookies from 'js-cookie'
 import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 
 interface EditMinisterioProps {
@@ -44,47 +44,54 @@ export default function EditMinisterio({
     ) as HTMLInputElement
     const fileToUpload = fileInput?.files?.[0]
 
-    let coverUrl = ''
+    let coverUrl = img
 
     if (fileToUpload) {
       try {
         const uploadFormData = new FormData()
         uploadFormData.append('file', fileToUpload)
 
-        const uploadResponse = await api.post('/upload', uploadFormData)
-        coverUrl = uploadResponse.data.fileUrl
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: uploadFormData,
+        })
+
+        const uploadData = await uploadResponse.json()
+        coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
         return
       }
-    } else {
-      coverUrl = img
     }
 
     try {
-      const response = await api.put(
-        `/ministerio/${local}/${id}`,
-        {
+      const response = await fetch(`/api/${local}/ministerio/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           title: title || titulo,
           name: name || nome,
           local: igreja || lugar,
           coverUrl,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      if (response.status === 200) {
+      const data = await response.json()
+
+      if (response.ok) {
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
-        return response.data
+        return data
       }
 
-      console.error('Erro ao editar um líder:', response.statusText)
+      console.error('Erro ao editar um líder:', data)
     } catch (error) {
       console.error('Erro ao editar um líder:', error)
     }
@@ -95,12 +102,9 @@ export default function EditMinisterio({
   function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
 
-    if (!files) {
-      return
-    }
+    if (!files) return
 
     const previewUrl = URL.createObjectURL(files[0])
-
     setPreview(previewUrl)
   }
 
@@ -120,36 +124,26 @@ export default function EditMinisterio({
 
       <label
         htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer flex-col items-center gap-2  font-bold"
+        className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
       >
         <p className="flex items-center gap-3">
-          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
           Anexar nova foto (até 5mb)
         </p>
-        {preview ? (
-          <Image
-            width={120}
-            height={120}
-            src={preview}
-            alt={nome}
-            className="flex  h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
-          />
-        ) : (
-          <Image
-            width={120}
-            height={120}
-            src={img}
-            alt={nome}
-            className="flex  h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1  border-primary dark:border-secundary"
-          />
-        )}
+        <Image
+          width={120}
+          height={120}
+          src={preview || img}
+          alt={nome}
+          className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+        />
       </label>
 
       <input
         className="input mt-4"
         type="text"
         name="name"
-        required={true}
+        required
         defaultValue={nome}
         placeholder="Digite um nome"
         onChange={(e) => setName(e.target.value)}
@@ -159,7 +153,7 @@ export default function EditMinisterio({
         className="input"
         type="text"
         name="title"
-        required={true}
+        required
         defaultValue={titulo}
         placeholder="Digite um título"
         onChange={(e) => setTitle(e.target.value)}
@@ -169,7 +163,7 @@ export default function EditMinisterio({
         className="input"
         type="text"
         name="local"
-        required={true}
+        required
         defaultValue={lugar}
         placeholder="Digite um local"
         onChange={(e) => setIgreja(e.target.value)}
@@ -180,7 +174,6 @@ export default function EditMinisterio({
         type="file"
         name="coverUrl"
         id="coverUrl"
-        placeholder="Digite a url da notícia"
         onChange={onFileSelected}
       />
 

@@ -3,7 +3,6 @@ import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 
 interface AddDoacaoProps {
   openDoacao: boolean
@@ -29,9 +28,13 @@ export default function AddDoacao({
     event.preventDefault()
 
     try {
-      const response = await api.post(
-        '/doacao',
-        {
+      const response = await fetch('/api/doacao', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           local,
           banco,
           conta,
@@ -39,16 +42,10 @@ export default function AddDoacao({
           nomebanco,
           pix,
           nomepix,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const doacao = response.data
+      const doacao = await response.json()
 
       if (response.status === 200 && doacao) {
         setOpenDoacao(false)

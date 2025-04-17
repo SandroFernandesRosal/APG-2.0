@@ -4,7 +4,6 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 
 interface EditAgendaProps {
   setOpenEdit: (open: string | null) => void
@@ -33,24 +32,22 @@ export default function EditAgenda({
     event.preventDefault()
 
     try {
-      const response = await api.put(
-        `/agenda/${local}/${id}`,
-        {
+      const response = await fetch(`/api/${local}/agenda/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           day: day || dia,
           name: name || title,
           hour: hour || hora,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const agenda = response.data
+      const agenda = await response.json()
 
-      if (response.status === 200 && agenda) {
+      if (response.ok && agenda) {
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'

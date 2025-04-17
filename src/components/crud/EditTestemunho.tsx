@@ -5,7 +5,6 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { api } from '@/lib/api'
 import { UserIgreja } from '@/data/types/userigreja'
 
 interface EditTestemunhoProps {
@@ -52,35 +51,36 @@ export default function EditTestemunho({
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await api.post('/upload', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
         })
-        coverUrl = uploadResponse.data.fileUrl
+
+        const uploadData = await uploadResponse.json()
+        coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
       }
     }
 
     try {
-      const response = await api.put(
-        `/testemunhos/${id}`,
-        {
+      const response = await fetch(`/api/testemunhos/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token || tokenAdm}`,
+        },
+        body: JSON.stringify({
           name,
           avatarUrl,
           content,
           coverUrl,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token || tokenAdm}`,
-          },
-        },
-      )
+        }),
+      })
 
-      const newss = response.data
+      const newss = await response.json()
 
-      if (response.status === 200 && newss) {
+      if (response.ok && newss) {
         setOpenEdit(null)
         router.push('/testemunhos')
         window.location.href = '/testemunhos'

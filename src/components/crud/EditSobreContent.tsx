@@ -4,7 +4,6 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 
 interface EditSobreContentProps {
@@ -46,8 +45,16 @@ export default function EditSobreContent({
         const uploadFormData = new FormData()
         uploadFormData.append('file', fileToUpload)
 
-        const uploadResponse = await api.post('/upload/sobre', uploadFormData)
-        coverUrl = uploadResponse.data.fileUrl
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadFormData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        const uploadData = await uploadResponse.json()
+        coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
         return
@@ -57,24 +64,23 @@ export default function EditSobreContent({
     }
 
     try {
-      const response = await api.put(
-        `/sobre/${id}`,
-        {
+      const response = await fetch(`/api/sobre/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           title: title || titulo,
           content: content || conteudo,
           coverUrl,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
-        return response.data
+        return response.json()
       }
 
       console.error('Erro ao editar notícia:', response.statusText)

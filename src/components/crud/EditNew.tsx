@@ -5,7 +5,6 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
-import { api } from '@/lib/api'
 import Image from 'next/image'
 
 interface EditNewProps {
@@ -52,8 +51,15 @@ export default function EditNew({
         const uploadFormData = new FormData()
         uploadFormData.append('file', fileToUpload)
 
-        const uploadResponse = await api.post('/upload', uploadFormData)
-        coverUrl = uploadResponse.data.fileUrl
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadFormData,
+        })
+
+        if (!uploadResponse.ok) throw new Error('Erro ao enviar imagem')
+
+        const uploadData = await uploadResponse.json()
+        coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
         return
@@ -63,26 +69,25 @@ export default function EditNew({
     }
 
     try {
-      const response = await api.put(
-        `/news/${local}/${id}`,
-        {
+      const response = await fetch(`/api/${local}/news/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           title: title || titulo,
           content: content || conteudo,
           coverUrl,
           page: local,
           destaque,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/')
         window.location.href = '/'
-        return response.data
+        return await response.json()
       }
 
       console.error('Erro ao editar notícia:', response.statusText)

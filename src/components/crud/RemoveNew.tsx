@@ -1,6 +1,5 @@
 'use client'
 import Cookies from 'js-cookie'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { useState, MouseEvent } from 'react'
@@ -22,13 +21,15 @@ export default function RemoveNew({ id }: RemoveNewProps) {
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/news/${local}/${id}`, {
+      const response = await fetch(`/api//${local}/news/${id}`, {
+        method: 'DELETE',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/')
         window.location.href = '/'
       } else {

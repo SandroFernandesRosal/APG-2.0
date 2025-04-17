@@ -1,6 +1,5 @@
 'use client'
 import Cookies from 'js-cookie'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -22,13 +21,15 @@ export default function RemoveTestemunho({ id }: RemoveTestemunhoProps) {
     setIsDeleting(true)
 
     try {
-      const response = await api.delete(`/testemunhos/${id}`, {
+      const response = await fetch(`/api/testemunhos/${id}`, {
+        method: 'DELETE',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token || tokenAdm}`,
         },
       })
 
-      if (response.status === 200) {
+      if (response.ok) {
         router.push('/testemunhos')
         window.location.href = '/testemunhos'
       } else {
