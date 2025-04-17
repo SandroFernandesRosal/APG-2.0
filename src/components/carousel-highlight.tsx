@@ -71,7 +71,7 @@ export default function CarouselHighlight() {
 
   useEffect(() => {
     api
-      .get(`/news/${local}`)
+      .get(`/${local}/news`)
       .then((response) => {
         setData(response.data)
         setLoading(false)

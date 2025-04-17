@@ -22,7 +22,7 @@ export default function Ministerioo() {
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/ministerio/${local}?offset=${offset}`)
+      .get(`/${local}/ministerio?offset=${offset}`)
       .then((response) => {
         console.log('Dados iniciais:', response.data)
 

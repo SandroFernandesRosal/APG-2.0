@@ -40,7 +40,7 @@ export default function CarouselMinisterio({
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/ministerio/${local}`)
+      .get(`/${local}/ministerio`)
       .then((response) => {
         setDataMinisterio(response.data)
         setLoading(false)

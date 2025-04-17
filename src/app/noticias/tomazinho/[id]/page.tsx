@@ -26,7 +26,7 @@ export default function NoticiaTomazinho({ params }: ParamsProps) {
 
   useEffect(() => {
     api
-      .get(`/news/${local}`)
+      .get(`/${local}/news`)
       .then((response) => {
         setData(response.data)
       })

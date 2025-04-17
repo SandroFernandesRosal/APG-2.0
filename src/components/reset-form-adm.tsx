@@ -31,7 +31,7 @@ export default function ResetPasswordFormAdm({
 
     try {
       const response = await api.post(
-        `/reset-password-adm`,
+        `/auth/admin/reset-password`,
         {
           login,
           password,

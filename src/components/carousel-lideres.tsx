@@ -32,7 +32,7 @@ export default function CarouselLideres() {
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/sobre/lider`)
+      .get(`/sobrelider`)
       .then((response) => {
         setDataSobre(response.data)
         setLoading(false)

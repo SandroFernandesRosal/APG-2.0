@@ -36,7 +36,7 @@ export default function CarouselAgenda({
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/agenda/${local}`)
+      .get(`/${local}/agenda`)
       .then((response) => {
         setDataAgenda(response.data)
         setLoading(false)

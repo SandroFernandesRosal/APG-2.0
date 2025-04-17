@@ -20,7 +20,7 @@ export default function News() {
 
   useEffect(() => {
     api
-      .get(`/news/${local}/search?search=${search}`)
+      .get(`/${local}/news/search?search=${search}`)
       .then((response) => {
         setDataSearch(response.data)
       })

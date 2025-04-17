@@ -19,7 +19,7 @@ export default function Eventos() {
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/agenda/${local}?offset=${offset}`)
+      .get(`/${local}/agenda?offset=${offset}`)
       .then((response) => {
         console.log('Dados iniciais:', response.data)
 

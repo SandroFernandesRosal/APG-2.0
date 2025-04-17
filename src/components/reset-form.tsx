@@ -29,7 +29,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
     try {
       const response = await api.post(
-        `/reset-password`,
+        `/auth/reset-password`,
         {
           login,
           password,

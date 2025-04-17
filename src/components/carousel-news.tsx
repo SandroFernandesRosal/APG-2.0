@@ -34,7 +34,7 @@ export default function CarouselNews({
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/news/${local}`)
+      .get(`/${local}/news`)
       .then((response) => {
         setData(response.data)
         setLoading(false)

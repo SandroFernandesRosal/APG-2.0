@@ -21,7 +21,7 @@ export default function ResetPasswordComponent({
 
     try {
       const response = await api.post(
-        `/reset-password`,
+        `/auth/admin/reset-password`,
         {
           login,
           password,
