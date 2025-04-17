@@ -9,7 +9,7 @@ export default async function QuemSomos() {
   const response = await api.get<Sobre[]>('/sobre')
   const dataSobre = response.data
 
-  const responseLider = await api.get<SobreLider[]>('/sobre/lider')
+  const responseLider = await api.get<SobreLider[]>('/sobrelider')
   const dataSobreLider = responseLider.data
 
   return (
