@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const isServer = typeof window === 'undefined'
+
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: isServer ? process.env.API_URL : process.env.NEXT_PUBLIC_API_URL,
 })
