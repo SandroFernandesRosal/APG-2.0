@@ -13,7 +13,9 @@ export const metadata: Metadata = {
 }
 
 async function searchVp(query: string): Promise<New[]> {
-  const response = await fetch(`/api/viladapenha/news/search?q=${query}`)
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/viladapenha/news/search?q=${query}`,
+  )
 
   if (!response.ok) {
     throw new Error('Failed to fetch data')
@@ -23,7 +25,9 @@ async function searchVp(query: string): Promise<New[]> {
 }
 
 async function searchVmh(query: string): Promise<New[]> {
-  const response = await fetch(`/api/caxias/news/search?q=${query}`)
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/caxias/news/search?q=${query}`,
+  )
 
   if (!response.ok) {
     throw new Error('Failed to fetch data')
@@ -33,7 +37,9 @@ async function searchVmh(query: string): Promise<New[]> {
 }
 
 async function searchTomazinho(query: string): Promise<New[]> {
-  const response = await fetch(`/api/tomazinho/news/search?q=${query}`)
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/tomazinho/news/search?q=${query}`,
+  )
 
   if (!response.ok) {
     throw new Error('Failed to fetch data')
