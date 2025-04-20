@@ -1,3 +1,4 @@
+'use client'
 import { New } from '@/data/types/new'
 import { useEffect, useState } from 'react'
 import { useData, useLocal, useSearch, useDataSearch } from '@/store/useStore'
@@ -89,9 +90,8 @@ export default function News() {
       {search ? <ResultLength dataSearch={dataSearch} /> : null}
 
       <div className="flex justify-center gap-5 flex-wrap w-full px-2">
-        {search
-          ? dataSearch &&
-            dataSearch.length > 0 &&
+        {search ? (
+          dataSearch && dataSearch.length > 0 ? (
             dataSearch.map((product: New) => (
               <ItemNew
                 key={product.id}
@@ -105,24 +105,38 @@ export default function News() {
                 updatedAt={product.updatedAt}
               />
             ))
-          : !loading
-            ? Array.isArray(data) &&
-              data.map((product: New) => (
-                <ItemNew
-                  key={product.id}
-                  id={product.id}
-                  coverUrl={product.coverUrl}
-                  content={product.content}
-                  title={product.title}
-                  createdAt={product.createdAt}
-                  destaque={false}
-                  page={product.page}
-                  updatedAt={product.updatedAt}
-                />
-              ))
-            : Array.from({ length: 4 }).map((_, index) => (
-                <SkeletonNew key={index} />
-              ))}
+          ) : (
+            !loading && (
+              <p className="text-center text-gray-500 mt-4 w-full">
+                Nenhuma notícia adicionada.
+              </p>
+            )
+          )
+        ) : !loading ? (
+          Array.isArray(data) && data.length > 0 ? (
+            data.map((product: New) => (
+              <ItemNew
+                key={product.id}
+                id={product.id}
+                coverUrl={product.coverUrl}
+                content={product.content}
+                title={product.title}
+                createdAt={product.createdAt}
+                destaque={false}
+                page={product.page}
+                updatedAt={product.updatedAt}
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-500 mt-4 w-full">
+              Nenhuma notícia adicionada.
+            </p>
+          )
+        ) : (
+          Array.from({ length: 4 }).map((_, index) => (
+            <SkeletonNew key={index} />
+          ))
+        )}
       </div>
 
       {!search && hasMore && (
