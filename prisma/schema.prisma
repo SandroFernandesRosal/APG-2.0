@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/app/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/app/generated/prisma"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -18,6 +18,7 @@ model User {
   isAdmin             Boolean               @default(false)
   expires             DateTime?
   passwordResetToken  String?
+  token               String?
   agenda              Agenda[]
   agendacaxias        AgendaCaxias[]
   agendatomazinho     AgendaTomazinho[]
@@ -44,6 +45,7 @@ model UserIgreja {
   password                 String
   passwordResetToken       String?
   expires                  DateTime?
+  token                    String?
   PasswordResetTokenIgreja PasswordResetTokenIgreja[]
   refreshTokenIgreja       RefreshTokenIgreja[]
   testemunho               Testemunho[]

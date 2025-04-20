@@ -32,15 +32,14 @@ export default function CarouselLideres() {
   useEffect(() => {
     setLoading(true)
     api
-      .get(`/sobrelider`)
+      .get('/sobrelider')
       .then((response) => {
         setDataSobre(response.data)
-        setLoading(false)
       })
       .catch((err) => {
-        console.log(err)
-        setLoading(false)
+        console.error('Erro ao buscar líderes:', err)
       })
+      .finally(() => setLoading(false))
   }, [setDataSobre])
 
   const settings = {

@@ -18,6 +18,7 @@ model User {
   isAdmin             Boolean               @default(false)
   expires             DateTime?
   passwordResetToken  String?
+  token               String?
   agenda              Agenda[]
   agendacaxias        AgendaCaxias[]
   agendatomazinho     AgendaTomazinho[]
@@ -42,6 +43,7 @@ model UserIgreja {
   name                     String?
   avatarUrl                String?
   password                 String
+  token                    String?
   passwordResetToken       String?
   expires                  DateTime?
   PasswordResetTokenIgreja PasswordResetTokenIgreja[]

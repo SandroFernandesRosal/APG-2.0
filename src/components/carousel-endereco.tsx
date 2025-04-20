@@ -127,7 +127,7 @@ export default function CarouselEndereco() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full  dark:bg-bgdark mt-4">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full dark:bg-bgdark mt-4">
         {token && (
           <>
             {openEndereco === false && (
@@ -171,10 +171,10 @@ export default function CarouselEndereco() {
 
                 return (
                   <div
-                    className={`flex  justify-between  h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800   ${token && 'mb-20 md:mb-24'}`}
+                    className={`flex justify-between h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 ${token && 'mb-20 md:mb-24'}`}
                     key={product.id}
                   >
-                    <div className="flex  justify-center items-center  h-[50%] ">
+                    <div className="flex justify-center items-center h-[50%]">
                       {coords ? (
                         <MapContainer
                           center={coords}
@@ -193,11 +193,11 @@ export default function CarouselEndereco() {
                         <p>Carregando mapa...</p>
                       )}
                     </div>
-                    <div className=" px-2 gap-1 flex md:text-xl justify-evenly py-1   h-[50%] flex-col items-center">
+                    <div className="px-2 gap-1 flex md:text-xl justify-evenly py-1 h-[50%] flex-col items-center">
                       <h1 className="text-primary dark:text-secundary text-xl">
                         {product.local}
                       </h1>
-                      <h2 className=" text-center">
+                      <h2 className="text-center">
                         {product.rua}, {product.numero}, {product.cidade}
                       </h2>
                       <span className="">CEP: {product.cep}</span>
@@ -206,7 +206,6 @@ export default function CarouselEndereco() {
                         onClick={() => openGoogleMaps(product)}
                         className="button mb-0"
                       >
-                        {' '}
                         Abrir mapa
                       </button>
                     </div>

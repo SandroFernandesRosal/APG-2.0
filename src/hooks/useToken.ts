@@ -1,13 +1,28 @@
 import { useState, useEffect } from 'react'
-import Cookies from 'js-cookie'
 
-export function useToken(): string | null {
-  const [token, setToken] = useState<string | null>(null)
+export function useToken() {
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const tokenFromCookie = Cookies.get('tokennn') || null
-    setToken(tokenFromCookie)
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/auth/admin/login/me', {
+          credentials: 'include',
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          setUser(data.user)
+        } else {
+          setUser(null)
+        }
+      } catch {
+        setUser(null)
+      }
+    }
+
+    fetchUser()
   }, [])
 
-  return token
+  return user
 }

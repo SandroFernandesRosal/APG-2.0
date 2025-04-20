@@ -61,7 +61,7 @@ export default function RegisterIgreja() {
 
     try {
       const response = await api.post<{ error?: string }>(
-        `/register/igreja`,
+        `/auth/register`,
         {
           name,
           login,

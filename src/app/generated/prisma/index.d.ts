@@ -2922,6 +2922,7 @@ export namespace Prisma {
     isAdmin: boolean | null
     expires: Date | null
     passwordResetToken: string | null
+    token: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2933,6 +2934,7 @@ export namespace Prisma {
     isAdmin: boolean | null
     expires: Date | null
     passwordResetToken: string | null
+    token: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2944,6 +2946,7 @@ export namespace Prisma {
     isAdmin: number
     expires: number
     passwordResetToken: number
+    token: number
     _all: number
   }
 
@@ -2957,6 +2960,7 @@ export namespace Prisma {
     isAdmin?: true
     expires?: true
     passwordResetToken?: true
+    token?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2968,6 +2972,7 @@ export namespace Prisma {
     isAdmin?: true
     expires?: true
     passwordResetToken?: true
+    token?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2979,6 +2984,7 @@ export namespace Prisma {
     isAdmin?: true
     expires?: true
     passwordResetToken?: true
+    token?: true
     _all?: true
   }
 
@@ -3063,6 +3069,7 @@ export namespace Prisma {
     isAdmin: boolean
     expires: Date | null
     passwordResetToken: string | null
+    token: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -3091,6 +3098,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: boolean
     passwordResetToken?: boolean
+    token?: boolean
     agenda?: boolean | User$agendaArgs<ExtArgs>
     agendacaxias?: boolean | User$agendacaxiasArgs<ExtArgs>
     agendatomazinho?: boolean | User$agendatomazinhoArgs<ExtArgs>
@@ -3119,6 +3127,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: boolean
     passwordResetToken?: boolean
+    token?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3130,6 +3139,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: boolean
     passwordResetToken?: boolean
+    token?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -3141,9 +3151,10 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: boolean
     passwordResetToken?: boolean
+    token?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "isAdmin" | "expires" | "passwordResetToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "isAdmin" | "expires" | "passwordResetToken" | "token", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | User$agendaArgs<ExtArgs>
     agendacaxias?: boolean | User$agendacaxiasArgs<ExtArgs>
@@ -3195,6 +3206,7 @@ export namespace Prisma {
       isAdmin: boolean
       expires: Date | null
       passwordResetToken: string | null
+      token: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3642,6 +3654,7 @@ export namespace Prisma {
     readonly isAdmin: FieldRef<"User", 'Boolean'>
     readonly expires: FieldRef<"User", 'DateTime'>
     readonly passwordResetToken: FieldRef<"User", 'String'>
+    readonly token: FieldRef<"User", 'String'>
   }
     
 
@@ -4448,6 +4461,7 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string | null
+    token: string | null
     passwordResetToken: string | null
     expires: Date | null
   }
@@ -4458,6 +4472,7 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string | null
+    token: string | null
     passwordResetToken: string | null
     expires: Date | null
   }
@@ -4468,6 +4483,7 @@ export namespace Prisma {
     name: number
     avatarUrl: number
     password: number
+    token: number
     passwordResetToken: number
     expires: number
     _all: number
@@ -4480,6 +4496,7 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
+    token?: true
     passwordResetToken?: true
     expires?: true
   }
@@ -4490,6 +4507,7 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
+    token?: true
     passwordResetToken?: true
     expires?: true
   }
@@ -4500,6 +4518,7 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
+    token?: true
     passwordResetToken?: true
     expires?: true
     _all?: true
@@ -4583,6 +4602,7 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string
+    token: string | null
     passwordResetToken: string | null
     expires: Date | null
     _count: UserIgrejaCountAggregateOutputType | null
@@ -4610,6 +4630,7 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
+    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
     PasswordResetTokenIgreja?: boolean | UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>
@@ -4624,6 +4645,7 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
+    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
   }, ExtArgs["result"]["userIgreja"]>
@@ -4634,6 +4656,7 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
+    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
   }, ExtArgs["result"]["userIgreja"]>
@@ -4644,11 +4667,12 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
+    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
   }
 
-  export type UserIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "passwordResetToken" | "expires", ExtArgs["result"]["userIgreja"]>
+  export type UserIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "token" | "passwordResetToken" | "expires", ExtArgs["result"]["userIgreja"]>
   export type UserIgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     PasswordResetTokenIgreja?: boolean | UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>
     refreshTokenIgreja?: boolean | UserIgreja$refreshTokenIgrejaArgs<ExtArgs>
@@ -4671,6 +4695,7 @@ export namespace Prisma {
       name: string | null
       avatarUrl: string | null
       password: string
+      token: string | null
       passwordResetToken: string | null
       expires: Date | null
     }, ExtArgs["result"]["userIgreja"]>
@@ -5104,6 +5129,7 @@ export namespace Prisma {
     readonly name: FieldRef<"UserIgreja", 'String'>
     readonly avatarUrl: FieldRef<"UserIgreja", 'String'>
     readonly password: FieldRef<"UserIgreja", 'String'>
+    readonly token: FieldRef<"UserIgreja", 'String'>
     readonly passwordResetToken: FieldRef<"UserIgreja", 'String'>
     readonly expires: FieldRef<"UserIgreja", 'DateTime'>
   }
@@ -26553,7 +26579,8 @@ export namespace Prisma {
     password: 'password',
     isAdmin: 'isAdmin',
     expires: 'expires',
-    passwordResetToken: 'passwordResetToken'
+    passwordResetToken: 'passwordResetToken',
+    token: 'token'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -26565,6 +26592,7 @@ export namespace Prisma {
     name: 'name',
     avatarUrl: 'avatarUrl',
     password: 'password',
+    token: 'token',
     passwordResetToken: 'passwordResetToken',
     expires: 'expires'
   };
@@ -26939,6 +26967,7 @@ export namespace Prisma {
     isAdmin?: BoolFilter<"User"> | boolean
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableFilter<"User"> | string | null
+    token?: StringNullableFilter<"User"> | string | null
     agenda?: AgendaListRelationFilter
     agendacaxias?: AgendaCaxiasListRelationFilter
     agendatomazinho?: AgendaTomazinhoListRelationFilter
@@ -26966,6 +26995,7 @@ export namespace Prisma {
     isAdmin?: SortOrder
     expires?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
+    token?: SortOrderInput | SortOrder
     agenda?: AgendaOrderByRelationAggregateInput
     agendacaxias?: AgendaCaxiasOrderByRelationAggregateInput
     agendatomazinho?: AgendaTomazinhoOrderByRelationAggregateInput
@@ -26996,6 +27026,7 @@ export namespace Prisma {
     isAdmin?: BoolFilter<"User"> | boolean
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableFilter<"User"> | string | null
+    token?: StringNullableFilter<"User"> | string | null
     agenda?: AgendaListRelationFilter
     agendacaxias?: AgendaCaxiasListRelationFilter
     agendatomazinho?: AgendaTomazinhoListRelationFilter
@@ -27023,6 +27054,7 @@ export namespace Prisma {
     isAdmin?: SortOrder
     expires?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
+    token?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -27040,6 +27072,7 @@ export namespace Prisma {
     isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
     expires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    token?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type UserIgrejaWhereInput = {
@@ -27051,6 +27084,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"UserIgreja"> | string | null
     avatarUrl?: StringNullableFilter<"UserIgreja"> | string | null
     password?: StringFilter<"UserIgreja"> | string
+    token?: StringNullableFilter<"UserIgreja"> | string | null
     passwordResetToken?: StringNullableFilter<"UserIgreja"> | string | null
     expires?: DateTimeNullableFilter<"UserIgreja"> | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaListRelationFilter
@@ -27064,6 +27098,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
+    token?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaOrderByRelationAggregateInput
@@ -27080,6 +27115,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"UserIgreja"> | string | null
     avatarUrl?: StringNullableFilter<"UserIgreja"> | string | null
     password?: StringFilter<"UserIgreja"> | string
+    token?: StringNullableFilter<"UserIgreja"> | string | null
     passwordResetToken?: StringNullableFilter<"UserIgreja"> | string | null
     expires?: DateTimeNullableFilter<"UserIgreja"> | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaListRelationFilter
@@ -27093,6 +27129,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
+    token?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
     _count?: UserIgrejaCountOrderByAggregateInput
@@ -27109,6 +27146,7 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     avatarUrl?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     password?: StringWithAggregatesFilter<"UserIgreja"> | string
+    token?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     passwordResetToken?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     expires?: DateTimeNullableWithAggregatesFilter<"UserIgreja"> | Date | string | null
   }
@@ -28492,6 +28530,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -28519,6 +28558,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -28546,6 +28586,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -28573,6 +28614,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -28600,6 +28642,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -28611,6 +28654,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -28622,6 +28666,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserIgrejaCreateInput = {
@@ -28630,6 +28675,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
@@ -28643,6 +28689,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
@@ -28656,6 +28703,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
@@ -28669,6 +28717,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
@@ -28682,6 +28731,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
   }
@@ -28692,6 +28742,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -28702,6 +28753,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -30426,6 +30478,7 @@ export namespace Prisma {
     isAdmin?: SortOrder
     expires?: SortOrder
     passwordResetToken?: SortOrder
+    token?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -30437,6 +30490,7 @@ export namespace Prisma {
     isAdmin?: SortOrder
     expires?: SortOrder
     passwordResetToken?: SortOrder
+    token?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -30448,6 +30502,7 @@ export namespace Prisma {
     isAdmin?: SortOrder
     expires?: SortOrder
     passwordResetToken?: SortOrder
+    token?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -30544,6 +30599,7 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
+    token?: SortOrder
     passwordResetToken?: SortOrder
     expires?: SortOrder
   }
@@ -30554,6 +30610,7 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
+    token?: SortOrder
     passwordResetToken?: SortOrder
     expires?: SortOrder
   }
@@ -30564,6 +30621,7 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
+    token?: SortOrder
     passwordResetToken?: SortOrder
     expires?: SortOrder
   }
@@ -33658,6 +33716,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -33684,6 +33743,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -33726,6 +33786,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -33752,6 +33813,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -33778,6 +33840,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -33804,6 +33867,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -33846,6 +33910,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -33872,6 +33937,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -33898,6 +33964,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -33924,6 +33991,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -33966,6 +34034,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -33992,6 +34061,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -34018,6 +34088,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -34044,6 +34115,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -34086,6 +34158,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -34112,6 +34185,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -34138,6 +34212,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -34164,6 +34239,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -34206,6 +34282,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -34232,6 +34309,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -34258,6 +34336,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -34284,6 +34363,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -34326,6 +34406,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -34352,6 +34433,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -34378,6 +34460,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -34404,6 +34487,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -34446,6 +34530,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -34472,6 +34557,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -34498,6 +34584,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -34524,6 +34611,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -34566,6 +34654,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -34592,6 +34681,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -34618,6 +34708,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -34644,6 +34735,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -34686,6 +34778,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -34712,6 +34805,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -34738,6 +34832,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -34764,6 +34859,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -34806,6 +34902,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -34832,6 +34929,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -34858,6 +34956,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -34884,6 +34983,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -34926,6 +35026,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -34952,6 +35053,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -34978,6 +35080,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -35004,6 +35107,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -35046,6 +35150,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -35072,6 +35177,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -35098,6 +35204,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -35124,6 +35231,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -35166,6 +35274,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -35192,6 +35301,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -35218,6 +35328,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -35244,6 +35355,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -35286,6 +35398,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -35312,6 +35425,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -35338,6 +35452,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -35364,6 +35479,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -35406,6 +35522,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -35432,6 +35549,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
@@ -35455,6 +35573,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
@@ -35467,6 +35586,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
@@ -35495,6 +35615,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
@@ -35507,6 +35628,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
@@ -35519,6 +35641,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
@@ -35531,6 +35654,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
@@ -35559,6 +35683,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
@@ -35571,6 +35696,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
@@ -35583,6 +35709,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
@@ -35595,6 +35722,7 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
+    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
@@ -35623,6 +35751,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
@@ -35635,6 +35764,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
@@ -35650,6 +35780,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
@@ -35676,6 +35807,7 @@ export namespace Prisma {
     isAdmin?: boolean
     expires?: Date | string | null
     passwordResetToken?: string | null
+    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
     agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
@@ -35718,6 +35850,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
@@ -35744,6 +35877,7 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
     agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput

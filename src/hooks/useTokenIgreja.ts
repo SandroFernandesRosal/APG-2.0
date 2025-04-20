@@ -1,13 +1,28 @@
 import { useState, useEffect } from 'react'
-import Cookies from 'js-cookie'
 
-export function useTokenIgreja(): string | null {
-  const [token, setToken] = useState<string | null>(null)
+export function useTokenIgreja() {
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const tokenFromCookie = Cookies.get('tokenigreja') || null
-    setToken(tokenFromCookie)
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/auth/login/me', {
+          credentials: 'include',
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          setUser(data.user)
+        } else {
+          setUser(null)
+        }
+      } catch {
+        setUser(null)
+      }
+    }
+
+    fetchUser()
   }, [])
 
-  return token
+  return user
 }
