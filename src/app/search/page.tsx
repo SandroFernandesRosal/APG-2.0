@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { api } from '@/lib/api'
 import { New } from '@/data/types/new'
 import { Metadata } from 'next'
 import ItemNew from '@/components/item-new'
@@ -14,27 +13,36 @@ export const metadata: Metadata = {
 }
 
 async function searchVp(query: string): Promise<New[]> {
-  const response = await api(`/news/viladapenha/search?search=${query}`)
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL
+  const response = await fetch(`${baseUrl}/viladapenha/news/search?q=${query}`)
 
-  const newsVp = response.data
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
 
-  return newsVp
+  return response.json()
 }
 
 async function searchVmh(query: string): Promise<New[]> {
-  const response = await api(`/news/caxias/search?search=${query}`)
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL
+  const response = await fetch(`${baseUrl}/caxias/news/search?q=${query}`)
 
-  const newsVmh = response.data
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
 
-  return newsVmh
+  return response.json()
 }
 
 async function searchTomazinho(query: string): Promise<New[]> {
-  const response = await api(`/news/tomazinho/search?search=${query}`)
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL
+  const response = await fetch(`${baseUrl}/tomazinho/news/search?q=${query}`)
 
-  const newsTomazinho = response.data
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
 
-  return newsTomazinho
+  return response.json()
 }
 
 export default async function Search({ searchParams }: SearchProps) {
@@ -46,9 +54,11 @@ export default async function Search({ searchParams }: SearchProps) {
 
   const normalizedQuery = query.toLowerCase()
 
-  const newsVp = await searchVp(normalizedQuery)
-  const newsVmh = await searchVmh(normalizedQuery)
-  const newsTomazinho = await searchTomazinho(normalizedQuery)
+  const [newsVp, newsVmh, newsTomazinho] = await Promise.all([
+    searchVp(normalizedQuery).catch(() => []),
+    searchVmh(normalizedQuery).catch(() => []),
+    searchTomazinho(normalizedQuery).catch(() => []),
+  ])
 
   return (
     <div className="flex flex-col gap-16 pt-[150px] md:pt-[180px] px-8 min-h-screen pb-10">
