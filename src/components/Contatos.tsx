@@ -1,5 +1,4 @@
 'use client'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 import { useDataContato } from '@/store/useStore'
@@ -15,14 +14,19 @@ export default function Contatos() {
   const token = useToken()
 
   useEffect(() => {
-    const fetchData = () => {
-      api
-        .get('/contato')
-        .then((response) => {
-          setDataContato(response.data)
-          setLoading(false)
-        })
-        .catch((err) => console.log(err))
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/contato')
+        if (!response.ok) {
+          throw new Error('Erro ao buscar contatos')
+        }
+        const data = await response.json()
+        setDataContato(data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
     }
 
     fetchData()
@@ -32,7 +36,7 @@ export default function Contatos() {
     <div>
       {token && (
         <>
-          {openContato === false && (
+          {!openContato && (
             <div className="flex w-full justify-center">
               <button className="button" onClick={() => setOpenContato(true)}>
                 Adicionar contato
@@ -56,18 +60,16 @@ export default function Contatos() {
           dataContato && dataContato.length < 1 ? (
             <p>Nenhum contato cadastrado.</p>
           ) : (
-            dataContato.map((item: Contato) => {
-              return (
-                <Socials
-                  key={item.id}
-                  id={item.id}
-                  title={item.local}
-                  numerowhatsapp={item.whatsapp}
-                  nomefacebook={item.facebook}
-                  nomeinstagram={item.instagram}
-                />
-              )
-            })
+            dataContato.map((item: Contato) => (
+              <Socials
+                key={item.id}
+                id={item.id}
+                title={item.local}
+                numerowhatsapp={item.whatsapp}
+                nomefacebook={item.facebook}
+                nomeinstagram={item.instagram}
+              />
+            ))
           )
         ) : (
           <SkeletonContato />

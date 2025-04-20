@@ -7,12 +7,10 @@ import 'slick-carousel/slick/slick-theme.css'
 import { Doacao } from '@/data/types/doacao'
 import RemoveDoacao from './crud/RemoveDoacao'
 import AddDoacao from './crud/AddDoacao'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import EditDoacao from './crud/EditDoacao'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
-
 import DoacaoHeader from './doacao-header'
 
 export default function CarouselDoacao() {
@@ -24,17 +22,25 @@ export default function CarouselDoacao() {
   const [selectedProduct, setSelectedProduct] = useState<Doacao | null>(null)
 
   useEffect(() => {
-    setLoading(true)
-    api
-      .get(`/doacao`)
-      .then((response) => {
-        setData(response.data)
+    const fetchDoacoes = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch('/api/doacao')
+
+        if (!response.ok) {
+          throw new Error('Falha ao carregar doações')
+        }
+
+        const doacoes = await response.json()
+        setData(doacoes)
+      } catch (error) {
+        console.error('Erro ao buscar doações:', error)
+      } finally {
         setLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
+      }
+    }
+
+    fetchDoacoes()
   }, [])
 
   const settings = {
@@ -82,7 +88,7 @@ export default function CarouselDoacao() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full border-b-[1px] border-zinc-300 dark:border-zinc-800   ">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full border-b-[1px] border-zinc-300 dark:border-zinc-800">
         <DoacaoHeader />
 
         {token && (
@@ -95,7 +101,6 @@ export default function CarouselDoacao() {
 
             {openDoacao && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddDoacao
                   openDoacao={openDoacao}
                   setOpenDoacao={setOpenDoacao}
@@ -122,52 +127,51 @@ export default function CarouselDoacao() {
           ) : (
             <Slider
               {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
+              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
-              {data.map((product: Doacao) => {
-                return (
-                  <div
-                    className="justify-between flex flex-col h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
-                    key={product.id}
-                  >
-                    <div className="border-b-[3px] border-primary dark:border-secundary  flex text-xl justify-around w-full h-[50%]  py-1 flex-col items-center">
-                      <h1 className="font-bold ">{product.local}</h1>{' '}
-                      <span className=" flex items-center   text-gray-900 dark:text-white">
-                        {product.banco}
-                      </span>
-                      <span>C: {product.conta}</span>
-                      <span>Ag: {product.agencia}</span>
-                      <span>{product.nomebanco}</span>
-                    </div>
-                    <div className="flex flex-col justify-center items-center h-[50%]">
-                      <span>Chave pix:</span>
-                      <h1>{product.pix}</h1>
-                      <h2>{product.nomepix}</h2>
-
-                      {token && (
-                        <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
-                          {openEdit !== product.id ? (
-                            <button
-                              className="button !mb-0"
-                              onClick={() => {
-                                setOpenEdit(product.id)
-                                setSelectedProduct(product)
-                              }}
-                            >
-                              Editar
-                            </button>
-                          ) : null}
-                          <RemoveDoacao id={product.id} />
-                        </div>
-                      )}
-                    </div>
+              {data.map((product: Doacao) => (
+                <div
+                  className="justify-between flex flex-col h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                  key={product.id}
+                >
+                  <div className="border-b-[3px] border-primary dark:border-secundary flex text-xl justify-around w-full h-[50%] py-1 flex-col items-center">
+                    <h1 className="font-bold">{product.local}</h1>
+                    <span className="flex items-center text-gray-900 dark:text-white">
+                      {product.banco}
+                    </span>
+                    <span>C: {product.conta}</span>
+                    <span>Ag: {product.agencia}</span>
+                    <span>{product.nomebanco}</span>
                   </div>
-                )
-              })}
+                  <div className="flex flex-col justify-center items-center h-[50%]">
+                    <span>Chave pix:</span>
+                    <h1>{product.pix}</h1>
+                    <h2>{product.nomepix}</h2>
+
+                    {token && (
+                      <div className="mb-1 flex w-full flex-1 items-end justify-around text-white">
+                        {openEdit !== product.id ? (
+                          <button
+                            className="button !mb-0"
+                            onClick={() => {
+                              setOpenEdit(product.id)
+                              setSelectedProduct(product)
+                            }}
+                          >
+                            Editar
+                          </button>
+                        ) : null}
+                        <RemoveDoacao id={product.id} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </Slider>
           )}
         </div>
       </section>
+
       {openEdit && selectedProduct && (
         <EditDoacao
           localInitial={selectedProduct.local}

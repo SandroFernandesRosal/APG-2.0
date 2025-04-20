@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { New } from '@/data/types/new'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useData, useLocal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -33,10 +32,13 @@ export default function CarouselNews({
 
   useEffect(() => {
     setLoading(true)
-    api
-      .get(`/${local}/news`)
-      .then((response) => {
-        setData(response.data)
+    fetch(`/api/${local}/news`)
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error('Erro ao buscar notícias')
+        }
+        const data = await res.json()
+        setData(data)
         setLoading(false)
         setLocalLoading(false)
       })
@@ -108,15 +110,13 @@ export default function CarouselNews({
       <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full">
         {token && (
           <>
-            {openNew === false && (
+            {!openNew && (
               <button className="button" onClick={() => setOpenNew(true)}>
                 Adicionar notícia
               </button>
             )}
-
             {openNew && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddNew openNew={openNew} setOpenNew={setOpenNew} />
               </div>
             )}
@@ -155,7 +155,9 @@ export default function CarouselNews({
                 }
                 return (
                   <div
-                    className={`justify-between relative flex flex-col h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800    group ${token && 'mb-20 md:mb-24'} `}
+                    className={`justify-between relative flex flex-col h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 group ${
+                      token && 'mb-20 md:mb-24'
+                    }`}
                     key={product.id}
                   >
                     <div className="h-[50%] relative overflow-hidden">
@@ -176,41 +178,40 @@ export default function CarouselNews({
                           width={500}
                           height={500}
                           alt={product.title}
-                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110 "
+                          className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110"
                         />
                       </Link>
                     </div>
 
-                    <div className="flex flex-col gap-1 justify-around   h-[50%] w-full z-10 mx-2">
+                    <div className="flex flex-col gap-1 justify-around h-[50%] w-full z-10 mx-2">
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
                         href={`/noticias/${product.page}/${product.id}`}
                         className="text-primary z-30"
                       >
-                        <h1 className=" text-lg  font-semibold text-primary dark:text-secundary">
+                        <h1 className="text-lg font-semibold text-primary dark:text-secundary">
                           {product.title}
                         </h1>
                       </Link>
-                      <div className="flex  text-lg">
+                      <div className="flex text-lg">
                         {product.content.slice(0, 50).concat('...')}
                       </div>
-
-                      <span className=" text-sm  flex flex-wrap   items-center ">
+                      <span className="text-sm flex flex-wrap items-center">
                         {formatDate(product.createdAt)}
                       </span>
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
                         href={`/noticias/${product.page}/${product.id}`}
-                        className="button  !mb-0 flex items-center justify-center self-center"
+                        className="button !mb-0 flex items-center justify-center self-center"
                       >
                         Ler notícia
                       </Link>
                     </div>
                     {token && (
-                      <div className="flex w-full items-start justify-around text-white py-3 ">
-                        {openEdit !== product.id ? (
+                      <div className="flex w-full items-start justify-around text-white py-3">
+                        {openEdit !== product.id && (
                           <button
                             aria-hidden="true"
                             tabIndex={-1}
@@ -222,7 +223,7 @@ export default function CarouselNews({
                           >
                             Editar
                           </button>
-                        ) : null}
+                        )}
                         <RemoveNew id={product.id} />
                       </div>
                     )}

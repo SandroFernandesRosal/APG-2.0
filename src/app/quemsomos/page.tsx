@@ -6,7 +6,7 @@ import QuemSomosHeader from '@/components/quemsomos-header'
 
 export default async function QuemSomos() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '/api'
 
     const [sobreResponse, liderResponse] = await Promise.all([
       fetch(`${baseUrl}/sobre`),

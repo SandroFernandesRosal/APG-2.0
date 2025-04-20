@@ -1,18 +1,15 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
-import { api } from '@/lib/api'
+import { useState, FormEvent, use } from 'react'
 
 interface ResetPasswordComponentProps {
-  params: {
-    token: string
-  }
+  params: Promise<{ token: string }>
 }
 
 export default function ResetPasswordComponent({
   params,
 }: ResetPasswordComponentProps) {
-  const token = params.token
+  const token = use(params)
   const [password, setPassword] = useState('')
   const [login, setLogin] = useState('')
 
@@ -20,24 +17,26 @@ export default function ResetPasswordComponent({
     e.preventDefault()
 
     try {
-      const response = await api.post(
-        `/auth/admin/reset-password`,
-        {
+      const response = await fetch('/api/auth/admin/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           login,
           password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      if (response) {
+      if (response.ok) {
         console.log('Senha redefinida com sucesso')
       } else {
-        console.error('Erro ao redefinir a senha')
+        const data = await response.json()
+        console.error(
+          'Erro ao redefinir a senha:',
+          data.error || 'Erro desconhecido',
+        )
       }
     } catch (error) {
       console.error('Erro ao redefinir a senha', error)

@@ -1,7 +1,6 @@
 import { New } from '@/data/types/new'
 import { useEffect, useState } from 'react'
 import { useData, useLocal, useSearch, useDataSearch } from '@/store/useStore'
-import { api } from '@/lib/api'
 
 import ResultLength from './ResultLength'
 import ItemNew from './item-new'
@@ -19,52 +18,61 @@ export default function News() {
   const itemsPerPage = 12
 
   useEffect(() => {
-    api
-      .get(`/${local}/news/search?search=${search}`)
-      .then((response) => {
-        setDataSearch(response.data)
-      })
-      .catch((err) => console.log(err))
+    const fetchSearchResults = async () => {
+      try {
+        const response = await fetch(`/api/${local}/news/search?q=${search}`)
+        if (!response.ok) throw new Error('Erro ao buscar resultados')
+        const data = await response.json()
+        setDataSearch(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchSearchResults()
   }, [local, setDataSearch, search])
 
   useEffect(() => {
-    api
-      .get(`/news/${local}?offset=${offset}`)
-      .then((response) => {
-        console.log('Dados iniciais:', response.data)
+    const fetchNews = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(`/api/${local}/news?offset=${offset}`)
+        if (!response.ok) throw new Error('Erro ao buscar notícias')
+        const data = await response.json()
+        console.log('Dados iniciais:', data)
 
-        setData(Array.isArray(response.data) ? response.data : [])
+        setData(Array.isArray(data) ? data : [])
         setLoading(false)
 
-        setHasMore(response.data.length === itemsPerPage)
-      })
-      .catch((err) => {
+        setHasMore(data.length === itemsPerPage)
+      } catch (err) {
         console.log(err)
         setData([])
         setLoading(false)
-      })
+      }
+    }
+
+    fetchNews()
   }, [setData, local, offset])
 
-  const loadMore = () => {
+  const loadMore = async () => {
     const newOffset = offset + itemsPerPage
 
-    api
-      .get(`/news/${local}?offset=${newOffset}`)
-      .then((response) => {
-        console.log('Novos dados carregados:', response.data)
+    try {
+      const response = await fetch(`/api/${local}/news?offset=${newOffset}`)
+      if (!response.ok) throw new Error('Erro ao carregar mais notícias')
+      const data = await response.json()
+      console.log('Novos dados carregados:', data)
 
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          setData((prevData: New[]) => {
-            const newData = [...prevData, ...response.data]
-            console.log('Nova lista de dados:', newData)
-            return newData
-          })
-          setOffset(newOffset)
-        }
+      if (Array.isArray(data) && data.length > 0) {
+        setData((prevData: New[]) => [...prevData, ...data])
+        setOffset(newOffset)
+      }
 
-        setHasMore(response.data.length === itemsPerPage)
-      })
-      .catch((err) => console.log(err))
+      setHasMore(data.length === itemsPerPage)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

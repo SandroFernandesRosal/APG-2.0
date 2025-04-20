@@ -5,7 +5,6 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import { Agenda } from '@/data/types/agenda'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useDataAgenda, useLocal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -14,7 +13,6 @@ import { useToken } from '@/hooks/useToken'
 import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
-
 import Image from 'next/image'
 import AgendaHeader from './agenda-header'
 
@@ -33,20 +31,27 @@ export default function CarouselAgenda({
   const [selectedProduct, setSelectedProduct] = useState<Agenda | null>(null)
 
   useEffect(() => {
-    setLoading(true)
-    api
-      .get(`/${local}/agenda`)
-      .then((response) => {
-        setDataAgenda(response.data)
+    const fetchAgendaData = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(`/api/${local}/agenda`)
+
+        if (!response.ok) {
+          throw new Error('Falha ao carregar agenda')
+        }
+
+        const data = await response.json()
+        setDataAgenda(data)
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error)
+      } finally {
         setLoading(false)
         setLocalLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-        setLocalLoading(false)
-      })
-  }, [setDataAgenda, local])
+      }
+    }
+
+    fetchAgendaData()
+  }, [local, setDataAgenda])
 
   const handleLocalChange = (newLocal: string) => {
     setLocalLoading(true)
@@ -98,7 +103,7 @@ export default function CarouselAgenda({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden  w-full mb-10">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full mb-10">
         <AgendaHeader />
 
         {token && (
@@ -111,7 +116,6 @@ export default function CarouselAgenda({
 
             {openAgenda && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddAgenda
                   openAgenda={openAgenda}
                   setOpenAgenda={setOpenAgenda}
@@ -148,55 +152,52 @@ export default function CarouselAgenda({
           ) : (
             <Slider
               {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2 "
+              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
-              {dataAgenda.map((product: Agenda) => {
-                return (
-                  <div
-                    className="flex justify-center relative content-center flex-col h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800 "
-                    key={product.id}
-                  >
-                    <Image
-                      src={'/img/agenda.png'}
-                      width={500}
-                      height={500}
-                      alt="imagem de evento"
-                      className="absolute top-0 inset-0 h-full w-full "
-                    />
-                    <div className=" bg-primary   text-white dark:border-secundary flex text-xl  justify-center w-[80%] place-self-center  rounded-md">
-                      {product.day}
-                    </div>
-                    <div className="relative    mt-5  flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px] ">
-                      <div className="  w-full">
-                        <span className="absolute  left-2 top-5 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary "></span>
-                        <h1 className=" flex items-center text-center font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400  dark:border-zinc-700 place-content-center">
-                          {product.name}
-                        </h1>
-
-                        <p className="font-normal place-content-center flex">
-                          {product.hour}
-                        </p>
-                      </div>
-                    </div>
-                    {token && (
-                      <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
-                        {openEdit !== product.id ? (
-                          <button
-                            className="button !mb-0"
-                            onClick={() => {
-                              setOpenEdit(product.id)
-                              setSelectedProduct(product)
-                            }}
-                          >
-                            Editar
-                          </button>
-                        ) : null}
-                        <RemoveAgenda id={product.id} />
-                      </div>
-                    )}
+              {dataAgenda.map((product: Agenda) => (
+                <div
+                  className="flex justify-center relative content-center flex-col h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+                  key={product.id}
+                >
+                  <Image
+                    src={'/img/agenda.png'}
+                    width={500}
+                    height={500}
+                    alt="imagem de evento"
+                    className="absolute top-0 inset-0 h-full w-full"
+                  />
+                  <div className="bg-primary text-white dark:border-secundary flex text-xl justify-center w-[80%] place-self-center rounded-md">
+                    {product.day}
                   </div>
-                )
-              })}
+                  <div className="relative mt-5 flex place-self-center w-[80%] overflow-visible border-l border-zinc-400 dark:border-zinc-700 border-[1px]">
+                    <div className="w-full">
+                      <span className="absolute left-2 top-5 flex h-2 w-2 items-center justify-center rounded-full bg-primary ring-8 ring-primary/20 dark:bg-secundary"></span>
+                      <h1 className="flex items-center text-center font-semibold text-gray-900 dark:text-white border-b-[1px] border-zinc-400 dark:border-zinc-700 place-content-center">
+                        {product.name}
+                      </h1>
+                      <p className="font-normal place-content-center flex">
+                        {product.hour}
+                      </p>
+                    </div>
+                  </div>
+                  {token && (
+                    <div className="mt-2 flex w-full flex-1 items-end justify-around text-white">
+                      {openEdit !== product.id ? (
+                        <button
+                          className="button !mb-0"
+                          onClick={() => {
+                            setOpenEdit(product.id)
+                            setSelectedProduct(product)
+                          }}
+                        >
+                          Editar
+                        </button>
+                      ) : null}
+                      <RemoveAgenda id={product.id} />
+                    </div>
+                  )}
+                </div>
+              ))}
             </Slider>
           )}
         </div>

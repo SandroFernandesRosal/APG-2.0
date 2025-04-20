@@ -1,4 +1,5 @@
 'use client'
+
 import { FaPlus } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
@@ -6,7 +7,6 @@ import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Ministerio } from '@/data/types/ministerio'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useDataMinisterio, useLocal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -17,7 +17,6 @@ import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 
 import CarouselEndereco from './carousel-endereco'
-
 import QuemSomosHeader from './quemsomos-header'
 import MinisterioHeader from './ministerio-header'
 
@@ -38,20 +37,27 @@ export default function CarouselMinisterio({
   )
 
   useEffect(() => {
-    setLoading(true)
-    api
-      .get(`/${local}/ministerio`)
-      .then((response) => {
-        setDataMinisterio(response.data)
+    const fetchMinisterios = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(`/api/${local}/ministerio`, {
+          cache: 'no-store',
+        })
+        if (!response.ok) {
+          throw new Error('Erro ao buscar ministérios')
+        }
+        const data = await response.json()
+        setDataMinisterio(data)
+      } catch (error) {
+        console.error('Erro ao buscar ministérios:', error)
+      } finally {
         setLoading(false)
         setLocalLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-        setLocalLoading(false)
-      })
-  }, [setDataMinisterio, local])
+      }
+    }
+
+    fetchMinisterios()
+  }, [local, setDataMinisterio])
 
   const handleLocalChange = (newLocal: string) => {
     setLocalLoading(true)
@@ -103,10 +109,9 @@ export default function CarouselMinisterio({
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center  relative  justify-center overflow-hidden w-full">
+      <section className="text-textprimary flex flex-col items-center relative justify-center overflow-hidden w-full">
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <QuemSomosHeader />
-
           <CarouselEndereco />
         </section>
 
@@ -114,7 +119,7 @@ export default function CarouselMinisterio({
 
         {token && (
           <>
-            {openMinisterio === false && (
+            {!openMinisterio && (
               <button
                 className="button"
                 onClick={() => setOpenMinisterio(true)}
@@ -122,10 +127,8 @@ export default function CarouselMinisterio({
                 Adicionar líder
               </button>
             )}
-
             {openMinisterio && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddMinisterio
                   openMinisterio={openMinisterio}
                   setOpenMinisterio={setOpenMinisterio}
@@ -134,7 +137,9 @@ export default function CarouselMinisterio({
             )}
           </>
         )}
+
         <SelectLocal onChange={handleLocalChange} />
+
         <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
@@ -164,64 +169,61 @@ export default function CarouselMinisterio({
               {...settings}
               className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
-              {dataMinisterio.map((product: Ministerio) => {
-                return (
-                  <div
-                    className={`justify-between mb-12 relative  flex flex-col h-[400px]  border-[1px] border-zinc-300 dark:border-zinc-800   bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
-                    key={product.id}
-                  >
-                    <div className="h-[60%] relative overflow-hidden">
-                      <div className="group h-full  overflow-hidden relative ">
-                        <div
-                          className="absolute inset-0 bg-cover bg-center  blur-sm scale-110"
-                          style={{
-                            backgroundImage: `url(${product.coverUrl})`,
-                          }}
-                        />
-                        <Image
-                          src={product.coverUrl}
-                          width={500}
-                          height={500}
-                          alt={product.title}
-                          quality={100}
-                          className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
+              {dataMinisterio.map((product: Ministerio) => (
+                <div
+                  key={product.id}
+                  className={`justify-between mb-12 relative flex flex-col h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
+                >
+                  <div className="h-[60%] relative overflow-hidden">
+                    <div className="group h-full overflow-hidden relative ">
+                      <div
+                        className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
+                        style={{
+                          backgroundImage: `url(${product.coverUrl})`,
+                        }}
+                      />
+                      <Image
+                        src={product.coverUrl}
+                        width={500}
+                        height={500}
+                        alt={product.title}
+                        quality={100}
+                        className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
-
-                    <div className="flex flex-col gap-1  h-[40%]  w-full justify-evenly items-center text-xl">
-                      <div className="text-primary dark:text-secundary z-30">
-                        <p className="text-center  font-bold ">
-                          {product.name}
-                        </p>
-                      </div>
-                      <div className="flex px-2  z-30 ">{product.title}</div>
-                      <span>{product.local}</span>
-                    </div>
-
-                    {token && (
-                      <div className=" mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
-                        {openEdit !== product.id ? (
-                          <button
-                            className="button !mb-0"
-                            onClick={() => {
-                              setOpenEdit(product.id)
-                              setSelectedProduct(product)
-                            }}
-                          >
-                            Editar
-                          </button>
-                        ) : null}
-                        <RemoveMinisterio id={product.id} />
-                      </div>
-                    )}
                   </div>
-                )
-              })}
+
+                  <div className="flex flex-col gap-1 h-[40%] w-full justify-evenly items-center text-xl">
+                    <div className="text-primary dark:text-secundary z-30">
+                      <p className="text-center font-bold">{product.name}</p>
+                    </div>
+                    <div className="flex px-2 z-30">{product.title}</div>
+                    <span>{product.local}</span>
+                  </div>
+
+                  {token && (
+                    <div className="mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
+                      {openEdit !== product.id && (
+                        <button
+                          className="button !mb-0"
+                          onClick={() => {
+                            setOpenEdit(product.id)
+                            setSelectedProduct(product)
+                          }}
+                        >
+                          Editar
+                        </button>
+                      )}
+                      <RemoveMinisterio id={product.id} />
+                    </div>
+                  )}
+                </div>
+              ))}
             </Slider>
           )}
         </div>
       </section>
+
       {openEdit && selectedProduct && (
         <EditMinisterio
           nome={selectedProduct.name}

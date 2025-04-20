@@ -3,7 +3,6 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { useState, useRef, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { api } from '@/lib/api'
 
 interface ApiError {
   response?: {
@@ -44,14 +43,12 @@ export default function RegisterIgreja() {
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await api.post<{ fileUrl: string }>(
-          '/upload',
-          formData,
-          {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          },
-        )
-        avatarUrl = uploadResponse.data.fileUrl
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        })
+        const data = await uploadResponse.json()
+        avatarUrl = data.fileUrl
       } catch (error) {
         console.error('Erro ao carregar foto:', error)
         setError('Falha ao carregar a foto do perfil. Tente novamente.')
@@ -60,26 +57,23 @@ export default function RegisterIgreja() {
     }
 
     try {
-      const response = await api.post<{ error?: string }>(
-        `/auth/register`,
-        {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           name,
           login,
           avatarUrl: avatarUrl || PlaceHolder,
           password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      )
+        }),
+      })
 
-      const user = response.data
+      const user = await response.json()
 
       if (response.status === 200 && !user.error) {
         router.push('/login/igreja')
-        window.location.href = '/login/igreja'
         return user
       } else if (user.error) {
         setError(user.error)
@@ -126,7 +120,7 @@ export default function RegisterIgreja() {
         <p className="mb-5 text-xl">preencha os campos abaixo</p>
         <form
           ref={formRef}
-          className="flex w-[75%] max-w-[500px] flex-col items-center gap-3  p-3  md:mb-5 border-[1px] border-zinc-400 dark:border-zinc-700 rounded-md py-5"
+          className="flex w-[75%] max-w-[500px] flex-col items-center gap-3 p-3 md:mb-5 border-[1px] border-zinc-400 dark:border-zinc-700 rounded-md py-5"
           onSubmit={handleSubmit}
         >
           <label
@@ -182,7 +176,6 @@ export default function RegisterIgreja() {
             type="file"
             name="avatarUrl"
             id="avatarUrl"
-            placeholder="Digite a url da notícia"
             onChange={onFileSelected}
           />
 

@@ -1,18 +1,7 @@
 'use client'
 
 import { useState, FormEvent, ChangeEvent } from 'react'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
-
-interface ApiError {
-  response?: {
-    status: number
-    data: {
-      error?: string
-    }
-  }
-  message?: string
-}
 
 interface ResetPasswordFormProps {
   token: string
@@ -30,43 +19,37 @@ export default function ResetPasswordFormAdm({
     e.preventDefault()
 
     try {
-      const response = await api.post(
-        `/auth/admin/reset-password`,
-        {
+      const response = await fetch('/api/auth/admin/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
           login,
           password,
           passwordResetToken: token,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        }),
+      })
 
-      if (response) {
+      if (response.ok) {
         console.log('Senha redefinida com sucesso')
         alert('Senha redefinida com sucesso!')
         router.push('/login/adm')
       } else {
-        throw new Error('Erro desconhecido')
+        const data = await response.json()
+        throw new Error(data.error || 'Erro desconhecido')
       }
     } catch (error: unknown) {
       if (
         typeof error === 'object' &&
         error !== null &&
-        'response' in error &&
-        typeof error.response === 'object' &&
-        error.response !== null &&
-        'status' in error.response &&
-        'data' in error.response &&
-        typeof error.response.data === 'object' &&
-        error.response.data !== null &&
-        'error' in error.response.data
+        'message' in error &&
+        typeof error.message === 'string'
       ) {
         setError(
-          (error as ApiError).response?.data?.error || 'Erro desconhecido',
+          error.message ||
+            'Erro ao redefinir a senha. Tente novamente mais tarde.',
         )
       } else {
         setError('Erro ao redefinir a senha. Tente novamente mais tarde.')

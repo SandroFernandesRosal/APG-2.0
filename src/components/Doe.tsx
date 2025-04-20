@@ -1,7 +1,6 @@
 'use client'
 import { useToken } from '@/hooks/useToken'
 import ItemDoe from './item-doe'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { Doacao } from '@/data/types/doacao'
 import AddDoacao from './crud/AddDoacao'
@@ -14,20 +13,29 @@ export default function Doe() {
   const token = useToken()
 
   useEffect(() => {
-    api
-      .get('/doacao')
-      .then((response) => {
-        setData(response.data)
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/doacao')
+        if (!response.ok) {
+          throw new Error('Erro ao buscar doações')
+        }
+        const result = await response.json()
+        setData(result)
+      } catch (err) {
+        console.error(err)
+      } finally {
         setLoading(false)
-      })
-      .catch((err) => console.log(err))
+      }
+    }
+
+    fetchData()
   }, [])
 
   return (
     <div className="mb-4 flex w-[100vw] flex-col items-center">
       {token && (
         <>
-          {openDoacao === false && (
+          {!openDoacao && (
             <div className="button" onClick={() => setOpenDoacao(true)}>
               Adicionar igreja
             </div>

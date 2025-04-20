@@ -1,12 +1,11 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import { Endereco } from '@/data/types/endereco'
-import { api } from '@/lib/api'
-import { useEffect, useState } from 'react'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
 import EditEndereco from './crud/EditEndereco'
@@ -37,20 +36,23 @@ export default function CarouselEndereco() {
   }>({})
 
   useEffect(() => {
-    setLoading(true)
-    api
-      .get(`/endereco`)
-      .then((response) => {
-        setData(response.data)
+    const fetchEnderecos = async () => {
+      try {
+        setLoading(true)
+        const res = await fetch('/api/endereco', { cache: 'no-store' })
+        if (!res.ok) throw new Error('Erro ao buscar endereços')
+
+        const json = await res.json()
+        setData(json)
+        json.forEach((endereco: Endereco) => geocodeAddress(endereco))
+      } catch (err) {
+        console.error(err)
+      } finally {
         setLoading(false)
-        response.data.forEach((endereco: Endereco) => {
-          geocodeAddress(endereco)
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
+      }
+    }
+
+    fetchEnderecos()
   }, [])
 
   const geocodeAddress = async (endereco: Endereco) => {
@@ -130,12 +132,11 @@ export default function CarouselEndereco() {
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full dark:bg-bgdark mt-4">
         {token && (
           <>
-            {openEndereco === false && (
+            {!openEndereco && (
               <button className="button" onClick={() => setOpenEndereco(true)}>
                 Adicionar endereço
               </button>
             )}
-
             {openEndereco && (
               <div className="md:min-w-[35%]">
                 <AddEndereco
@@ -211,7 +212,7 @@ export default function CarouselEndereco() {
                     </div>
                     {token && (
                       <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
-                        {openEdit !== product.id ? (
+                        {openEdit !== product.id && (
                           <button
                             className="button !mb-0"
                             onClick={() => {
@@ -221,7 +222,7 @@ export default function CarouselEndereco() {
                           >
                             Editar
                           </button>
-                        ) : null}
+                        )}
                         <RemoveEndereco id={product.id} />
                       </div>
                     )}
@@ -232,6 +233,7 @@ export default function CarouselEndereco() {
           )}
         </div>
       </section>
+
       {openEdit && selectedProduct && (
         <EditEndereco
           localInitial={selectedProduct.local}

@@ -1,6 +1,5 @@
 'use client'
 import { Endereco } from '@/data/types/endereco'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 import ItemEndereco from './ItemEndereco'
@@ -20,20 +19,24 @@ export default function Locais() {
   const token = useToken()
 
   useEffect(() => {
-    setLoading(true)
-    api
-      .get('/endereco')
-      .then((response) => {
-        setData(response.data)
-        setLoading(false)
-        response.data.forEach((endereco: Endereco) => {
+    const fetchEnderecos = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch('/api/endereco')
+        if (!response.ok) throw new Error('Erro ao buscar endereços')
+        const data = await response.json()
+        setData(data)
+        data.forEach((endereco: Endereco) => {
           geocodeAddress(endereco)
         })
-      })
-      .catch((err) => {
+      } catch (err) {
         console.log(err)
+      } finally {
         setLoading(false)
-      })
+      }
+    }
+
+    fetchEnderecos()
   }, [])
 
   const geocodeAddress = async (endereco: Endereco) => {
@@ -62,7 +65,7 @@ export default function Locais() {
     <section className="mb-5 flex w-[100vw] flex-col items-center">
       {token && (
         <>
-          {openEndereco === false && (
+          {!openEndereco && (
             <div className="button" onClick={() => setOpenEndereco(true)}>
               Adicionar endereço
             </div>

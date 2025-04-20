@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { New } from '@/data/types/new'
-import { api } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { useData, useLocal } from '@/store/useStore'
 import SkeletonHighlight from './skeleton/SkeletonHighlight'
@@ -70,14 +69,17 @@ export default function CarouselHighlight() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    api
-      .get(`/${local}/news`)
-      .then((response) => {
-        setData(response.data)
+    fetch(`/api/${local}/news`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Erro ao buscar dados')
+        return res.json()
+      })
+      .then((data) => {
+        setData(data)
         setLoading(false)
       })
       .catch((err) => {
-        console.log('Erro na requisição:', err)
+        console.error('Erro na requisição:', err)
         setLoading(false)
       })
   }, [setData, local])
@@ -160,7 +162,7 @@ export default function CarouselHighlight() {
                     alt={item.title}
                     priority
                     quality={100}
-                    className="relative z-10 h-full w-full object-contain  transition-transform duration-500 group-hover:scale-110 "
+                    className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
                   />
                 </Link>
               </div>

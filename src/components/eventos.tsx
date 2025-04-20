@@ -1,7 +1,6 @@
 import { Agenda } from '@/data/types/agenda'
 import { useEffect, useState } from 'react'
 import { useDataAgenda, useLocal, useSearch } from '@/store/useStore'
-import { api } from '@/lib/api'
 
 import ItemAgenda from './item-agenda'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -17,40 +16,49 @@ export default function Eventos() {
   const itemsPerPage = 12
 
   useEffect(() => {
-    setLoading(true)
-    api
-      .get(`/${local}/agenda?offset=${offset}`)
-      .then((response) => {
-        console.log('Dados iniciais:', response.data)
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(`/api/${local}/agenda?offset=${offset}`)
+        if (!response.ok) {
+          throw new Error('Erro ao buscar eventos')
+        }
+        const data = await response.json()
+        console.log('Dados iniciais:', data)
 
-        setDataAgenda(Array.isArray(response.data) ? response.data : [])
-        setLoading(false)
-
-        setHasMore(response.data.length === itemsPerPage)
-      })
-      .catch((err) => {
+        setDataAgenda(Array.isArray(data) ? data : [])
+        setHasMore(data.length === itemsPerPage)
+      } catch (err) {
         console.log(err)
         setDataAgenda([])
+      } finally {
         setLoading(false)
-      })
+      }
+    }
+
+    fetchData()
   }, [setDataAgenda, local, offset])
 
-  const loadMore = () => {
+  const loadMore = async () => {
     const newOffset = offset + itemsPerPage
 
-    api
-      .get(`/agenda/${local}?offset=${newOffset}`)
-      .then((response) => {
-        console.log('Novos dados carregados:', response.data)
+    try {
+      const response = await fetch(`/api/${local}/agenda?offset=${newOffset}`)
+      if (!response.ok) {
+        throw new Error('Erro ao carregar mais eventos')
+      }
+      const data = await response.json()
+      console.log('Novos dados carregados:', data)
 
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          setDataAgenda((prevData: Agenda[]) => [...prevData, ...response.data])
-          setOffset(newOffset)
-        }
+      if (Array.isArray(data) && data.length > 0) {
+        setDataAgenda((prevData: Agenda[]) => [...prevData, ...data])
+        setOffset(newOffset)
+      }
 
-        setHasMore(response.data.length === itemsPerPage)
-      })
-      .catch((err) => console.log(err))
+      setHasMore(data.length === itemsPerPage)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

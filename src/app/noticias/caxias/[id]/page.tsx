@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import { useData, useLocal } from '@/store/useStore'
 import { useEffect, useState, use } from 'react'
-import { api } from '@/lib/api'
 import RemoveNew from '@/components/crud/RemoveNew'
 import EditNew from '@/components/crud/EditNew'
 import { useToken } from '@/hooks/useToken'
@@ -25,10 +24,10 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
   const selectedItem = data.find((item: { id: string }) => item.id === id)
 
   useEffect(() => {
-    api
-      .get(`/${local}/news`)
-      .then((response) => {
-        setData(response.data)
+    fetch(`/api/${local}/news`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data)
       })
       .catch((err) => console.log(err))
   }, [local, setData])

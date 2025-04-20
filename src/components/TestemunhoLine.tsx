@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { api } from '@/lib/api'
 import { useDataTestemunho } from '@/store/useStore'
 import { Testemunho } from '@/data/types/testemunho'
 import ItemTestemunho from './item-testemunho'
@@ -35,13 +34,12 @@ export default function TestemunhoLine({
 
   useEffect(() => {
     setLoading(true)
-    api
-      .get(`/testemunhos?offset=${offset}`)
-      .then((response) => {
-        setDataTestemunho(Array.isArray(response.data) ? response.data : [])
+    fetch(`/api/testemunhos?offset=${offset}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDataTestemunho(Array.isArray(data) ? data : [])
         setLoading(false)
-
-        setHasMore(response.data.length === itemsPerPage)
+        setHasMore(data.length === itemsPerPage)
       })
       .catch((err) => {
         console.log(err)
@@ -53,18 +51,17 @@ export default function TestemunhoLine({
   const loadMore = () => {
     const newOffset = offset + itemsPerPage
 
-    api
-      .get(`/testemunhos?offset=${newOffset}`)
-      .then((response) => {
-        if (Array.isArray(response.data) && response.data.length > 0) {
+    fetch(`/testemunhos?offset=${newOffset}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
           setDataTestemunho((prevData: Testemunho[]) => {
-            const newData: Testemunho[] = [...prevData, ...response.data]
+            const newData: Testemunho[] = [...prevData, ...data]
             return newData
           })
           setOffset(newOffset)
         }
-
-        setHasMore(response.data.length === itemsPerPage)
+        setHasMore(data.length === itemsPerPage)
       })
       .catch((err) => console.log(err))
   }

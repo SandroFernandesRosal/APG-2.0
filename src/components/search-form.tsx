@@ -21,7 +21,7 @@ export function SearchForm() {
     }
 
     setQuery(newQuery)
-    router.push(`/search?q=${newQuery}`)
+    router.push(`/api/search?q=${newQuery}`)
   }
 
   return (
