@@ -4461,9 +4461,9 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string | null
-    token: string | null
     passwordResetToken: string | null
     expires: Date | null
+    token: string | null
   }
 
   export type UserIgrejaMaxAggregateOutputType = {
@@ -4472,9 +4472,9 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string | null
-    token: string | null
     passwordResetToken: string | null
     expires: Date | null
+    token: string | null
   }
 
   export type UserIgrejaCountAggregateOutputType = {
@@ -4483,9 +4483,9 @@ export namespace Prisma {
     name: number
     avatarUrl: number
     password: number
-    token: number
     passwordResetToken: number
     expires: number
+    token: number
     _all: number
   }
 
@@ -4496,9 +4496,9 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
-    token?: true
     passwordResetToken?: true
     expires?: true
+    token?: true
   }
 
   export type UserIgrejaMaxAggregateInputType = {
@@ -4507,9 +4507,9 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
-    token?: true
     passwordResetToken?: true
     expires?: true
+    token?: true
   }
 
   export type UserIgrejaCountAggregateInputType = {
@@ -4518,9 +4518,9 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
-    token?: true
     passwordResetToken?: true
     expires?: true
+    token?: true
     _all?: true
   }
 
@@ -4602,9 +4602,9 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string
-    token: string | null
     passwordResetToken: string | null
     expires: Date | null
+    token: string | null
     _count: UserIgrejaCountAggregateOutputType | null
     _min: UserIgrejaMinAggregateOutputType | null
     _max: UserIgrejaMaxAggregateOutputType | null
@@ -4630,9 +4630,9 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
+    token?: boolean
     PasswordResetTokenIgreja?: boolean | UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>
     refreshTokenIgreja?: boolean | UserIgreja$refreshTokenIgrejaArgs<ExtArgs>
     testemunho?: boolean | UserIgreja$testemunhoArgs<ExtArgs>
@@ -4645,9 +4645,9 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
+    token?: boolean
   }, ExtArgs["result"]["userIgreja"]>
 
   export type UserIgrejaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4656,9 +4656,9 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
+    token?: boolean
   }, ExtArgs["result"]["userIgreja"]>
 
   export type UserIgrejaSelectScalar = {
@@ -4667,12 +4667,12 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    token?: boolean
     passwordResetToken?: boolean
     expires?: boolean
+    token?: boolean
   }
 
-  export type UserIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "token" | "passwordResetToken" | "expires", ExtArgs["result"]["userIgreja"]>
+  export type UserIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "passwordResetToken" | "expires" | "token", ExtArgs["result"]["userIgreja"]>
   export type UserIgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     PasswordResetTokenIgreja?: boolean | UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>
     refreshTokenIgreja?: boolean | UserIgreja$refreshTokenIgrejaArgs<ExtArgs>
@@ -4695,9 +4695,9 @@ export namespace Prisma {
       name: string | null
       avatarUrl: string | null
       password: string
-      token: string | null
       passwordResetToken: string | null
       expires: Date | null
+      token: string | null
     }, ExtArgs["result"]["userIgreja"]>
     composites: {}
   }
@@ -5129,9 +5129,9 @@ export namespace Prisma {
     readonly name: FieldRef<"UserIgreja", 'String'>
     readonly avatarUrl: FieldRef<"UserIgreja", 'String'>
     readonly password: FieldRef<"UserIgreja", 'String'>
-    readonly token: FieldRef<"UserIgreja", 'String'>
     readonly passwordResetToken: FieldRef<"UserIgreja", 'String'>
     readonly expires: FieldRef<"UserIgreja", 'DateTime'>
+    readonly token: FieldRef<"UserIgreja", 'String'>
   }
     
 
@@ -26592,9 +26592,9 @@ export namespace Prisma {
     name: 'name',
     avatarUrl: 'avatarUrl',
     password: 'password',
-    token: 'token',
     passwordResetToken: 'passwordResetToken',
-    expires: 'expires'
+    expires: 'expires',
+    token: 'token'
   };
 
   export type UserIgrejaScalarFieldEnum = (typeof UserIgrejaScalarFieldEnum)[keyof typeof UserIgrejaScalarFieldEnum]
@@ -27084,9 +27084,9 @@ export namespace Prisma {
     name?: StringNullableFilter<"UserIgreja"> | string | null
     avatarUrl?: StringNullableFilter<"UserIgreja"> | string | null
     password?: StringFilter<"UserIgreja"> | string
-    token?: StringNullableFilter<"UserIgreja"> | string | null
     passwordResetToken?: StringNullableFilter<"UserIgreja"> | string | null
     expires?: DateTimeNullableFilter<"UserIgreja"> | Date | string | null
+    token?: StringNullableFilter<"UserIgreja"> | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaListRelationFilter
     refreshTokenIgreja?: RefreshTokenIgrejaListRelationFilter
     testemunho?: TestemunhoListRelationFilter
@@ -27098,9 +27098,9 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
-    token?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
+    token?: SortOrderInput | SortOrder
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaOrderByRelationAggregateInput
     refreshTokenIgreja?: RefreshTokenIgrejaOrderByRelationAggregateInput
     testemunho?: TestemunhoOrderByRelationAggregateInput
@@ -27115,9 +27115,9 @@ export namespace Prisma {
     name?: StringNullableFilter<"UserIgreja"> | string | null
     avatarUrl?: StringNullableFilter<"UserIgreja"> | string | null
     password?: StringFilter<"UserIgreja"> | string
-    token?: StringNullableFilter<"UserIgreja"> | string | null
     passwordResetToken?: StringNullableFilter<"UserIgreja"> | string | null
     expires?: DateTimeNullableFilter<"UserIgreja"> | Date | string | null
+    token?: StringNullableFilter<"UserIgreja"> | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaListRelationFilter
     refreshTokenIgreja?: RefreshTokenIgrejaListRelationFilter
     testemunho?: TestemunhoListRelationFilter
@@ -27129,9 +27129,9 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
-    token?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
+    token?: SortOrderInput | SortOrder
     _count?: UserIgrejaCountOrderByAggregateInput
     _max?: UserIgrejaMaxOrderByAggregateInput
     _min?: UserIgrejaMinOrderByAggregateInput
@@ -27146,9 +27146,9 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     avatarUrl?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     password?: StringWithAggregatesFilter<"UserIgreja"> | string
-    token?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     passwordResetToken?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
     expires?: DateTimeNullableWithAggregatesFilter<"UserIgreja"> | Date | string | null
+    token?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
   }
 
   export type NewWhereInput = {
@@ -28675,9 +28675,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
     refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
     testemunho?: TestemunhoCreateNestedManyWithoutUserIgrejaInput
@@ -28689,9 +28689,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
     testemunho?: TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput
@@ -28703,9 +28703,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
     refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
     testemunho?: TestemunhoUpdateManyWithoutUserIgrejaNestedInput
@@ -28717,9 +28717,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
     testemunho?: TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput
@@ -28731,9 +28731,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
   }
 
   export type UserIgrejaUpdateManyMutationInput = {
@@ -28742,9 +28742,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserIgrejaUncheckedUpdateManyInput = {
@@ -28753,9 +28753,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewCreateInput = {
@@ -30599,9 +30599,9 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
-    token?: SortOrder
     passwordResetToken?: SortOrder
     expires?: SortOrder
+    token?: SortOrder
   }
 
   export type UserIgrejaMaxOrderByAggregateInput = {
@@ -30610,9 +30610,9 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
-    token?: SortOrder
     passwordResetToken?: SortOrder
     expires?: SortOrder
+    token?: SortOrder
   }
 
   export type UserIgrejaMinOrderByAggregateInput = {
@@ -30621,9 +30621,9 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
-    token?: SortOrder
     passwordResetToken?: SortOrder
     expires?: SortOrder
+    token?: SortOrder
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -35573,9 +35573,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
     refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
   }
@@ -35586,9 +35586,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
   }
@@ -35615,9 +35615,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
     refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
   }
@@ -35628,9 +35628,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
   }
@@ -35641,9 +35641,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
     testemunho?: TestemunhoCreateNestedManyWithoutUserIgrejaInput
   }
@@ -35654,9 +35654,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
     testemunho?: TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput
   }
@@ -35683,9 +35683,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
     testemunho?: TestemunhoUpdateManyWithoutUserIgrejaNestedInput
   }
@@ -35696,9 +35696,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
     testemunho?: TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput
   }
@@ -35709,9 +35709,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
     testemunho?: TestemunhoCreateNestedManyWithoutUserIgrejaInput
   }
@@ -35722,9 +35722,9 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    token?: string | null
     passwordResetToken?: string | null
     expires?: Date | string | null
+    token?: string | null
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
     testemunho?: TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput
   }
@@ -35751,9 +35751,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
     testemunho?: TestemunhoUpdateManyWithoutUserIgrejaNestedInput
   }
@@ -35764,9 +35764,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    token?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
     testemunho?: TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput
   }

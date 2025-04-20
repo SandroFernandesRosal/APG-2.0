@@ -43,9 +43,9 @@ model UserIgreja {
   name                     String?
   avatarUrl                String?
   password                 String
-  token                    String?
   passwordResetToken       String?
   expires                  DateTime?
+  token                    String?
   PasswordResetTokenIgreja PasswordResetTokenIgreja[]
   refreshTokenIgreja       RefreshTokenIgreja[]
   testemunho               Testemunho[]

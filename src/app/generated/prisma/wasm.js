@@ -135,9 +135,9 @@ exports.Prisma.UserIgrejaScalarFieldEnum = {
   name: 'name',
   avatarUrl: 'avatarUrl',
   password: 'password',
-  token: 'token',
   passwordResetToken: 'passwordResetToken',
-  expires: 'expires'
+  expires: 'expires',
+  token: 'token'
 };
 
 exports.Prisma.NewScalarFieldEnum = {
