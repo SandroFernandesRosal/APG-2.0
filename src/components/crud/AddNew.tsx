@@ -73,7 +73,9 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
 
       if (response.ok) {
         setOpenNew(false)
-        router.refresh()
+
+        router.push('/')
+        window.location.href = '/'
       } else {
         const data = await response.json()
         console.error('Erro ao postar notícia:', data)

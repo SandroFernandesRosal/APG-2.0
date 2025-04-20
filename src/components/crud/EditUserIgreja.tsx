@@ -93,6 +93,7 @@ export default function EditUserIgreja({
 
         Cookies.remove('tokenigreja')
         router.push('/login/igreja')
+        window.location.href = '/login/igreja'
         return
       }
 

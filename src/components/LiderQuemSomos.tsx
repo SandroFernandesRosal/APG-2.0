@@ -61,7 +61,7 @@ export default function LiderQuemSomos({
                   <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
                     {openEdit !== product.id ? (
                       <button
-                        className="button"
+                        className="button !mb-0"
                         onClick={() => {
                           setOpenEdit(product.id)
                         }}

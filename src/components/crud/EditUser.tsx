@@ -78,7 +78,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
 
       if (response.status === 200 && newss) {
         Cookies.remove('tokennn')
-        router.push('/login/adm')
+        router.push('/perfil/adm')
         window.location.href = '/login/adm'
         return newss
       }

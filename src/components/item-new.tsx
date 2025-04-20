@@ -88,7 +88,7 @@ export default function ItemNew({
             <button
               aria-hidden="true"
               tabIndex={-1}
-              className="button"
+              className="button !mb-0"
               onClick={() => {
                 setOpenEdit(id)
               }}

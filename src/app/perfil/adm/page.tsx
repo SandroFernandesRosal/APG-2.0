@@ -35,7 +35,7 @@ export default async function PerfilAdm() {
               <p className="truncate w-[100%]">{user.login}</p>
 
               <div className="flex w-full justify-between gap-2">
-                <Link href={'/perfil/adm/editar'} className="button">
+                <Link href={'/perfil/adm/editar'} className="button !mb-0">
                   Editar perfil
                 </Link>
                 <RemoveUserAdm id={user.id} />
