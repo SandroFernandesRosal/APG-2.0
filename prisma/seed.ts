@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcrypt'
+import 'dotenv/config'
 
 import { z } from 'zod'
 const PlaceHolder =
