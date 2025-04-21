@@ -24,7 +24,7 @@ export default function ItemUserIgreja({ avatarUrl, name }: userProps) {
             alt="imagem de perfil"
             width={40}
             height={40}
-            className="p-[2px] mr-1 h-[40px] w-[40px] rounded-full border-[1px] border-primary  dark:border-secundary cursor-pointer"
+            className="p-[2px] mr-1  rounded-full border-[1px] border-primary  dark:border-secundary cursor-pointer"
             onClick={() => setOpen(!open)}
           />
         )}

@@ -32,7 +32,7 @@ export default function ItemTestemunho({
           height={120}
           src={item.avatarUrl}
           alt={item.name}
-          className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary dark:border-secundary"
+          className="p-[2px] mr-1  rounded-full border-[1px] border-primary dark:border-secundary"
         />
       )}
 

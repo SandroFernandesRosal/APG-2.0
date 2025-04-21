@@ -116,7 +116,7 @@ export default function TestemunhoLine({
               />
             ))
           ) : (
-            <p className="text-gray-500">Nenhum testemunho ainda.</p>
+            <p>Nenhum testemunho ainda.</p>
           )
         ) : (
           Array.from({ length: 4 }).map((_, index) => (
@@ -131,9 +131,7 @@ export default function TestemunhoLine({
         )}
 
         {!hasMore && dataTestemunho.length > 0 && (
-          <p className="mt-4 text-gray-500">
-            Não há mais testemunhos para carregar.
-          </p>
+          <p>Não há mais testemunhos para carregar.</p>
         )}
       </section>
     </div>
