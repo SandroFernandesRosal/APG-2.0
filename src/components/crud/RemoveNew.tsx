@@ -21,7 +21,7 @@ export default function RemoveNew({ id }: RemoveNewProps) {
     setIsDeleting(true)
 
     try {
-      const response = await fetch(`/api//${local}/news/${id}`, {
+      const response = await fetch(`/api/${local}/news/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
