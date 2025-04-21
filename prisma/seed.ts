@@ -25,7 +25,7 @@ async function main() {
   const defaultAdmin = {
     login: 'apg.adm.viladapenha@gmail.com',
     name: 'Administrador Vila da Penha',
-    password: 'A#1234567',
+    password: process.env.NEXT_PUBLIC_PASSWORD_ADMIN || '',
     avatarUrl: PlaceHolder,
   }
 
