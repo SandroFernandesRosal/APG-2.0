@@ -1,6 +1,7 @@
+'use client'
+import { useToken } from '@/hooks/useToken'
 import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import Link from 'next/link'
-import Cookies from 'js-cookie'
 import { useState } from 'react'
 import EditContatos from './crud/EditContatos'
 import RemoveContatos from './crud/RemoveContatos'
@@ -21,7 +22,9 @@ export default function Socials({
   id,
 }: SocialsProps) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const token = Cookies.get('tokennn')
+
+  const token = useToken()
+
   return (
     <>
       <div className="mb-[7px] flex flex-col justify-center gap-2">
@@ -56,12 +59,7 @@ export default function Socials({
         {token && (
           <div className="flex w-full justify-around md:gap-2">
             {openEdit !== id ? (
-              <button
-                className="button !mb-0"
-                onClick={() => {
-                  setOpenEdit(id)
-                }}
-              >
+              <button className="button !mb-0" onClick={() => setOpenEdit(id)}>
                 Editar
               </button>
             ) : null}

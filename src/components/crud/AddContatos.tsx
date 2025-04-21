@@ -64,7 +64,7 @@ export default function AddContatos({
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar endereço{' '}
+        Adicionar contatos{' '}
         {openContato === true && (
           <AiFillCloseCircle
             onClick={() => setOpenContato(false)}
