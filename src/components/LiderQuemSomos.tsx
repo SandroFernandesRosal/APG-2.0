@@ -40,22 +40,32 @@ export default function LiderQuemSomos({
         {dataSobreLider &&
           dataSobreLider.map((product) => (
             <div
-              className="justify-between flex flex-col h-[300px] md:h-[400px] w-[47%] max-w-[200px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
+              className="justify-between mb-12 relative flex flex-col h-[400px] w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800 bg-bglight dark:bg-bgdark group"
               key={product.id}
             >
-              <div className="border-b-[3px] border-primary dark:border-secundary h-[50%] py-2 flex justify-center items-center">
-                <Image
-                  src={product.coverUrl}
-                  width={130}
-                  height={130}
-                  alt={product.title}
-                  className="group-hover:scale-105 transition-transform duration-500 p-1 w-[100px] h-[100px] md:w-[130px] md:h-[130px] rounded-full border-[1px] border-primary dark:border-secundary"
-                />
+              <div className="h-[60%] relative overflow-hidden">
+                <div className="group h-full overflow-hidden relative ">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
+                    style={{
+                      backgroundImage: `url(${product.coverUrl})`,
+                    }}
+                  />
+                  <Image
+                    src={product.coverUrl}
+                    width={500}
+                    height={500}
+                    alt={product.title}
+                    quality={100}
+                    className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
-              <div className="flex flex-col my-2 min-h-[100px] md:min-h-[70px] gap-2 justify-between items-center">
-                <h1 className="text-center px-1">{product.name}</h1>
-
-                <span>{product.title}</span>
+              <div className="flex flex-col gap-1 h-[40%] w-full justify-evenly items-center text-xl">
+                <div className="text-primary dark:text-secundary z-30">
+                  <p className="text-center font-bold">{product.name}</p>
+                </div>
+                <div className="flex px-2 z-30">{product.title}</div>
 
                 {token && (
                   <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
