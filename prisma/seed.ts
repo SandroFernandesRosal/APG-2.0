@@ -19,7 +19,7 @@ async function main() {
   const defaultAdmin = {
     login: 'apg.adm.viladapenha@gmail.com',
     name: 'Administrador Vila da Penha',
-    password: process.env.NEXT_PUBLIC_PASSWORD_ADMIN,
+    password: process.env.NEXT_PUBLIC_PASSWORD_ADMIN || 'A#1234567',
     avatarUrl: PlaceHolder,
   }
 
@@ -35,9 +35,6 @@ async function main() {
       return
     }
 
-    if (!defaultAdmin.password) {
-      throw new Error('Admin password is not defined in environment variables.')
-    }
     const hashedPassword = await bcrypt.hash(defaultAdmin.password, 10)
 
     await prisma.user.create({
