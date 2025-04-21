@@ -29,10 +29,10 @@ export default async function UserComponent() {
             {avatarUrl && (
               <Image
                 src={avatarUrl}
-                alt="imagem de perfil"
-                width={80}
-                height={80}
-                className="p-[2px] mr-1 h-[80px] w-[80px] rounded-full border-[1px] border-primary  dark:border-secundary"
+                alt={`imagem de perfil de ${name}`}
+                width={40}
+                height={40}
+                className="p-[2px] mr-1 h-[40px] w-[40px] rounded-full border-[1px] border-primary  dark:border-secundary"
               />
             )}
 
