@@ -20,7 +20,7 @@ export default function ItemUser({ avatarUrl, name }: userProps) {
         {avatarUrl && (
           <Image
             src={avatarUrl}
-            alt="imagem de perfil"
+            alt={`imagem de perfil de ${name}`}
             width={40}
             height={40}
             className="p-[2px] mr-1  rounded-full border-[1px] border-primary  dark:border-secundary cursor-pointer"
