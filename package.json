@@ -10,7 +10,7 @@
     "postinstall": "prisma generate --no-engine"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
