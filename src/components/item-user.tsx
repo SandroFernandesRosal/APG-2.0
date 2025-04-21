@@ -23,7 +23,7 @@ export default function ItemUser({ avatarUrl, name }: userProps) {
             alt={`imagem de perfil de ${name}`}
             width={40}
             height={40}
-            className="p-[2px] mr-1 w-'auto' h-'auto'  rounded-full border-[1px] border-primary  dark:border-secundary cursor-pointer"
+            className="p-[2px] mr-1 w-[40px] h-[40px]  rounded-full border-[1px] border-primary  dark:border-secundary cursor-pointer"
             onClick={() => setOpen(!open)}
           />
         )}
