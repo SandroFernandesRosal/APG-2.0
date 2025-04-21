@@ -12,7 +12,13 @@ async function main() {
     password: z
       .string()
       .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
-      .max(10, { message: 'A senha deve ter no máximo 10 caracteres' }),
+      .max(10, { message: 'A senha deve ter no máximo 10 caracteres' })
+      .regex(/[!@#$%^&*(),.?":{}|<>]/, {
+        message: 'A senha deve conter pelo menos um caractere especial',
+      })
+      .refine((value) => /[a-zA-Z]/.test(value), {
+        message: 'A senha deve conter pelo menos uma letra',
+      }),
     avatarUrl: z.string().url(),
   })
 
