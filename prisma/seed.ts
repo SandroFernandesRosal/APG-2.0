@@ -1,10 +1,11 @@
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcrypt'
-import 'dotenv/config'
 
 import { z } from 'zod'
 const PlaceHolder =
   'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
+
+const senha = process.env.NEXT_PUBLIC_PASSWORD_ADMIN || ''
 
 async function main() {
   const userSchema = z.object({
@@ -26,7 +27,7 @@ async function main() {
   const defaultAdmin = {
     login: 'apg.adm.viladapenha@gmail.com',
     name: 'Administrador Vila da Penha',
-    password: process.env.NEXT_PUBLIC_PASSWORD_ADMIN || '',
+    password: senha,
     avatarUrl: PlaceHolder,
   }
 
