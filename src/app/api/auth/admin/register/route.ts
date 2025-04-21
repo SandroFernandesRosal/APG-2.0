@@ -25,10 +25,13 @@ export async function POST(req: Request) {
       .string()
       .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
       .max(10, { message: 'A senha deve ter no máximo 10 caracteres' }),
+    avatarUrl: z.string().url(),
   })
 
   try {
-    const { login, name, password } = userSchema.parse(await req.json())
+    const { login, name, password, avatarUrl } = userSchema.parse(
+      await req.json(),
+    )
 
     const existingUser = await prisma.user.findUnique({
       where: { login },
@@ -47,6 +50,7 @@ export async function POST(req: Request) {
       data: {
         login,
         name,
+        avatarUrl,
         password: hashedPassword,
       },
     })

@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcrypt'
 
 import { z } from 'zod'
+const PlaceHolder =
+  'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
 
 async function main() {
   const userSchema = z.object({
@@ -11,12 +13,14 @@ async function main() {
       .string()
       .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
       .max(10, { message: 'A senha deve ter no máximo 10 caracteres' }),
+    avatarUrl: z.string().url(),
   })
 
   const defaultAdmin = {
     login: 'apg.adm.viladapenha@gmail.com',
     name: 'Administrador Vila da Penha',
     password: 'Apgadm#84',
+    avatarUrl: PlaceHolder,
   }
 
   try {
@@ -38,6 +42,7 @@ async function main() {
         login: defaultAdmin.login,
         name: defaultAdmin.name,
         password: hashedPassword,
+        avatarUrl: defaultAdmin.avatarUrl,
       },
     })
 
