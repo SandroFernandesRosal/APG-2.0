@@ -16,7 +16,7 @@ model User {
   name                String?
   avatarUrl           String?
   password            String
-  isAdmin             Boolean               @default(false)
+  isAdmin             Boolean               @default(true)
   expires             DateTime?
   passwordResetToken  String?
   token               String?
