@@ -52,17 +52,23 @@ export default function QuemSomos() {
             {dataSobreLider.length > 0 ? (
               <LiderQuemSomos dataSobreLider={dataSobreLider} />
             ) : (
-              <p className="text-gray-500 text-sm mb-4">
-                Nenhum líder adicionado.
-              </p>
+              <div className="flex flex-col items-center">
+                <LiderQuemSomos dataSobreLider={dataSobreLider} />{' '}
+                <p className="text-gray-500 text-sm mb-4">
+                  Nenhum líder adicionado.
+                </p>
+              </div>
             )}
 
             {dataSobre.length > 0 ? (
               <ContentQuemSomos dataSobre={dataSobre} />
             ) : (
-              <p className="text-gray-500 text-sm mb-4">
-                Nenhum conteúdo sobre a igreja foi adicionado.
-              </p>
+              <div className="flex flex-col items-center">
+                <ContentQuemSomos dataSobre={dataSobre} />
+                <p className="text-gray-500 text-sm mb-4">
+                  Nenhum conteúdo sobre a igreja foi adicionado.
+                </p>
+              </div>
             )}
           </>
         )}

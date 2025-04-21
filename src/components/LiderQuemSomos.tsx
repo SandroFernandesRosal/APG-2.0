@@ -36,7 +36,7 @@ export default function LiderQuemSomos({
         </>
       )}
 
-      <div className="my-4 mb-12 flex flex-wrap justify-center gap-4 w-full">
+      <div className=" flex flex-wrap justify-center gap-4 w-full">
         {dataSobreLider &&
           dataSobreLider.map((product) => (
             <div
