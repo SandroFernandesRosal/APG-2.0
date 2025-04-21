@@ -1,5 +1,5 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+import { FaArrowRight } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -131,7 +131,7 @@ export default function CarouselAgenda({
             href={`/agenda`}
             className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
           >
-            <span>Ver todos</span> <FaPlus />
+            <span>Ver todos</span> <FaArrowRight />
           </Link>
         </div>
 

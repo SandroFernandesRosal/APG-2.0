@@ -1,5 +1,5 @@
 'use client'
-import { FaPlus } from 'react-icons/fa'
+import { FaArrowRight } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -129,7 +129,7 @@ export default function CarouselNews({
             href={`/noticias`}
             className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
           >
-            <span>Ver todas</span> <FaPlus />
+            <span>Ver todas</span> <FaArrowRight />
           </Link>
         </div>
 
