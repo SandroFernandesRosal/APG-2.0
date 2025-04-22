@@ -67,17 +67,17 @@ export default function AdminTestemunhosPage() {
   }
 
   return (
-    <div className="px-10 pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 justify-center">
+    <div className=" pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 justify-center w-full">
       <h1 className="text-2xl font-bold mb-4">Testemunhos Pendentes</h1>
 
       {testemunhos.length === 0 ? (
         <p className="text-gray-500">Nenhum testemunho pendente.</p>
       ) : (
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-4 w-full items-center">
           {testemunhos.map((t) => (
             <li
               key={t.id}
-              className="border rounded-lg p-4 shadow bg-white dark:bg-bgdarksecundary"
+              className="border rounded-lg p-4 shadow bg-white dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] "
             >
               <div className="flex items-center gap-3 mb-2">
                 <Image
