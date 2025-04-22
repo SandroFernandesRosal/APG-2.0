@@ -37,9 +37,12 @@ export default function TestemunhoLine({
     fetch(`/api/testemunhos?offset=${offset}`)
       .then((response) => response.json())
       .then((data) => {
-        setDataTestemunho(Array.isArray(data) ? data : [])
+        const publicData = (Array.isArray(data) ? data : []).filter(
+          (item) => item.isPublic,
+        )
+        setDataTestemunho(publicData)
         setLoading(false)
-        setHasMore(data.length === itemsPerPage)
+        setHasMore(publicData.length === itemsPerPage)
       })
       .catch((err) => {
         console.log(err)
@@ -51,17 +54,22 @@ export default function TestemunhoLine({
   const loadMore = () => {
     const newOffset = offset + itemsPerPage
 
-    fetch(`/testemunhos?offset=${newOffset}`)
+    fetch(`/api/testemunhos?offset=${newOffset}`)
       .then((response) => response.json())
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setDataTestemunho((prevData: Testemunho[]) => {
-            const newData: Testemunho[] = [...prevData, ...data]
-            return newData
-          })
+        const publicData = (Array.isArray(data) ? data : []).filter(
+          (item) => item.isPublic,
+        )
+
+        if (publicData.length > 0) {
+          setDataTestemunho((prevData: Testemunho[]) => [
+            ...prevData,
+            ...publicData,
+          ])
           setOffset(newOffset)
         }
-        setHasMore(data.length === itemsPerPage)
+
+        setHasMore(publicData.length === itemsPerPage)
       })
       .catch((err) => console.log(err))
   }
