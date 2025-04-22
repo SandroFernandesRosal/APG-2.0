@@ -153,7 +153,7 @@ export default function Register() {
           </button>
 
           <Link
-            href={'/forgot-password-adm'}
+            href={'/reset-password-adm'}
             className="font-bold text-primary dark:text-secundary"
           >
             Esqueceu a senha?

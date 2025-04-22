@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       to: login,
       subject: 'Recuperação de Senha',
       text: `Para redefinir sua senha, clique no link abaixo:
-      https://alcancadospelagraca.vercel.app/user/reset-password/${token}
+      https://apg-2-0.vercel.app/reset-password/${token}
       Este link expira em 1 hora.`,
     }
 

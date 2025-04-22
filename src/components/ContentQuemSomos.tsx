@@ -52,7 +52,10 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
           {token && (
             <div className="mb-2 flex w-full justify-center gap-2 text-white">
               {openEdit !== item.id ? (
-                <button className="button" onClick={() => setOpenEdit(item.id)}>
+                <button
+                  className="button !mb-0"
+                  onClick={() => setOpenEdit(item.id)}
+                >
                   Editar
                 </button>
               ) : (

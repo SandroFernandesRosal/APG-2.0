@@ -2,7 +2,7 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function ForgotPasswordPage() {
+export default function ForgotPasswordPageAdmin() {
   const [login, setLogin] = useState<string>('')
   const router = useRouter()
 
@@ -10,7 +10,7 @@ export default function ForgotPasswordPage() {
     e.preventDefault()
 
     try {
-      const response = await fetch('/api/auth/recover-password', {
+      const response = await fetch('/api/auth/admin/recover-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
