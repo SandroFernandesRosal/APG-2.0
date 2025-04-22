@@ -13,10 +13,9 @@ export default async function PerfilAdm() {
         {user ? (
           <>
             <div className="flex flex-col items-center md:min-w-[35%]">
-              <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
-                Meu perfil
+              <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary mb-5">
+                Perfil de {user.name.split(' ')[0]}
               </h1>
-              <p className="mb-4 text-xl">Verifique seus dados</p>
             </div>
             <div className="flex flex-col items-center gap-1 rounded-md border-[1px] w-[70%] max-w-[400px] h-[400px] justify-evenly p-4 border-zinc-300 dark:border-zinc-700">
               {user.avatarUrl && (
@@ -32,13 +31,16 @@ export default async function PerfilAdm() {
               <h1 className="text-lg font-bold truncate w-[100%] text-center">
                 {user.name}
               </h1>
-              <p className="truncate w-[100%]">{user.login}</p>
+              <p className="truncate w-[100%] text-center">{user.login}</p>
 
-              <div className="flex w-full justify-between gap-2">
+              <div className="flex w-full  gap-3 flex-wrap justify-center">
                 <Link href={'/perfil/adm/editar'} className="button !mb-0">
                   Editar perfil
                 </Link>
                 <RemoveUserAdm id={user.id} />
+                <Link href={'/register/admin'} className="button !mb-0">
+                  Criar novo administrador
+                </Link>
               </div>
             </div>
           </>

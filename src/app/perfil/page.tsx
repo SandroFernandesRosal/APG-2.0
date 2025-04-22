@@ -14,9 +14,8 @@ export default async function Perfil() {
           <>
             <div className="flex flex-col items-center md:min-w-[35%]">
               <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
-                Meu perfil
+                Perfil de {user.name.split(' ')[0]}
               </h1>
-              <p className="mb-4 text-xl">Verifique seus dados</p>
             </div>
             <div className="flex flex-col items-center gap-1 rounded-md border-[1px] w-[70%] max-w-[400px] h-[400px] justify-evenly p-4 border-zinc-300 dark:border-zinc-700">
               {user.avatarUrl && (
@@ -32,7 +31,7 @@ export default async function Perfil() {
               <h1 className="text-lg font-bold truncate w-[100%] text-center">
                 {user.name}
               </h1>
-              <p className="truncate w-[100%]">{user.login}</p>
+              <p className="truncate w-[100%] text-center">{user.login}</p>
 
               <div className="flex w-full justify-between gap-2">
                 <Link href={'/perfil/editar'} className="button !mb-0">
