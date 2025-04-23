@@ -18,6 +18,7 @@ import { useToken } from '@/hooks/useToken'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
 import { useTheme } from 'next-themes'
 import { SearchForm } from './search-form'
+import { Notification } from './notification'
 
 interface HeaderProps {
   children: React.ReactNode
@@ -94,6 +95,7 @@ export default function Header({ children }: HeaderProps) {
                 />
               </Link>
             )}
+            <Notification />
           </div>
 
           <div onClick={handleMenu} className={'md:hidden'}>

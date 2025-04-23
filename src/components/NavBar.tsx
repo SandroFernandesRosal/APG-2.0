@@ -13,6 +13,7 @@ import { VscHeartFilled } from 'react-icons/vsc'
 
 import { useToken } from '@/hooks/useToken'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
+import { Notification } from './notification'
 
 interface NavBarProps {
   handleMenu: () => void
@@ -29,6 +30,8 @@ export default function NavBar({ handleMenu, menu, user }: NavBarProps) {
         menu ? 'translate-x-0 ' : 'translate-x-full'
       } `}
     >
+      {' '}
+      <Notification />
       <div className="flex w-full items-center justify-around">
         {token || tokenIgreja ? (
           <div onClick={handleMenu}>{user}</div>
@@ -48,7 +51,6 @@ export default function NavBar({ handleMenu, menu, user }: NavBarProps) {
           </div>
         )}
       </div>
-
       <div className="flex w-[80%] flex-col gap-3">
         <Link
           href="/quemsomos"

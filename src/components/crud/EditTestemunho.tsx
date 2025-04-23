@@ -75,6 +75,7 @@ export default function EditTestemunho({
           avatarUrl,
           content,
           coverUrl,
+          isPublic: false,
         }),
       })
 

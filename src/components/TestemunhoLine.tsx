@@ -10,7 +10,17 @@ import Link from 'next/link'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
 import { useToken } from '@/hooks/useToken'
 import AddTestemunho from '@/components/crud/AddTestemunho'
-import { AiFillCloseCircle } from 'react-icons/ai'
+
+export interface testemunhoProps {
+  id: string
+  name: string
+  content: string
+  avatarUrl: string
+  coverUrl: string
+  createdAt: string
+  isPublic: boolean
+  userId: string
+}
 
 export default function TestemunhoLine({
   userIgreja,
@@ -26,6 +36,7 @@ export default function TestemunhoLine({
   const [offset, setOffset] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const [open, setOpen] = useState(false)
+  const [qtdAguardandoAprovacao, setQtdAguardandoAprovacao] = useState(0)
 
   const tokenIgreja = useTokenIgreja()
   const token = useToken()
@@ -49,7 +60,18 @@ export default function TestemunhoLine({
         setDataTestemunho([])
         setLoading(false)
       })
-  }, [setDataTestemunho, offset])
+
+    if (tokenIgreja) {
+      fetch('/api/testemunhos')
+        .then((res) => res.json())
+        .then((allTestemunhos) => {
+          const pendentes = allTestemunhos.filter(
+            (t: testemunhoProps) => !t.isPublic && t.userId === userIgreja.id,
+          )
+          setQtdAguardandoAprovacao(pendentes.length)
+        })
+    }
+  }, [setDataTestemunho, offset, tokenIgreja, userIgreja?.id])
 
   const loadMore = () => {
     const newOffset = offset + itemsPerPage
@@ -94,15 +116,17 @@ export default function TestemunhoLine({
 
         {tokenIgreja && (
           <>
+            {qtdAguardandoAprovacao > 0 && (
+              <div className="my-4 mx-5 rounded border border-primary dark:border-secundary bg-bglightsecundary dark:bg-bgdarksecundary p-4">
+                Você tem {qtdAguardandoAprovacao} testemunho
+                {qtdAguardandoAprovacao > 1 ? 's' : ''} aguardando aprovação de
+                um administrador.
+              </div>
+            )}
+
             {open === false && (
               <button className="button" onClick={() => setOpen(true)}>
                 Adicionar testemunho
-                {open && (
-                  <AiFillCloseCircle
-                    onClick={() => setOpen(false)}
-                    className="cursor-pointer text-2xl font-bold text-black dark:text-white"
-                  />
-                )}
               </button>
             )}
 

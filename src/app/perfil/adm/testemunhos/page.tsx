@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { Trash2 } from 'lucide-react'
 
 interface Testemunho {
   id: string
@@ -14,6 +15,8 @@ interface Testemunho {
 
 export default function AdminTestemunhosPage() {
   const [testemunhos, setTestemunhos] = useState<Testemunho[]>([])
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [showModal, setShowModal] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -23,8 +26,6 @@ export default function AdminTestemunhosPage() {
           credentials: 'include',
         })
 
-        console.log('resAuth status:', resAuth.status)
-
         if (!resAuth.ok) {
           router.push('/login/adm')
           return
@@ -33,8 +34,6 @@ export default function AdminTestemunhosPage() {
         const res = await fetch('/api/auth/admin/testemunho', {
           credentials: 'include',
         })
-
-        console.log('res testemunhos status:', res.status)
 
         if (!res.ok) {
           const errText = await res.text()
@@ -56,9 +55,7 @@ export default function AdminTestemunhosPage() {
   async function handleAprovar(id: string) {
     await fetch(`/api/auth/admin/testemunho/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({ isPublic: true }),
     })
@@ -66,8 +63,25 @@ export default function AdminTestemunhosPage() {
     setTestemunhos((prev) => prev.filter((t) => t.id !== id))
   }
 
+  async function handleDelete(id: string) {
+    const res = await fetch(`/api/auth/admin/testemunho/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+
+    if (res.ok) {
+      setTestemunhos((prev) => prev.filter((t) => t.id !== id))
+      setShowModal(false)
+      setSelectedId(null)
+    } else {
+      const errText = await res.text()
+      console.error('Erro ao deletar:', errText)
+      alert('Erro ao deletar o testemunho.')
+    }
+  }
+
   return (
-    <div className=" pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 justify-center w-full">
+    <div className="pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 justify-center w-full">
       <h1 className="text-2xl font-bold mb-4">Testemunhos Pendentes</h1>
 
       {testemunhos.length === 0 ? (
@@ -77,7 +91,7 @@ export default function AdminTestemunhosPage() {
           {testemunhos.map((t) => (
             <li
               key={t.id}
-              className="border rounded-lg p-4 shadow bg-white dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] "
+              className="border[1px] rounded-lg p-4  bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-700"
             >
               <div className="flex items-center gap-3 mb-2">
                 <Image
@@ -103,15 +117,55 @@ export default function AdminTestemunhosPage() {
                 </div>
               )}
 
-              <button
-                onClick={() => handleAprovar(t.id)}
-                className="button !mt-2"
-              >
-                Aprovar
-              </button>
+              <div className="flex gap-3 items-center">
+                <button
+                  onClick={() => handleAprovar(t.id)}
+                  className="button  !mb-0"
+                >
+                  Aprovar
+                </button>
+
+                <button
+                  onClick={() => {
+                    setSelectedId(t.id)
+                    setShowModal(true)
+                  }}
+                  className=" button !mb-0 !flex items-center gap-2 !text-red-500 !border-red-500 hover:!bg-red-500 hover:!text-white"
+                  title="Excluir testemunho"
+                >
+                  Deletar
+                  <Trash2 size={20} />
+                </button>
+              </div>
             </li>
           ))}
         </ul>
+      )}
+
+      {showModal && selectedId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-bglightsecundary dark:bg-bgdarksecundary rounded-xl p-6 max-w-md w-full border-zinc-300 dark:border-zinc-700 border-[1px]">
+            <h2 className="text-lg font-semibold mb-4">Excluir testemunho</h2>
+            <p className="mb-6">
+              Tem certeza que deseja excluir este testemunho?
+            </p>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 rounded border"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => handleDelete(selectedId)}
+                className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

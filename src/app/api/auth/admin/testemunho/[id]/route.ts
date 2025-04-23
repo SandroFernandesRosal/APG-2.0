@@ -27,3 +27,29 @@ export async function PUT(
 
   return NextResponse.json(updated)
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+): Promise<NextResponse> {
+  const admin = await authMiddleware(req)
+  if (!admin) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
+
+  const { id } = await params
+
+  try {
+    await prisma.testemunho.delete({
+      where: { id },
+    })
+
+    return NextResponse.json({ message: 'Testemunho deletado com sucesso' })
+  } catch (error) {
+    console.error('Erro ao deletar testemunho:', error)
+    return NextResponse.json(
+      { error: 'Erro ao deletar testemunho' },
+      { status: 500 },
+    )
+  }
+}
