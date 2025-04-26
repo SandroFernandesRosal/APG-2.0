@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Ministerio } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
-import { useDataMinisterio, useLocal } from '@/store/useStore'
+import { useDataMinisterio, useLocal, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
@@ -35,6 +35,7 @@ export default function CarouselMinisterio({
   const [selectedProduct, setSelectedProduct] = useState<Ministerio | null>(
     null,
   )
+  const { showModal, setShowModal } = useShowModal()
 
   useEffect(() => {
     const fetchMinisterios = async () => {
@@ -214,7 +215,17 @@ export default function CarouselMinisterio({
                           Editar
                         </button>
                       )}
-                      <RemoveMinisterio id={product.id} />
+                      <button
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        className="button !mb-0"
+                        onClick={() => {
+                          setShowModal(product.id)
+                          setSelectedProduct(product)
+                        }}
+                      >
+                        Remover
+                      </button>
                     </div>
                   )}
                 </div>
@@ -223,6 +234,10 @@ export default function CarouselMinisterio({
           )}
         </div>
       </section>
+
+      {showModal && selectedProduct && (
+        <RemoveMinisterio id={selectedProduct.id} />
+      )}
 
       {openEdit && selectedProduct && (
         <EditMinisterio

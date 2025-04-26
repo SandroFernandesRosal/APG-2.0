@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
+import { useShowModal } from '@/store/useStore'
 import { Endereco } from '@/data/types/endereco'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
@@ -31,6 +31,7 @@ export default function CarouselEndereco() {
   const [openEndereco, setOpenEndereco] = useState(false)
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<Endereco | null>(null)
+  const { showModal, setShowModal } = useShowModal()
   const [coordinates, setCoordinates] = useState<{
     [key: string]: [number, number]
   }>({})
@@ -223,7 +224,17 @@ export default function CarouselEndereco() {
                             Editar
                           </button>
                         )}
-                        <RemoveEndereco id={product.id} />
+                        <button
+                          aria-hidden="true"
+                          tabIndex={-1}
+                          className="button !mb-0"
+                          onClick={() => {
+                            setShowModal(product.id)
+                            setSelectedProduct(product)
+                          }}
+                        >
+                          Remover
+                        </button>
                       </div>
                     )}
                   </div>
@@ -233,6 +244,10 @@ export default function CarouselEndereco() {
           )}
         </div>
       </section>
+
+      {showModal && selectedProduct && (
+        <RemoveEndereco id={selectedProduct.id} />
+      )}
 
       {openEdit && selectedProduct && (
         <EditEndereco

@@ -68,6 +68,14 @@ export default function Contatos() {
                 numerowhatsapp={item.whatsapp}
                 nomefacebook={item.facebook}
                 nomeinstagram={item.instagram}
+                contatoItem={{
+                  numerowhatsapp: item.whatsapp,
+                  nomeinstagram: item.instagram,
+                  nomefacebook: item.facebook,
+                  title: item.local,
+                  id: item.id,
+                  contatoItem: null,
+                }}
               />
             ))
           )

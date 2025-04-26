@@ -43,6 +43,11 @@ interface DataContatoState {
   setDataContato: (state: Contato[]) => void
 }
 
+interface ShowModalState {
+  showModal: string | null
+  setShowModal: (state: string | null) => void
+}
+
 interface MenuState {
   menu: boolean
   setMenu: (state: boolean) => void
@@ -84,6 +89,11 @@ interface DataTestemunhoState {
   dataTestemunho: Testemunho[]
   setDataTestemunho: (state: Testemunho[]) => void
 }
+
+export const useShowModal = create<ShowModalState>((set) => ({
+  showModal: null,
+  setShowModal: (state) => set({ showModal: state }),
+}))
 
 export const useSearch = create<SearchState>((set) => ({
   search: '',

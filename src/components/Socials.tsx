@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import EditContatos from './crud/EditContatos'
 import RemoveContatos from './crud/RemoveContatos'
+import { useShowModal } from '@/store/useStore'
 
 interface SocialsProps {
   numerowhatsapp: string
@@ -12,6 +13,7 @@ interface SocialsProps {
   nomefacebook: string
   title: string
   id: string
+  contatoItem: SocialsProps | null
 }
 
 export default function Socials({
@@ -20,8 +22,13 @@ export default function Socials({
   nomefacebook,
   title,
   id,
+  contatoItem,
 }: SocialsProps) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
+  const { showModal, setShowModal } = useShowModal()
+  const [selectedProduct, setSelectedProduct] = useState<SocialsProps | null>(
+    null,
+  )
 
   const token = useToken()
 
@@ -63,10 +70,24 @@ export default function Socials({
                 Editar
               </button>
             ) : null}
-            <RemoveContatos id={id} />
+            <button
+              aria-hidden="true"
+              tabIndex={-1}
+              className="button !mb-0"
+              onClick={() => {
+                setShowModal(id)
+                setSelectedProduct(contatoItem)
+              }}
+            >
+              Remover
+            </button>
           </div>
         )}
       </div>
+
+      {showModal && selectedProduct && (
+        <RemoveContatos id={selectedProduct.id} />
+      )}
 
       {openEdit && (
         <EditContatos

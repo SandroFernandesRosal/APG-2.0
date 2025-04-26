@@ -6,4 +6,5 @@ export interface Contato {
   facebook: string
   createdAt: string
   updatedAt: string
+  contatoitem: Contato | null
 }

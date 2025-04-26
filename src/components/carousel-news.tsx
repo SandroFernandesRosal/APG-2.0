@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { New } from '@/data/types/new'
 import { useEffect, useState } from 'react'
-import { useData, useLocal } from '@/store/useStore'
+import { useData, useLocal, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
@@ -28,6 +28,7 @@ export default function CarouselNews({
   const [openNew, setOpenNew] = useState(false)
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
+  const { showModal, setShowModal } = useShowModal()
   const [selectedProduct, setSelectedProduct] = useState<New | null>(null)
 
   useEffect(() => {
@@ -224,7 +225,18 @@ export default function CarouselNews({
                             Editar
                           </button>
                         )}
-                        <RemoveNew id={product.id} />
+
+                        <button
+                          aria-hidden="true"
+                          tabIndex={-1}
+                          className="button !mb-0"
+                          onClick={() => {
+                            setShowModal(product.id)
+                            setSelectedProduct(product)
+                          }}
+                        >
+                          Remover
+                        </button>
                       </div>
                     )}
                   </div>
@@ -234,6 +246,8 @@ export default function CarouselNews({
           )}
         </div>
       </section>
+
+      {showModal && selectedProduct && <RemoveNew id={selectedProduct.id} />}
 
       {openEdit && selectedProduct && (
         <EditNew

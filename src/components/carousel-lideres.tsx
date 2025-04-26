@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
 import { SobreLider } from '@/data/types/sobrelider'
 import { useEffect, useState } from 'react'
-import { useDataSobre } from '@/store/useStore'
+import { useDataSobre, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 
 import { useToken } from '@/hooks/useToken'
@@ -26,6 +26,7 @@ export default function CarouselLideres() {
   const [selectedProduct, setSelectedProduct] = useState<SobreLider | null>(
     null,
   )
+  const { showModal, setShowModal } = useShowModal()
 
   useEffect(() => {
     const fetchLideres = async () => {
@@ -189,7 +190,17 @@ export default function CarouselLideres() {
                           Editar
                         </button>
                       )}
-                      <RemoveSobreLider id={product.id} />
+                      <button
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        className="button !mb-0"
+                        onClick={() => {
+                          setShowModal(product.id)
+                          setSelectedProduct(product)
+                        }}
+                      >
+                        Remover
+                      </button>
                     </div>
                   )}
                 </div>
@@ -198,6 +209,10 @@ export default function CarouselLideres() {
           )}
         </div>
       </section>
+
+      {showModal && selectedProduct && (
+        <RemoveSobreLider id={selectedProduct.id} />
+      )}
 
       {openEdit && selectedProduct && (
         <EditSobreLider

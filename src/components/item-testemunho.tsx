@@ -6,6 +6,7 @@ import { UserIgreja } from '@/data/types/userigreja'
 import { Testemunho } from '@/data/types/testemunho'
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
+import { useShowModal } from '@/store/useStore'
 
 interface ItemTestemunhoProps {
   item: Testemunho
@@ -17,6 +18,7 @@ export default function ItemTestemunho({
   userIgreja,
 }: ItemTestemunhoProps) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
+  const { showModal, setShowModal } = useShowModal()
   const token = useToken()
 
   function formatDate(dateString: string): string {
@@ -80,10 +82,20 @@ export default function ItemTestemunho({
                 />
               </div>
             )}
-            <RemoveTestemunho id={item.id} />
+            <button
+              aria-hidden="true"
+              tabIndex={-1}
+              className="button !mb-0"
+              onClick={() => {
+                setShowModal(item.id)
+              }}
+            >
+              Remover
+            </button>
           </div>
         ) : null}
       </div>
+      {showModal && <RemoveTestemunho id={item.id} />}
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
+import { useShowModal } from '@/store/useStore'
 import { Doacao } from '@/data/types/doacao'
 import RemoveDoacao from './crud/RemoveDoacao'
 import AddDoacao from './crud/AddDoacao'
@@ -20,6 +20,7 @@ export default function CarouselDoacao() {
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<Doacao | null>(null)
+  const { showModal, setShowModal } = useShowModal()
 
   useEffect(() => {
     const fetchDoacoes = async () => {
@@ -161,7 +162,17 @@ export default function CarouselDoacao() {
                             Editar
                           </button>
                         ) : null}
-                        <RemoveDoacao id={product.id} />
+                        <button
+                          aria-hidden="true"
+                          tabIndex={-1}
+                          className="button !mb-0"
+                          onClick={() => {
+                            setShowModal(product.id)
+                            setSelectedProduct(product)
+                          }}
+                        >
+                          Remover
+                        </button>
                       </div>
                     )}
                   </div>
@@ -172,6 +183,7 @@ export default function CarouselDoacao() {
         </div>
       </section>
 
+      {showModal && selectedProduct && <RemoveDoacao id={selectedProduct.id} />}
       {openEdit && selectedProduct && (
         <EditDoacao
           localInitial={selectedProduct.local}

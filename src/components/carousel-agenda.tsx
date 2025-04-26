@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import { Agenda } from '@/data/types/agenda'
 import { useEffect, useState } from 'react'
-import { useDataAgenda, useLocal } from '@/store/useStore'
+import { useDataAgenda, useLocal, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
@@ -29,6 +29,7 @@ export default function CarouselAgenda({
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<Agenda | null>(null)
+  const { showModal, setShowModal } = useShowModal()
 
   useEffect(() => {
     const fetchAgendaData = async () => {
@@ -193,7 +194,17 @@ export default function CarouselAgenda({
                           Editar
                         </button>
                       ) : null}
-                      <RemoveAgenda id={product.id} />
+                      <button
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        className="button !mb-0"
+                        onClick={() => {
+                          setShowModal(product.id)
+                          setSelectedProduct(product)
+                        }}
+                      >
+                        Remover
+                      </button>
                     </div>
                   )}
                 </div>
@@ -202,6 +213,8 @@ export default function CarouselAgenda({
           )}
         </div>
       </section>
+
+      {showModal && selectedProduct && <RemoveAgenda id={selectedProduct.id} />}
 
       {openEdit && selectedProduct && (
         <EditAgenda

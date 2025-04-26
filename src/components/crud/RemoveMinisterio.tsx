@@ -1,8 +1,9 @@
 'use client'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
-import { useState, MouseEvent } from 'react'
+import { useLocal, useShowModal } from '../../store/useStore'
+import { useState } from 'react'
+import ShowModal from '../showModal'
 
 interface RemoveMinisterioProps {
   id: string
@@ -10,13 +11,12 @@ interface RemoveMinisterioProps {
 
 export default function RemoveMinisterio({ id }: RemoveMinisterioProps) {
   const { local } = useLocal()
+  const { showModal, setShowModal } = useShowModal()
   const router = useRouter()
   const token = Cookies.get('tokennn')
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleSubmit(event: MouseEvent<HTMLButtonElement>) {
-    event.preventDefault()
-
+  async function handleDelete() {
     if (isDeleting) return
     setIsDeleting(true)
 
@@ -43,12 +43,21 @@ export default function RemoveMinisterio({ id }: RemoveMinisterioProps) {
   }
 
   return (
-    <button
-      onClick={handleSubmit}
-      disabled={isDeleting}
-      className="button !mb-0"
-    >
-      {isDeleting ? 'Removendo...' : 'Remover'}
-    </button>
+    <>
+      {' '}
+      <button
+        onClick={() => setShowModal(id)}
+        disabled={isDeleting}
+        className="button !mb-0"
+      >
+        {isDeleting ? 'Removendo...' : 'Remover'}
+      </button>
+      <ShowModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleDelete={handleDelete}
+        id={id}
+      />
+    </>
   )
 }

@@ -1,8 +1,9 @@
 'use client'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
-import { useState, MouseEvent } from 'react'
+import { useLocal, useShowModal } from '../../store/useStore'
+import { useState } from 'react'
+import ShowModal from '../showModal'
 
 interface RemoveNewProps {
   id: string
@@ -10,13 +11,13 @@ interface RemoveNewProps {
 
 export default function RemoveNew({ id }: RemoveNewProps) {
   const { local } = useLocal()
+  const { showModal, setShowModal } = useShowModal()
   const router = useRouter()
   const token = Cookies.get('tokennn')
+
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleSubmit(event: MouseEvent<HTMLButtonElement>) {
-    event.preventDefault()
-
+  async function handleDelete() {
     if (isDeleting) return
     setIsDeleting(true)
 
@@ -39,18 +40,27 @@ export default function RemoveNew({ id }: RemoveNewProps) {
       console.error('Erro ao remover notícia:', error)
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 
   return (
-    <button
-      onClick={handleSubmit}
-      disabled={isDeleting}
-      className="button !mb-0"
-      aria-hidden="true"
-      tabIndex={-1}
-    >
-      {isDeleting ? 'Removendo...' : 'Remover'}
-    </button>
+    <>
+      <button
+        onClick={() => setShowModal(id)}
+        disabled={isDeleting}
+        className="button !mb-0"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        {isDeleting ? 'Removendo...' : 'Remover'}
+      </button>
+      <ShowModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleDelete={handleDelete}
+        id={id}
+      />
+    </>
   )
 }
