@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import Image from 'next/image'
 
 interface AddSobreLiderProps {
@@ -15,6 +15,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
   const [title, setTitle] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [preview, setPreview] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const router = useRouter()
@@ -22,6 +23,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -31,6 +33,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
 
     if (!fileToUpload) {
       alert('Você precisa adicionar uma imagem.')
+      setIsSubmitting(false)
       return
     }
 
@@ -49,6 +52,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
       coverUrl = data.fileUrl
     } catch (error) {
       console.error('Erro ao carregar arquivo:', error)
+      setIsSubmitting(false)
       return
     }
 
@@ -73,6 +77,8 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
       console.log('Erro ao criar líder:', res.statusText)
     } catch (error) {
       console.error('Erro durante a requisição à API:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -87,7 +93,7 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 flex min-h-screen z-50 w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
@@ -104,15 +110,15 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
         htmlFor="coverUrl"
         className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
       >
-        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
         Anexar foto (até 5mb)
       </label>
 
       {preview && (
         <Image
           src={preview}
-          width={200}
-          height={200}
+          width={150}
+          height={150}
           alt={`Imagem de ${name}`}
           className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
         />
@@ -142,8 +148,19 @@ export default function AddSobreLider({ open, setOpen }: AddSobreLiderProps) {
         onChange={onFileSelected}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Adicionando líder...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )

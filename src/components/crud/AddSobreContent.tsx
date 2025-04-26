@@ -1,6 +1,7 @@
 'use client'
+
 import Cookies from 'js-cookie'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
@@ -17,8 +18,8 @@ export default function AddSobreContent({
 }: AddSobreContentProps) {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
-
   const [preview, setPreview] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false) // Estado para controlar o spinner
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const router = useRouter()
@@ -26,6 +27,7 @@ export default function AddSobreContent({
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -37,6 +39,7 @@ export default function AddSobreContent({
 
     if (!fileToUpload) {
       alert('Você precisa adicionar uma imagem.')
+      setIsSubmitting(false)
       return
     }
 
@@ -53,6 +56,7 @@ export default function AddSobreContent({
         coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
+        setIsSubmitting(false)
         return
       }
     }
@@ -77,12 +81,15 @@ export default function AddSobreContent({
         setOpen(false)
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
+        setIsSubmitting(false)
         return newss
       }
 
       console.log(newss)
+      setIsSubmitting(false)
     } catch (error) {
       console.error('Erro ao criar história:', error)
+      setIsSubmitting(false)
     }
 
     return null
@@ -118,11 +125,12 @@ export default function AddSobreContent({
 
       <label
         htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer items-center gap-2  font-bold"
+        className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
       >
-        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
         Anexar foto (até 50mb)
       </label>
+
       {preview && (
         <Image
           width={200}
@@ -156,12 +164,23 @@ export default function AddSobreContent({
         name="coverUrl"
         id="coverUrl"
         required
-        placeholder="Digite a url da notícia"
+        placeholder="Escolha uma imagem"
         onChange={onFileSelected}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin text-lg" />
+            Adicionando história...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )

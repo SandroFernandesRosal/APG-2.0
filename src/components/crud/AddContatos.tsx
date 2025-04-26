@@ -1,10 +1,9 @@
 'use client'
 import Cookies from 'js-cookie'
-
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
 
 interface AddContatoProps {
   openContato: boolean
@@ -19,12 +18,14 @@ export default function AddContatos({
   const [whatsapp, setWhatsapp] = useState<string>('')
   const [facebook, setFacebook] = useState<string>('')
   const [instagram, setInstagram] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     try {
       const response = await fetch('/api/contato', {
@@ -53,6 +54,8 @@ export default function AddContatos({
       console.log(contato)
     } catch (error) {
       console.error('Erro ao criar contato:', error)
+    } finally {
+      setIsSubmitting(false)
     }
 
     return null
@@ -65,18 +68,19 @@ export default function AddContatos({
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
         Adicionar contatos{' '}
-        {openContato === true && (
+        {openContato && (
           <AiFillCloseCircle
             onClick={() => setOpenContato(false)}
             className="cursor-pointer text-2xl font-bold text-black dark:text-white"
           />
         )}
       </h1>
+
       <input
         className="input mt-4"
         type="text"
         name="local"
-        required={true}
+        required
         placeholder="Digite o local"
         onChange={(e) => setLocal(e.target.value)}
       />
@@ -85,7 +89,7 @@ export default function AddContatos({
         className="input"
         type="text"
         name="whatsapp"
-        required={true}
+        required
         placeholder="Digite o número whatsapp"
         onChange={(e) => setWhatsapp(e.target.value)}
       />
@@ -93,9 +97,9 @@ export default function AddContatos({
       <input
         className="input"
         type="text"
-        name="instagran"
-        required={true}
-        placeholder="Digite o instagran"
+        name="instagram"
+        required
+        placeholder="Digite o instagram"
         onChange={(e) => setInstagram(e.target.value)}
       />
 
@@ -103,12 +107,24 @@ export default function AddContatos({
         className="input"
         type="text"
         name="facebook"
-        required={true}
+        required
         placeholder="Digite o facebook"
         onChange={(e) => setFacebook(e.target.value)}
       />
-      <button type="submit" className="button !mb-0">
-        Enviar
+
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Adicionando contato...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )

@@ -9,7 +9,9 @@ export default function ShowModal({
   handleDelete,
   showModal,
   setShowModal,
+  id,
 }: ShowModalProps) {
+  if (showModal !== id) return null
   return (
     <>
       {showModal && (

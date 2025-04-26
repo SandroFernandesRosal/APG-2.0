@@ -5,7 +5,7 @@ import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import Image from 'next/image'
 
 interface AddMinisterioProps {
@@ -22,6 +22,7 @@ export default function AddMinisterio({
   const formRef = useRef<HTMLFormElement | null>(null)
   const [igreja, setIgreja] = useState<string>('')
   const [preview, setPreview] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { local } = useLocal()
   const router = useRouter()
@@ -29,6 +30,7 @@ export default function AddMinisterio({
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -38,6 +40,7 @@ export default function AddMinisterio({
 
     if (!fileToUpload) {
       alert('Você precisa adicionar uma imagem.')
+      setIsSubmitting(false)
       return
     }
 
@@ -56,6 +59,7 @@ export default function AddMinisterio({
       coverUrl = uploadResult.fileUrl
     } catch (error) {
       console.error('Erro ao fazer upload da imagem:', error)
+      setIsSubmitting(false)
       return
     }
 
@@ -84,6 +88,8 @@ export default function AddMinisterio({
       }
     } catch (error) {
       console.error('Erro durante requisição:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -162,8 +168,19 @@ export default function AddMinisterio({
         onChange={onFileSelected}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Adicionando líder...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )

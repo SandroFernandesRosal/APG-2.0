@@ -1,7 +1,7 @@
 'use client'
 
 import Cookies from 'js-cookie'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
@@ -18,6 +18,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
   const [content, setContent] = useState('')
   const [destaque, setDestaque] = useState(false)
   const [preview, setPreview] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const { local } = useLocal()
@@ -26,6 +27,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -35,6 +37,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
 
     if (!fileToUpload) {
       alert('Você precisa adicionar uma imagem.')
+      setIsSubmitting(false)
       return
     }
 
@@ -52,6 +55,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
       coverUrl = uploadResult.fileUrl
     } catch (error) {
       console.error('Erro ao fazer upload da imagem:', error)
+      setIsSubmitting(false)
       return
     }
 
@@ -73,7 +77,6 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
 
       if (response.ok) {
         setOpenNew(false)
-
         router.push('/')
         window.location.href = '/'
       } else {
@@ -82,6 +85,8 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
       }
     } catch (error) {
       console.error('Erro ao enviar notícia:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -169,8 +174,19 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
         </label>
       </div>
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Adicionando notícia...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )

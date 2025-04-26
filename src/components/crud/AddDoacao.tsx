@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
 
 interface AddDoacaoProps {
   openDoacao: boolean
@@ -20,12 +21,14 @@ export default function AddDoacao({
   const [nomebanco, setNomeBanco] = useState<string>('')
   const [pix, setPix] = useState<string>('')
   const [nomepix, setNomePix] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     try {
       const response = await fetch('/api/doacao', {
@@ -57,6 +60,8 @@ export default function AddDoacao({
       console.log(doacao)
     } catch (error) {
       console.error('Erro ao criar doação:', error)
+    } finally {
+      setIsSubmitting(false)
     }
 
     return null
@@ -64,22 +69,24 @@ export default function AddDoacao({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50  flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
       onSubmit={handleSubmit}
     >
       <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar igreja{' '}
-        {openDoacao === true && (
+        Adicionar doação{' '}
+        {openDoacao && (
           <AiFillCloseCircle
             onClick={() => setOpenDoacao(false)}
-            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+            className="cursor-pointer text-2xl font-bold text-black dark:text-white"
           />
         )}
       </h1>
+
       <input
         className="input mt-4"
         type="text"
         name="local"
+        required
         placeholder="Digite um local"
         onChange={(e) => setLocal(e.target.value)}
       />
@@ -88,6 +95,7 @@ export default function AddDoacao({
         className="input"
         type="text"
         name="banco"
+        required
         placeholder="Digite o nome do banco"
         onChange={(e) => setBanco(e.target.value)}
       />
@@ -96,6 +104,7 @@ export default function AddDoacao({
         className="input"
         type="text"
         name="conta"
+        required
         placeholder="Digite número da conta"
         onChange={(e) => setConta(e.target.value)}
       />
@@ -104,6 +113,7 @@ export default function AddDoacao({
         className="input"
         type="text"
         name="agencia"
+        required
         placeholder="Digite a agência"
         onChange={(e) => setAgencia(e.target.value)}
       />
@@ -112,6 +122,7 @@ export default function AddDoacao({
         className="input"
         type="text"
         name="nomeBanco"
+        required
         placeholder="Nome do beneficiário"
         onChange={(e) => setNomeBanco(e.target.value)}
       />
@@ -120,6 +131,7 @@ export default function AddDoacao({
         className="input"
         type="text"
         name="pix"
+        required
         placeholder="Digite a chave pix"
         onChange={(e) => setPix(e.target.value)}
       />
@@ -128,12 +140,24 @@ export default function AddDoacao({
         className="input"
         type="text"
         name="nomePix"
+        required
         placeholder="Nome do beneficiário"
         onChange={(e) => setNomePix(e.target.value)}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Adicionando igreja...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )

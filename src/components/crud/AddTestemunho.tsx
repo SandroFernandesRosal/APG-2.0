@@ -1,16 +1,18 @@
 'use client'
+
 import Cookies from 'js-cookie'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef } from 'react'
+import { useState, useRef, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-import { UserIgreja } from '@/data/types/userigreja'
-
 interface AddTestemunhoProps {
   setOpen: (value: boolean) => void
-  userIgreja: UserIgreja
+  userIgreja: {
+    name: string
+    avatarUrl: string
+  }
 }
 
 export default function AddTestemunho({
@@ -19,40 +21,39 @@ export default function AddTestemunho({
 }: AddTestemunhoProps) {
   const [content, setContent] = useState('')
   const [preview, setPreview] = useState<string | null>(null)
-  const formRef = useRef<HTMLFormElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
+  const { name, avatarUrl } = userIgreja
   const router = useRouter()
   const token = Cookies.get('tokenigreja')
 
-  const { name, avatarUrl } = userIgreja
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     const form = formRef.current
-    if (!form) return
-
-    const fileInput = form.querySelector(
+    const fileInput = form?.querySelector(
       'input[type="file"]',
     ) as HTMLInputElement
     const fileToUpload = fileInput?.files?.[0]
 
     let coverUrl = ''
-
     if (fileToUpload) {
       const formData = new FormData()
       formData.append('file', fileToUpload)
 
       try {
-        const uploadResponse = await fetch('/api/upload', {
+        const uploadRes = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         })
-
-        const data = await uploadResponse.json()
-        coverUrl = data.fileUrl
+        const uploadResult = await uploadRes.json()
+        coverUrl = uploadResult.fileUrl
       } catch (error) {
-        console.error('Erro ao carregar arquivo:', error)
+        console.error('Erro ao fazer upload da imagem:', error)
+        setIsSubmitting(false)
+        return
       }
     }
 
@@ -72,25 +73,23 @@ export default function AddTestemunho({
       })
 
       if (response.ok) {
-        const newTestemunho = await response.json()
         setOpen(false)
         router.push('/testemunhos')
         window.location.href = '/testemunhos'
-        return newTestemunho
+      } else {
+        const errorData = await response.json()
+        console.error('Erro ao criar testemunho:', errorData)
       }
-
-      console.log('Erro ao criar testemunho:', response.statusText)
     } catch (error) {
-      console.error('Erro ao criar testemunho:', error)
+      console.error('Erro durante requisição:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
-  function onFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
+  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
-
-    if (!files || files.length === 0) {
-      return
-    }
+    if (!files) return
 
     const previewUrl = URL.createObjectURL(files[0])
     setPreview(previewUrl)
@@ -99,7 +98,7 @@ export default function AddTestemunho({
   return (
     <form
       ref={formRef}
-      className="z-20 flex w-[100vw] flex-col items-start gap-3  px-6 py-4   md:flex-row md:justify-center"
+      className="z-20 flex w-[100vw] flex-col items-start gap-3 px-6 py-4 md:flex-row md:justify-center"
       onSubmit={handleSubmit}
     >
       {avatarUrl && (
@@ -108,11 +107,11 @@ export default function AddTestemunho({
           height={120}
           src={avatarUrl}
           alt={name}
-          className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary  dark:border-secundary"
+          className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary dark:border-secundary"
         />
       )}
 
-      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary  md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800 mt-4">
+      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800 mt-4">
         <div className="flex items-center justify-between">
           <p className="pl-3 text-lg font-bold">{name}</p>
           <button onClick={() => setOpen(false)} className="pr-1">
@@ -139,6 +138,7 @@ export default function AddTestemunho({
             />
           </div>
         )}
+
         <div className="mx-2 mb-2 flex w-full justify-center gap-4">
           <label
             htmlFor="coverUrl"
@@ -147,8 +147,20 @@ export default function AddTestemunho({
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto (Opcional)
           </label>
-          <button type="submit" className="button !mb-0">
-            Enviar
+
+          <button
+            type="submit"
+            className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <FaSpinner className="animate-spin" />
+                Enviando testemunho...
+              </>
+            ) : (
+              'Enviar'
+            )}
           </button>
         </div>
       </div>

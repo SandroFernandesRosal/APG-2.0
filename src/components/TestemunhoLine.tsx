@@ -132,7 +132,13 @@ export default function TestemunhoLine({
 
             {open && (
               <div className="md:min-w-[35%]">
-                <AddTestemunho userIgreja={userIgreja} setOpen={setOpen} />
+                <AddTestemunho
+                  userIgreja={{
+                    ...userIgreja,
+                    avatarUrl: userIgreja.avatarUrl || '',
+                  }}
+                  setOpen={setOpen}
+                />
               </div>
             )}
           </>

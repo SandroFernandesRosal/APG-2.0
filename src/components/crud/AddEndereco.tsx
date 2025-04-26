@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
 
 interface AddEnderecoProps {
   openEndereco: boolean
@@ -18,12 +19,14 @@ export default function AddEndereco({
   const [cep, setCep] = useState('')
   const [numero, setNumero] = useState('')
   const [cidade, setCidade] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsSubmitting(true)
 
     try {
       const response = await fetch('/api/endereco', {
@@ -52,6 +55,8 @@ export default function AddEndereco({
       }
     } catch (error) {
       console.error('Erro ao criar endereço:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -69,6 +74,7 @@ export default function AddEndereco({
           />
         )}
       </h1>
+
       <input
         className="input mt-4"
         type="text"
@@ -105,8 +111,19 @@ export default function AddEndereco({
         onChange={(e) => setCep(e.target.value)}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Adicionando endereço...
+          </>
+        ) : (
+          'Enviar'
+        )}
       </button>
     </form>
   )
