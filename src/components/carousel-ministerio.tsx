@@ -22,8 +22,10 @@ import MinisterioHeader from './ministerio-header'
 
 export default function CarouselMinisterio({
   titleproducts,
+  children,
 }: {
   titleproducts: string
+  children?: React.ReactNode
 }) {
   const { dataMinisterio, setDataMinisterio } = useDataMinisterio()
   const { local, setLocal } = useLocal()
@@ -113,6 +115,8 @@ export default function CarouselMinisterio({
       <section className="text-textprimary flex flex-col items-center relative justify-center overflow-hidden w-full">
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <QuemSomosHeader />
+          {children}
+
           <CarouselEndereco />
         </section>
 

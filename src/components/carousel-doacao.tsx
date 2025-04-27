@@ -12,6 +12,14 @@ import EditDoacao from './crud/EditDoacao'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
 import DoacaoHeader from './doacao-header'
+import {
+  Church,
+  CreditCard,
+  Landmark,
+  BadgeCent,
+  Copy,
+  KeyRound,
+} from 'lucide-react'
 
 export default function CarouselDoacao() {
   const [data, setData] = useState<Doacao[]>([])
@@ -21,17 +29,16 @@ export default function CarouselDoacao() {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<Doacao | null>(null)
   const { showModal, setShowModal } = useShowModal()
+  const [copiedId, setCopiedId] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchDoacoes = async () => {
       setLoading(true)
       try {
         const response = await fetch('/api/doacao')
-
         if (!response.ok) {
           throw new Error('Falha ao carregar doações')
         }
-
         const doacoes = await response.json()
         setData(doacoes)
       } catch (error) {
@@ -40,7 +47,6 @@ export default function CarouselDoacao() {
         setLoading(false)
       }
     }
-
     fetchDoacoes()
   }, [])
 
@@ -87,6 +93,19 @@ export default function CarouselDoacao() {
     ],
   }
 
+  const handleCopy = async (text: string, id: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedId(id)
+
+      setTimeout(() => {
+        setCopiedId(null)
+      }, 2000)
+    } catch (err) {
+      console.error('Erro ao copiar PIX:', err)
+    }
+  }
+
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full border-b-[1px] border-zinc-300 dark:border-zinc-800">
@@ -99,7 +118,6 @@ export default function CarouselDoacao() {
                 Adicionar igreja
               </button>
             )}
-
             {openDoacao && (
               <div className="md:min-w-[35%]">
                 <AddDoacao
@@ -132,26 +150,55 @@ export default function CarouselDoacao() {
             >
               {data.map((product: Doacao) => (
                 <div
-                  className="justify-between flex flex-col h-[400px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
+                  className="flex flex-col justify-between h-[400px] rounded-lg  border-[1px] border-zinc-300 dark:border-zinc-700  transition-all"
                   key={product.id}
                 >
-                  <div className="border-b-[3px] border-primary dark:border-secundary flex text-xl justify-around w-full h-[50%] py-1 flex-col items-center">
-                    <h1 className="font-bold">{product.local}</h1>
-                    <span className="flex items-center text-gray-900 dark:text-white">
+                  <div className=" flex flex-col  justify-center  gap-2 h-[50%]  w-fit place-self-center">
+                    <h1 className="font-bold text-lg flex items-center gap-2">
+                      <Church className="w-5 h-5" />
+                      {product.local}
+                    </h1>
+                    <span className="flex items-center gap-2 ">
+                      <Landmark className="w-4 h-4" />
                       {product.banco}
                     </span>
-                    <span>C: {product.conta}</span>
-                    <span>Ag: {product.agencia}</span>
+                    <span className="flex items-center gap-2 ">
+                      <CreditCard className="w-4 h-4" />
+                      Conta: {product.conta}
+                    </span>
+                    <span className="flex items-center gap-2 ">
+                      <BadgeCent className="w-4 h-4" />
+                      Agência: {product.agencia}
+                    </span>
                     <span>{product.nomebanco}</span>
                   </div>
-                  <div className="flex flex-col justify-center items-center h-[50%]">
-                    <span>Chave pix:</span>
-                    <h1>{product.pix}</h1>
+
+                  <div className="border-b-[1px] border-zinc-300 dark:border-zinc-700" />
+
+                  <div className="flex flex-col justify-center h-[50%] gap-2  w-fit place-self-center">
+                    <span className="font-semibold text-center flex items-center justify-center gap-2 text-lg">
+                      <KeyRound className="w-4 h-4" />
+                      Chave PIX:
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <h1 className="break-all">{product.pix}</h1>
+                      <button
+                        onClick={() => handleCopy(product.pix, product.id)}
+                        className="p-1 hover:bg-primary/20 dark:hover:bg-secundary/20 rounded-md transition"
+                      >
+                        <Copy className="w-4 h-4 text-primary dark:text-secundary" />
+                      </button>
+                    </div>
+                    {copiedId === product.id && (
+                      <span className="text-xs text-green-500 transition-all">
+                        PIX copiado!
+                      </span>
+                    )}
                     <h2>{product.nomepix}</h2>
 
                     {token && (
-                      <div className="mb-1 flex w-full flex-1 items-end justify-around text-white">
-                        {openEdit !== product.id ? (
+                      <div className="flex w-full mt-4 gap-2 justify-around">
+                        {openEdit !== product.id && (
                           <button
                             className="button !mb-0"
                             onClick={() => {
@@ -161,7 +208,7 @@ export default function CarouselDoacao() {
                           >
                             Editar
                           </button>
-                        ) : null}
+                        )}
                         <button
                           aria-hidden="true"
                           tabIndex={-1}
