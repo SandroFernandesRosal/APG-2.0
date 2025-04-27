@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import LogoutIgreja from '@/components/LogoutIgreja'
+import { FaSpinner } from 'react-icons/fa'
 
 export default function Register() {
   const [login, setLogin] = useState<string>('')
@@ -12,6 +13,7 @@ export default function Register() {
   const [isAdminLogged, setIsAdminLogged] = useState(false)
   const [isMemberLogged, setIsMemberLogged] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isLogged, setIsLogged] = useState(false)
 
   const router = useRouter()
 
@@ -45,6 +47,8 @@ export default function Register() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+
+    setIsLogged(true)
 
     try {
       const response = await fetch('/api/auth/admin/login', {
@@ -148,8 +152,18 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className="button">
-            Entrar
+          <button
+            type="submit"
+            className="button !mb-0 flex items-center gap-2"
+          >
+            {isLogged ? (
+              <>
+                <FaSpinner className="animate-spin" />
+                Entrando...
+              </>
+            ) : (
+              'Entrar'
+            )}
           </button>
 
           <Link
