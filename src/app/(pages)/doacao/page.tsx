@@ -1,5 +1,5 @@
 import DoacaoHeader from '@/components/doacao-header'
-import Doe from '../../../components/Doe'
+import Doe from '@/components/Doe'
 
 export default function Doacao() {
   return (
