@@ -28,20 +28,44 @@ export default function ItemTestemunho({
 
   return (
     <div className="flex w-full flex-col items-start gap-3 px-6 py-4 md:flex-row md:justify-center">
-      {item.avatarUrl && (
-        <Image
-          width={120}
-          height={120}
-          src={item.avatarUrl}
-          alt={item.name}
-          className="p-[2px] mr-1  rounded-full border-[1px] border-primary dark:border-secundary"
-        />
-      )}
-
       <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
-        <div className="flex items-center justify-between px-3">
-          <p className="text-lg font-bold">{item.name}</p>
-          <span className="text-sm">{formatDate(item.createdAt)}</span>
+        <div className="flex flex-col  gap-5 p-3 ">
+          <div className="flex items-center  md:justify-between">
+            <div className="flex items-center gap-4 ">
+              {item.avatarUrl && (
+                <Image
+                  width={80}
+                  height={80}
+                  src={item.avatarUrl}
+                  alt={item.name}
+                  className="p-[2px] mr-1  rounded-full border-[1px] border-primary dark:border-secundary"
+                />
+              )}
+              <div>
+                <p className="text-lg font-bold">{item.name}</p>
+                <div className="justify-center flex md:hidden">
+                  {item.updatedAt ? (
+                    <span className="text-xs">
+                      Atualizado: {formatDate(item.updatedAt)}
+                    </span>
+                  ) : (
+                    <span className="text-xs">
+                      {formatDate(item.createdAt)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>{' '}
+            <div className="md:flex justify-center hidden">
+              {item.updatedAt ? (
+                <span className="text-xs">
+                  Atualizado: {formatDate(item.updatedAt)}
+                </span>
+              ) : (
+                <span className="text-xs">{formatDate(item.createdAt)}</span>
+              )}
+            </div>
+          </div>
         </div>
 
         <p className="pl-3">{item.content}</p>
