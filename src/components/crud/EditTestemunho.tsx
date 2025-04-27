@@ -1,6 +1,6 @@
 'use client'
 import Cookies from 'js-cookie'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -27,6 +27,7 @@ export default function EditTestemunho({
 }: EditTestemunhoProps) {
   const [content, setContent] = useState(conteudo)
   const [preview, setPreview] = useState<string | null>(null)
+  const [isEdit, setIsEdit] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
   const router = useRouter()
@@ -35,7 +36,7 @@ export default function EditTestemunho({
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
+    setIsEdit(true)
     const form = formRef.current
     if (!form) return
 
@@ -176,8 +177,18 @@ export default function EditTestemunho({
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar foto {img && 'nova '}(Opcional)
           </label>
-          <button type="submit" className="button !mb-0">
-            Editar
+          <button
+            type="submit"
+            className="button !mb-0 items-center flex gap-2 justify-center"
+          >
+            {isEdit ? (
+              <>
+                <FaSpinner className="animate-spin" />
+                Editando...
+              </>
+            ) : (
+              'Editar'
+            )}
           </button>
         </div>
       </div>

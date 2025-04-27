@@ -61,6 +61,9 @@ export default function AdminTestemunhosPage() {
     })
 
     setTestemunhos((prev) => prev.filter((t) => t.id !== id))
+
+    router.push('/perfil/adm/testemunhos')
+    window.location.href = '/perfil/adm/testemunhos'
   }
 
   async function handleDelete(id: string) {
@@ -73,6 +76,8 @@ export default function AdminTestemunhosPage() {
       setTestemunhos((prev) => prev.filter((t) => t.id !== id))
       setShowModal(false)
       setSelectedId(null)
+      router.push('/perfil/adm/testemunhos')
+      window.location.href = '/perfil/adm/testemunhos'
     } else {
       const errText = await res.text()
       console.error('Erro ao deletar:', errText)
@@ -91,7 +96,7 @@ export default function AdminTestemunhosPage() {
           {testemunhos.map((t) => (
             <li
               key={t.id}
-              className="border[1px] rounded-lg p-4  bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-700"
+              className="flex  flex-col border[1px] rounded-lg p-4  bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-700"
             >
               <div className="flex items-center gap-3 mb-2">
                 <Image
@@ -107,12 +112,12 @@ export default function AdminTestemunhosPage() {
               <p className="mb-2">{t.content}</p>
 
               {t.coverUrl && (
-                <div className="relative w-full max-w-md h-64 mb-2">
+                <div className="relative w-full max-w-md h-64 mb-2 flex self-center ">
                   <Image
                     src={t.coverUrl}
                     alt="Foto testemunho"
                     fill
-                    className="rounded-lg object-cover"
+                    className="rounded-lg object-contain"
                   />
                 </div>
               )}

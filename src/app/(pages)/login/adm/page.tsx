@@ -63,6 +63,7 @@ export default function Register() {
       const user = await response.json()
 
       if (!response.ok) {
+        setIsLogged(false)
         setError(user.error || 'Erro ao fazer login.')
         return
       }
