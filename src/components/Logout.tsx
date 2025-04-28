@@ -11,7 +11,7 @@ export default function Logout() {
     console.log('Iniciando logout...')
 
     try {
-      console.log('Fazendo requisição para /api/auth/adminlogout...')
+      console.log('Fazendo requisição para /api/auth/admin/logout...')
 
       const response = await fetch('/api/auth/admin/logout', {
         method: 'POST',

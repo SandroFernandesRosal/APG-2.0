@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
 
 interface EditEnderecoProps {
   setOpenEdit: (open: string | null) => void
@@ -29,12 +30,14 @@ export default function EditEndereco({
   const [cep, setCep] = useState(cepInitial)
   const [numero, setNumero] = useState(numeroInitial)
   const [cidade, setCidade] = useState(cidadeInitial)
+  const [isEditing, setIsEditing] = useState(false)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsEditing(true)
 
     try {
       const response = await fetch(`/api/endereco/${id}`, {
@@ -132,8 +135,18 @@ export default function EditEndereco({
         onChange={(e) => setCep(e.target.value)}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center"
+      >
+        {isEditing ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Editando endereço...
+          </>
+        ) : (
+          'Editar'
+        )}
       </button>
     </form>
   )

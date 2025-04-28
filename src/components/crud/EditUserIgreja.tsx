@@ -1,5 +1,5 @@
 'use client'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
@@ -24,6 +24,7 @@ export default function EditUserIgreja({
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [preview, setPreview] = useState<string | null>(null)
+  const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
   const PlaceHolder =
     'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
@@ -32,6 +33,7 @@ export default function EditUserIgreja({
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsEditing(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -90,6 +92,15 @@ export default function EditUserIgreja({
             avatarUrl,
           }),
         })
+
+        if (response.ok) {
+          await fetch('/api/auth/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        }
 
         Cookies.remove('tokenigreja')
         router.push('/login/igreja')
@@ -199,8 +210,18 @@ export default function EditUserIgreja({
                 onChange={onFileSelected}
               />
 
-              <button type="submit" className="button !mb-0">
-                Editar
+              <button
+                type="submit"
+                className="button !mb-0 flex items-center gap-2 justify-center"
+              >
+                {isEditing ? (
+                  <>
+                    <FaSpinner className="animate-spin" />
+                    Editando usuário...
+                  </>
+                ) : (
+                  'Editar'
+                )}
               </button>
             </form>
           </div>

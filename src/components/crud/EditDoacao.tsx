@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
 
 interface EditDoacaoProps {
   setOpenEdit: (open: string | null) => void
@@ -34,12 +35,14 @@ export default function EditDoacao({
   const [nomebanco, setNomeBanco] = useState(nomebancoInitial)
   const [pix, setPix] = useState(pixInitial)
   const [nomepix, setNomePix] = useState(nomepixInitial)
+  const [isEditing, setIsEditing] = useState(false)
 
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsEditing(true)
 
     try {
       const response = await fetch(`/api/doacao/${id}`, {
@@ -146,8 +149,18 @@ export default function EditDoacao({
         value={nomepix}
         onChange={(e) => setNomePix(e.target.value)}
       />
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center"
+      >
+        {isEditing ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Editando igreja...
+          </>
+        ) : (
+          'Editar'
+        )}
       </button>
     </form>
   )

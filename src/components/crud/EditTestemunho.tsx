@@ -184,7 +184,7 @@ export default function EditTestemunho({
             {isEdit ? (
               <>
                 <FaSpinner className="animate-spin" />
-                Editando...
+                Editando testemunho...
               </>
             ) : (
               'Editar'

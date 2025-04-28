@@ -19,6 +19,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
     }
 
+    const MAX_SIZE = 50 * 1024 * 1024
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json(
+        { error: 'File size exceeds 50MB limit' },
+        { status: 400 },
+      )
+    }
+
     const mimeTypeRegex = /^(image|video)\/\w+/
     if (!mimeTypeRegex.test(file.type)) {
       return NextResponse.json(

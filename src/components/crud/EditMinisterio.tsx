@@ -1,7 +1,7 @@
 'use client'
 
 import Cookies from 'js-cookie'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
@@ -29,6 +29,7 @@ export default function EditMinisterio({
   const [name, setName] = useState<string>('')
   const [igreja, setIgreja] = useState<string>('')
   const [preview, setPreview] = useState<string | null>(null)
+  const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const { local } = useLocal()
@@ -37,6 +38,7 @@ export default function EditMinisterio({
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsEditing(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -177,8 +179,18 @@ export default function EditMinisterio({
         onChange={onFileSelected}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center"
+      >
+        {isEditing ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Editando líder...
+          </>
+        ) : (
+          'Editar'
+        )}
       </button>
     </form>
   )

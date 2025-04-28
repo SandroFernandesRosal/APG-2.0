@@ -2,8 +2,9 @@
 import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
+import { useLocal } from '@/store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
 
 interface EditAgendaProps {
   setOpenEdit: (open: string | null) => void
@@ -23,6 +24,7 @@ export default function EditAgenda({
   const [day, setDay] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [hour, setHour] = useState<string>('')
+  const [isEditing, setIsEditing] = useState(false)
 
   const { local } = useLocal()
   const router = useRouter()
@@ -30,6 +32,7 @@ export default function EditAgenda({
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsEditing(true)
 
     try {
       const response = await fetch(`/api/${local}/agenda/${id}`, {
@@ -104,8 +107,18 @@ export default function EditAgenda({
         onChange={(e) => setHour(e.target.value)}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center"
+      >
+        {isEditing ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Editando evento...
+          </>
+        ) : (
+          'Editar'
+        )}
       </button>
     </form>
   )

@@ -1,6 +1,6 @@
 'use client'
 import Cookies from 'js-cookie'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
@@ -24,6 +24,7 @@ export default function EditSobreContent({
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [preview, setPreview] = useState<string | null>(null)
+  const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const router = useRouter()
@@ -31,6 +32,7 @@ export default function EditSobreContent({
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    setIsEditing(true)
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -174,8 +176,18 @@ export default function EditSobreContent({
         onChange={onFileSelected}
       />
 
-      <button type="submit" className="button !mb-0">
-        Enviar
+      <button
+        type="submit"
+        className="button !mb-0 flex items-center gap-2 justify-center"
+      >
+        {isEditing ? (
+          <>
+            <FaSpinner className="animate-spin" />
+            Editando história...
+          </>
+        ) : (
+          'Editar'
+        )}
       </button>
     </form>
   )

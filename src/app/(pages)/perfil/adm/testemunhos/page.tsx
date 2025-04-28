@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Trash2 } from 'lucide-react'
 import { format } from 'date-fns'
+import { FaSpinner } from 'react-icons/fa'
 
 interface Testemunho {
   id: string
@@ -19,6 +20,7 @@ export default function AdminTestemunhosPage() {
   const [testemunhos, setTestemunhos] = useState<Testemunho[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
+  const [isApproved, setIsAproved] = useState(false)
   const router = useRouter()
 
   function formatDate(dateString: string): string {
@@ -60,6 +62,7 @@ export default function AdminTestemunhosPage() {
   }, [router])
 
   async function handleAprovar(id: string) {
+    setIsAproved(true)
     await fetch(`/api/auth/admin/testemunho/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -148,9 +151,16 @@ export default function AdminTestemunhosPage() {
               <div className="flex gap-3 items-center">
                 <button
                   onClick={() => handleAprovar(t.id)}
-                  className="button  !mb-0"
+                  className="button  !mb-0 flex items-center gap-2 justify-center"
                 >
-                  Aprovar
+                  {isApproved ? (
+                    <>
+                      <FaSpinner className="animate-spin" />
+                      Aprovando...
+                    </>
+                  ) : (
+                    'Aprovar'
+                  )}
                 </button>
 
                 <button

@@ -34,11 +34,11 @@ export default function ItemTestemunho({
             <div className="flex items-center gap-4 ">
               {item.avatarUrl && (
                 <Image
-                  width={80}
-                  height={80}
+                  width={100}
+                  height={100}
                   src={item.avatarUrl}
                   alt={item.name}
-                  className="p-[2px] mr-1  rounded-full border-[1px] border-primary dark:border-secundary"
+                  className="p-[2px] mr-1 w-[100px] h-[100px]  rounded-full border-[1px] border-primary dark:border-secundary"
                 />
               )}
               <div>

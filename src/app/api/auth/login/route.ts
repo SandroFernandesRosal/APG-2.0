@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { z } from 'zod'
+import { v4 as uuidv4 } from 'uuid'
 
 export async function POST(req: Request) {
   const userSchema = z.object({
@@ -33,6 +34,15 @@ export async function POST(req: Request) {
       )
     }
 
+    const refreshToken = uuidv4()
+
+    await prisma.refreshTokenIgreja.create({
+      data: {
+        token: refreshToken,
+        userId: user.id,
+      },
+    })
+
     const token = jwt.sign(
       {
         id: user.id,
@@ -47,7 +57,7 @@ export async function POST(req: Request) {
       },
     )
 
-    const response = NextResponse.json({ user, token })
+    const response = NextResponse.json({ user, token, refreshToken })
     response.cookies.set('tokenigreja', token, {
       httpOnly: true,
       sameSite: 'strict',
