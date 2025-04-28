@@ -43,7 +43,7 @@ export default function ItemTestemunho({
               )}
               <div>
                 <p className="text-lg font-bold">{item.name}</p>
-                <div className="justify-center flex md:hidden">
+                <div className="flex md:hidden">
                   {item.updatedAt ? (
                     <span className="text-xs">
                       Atualizado: {formatDate(item.updatedAt)}
@@ -56,7 +56,7 @@ export default function ItemTestemunho({
                 </div>
               </div>
             </div>{' '}
-            <div className="md:flex justify-center hidden">
+            <div className="md:flex justify-center hidden self-start">
               {item.updatedAt ? (
                 <span className="text-xs">
                   Atualizado: {formatDate(item.updatedAt)}

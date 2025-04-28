@@ -140,7 +140,7 @@ export default function CarouselDoacao() {
               ))}
             </Slider>
           ) : data.length === 0 ? (
-            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-400 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
+            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
               <p>Nenhuma igreja cadastrada.</p>
             </div>
           ) : (
@@ -150,7 +150,7 @@ export default function CarouselDoacao() {
             >
               {data.map((product: Doacao) => (
                 <div
-                  className="flex flex-col justify-between h-[400px] rounded-lg  border-[1px] border-zinc-300 dark:border-zinc-700  transition-all"
+                  className="flex flex-col justify-between h-[400px] rounded-lg  border-[1px] border-zinc-300 dark:border-zinc-800  transition-all"
                   key={product.id}
                 >
                   <div className=" flex flex-col  justify-center  gap-2 h-[50%]  w-fit place-self-center">

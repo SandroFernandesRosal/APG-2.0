@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Trash2 } from 'lucide-react'
+import { format } from 'date-fns'
 
 interface Testemunho {
   id: string
@@ -11,6 +12,7 @@ interface Testemunho {
   avatarUrl: string
   coverUrl: string
   createdAt: string
+  updatedAt?: string
 }
 
 export default function AdminTestemunhosPage() {
@@ -18,6 +20,11 @@ export default function AdminTestemunhosPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const router = useRouter()
+
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString)
+    return format(date, 'dd/MM/yyyy HH:mm')
+  }
 
   useEffect(() => {
     async function checkAuthAndFetch() {
@@ -96,23 +103,39 @@ export default function AdminTestemunhosPage() {
           {testemunhos.map((t) => (
             <li
               key={t.id}
-              className="flex  flex-col border[1px] rounded-lg p-4  bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-700"
+              className="flex  flex-col border[1px] rounded-lg p-4  bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-800 border-[1px]"
             >
-              <div className="flex items-center gap-3 mb-2">
-                <Image
-                  src={t.avatarUrl}
-                  alt={t.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover"
-                />
-                <strong>{t.name}</strong>
+              <div className="flex items-center gap-4 relative mb-5">
+                {t.avatarUrl && (
+                  <Image
+                    width={80}
+                    height={80}
+                    src={t.avatarUrl}
+                    alt={t.name}
+                    className="p-[2px] mr-1  rounded-full border-[1px] border-primary dark:border-secundary"
+                  />
+                )}
+                <div>
+                  <p className="text-lg font-bold">{t.name}</p>
+                  <div className="text-xs self-center absolute right-0 top-0   flex-col  hidden md:flex">
+                    <span>Postado: {formatDate(t.createdAt)}</span>
+                    {t.updatedAt && (
+                      <span>Atualizado: {formatDate(t.updatedAt)}</span>
+                    )}
+                  </div>
+                  <div className="text-xs flex self-center   flex-col  ">
+                    <span>Postado: {formatDate(t.createdAt)}</span>
+                    {t.updatedAt && (
+                      <span>Última atualização: {formatDate(t.updatedAt)}</span>
+                    )}
+                  </div>
+                </div>
               </div>
 
-              <p className="mb-2">{t.content}</p>
+              <p className="mb-4">{t.content}</p>
 
               {t.coverUrl && (
-                <div className="relative w-full max-w-md h-64 mb-2 flex self-center ">
+                <div className="relative w-full max-w-md h-64 mb-4 flex self-center ">
                   <Image
                     src={t.coverUrl}
                     alt="Foto testemunho"

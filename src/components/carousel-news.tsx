@@ -145,7 +145,7 @@ export default function CarouselNews({
               ))}
             </Slider>
           ) : data.length === 0 ? (
-            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
+            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
               <p>Nenhuma notícia cadastrada.</p>
             </div>
           ) : (

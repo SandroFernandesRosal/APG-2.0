@@ -26,7 +26,7 @@ export default function NavBar({ handleMenu, menu, user }: NavBarProps) {
   const tokenIgreja = useTokenIgreja()
   return (
     <nav
-      className={`font-Roboto fixed right-0 z-50 top-20 flex min-h-screen w-[70vw] transform flex-col items-center justify-center gap-10 border-l-[3px] border-secundary bg-bglightsecundary font-bold backdrop-blur-md transition-transform duration-500 ease-in-out dark:bg-bgdarksecundary md:hidden ${
+      className={`font-Roboto fixed right-0 z-50 top-20 flex min-h-screen w-[70vw] transform flex-col items-center justify-center gap-10 border-l-[3px] border-primary dark:border-secundary bg-bglightsecundary font-bold backdrop-blur-md transition-transform duration-500 ease-in-out dark:bg-bgdarksecundary md:hidden ${
         menu ? 'translate-x-0 ' : 'translate-x-full'
       } `}
     >

@@ -166,7 +166,7 @@ export default function CarouselMinisterio({
               ))}
             </Slider>
           ) : dataMinisterio.length === 0 ? (
-            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-400 dark:border-zinc-700 p-5 rounded-lg justify-center items-center">
+            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-400 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
               <p>Nenhum membro cadastrado.</p>
             </div>
           ) : (
