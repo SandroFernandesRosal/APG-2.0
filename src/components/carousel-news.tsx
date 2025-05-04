@@ -165,7 +165,7 @@ export default function CarouselNews({
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
-                        href={`/noticias/${product.page}/${product.id}`}
+                        href={`/noticias/${product.page}/${product.url}`}
                         className="group h-full rounded-md overflow-hidden relative"
                       >
                         <div
@@ -204,7 +204,7 @@ export default function CarouselNews({
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
-                        href={`/noticias/${product.page}/${product.id}`}
+                        href={`/noticias/${product.page}/${product.url}`}
                         className="button !mb-0 flex items-center justify-center self-center"
                       >
                         Ler notícia

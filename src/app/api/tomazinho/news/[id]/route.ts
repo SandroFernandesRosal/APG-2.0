@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { randomUUID } from 'crypto'
+import { slugify } from '@/lib/slug'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -39,9 +41,16 @@ export async function PUT(
 
   const data = schema.parse(body)
 
+  const uuid = randomUUID()
+  const slug = `${slugify(data.title)}-${uuid.slice(-5)}`
+
   const updated = await prisma.newTomazinho.update({
     where: { id },
-    data,
+    data: {
+      ...data,
+      userId: user.sub,
+      url: slug,
+    },
   })
 
   return NextResponse.json(updated)

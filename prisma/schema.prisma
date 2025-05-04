@@ -63,6 +63,7 @@ model New {
   page      String
   updatedAt DateTime @updatedAt
   destaque  Boolean  @default(false)
+  url       String   @unique
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -103,6 +104,7 @@ model NewTomazinho {
   page      String
   updatedAt DateTime @updatedAt
   destaque  Boolean  @default(false)
+  url       String   @unique
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -143,6 +145,7 @@ model NewCaxias {
   page      String
   updatedAt DateTime @updatedAt
   destaque  Boolean  @default(false)
+  url       String   @unique
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -256,7 +259,7 @@ model Testemunho {
   content    String
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  isPublic   Boolean    @default(false)
+  isPublic   Boolean    @default(true)
   coverUrl   String?
   userIgreja UserIgreja @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -286,4 +289,13 @@ model PasswordResetToken {
   createdAt DateTime @default(now())
   expiresAt DateTime
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Novatabela {
+  id       String   @id @default(uuid())
+  userId    String
+  name      String
+  title     String
+
+
 }

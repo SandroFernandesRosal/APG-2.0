@@ -16,6 +16,7 @@ export default function ItemNew({
   content,
   createdAt,
   destaque,
+  url,
 }: New) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
 
@@ -36,7 +37,7 @@ export default function ItemNew({
         <Link
           aria-hidden="true"
           tabIndex={-1}
-          href={`/noticias/${page}/${id}`}
+          href={`/noticias/${page}/${url}`}
           className="group h-full rounded-md overflow-hidden relative"
         >
           <div
@@ -59,7 +60,7 @@ export default function ItemNew({
         <Link
           aria-hidden="true"
           tabIndex={-1}
-          href={`/noticias/${page}/${id}`}
+          href={`/noticias/${page}/${url}`}
           className="text-primary z-30"
         >
           <h1 className="text-center  text-xl  font-semibold text-primary dark:text-secundary">
@@ -76,7 +77,7 @@ export default function ItemNew({
         <Link
           aria-hidden="true"
           tabIndex={-1}
-          href={`/noticias/${page}/${id}`}
+          href={`/noticias/${page}/${url}`}
           className="button  !mb-0 flex items-center justify-center self-center"
         >
           Ler notícia

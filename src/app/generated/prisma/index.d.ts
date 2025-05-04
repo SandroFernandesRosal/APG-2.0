@@ -118,6 +118,11 @@ export type PasswordResetTokenIgreja = $Result.DefaultSelection<Prisma.$Password
  * 
  */
 export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetTokenPayload>
+/**
+ * Model Novatabela
+ * 
+ */
+export type Novatabela = $Result.DefaultSelection<Prisma.$NovatabelaPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -453,6 +458,16 @@ export class PrismaClient<
     * ```
     */
   get passwordResetToken(): Prisma.PasswordResetTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.novatabela`: Exposes CRUD operations for the **Novatabela** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Novatabelas
+    * const novatabelas = await prisma.novatabela.findMany()
+    * ```
+    */
+  get novatabela(): Prisma.NovatabelaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -913,7 +928,8 @@ export namespace Prisma {
     Testemunho: 'Testemunho',
     RefreshTokenIgreja: 'RefreshTokenIgreja',
     PasswordResetTokenIgreja: 'PasswordResetTokenIgreja',
-    PasswordResetToken: 'PasswordResetToken'
+    PasswordResetToken: 'PasswordResetToken',
+    Novatabela: 'Novatabela'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -932,7 +948,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userIgreja" | "new" | "ministerio" | "agenda" | "newTomazinho" | "ministerioTomazinho" | "agendaTomazinho" | "newCaxias" | "ministerioCaxias" | "agendaCaxias" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "testemunho" | "refreshTokenIgreja" | "passwordResetTokenIgreja" | "passwordResetToken"
+      modelProps: "user" | "userIgreja" | "new" | "ministerio" | "agenda" | "newTomazinho" | "ministerioTomazinho" | "agendaTomazinho" | "newCaxias" | "ministerioCaxias" | "agendaCaxias" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "testemunho" | "refreshTokenIgreja" | "passwordResetTokenIgreja" | "passwordResetToken" | "novatabela"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2490,6 +2506,80 @@ export namespace Prisma {
           }
         }
       }
+      Novatabela: {
+        payload: Prisma.$NovatabelaPayload<ExtArgs>
+        fields: Prisma.NovatabelaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NovatabelaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NovatabelaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+          }
+          findFirst: {
+            args: Prisma.NovatabelaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NovatabelaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+          }
+          findMany: {
+            args: Prisma.NovatabelaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>[]
+          }
+          create: {
+            args: Prisma.NovatabelaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+          }
+          createMany: {
+            args: Prisma.NovatabelaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NovatabelaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>[]
+          }
+          delete: {
+            args: Prisma.NovatabelaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+          }
+          update: {
+            args: Prisma.NovatabelaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+          }
+          deleteMany: {
+            args: Prisma.NovatabelaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NovatabelaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NovatabelaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>[]
+          }
+          upsert: {
+            args: Prisma.NovatabelaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+          }
+          aggregate: {
+            args: Prisma.NovatabelaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNovatabela>
+          }
+          groupBy: {
+            args: Prisma.NovatabelaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NovatabelaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NovatabelaCountArgs<ExtArgs>
+            result: $Utils.Optional<NovatabelaCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2595,6 +2685,7 @@ export namespace Prisma {
     refreshTokenIgreja?: RefreshTokenIgrejaOmit
     passwordResetTokenIgreja?: PasswordResetTokenIgrejaOmit
     passwordResetToken?: PasswordResetTokenOmit
+    novatabela?: NovatabelaOmit
   }
 
   /* Types for Logging */
@@ -5631,6 +5722,7 @@ export namespace Prisma {
     page: string | null
     updatedAt: Date | null
     destaque: boolean | null
+    url: string | null
   }
 
   export type NewMaxAggregateOutputType = {
@@ -5644,6 +5736,7 @@ export namespace Prisma {
     page: string | null
     updatedAt: Date | null
     destaque: boolean | null
+    url: string | null
   }
 
   export type NewCountAggregateOutputType = {
@@ -5657,6 +5750,7 @@ export namespace Prisma {
     page: number
     updatedAt: number
     destaque: number
+    url: number
     _all: number
   }
 
@@ -5672,6 +5766,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
   }
 
   export type NewMaxAggregateInputType = {
@@ -5685,6 +5780,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
   }
 
   export type NewCountAggregateInputType = {
@@ -5698,6 +5794,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
     _all?: true
   }
 
@@ -5784,6 +5881,7 @@ export namespace Prisma {
     page: string
     updatedAt: Date
     destaque: boolean
+    url: string
     _count: NewCountAggregateOutputType | null
     _min: NewMinAggregateOutputType | null
     _max: NewMaxAggregateOutputType | null
@@ -5814,6 +5912,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
@@ -5828,6 +5927,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
@@ -5842,6 +5942,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
@@ -5856,9 +5957,10 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
   }
 
-  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque", ExtArgs["result"]["new"]>
+  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url", ExtArgs["result"]["new"]>
   export type NewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5885,6 +5987,7 @@ export namespace Prisma {
       page: string
       updatedAt: Date
       destaque: boolean
+      url: string
     }, ExtArgs["result"]["new"]>
     composites: {}
   }
@@ -6319,6 +6422,7 @@ export namespace Prisma {
     readonly page: FieldRef<"New", 'String'>
     readonly updatedAt: FieldRef<"New", 'DateTime'>
     readonly destaque: FieldRef<"New", 'Boolean'>
+    readonly url: FieldRef<"New", 'String'>
   }
     
 
@@ -8974,6 +9078,7 @@ export namespace Prisma {
     page: string | null
     updatedAt: Date | null
     destaque: boolean | null
+    url: string | null
   }
 
   export type NewTomazinhoMaxAggregateOutputType = {
@@ -8987,6 +9092,7 @@ export namespace Prisma {
     page: string | null
     updatedAt: Date | null
     destaque: boolean | null
+    url: string | null
   }
 
   export type NewTomazinhoCountAggregateOutputType = {
@@ -9000,6 +9106,7 @@ export namespace Prisma {
     page: number
     updatedAt: number
     destaque: number
+    url: number
     _all: number
   }
 
@@ -9015,6 +9122,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
   }
 
   export type NewTomazinhoMaxAggregateInputType = {
@@ -9028,6 +9136,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
   }
 
   export type NewTomazinhoCountAggregateInputType = {
@@ -9041,6 +9150,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
     _all?: true
   }
 
@@ -9127,6 +9237,7 @@ export namespace Prisma {
     page: string
     updatedAt: Date
     destaque: boolean
+    url: string
     _count: NewTomazinhoCountAggregateOutputType | null
     _min: NewTomazinhoMinAggregateOutputType | null
     _max: NewTomazinhoMaxAggregateOutputType | null
@@ -9157,6 +9268,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newTomazinho"]>
 
@@ -9171,6 +9283,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newTomazinho"]>
 
@@ -9185,6 +9298,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newTomazinho"]>
 
@@ -9199,9 +9313,10 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
   }
 
-  export type NewTomazinhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "isPublic" | "createdAt" | "page" | "updatedAt" | "destaque", ExtArgs["result"]["newTomazinho"]>
+  export type NewTomazinhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "isPublic" | "createdAt" | "page" | "updatedAt" | "destaque" | "url", ExtArgs["result"]["newTomazinho"]>
   export type NewTomazinhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -9228,6 +9343,7 @@ export namespace Prisma {
       page: string
       updatedAt: Date
       destaque: boolean
+      url: string
     }, ExtArgs["result"]["newTomazinho"]>
     composites: {}
   }
@@ -9662,6 +9778,7 @@ export namespace Prisma {
     readonly page: FieldRef<"NewTomazinho", 'String'>
     readonly updatedAt: FieldRef<"NewTomazinho", 'DateTime'>
     readonly destaque: FieldRef<"NewTomazinho", 'Boolean'>
+    readonly url: FieldRef<"NewTomazinho", 'String'>
   }
     
 
@@ -12317,6 +12434,7 @@ export namespace Prisma {
     page: string | null
     updatedAt: Date | null
     destaque: boolean | null
+    url: string | null
   }
 
   export type NewCaxiasMaxAggregateOutputType = {
@@ -12330,6 +12448,7 @@ export namespace Prisma {
     page: string | null
     updatedAt: Date | null
     destaque: boolean | null
+    url: string | null
   }
 
   export type NewCaxiasCountAggregateOutputType = {
@@ -12343,6 +12462,7 @@ export namespace Prisma {
     page: number
     updatedAt: number
     destaque: number
+    url: number
     _all: number
   }
 
@@ -12358,6 +12478,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
   }
 
   export type NewCaxiasMaxAggregateInputType = {
@@ -12371,6 +12492,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
   }
 
   export type NewCaxiasCountAggregateInputType = {
@@ -12384,6 +12506,7 @@ export namespace Prisma {
     page?: true
     updatedAt?: true
     destaque?: true
+    url?: true
     _all?: true
   }
 
@@ -12470,6 +12593,7 @@ export namespace Prisma {
     page: string
     updatedAt: Date
     destaque: boolean
+    url: string
     _count: NewCaxiasCountAggregateOutputType | null
     _min: NewCaxiasMinAggregateOutputType | null
     _max: NewCaxiasMaxAggregateOutputType | null
@@ -12500,6 +12624,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newCaxias"]>
 
@@ -12514,6 +12639,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newCaxias"]>
 
@@ -12528,6 +12654,7 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newCaxias"]>
 
@@ -12542,9 +12669,10 @@ export namespace Prisma {
     page?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    url?: boolean
   }
 
-  export type NewCaxiasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "isPublic" | "createdAt" | "page" | "updatedAt" | "destaque", ExtArgs["result"]["newCaxias"]>
+  export type NewCaxiasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "isPublic" | "createdAt" | "page" | "updatedAt" | "destaque" | "url", ExtArgs["result"]["newCaxias"]>
   export type NewCaxiasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -12571,6 +12699,7 @@ export namespace Prisma {
       page: string
       updatedAt: Date
       destaque: boolean
+      url: string
     }, ExtArgs["result"]["newCaxias"]>
     composites: {}
   }
@@ -13005,6 +13134,7 @@ export namespace Prisma {
     readonly page: FieldRef<"NewCaxias", 'String'>
     readonly updatedAt: FieldRef<"NewCaxias", 'DateTime'>
     readonly destaque: FieldRef<"NewCaxias", 'Boolean'>
+    readonly url: FieldRef<"NewCaxias", 'String'>
   }
     
 
@@ -26558,6 +26688,988 @@ export namespace Prisma {
 
 
   /**
+   * Model Novatabela
+   */
+
+  export type AggregateNovatabela = {
+    _count: NovatabelaCountAggregateOutputType | null
+    _min: NovatabelaMinAggregateOutputType | null
+    _max: NovatabelaMaxAggregateOutputType | null
+  }
+
+  export type NovatabelaMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    title: string | null
+  }
+
+  export type NovatabelaMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    title: string | null
+  }
+
+  export type NovatabelaCountAggregateOutputType = {
+    id: number
+    userId: number
+    name: number
+    title: number
+    _all: number
+  }
+
+
+  export type NovatabelaMinAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    title?: true
+  }
+
+  export type NovatabelaMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    title?: true
+  }
+
+  export type NovatabelaCountAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    title?: true
+    _all?: true
+  }
+
+  export type NovatabelaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Novatabela to aggregate.
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novatabelas to fetch.
+     */
+    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NovatabelaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novatabelas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novatabelas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Novatabelas
+    **/
+    _count?: true | NovatabelaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NovatabelaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NovatabelaMaxAggregateInputType
+  }
+
+  export type GetNovatabelaAggregateType<T extends NovatabelaAggregateArgs> = {
+        [P in keyof T & keyof AggregateNovatabela]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNovatabela[P]>
+      : GetScalarType<T[P], AggregateNovatabela[P]>
+  }
+
+
+
+
+  export type NovatabelaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NovatabelaWhereInput
+    orderBy?: NovatabelaOrderByWithAggregationInput | NovatabelaOrderByWithAggregationInput[]
+    by: NovatabelaScalarFieldEnum[] | NovatabelaScalarFieldEnum
+    having?: NovatabelaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NovatabelaCountAggregateInputType | true
+    _min?: NovatabelaMinAggregateInputType
+    _max?: NovatabelaMaxAggregateInputType
+  }
+
+  export type NovatabelaGroupByOutputType = {
+    id: string
+    userId: string
+    name: string
+    title: string
+    _count: NovatabelaCountAggregateOutputType | null
+    _min: NovatabelaMinAggregateOutputType | null
+    _max: NovatabelaMaxAggregateOutputType | null
+  }
+
+  type GetNovatabelaGroupByPayload<T extends NovatabelaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NovatabelaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NovatabelaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NovatabelaGroupByOutputType[P]>
+            : GetScalarType<T[P], NovatabelaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NovatabelaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    title?: boolean
+  }, ExtArgs["result"]["novatabela"]>
+
+  export type NovatabelaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    title?: boolean
+  }, ExtArgs["result"]["novatabela"]>
+
+  export type NovatabelaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    title?: boolean
+  }, ExtArgs["result"]["novatabela"]>
+
+  export type NovatabelaSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    title?: boolean
+  }
+
+  export type NovatabelaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title", ExtArgs["result"]["novatabela"]>
+
+  export type $NovatabelaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Novatabela"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      name: string
+      title: string
+    }, ExtArgs["result"]["novatabela"]>
+    composites: {}
+  }
+
+  type NovatabelaGetPayload<S extends boolean | null | undefined | NovatabelaDefaultArgs> = $Result.GetResult<Prisma.$NovatabelaPayload, S>
+
+  type NovatabelaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NovatabelaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NovatabelaCountAggregateInputType | true
+    }
+
+  export interface NovatabelaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Novatabela'], meta: { name: 'Novatabela' } }
+    /**
+     * Find zero or one Novatabela that matches the filter.
+     * @param {NovatabelaFindUniqueArgs} args - Arguments to find a Novatabela
+     * @example
+     * // Get one Novatabela
+     * const novatabela = await prisma.novatabela.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NovatabelaFindUniqueArgs>(args: SelectSubset<T, NovatabelaFindUniqueArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Novatabela that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NovatabelaFindUniqueOrThrowArgs} args - Arguments to find a Novatabela
+     * @example
+     * // Get one Novatabela
+     * const novatabela = await prisma.novatabela.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NovatabelaFindUniqueOrThrowArgs>(args: SelectSubset<T, NovatabelaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Novatabela that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaFindFirstArgs} args - Arguments to find a Novatabela
+     * @example
+     * // Get one Novatabela
+     * const novatabela = await prisma.novatabela.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NovatabelaFindFirstArgs>(args?: SelectSubset<T, NovatabelaFindFirstArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Novatabela that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaFindFirstOrThrowArgs} args - Arguments to find a Novatabela
+     * @example
+     * // Get one Novatabela
+     * const novatabela = await prisma.novatabela.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NovatabelaFindFirstOrThrowArgs>(args?: SelectSubset<T, NovatabelaFindFirstOrThrowArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Novatabelas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Novatabelas
+     * const novatabelas = await prisma.novatabela.findMany()
+     * 
+     * // Get first 10 Novatabelas
+     * const novatabelas = await prisma.novatabela.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const novatabelaWithIdOnly = await prisma.novatabela.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NovatabelaFindManyArgs>(args?: SelectSubset<T, NovatabelaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Novatabela.
+     * @param {NovatabelaCreateArgs} args - Arguments to create a Novatabela.
+     * @example
+     * // Create one Novatabela
+     * const Novatabela = await prisma.novatabela.create({
+     *   data: {
+     *     // ... data to create a Novatabela
+     *   }
+     * })
+     * 
+     */
+    create<T extends NovatabelaCreateArgs>(args: SelectSubset<T, NovatabelaCreateArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Novatabelas.
+     * @param {NovatabelaCreateManyArgs} args - Arguments to create many Novatabelas.
+     * @example
+     * // Create many Novatabelas
+     * const novatabela = await prisma.novatabela.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NovatabelaCreateManyArgs>(args?: SelectSubset<T, NovatabelaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Novatabelas and returns the data saved in the database.
+     * @param {NovatabelaCreateManyAndReturnArgs} args - Arguments to create many Novatabelas.
+     * @example
+     * // Create many Novatabelas
+     * const novatabela = await prisma.novatabela.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Novatabelas and only return the `id`
+     * const novatabelaWithIdOnly = await prisma.novatabela.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NovatabelaCreateManyAndReturnArgs>(args?: SelectSubset<T, NovatabelaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Novatabela.
+     * @param {NovatabelaDeleteArgs} args - Arguments to delete one Novatabela.
+     * @example
+     * // Delete one Novatabela
+     * const Novatabela = await prisma.novatabela.delete({
+     *   where: {
+     *     // ... filter to delete one Novatabela
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NovatabelaDeleteArgs>(args: SelectSubset<T, NovatabelaDeleteArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Novatabela.
+     * @param {NovatabelaUpdateArgs} args - Arguments to update one Novatabela.
+     * @example
+     * // Update one Novatabela
+     * const novatabela = await prisma.novatabela.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NovatabelaUpdateArgs>(args: SelectSubset<T, NovatabelaUpdateArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Novatabelas.
+     * @param {NovatabelaDeleteManyArgs} args - Arguments to filter Novatabelas to delete.
+     * @example
+     * // Delete a few Novatabelas
+     * const { count } = await prisma.novatabela.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NovatabelaDeleteManyArgs>(args?: SelectSubset<T, NovatabelaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Novatabelas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Novatabelas
+     * const novatabela = await prisma.novatabela.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NovatabelaUpdateManyArgs>(args: SelectSubset<T, NovatabelaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Novatabelas and returns the data updated in the database.
+     * @param {NovatabelaUpdateManyAndReturnArgs} args - Arguments to update many Novatabelas.
+     * @example
+     * // Update many Novatabelas
+     * const novatabela = await prisma.novatabela.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Novatabelas and only return the `id`
+     * const novatabelaWithIdOnly = await prisma.novatabela.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NovatabelaUpdateManyAndReturnArgs>(args: SelectSubset<T, NovatabelaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Novatabela.
+     * @param {NovatabelaUpsertArgs} args - Arguments to update or create a Novatabela.
+     * @example
+     * // Update or create a Novatabela
+     * const novatabela = await prisma.novatabela.upsert({
+     *   create: {
+     *     // ... data to create a Novatabela
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Novatabela we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NovatabelaUpsertArgs>(args: SelectSubset<T, NovatabelaUpsertArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Novatabelas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaCountArgs} args - Arguments to filter Novatabelas to count.
+     * @example
+     * // Count the number of Novatabelas
+     * const count = await prisma.novatabela.count({
+     *   where: {
+     *     // ... the filter for the Novatabelas we want to count
+     *   }
+     * })
+    **/
+    count<T extends NovatabelaCountArgs>(
+      args?: Subset<T, NovatabelaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NovatabelaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Novatabela.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NovatabelaAggregateArgs>(args: Subset<T, NovatabelaAggregateArgs>): Prisma.PrismaPromise<GetNovatabelaAggregateType<T>>
+
+    /**
+     * Group by Novatabela.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovatabelaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NovatabelaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NovatabelaGroupByArgs['orderBy'] }
+        : { orderBy?: NovatabelaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NovatabelaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNovatabelaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Novatabela model
+   */
+  readonly fields: NovatabelaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Novatabela.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NovatabelaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Novatabela model
+   */
+  interface NovatabelaFieldRefs {
+    readonly id: FieldRef<"Novatabela", 'String'>
+    readonly userId: FieldRef<"Novatabela", 'String'>
+    readonly name: FieldRef<"Novatabela", 'String'>
+    readonly title: FieldRef<"Novatabela", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Novatabela findUnique
+   */
+  export type NovatabelaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * Filter, which Novatabela to fetch.
+     */
+    where: NovatabelaWhereUniqueInput
+  }
+
+  /**
+   * Novatabela findUniqueOrThrow
+   */
+  export type NovatabelaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * Filter, which Novatabela to fetch.
+     */
+    where: NovatabelaWhereUniqueInput
+  }
+
+  /**
+   * Novatabela findFirst
+   */
+  export type NovatabelaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * Filter, which Novatabela to fetch.
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novatabelas to fetch.
+     */
+    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Novatabelas.
+     */
+    cursor?: NovatabelaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novatabelas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novatabelas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Novatabelas.
+     */
+    distinct?: NovatabelaScalarFieldEnum | NovatabelaScalarFieldEnum[]
+  }
+
+  /**
+   * Novatabela findFirstOrThrow
+   */
+  export type NovatabelaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * Filter, which Novatabela to fetch.
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novatabelas to fetch.
+     */
+    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Novatabelas.
+     */
+    cursor?: NovatabelaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novatabelas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novatabelas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Novatabelas.
+     */
+    distinct?: NovatabelaScalarFieldEnum | NovatabelaScalarFieldEnum[]
+  }
+
+  /**
+   * Novatabela findMany
+   */
+  export type NovatabelaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * Filter, which Novatabelas to fetch.
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novatabelas to fetch.
+     */
+    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Novatabelas.
+     */
+    cursor?: NovatabelaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novatabelas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novatabelas.
+     */
+    skip?: number
+    distinct?: NovatabelaScalarFieldEnum | NovatabelaScalarFieldEnum[]
+  }
+
+  /**
+   * Novatabela create
+   */
+  export type NovatabelaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Novatabela.
+     */
+    data: XOR<NovatabelaCreateInput, NovatabelaUncheckedCreateInput>
+  }
+
+  /**
+   * Novatabela createMany
+   */
+  export type NovatabelaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Novatabelas.
+     */
+    data: NovatabelaCreateManyInput | NovatabelaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Novatabela createManyAndReturn
+   */
+  export type NovatabelaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Novatabelas.
+     */
+    data: NovatabelaCreateManyInput | NovatabelaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Novatabela update
+   */
+  export type NovatabelaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Novatabela.
+     */
+    data: XOR<NovatabelaUpdateInput, NovatabelaUncheckedUpdateInput>
+    /**
+     * Choose, which Novatabela to update.
+     */
+    where: NovatabelaWhereUniqueInput
+  }
+
+  /**
+   * Novatabela updateMany
+   */
+  export type NovatabelaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Novatabelas.
+     */
+    data: XOR<NovatabelaUpdateManyMutationInput, NovatabelaUncheckedUpdateManyInput>
+    /**
+     * Filter which Novatabelas to update
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * Limit how many Novatabelas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Novatabela updateManyAndReturn
+   */
+  export type NovatabelaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * The data used to update Novatabelas.
+     */
+    data: XOR<NovatabelaUpdateManyMutationInput, NovatabelaUncheckedUpdateManyInput>
+    /**
+     * Filter which Novatabelas to update
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * Limit how many Novatabelas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Novatabela upsert
+   */
+  export type NovatabelaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Novatabela to update in case it exists.
+     */
+    where: NovatabelaWhereUniqueInput
+    /**
+     * In case the Novatabela found by the `where` argument doesn't exist, create a new Novatabela with this data.
+     */
+    create: XOR<NovatabelaCreateInput, NovatabelaUncheckedCreateInput>
+    /**
+     * In case the Novatabela was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NovatabelaUpdateInput, NovatabelaUncheckedUpdateInput>
+  }
+
+  /**
+   * Novatabela delete
+   */
+  export type NovatabelaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+    /**
+     * Filter which Novatabela to delete.
+     */
+    where: NovatabelaWhereUniqueInput
+  }
+
+  /**
+   * Novatabela deleteMany
+   */
+  export type NovatabelaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Novatabelas to delete
+     */
+    where?: NovatabelaWhereInput
+    /**
+     * Limit how many Novatabelas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Novatabela without action
+   */
+  export type NovatabelaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novatabela
+     */
+    select?: NovatabelaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novatabela
+     */
+    omit?: NovatabelaOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26610,7 +27722,8 @@ export namespace Prisma {
     isPublic: 'isPublic',
     page: 'page',
     updatedAt: 'updatedAt',
-    destaque: 'destaque'
+    destaque: 'destaque',
+    url: 'url'
   };
 
   export type NewScalarFieldEnum = (typeof NewScalarFieldEnum)[keyof typeof NewScalarFieldEnum]
@@ -26656,7 +27769,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     page: 'page',
     updatedAt: 'updatedAt',
-    destaque: 'destaque'
+    destaque: 'destaque',
+    url: 'url'
   };
 
   export type NewTomazinhoScalarFieldEnum = (typeof NewTomazinhoScalarFieldEnum)[keyof typeof NewTomazinhoScalarFieldEnum]
@@ -26702,7 +27816,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     page: 'page',
     updatedAt: 'updatedAt',
-    destaque: 'destaque'
+    destaque: 'destaque',
+    url: 'url'
   };
 
   export type NewCaxiasScalarFieldEnum = (typeof NewCaxiasScalarFieldEnum)[keyof typeof NewCaxiasScalarFieldEnum]
@@ -26872,6 +27987,16 @@ export namespace Prisma {
   };
 
   export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+  export const NovatabelaScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    name: 'name',
+    title: 'title'
+  };
+
+  export type NovatabelaScalarFieldEnum = (typeof NovatabelaScalarFieldEnum)[keyof typeof NovatabelaScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -27165,6 +28290,7 @@ export namespace Prisma {
     page?: StringFilter<"New"> | string
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
+    url?: StringFilter<"New"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -27179,11 +28305,13 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type NewWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    url?: string
     AND?: NewWhereInput | NewWhereInput[]
     OR?: NewWhereInput[]
     NOT?: NewWhereInput | NewWhereInput[]
@@ -27197,7 +28325,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "url">
 
   export type NewOrderByWithAggregationInput = {
     id?: SortOrder
@@ -27210,6 +28338,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
     _count?: NewCountOrderByAggregateInput
     _max?: NewMaxOrderByAggregateInput
     _min?: NewMinOrderByAggregateInput
@@ -27229,6 +28358,7 @@ export namespace Prisma {
     page?: StringWithAggregatesFilter<"New"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"New"> | Date | string
     destaque?: BoolWithAggregatesFilter<"New"> | boolean
+    url?: StringWithAggregatesFilter<"New"> | string
   }
 
   export type MinisterioWhereInput = {
@@ -27395,6 +28525,7 @@ export namespace Prisma {
     page?: StringFilter<"NewTomazinho"> | string
     updatedAt?: DateTimeFilter<"NewTomazinho"> | Date | string
     destaque?: BoolFilter<"NewTomazinho"> | boolean
+    url?: StringFilter<"NewTomazinho"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -27409,11 +28540,13 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type NewTomazinhoWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    url?: string
     AND?: NewTomazinhoWhereInput | NewTomazinhoWhereInput[]
     OR?: NewTomazinhoWhereInput[]
     NOT?: NewTomazinhoWhereInput | NewTomazinhoWhereInput[]
@@ -27427,7 +28560,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"NewTomazinho"> | Date | string
     destaque?: BoolFilter<"NewTomazinho"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "url">
 
   export type NewTomazinhoOrderByWithAggregationInput = {
     id?: SortOrder
@@ -27440,6 +28573,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
     _count?: NewTomazinhoCountOrderByAggregateInput
     _max?: NewTomazinhoMaxOrderByAggregateInput
     _min?: NewTomazinhoMinOrderByAggregateInput
@@ -27459,6 +28593,7 @@ export namespace Prisma {
     page?: StringWithAggregatesFilter<"NewTomazinho"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"NewTomazinho"> | Date | string
     destaque?: BoolWithAggregatesFilter<"NewTomazinho"> | boolean
+    url?: StringWithAggregatesFilter<"NewTomazinho"> | string
   }
 
   export type MinisterioTomazinhoWhereInput = {
@@ -27625,6 +28760,7 @@ export namespace Prisma {
     page?: StringFilter<"NewCaxias"> | string
     updatedAt?: DateTimeFilter<"NewCaxias"> | Date | string
     destaque?: BoolFilter<"NewCaxias"> | boolean
+    url?: StringFilter<"NewCaxias"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -27639,11 +28775,13 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type NewCaxiasWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    url?: string
     AND?: NewCaxiasWhereInput | NewCaxiasWhereInput[]
     OR?: NewCaxiasWhereInput[]
     NOT?: NewCaxiasWhereInput | NewCaxiasWhereInput[]
@@ -27657,7 +28795,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"NewCaxias"> | Date | string
     destaque?: BoolFilter<"NewCaxias"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "url">
 
   export type NewCaxiasOrderByWithAggregationInput = {
     id?: SortOrder
@@ -27670,6 +28808,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
     _count?: NewCaxiasCountOrderByAggregateInput
     _max?: NewCaxiasMaxOrderByAggregateInput
     _min?: NewCaxiasMinOrderByAggregateInput
@@ -27689,6 +28828,7 @@ export namespace Prisma {
     page?: StringWithAggregatesFilter<"NewCaxias"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"NewCaxias"> | Date | string
     destaque?: BoolWithAggregatesFilter<"NewCaxias"> | boolean
+    url?: StringWithAggregatesFilter<"NewCaxias"> | string
   }
 
   export type MinisterioCaxiasWhereInput = {
@@ -28521,6 +29661,53 @@ export namespace Prisma {
     expiresAt?: DateTimeWithAggregatesFilter<"PasswordResetToken"> | Date | string
   }
 
+  export type NovatabelaWhereInput = {
+    AND?: NovatabelaWhereInput | NovatabelaWhereInput[]
+    OR?: NovatabelaWhereInput[]
+    NOT?: NovatabelaWhereInput | NovatabelaWhereInput[]
+    id?: StringFilter<"Novatabela"> | string
+    userId?: StringFilter<"Novatabela"> | string
+    name?: StringFilter<"Novatabela"> | string
+    title?: StringFilter<"Novatabela"> | string
+  }
+
+  export type NovatabelaOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    title?: SortOrder
+  }
+
+  export type NovatabelaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NovatabelaWhereInput | NovatabelaWhereInput[]
+    OR?: NovatabelaWhereInput[]
+    NOT?: NovatabelaWhereInput | NovatabelaWhereInput[]
+    userId?: StringFilter<"Novatabela"> | string
+    name?: StringFilter<"Novatabela"> | string
+    title?: StringFilter<"Novatabela"> | string
+  }, "id">
+
+  export type NovatabelaOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    title?: SortOrder
+    _count?: NovatabelaCountOrderByAggregateInput
+    _max?: NovatabelaMaxOrderByAggregateInput
+    _min?: NovatabelaMinOrderByAggregateInput
+  }
+
+  export type NovatabelaScalarWhereWithAggregatesInput = {
+    AND?: NovatabelaScalarWhereWithAggregatesInput | NovatabelaScalarWhereWithAggregatesInput[]
+    OR?: NovatabelaScalarWhereWithAggregatesInput[]
+    NOT?: NovatabelaScalarWhereWithAggregatesInput | NovatabelaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Novatabela"> | string
+    userId?: StringWithAggregatesFilter<"Novatabela"> | string
+    name?: StringWithAggregatesFilter<"Novatabela"> | string
+    title?: StringWithAggregatesFilter<"Novatabela"> | string
+  }
+
   export type UserCreateInput = {
     id?: string
     login: string
@@ -28768,6 +29955,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
     user: UserCreateNestedOneWithoutNewsInput
   }
 
@@ -28782,6 +29970,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewUpdateInput = {
@@ -28794,6 +29983,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutNewsNestedInput
   }
 
@@ -28808,6 +29998,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewCreateManyInput = {
@@ -28821,6 +30012,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewUpdateManyMutationInput = {
@@ -28833,6 +30025,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewUncheckedUpdateManyInput = {
@@ -28846,6 +30039,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type MinisterioCreateInput = {
@@ -29024,6 +30218,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
     user: UserCreateNestedOneWithoutNewstomazinhoInput
   }
 
@@ -29038,6 +30233,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewTomazinhoUpdateInput = {
@@ -29050,6 +30246,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutNewstomazinhoNestedInput
   }
 
@@ -29064,6 +30261,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewTomazinhoCreateManyInput = {
@@ -29077,6 +30275,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewTomazinhoUpdateManyMutationInput = {
@@ -29089,6 +30288,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewTomazinhoUncheckedUpdateManyInput = {
@@ -29102,6 +30302,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type MinisterioTomazinhoCreateInput = {
@@ -29280,6 +30481,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
     user: UserCreateNestedOneWithoutNewscaxiasInput
   }
 
@@ -29294,6 +30496,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewCaxiasUpdateInput = {
@@ -29306,6 +30509,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutNewscaxiasNestedInput
   }
 
@@ -29320,6 +30524,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewCaxiasCreateManyInput = {
@@ -29333,6 +30538,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewCaxiasUpdateManyMutationInput = {
@@ -29345,6 +30551,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewCaxiasUncheckedUpdateManyInput = {
@@ -29358,6 +30565,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type MinisterioCaxiasCreateInput = {
@@ -30258,6 +31466,55 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NovatabelaCreateInput = {
+    id?: string
+    userId: string
+    name: string
+    title: string
+  }
+
+  export type NovatabelaUncheckedCreateInput = {
+    id?: string
+    userId: string
+    name: string
+    title: string
+  }
+
+  export type NovatabelaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NovatabelaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NovatabelaCreateManyInput = {
+    id?: string
+    userId: string
+    name: string
+    title: string
+  }
+
+  export type NovatabelaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NovatabelaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -30653,6 +31910,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type NewMaxOrderByAggregateInput = {
@@ -30666,6 +31924,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type NewMinOrderByAggregateInput = {
@@ -30679,6 +31938,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -30778,6 +32038,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type NewTomazinhoMaxOrderByAggregateInput = {
@@ -30791,6 +32052,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type NewTomazinhoMinOrderByAggregateInput = {
@@ -30804,6 +32066,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type MinisterioTomazinhoCountOrderByAggregateInput = {
@@ -30889,6 +32152,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type NewCaxiasMaxOrderByAggregateInput = {
@@ -30902,6 +32166,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type NewCaxiasMinOrderByAggregateInput = {
@@ -30915,6 +32180,7 @@ export namespace Prisma {
     page?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    url?: SortOrder
   }
 
   export type MinisterioCaxiasCountOrderByAggregateInput = {
@@ -31310,6 +32576,27 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
+  }
+
+  export type NovatabelaCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    title?: SortOrder
+  }
+
+  export type NovatabelaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    title?: SortOrder
+  }
+
+  export type NovatabelaMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    title?: SortOrder
   }
 
   export type AgendaCreateNestedManyWithoutUserInput = {
@@ -32849,6 +34136,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewUncheckedCreateWithoutUserInput = {
@@ -32861,6 +34149,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewCreateOrConnectWithoutUserInput = {
@@ -32883,6 +34172,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewCaxiasUncheckedCreateWithoutUserInput = {
@@ -32895,6 +34185,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewCaxiasCreateOrConnectWithoutUserInput = {
@@ -32917,6 +34208,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewTomazinhoUncheckedCreateWithoutUserInput = {
@@ -32929,6 +34221,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewTomazinhoCreateOrConnectWithoutUserInput = {
@@ -33362,6 +34655,7 @@ export namespace Prisma {
     page?: StringFilter<"New"> | string
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
+    url?: StringFilter<"New"> | string
   }
 
   export type NewCaxiasUpsertWithWhereUniqueWithoutUserInput = {
@@ -33394,6 +34688,7 @@ export namespace Prisma {
     page?: StringFilter<"NewCaxias"> | string
     updatedAt?: DateTimeFilter<"NewCaxias"> | Date | string
     destaque?: BoolFilter<"NewCaxias"> | boolean
+    url?: StringFilter<"NewCaxias"> | string
   }
 
   export type NewTomazinhoUpsertWithWhereUniqueWithoutUserInput = {
@@ -33426,6 +34721,7 @@ export namespace Prisma {
     page?: StringFilter<"NewTomazinho"> | string
     updatedAt?: DateTimeFilter<"NewTomazinho"> | Date | string
     destaque?: BoolFilter<"NewTomazinho"> | boolean
+    url?: StringFilter<"NewTomazinho"> | string
   }
 
   export type PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput = {
@@ -36008,6 +37304,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewCaxiasCreateManyUserInput = {
@@ -36020,6 +37317,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type NewTomazinhoCreateManyUserInput = {
@@ -36032,6 +37330,7 @@ export namespace Prisma {
     page: string
     updatedAt?: Date | string
     destaque?: boolean
+    url: string
   }
 
   export type PasswordResetTokenCreateManyUserInput = {
@@ -36387,6 +37686,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewUncheckedUpdateWithoutUserInput = {
@@ -36399,6 +37699,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewUncheckedUpdateManyWithoutUserInput = {
@@ -36411,6 +37712,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewCaxiasUpdateWithoutUserInput = {
@@ -36423,6 +37725,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewCaxiasUncheckedUpdateWithoutUserInput = {
@@ -36435,6 +37738,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewCaxiasUncheckedUpdateManyWithoutUserInput = {
@@ -36447,6 +37751,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewTomazinhoUpdateWithoutUserInput = {
@@ -36459,6 +37764,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewTomazinhoUncheckedUpdateWithoutUserInput = {
@@ -36471,6 +37777,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewTomazinhoUncheckedUpdateManyWithoutUserInput = {
@@ -36483,6 +37790,7 @@ export namespace Prisma {
     page?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type PasswordResetTokenUpdateWithoutUserInput = {

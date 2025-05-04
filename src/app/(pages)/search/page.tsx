@@ -98,6 +98,7 @@ export default async function Search({ searchParams }: SearchProps) {
                     destaque={item.destaque}
                     key={item.id}
                     updatedAt={item.updatedAt}
+                    url={item.url}
                   />
                 )
               }
@@ -127,6 +128,7 @@ export default async function Search({ searchParams }: SearchProps) {
                     destaque={item.destaque}
                     key={item.id}
                     updatedAt={item.updatedAt}
+                    url={item.url}
                   />
                 )
               }
@@ -154,6 +156,7 @@ export default async function Search({ searchParams }: SearchProps) {
                     destaque={item.destaque}
                     key={item.id}
                     updatedAt={item.updatedAt}
+                    url={item.url}
                   />
                 )
               }

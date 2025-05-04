@@ -7,4 +7,5 @@ export interface New {
   destaque: boolean
   page: string
   updatedAt: string
+  url: string
 }

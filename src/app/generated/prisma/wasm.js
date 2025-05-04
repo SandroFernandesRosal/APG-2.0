@@ -150,7 +150,8 @@ exports.Prisma.NewScalarFieldEnum = {
   isPublic: 'isPublic',
   page: 'page',
   updatedAt: 'updatedAt',
-  destaque: 'destaque'
+  destaque: 'destaque',
+  url: 'url'
 };
 
 exports.Prisma.MinisterioScalarFieldEnum = {
@@ -187,7 +188,8 @@ exports.Prisma.NewTomazinhoScalarFieldEnum = {
   createdAt: 'createdAt',
   page: 'page',
   updatedAt: 'updatedAt',
-  destaque: 'destaque'
+  destaque: 'destaque',
+  url: 'url'
 };
 
 exports.Prisma.MinisterioTomazinhoScalarFieldEnum = {
@@ -224,7 +226,8 @@ exports.Prisma.NewCaxiasScalarFieldEnum = {
   createdAt: 'createdAt',
   page: 'page',
   updatedAt: 'updatedAt',
-  destaque: 'destaque'
+  destaque: 'destaque',
+  url: 'url'
 };
 
 exports.Prisma.MinisterioCaxiasScalarFieldEnum = {
@@ -357,6 +360,13 @@ exports.Prisma.PasswordResetTokenScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
+exports.Prisma.NovatabelaScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  title: 'title'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -394,7 +404,8 @@ exports.Prisma.ModelName = {
   Testemunho: 'Testemunho',
   RefreshTokenIgreja: 'RefreshTokenIgreja',
   PasswordResetTokenIgreja: 'PasswordResetTokenIgreja',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  Novatabela: 'Novatabela'
 };
 
 /**

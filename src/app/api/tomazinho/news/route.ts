@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { randomUUID } from 'crypto'
+import { slugify } from '@/lib/slug'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -35,10 +37,14 @@ export async function POST(req: NextRequest) {
 
   const data = schema.parse(body)
 
+  const uuid = randomUUID()
+  const slug = `${slugify(data.title)}-${uuid.slice(-5)}`
+
   const created = await prisma.newTomazinho.create({
     data: {
       ...data,
       userId: user.sub,
+      url: slug,
     },
   })
 

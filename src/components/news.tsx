@@ -103,6 +103,7 @@ export default function News() {
                 destaque={product.destaque}
                 page={product.page}
                 updatedAt={product.updatedAt}
+                url={product.url}
               />
             ))
           ) : (
@@ -125,6 +126,7 @@ export default function News() {
                 destaque={false}
                 page={product.page}
                 updatedAt={product.updatedAt}
+                url={product.url}
               />
             ))
           ) : (

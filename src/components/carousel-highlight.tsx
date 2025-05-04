@@ -148,7 +148,7 @@ export default function CarouselHighlight() {
                 <Link
                   aria-hidden="true"
                   tabIndex={-1}
-                  href={`/noticias/${item.page}/${item.id}`}
+                  href={`/noticias/${item.page}/${item.url}`}
                   className="group flex justify-center items-center h-[300px] md:h-[500px] overflow-hidden w-full relative"
                 >
                   <div
