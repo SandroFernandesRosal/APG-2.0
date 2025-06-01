@@ -33,6 +33,7 @@ async function main() {
    
   }
 
+
   try {
     userSchema.parse(defaultAdmin)
 
@@ -57,7 +58,7 @@ async function main() {
       },
     })
 
-    console.log('✅ Admin criado com sucesso!')
+    console.log('✅ Admin criado com sucesso !')
   } catch (error) {
     console.error('❌ Erro ao criar admin:', error)
   } finally {
