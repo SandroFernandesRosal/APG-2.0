@@ -22,7 +22,7 @@ async function main() {
         message: 'A senha deve conter pelo menos uma letra',
       }),
     avatarUrl: z.string().url(),
-      role: z.enum(['ADMIN', 'MEMBRO']).optional(),
+      
   })
 
   const defaultAdmin = {
@@ -30,8 +30,7 @@ async function main() {
     name: 'Administrador Vila da Penha',
     password: senha,
     avatarUrl: PlaceHolder,
-    role: 'ADMIN',
-    
+   
   }
 
   try {
@@ -54,7 +53,7 @@ async function main() {
         name: defaultAdmin.name,
         password: hashedPassword,
         avatarUrl: defaultAdmin.avatarUrl,
-        role: defaultAdmin.role as any as import('@/app/generated/prisma').UserRole  
+        role: 'ADMIN',
       },
     })
 
