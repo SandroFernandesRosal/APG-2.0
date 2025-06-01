@@ -11,7 +11,7 @@ export async function GET(req: Request, { params }: ParamsProps) {
   try {
     const { id } = await params
 
-    const user = await prisma.userIgreja.findUniqueOrThrow({
+    const user = await prisma.user.findUniqueOrThrow({
       where: {
         id,
       },
@@ -56,7 +56,7 @@ export async function PUT(req: Request, { params }: ParamsProps) {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const user = await prisma.userIgreja.update({
+    const user = await prisma.user.update({
       where: { id },
       data: {
         name,
@@ -84,7 +84,7 @@ export async function DELETE(req: Request, { params }: ParamsProps) {
   try {
     const { id } = await params
 
-    await prisma.userIgreja.delete({
+    await prisma.user.delete({
       where: { id },
     })
 
