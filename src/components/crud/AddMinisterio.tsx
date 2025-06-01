@@ -20,11 +20,12 @@ export default function AddMinisterio({
   const [title, setTitle] = useState<string>('')
   const [name, setName] = useState<string>('')
   const formRef = useRef<HTMLFormElement | null>(null)
-  const [igreja, setIgreja] = useState<string>('')
+
   const [preview, setPreview] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { local } = useLocal()
+  const [role, setRole] = useState<string>(local)
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
@@ -64,7 +65,7 @@ export default function AddMinisterio({
     }
 
     try {
-      const response = await fetch(`/api/${local}/ministerio`, {
+      const response = await fetch(`/api/ministerio`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +74,8 @@ export default function AddMinisterio({
         body: JSON.stringify({
           name,
           title,
-          local: igreja,
+          local: role,
+          role,
           coverUrl,
         }),
       })
@@ -104,84 +106,94 @@ export default function AddMinisterio({
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar líder
-        {openMinisterio && (
-          <AiFillCloseCircle
-            onClick={() => setOpenMinisterio(false)}
-            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Adicionar líder
+          {openMinisterio && (
+            <AiFillCloseCircle
+              onClick={() => setOpenMinisterio(false)}
+              className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+            />
+          )}
+        </h1>
+
+        <label
+          htmlFor="coverUrl"
+          className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
+        >
+          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
+          Anexar foto (até 5mb)
+        </label>
+
+        {preview && (
+          <Image
+            src={preview}
+            alt="Imagem do líder"
+            width={150}
+            height={150}
+            className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-2 border-primary p-1 dark:border-secundary"
           />
         )}
-      </h1>
 
-      <label
-        htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
-      >
-        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
-        Anexar foto (até 5mb)
-      </label>
-
-      {preview && (
-        <Image
-          src={preview}
-          alt="Imagem do líder"
-          width={150}
-          height={150}
-          className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-2 border-primary p-1 dark:border-secundary"
+        <input
+          className="input mt-4"
+          type="text"
+          name="name"
+          placeholder="Nome"
+          onChange={(e) => setName(e.target.value)}
         />
-      )}
 
-      <input
-        className="input mt-4"
-        type="text"
-        name="name"
-        placeholder="Nome"
-        onChange={(e) => setName(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="title"
+          placeholder="Cargo de liderança"
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="title"
-        placeholder="Cargo de liderança"
-        onChange={(e) => setTitle(e.target.value)}
-      />
+        <input
+          className="invisible h-0 w-0"
+          type="file"
+          name="coverUrl"
+          id="coverUrl"
+          placeholder="Escolha uma imagem"
+          onChange={onFileSelected}
+        />
+        <label htmlFor="igreja" className="font-bold mb-1">
+          Selecione a igreja
+        </label>
+        <select
+          id="igreja"
+          name="igreja"
+          className="input mb-3"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          required
+        >
+          <option value="">Selecione...</option>
+          <option value="VILADAPENHA">Vila da Penha</option>
+          <option value="MARIAHELENA">Maria Helena</option>
+          <option value="TOMAZINHO">Tomazinho</option>
+        </select>
 
-      <input
-        className="input"
-        type="text"
-        name="igreja"
-        placeholder="Igreja (local)"
-        onChange={(e) => setIgreja(e.target.value)}
-      />
-
-      <input
-        className="invisible h-0 w-0"
-        type="file"
-        name="coverUrl"
-        id="coverUrl"
-        placeholder="Escolha uma imagem"
-        onChange={onFileSelected}
-      />
-
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Adicionando líder...
-          </>
-        ) : (
-          'Enviar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Adicionando líder...
+            </>
+          ) : (
+            'Enviar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

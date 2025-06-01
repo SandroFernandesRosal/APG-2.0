@@ -33,7 +33,7 @@ export default function Doe() {
 
   return (
     <div className="mb-4 flex w-[100vw] flex-col items-center">
-      {token && (
+      {token?.role === 'ADMIN' && (
         <>
           {!openDoacao && (
             <div className="button" onClick={() => setOpenDoacao(true)}>

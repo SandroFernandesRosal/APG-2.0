@@ -5,7 +5,8 @@ import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
+import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+
 import Image from 'next/image'
 
 interface EditMinisterioProps {
@@ -15,6 +16,7 @@ interface EditMinisterioProps {
   lugar: string
   titulo: string
   img: string
+  role?: string
 }
 
 export default function EditMinisterio({
@@ -24,15 +26,15 @@ export default function EditMinisterio({
   lugar,
   titulo,
   img,
+  role,
 }: EditMinisterioProps) {
   const [title, setTitle] = useState<string>('')
   const [name, setName] = useState<string>('')
-  const [igreja, setIgreja] = useState<string>('')
+
   const [preview, setPreview] = useState<string | null>(null)
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  const { local } = useLocal()
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
@@ -70,7 +72,7 @@ export default function EditMinisterio({
     }
 
     try {
-      const response = await fetch(`/api/${local}/ministerio/${id}`, {
+      const response = await fetch(`/api/ministerio/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -79,8 +81,9 @@ export default function EditMinisterio({
         body: JSON.stringify({
           title: title || titulo,
           name: name || nome,
-          local: igreja || lugar,
+          local: lugar,
           coverUrl,
+          role,
         }),
       })
 
@@ -113,85 +116,81 @@ export default function EditMinisterio({
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-50 mt-10 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 mt-10 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Editar Líder{' '}
-        <AiFillCloseCircle
-          onClick={() => setOpenEdit(null)}
-          className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Editar Líder{' '}
+          <AiFillCloseCircle
+            onClick={() => setOpenEdit(null)}
+            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+          />
+        </h1>
+
+        <label
+          htmlFor="coverUrl"
+          className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
+        >
+          <p className="flex items-center gap-3">
+            <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
+            Anexar nova foto (até 5mb)
+          </p>
+          <Image
+            width={120}
+            height={120}
+            src={preview || img}
+            alt={nome}
+            className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+          />
+        </label>
+
+        <input
+          className="input mt-4"
+          type="text"
+          name="name"
+          required
+          defaultValue={nome}
+          placeholder="Digite um nome"
+          onChange={(e) => setName(e.target.value)}
         />
-      </h1>
 
-      <label
-        htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
-      >
-        <p className="flex items-center gap-3">
-          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
-          Anexar nova foto (até 5mb)
-        </p>
-        <Image
-          width={120}
-          height={120}
-          src={preview || img}
-          alt={nome}
-          className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+        <input
+          className="input"
+          type="text"
+          name="title"
+          required
+          defaultValue={titulo}
+          placeholder="Digite um título"
+          onChange={(e) => setTitle(e.target.value)}
         />
-      </label>
 
-      <input
-        className="input mt-4"
-        type="text"
-        name="name"
-        required
-        defaultValue={nome}
-        placeholder="Digite um nome"
-        onChange={(e) => setName(e.target.value)}
-      />
+        <div className="input bg-gray-100 dark:bg-gray-800 cursor-not-allowed mb-3">
+          {getIgrejaLabel(lugar)}
+        </div>
 
-      <input
-        className="input"
-        type="text"
-        name="title"
-        required
-        defaultValue={titulo}
-        placeholder="Digite um título"
-        onChange={(e) => setTitle(e.target.value)}
-      />
+        <input
+          className="invisible h-0 w-0"
+          type="file"
+          name="coverUrl"
+          id="coverUrl"
+          onChange={onFileSelected}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="local"
-        required
-        defaultValue={lugar}
-        placeholder="Digite um local"
-        onChange={(e) => setIgreja(e.target.value)}
-      />
-
-      <input
-        className="invisible h-0 w-0"
-        type="file"
-        name="coverUrl"
-        id="coverUrl"
-        onChange={onFileSelected}
-      />
-
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center"
-      >
-        {isEditing ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Editando líder...
-          </>
-        ) : (
-          'Editar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center"
+        >
+          {isEditing ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Editando líder...
+            </>
+          ) : (
+            'Editar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

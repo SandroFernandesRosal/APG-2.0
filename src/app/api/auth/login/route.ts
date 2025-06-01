@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   try {
     const { login, password } = userSchema.parse(await req.json())
 
-    const user = await prisma.userIgreja.findUnique({
+    const user = await prisma.user.findUnique({
       where: { login },
     })
 
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
     const refreshToken = uuidv4()
 
-    await prisma.refreshTokenIgreja.create({
+    await prisma.refreshToken.create({
       data: {
         token: refreshToken,
         userId: user.id,
@@ -49,6 +49,7 @@ export async function POST(req: Request) {
         name: user.name,
         avatarUrl: user.avatarUrl,
         login: user.login,
+        role: user.role,
       },
       process.env.JWT_SECRET || 'secret',
       {
@@ -58,7 +59,7 @@ export async function POST(req: Request) {
     )
 
     const response = NextResponse.json({ user, token, refreshToken })
-    response.cookies.set('tokenigreja', token, {
+    response.cookies.set('token', token, {
       httpOnly: true,
       sameSite: 'strict',
       path: '/',

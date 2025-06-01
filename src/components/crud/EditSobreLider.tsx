@@ -108,85 +108,87 @@ export default function EditSobreLider({
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark text-textlight dark:text-textdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30 text-textlight dark:text-textdark"
       onSubmit={handleSubmit}
     >
-      <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Editar Líder{' '}
-        <AiFillCloseCircle
-          onClick={() => setOpenEdit(null)}
-          className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Editar Líder{' '}
+          <AiFillCloseCircle
+            onClick={() => setOpenEdit(null)}
+            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+          />
+        </h1>
+
+        <label
+          htmlFor="coverUrl"
+          className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
+        >
+          <p className="flex items-center gap-3">
+            <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+            Anexar nova foto (até 5mb)
+          </p>
+          {preview ? (
+            <Image
+              width={120}
+              height={120}
+              src={preview}
+              alt={nome}
+              className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+            />
+          ) : (
+            <Image
+              width={120}
+              height={120}
+              src={img}
+              alt={nome}
+              className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+            />
+          )}
+        </label>
+
+        <input
+          className="input mt-4"
+          type="text"
+          name="name"
+          required
+          defaultValue={nome}
+          placeholder="Digite um nome"
+          onChange={(e) => setName(e.target.value)}
         />
-      </h1>
 
-      <label
-        htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
-      >
-        <p className="flex items-center gap-3">
-          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-          Anexar nova foto (até 5mb)
-        </p>
-        {preview ? (
-          <Image
-            width={120}
-            height={120}
-            src={preview}
-            alt={nome}
-            className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
-          />
-        ) : (
-          <Image
-            width={120}
-            height={120}
-            src={img}
-            alt={nome}
-            className="flex  h-[150px] w-[150px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
-          />
-        )}
-      </label>
+        <input
+          className="input"
+          type="text"
+          name="title"
+          required
+          defaultValue={titulo}
+          placeholder="Digite um título"
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      <input
-        className="input mt-4"
-        type="text"
-        name="name"
-        required
-        defaultValue={nome}
-        placeholder="Digite um nome"
-        onChange={(e) => setName(e.target.value)}
-      />
+        <input
+          className="invisible h-0 w-0"
+          type="file"
+          name="coverUrl"
+          id="coverUrl"
+          onChange={onFileSelected}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="title"
-        required
-        defaultValue={titulo}
-        placeholder="Digite um título"
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <input
-        className="invisible h-0 w-0"
-        type="file"
-        name="coverUrl"
-        id="coverUrl"
-        onChange={onFileSelected}
-      />
-
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center"
-      >
-        {isEditing ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Editando líder...
-          </>
-        ) : (
-          'Editar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center"
+        >
+          {isEditing ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Editando líder...
+            </>
+          ) : (
+            'Editar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

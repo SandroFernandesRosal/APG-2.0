@@ -1,4 +1,3 @@
-// app/api/doacao/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
@@ -26,7 +25,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user) {
+  if (!user || user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -69,7 +68,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user) {
+  if (!user || user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
+import { User } from '@/data/types/user'
 
-export function useToken() {
+export function useToken(): User | null {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('/api/auth/admin/login/me', {
+        const response = await fetch('/api/auth/login/me', {
           credentials: 'include',
         })
 

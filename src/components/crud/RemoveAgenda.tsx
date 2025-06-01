@@ -1,7 +1,7 @@
 'use client'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { useLocal, useShowModal } from '../../store/useStore'
+import { useShowModal } from '../../store/useStore'
 import { useState } from 'react'
 import ShowModal from '../showModal'
 
@@ -10,7 +10,6 @@ interface RemoveAgendaProps {
 }
 
 export default function RemoveAgenda({ id }: RemoveAgendaProps) {
-  const { local } = useLocal()
   const { showModal, setShowModal } = useShowModal()
   const router = useRouter()
   const token = Cookies.get('tokennn')
@@ -21,7 +20,7 @@ export default function RemoveAgenda({ id }: RemoveAgendaProps) {
     setIsDeleting(true)
 
     try {
-      const response = await fetch(`/api/${local}/agenda/${id}`, {
+      const response = await fetch(`/api/agenda/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

@@ -71,69 +71,71 @@ export default function EditContatos({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark dark:text-white"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30 dark:text-white"
       onSubmit={handleSubmit}
     >
-      <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Editar contato{' '}
-        <AiFillCloseCircle
-          onClick={() => setOpenEdit(null)}
-          className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Editar contato{' '}
+          <AiFillCloseCircle
+            onClick={() => setOpenEdit(null)}
+            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+          />
+        </h1>
+        <input
+          className="input mt-2"
+          type="text"
+          name="local"
+          required
+          placeholder="Digite o local"
+          defaultValue={localInitial}
+          onChange={(e) => setLocal(e.target.value)}
         />
-      </h1>
-      <input
-        className="input mt-2"
-        type="text"
-        name="local"
-        required
-        placeholder="Digite o local"
-        defaultValue={localInitial}
-        onChange={(e) => setLocal(e.target.value)}
-      />
 
-      <input
-        className="input"
-        type="text"
-        name="whatsapp"
-        required
-        placeholder="Digite o número"
-        defaultValue={whatsappInitial}
-        onChange={(e) => setWhatsapp(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="whatsapp"
+          required
+          placeholder="Digite o número"
+          defaultValue={whatsappInitial}
+          onChange={(e) => setWhatsapp(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="instagram"
-        required
-        placeholder="Digite o Instagram"
-        defaultValue={instagramInitial}
-        onChange={(e) => setInstagram(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="instagram"
+          required
+          placeholder="Digite o Instagram"
+          defaultValue={instagramInitial}
+          onChange={(e) => setInstagram(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="facebook"
-        required
-        placeholder="Digite o Facebook"
-        defaultValue={facebookInitial}
-        onChange={(e) => setFacebook(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="facebook"
+          required
+          placeholder="Digite o Facebook"
+          defaultValue={facebookInitial}
+          onChange={(e) => setFacebook(e.target.value)}
+        />
 
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center"
-      >
-        {isEditing ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Editando contato...
-          </>
-        ) : (
-          'Editar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center"
+        >
+          {isEditing ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Editando contato...
+            </>
+          ) : (
+            'Editar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

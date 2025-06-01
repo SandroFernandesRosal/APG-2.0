@@ -131,7 +131,7 @@ export default function CarouselEndereco() {
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full dark:bg-bgdark mt-4">
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {!openEndereco && (
               <button className="button" onClick={() => setOpenEndereco(true)}>

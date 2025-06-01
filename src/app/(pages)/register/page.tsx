@@ -3,6 +3,7 @@ import { FaCameraRetro } from 'react-icons/fa'
 import { useState, useRef, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { useToken } from '@/hooks/useToken'
 
 interface ApiError {
   response?: {
@@ -24,6 +25,8 @@ export default function RegisterIgreja() {
 
   const [preview, setPreview] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
+  const token = useToken()
+  const role = token?.role === 'ADMIN' ? 'ADMIN' : 'MEMBRO'
 
   const router = useRouter()
 
@@ -67,13 +70,14 @@ export default function RegisterIgreja() {
           login,
           avatarUrl: avatarUrl || PlaceHolder,
           password,
+          role,
         }),
       })
 
       const user = await response.json()
 
       if (response.status === 200 && !user.error) {
-        router.push('/login/igreja')
+        router.push('/login')
         return user
       } else if (user.error) {
         setError(user.error)

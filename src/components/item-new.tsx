@@ -83,7 +83,7 @@ export default function ItemNew({
           Ler notícia
         </Link>
       </div>
-      {token && (
+      {token?.role === 'ADMIN' && (
         <div className="flex w-full items-start justify-around text-white py-3 ">
           {openEdit !== id ? (
             <button

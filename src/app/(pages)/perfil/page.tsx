@@ -1,19 +1,19 @@
-import { getUserIgreja } from '@/lib/getUserIgreja'
+import { getUser } from '@/lib/getUser'
 import Image from 'next/image'
-import RemoveUserIgreja from '@/components/crud/RemoveUserIgreja'
+import RemoveUser from '@/components/crud/RemoveUser'
 import Link from 'next/link'
-import { UserIgreja } from '@/data/types/userigreja'
+import { User } from '@/data/types/user'
 
 export default async function Perfil() {
-  const user: UserIgreja | null = await getUserIgreja()
+  const user: User | null = await getUser()
 
   return (
     <div className="mb-2 mt-4 flex min-h-screen flex-col items-center gap-5 pt-24 md:mt-0 md:pt-[165px]">
       <div className="mb-4 flex min-h-screen w-full flex-col items-center ">
         {user ? (
           <>
-            <div className="flex flex-col items-center md:min-w-[35%]">
-              <h1 className="m-0 text-lg font-bold text-primary dark:text-secundary">
+            <div className="flex flex-col items-center md:min-w-[35%] mb-4">
+              <h1 className="m-0 text-xl font-bold text-primary dark:text-secundary">
                 Perfil de {user.name.split(' ')[0]}
               </h1>
             </div>
@@ -33,11 +33,16 @@ export default async function Perfil() {
               </h1>
               <p className="truncate w-[100%] text-center">{user.login}</p>
 
-              <div className="flex w-full justify-between gap-2">
+              <div className="flex w-full justify-center gap-2 flex-wrap">
                 <Link href={'/perfil/editar'} className="button !mb-0">
                   Editar perfil
                 </Link>
-                <RemoveUserIgreja id={user.id} />
+                <RemoveUser id={user.id} />
+                {user.role === 'ADMIN' && (
+                  <Link href={'/register'} className="button !mb-0">
+                    Criar novo administrador
+                  </Link>
+                )}
               </div>
             </div>
           </>

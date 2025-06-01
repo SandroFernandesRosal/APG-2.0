@@ -34,7 +34,7 @@ export default function Contatos() {
 
   return (
     <div>
-      {token && (
+      {token?.role === 'ADMIN' && (
         <>
           {!openContato && (
             <div className="flex w-full justify-center">

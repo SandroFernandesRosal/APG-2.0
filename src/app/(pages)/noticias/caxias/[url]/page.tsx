@@ -21,10 +21,13 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
 
   const token = useToken()
 
-  const selectedItem = data.find((item: { url: string }) => item.url === url)
+  const selectedItem = data.find(
+    (item: { url: string; role: string }) =>
+      item.url === url && item.role === local.toUpperCase(),
+  )
 
   useEffect(() => {
-    fetch(`/api/${local}/news`)
+    fetch(`/api/news`)
       .then((response) => response.json())
       .then((data) => {
         setData(data)
@@ -52,7 +55,7 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
     <main className="flex min-h-screen flex-col  items-center gap-5 pt-24 md:pt-[165px]">
       <article className="mb-5  flex w-full flex-col items-center">
         <div className="flex w-full items-center justify-around">
-          {token && selectedItem && (
+          {token?.role === 'ADMIN' && selectedItem && (
             <div className="mt-2 flex gap-3">
               {openEdit !== selectedItem.id ? (
                 <button

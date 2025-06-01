@@ -2,6 +2,8 @@ export interface User {
   id: string
   login: string
   name: string
-  avatarUrl: string
-  isAdmin: boolean
+  avatarUrl?: string
+  sub?: string
+  userId: string
+  role: 'ADMIN' | 'MEMBRO'
 }

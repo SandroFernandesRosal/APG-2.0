@@ -4,7 +4,7 @@ import { useDataTestemunho } from '@/store/useStore'
 import { Testemunho } from '@/data/types/testemunho'
 import ItemTestemunho from './item-testemunho'
 import SkeletonTestemunhos from './skeleton/SkeletonTestemunhos'
-import { UserIgreja } from '@/data/types/userigreja'
+import { User } from '@/data/types/user'
 
 import Link from 'next/link'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
@@ -22,11 +22,7 @@ export interface testemunhoProps {
   userId: string
 }
 
-export default function TestemunhoLine({
-  userIgreja,
-}: {
-  userIgreja: UserIgreja
-}) {
+export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
   const { dataTestemunho, setDataTestemunho } = useDataTestemunho() as {
     dataTestemunho: Testemunho[]
     setDataTestemunho: React.Dispatch<React.SetStateAction<Testemunho[]>>
@@ -99,22 +95,21 @@ export default function TestemunhoLine({
   return (
     <div className="flex flex-col items-center self-center mb-4 w-full">
       <section className="mb-8 flex w-full flex-col items-center pb-4 md:rounded-xl">
-        {!tokenIgreja ||
-          (token && (
-            <div className="flex w-full flex-wrap items-end justify-center gap-1">
-              Faça
-              <Link href={'/login/igreja'} className="button">
-                login
-              </Link>{' '}
-              ou{' '}
-              <Link href={'/register'} className="button">
-                Registre-se
-              </Link>
-              e envie seu testemunho.
-            </div>
-          ))}
+        {!token && (
+          <div className="flex w-full flex-wrap items-end justify-center gap-1">
+            Faça
+            <Link href={'/login/igreja'} className="button">
+              login
+            </Link>{' '}
+            ou{' '}
+            <Link href={'/register'} className="button">
+              Registre-se
+            </Link>
+            e envie seu testemunho.
+          </div>
+        )}
 
-        {tokenIgreja && (
+        {token?.role === 'MEMBRO' && (
           <>
             {qtdAguardandoAprovacao > 0 && (
               <div className="my-4 mx-5 rounded border border-primary dark:border-secundary bg-bglightsecundary dark:bg-bgdarksecundary p-4">

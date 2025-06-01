@@ -20,7 +20,7 @@ export default function LiderQuemSomos({
 
   return (
     <Suspense fallback={<div>Carregando...</div>}>
-      {token && (
+      {token?.role === 'ADMIN' && (
         <>
           {open === false && (
             <button className="button" onClick={() => setOpen(true)}>
@@ -67,7 +67,7 @@ export default function LiderQuemSomos({
                 </div>
                 <div className="flex px-2 z-30">{product.title}</div>
 
-                {token && (
+                {token?.role === 'ADMIN' && (
                   <div className=" mb-1 flex w-full flex-1 items-end justify-around text-white">
                     {openEdit !== product.id ? (
                       <button

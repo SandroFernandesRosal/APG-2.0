@@ -22,6 +22,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const { local } = useLocal()
+  const [role, setRole] = useState<string>(local)
   const router = useRouter()
   const token = Cookies.get('tokennn')
 
@@ -60,7 +61,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
     }
 
     try {
-      const response = await fetch(`/api/${local}/news`, {
+      const response = await fetch(`/api/news`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,6 +72,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
           content,
           coverUrl,
           page: local,
+          role,
           destaque,
         }),
       })
@@ -100,94 +102,113 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar Notícia
-        {openNew && (
-          <AiFillCloseCircle
-            onClick={() => setOpenNew(false)}
-            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Adicionar Notícia
+          {openNew && (
+            <AiFillCloseCircle
+              onClick={() => setOpenNew(false)}
+              className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+            />
+          )}
+        </h1>
+
+        <label
+          htmlFor="coverUrl"
+          className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
+        >
+          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
+          Anexar foto (até 5mb)
+        </label>
+
+        {preview && (
+          <Image
+            src={preview}
+            width={200}
+            height={200}
+            alt="Imagem"
+            className="aspect-video w-[200px]"
           />
         )}
-      </h1>
 
-      <label
-        htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
-      >
-        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
-        Anexar foto (até 5mb)
-      </label>
-
-      {preview && (
-        <Image
-          src={preview}
-          width={200}
-          height={200}
-          alt="Imagem"
-          className="aspect-video w-[200px]"
-        />
-      )}
-
-      <input
-        className="input mt-4"
-        type="text"
-        name="title"
-        required
-        placeholder="Título da notícia"
-        onChange={(e) => setTitle(e.target.value.toLowerCase())}
-      />
-
-      <textarea
-        className="input"
-        name="content"
-        required
-        placeholder="Conteúdo da notícia"
-        onChange={(e) => setContent(e.target.value)}
-      />
-
-      <input
-        className="invisible h-0 w-0"
-        type="file"
-        name="coverUrl"
-        id="coverUrl"
-        required
-        onChange={onFileSelected}
-      />
-
-      <div className="my-4 flex items-center gap-2">
         <input
-          type="checkbox"
-          id="destaque"
-          name="destaque"
-          checked={destaque}
-          onChange={(e) => setDestaque(e.target.checked)}
-          className="cursor-pointer rounded-lg border-none bg-gray-300 focus:ring-primary dark:border-gray-500 dark:bg-gray-600"
+          className="input mt-4"
+          type="text"
+          name="title"
+          required
+          placeholder="Título da notícia"
+          onChange={(e) => setTitle(e.target.value.toLowerCase())}
         />
-        <label
-          htmlFor="destaque"
-          className="font-bold text-black dark:text-white"
-        >
-          Marcar como destaque
-        </label>
-      </div>
 
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Adicionando notícia...
-          </>
-        ) : (
-          'Enviar'
-        )}
-      </button>
+        <textarea
+          className="input"
+          name="content"
+          required
+          placeholder="Conteúdo da notícia"
+          onChange={(e) => setContent(e.target.value)}
+        />
+
+        <input
+          className="invisible h-0 w-0"
+          type="file"
+          name="coverUrl"
+          id="coverUrl"
+          required
+          onChange={onFileSelected}
+        />
+
+        <label htmlFor="role" className="font-bold mb-1">
+          Selecione a igreja
+        </label>
+        <select
+          id="role"
+          name="role"
+          className="input mb-3"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          required
+        >
+          <option value="">Selecione...</option>
+          <option value="VILADAPENHA">Vila da Penha</option>
+          <option value="MARIAHELENA">Maria Helena</option>
+          <option value="TOMAZINHO">Tomazinho</option>
+        </select>
+
+        <div className="my-4 flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="destaque"
+            name="destaque"
+            checked={destaque}
+            onChange={(e) => setDestaque(e.target.checked)}
+            className="cursor-pointer rounded-lg border-none bg-gray-300 focus:ring-primary dark:border-gray-500 dark:bg-gray-600"
+          />
+          <label
+            htmlFor="destaque"
+            className="font-bold text-black dark:text-white"
+          >
+            Marcar como destaque
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Adicionando notícia...
+            </>
+          ) : (
+            'Enviar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

@@ -16,7 +16,7 @@ export default function MinisterioPage() {
       <div className=" w-full  flex-col items-center  md:min-w-[35%] flex">
         <MinisterioHeader />
 
-        {token && (
+        {token && token.role === 'ADMIN' && (
           <>
             {openMinisterio === false && (
               <button
@@ -29,7 +29,6 @@ export default function MinisterioPage() {
 
             {openMinisterio && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddMinisterio
                   openMinisterio={openMinisterio}
                   setOpenMinisterio={setOpenMinisterio}

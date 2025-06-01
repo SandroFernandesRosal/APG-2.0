@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 
-import { authMiddlewareMember } from '@/lib/auth-member'
+import { authMiddleware } from '@/lib/auth'
 
 const bodySchema = z.object({
   name: z.string(),
@@ -34,8 +34,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 }
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const member = await authMiddlewareMember(req)
-  if (!member) {
+  const member = await authMiddleware(req)
+  if (!member || (member.role !== 'ADMIN' && member.role !== 'MEMBRO')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -58,8 +58,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 }
 
 export async function PUT(req: NextRequest): Promise<NextResponse> {
-  const user = await authMiddlewareMember(req)
-  if (!user) {
+  const user = await authMiddleware(req)
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'MEMBRO')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 

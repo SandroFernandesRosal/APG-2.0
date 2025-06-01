@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 export async function GET() {
   try {
-    const users = await prisma.userIgreja.findMany()
+    const users = await prisma.user.findMany()
 
     return NextResponse.json(users)
   } catch (error) {
@@ -33,14 +33,15 @@ export async function POST(req: Request) {
       .refine((value) => /[a-zA-Z]/.test(value), {
         message: 'A senha deve conter pelo menos uma letra',
       }),
+    role: z.enum(['ADMIN', 'MEMBRO']).optional(), // Permite definir o role, default é MEMBRO
   })
 
   try {
-    const { login, name, avatarUrl, password } = userSchema.parse(
+    const { login, name, avatarUrl, password, role } = userSchema.parse(
       await req.json(),
     )
 
-    const existingUser = await prisma.userIgreja.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: { login },
     })
 
@@ -52,19 +53,19 @@ export async function POST(req: Request) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
-
     const refreshToken = uuidv4()
 
-    const user = await prisma.userIgreja.create({
+    const user = await prisma.user.create({
       data: {
         login,
         name,
         avatarUrl,
         password: hashedPassword,
+        role: role || 'MEMBRO',
       },
     })
 
-    await prisma.refreshTokenIgreja.create({
+    await prisma.refreshToken.create({
       data: {
         token: refreshToken,
         userId: user.id,

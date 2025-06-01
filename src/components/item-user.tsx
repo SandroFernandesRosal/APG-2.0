@@ -37,11 +37,12 @@ export default function ItemUser({ avatarUrl, name }: userProps) {
           />
           <p className="text-lg font-bold text-black dark:text-white">{name}</p>
           <Link
-            href={'/perfil/adm'}
+            href={'/perfil'}
             className="rounded-md mx-2 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
           >
             Perfil
           </Link>
+
           <Logout />
           <div className="m-2 flex md:hidden">
             <ChangeTheme />

@@ -8,4 +8,5 @@ export interface New {
   page: string
   updatedAt: string
   url: string
+  role: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
 }

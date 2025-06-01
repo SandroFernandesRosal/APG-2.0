@@ -11,19 +11,19 @@ export async function POST(req: Request) {
   try {
     const { refreshToken } = refreshTokenSchema.parse(await req.json())
 
-    const refreshTokenRecord = await prisma.refreshTokenIgreja.findUnique({
+    const refreshTokenRecord = await prisma.refreshToken.findUnique({
       where: { token: refreshToken },
-      include: { userIgreja: true },
+      include: { user: true },
     })
 
-    if (!refreshTokenRecord) {
+    if (!refreshTokenRecord || !refreshTokenRecord.user) {
       return NextResponse.json(
         { error: 'Refresh token inválido.' },
         { status: 401 },
       )
     }
 
-    const user = refreshTokenRecord.userIgreja
+    const user = refreshTokenRecord.user
 
     const newToken = jwt.sign(
       {
@@ -31,6 +31,7 @@ export async function POST(req: Request) {
         name: user.name,
         avatarUrl: user.avatarUrl,
         login: user.login,
+        role: user.role,
       },
       process.env.JWT_SECRET || 'secret',
       {

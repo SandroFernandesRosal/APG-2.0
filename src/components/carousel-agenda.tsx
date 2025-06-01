@@ -35,7 +35,7 @@ export default function CarouselAgenda({
     const fetchAgendaData = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`/api/${local}/agenda`)
+        const response = await fetch(`/api/agenda`)
 
         if (!response.ok) {
           throw new Error('Falha ao carregar agenda')
@@ -58,6 +58,10 @@ export default function CarouselAgenda({
     setLocalLoading(true)
     setLocal(newLocal)
   }
+
+  const filteredAgenda = dataAgenda.filter(
+    (item: Agenda) => item.role === local.toUpperCase(),
+  )
 
   const settings = {
     dots: true,
@@ -107,7 +111,7 @@ export default function CarouselAgenda({
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full mb-10">
         <AgendaHeader />
 
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {openAgenda === false && (
               <button className="button" onClick={() => setOpenAgenda(true)}>
@@ -146,7 +150,7 @@ export default function CarouselAgenda({
                 <SkeletonNew key={index} />
               ))}
             </Slider>
-          ) : dataAgenda.length === 0 ? (
+          ) : filteredAgenda.length === 0 ? (
             <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
               <p>Nenhum evento cadastrado.</p>
             </div>
@@ -155,7 +159,7 @@ export default function CarouselAgenda({
               {...settings}
               className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
-              {dataAgenda.map((product: Agenda) => (
+              {filteredAgenda.map((product: Agenda) => (
                 <div
                   className="flex justify-center relative content-center flex-col h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800"
                   key={product.id}
@@ -223,6 +227,7 @@ export default function CarouselAgenda({
           hora={selectedProduct.hour}
           dia={selectedProduct.day}
           setOpenEdit={setOpenEdit}
+          role={selectedProduct.role}
         />
       )}
     </>

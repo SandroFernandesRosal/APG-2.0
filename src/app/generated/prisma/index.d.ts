@@ -19,11 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model UserIgreja
- * 
- */
-export type UserIgreja = $Result.DefaultSelection<Prisma.$UserIgrejaPayload>
-/**
  * Model New
  * 
  */
@@ -38,36 +33,6 @@ export type Ministerio = $Result.DefaultSelection<Prisma.$MinisterioPayload>
  * 
  */
 export type Agenda = $Result.DefaultSelection<Prisma.$AgendaPayload>
-/**
- * Model NewTomazinho
- * 
- */
-export type NewTomazinho = $Result.DefaultSelection<Prisma.$NewTomazinhoPayload>
-/**
- * Model MinisterioTomazinho
- * 
- */
-export type MinisterioTomazinho = $Result.DefaultSelection<Prisma.$MinisterioTomazinhoPayload>
-/**
- * Model AgendaTomazinho
- * 
- */
-export type AgendaTomazinho = $Result.DefaultSelection<Prisma.$AgendaTomazinhoPayload>
-/**
- * Model NewCaxias
- * 
- */
-export type NewCaxias = $Result.DefaultSelection<Prisma.$NewCaxiasPayload>
-/**
- * Model MinisterioCaxias
- * 
- */
-export type MinisterioCaxias = $Result.DefaultSelection<Prisma.$MinisterioCaxiasPayload>
-/**
- * Model AgendaCaxias
- * 
- */
-export type AgendaCaxias = $Result.DefaultSelection<Prisma.$AgendaCaxiasPayload>
 /**
  * Model Doacao
  * 
@@ -99,30 +64,45 @@ export type SobreLider = $Result.DefaultSelection<Prisma.$SobreLiderPayload>
  */
 export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
 /**
- * Model Testemunho
- * 
- */
-export type Testemunho = $Result.DefaultSelection<Prisma.$TestemunhoPayload>
-/**
- * Model RefreshTokenIgreja
- * 
- */
-export type RefreshTokenIgreja = $Result.DefaultSelection<Prisma.$RefreshTokenIgrejaPayload>
-/**
- * Model PasswordResetTokenIgreja
- * 
- */
-export type PasswordResetTokenIgreja = $Result.DefaultSelection<Prisma.$PasswordResetTokenIgrejaPayload>
-/**
  * Model PasswordResetToken
  * 
  */
 export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetTokenPayload>
 /**
- * Model Novatabela
+ * Model Testemunho
  * 
  */
-export type Novatabela = $Result.DefaultSelection<Prisma.$NovatabelaPayload>
+export type Testemunho = $Result.DefaultSelection<Prisma.$TestemunhoPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserRole: {
+  ADMIN: 'ADMIN',
+  MEMBRO: 'MEMBRO'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const MinistryRole: {
+  VILADAPENHA: 'VILADAPENHA',
+  TOMAZINHO: 'TOMAZINHO',
+  MARIAHELENA: 'MARIAHELENA'
+};
+
+export type MinistryRole = (typeof MinistryRole)[keyof typeof MinistryRole]
+
+}
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
+
+export type MinistryRole = $Enums.MinistryRole
+
+export const MinistryRole: typeof $Enums.MinistryRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -260,16 +240,6 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.userIgreja`: Exposes CRUD operations for the **UserIgreja** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserIgrejas
-    * const userIgrejas = await prisma.userIgreja.findMany()
-    * ```
-    */
-  get userIgreja(): Prisma.UserIgrejaDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.new`: Exposes CRUD operations for the **New** model.
     * Example usage:
     * ```ts
@@ -298,66 +268,6 @@ export class PrismaClient<
     * ```
     */
   get agenda(): Prisma.AgendaDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.newTomazinho`: Exposes CRUD operations for the **NewTomazinho** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more NewTomazinhos
-    * const newTomazinhos = await prisma.newTomazinho.findMany()
-    * ```
-    */
-  get newTomazinho(): Prisma.NewTomazinhoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.ministerioTomazinho`: Exposes CRUD operations for the **MinisterioTomazinho** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MinisterioTomazinhos
-    * const ministerioTomazinhos = await prisma.ministerioTomazinho.findMany()
-    * ```
-    */
-  get ministerioTomazinho(): Prisma.MinisterioTomazinhoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.agendaTomazinho`: Exposes CRUD operations for the **AgendaTomazinho** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more AgendaTomazinhos
-    * const agendaTomazinhos = await prisma.agendaTomazinho.findMany()
-    * ```
-    */
-  get agendaTomazinho(): Prisma.AgendaTomazinhoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.newCaxias`: Exposes CRUD operations for the **NewCaxias** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more NewCaxias
-    * const newCaxias = await prisma.newCaxias.findMany()
-    * ```
-    */
-  get newCaxias(): Prisma.NewCaxiasDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.ministerioCaxias`: Exposes CRUD operations for the **MinisterioCaxias** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MinisterioCaxias
-    * const ministerioCaxias = await prisma.ministerioCaxias.findMany()
-    * ```
-    */
-  get ministerioCaxias(): Prisma.MinisterioCaxiasDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.agendaCaxias`: Exposes CRUD operations for the **AgendaCaxias** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more AgendaCaxias
-    * const agendaCaxias = await prisma.agendaCaxias.findMany()
-    * ```
-    */
-  get agendaCaxias(): Prisma.AgendaCaxiasDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.doacao`: Exposes CRUD operations for the **Doacao** model.
@@ -420,36 +330,6 @@ export class PrismaClient<
   get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.testemunho`: Exposes CRUD operations for the **Testemunho** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Testemunhos
-    * const testemunhos = await prisma.testemunho.findMany()
-    * ```
-    */
-  get testemunho(): Prisma.TestemunhoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.refreshTokenIgreja`: Exposes CRUD operations for the **RefreshTokenIgreja** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more RefreshTokenIgrejas
-    * const refreshTokenIgrejas = await prisma.refreshTokenIgreja.findMany()
-    * ```
-    */
-  get refreshTokenIgreja(): Prisma.RefreshTokenIgrejaDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.passwordResetTokenIgreja`: Exposes CRUD operations for the **PasswordResetTokenIgreja** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PasswordResetTokenIgrejas
-    * const passwordResetTokenIgrejas = await prisma.passwordResetTokenIgreja.findMany()
-    * ```
-    */
-  get passwordResetTokenIgreja(): Prisma.PasswordResetTokenIgrejaDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.passwordResetToken`: Exposes CRUD operations for the **PasswordResetToken** model.
     * Example usage:
     * ```ts
@@ -460,14 +340,14 @@ export class PrismaClient<
   get passwordResetToken(): Prisma.PasswordResetTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.novatabela`: Exposes CRUD operations for the **Novatabela** model.
+   * `prisma.testemunho`: Exposes CRUD operations for the **Testemunho** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Novatabelas
-    * const novatabelas = await prisma.novatabela.findMany()
+    * // Fetch zero or more Testemunhos
+    * const testemunhos = await prisma.testemunho.findMany()
     * ```
     */
-  get novatabela(): Prisma.NovatabelaDelegate<ExtArgs, ClientOptions>;
+  get testemunho(): Prisma.TestemunhoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -909,27 +789,17 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    UserIgreja: 'UserIgreja',
     New: 'New',
     Ministerio: 'Ministerio',
     Agenda: 'Agenda',
-    NewTomazinho: 'NewTomazinho',
-    MinisterioTomazinho: 'MinisterioTomazinho',
-    AgendaTomazinho: 'AgendaTomazinho',
-    NewCaxias: 'NewCaxias',
-    MinisterioCaxias: 'MinisterioCaxias',
-    AgendaCaxias: 'AgendaCaxias',
     Doacao: 'Doacao',
     Endereco: 'Endereco',
     Contato: 'Contato',
     Sobre: 'Sobre',
     SobreLider: 'SobreLider',
     RefreshToken: 'RefreshToken',
-    Testemunho: 'Testemunho',
-    RefreshTokenIgreja: 'RefreshTokenIgreja',
-    PasswordResetTokenIgreja: 'PasswordResetTokenIgreja',
     PasswordResetToken: 'PasswordResetToken',
-    Novatabela: 'Novatabela'
+    Testemunho: 'Testemunho'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -948,7 +818,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userIgreja" | "new" | "ministerio" | "agenda" | "newTomazinho" | "ministerioTomazinho" | "agendaTomazinho" | "newCaxias" | "ministerioCaxias" | "agendaCaxias" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "testemunho" | "refreshTokenIgreja" | "passwordResetTokenIgreja" | "passwordResetToken" | "novatabela"
+      modelProps: "user" | "new" | "ministerio" | "agenda" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "passwordResetToken" | "testemunho"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1023,80 +893,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
-      UserIgreja: {
-        payload: Prisma.$UserIgrejaPayload<ExtArgs>
-        fields: Prisma.UserIgrejaFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UserIgrejaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UserIgrejaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>
-          }
-          findFirst: {
-            args: Prisma.UserIgrejaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UserIgrejaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>
-          }
-          findMany: {
-            args: Prisma.UserIgrejaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>[]
-          }
-          create: {
-            args: Prisma.UserIgrejaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>
-          }
-          createMany: {
-            args: Prisma.UserIgrejaCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.UserIgrejaCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>[]
-          }
-          delete: {
-            args: Prisma.UserIgrejaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>
-          }
-          update: {
-            args: Prisma.UserIgrejaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>
-          }
-          deleteMany: {
-            args: Prisma.UserIgrejaDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UserIgrejaUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.UserIgrejaUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>[]
-          }
-          upsert: {
-            args: Prisma.UserIgrejaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserIgrejaPayload>
-          }
-          aggregate: {
-            args: Prisma.UserIgrejaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUserIgreja>
-          }
-          groupBy: {
-            args: Prisma.UserIgrejaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserIgrejaGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.UserIgrejaCountArgs<ExtArgs>
-            result: $Utils.Optional<UserIgrejaCountAggregateOutputType> | number
           }
         }
       }
@@ -1319,450 +1115,6 @@ export namespace Prisma {
           count: {
             args: Prisma.AgendaCountArgs<ExtArgs>
             result: $Utils.Optional<AgendaCountAggregateOutputType> | number
-          }
-        }
-      }
-      NewTomazinho: {
-        payload: Prisma.$NewTomazinhoPayload<ExtArgs>
-        fields: Prisma.NewTomazinhoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.NewTomazinhoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.NewTomazinhoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>
-          }
-          findFirst: {
-            args: Prisma.NewTomazinhoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.NewTomazinhoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>
-          }
-          findMany: {
-            args: Prisma.NewTomazinhoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>[]
-          }
-          create: {
-            args: Prisma.NewTomazinhoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>
-          }
-          createMany: {
-            args: Prisma.NewTomazinhoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.NewTomazinhoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>[]
-          }
-          delete: {
-            args: Prisma.NewTomazinhoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>
-          }
-          update: {
-            args: Prisma.NewTomazinhoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>
-          }
-          deleteMany: {
-            args: Prisma.NewTomazinhoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.NewTomazinhoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.NewTomazinhoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>[]
-          }
-          upsert: {
-            args: Prisma.NewTomazinhoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewTomazinhoPayload>
-          }
-          aggregate: {
-            args: Prisma.NewTomazinhoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNewTomazinho>
-          }
-          groupBy: {
-            args: Prisma.NewTomazinhoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NewTomazinhoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.NewTomazinhoCountArgs<ExtArgs>
-            result: $Utils.Optional<NewTomazinhoCountAggregateOutputType> | number
-          }
-        }
-      }
-      MinisterioTomazinho: {
-        payload: Prisma.$MinisterioTomazinhoPayload<ExtArgs>
-        fields: Prisma.MinisterioTomazinhoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.MinisterioTomazinhoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.MinisterioTomazinhoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>
-          }
-          findFirst: {
-            args: Prisma.MinisterioTomazinhoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.MinisterioTomazinhoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>
-          }
-          findMany: {
-            args: Prisma.MinisterioTomazinhoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>[]
-          }
-          create: {
-            args: Prisma.MinisterioTomazinhoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>
-          }
-          createMany: {
-            args: Prisma.MinisterioTomazinhoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.MinisterioTomazinhoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>[]
-          }
-          delete: {
-            args: Prisma.MinisterioTomazinhoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>
-          }
-          update: {
-            args: Prisma.MinisterioTomazinhoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>
-          }
-          deleteMany: {
-            args: Prisma.MinisterioTomazinhoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.MinisterioTomazinhoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.MinisterioTomazinhoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>[]
-          }
-          upsert: {
-            args: Prisma.MinisterioTomazinhoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioTomazinhoPayload>
-          }
-          aggregate: {
-            args: Prisma.MinisterioTomazinhoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMinisterioTomazinho>
-          }
-          groupBy: {
-            args: Prisma.MinisterioTomazinhoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MinisterioTomazinhoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.MinisterioTomazinhoCountArgs<ExtArgs>
-            result: $Utils.Optional<MinisterioTomazinhoCountAggregateOutputType> | number
-          }
-        }
-      }
-      AgendaTomazinho: {
-        payload: Prisma.$AgendaTomazinhoPayload<ExtArgs>
-        fields: Prisma.AgendaTomazinhoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AgendaTomazinhoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AgendaTomazinhoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>
-          }
-          findFirst: {
-            args: Prisma.AgendaTomazinhoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AgendaTomazinhoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>
-          }
-          findMany: {
-            args: Prisma.AgendaTomazinhoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>[]
-          }
-          create: {
-            args: Prisma.AgendaTomazinhoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>
-          }
-          createMany: {
-            args: Prisma.AgendaTomazinhoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AgendaTomazinhoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>[]
-          }
-          delete: {
-            args: Prisma.AgendaTomazinhoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>
-          }
-          update: {
-            args: Prisma.AgendaTomazinhoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>
-          }
-          deleteMany: {
-            args: Prisma.AgendaTomazinhoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AgendaTomazinhoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AgendaTomazinhoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>[]
-          }
-          upsert: {
-            args: Prisma.AgendaTomazinhoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaTomazinhoPayload>
-          }
-          aggregate: {
-            args: Prisma.AgendaTomazinhoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAgendaTomazinho>
-          }
-          groupBy: {
-            args: Prisma.AgendaTomazinhoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AgendaTomazinhoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AgendaTomazinhoCountArgs<ExtArgs>
-            result: $Utils.Optional<AgendaTomazinhoCountAggregateOutputType> | number
-          }
-        }
-      }
-      NewCaxias: {
-        payload: Prisma.$NewCaxiasPayload<ExtArgs>
-        fields: Prisma.NewCaxiasFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.NewCaxiasFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.NewCaxiasFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>
-          }
-          findFirst: {
-            args: Prisma.NewCaxiasFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.NewCaxiasFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>
-          }
-          findMany: {
-            args: Prisma.NewCaxiasFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>[]
-          }
-          create: {
-            args: Prisma.NewCaxiasCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>
-          }
-          createMany: {
-            args: Prisma.NewCaxiasCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.NewCaxiasCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>[]
-          }
-          delete: {
-            args: Prisma.NewCaxiasDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>
-          }
-          update: {
-            args: Prisma.NewCaxiasUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>
-          }
-          deleteMany: {
-            args: Prisma.NewCaxiasDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.NewCaxiasUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.NewCaxiasUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>[]
-          }
-          upsert: {
-            args: Prisma.NewCaxiasUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewCaxiasPayload>
-          }
-          aggregate: {
-            args: Prisma.NewCaxiasAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNewCaxias>
-          }
-          groupBy: {
-            args: Prisma.NewCaxiasGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NewCaxiasGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.NewCaxiasCountArgs<ExtArgs>
-            result: $Utils.Optional<NewCaxiasCountAggregateOutputType> | number
-          }
-        }
-      }
-      MinisterioCaxias: {
-        payload: Prisma.$MinisterioCaxiasPayload<ExtArgs>
-        fields: Prisma.MinisterioCaxiasFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.MinisterioCaxiasFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.MinisterioCaxiasFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>
-          }
-          findFirst: {
-            args: Prisma.MinisterioCaxiasFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.MinisterioCaxiasFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>
-          }
-          findMany: {
-            args: Prisma.MinisterioCaxiasFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>[]
-          }
-          create: {
-            args: Prisma.MinisterioCaxiasCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>
-          }
-          createMany: {
-            args: Prisma.MinisterioCaxiasCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.MinisterioCaxiasCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>[]
-          }
-          delete: {
-            args: Prisma.MinisterioCaxiasDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>
-          }
-          update: {
-            args: Prisma.MinisterioCaxiasUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>
-          }
-          deleteMany: {
-            args: Prisma.MinisterioCaxiasDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.MinisterioCaxiasUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.MinisterioCaxiasUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>[]
-          }
-          upsert: {
-            args: Prisma.MinisterioCaxiasUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MinisterioCaxiasPayload>
-          }
-          aggregate: {
-            args: Prisma.MinisterioCaxiasAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMinisterioCaxias>
-          }
-          groupBy: {
-            args: Prisma.MinisterioCaxiasGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MinisterioCaxiasGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.MinisterioCaxiasCountArgs<ExtArgs>
-            result: $Utils.Optional<MinisterioCaxiasCountAggregateOutputType> | number
-          }
-        }
-      }
-      AgendaCaxias: {
-        payload: Prisma.$AgendaCaxiasPayload<ExtArgs>
-        fields: Prisma.AgendaCaxiasFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AgendaCaxiasFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AgendaCaxiasFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>
-          }
-          findFirst: {
-            args: Prisma.AgendaCaxiasFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AgendaCaxiasFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>
-          }
-          findMany: {
-            args: Prisma.AgendaCaxiasFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>[]
-          }
-          create: {
-            args: Prisma.AgendaCaxiasCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>
-          }
-          createMany: {
-            args: Prisma.AgendaCaxiasCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AgendaCaxiasCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>[]
-          }
-          delete: {
-            args: Prisma.AgendaCaxiasDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>
-          }
-          update: {
-            args: Prisma.AgendaCaxiasUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>
-          }
-          deleteMany: {
-            args: Prisma.AgendaCaxiasDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AgendaCaxiasUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AgendaCaxiasUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>[]
-          }
-          upsert: {
-            args: Prisma.AgendaCaxiasUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AgendaCaxiasPayload>
-          }
-          aggregate: {
-            args: Prisma.AgendaCaxiasAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAgendaCaxias>
-          }
-          groupBy: {
-            args: Prisma.AgendaCaxiasGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AgendaCaxiasGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AgendaCaxiasCountArgs<ExtArgs>
-            result: $Utils.Optional<AgendaCaxiasCountAggregateOutputType> | number
           }
         }
       }
@@ -2210,228 +1562,6 @@ export namespace Prisma {
           }
         }
       }
-      Testemunho: {
-        payload: Prisma.$TestemunhoPayload<ExtArgs>
-        fields: Prisma.TestemunhoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TestemunhoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TestemunhoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
-          }
-          findFirst: {
-            args: Prisma.TestemunhoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TestemunhoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
-          }
-          findMany: {
-            args: Prisma.TestemunhoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>[]
-          }
-          create: {
-            args: Prisma.TestemunhoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
-          }
-          createMany: {
-            args: Prisma.TestemunhoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TestemunhoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>[]
-          }
-          delete: {
-            args: Prisma.TestemunhoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
-          }
-          update: {
-            args: Prisma.TestemunhoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
-          }
-          deleteMany: {
-            args: Prisma.TestemunhoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TestemunhoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TestemunhoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>[]
-          }
-          upsert: {
-            args: Prisma.TestemunhoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
-          }
-          aggregate: {
-            args: Prisma.TestemunhoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTestemunho>
-          }
-          groupBy: {
-            args: Prisma.TestemunhoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TestemunhoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TestemunhoCountArgs<ExtArgs>
-            result: $Utils.Optional<TestemunhoCountAggregateOutputType> | number
-          }
-        }
-      }
-      RefreshTokenIgreja: {
-        payload: Prisma.$RefreshTokenIgrejaPayload<ExtArgs>
-        fields: Prisma.RefreshTokenIgrejaFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.RefreshTokenIgrejaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.RefreshTokenIgrejaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>
-          }
-          findFirst: {
-            args: Prisma.RefreshTokenIgrejaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.RefreshTokenIgrejaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>
-          }
-          findMany: {
-            args: Prisma.RefreshTokenIgrejaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>[]
-          }
-          create: {
-            args: Prisma.RefreshTokenIgrejaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>
-          }
-          createMany: {
-            args: Prisma.RefreshTokenIgrejaCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.RefreshTokenIgrejaCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>[]
-          }
-          delete: {
-            args: Prisma.RefreshTokenIgrejaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>
-          }
-          update: {
-            args: Prisma.RefreshTokenIgrejaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>
-          }
-          deleteMany: {
-            args: Prisma.RefreshTokenIgrejaDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.RefreshTokenIgrejaUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.RefreshTokenIgrejaUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>[]
-          }
-          upsert: {
-            args: Prisma.RefreshTokenIgrejaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenIgrejaPayload>
-          }
-          aggregate: {
-            args: Prisma.RefreshTokenIgrejaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRefreshTokenIgreja>
-          }
-          groupBy: {
-            args: Prisma.RefreshTokenIgrejaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<RefreshTokenIgrejaGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.RefreshTokenIgrejaCountArgs<ExtArgs>
-            result: $Utils.Optional<RefreshTokenIgrejaCountAggregateOutputType> | number
-          }
-        }
-      }
-      PasswordResetTokenIgreja: {
-        payload: Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>
-        fields: Prisma.PasswordResetTokenIgrejaFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PasswordResetTokenIgrejaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PasswordResetTokenIgrejaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>
-          }
-          findFirst: {
-            args: Prisma.PasswordResetTokenIgrejaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PasswordResetTokenIgrejaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>
-          }
-          findMany: {
-            args: Prisma.PasswordResetTokenIgrejaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>[]
-          }
-          create: {
-            args: Prisma.PasswordResetTokenIgrejaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>
-          }
-          createMany: {
-            args: Prisma.PasswordResetTokenIgrejaCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PasswordResetTokenIgrejaCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>[]
-          }
-          delete: {
-            args: Prisma.PasswordResetTokenIgrejaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>
-          }
-          update: {
-            args: Prisma.PasswordResetTokenIgrejaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>
-          }
-          deleteMany: {
-            args: Prisma.PasswordResetTokenIgrejaDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PasswordResetTokenIgrejaUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PasswordResetTokenIgrejaUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>[]
-          }
-          upsert: {
-            args: Prisma.PasswordResetTokenIgrejaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenIgrejaPayload>
-          }
-          aggregate: {
-            args: Prisma.PasswordResetTokenIgrejaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePasswordResetTokenIgreja>
-          }
-          groupBy: {
-            args: Prisma.PasswordResetTokenIgrejaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PasswordResetTokenIgrejaGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PasswordResetTokenIgrejaCountArgs<ExtArgs>
-            result: $Utils.Optional<PasswordResetTokenIgrejaCountAggregateOutputType> | number
-          }
-        }
-      }
       PasswordResetToken: {
         payload: Prisma.$PasswordResetTokenPayload<ExtArgs>
         fields: Prisma.PasswordResetTokenFieldRefs
@@ -2506,77 +1636,77 @@ export namespace Prisma {
           }
         }
       }
-      Novatabela: {
-        payload: Prisma.$NovatabelaPayload<ExtArgs>
-        fields: Prisma.NovatabelaFieldRefs
+      Testemunho: {
+        payload: Prisma.$TestemunhoPayload<ExtArgs>
+        fields: Prisma.TestemunhoFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.NovatabelaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload> | null
+            args: Prisma.TestemunhoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.NovatabelaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+            args: Prisma.TestemunhoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
           }
           findFirst: {
-            args: Prisma.NovatabelaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload> | null
+            args: Prisma.TestemunhoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.NovatabelaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+            args: Prisma.TestemunhoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
           }
           findMany: {
-            args: Prisma.NovatabelaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>[]
+            args: Prisma.TestemunhoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>[]
           }
           create: {
-            args: Prisma.NovatabelaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+            args: Prisma.TestemunhoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
           }
           createMany: {
-            args: Prisma.NovatabelaCreateManyArgs<ExtArgs>
+            args: Prisma.TestemunhoCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.NovatabelaCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>[]
+            args: Prisma.TestemunhoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>[]
           }
           delete: {
-            args: Prisma.NovatabelaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+            args: Prisma.TestemunhoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
           }
           update: {
-            args: Prisma.NovatabelaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+            args: Prisma.TestemunhoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
           }
           deleteMany: {
-            args: Prisma.NovatabelaDeleteManyArgs<ExtArgs>
+            args: Prisma.TestemunhoDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.NovatabelaUpdateManyArgs<ExtArgs>
+            args: Prisma.TestemunhoUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.NovatabelaUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>[]
+            args: Prisma.TestemunhoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>[]
           }
           upsert: {
-            args: Prisma.NovatabelaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovatabelaPayload>
+            args: Prisma.TestemunhoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TestemunhoPayload>
           }
           aggregate: {
-            args: Prisma.NovatabelaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNovatabela>
+            args: Prisma.TestemunhoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTestemunho>
           }
           groupBy: {
-            args: Prisma.NovatabelaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NovatabelaGroupByOutputType>[]
+            args: Prisma.TestemunhoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TestemunhoGroupByOutputType>[]
           }
           count: {
-            args: Prisma.NovatabelaCountArgs<ExtArgs>
-            result: $Utils.Optional<NovatabelaCountAggregateOutputType> | number
+            args: Prisma.TestemunhoCountArgs<ExtArgs>
+            result: $Utils.Optional<TestemunhoCountAggregateOutputType> | number
           }
         }
       }
@@ -2665,27 +1795,17 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
-    userIgreja?: UserIgrejaOmit
     new?: NewOmit
     ministerio?: MinisterioOmit
     agenda?: AgendaOmit
-    newTomazinho?: NewTomazinhoOmit
-    ministerioTomazinho?: MinisterioTomazinhoOmit
-    agendaTomazinho?: AgendaTomazinhoOmit
-    newCaxias?: NewCaxiasOmit
-    ministerioCaxias?: MinisterioCaxiasOmit
-    agendaCaxias?: AgendaCaxiasOmit
     doacao?: DoacaoOmit
     endereco?: EnderecoOmit
     contato?: ContatoOmit
     sobre?: SobreOmit
     sobreLider?: SobreLiderOmit
     refreshToken?: RefreshTokenOmit
-    testemunho?: TestemunhoOmit
-    refreshTokenIgreja?: RefreshTokenIgrejaOmit
-    passwordResetTokenIgreja?: PasswordResetTokenIgrejaOmit
     passwordResetToken?: PasswordResetTokenOmit
-    novatabela?: NovatabelaOmit
+    testemunho?: TestemunhoOmit
   }
 
   /* Types for Logging */
@@ -2781,40 +1901,30 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     agenda: number
-    agendacaxias: number
-    agendatomazinho: number
     contato: number
     doacao: number
     endereco: number
     ministerio: number
-    ministeriocaxias: number
-    ministeriotomazinho: number
     news: number
-    newscaxias: number
-    newstomazinho: number
     PasswordResetToken: number
     refreshToken: number
     sobre: number
     sobreLider: number
+    testemunhos: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | UserCountOutputTypeCountAgendaArgs
-    agendacaxias?: boolean | UserCountOutputTypeCountAgendacaxiasArgs
-    agendatomazinho?: boolean | UserCountOutputTypeCountAgendatomazinhoArgs
     contato?: boolean | UserCountOutputTypeCountContatoArgs
     doacao?: boolean | UserCountOutputTypeCountDoacaoArgs
     endereco?: boolean | UserCountOutputTypeCountEnderecoArgs
     ministerio?: boolean | UserCountOutputTypeCountMinisterioArgs
-    ministeriocaxias?: boolean | UserCountOutputTypeCountMinisteriocaxiasArgs
-    ministeriotomazinho?: boolean | UserCountOutputTypeCountMinisteriotomazinhoArgs
     news?: boolean | UserCountOutputTypeCountNewsArgs
-    newscaxias?: boolean | UserCountOutputTypeCountNewscaxiasArgs
-    newstomazinho?: boolean | UserCountOutputTypeCountNewstomazinhoArgs
     PasswordResetToken?: boolean | UserCountOutputTypeCountPasswordResetTokenArgs
     refreshToken?: boolean | UserCountOutputTypeCountRefreshTokenArgs
     sobre?: boolean | UserCountOutputTypeCountSobreArgs
     sobreLider?: boolean | UserCountOutputTypeCountSobreLiderArgs
+    testemunhos?: boolean | UserCountOutputTypeCountTestemunhosArgs
   }
 
   // Custom InputTypes
@@ -2833,20 +1943,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAgendaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AgendaWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAgendacaxiasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AgendaCaxiasWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAgendatomazinhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AgendaTomazinhoWhereInput
   }
 
   /**
@@ -2880,36 +1976,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMinisteriocaxiasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MinisterioCaxiasWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountMinisteriotomazinhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MinisterioTomazinhoWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountNewscaxiasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewCaxiasWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountNewstomazinhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewTomazinhoWhereInput
   }
 
   /**
@@ -2940,52 +2008,10 @@ export namespace Prisma {
     where?: SobreLiderWhereInput
   }
 
-
   /**
-   * Count Type UserIgrejaCountOutputType
+   * UserCountOutputType without action
    */
-
-  export type UserIgrejaCountOutputType = {
-    PasswordResetTokenIgreja: number
-    refreshTokenIgreja: number
-    testemunho: number
-  }
-
-  export type UserIgrejaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    PasswordResetTokenIgreja?: boolean | UserIgrejaCountOutputTypeCountPasswordResetTokenIgrejaArgs
-    refreshTokenIgreja?: boolean | UserIgrejaCountOutputTypeCountRefreshTokenIgrejaArgs
-    testemunho?: boolean | UserIgrejaCountOutputTypeCountTestemunhoArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserIgrejaCountOutputType without action
-   */
-  export type UserIgrejaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgrejaCountOutputType
-     */
-    select?: UserIgrejaCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserIgrejaCountOutputType without action
-   */
-  export type UserIgrejaCountOutputTypeCountPasswordResetTokenIgrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PasswordResetTokenIgrejaWhereInput
-  }
-
-  /**
-   * UserIgrejaCountOutputType without action
-   */
-  export type UserIgrejaCountOutputTypeCountRefreshTokenIgrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RefreshTokenIgrejaWhereInput
-  }
-
-  /**
-   * UserIgrejaCountOutputType without action
-   */
-  export type UserIgrejaCountOutputTypeCountTestemunhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountTestemunhosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TestemunhoWhereInput
   }
 
@@ -3010,10 +2036,8 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string | null
-    isAdmin: boolean | null
+    role: $Enums.UserRole | null
     expires: Date | null
-    passwordResetToken: string | null
-    token: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -3022,10 +2046,8 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string | null
-    isAdmin: boolean | null
+    role: $Enums.UserRole | null
     expires: Date | null
-    passwordResetToken: string | null
-    token: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -3034,10 +2056,8 @@ export namespace Prisma {
     name: number
     avatarUrl: number
     password: number
-    isAdmin: number
+    role: number
     expires: number
-    passwordResetToken: number
-    token: number
     _all: number
   }
 
@@ -3048,10 +2068,8 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
-    isAdmin?: true
+    role?: true
     expires?: true
-    passwordResetToken?: true
-    token?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -3060,10 +2078,8 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
-    isAdmin?: true
+    role?: true
     expires?: true
-    passwordResetToken?: true
-    token?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -3072,10 +2088,8 @@ export namespace Prisma {
     name?: true
     avatarUrl?: true
     password?: true
-    isAdmin?: true
+    role?: true
     expires?: true
-    passwordResetToken?: true
-    token?: true
     _all?: true
   }
 
@@ -3157,10 +2171,8 @@ export namespace Prisma {
     name: string | null
     avatarUrl: string | null
     password: string
-    isAdmin: boolean
+    role: $Enums.UserRole
     expires: Date | null
-    passwordResetToken: string | null
-    token: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -3186,26 +2198,19 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    isAdmin?: boolean
+    role?: boolean
     expires?: boolean
-    passwordResetToken?: boolean
-    token?: boolean
     agenda?: boolean | User$agendaArgs<ExtArgs>
-    agendacaxias?: boolean | User$agendacaxiasArgs<ExtArgs>
-    agendatomazinho?: boolean | User$agendatomazinhoArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
     doacao?: boolean | User$doacaoArgs<ExtArgs>
     endereco?: boolean | User$enderecoArgs<ExtArgs>
     ministerio?: boolean | User$ministerioArgs<ExtArgs>
-    ministeriocaxias?: boolean | User$ministeriocaxiasArgs<ExtArgs>
-    ministeriotomazinho?: boolean | User$ministeriotomazinhoArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
-    newscaxias?: boolean | User$newscaxiasArgs<ExtArgs>
-    newstomazinho?: boolean | User$newstomazinhoArgs<ExtArgs>
     PasswordResetToken?: boolean | User$PasswordResetTokenArgs<ExtArgs>
     refreshToken?: boolean | User$refreshTokenArgs<ExtArgs>
     sobre?: boolean | User$sobreArgs<ExtArgs>
     sobreLider?: boolean | User$sobreLiderArgs<ExtArgs>
+    testemunhos?: boolean | User$testemunhosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3215,10 +2220,8 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    isAdmin?: boolean
+    role?: boolean
     expires?: boolean
-    passwordResetToken?: boolean
-    token?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3227,10 +2230,8 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    isAdmin?: boolean
+    role?: boolean
     expires?: boolean
-    passwordResetToken?: boolean
-    token?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -3239,30 +2240,23 @@ export namespace Prisma {
     name?: boolean
     avatarUrl?: boolean
     password?: boolean
-    isAdmin?: boolean
+    role?: boolean
     expires?: boolean
-    passwordResetToken?: boolean
-    token?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "isAdmin" | "expires" | "passwordResetToken" | "token", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "expires", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | User$agendaArgs<ExtArgs>
-    agendacaxias?: boolean | User$agendacaxiasArgs<ExtArgs>
-    agendatomazinho?: boolean | User$agendatomazinhoArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
     doacao?: boolean | User$doacaoArgs<ExtArgs>
     endereco?: boolean | User$enderecoArgs<ExtArgs>
     ministerio?: boolean | User$ministerioArgs<ExtArgs>
-    ministeriocaxias?: boolean | User$ministeriocaxiasArgs<ExtArgs>
-    ministeriotomazinho?: boolean | User$ministeriotomazinhoArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
-    newscaxias?: boolean | User$newscaxiasArgs<ExtArgs>
-    newstomazinho?: boolean | User$newstomazinhoArgs<ExtArgs>
     PasswordResetToken?: boolean | User$PasswordResetTokenArgs<ExtArgs>
     refreshToken?: boolean | User$refreshTokenArgs<ExtArgs>
     sobre?: boolean | User$sobreArgs<ExtArgs>
     sobreLider?: boolean | User$sobreLiderArgs<ExtArgs>
+    testemunhos?: boolean | User$testemunhosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3272,21 +2266,16 @@ export namespace Prisma {
     name: "User"
     objects: {
       agenda: Prisma.$AgendaPayload<ExtArgs>[]
-      agendacaxias: Prisma.$AgendaCaxiasPayload<ExtArgs>[]
-      agendatomazinho: Prisma.$AgendaTomazinhoPayload<ExtArgs>[]
       contato: Prisma.$ContatoPayload<ExtArgs>[]
       doacao: Prisma.$DoacaoPayload<ExtArgs>[]
       endereco: Prisma.$EnderecoPayload<ExtArgs>[]
       ministerio: Prisma.$MinisterioPayload<ExtArgs>[]
-      ministeriocaxias: Prisma.$MinisterioCaxiasPayload<ExtArgs>[]
-      ministeriotomazinho: Prisma.$MinisterioTomazinhoPayload<ExtArgs>[]
       news: Prisma.$NewPayload<ExtArgs>[]
-      newscaxias: Prisma.$NewCaxiasPayload<ExtArgs>[]
-      newstomazinho: Prisma.$NewTomazinhoPayload<ExtArgs>[]
       PasswordResetToken: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
       refreshToken: Prisma.$RefreshTokenPayload<ExtArgs>[]
       sobre: Prisma.$SobrePayload<ExtArgs>[]
       sobreLider: Prisma.$SobreLiderPayload<ExtArgs>[]
+      testemunhos: Prisma.$TestemunhoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3294,10 +2283,8 @@ export namespace Prisma {
       name: string | null
       avatarUrl: string | null
       password: string
-      isAdmin: boolean
+      role: $Enums.UserRole
       expires: Date | null
-      passwordResetToken: string | null
-      token: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3693,21 +2680,16 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     agenda<T extends User$agendaArgs<ExtArgs> = {}>(args?: Subset<T, User$agendaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    agendacaxias<T extends User$agendacaxiasArgs<ExtArgs> = {}>(args?: Subset<T, User$agendacaxiasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    agendatomazinho<T extends User$agendatomazinhoArgs<ExtArgs> = {}>(args?: Subset<T, User$agendatomazinhoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contato<T extends User$contatoArgs<ExtArgs> = {}>(args?: Subset<T, User$contatoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContatoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     doacao<T extends User$doacaoArgs<ExtArgs> = {}>(args?: Subset<T, User$doacaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     endereco<T extends User$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, User$enderecoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ministerio<T extends User$ministerioArgs<ExtArgs> = {}>(args?: Subset<T, User$ministerioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ministeriocaxias<T extends User$ministeriocaxiasArgs<ExtArgs> = {}>(args?: Subset<T, User$ministeriocaxiasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ministeriotomazinho<T extends User$ministeriotomazinhoArgs<ExtArgs> = {}>(args?: Subset<T, User$ministeriotomazinhoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    newscaxias<T extends User$newscaxiasArgs<ExtArgs> = {}>(args?: Subset<T, User$newscaxiasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    newstomazinho<T extends User$newstomazinhoArgs<ExtArgs> = {}>(args?: Subset<T, User$newstomazinhoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     PasswordResetToken<T extends User$PasswordResetTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$PasswordResetTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     refreshToken<T extends User$refreshTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sobre<T extends User$sobreArgs<ExtArgs> = {}>(args?: Subset<T, User$sobreArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SobrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sobreLider<T extends User$sobreLiderArgs<ExtArgs> = {}>(args?: Subset<T, User$sobreLiderArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SobreLiderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    testemunhos<T extends User$testemunhosArgs<ExtArgs> = {}>(args?: Subset<T, User$testemunhosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3742,10 +2724,8 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly isAdmin: FieldRef<"User", 'Boolean'>
+    readonly role: FieldRef<"User", 'UserRole'>
     readonly expires: FieldRef<"User", 'DateTime'>
-    readonly passwordResetToken: FieldRef<"User", 'String'>
-    readonly token: FieldRef<"User", 'String'>
   }
     
 
@@ -4158,54 +3138,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.agendacaxias
-   */
-  export type User$agendacaxiasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    where?: AgendaCaxiasWhereInput
-    orderBy?: AgendaCaxiasOrderByWithRelationInput | AgendaCaxiasOrderByWithRelationInput[]
-    cursor?: AgendaCaxiasWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AgendaCaxiasScalarFieldEnum | AgendaCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * User.agendatomazinho
-   */
-  export type User$agendatomazinhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    where?: AgendaTomazinhoWhereInput
-    orderBy?: AgendaTomazinhoOrderByWithRelationInput | AgendaTomazinhoOrderByWithRelationInput[]
-    cursor?: AgendaTomazinhoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AgendaTomazinhoScalarFieldEnum | AgendaTomazinhoScalarFieldEnum[]
-  }
-
-  /**
    * User.contato
    */
   export type User$contatoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4302,54 +3234,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.ministeriocaxias
-   */
-  export type User$ministeriocaxiasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    where?: MinisterioCaxiasWhereInput
-    orderBy?: MinisterioCaxiasOrderByWithRelationInput | MinisterioCaxiasOrderByWithRelationInput[]
-    cursor?: MinisterioCaxiasWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MinisterioCaxiasScalarFieldEnum | MinisterioCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * User.ministeriotomazinho
-   */
-  export type User$ministeriotomazinhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    where?: MinisterioTomazinhoWhereInput
-    orderBy?: MinisterioTomazinhoOrderByWithRelationInput | MinisterioTomazinhoOrderByWithRelationInput[]
-    cursor?: MinisterioTomazinhoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MinisterioTomazinhoScalarFieldEnum | MinisterioTomazinhoScalarFieldEnum[]
-  }
-
-  /**
    * User.news
    */
   export type User$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4371,54 +3255,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NewScalarFieldEnum | NewScalarFieldEnum[]
-  }
-
-  /**
-   * User.newscaxias
-   */
-  export type User$newscaxiasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    where?: NewCaxiasWhereInput
-    orderBy?: NewCaxiasOrderByWithRelationInput | NewCaxiasOrderByWithRelationInput[]
-    cursor?: NewCaxiasWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NewCaxiasScalarFieldEnum | NewCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * User.newstomazinho
-   */
-  export type User$newstomazinhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    where?: NewTomazinhoWhereInput
-    orderBy?: NewTomazinhoOrderByWithRelationInput | NewTomazinhoOrderByWithRelationInput[]
-    cursor?: NewTomazinhoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NewTomazinhoScalarFieldEnum | NewTomazinhoScalarFieldEnum[]
   }
 
   /**
@@ -4518,1150 +3354,9 @@ export namespace Prisma {
   }
 
   /**
-   * User without action
+   * User.testemunhos
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model UserIgreja
-   */
-
-  export type AggregateUserIgreja = {
-    _count: UserIgrejaCountAggregateOutputType | null
-    _min: UserIgrejaMinAggregateOutputType | null
-    _max: UserIgrejaMaxAggregateOutputType | null
-  }
-
-  export type UserIgrejaMinAggregateOutputType = {
-    id: string | null
-    login: string | null
-    name: string | null
-    avatarUrl: string | null
-    password: string | null
-    passwordResetToken: string | null
-    expires: Date | null
-    token: string | null
-  }
-
-  export type UserIgrejaMaxAggregateOutputType = {
-    id: string | null
-    login: string | null
-    name: string | null
-    avatarUrl: string | null
-    password: string | null
-    passwordResetToken: string | null
-    expires: Date | null
-    token: string | null
-  }
-
-  export type UserIgrejaCountAggregateOutputType = {
-    id: number
-    login: number
-    name: number
-    avatarUrl: number
-    password: number
-    passwordResetToken: number
-    expires: number
-    token: number
-    _all: number
-  }
-
-
-  export type UserIgrejaMinAggregateInputType = {
-    id?: true
-    login?: true
-    name?: true
-    avatarUrl?: true
-    password?: true
-    passwordResetToken?: true
-    expires?: true
-    token?: true
-  }
-
-  export type UserIgrejaMaxAggregateInputType = {
-    id?: true
-    login?: true
-    name?: true
-    avatarUrl?: true
-    password?: true
-    passwordResetToken?: true
-    expires?: true
-    token?: true
-  }
-
-  export type UserIgrejaCountAggregateInputType = {
-    id?: true
-    login?: true
-    name?: true
-    avatarUrl?: true
-    password?: true
-    passwordResetToken?: true
-    expires?: true
-    token?: true
-    _all?: true
-  }
-
-  export type UserIgrejaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserIgreja to aggregate.
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserIgrejas to fetch.
-     */
-    orderBy?: UserIgrejaOrderByWithRelationInput | UserIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned UserIgrejas
-    **/
-    _count?: true | UserIgrejaCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserIgrejaMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserIgrejaMaxAggregateInputType
-  }
-
-  export type GetUserIgrejaAggregateType<T extends UserIgrejaAggregateArgs> = {
-        [P in keyof T & keyof AggregateUserIgreja]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUserIgreja[P]>
-      : GetScalarType<T[P], AggregateUserIgreja[P]>
-  }
-
-
-
-
-  export type UserIgrejaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserIgrejaWhereInput
-    orderBy?: UserIgrejaOrderByWithAggregationInput | UserIgrejaOrderByWithAggregationInput[]
-    by: UserIgrejaScalarFieldEnum[] | UserIgrejaScalarFieldEnum
-    having?: UserIgrejaScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserIgrejaCountAggregateInputType | true
-    _min?: UserIgrejaMinAggregateInputType
-    _max?: UserIgrejaMaxAggregateInputType
-  }
-
-  export type UserIgrejaGroupByOutputType = {
-    id: string
-    login: string
-    name: string | null
-    avatarUrl: string | null
-    password: string
-    passwordResetToken: string | null
-    expires: Date | null
-    token: string | null
-    _count: UserIgrejaCountAggregateOutputType | null
-    _min: UserIgrejaMinAggregateOutputType | null
-    _max: UserIgrejaMaxAggregateOutputType | null
-  }
-
-  type GetUserIgrejaGroupByPayload<T extends UserIgrejaGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UserIgrejaGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserIgrejaGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserIgrejaGroupByOutputType[P]>
-            : GetScalarType<T[P], UserIgrejaGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UserIgrejaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    login?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    password?: boolean
-    passwordResetToken?: boolean
-    expires?: boolean
-    token?: boolean
-    PasswordResetTokenIgreja?: boolean | UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>
-    refreshTokenIgreja?: boolean | UserIgreja$refreshTokenIgrejaArgs<ExtArgs>
-    testemunho?: boolean | UserIgreja$testemunhoArgs<ExtArgs>
-    _count?: boolean | UserIgrejaCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["userIgreja"]>
-
-  export type UserIgrejaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    login?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    password?: boolean
-    passwordResetToken?: boolean
-    expires?: boolean
-    token?: boolean
-  }, ExtArgs["result"]["userIgreja"]>
-
-  export type UserIgrejaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    login?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    password?: boolean
-    passwordResetToken?: boolean
-    expires?: boolean
-    token?: boolean
-  }, ExtArgs["result"]["userIgreja"]>
-
-  export type UserIgrejaSelectScalar = {
-    id?: boolean
-    login?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    password?: boolean
-    passwordResetToken?: boolean
-    expires?: boolean
-    token?: boolean
-  }
-
-  export type UserIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "passwordResetToken" | "expires" | "token", ExtArgs["result"]["userIgreja"]>
-  export type UserIgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    PasswordResetTokenIgreja?: boolean | UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>
-    refreshTokenIgreja?: boolean | UserIgreja$refreshTokenIgrejaArgs<ExtArgs>
-    testemunho?: boolean | UserIgreja$testemunhoArgs<ExtArgs>
-    _count?: boolean | UserIgrejaCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type UserIgrejaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIgrejaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $UserIgrejaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "UserIgreja"
-    objects: {
-      PasswordResetTokenIgreja: Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>[]
-      refreshTokenIgreja: Prisma.$RefreshTokenIgrejaPayload<ExtArgs>[]
-      testemunho: Prisma.$TestemunhoPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      login: string
-      name: string | null
-      avatarUrl: string | null
-      password: string
-      passwordResetToken: string | null
-      expires: Date | null
-      token: string | null
-    }, ExtArgs["result"]["userIgreja"]>
-    composites: {}
-  }
-
-  type UserIgrejaGetPayload<S extends boolean | null | undefined | UserIgrejaDefaultArgs> = $Result.GetResult<Prisma.$UserIgrejaPayload, S>
-
-  type UserIgrejaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserIgrejaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserIgrejaCountAggregateInputType | true
-    }
-
-  export interface UserIgrejaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserIgreja'], meta: { name: 'UserIgreja' } }
-    /**
-     * Find zero or one UserIgreja that matches the filter.
-     * @param {UserIgrejaFindUniqueArgs} args - Arguments to find a UserIgreja
-     * @example
-     * // Get one UserIgreja
-     * const userIgreja = await prisma.userIgreja.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends UserIgrejaFindUniqueArgs>(args: SelectSubset<T, UserIgrejaFindUniqueArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one UserIgreja that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {UserIgrejaFindUniqueOrThrowArgs} args - Arguments to find a UserIgreja
-     * @example
-     * // Get one UserIgreja
-     * const userIgreja = await prisma.userIgreja.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends UserIgrejaFindUniqueOrThrowArgs>(args: SelectSubset<T, UserIgrejaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first UserIgreja that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaFindFirstArgs} args - Arguments to find a UserIgreja
-     * @example
-     * // Get one UserIgreja
-     * const userIgreja = await prisma.userIgreja.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends UserIgrejaFindFirstArgs>(args?: SelectSubset<T, UserIgrejaFindFirstArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first UserIgreja that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaFindFirstOrThrowArgs} args - Arguments to find a UserIgreja
-     * @example
-     * // Get one UserIgreja
-     * const userIgreja = await prisma.userIgreja.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends UserIgrejaFindFirstOrThrowArgs>(args?: SelectSubset<T, UserIgrejaFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more UserIgrejas that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all UserIgrejas
-     * const userIgrejas = await prisma.userIgreja.findMany()
-     * 
-     * // Get first 10 UserIgrejas
-     * const userIgrejas = await prisma.userIgreja.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const userIgrejaWithIdOnly = await prisma.userIgreja.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends UserIgrejaFindManyArgs>(args?: SelectSubset<T, UserIgrejaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a UserIgreja.
-     * @param {UserIgrejaCreateArgs} args - Arguments to create a UserIgreja.
-     * @example
-     * // Create one UserIgreja
-     * const UserIgreja = await prisma.userIgreja.create({
-     *   data: {
-     *     // ... data to create a UserIgreja
-     *   }
-     * })
-     * 
-     */
-    create<T extends UserIgrejaCreateArgs>(args: SelectSubset<T, UserIgrejaCreateArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many UserIgrejas.
-     * @param {UserIgrejaCreateManyArgs} args - Arguments to create many UserIgrejas.
-     * @example
-     * // Create many UserIgrejas
-     * const userIgreja = await prisma.userIgreja.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends UserIgrejaCreateManyArgs>(args?: SelectSubset<T, UserIgrejaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many UserIgrejas and returns the data saved in the database.
-     * @param {UserIgrejaCreateManyAndReturnArgs} args - Arguments to create many UserIgrejas.
-     * @example
-     * // Create many UserIgrejas
-     * const userIgreja = await prisma.userIgreja.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many UserIgrejas and only return the `id`
-     * const userIgrejaWithIdOnly = await prisma.userIgreja.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends UserIgrejaCreateManyAndReturnArgs>(args?: SelectSubset<T, UserIgrejaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a UserIgreja.
-     * @param {UserIgrejaDeleteArgs} args - Arguments to delete one UserIgreja.
-     * @example
-     * // Delete one UserIgreja
-     * const UserIgreja = await prisma.userIgreja.delete({
-     *   where: {
-     *     // ... filter to delete one UserIgreja
-     *   }
-     * })
-     * 
-     */
-    delete<T extends UserIgrejaDeleteArgs>(args: SelectSubset<T, UserIgrejaDeleteArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one UserIgreja.
-     * @param {UserIgrejaUpdateArgs} args - Arguments to update one UserIgreja.
-     * @example
-     * // Update one UserIgreja
-     * const userIgreja = await prisma.userIgreja.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends UserIgrejaUpdateArgs>(args: SelectSubset<T, UserIgrejaUpdateArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more UserIgrejas.
-     * @param {UserIgrejaDeleteManyArgs} args - Arguments to filter UserIgrejas to delete.
-     * @example
-     * // Delete a few UserIgrejas
-     * const { count } = await prisma.userIgreja.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends UserIgrejaDeleteManyArgs>(args?: SelectSubset<T, UserIgrejaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserIgrejas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many UserIgrejas
-     * const userIgreja = await prisma.userIgreja.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends UserIgrejaUpdateManyArgs>(args: SelectSubset<T, UserIgrejaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserIgrejas and returns the data updated in the database.
-     * @param {UserIgrejaUpdateManyAndReturnArgs} args - Arguments to update many UserIgrejas.
-     * @example
-     * // Update many UserIgrejas
-     * const userIgreja = await prisma.userIgreja.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more UserIgrejas and only return the `id`
-     * const userIgrejaWithIdOnly = await prisma.userIgreja.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends UserIgrejaUpdateManyAndReturnArgs>(args: SelectSubset<T, UserIgrejaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one UserIgreja.
-     * @param {UserIgrejaUpsertArgs} args - Arguments to update or create a UserIgreja.
-     * @example
-     * // Update or create a UserIgreja
-     * const userIgreja = await prisma.userIgreja.upsert({
-     *   create: {
-     *     // ... data to create a UserIgreja
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the UserIgreja we want to update
-     *   }
-     * })
-     */
-    upsert<T extends UserIgrejaUpsertArgs>(args: SelectSubset<T, UserIgrejaUpsertArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of UserIgrejas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaCountArgs} args - Arguments to filter UserIgrejas to count.
-     * @example
-     * // Count the number of UserIgrejas
-     * const count = await prisma.userIgreja.count({
-     *   where: {
-     *     // ... the filter for the UserIgrejas we want to count
-     *   }
-     * })
-    **/
-    count<T extends UserIgrejaCountArgs>(
-      args?: Subset<T, UserIgrejaCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserIgrejaCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a UserIgreja.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UserIgrejaAggregateArgs>(args: Subset<T, UserIgrejaAggregateArgs>): Prisma.PrismaPromise<GetUserIgrejaAggregateType<T>>
-
-    /**
-     * Group by UserIgreja.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserIgrejaGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UserIgrejaGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserIgrejaGroupByArgs['orderBy'] }
-        : { orderBy?: UserIgrejaGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserIgrejaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserIgrejaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the UserIgreja model
-   */
-  readonly fields: UserIgrejaFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for UserIgreja.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UserIgrejaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    PasswordResetTokenIgreja<T extends UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs> = {}>(args?: Subset<T, UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    refreshTokenIgreja<T extends UserIgreja$refreshTokenIgrejaArgs<ExtArgs> = {}>(args?: Subset<T, UserIgreja$refreshTokenIgrejaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    testemunho<T extends UserIgreja$testemunhoArgs<ExtArgs> = {}>(args?: Subset<T, UserIgreja$testemunhoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the UserIgreja model
-   */
-  interface UserIgrejaFieldRefs {
-    readonly id: FieldRef<"UserIgreja", 'String'>
-    readonly login: FieldRef<"UserIgreja", 'String'>
-    readonly name: FieldRef<"UserIgreja", 'String'>
-    readonly avatarUrl: FieldRef<"UserIgreja", 'String'>
-    readonly password: FieldRef<"UserIgreja", 'String'>
-    readonly passwordResetToken: FieldRef<"UserIgreja", 'String'>
-    readonly expires: FieldRef<"UserIgreja", 'DateTime'>
-    readonly token: FieldRef<"UserIgreja", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * UserIgreja findUnique
-   */
-  export type UserIgrejaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which UserIgreja to fetch.
-     */
-    where: UserIgrejaWhereUniqueInput
-  }
-
-  /**
-   * UserIgreja findUniqueOrThrow
-   */
-  export type UserIgrejaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which UserIgreja to fetch.
-     */
-    where: UserIgrejaWhereUniqueInput
-  }
-
-  /**
-   * UserIgreja findFirst
-   */
-  export type UserIgrejaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which UserIgreja to fetch.
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserIgrejas to fetch.
-     */
-    orderBy?: UserIgrejaOrderByWithRelationInput | UserIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserIgrejas.
-     */
-    cursor?: UserIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserIgrejas.
-     */
-    distinct?: UserIgrejaScalarFieldEnum | UserIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * UserIgreja findFirstOrThrow
-   */
-  export type UserIgrejaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which UserIgreja to fetch.
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserIgrejas to fetch.
-     */
-    orderBy?: UserIgrejaOrderByWithRelationInput | UserIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserIgrejas.
-     */
-    cursor?: UserIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserIgrejas.
-     */
-    distinct?: UserIgrejaScalarFieldEnum | UserIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * UserIgreja findMany
-   */
-  export type UserIgrejaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which UserIgrejas to fetch.
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserIgrejas to fetch.
-     */
-    orderBy?: UserIgrejaOrderByWithRelationInput | UserIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing UserIgrejas.
-     */
-    cursor?: UserIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserIgrejas.
-     */
-    skip?: number
-    distinct?: UserIgrejaScalarFieldEnum | UserIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * UserIgreja create
-   */
-  export type UserIgrejaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * The data needed to create a UserIgreja.
-     */
-    data: XOR<UserIgrejaCreateInput, UserIgrejaUncheckedCreateInput>
-  }
-
-  /**
-   * UserIgreja createMany
-   */
-  export type UserIgrejaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many UserIgrejas.
-     */
-    data: UserIgrejaCreateManyInput | UserIgrejaCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * UserIgreja createManyAndReturn
-   */
-  export type UserIgrejaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * The data used to create many UserIgrejas.
-     */
-    data: UserIgrejaCreateManyInput | UserIgrejaCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * UserIgreja update
-   */
-  export type UserIgrejaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * The data needed to update a UserIgreja.
-     */
-    data: XOR<UserIgrejaUpdateInput, UserIgrejaUncheckedUpdateInput>
-    /**
-     * Choose, which UserIgreja to update.
-     */
-    where: UserIgrejaWhereUniqueInput
-  }
-
-  /**
-   * UserIgreja updateMany
-   */
-  export type UserIgrejaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update UserIgrejas.
-     */
-    data: XOR<UserIgrejaUpdateManyMutationInput, UserIgrejaUncheckedUpdateManyInput>
-    /**
-     * Filter which UserIgrejas to update
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * Limit how many UserIgrejas to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserIgreja updateManyAndReturn
-   */
-  export type UserIgrejaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * The data used to update UserIgrejas.
-     */
-    data: XOR<UserIgrejaUpdateManyMutationInput, UserIgrejaUncheckedUpdateManyInput>
-    /**
-     * Filter which UserIgrejas to update
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * Limit how many UserIgrejas to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserIgreja upsert
-   */
-  export type UserIgrejaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * The filter to search for the UserIgreja to update in case it exists.
-     */
-    where: UserIgrejaWhereUniqueInput
-    /**
-     * In case the UserIgreja found by the `where` argument doesn't exist, create a new UserIgreja with this data.
-     */
-    create: XOR<UserIgrejaCreateInput, UserIgrejaUncheckedCreateInput>
-    /**
-     * In case the UserIgreja was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserIgrejaUpdateInput, UserIgrejaUncheckedUpdateInput>
-  }
-
-  /**
-   * UserIgreja delete
-   */
-  export type UserIgrejaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserIgreja
-     */
-    select?: UserIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserIgreja
-     */
-    omit?: UserIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter which UserIgreja to delete.
-     */
-    where: UserIgrejaWhereUniqueInput
-  }
-
-  /**
-   * UserIgreja deleteMany
-   */
-  export type UserIgrejaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserIgrejas to delete
-     */
-    where?: UserIgrejaWhereInput
-    /**
-     * Limit how many UserIgrejas to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserIgreja.PasswordResetTokenIgreja
-   */
-  export type UserIgreja$PasswordResetTokenIgrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    where?: PasswordResetTokenIgrejaWhereInput
-    orderBy?: PasswordResetTokenIgrejaOrderByWithRelationInput | PasswordResetTokenIgrejaOrderByWithRelationInput[]
-    cursor?: PasswordResetTokenIgrejaWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PasswordResetTokenIgrejaScalarFieldEnum | PasswordResetTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * UserIgreja.refreshTokenIgreja
-   */
-  export type UserIgreja$refreshTokenIgrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    where?: RefreshTokenIgrejaWhereInput
-    orderBy?: RefreshTokenIgrejaOrderByWithRelationInput | RefreshTokenIgrejaOrderByWithRelationInput[]
-    cursor?: RefreshTokenIgrejaWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RefreshTokenIgrejaScalarFieldEnum | RefreshTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * UserIgreja.testemunho
-   */
-  export type UserIgreja$testemunhoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$testemunhosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Testemunho
      */
@@ -5683,21 +3378,21 @@ export namespace Prisma {
   }
 
   /**
-   * UserIgreja without action
+   * User without action
    */
-  export type UserIgrejaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserIgreja
+     * Select specific fields to fetch from the User
      */
-    select?: UserIgrejaSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserIgreja
+     * Omit specific fields from the User
      */
-    omit?: UserIgrejaOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserIgrejaInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -5723,6 +3418,7 @@ export namespace Prisma {
     updatedAt: Date | null
     destaque: boolean | null
     url: string | null
+    role: $Enums.MinistryRole | null
   }
 
   export type NewMaxAggregateOutputType = {
@@ -5737,6 +3433,7 @@ export namespace Prisma {
     updatedAt: Date | null
     destaque: boolean | null
     url: string | null
+    role: $Enums.MinistryRole | null
   }
 
   export type NewCountAggregateOutputType = {
@@ -5751,6 +3448,7 @@ export namespace Prisma {
     updatedAt: number
     destaque: number
     url: number
+    role: number
     _all: number
   }
 
@@ -5767,6 +3465,7 @@ export namespace Prisma {
     updatedAt?: true
     destaque?: true
     url?: true
+    role?: true
   }
 
   export type NewMaxAggregateInputType = {
@@ -5781,6 +3480,7 @@ export namespace Prisma {
     updatedAt?: true
     destaque?: true
     url?: true
+    role?: true
   }
 
   export type NewCountAggregateInputType = {
@@ -5795,6 +3495,7 @@ export namespace Prisma {
     updatedAt?: true
     destaque?: true
     url?: true
+    role?: true
     _all?: true
   }
 
@@ -5882,6 +3583,7 @@ export namespace Prisma {
     updatedAt: Date
     destaque: boolean
     url: string
+    role: $Enums.MinistryRole
     _count: NewCountAggregateOutputType | null
     _min: NewMinAggregateOutputType | null
     _max: NewMaxAggregateOutputType | null
@@ -5913,6 +3615,7 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
@@ -5928,6 +3631,7 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
@@ -5943,6 +3647,7 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
@@ -5958,9 +3663,10 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
+    role?: boolean
   }
 
-  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url", ExtArgs["result"]["new"]>
+  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url" | "role", ExtArgs["result"]["new"]>
   export type NewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5988,6 +3694,7 @@ export namespace Prisma {
       updatedAt: Date
       destaque: boolean
       url: string
+      role: $Enums.MinistryRole
     }, ExtArgs["result"]["new"]>
     composites: {}
   }
@@ -6423,6 +4130,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"New", 'DateTime'>
     readonly destaque: FieldRef<"New", 'Boolean'>
     readonly url: FieldRef<"New", 'String'>
+    readonly role: FieldRef<"New", 'MinistryRole'>
   }
     
 
@@ -6857,6 +4565,7 @@ export namespace Prisma {
     createdAt: Date | null
     coverUrl: string | null
     updatedAt: Date | null
+    role: $Enums.MinistryRole | null
   }
 
   export type MinisterioMaxAggregateOutputType = {
@@ -6869,6 +4578,7 @@ export namespace Prisma {
     createdAt: Date | null
     coverUrl: string | null
     updatedAt: Date | null
+    role: $Enums.MinistryRole | null
   }
 
   export type MinisterioCountAggregateOutputType = {
@@ -6881,6 +4591,7 @@ export namespace Prisma {
     createdAt: number
     coverUrl: number
     updatedAt: number
+    role: number
     _all: number
   }
 
@@ -6895,6 +4606,7 @@ export namespace Prisma {
     createdAt?: true
     coverUrl?: true
     updatedAt?: true
+    role?: true
   }
 
   export type MinisterioMaxAggregateInputType = {
@@ -6907,6 +4619,7 @@ export namespace Prisma {
     createdAt?: true
     coverUrl?: true
     updatedAt?: true
+    role?: true
   }
 
   export type MinisterioCountAggregateInputType = {
@@ -6919,6 +4632,7 @@ export namespace Prisma {
     createdAt?: true
     coverUrl?: true
     updatedAt?: true
+    role?: true
     _all?: true
   }
 
@@ -7004,6 +4718,7 @@ export namespace Prisma {
     createdAt: Date
     coverUrl: string
     updatedAt: Date
+    role: $Enums.MinistryRole
     _count: MinisterioCountAggregateOutputType | null
     _min: MinisterioMinAggregateOutputType | null
     _max: MinisterioMaxAggregateOutputType | null
@@ -7033,6 +4748,7 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ministerio"]>
 
@@ -7046,6 +4762,7 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ministerio"]>
 
@@ -7059,6 +4776,7 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ministerio"]>
 
@@ -7072,9 +4790,10 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
+    role?: boolean
   }
 
-  export type MinisterioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title" | "local" | "isPublic" | "createdAt" | "coverUrl" | "updatedAt", ExtArgs["result"]["ministerio"]>
+  export type MinisterioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title" | "local" | "isPublic" | "createdAt" | "coverUrl" | "updatedAt" | "role", ExtArgs["result"]["ministerio"]>
   export type MinisterioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -7100,6 +4819,7 @@ export namespace Prisma {
       createdAt: Date
       coverUrl: string
       updatedAt: Date
+      role: $Enums.MinistryRole
     }, ExtArgs["result"]["ministerio"]>
     composites: {}
   }
@@ -7533,6 +5253,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Ministerio", 'DateTime'>
     readonly coverUrl: FieldRef<"Ministerio", 'String'>
     readonly updatedAt: FieldRef<"Ministerio", 'DateTime'>
+    readonly role: FieldRef<"Ministerio", 'MinistryRole'>
   }
     
 
@@ -7967,6 +5688,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     destaque: boolean | null
+    role: $Enums.MinistryRole | null
   }
 
   export type AgendaMaxAggregateOutputType = {
@@ -7979,6 +5701,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     destaque: boolean | null
+    role: $Enums.MinistryRole | null
   }
 
   export type AgendaCountAggregateOutputType = {
@@ -7991,6 +5714,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     destaque: number
+    role: number
     _all: number
   }
 
@@ -8005,6 +5729,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     destaque?: true
+    role?: true
   }
 
   export type AgendaMaxAggregateInputType = {
@@ -8017,6 +5742,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     destaque?: true
+    role?: true
   }
 
   export type AgendaCountAggregateInputType = {
@@ -8029,6 +5755,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     destaque?: true
+    role?: true
     _all?: true
   }
 
@@ -8114,6 +5841,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     destaque: boolean
+    role: $Enums.MinistryRole
     _count: AgendaCountAggregateOutputType | null
     _min: AgendaMinAggregateOutputType | null
     _max: AgendaMaxAggregateOutputType | null
@@ -8143,6 +5871,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agenda"]>
 
@@ -8156,6 +5885,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agenda"]>
 
@@ -8169,6 +5899,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agenda"]>
 
@@ -8182,9 +5913,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
+    role?: boolean
   }
 
-  export type AgendaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "name" | "hour" | "isPublic" | "createdAt" | "updatedAt" | "destaque", ExtArgs["result"]["agenda"]>
+  export type AgendaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "name" | "hour" | "isPublic" | "createdAt" | "updatedAt" | "destaque" | "role", ExtArgs["result"]["agenda"]>
   export type AgendaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -8210,6 +5942,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       destaque: boolean
+      role: $Enums.MinistryRole
     }, ExtArgs["result"]["agenda"]>
     composites: {}
   }
@@ -8643,6 +6376,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Agenda", 'DateTime'>
     readonly updatedAt: FieldRef<"Agenda", 'DateTime'>
     readonly destaque: FieldRef<"Agenda", 'Boolean'>
+    readonly role: FieldRef<"Agenda", 'MinistryRole'>
   }
     
 
@@ -9054,6718 +6788,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AgendaInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model NewTomazinho
-   */
-
-  export type AggregateNewTomazinho = {
-    _count: NewTomazinhoCountAggregateOutputType | null
-    _min: NewTomazinhoMinAggregateOutputType | null
-    _max: NewTomazinhoMaxAggregateOutputType | null
-  }
-
-  export type NewTomazinhoMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    coverUrl: string | null
-    content: string | null
-    title: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    page: string | null
-    updatedAt: Date | null
-    destaque: boolean | null
-    url: string | null
-  }
-
-  export type NewTomazinhoMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    coverUrl: string | null
-    content: string | null
-    title: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    page: string | null
-    updatedAt: Date | null
-    destaque: boolean | null
-    url: string | null
-  }
-
-  export type NewTomazinhoCountAggregateOutputType = {
-    id: number
-    userId: number
-    coverUrl: number
-    content: number
-    title: number
-    isPublic: number
-    createdAt: number
-    page: number
-    updatedAt: number
-    destaque: number
-    url: number
-    _all: number
-  }
-
-
-  export type NewTomazinhoMinAggregateInputType = {
-    id?: true
-    userId?: true
-    coverUrl?: true
-    content?: true
-    title?: true
-    isPublic?: true
-    createdAt?: true
-    page?: true
-    updatedAt?: true
-    destaque?: true
-    url?: true
-  }
-
-  export type NewTomazinhoMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    coverUrl?: true
-    content?: true
-    title?: true
-    isPublic?: true
-    createdAt?: true
-    page?: true
-    updatedAt?: true
-    destaque?: true
-    url?: true
-  }
-
-  export type NewTomazinhoCountAggregateInputType = {
-    id?: true
-    userId?: true
-    coverUrl?: true
-    content?: true
-    title?: true
-    isPublic?: true
-    createdAt?: true
-    page?: true
-    updatedAt?: true
-    destaque?: true
-    url?: true
-    _all?: true
-  }
-
-  export type NewTomazinhoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewTomazinho to aggregate.
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewTomazinhos to fetch.
-     */
-    orderBy?: NewTomazinhoOrderByWithRelationInput | NewTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: NewTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned NewTomazinhos
-    **/
-    _count?: true | NewTomazinhoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: NewTomazinhoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: NewTomazinhoMaxAggregateInputType
-  }
-
-  export type GetNewTomazinhoAggregateType<T extends NewTomazinhoAggregateArgs> = {
-        [P in keyof T & keyof AggregateNewTomazinho]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNewTomazinho[P]>
-      : GetScalarType<T[P], AggregateNewTomazinho[P]>
-  }
-
-
-
-
-  export type NewTomazinhoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewTomazinhoWhereInput
-    orderBy?: NewTomazinhoOrderByWithAggregationInput | NewTomazinhoOrderByWithAggregationInput[]
-    by: NewTomazinhoScalarFieldEnum[] | NewTomazinhoScalarFieldEnum
-    having?: NewTomazinhoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: NewTomazinhoCountAggregateInputType | true
-    _min?: NewTomazinhoMinAggregateInputType
-    _max?: NewTomazinhoMaxAggregateInputType
-  }
-
-  export type NewTomazinhoGroupByOutputType = {
-    id: string
-    userId: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic: boolean
-    createdAt: Date
-    page: string
-    updatedAt: Date
-    destaque: boolean
-    url: string
-    _count: NewTomazinhoCountAggregateOutputType | null
-    _min: NewTomazinhoMinAggregateOutputType | null
-    _max: NewTomazinhoMaxAggregateOutputType | null
-  }
-
-  type GetNewTomazinhoGroupByPayload<T extends NewTomazinhoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<NewTomazinhoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof NewTomazinhoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], NewTomazinhoGroupByOutputType[P]>
-            : GetScalarType<T[P], NewTomazinhoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type NewTomazinhoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newTomazinho"]>
-
-  export type NewTomazinhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newTomazinho"]>
-
-  export type NewTomazinhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newTomazinho"]>
-
-  export type NewTomazinhoSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-  }
-
-  export type NewTomazinhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "isPublic" | "createdAt" | "page" | "updatedAt" | "destaque" | "url", ExtArgs["result"]["newTomazinho"]>
-  export type NewTomazinhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewTomazinhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewTomazinhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $NewTomazinhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "NewTomazinho"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      coverUrl: string
-      content: string
-      title: string
-      isPublic: boolean
-      createdAt: Date
-      page: string
-      updatedAt: Date
-      destaque: boolean
-      url: string
-    }, ExtArgs["result"]["newTomazinho"]>
-    composites: {}
-  }
-
-  type NewTomazinhoGetPayload<S extends boolean | null | undefined | NewTomazinhoDefaultArgs> = $Result.GetResult<Prisma.$NewTomazinhoPayload, S>
-
-  type NewTomazinhoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NewTomazinhoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NewTomazinhoCountAggregateInputType | true
-    }
-
-  export interface NewTomazinhoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewTomazinho'], meta: { name: 'NewTomazinho' } }
-    /**
-     * Find zero or one NewTomazinho that matches the filter.
-     * @param {NewTomazinhoFindUniqueArgs} args - Arguments to find a NewTomazinho
-     * @example
-     * // Get one NewTomazinho
-     * const newTomazinho = await prisma.newTomazinho.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends NewTomazinhoFindUniqueArgs>(args: SelectSubset<T, NewTomazinhoFindUniqueArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one NewTomazinho that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {NewTomazinhoFindUniqueOrThrowArgs} args - Arguments to find a NewTomazinho
-     * @example
-     * // Get one NewTomazinho
-     * const newTomazinho = await prisma.newTomazinho.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends NewTomazinhoFindUniqueOrThrowArgs>(args: SelectSubset<T, NewTomazinhoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first NewTomazinho that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoFindFirstArgs} args - Arguments to find a NewTomazinho
-     * @example
-     * // Get one NewTomazinho
-     * const newTomazinho = await prisma.newTomazinho.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends NewTomazinhoFindFirstArgs>(args?: SelectSubset<T, NewTomazinhoFindFirstArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first NewTomazinho that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoFindFirstOrThrowArgs} args - Arguments to find a NewTomazinho
-     * @example
-     * // Get one NewTomazinho
-     * const newTomazinho = await prisma.newTomazinho.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends NewTomazinhoFindFirstOrThrowArgs>(args?: SelectSubset<T, NewTomazinhoFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more NewTomazinhos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all NewTomazinhos
-     * const newTomazinhos = await prisma.newTomazinho.findMany()
-     * 
-     * // Get first 10 NewTomazinhos
-     * const newTomazinhos = await prisma.newTomazinho.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const newTomazinhoWithIdOnly = await prisma.newTomazinho.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends NewTomazinhoFindManyArgs>(args?: SelectSubset<T, NewTomazinhoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a NewTomazinho.
-     * @param {NewTomazinhoCreateArgs} args - Arguments to create a NewTomazinho.
-     * @example
-     * // Create one NewTomazinho
-     * const NewTomazinho = await prisma.newTomazinho.create({
-     *   data: {
-     *     // ... data to create a NewTomazinho
-     *   }
-     * })
-     * 
-     */
-    create<T extends NewTomazinhoCreateArgs>(args: SelectSubset<T, NewTomazinhoCreateArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many NewTomazinhos.
-     * @param {NewTomazinhoCreateManyArgs} args - Arguments to create many NewTomazinhos.
-     * @example
-     * // Create many NewTomazinhos
-     * const newTomazinho = await prisma.newTomazinho.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends NewTomazinhoCreateManyArgs>(args?: SelectSubset<T, NewTomazinhoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many NewTomazinhos and returns the data saved in the database.
-     * @param {NewTomazinhoCreateManyAndReturnArgs} args - Arguments to create many NewTomazinhos.
-     * @example
-     * // Create many NewTomazinhos
-     * const newTomazinho = await prisma.newTomazinho.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many NewTomazinhos and only return the `id`
-     * const newTomazinhoWithIdOnly = await prisma.newTomazinho.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends NewTomazinhoCreateManyAndReturnArgs>(args?: SelectSubset<T, NewTomazinhoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a NewTomazinho.
-     * @param {NewTomazinhoDeleteArgs} args - Arguments to delete one NewTomazinho.
-     * @example
-     * // Delete one NewTomazinho
-     * const NewTomazinho = await prisma.newTomazinho.delete({
-     *   where: {
-     *     // ... filter to delete one NewTomazinho
-     *   }
-     * })
-     * 
-     */
-    delete<T extends NewTomazinhoDeleteArgs>(args: SelectSubset<T, NewTomazinhoDeleteArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one NewTomazinho.
-     * @param {NewTomazinhoUpdateArgs} args - Arguments to update one NewTomazinho.
-     * @example
-     * // Update one NewTomazinho
-     * const newTomazinho = await prisma.newTomazinho.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends NewTomazinhoUpdateArgs>(args: SelectSubset<T, NewTomazinhoUpdateArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more NewTomazinhos.
-     * @param {NewTomazinhoDeleteManyArgs} args - Arguments to filter NewTomazinhos to delete.
-     * @example
-     * // Delete a few NewTomazinhos
-     * const { count } = await prisma.newTomazinho.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends NewTomazinhoDeleteManyArgs>(args?: SelectSubset<T, NewTomazinhoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewTomazinhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many NewTomazinhos
-     * const newTomazinho = await prisma.newTomazinho.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends NewTomazinhoUpdateManyArgs>(args: SelectSubset<T, NewTomazinhoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewTomazinhos and returns the data updated in the database.
-     * @param {NewTomazinhoUpdateManyAndReturnArgs} args - Arguments to update many NewTomazinhos.
-     * @example
-     * // Update many NewTomazinhos
-     * const newTomazinho = await prisma.newTomazinho.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more NewTomazinhos and only return the `id`
-     * const newTomazinhoWithIdOnly = await prisma.newTomazinho.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends NewTomazinhoUpdateManyAndReturnArgs>(args: SelectSubset<T, NewTomazinhoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one NewTomazinho.
-     * @param {NewTomazinhoUpsertArgs} args - Arguments to update or create a NewTomazinho.
-     * @example
-     * // Update or create a NewTomazinho
-     * const newTomazinho = await prisma.newTomazinho.upsert({
-     *   create: {
-     *     // ... data to create a NewTomazinho
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the NewTomazinho we want to update
-     *   }
-     * })
-     */
-    upsert<T extends NewTomazinhoUpsertArgs>(args: SelectSubset<T, NewTomazinhoUpsertArgs<ExtArgs>>): Prisma__NewTomazinhoClient<$Result.GetResult<Prisma.$NewTomazinhoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of NewTomazinhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoCountArgs} args - Arguments to filter NewTomazinhos to count.
-     * @example
-     * // Count the number of NewTomazinhos
-     * const count = await prisma.newTomazinho.count({
-     *   where: {
-     *     // ... the filter for the NewTomazinhos we want to count
-     *   }
-     * })
-    **/
-    count<T extends NewTomazinhoCountArgs>(
-      args?: Subset<T, NewTomazinhoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], NewTomazinhoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a NewTomazinho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends NewTomazinhoAggregateArgs>(args: Subset<T, NewTomazinhoAggregateArgs>): Prisma.PrismaPromise<GetNewTomazinhoAggregateType<T>>
-
-    /**
-     * Group by NewTomazinho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewTomazinhoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends NewTomazinhoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NewTomazinhoGroupByArgs['orderBy'] }
-        : { orderBy?: NewTomazinhoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, NewTomazinhoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewTomazinhoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the NewTomazinho model
-   */
-  readonly fields: NewTomazinhoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for NewTomazinho.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__NewTomazinhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the NewTomazinho model
-   */
-  interface NewTomazinhoFieldRefs {
-    readonly id: FieldRef<"NewTomazinho", 'String'>
-    readonly userId: FieldRef<"NewTomazinho", 'String'>
-    readonly coverUrl: FieldRef<"NewTomazinho", 'String'>
-    readonly content: FieldRef<"NewTomazinho", 'String'>
-    readonly title: FieldRef<"NewTomazinho", 'String'>
-    readonly isPublic: FieldRef<"NewTomazinho", 'Boolean'>
-    readonly createdAt: FieldRef<"NewTomazinho", 'DateTime'>
-    readonly page: FieldRef<"NewTomazinho", 'String'>
-    readonly updatedAt: FieldRef<"NewTomazinho", 'DateTime'>
-    readonly destaque: FieldRef<"NewTomazinho", 'Boolean'>
-    readonly url: FieldRef<"NewTomazinho", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * NewTomazinho findUnique
-   */
-  export type NewTomazinhoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which NewTomazinho to fetch.
-     */
-    where: NewTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * NewTomazinho findUniqueOrThrow
-   */
-  export type NewTomazinhoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which NewTomazinho to fetch.
-     */
-    where: NewTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * NewTomazinho findFirst
-   */
-  export type NewTomazinhoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which NewTomazinho to fetch.
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewTomazinhos to fetch.
-     */
-    orderBy?: NewTomazinhoOrderByWithRelationInput | NewTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewTomazinhos.
-     */
-    cursor?: NewTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewTomazinhos.
-     */
-    distinct?: NewTomazinhoScalarFieldEnum | NewTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * NewTomazinho findFirstOrThrow
-   */
-  export type NewTomazinhoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which NewTomazinho to fetch.
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewTomazinhos to fetch.
-     */
-    orderBy?: NewTomazinhoOrderByWithRelationInput | NewTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewTomazinhos.
-     */
-    cursor?: NewTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewTomazinhos.
-     */
-    distinct?: NewTomazinhoScalarFieldEnum | NewTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * NewTomazinho findMany
-   */
-  export type NewTomazinhoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which NewTomazinhos to fetch.
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewTomazinhos to fetch.
-     */
-    orderBy?: NewTomazinhoOrderByWithRelationInput | NewTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing NewTomazinhos.
-     */
-    cursor?: NewTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewTomazinhos.
-     */
-    skip?: number
-    distinct?: NewTomazinhoScalarFieldEnum | NewTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * NewTomazinho create
-   */
-  export type NewTomazinhoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a NewTomazinho.
-     */
-    data: XOR<NewTomazinhoCreateInput, NewTomazinhoUncheckedCreateInput>
-  }
-
-  /**
-   * NewTomazinho createMany
-   */
-  export type NewTomazinhoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many NewTomazinhos.
-     */
-    data: NewTomazinhoCreateManyInput | NewTomazinhoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * NewTomazinho createManyAndReturn
-   */
-  export type NewTomazinhoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * The data used to create many NewTomazinhos.
-     */
-    data: NewTomazinhoCreateManyInput | NewTomazinhoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * NewTomazinho update
-   */
-  export type NewTomazinhoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a NewTomazinho.
-     */
-    data: XOR<NewTomazinhoUpdateInput, NewTomazinhoUncheckedUpdateInput>
-    /**
-     * Choose, which NewTomazinho to update.
-     */
-    where: NewTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * NewTomazinho updateMany
-   */
-  export type NewTomazinhoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update NewTomazinhos.
-     */
-    data: XOR<NewTomazinhoUpdateManyMutationInput, NewTomazinhoUncheckedUpdateManyInput>
-    /**
-     * Filter which NewTomazinhos to update
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * Limit how many NewTomazinhos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewTomazinho updateManyAndReturn
-   */
-  export type NewTomazinhoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * The data used to update NewTomazinhos.
-     */
-    data: XOR<NewTomazinhoUpdateManyMutationInput, NewTomazinhoUncheckedUpdateManyInput>
-    /**
-     * Filter which NewTomazinhos to update
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * Limit how many NewTomazinhos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * NewTomazinho upsert
-   */
-  export type NewTomazinhoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the NewTomazinho to update in case it exists.
-     */
-    where: NewTomazinhoWhereUniqueInput
-    /**
-     * In case the NewTomazinho found by the `where` argument doesn't exist, create a new NewTomazinho with this data.
-     */
-    create: XOR<NewTomazinhoCreateInput, NewTomazinhoUncheckedCreateInput>
-    /**
-     * In case the NewTomazinho was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NewTomazinhoUpdateInput, NewTomazinhoUncheckedUpdateInput>
-  }
-
-  /**
-   * NewTomazinho delete
-   */
-  export type NewTomazinhoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter which NewTomazinho to delete.
-     */
-    where: NewTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * NewTomazinho deleteMany
-   */
-  export type NewTomazinhoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewTomazinhos to delete
-     */
-    where?: NewTomazinhoWhereInput
-    /**
-     * Limit how many NewTomazinhos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewTomazinho without action
-   */
-  export type NewTomazinhoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewTomazinho
-     */
-    select?: NewTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewTomazinho
-     */
-    omit?: NewTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewTomazinhoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model MinisterioTomazinho
-   */
-
-  export type AggregateMinisterioTomazinho = {
-    _count: MinisterioTomazinhoCountAggregateOutputType | null
-    _min: MinisterioTomazinhoMinAggregateOutputType | null
-    _max: MinisterioTomazinhoMaxAggregateOutputType | null
-  }
-
-  export type MinisterioTomazinhoMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    name: string | null
-    title: string | null
-    local: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    coverUrl: string | null
-    updatedAt: Date | null
-  }
-
-  export type MinisterioTomazinhoMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    name: string | null
-    title: string | null
-    local: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    coverUrl: string | null
-    updatedAt: Date | null
-  }
-
-  export type MinisterioTomazinhoCountAggregateOutputType = {
-    id: number
-    userId: number
-    name: number
-    title: number
-    local: number
-    isPublic: number
-    createdAt: number
-    coverUrl: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type MinisterioTomazinhoMinAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    title?: true
-    local?: true
-    isPublic?: true
-    createdAt?: true
-    coverUrl?: true
-    updatedAt?: true
-  }
-
-  export type MinisterioTomazinhoMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    title?: true
-    local?: true
-    isPublic?: true
-    createdAt?: true
-    coverUrl?: true
-    updatedAt?: true
-  }
-
-  export type MinisterioTomazinhoCountAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    title?: true
-    local?: true
-    isPublic?: true
-    createdAt?: true
-    coverUrl?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type MinisterioTomazinhoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MinisterioTomazinho to aggregate.
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioTomazinhos to fetch.
-     */
-    orderBy?: MinisterioTomazinhoOrderByWithRelationInput | MinisterioTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MinisterioTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MinisterioTomazinhos
-    **/
-    _count?: true | MinisterioTomazinhoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MinisterioTomazinhoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MinisterioTomazinhoMaxAggregateInputType
-  }
-
-  export type GetMinisterioTomazinhoAggregateType<T extends MinisterioTomazinhoAggregateArgs> = {
-        [P in keyof T & keyof AggregateMinisterioTomazinho]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMinisterioTomazinho[P]>
-      : GetScalarType<T[P], AggregateMinisterioTomazinho[P]>
-  }
-
-
-
-
-  export type MinisterioTomazinhoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MinisterioTomazinhoWhereInput
-    orderBy?: MinisterioTomazinhoOrderByWithAggregationInput | MinisterioTomazinhoOrderByWithAggregationInput[]
-    by: MinisterioTomazinhoScalarFieldEnum[] | MinisterioTomazinhoScalarFieldEnum
-    having?: MinisterioTomazinhoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MinisterioTomazinhoCountAggregateInputType | true
-    _min?: MinisterioTomazinhoMinAggregateInputType
-    _max?: MinisterioTomazinhoMaxAggregateInputType
-  }
-
-  export type MinisterioTomazinhoGroupByOutputType = {
-    id: string
-    userId: string
-    name: string
-    title: string
-    local: string
-    isPublic: boolean
-    createdAt: Date
-    coverUrl: string
-    updatedAt: Date
-    _count: MinisterioTomazinhoCountAggregateOutputType | null
-    _min: MinisterioTomazinhoMinAggregateOutputType | null
-    _max: MinisterioTomazinhoMaxAggregateOutputType | null
-  }
-
-  type GetMinisterioTomazinhoGroupByPayload<T extends MinisterioTomazinhoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MinisterioTomazinhoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MinisterioTomazinhoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MinisterioTomazinhoGroupByOutputType[P]>
-            : GetScalarType<T[P], MinisterioTomazinhoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MinisterioTomazinhoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministerioTomazinho"]>
-
-  export type MinisterioTomazinhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministerioTomazinho"]>
-
-  export type MinisterioTomazinhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministerioTomazinho"]>
-
-  export type MinisterioTomazinhoSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-  }
-
-  export type MinisterioTomazinhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title" | "local" | "isPublic" | "createdAt" | "coverUrl" | "updatedAt", ExtArgs["result"]["ministerioTomazinho"]>
-  export type MinisterioTomazinhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type MinisterioTomazinhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type MinisterioTomazinhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $MinisterioTomazinhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MinisterioTomazinho"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      name: string
-      title: string
-      local: string
-      isPublic: boolean
-      createdAt: Date
-      coverUrl: string
-      updatedAt: Date
-    }, ExtArgs["result"]["ministerioTomazinho"]>
-    composites: {}
-  }
-
-  type MinisterioTomazinhoGetPayload<S extends boolean | null | undefined | MinisterioTomazinhoDefaultArgs> = $Result.GetResult<Prisma.$MinisterioTomazinhoPayload, S>
-
-  type MinisterioTomazinhoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MinisterioTomazinhoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MinisterioTomazinhoCountAggregateInputType | true
-    }
-
-  export interface MinisterioTomazinhoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MinisterioTomazinho'], meta: { name: 'MinisterioTomazinho' } }
-    /**
-     * Find zero or one MinisterioTomazinho that matches the filter.
-     * @param {MinisterioTomazinhoFindUniqueArgs} args - Arguments to find a MinisterioTomazinho
-     * @example
-     * // Get one MinisterioTomazinho
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MinisterioTomazinhoFindUniqueArgs>(args: SelectSubset<T, MinisterioTomazinhoFindUniqueArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one MinisterioTomazinho that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {MinisterioTomazinhoFindUniqueOrThrowArgs} args - Arguments to find a MinisterioTomazinho
-     * @example
-     * // Get one MinisterioTomazinho
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MinisterioTomazinhoFindUniqueOrThrowArgs>(args: SelectSubset<T, MinisterioTomazinhoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MinisterioTomazinho that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoFindFirstArgs} args - Arguments to find a MinisterioTomazinho
-     * @example
-     * // Get one MinisterioTomazinho
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MinisterioTomazinhoFindFirstArgs>(args?: SelectSubset<T, MinisterioTomazinhoFindFirstArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MinisterioTomazinho that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoFindFirstOrThrowArgs} args - Arguments to find a MinisterioTomazinho
-     * @example
-     * // Get one MinisterioTomazinho
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MinisterioTomazinhoFindFirstOrThrowArgs>(args?: SelectSubset<T, MinisterioTomazinhoFindFirstOrThrowArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more MinisterioTomazinhos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MinisterioTomazinhos
-     * const ministerioTomazinhos = await prisma.ministerioTomazinho.findMany()
-     * 
-     * // Get first 10 MinisterioTomazinhos
-     * const ministerioTomazinhos = await prisma.ministerioTomazinho.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const ministerioTomazinhoWithIdOnly = await prisma.ministerioTomazinho.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MinisterioTomazinhoFindManyArgs>(args?: SelectSubset<T, MinisterioTomazinhoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a MinisterioTomazinho.
-     * @param {MinisterioTomazinhoCreateArgs} args - Arguments to create a MinisterioTomazinho.
-     * @example
-     * // Create one MinisterioTomazinho
-     * const MinisterioTomazinho = await prisma.ministerioTomazinho.create({
-     *   data: {
-     *     // ... data to create a MinisterioTomazinho
-     *   }
-     * })
-     * 
-     */
-    create<T extends MinisterioTomazinhoCreateArgs>(args: SelectSubset<T, MinisterioTomazinhoCreateArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many MinisterioTomazinhos.
-     * @param {MinisterioTomazinhoCreateManyArgs} args - Arguments to create many MinisterioTomazinhos.
-     * @example
-     * // Create many MinisterioTomazinhos
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MinisterioTomazinhoCreateManyArgs>(args?: SelectSubset<T, MinisterioTomazinhoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MinisterioTomazinhos and returns the data saved in the database.
-     * @param {MinisterioTomazinhoCreateManyAndReturnArgs} args - Arguments to create many MinisterioTomazinhos.
-     * @example
-     * // Create many MinisterioTomazinhos
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MinisterioTomazinhos and only return the `id`
-     * const ministerioTomazinhoWithIdOnly = await prisma.ministerioTomazinho.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MinisterioTomazinhoCreateManyAndReturnArgs>(args?: SelectSubset<T, MinisterioTomazinhoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a MinisterioTomazinho.
-     * @param {MinisterioTomazinhoDeleteArgs} args - Arguments to delete one MinisterioTomazinho.
-     * @example
-     * // Delete one MinisterioTomazinho
-     * const MinisterioTomazinho = await prisma.ministerioTomazinho.delete({
-     *   where: {
-     *     // ... filter to delete one MinisterioTomazinho
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MinisterioTomazinhoDeleteArgs>(args: SelectSubset<T, MinisterioTomazinhoDeleteArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one MinisterioTomazinho.
-     * @param {MinisterioTomazinhoUpdateArgs} args - Arguments to update one MinisterioTomazinho.
-     * @example
-     * // Update one MinisterioTomazinho
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MinisterioTomazinhoUpdateArgs>(args: SelectSubset<T, MinisterioTomazinhoUpdateArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more MinisterioTomazinhos.
-     * @param {MinisterioTomazinhoDeleteManyArgs} args - Arguments to filter MinisterioTomazinhos to delete.
-     * @example
-     * // Delete a few MinisterioTomazinhos
-     * const { count } = await prisma.ministerioTomazinho.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MinisterioTomazinhoDeleteManyArgs>(args?: SelectSubset<T, MinisterioTomazinhoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MinisterioTomazinhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MinisterioTomazinhos
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MinisterioTomazinhoUpdateManyArgs>(args: SelectSubset<T, MinisterioTomazinhoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MinisterioTomazinhos and returns the data updated in the database.
-     * @param {MinisterioTomazinhoUpdateManyAndReturnArgs} args - Arguments to update many MinisterioTomazinhos.
-     * @example
-     * // Update many MinisterioTomazinhos
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more MinisterioTomazinhos and only return the `id`
-     * const ministerioTomazinhoWithIdOnly = await prisma.ministerioTomazinho.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends MinisterioTomazinhoUpdateManyAndReturnArgs>(args: SelectSubset<T, MinisterioTomazinhoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one MinisterioTomazinho.
-     * @param {MinisterioTomazinhoUpsertArgs} args - Arguments to update or create a MinisterioTomazinho.
-     * @example
-     * // Update or create a MinisterioTomazinho
-     * const ministerioTomazinho = await prisma.ministerioTomazinho.upsert({
-     *   create: {
-     *     // ... data to create a MinisterioTomazinho
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MinisterioTomazinho we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MinisterioTomazinhoUpsertArgs>(args: SelectSubset<T, MinisterioTomazinhoUpsertArgs<ExtArgs>>): Prisma__MinisterioTomazinhoClient<$Result.GetResult<Prisma.$MinisterioTomazinhoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of MinisterioTomazinhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoCountArgs} args - Arguments to filter MinisterioTomazinhos to count.
-     * @example
-     * // Count the number of MinisterioTomazinhos
-     * const count = await prisma.ministerioTomazinho.count({
-     *   where: {
-     *     // ... the filter for the MinisterioTomazinhos we want to count
-     *   }
-     * })
-    **/
-    count<T extends MinisterioTomazinhoCountArgs>(
-      args?: Subset<T, MinisterioTomazinhoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MinisterioTomazinhoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MinisterioTomazinho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MinisterioTomazinhoAggregateArgs>(args: Subset<T, MinisterioTomazinhoAggregateArgs>): Prisma.PrismaPromise<GetMinisterioTomazinhoAggregateType<T>>
-
-    /**
-     * Group by MinisterioTomazinho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioTomazinhoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MinisterioTomazinhoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MinisterioTomazinhoGroupByArgs['orderBy'] }
-        : { orderBy?: MinisterioTomazinhoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MinisterioTomazinhoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMinisterioTomazinhoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MinisterioTomazinho model
-   */
-  readonly fields: MinisterioTomazinhoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MinisterioTomazinho.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MinisterioTomazinhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MinisterioTomazinho model
-   */
-  interface MinisterioTomazinhoFieldRefs {
-    readonly id: FieldRef<"MinisterioTomazinho", 'String'>
-    readonly userId: FieldRef<"MinisterioTomazinho", 'String'>
-    readonly name: FieldRef<"MinisterioTomazinho", 'String'>
-    readonly title: FieldRef<"MinisterioTomazinho", 'String'>
-    readonly local: FieldRef<"MinisterioTomazinho", 'String'>
-    readonly isPublic: FieldRef<"MinisterioTomazinho", 'Boolean'>
-    readonly createdAt: FieldRef<"MinisterioTomazinho", 'DateTime'>
-    readonly coverUrl: FieldRef<"MinisterioTomazinho", 'String'>
-    readonly updatedAt: FieldRef<"MinisterioTomazinho", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MinisterioTomazinho findUnique
-   */
-  export type MinisterioTomazinhoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioTomazinho to fetch.
-     */
-    where: MinisterioTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * MinisterioTomazinho findUniqueOrThrow
-   */
-  export type MinisterioTomazinhoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioTomazinho to fetch.
-     */
-    where: MinisterioTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * MinisterioTomazinho findFirst
-   */
-  export type MinisterioTomazinhoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioTomazinho to fetch.
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioTomazinhos to fetch.
-     */
-    orderBy?: MinisterioTomazinhoOrderByWithRelationInput | MinisterioTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MinisterioTomazinhos.
-     */
-    cursor?: MinisterioTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MinisterioTomazinhos.
-     */
-    distinct?: MinisterioTomazinhoScalarFieldEnum | MinisterioTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * MinisterioTomazinho findFirstOrThrow
-   */
-  export type MinisterioTomazinhoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioTomazinho to fetch.
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioTomazinhos to fetch.
-     */
-    orderBy?: MinisterioTomazinhoOrderByWithRelationInput | MinisterioTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MinisterioTomazinhos.
-     */
-    cursor?: MinisterioTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MinisterioTomazinhos.
-     */
-    distinct?: MinisterioTomazinhoScalarFieldEnum | MinisterioTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * MinisterioTomazinho findMany
-   */
-  export type MinisterioTomazinhoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioTomazinhos to fetch.
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioTomazinhos to fetch.
-     */
-    orderBy?: MinisterioTomazinhoOrderByWithRelationInput | MinisterioTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MinisterioTomazinhos.
-     */
-    cursor?: MinisterioTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioTomazinhos.
-     */
-    skip?: number
-    distinct?: MinisterioTomazinhoScalarFieldEnum | MinisterioTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * MinisterioTomazinho create
-   */
-  export type MinisterioTomazinhoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MinisterioTomazinho.
-     */
-    data: XOR<MinisterioTomazinhoCreateInput, MinisterioTomazinhoUncheckedCreateInput>
-  }
-
-  /**
-   * MinisterioTomazinho createMany
-   */
-  export type MinisterioTomazinhoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MinisterioTomazinhos.
-     */
-    data: MinisterioTomazinhoCreateManyInput | MinisterioTomazinhoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MinisterioTomazinho createManyAndReturn
-   */
-  export type MinisterioTomazinhoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * The data used to create many MinisterioTomazinhos.
-     */
-    data: MinisterioTomazinhoCreateManyInput | MinisterioTomazinhoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MinisterioTomazinho update
-   */
-  export type MinisterioTomazinhoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MinisterioTomazinho.
-     */
-    data: XOR<MinisterioTomazinhoUpdateInput, MinisterioTomazinhoUncheckedUpdateInput>
-    /**
-     * Choose, which MinisterioTomazinho to update.
-     */
-    where: MinisterioTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * MinisterioTomazinho updateMany
-   */
-  export type MinisterioTomazinhoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MinisterioTomazinhos.
-     */
-    data: XOR<MinisterioTomazinhoUpdateManyMutationInput, MinisterioTomazinhoUncheckedUpdateManyInput>
-    /**
-     * Filter which MinisterioTomazinhos to update
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * Limit how many MinisterioTomazinhos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * MinisterioTomazinho updateManyAndReturn
-   */
-  export type MinisterioTomazinhoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * The data used to update MinisterioTomazinhos.
-     */
-    data: XOR<MinisterioTomazinhoUpdateManyMutationInput, MinisterioTomazinhoUncheckedUpdateManyInput>
-    /**
-     * Filter which MinisterioTomazinhos to update
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * Limit how many MinisterioTomazinhos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MinisterioTomazinho upsert
-   */
-  export type MinisterioTomazinhoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MinisterioTomazinho to update in case it exists.
-     */
-    where: MinisterioTomazinhoWhereUniqueInput
-    /**
-     * In case the MinisterioTomazinho found by the `where` argument doesn't exist, create a new MinisterioTomazinho with this data.
-     */
-    create: XOR<MinisterioTomazinhoCreateInput, MinisterioTomazinhoUncheckedCreateInput>
-    /**
-     * In case the MinisterioTomazinho was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MinisterioTomazinhoUpdateInput, MinisterioTomazinhoUncheckedUpdateInput>
-  }
-
-  /**
-   * MinisterioTomazinho delete
-   */
-  export type MinisterioTomazinhoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter which MinisterioTomazinho to delete.
-     */
-    where: MinisterioTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * MinisterioTomazinho deleteMany
-   */
-  export type MinisterioTomazinhoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MinisterioTomazinhos to delete
-     */
-    where?: MinisterioTomazinhoWhereInput
-    /**
-     * Limit how many MinisterioTomazinhos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * MinisterioTomazinho without action
-   */
-  export type MinisterioTomazinhoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioTomazinho
-     */
-    select?: MinisterioTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioTomazinho
-     */
-    omit?: MinisterioTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioTomazinhoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model AgendaTomazinho
-   */
-
-  export type AggregateAgendaTomazinho = {
-    _count: AgendaTomazinhoCountAggregateOutputType | null
-    _min: AgendaTomazinhoMinAggregateOutputType | null
-    _max: AgendaTomazinhoMaxAggregateOutputType | null
-  }
-
-  export type AgendaTomazinhoMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    day: string | null
-    name: string | null
-    hour: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    destaque: boolean | null
-  }
-
-  export type AgendaTomazinhoMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    day: string | null
-    name: string | null
-    hour: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    destaque: boolean | null
-  }
-
-  export type AgendaTomazinhoCountAggregateOutputType = {
-    id: number
-    userId: number
-    day: number
-    name: number
-    hour: number
-    isPublic: number
-    createdAt: number
-    updatedAt: number
-    destaque: number
-    _all: number
-  }
-
-
-  export type AgendaTomazinhoMinAggregateInputType = {
-    id?: true
-    userId?: true
-    day?: true
-    name?: true
-    hour?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    destaque?: true
-  }
-
-  export type AgendaTomazinhoMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    day?: true
-    name?: true
-    hour?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    destaque?: true
-  }
-
-  export type AgendaTomazinhoCountAggregateInputType = {
-    id?: true
-    userId?: true
-    day?: true
-    name?: true
-    hour?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    destaque?: true
-    _all?: true
-  }
-
-  export type AgendaTomazinhoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AgendaTomazinho to aggregate.
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaTomazinhos to fetch.
-     */
-    orderBy?: AgendaTomazinhoOrderByWithRelationInput | AgendaTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AgendaTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned AgendaTomazinhos
-    **/
-    _count?: true | AgendaTomazinhoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AgendaTomazinhoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AgendaTomazinhoMaxAggregateInputType
-  }
-
-  export type GetAgendaTomazinhoAggregateType<T extends AgendaTomazinhoAggregateArgs> = {
-        [P in keyof T & keyof AggregateAgendaTomazinho]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAgendaTomazinho[P]>
-      : GetScalarType<T[P], AggregateAgendaTomazinho[P]>
-  }
-
-
-
-
-  export type AgendaTomazinhoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AgendaTomazinhoWhereInput
-    orderBy?: AgendaTomazinhoOrderByWithAggregationInput | AgendaTomazinhoOrderByWithAggregationInput[]
-    by: AgendaTomazinhoScalarFieldEnum[] | AgendaTomazinhoScalarFieldEnum
-    having?: AgendaTomazinhoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AgendaTomazinhoCountAggregateInputType | true
-    _min?: AgendaTomazinhoMinAggregateInputType
-    _max?: AgendaTomazinhoMaxAggregateInputType
-  }
-
-  export type AgendaTomazinhoGroupByOutputType = {
-    id: string
-    userId: string
-    day: string
-    name: string
-    hour: string
-    isPublic: boolean
-    createdAt: Date
-    updatedAt: Date
-    destaque: boolean
-    _count: AgendaTomazinhoCountAggregateOutputType | null
-    _min: AgendaTomazinhoMinAggregateOutputType | null
-    _max: AgendaTomazinhoMaxAggregateOutputType | null
-  }
-
-  type GetAgendaTomazinhoGroupByPayload<T extends AgendaTomazinhoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AgendaTomazinhoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AgendaTomazinhoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AgendaTomazinhoGroupByOutputType[P]>
-            : GetScalarType<T[P], AgendaTomazinhoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AgendaTomazinhoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["agendaTomazinho"]>
-
-  export type AgendaTomazinhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["agendaTomazinho"]>
-
-  export type AgendaTomazinhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["agendaTomazinho"]>
-
-  export type AgendaTomazinhoSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-  }
-
-  export type AgendaTomazinhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "name" | "hour" | "isPublic" | "createdAt" | "updatedAt" | "destaque", ExtArgs["result"]["agendaTomazinho"]>
-  export type AgendaTomazinhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type AgendaTomazinhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type AgendaTomazinhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $AgendaTomazinhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "AgendaTomazinho"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      day: string
-      name: string
-      hour: string
-      isPublic: boolean
-      createdAt: Date
-      updatedAt: Date
-      destaque: boolean
-    }, ExtArgs["result"]["agendaTomazinho"]>
-    composites: {}
-  }
-
-  type AgendaTomazinhoGetPayload<S extends boolean | null | undefined | AgendaTomazinhoDefaultArgs> = $Result.GetResult<Prisma.$AgendaTomazinhoPayload, S>
-
-  type AgendaTomazinhoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AgendaTomazinhoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AgendaTomazinhoCountAggregateInputType | true
-    }
-
-  export interface AgendaTomazinhoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AgendaTomazinho'], meta: { name: 'AgendaTomazinho' } }
-    /**
-     * Find zero or one AgendaTomazinho that matches the filter.
-     * @param {AgendaTomazinhoFindUniqueArgs} args - Arguments to find a AgendaTomazinho
-     * @example
-     * // Get one AgendaTomazinho
-     * const agendaTomazinho = await prisma.agendaTomazinho.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AgendaTomazinhoFindUniqueArgs>(args: SelectSubset<T, AgendaTomazinhoFindUniqueArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one AgendaTomazinho that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AgendaTomazinhoFindUniqueOrThrowArgs} args - Arguments to find a AgendaTomazinho
-     * @example
-     * // Get one AgendaTomazinho
-     * const agendaTomazinho = await prisma.agendaTomazinho.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AgendaTomazinhoFindUniqueOrThrowArgs>(args: SelectSubset<T, AgendaTomazinhoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AgendaTomazinho that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoFindFirstArgs} args - Arguments to find a AgendaTomazinho
-     * @example
-     * // Get one AgendaTomazinho
-     * const agendaTomazinho = await prisma.agendaTomazinho.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AgendaTomazinhoFindFirstArgs>(args?: SelectSubset<T, AgendaTomazinhoFindFirstArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AgendaTomazinho that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoFindFirstOrThrowArgs} args - Arguments to find a AgendaTomazinho
-     * @example
-     * // Get one AgendaTomazinho
-     * const agendaTomazinho = await prisma.agendaTomazinho.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AgendaTomazinhoFindFirstOrThrowArgs>(args?: SelectSubset<T, AgendaTomazinhoFindFirstOrThrowArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more AgendaTomazinhos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all AgendaTomazinhos
-     * const agendaTomazinhos = await prisma.agendaTomazinho.findMany()
-     * 
-     * // Get first 10 AgendaTomazinhos
-     * const agendaTomazinhos = await prisma.agendaTomazinho.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const agendaTomazinhoWithIdOnly = await prisma.agendaTomazinho.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AgendaTomazinhoFindManyArgs>(args?: SelectSubset<T, AgendaTomazinhoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a AgendaTomazinho.
-     * @param {AgendaTomazinhoCreateArgs} args - Arguments to create a AgendaTomazinho.
-     * @example
-     * // Create one AgendaTomazinho
-     * const AgendaTomazinho = await prisma.agendaTomazinho.create({
-     *   data: {
-     *     // ... data to create a AgendaTomazinho
-     *   }
-     * })
-     * 
-     */
-    create<T extends AgendaTomazinhoCreateArgs>(args: SelectSubset<T, AgendaTomazinhoCreateArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many AgendaTomazinhos.
-     * @param {AgendaTomazinhoCreateManyArgs} args - Arguments to create many AgendaTomazinhos.
-     * @example
-     * // Create many AgendaTomazinhos
-     * const agendaTomazinho = await prisma.agendaTomazinho.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AgendaTomazinhoCreateManyArgs>(args?: SelectSubset<T, AgendaTomazinhoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many AgendaTomazinhos and returns the data saved in the database.
-     * @param {AgendaTomazinhoCreateManyAndReturnArgs} args - Arguments to create many AgendaTomazinhos.
-     * @example
-     * // Create many AgendaTomazinhos
-     * const agendaTomazinho = await prisma.agendaTomazinho.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many AgendaTomazinhos and only return the `id`
-     * const agendaTomazinhoWithIdOnly = await prisma.agendaTomazinho.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AgendaTomazinhoCreateManyAndReturnArgs>(args?: SelectSubset<T, AgendaTomazinhoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a AgendaTomazinho.
-     * @param {AgendaTomazinhoDeleteArgs} args - Arguments to delete one AgendaTomazinho.
-     * @example
-     * // Delete one AgendaTomazinho
-     * const AgendaTomazinho = await prisma.agendaTomazinho.delete({
-     *   where: {
-     *     // ... filter to delete one AgendaTomazinho
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AgendaTomazinhoDeleteArgs>(args: SelectSubset<T, AgendaTomazinhoDeleteArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one AgendaTomazinho.
-     * @param {AgendaTomazinhoUpdateArgs} args - Arguments to update one AgendaTomazinho.
-     * @example
-     * // Update one AgendaTomazinho
-     * const agendaTomazinho = await prisma.agendaTomazinho.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AgendaTomazinhoUpdateArgs>(args: SelectSubset<T, AgendaTomazinhoUpdateArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more AgendaTomazinhos.
-     * @param {AgendaTomazinhoDeleteManyArgs} args - Arguments to filter AgendaTomazinhos to delete.
-     * @example
-     * // Delete a few AgendaTomazinhos
-     * const { count } = await prisma.agendaTomazinho.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AgendaTomazinhoDeleteManyArgs>(args?: SelectSubset<T, AgendaTomazinhoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AgendaTomazinhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many AgendaTomazinhos
-     * const agendaTomazinho = await prisma.agendaTomazinho.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AgendaTomazinhoUpdateManyArgs>(args: SelectSubset<T, AgendaTomazinhoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AgendaTomazinhos and returns the data updated in the database.
-     * @param {AgendaTomazinhoUpdateManyAndReturnArgs} args - Arguments to update many AgendaTomazinhos.
-     * @example
-     * // Update many AgendaTomazinhos
-     * const agendaTomazinho = await prisma.agendaTomazinho.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more AgendaTomazinhos and only return the `id`
-     * const agendaTomazinhoWithIdOnly = await prisma.agendaTomazinho.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AgendaTomazinhoUpdateManyAndReturnArgs>(args: SelectSubset<T, AgendaTomazinhoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one AgendaTomazinho.
-     * @param {AgendaTomazinhoUpsertArgs} args - Arguments to update or create a AgendaTomazinho.
-     * @example
-     * // Update or create a AgendaTomazinho
-     * const agendaTomazinho = await prisma.agendaTomazinho.upsert({
-     *   create: {
-     *     // ... data to create a AgendaTomazinho
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the AgendaTomazinho we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AgendaTomazinhoUpsertArgs>(args: SelectSubset<T, AgendaTomazinhoUpsertArgs<ExtArgs>>): Prisma__AgendaTomazinhoClient<$Result.GetResult<Prisma.$AgendaTomazinhoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of AgendaTomazinhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoCountArgs} args - Arguments to filter AgendaTomazinhos to count.
-     * @example
-     * // Count the number of AgendaTomazinhos
-     * const count = await prisma.agendaTomazinho.count({
-     *   where: {
-     *     // ... the filter for the AgendaTomazinhos we want to count
-     *   }
-     * })
-    **/
-    count<T extends AgendaTomazinhoCountArgs>(
-      args?: Subset<T, AgendaTomazinhoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AgendaTomazinhoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a AgendaTomazinho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AgendaTomazinhoAggregateArgs>(args: Subset<T, AgendaTomazinhoAggregateArgs>): Prisma.PrismaPromise<GetAgendaTomazinhoAggregateType<T>>
-
-    /**
-     * Group by AgendaTomazinho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaTomazinhoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AgendaTomazinhoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AgendaTomazinhoGroupByArgs['orderBy'] }
-        : { orderBy?: AgendaTomazinhoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AgendaTomazinhoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAgendaTomazinhoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the AgendaTomazinho model
-   */
-  readonly fields: AgendaTomazinhoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for AgendaTomazinho.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AgendaTomazinhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the AgendaTomazinho model
-   */
-  interface AgendaTomazinhoFieldRefs {
-    readonly id: FieldRef<"AgendaTomazinho", 'String'>
-    readonly userId: FieldRef<"AgendaTomazinho", 'String'>
-    readonly day: FieldRef<"AgendaTomazinho", 'String'>
-    readonly name: FieldRef<"AgendaTomazinho", 'String'>
-    readonly hour: FieldRef<"AgendaTomazinho", 'String'>
-    readonly isPublic: FieldRef<"AgendaTomazinho", 'Boolean'>
-    readonly createdAt: FieldRef<"AgendaTomazinho", 'DateTime'>
-    readonly updatedAt: FieldRef<"AgendaTomazinho", 'DateTime'>
-    readonly destaque: FieldRef<"AgendaTomazinho", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * AgendaTomazinho findUnique
-   */
-  export type AgendaTomazinhoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaTomazinho to fetch.
-     */
-    where: AgendaTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * AgendaTomazinho findUniqueOrThrow
-   */
-  export type AgendaTomazinhoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaTomazinho to fetch.
-     */
-    where: AgendaTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * AgendaTomazinho findFirst
-   */
-  export type AgendaTomazinhoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaTomazinho to fetch.
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaTomazinhos to fetch.
-     */
-    orderBy?: AgendaTomazinhoOrderByWithRelationInput | AgendaTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AgendaTomazinhos.
-     */
-    cursor?: AgendaTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AgendaTomazinhos.
-     */
-    distinct?: AgendaTomazinhoScalarFieldEnum | AgendaTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * AgendaTomazinho findFirstOrThrow
-   */
-  export type AgendaTomazinhoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaTomazinho to fetch.
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaTomazinhos to fetch.
-     */
-    orderBy?: AgendaTomazinhoOrderByWithRelationInput | AgendaTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AgendaTomazinhos.
-     */
-    cursor?: AgendaTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaTomazinhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AgendaTomazinhos.
-     */
-    distinct?: AgendaTomazinhoScalarFieldEnum | AgendaTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * AgendaTomazinho findMany
-   */
-  export type AgendaTomazinhoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaTomazinhos to fetch.
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaTomazinhos to fetch.
-     */
-    orderBy?: AgendaTomazinhoOrderByWithRelationInput | AgendaTomazinhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing AgendaTomazinhos.
-     */
-    cursor?: AgendaTomazinhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaTomazinhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaTomazinhos.
-     */
-    skip?: number
-    distinct?: AgendaTomazinhoScalarFieldEnum | AgendaTomazinhoScalarFieldEnum[]
-  }
-
-  /**
-   * AgendaTomazinho create
-   */
-  export type AgendaTomazinhoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a AgendaTomazinho.
-     */
-    data: XOR<AgendaTomazinhoCreateInput, AgendaTomazinhoUncheckedCreateInput>
-  }
-
-  /**
-   * AgendaTomazinho createMany
-   */
-  export type AgendaTomazinhoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many AgendaTomazinhos.
-     */
-    data: AgendaTomazinhoCreateManyInput | AgendaTomazinhoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * AgendaTomazinho createManyAndReturn
-   */
-  export type AgendaTomazinhoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * The data used to create many AgendaTomazinhos.
-     */
-    data: AgendaTomazinhoCreateManyInput | AgendaTomazinhoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * AgendaTomazinho update
-   */
-  export type AgendaTomazinhoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a AgendaTomazinho.
-     */
-    data: XOR<AgendaTomazinhoUpdateInput, AgendaTomazinhoUncheckedUpdateInput>
-    /**
-     * Choose, which AgendaTomazinho to update.
-     */
-    where: AgendaTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * AgendaTomazinho updateMany
-   */
-  export type AgendaTomazinhoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update AgendaTomazinhos.
-     */
-    data: XOR<AgendaTomazinhoUpdateManyMutationInput, AgendaTomazinhoUncheckedUpdateManyInput>
-    /**
-     * Filter which AgendaTomazinhos to update
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * Limit how many AgendaTomazinhos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * AgendaTomazinho updateManyAndReturn
-   */
-  export type AgendaTomazinhoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * The data used to update AgendaTomazinhos.
-     */
-    data: XOR<AgendaTomazinhoUpdateManyMutationInput, AgendaTomazinhoUncheckedUpdateManyInput>
-    /**
-     * Filter which AgendaTomazinhos to update
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * Limit how many AgendaTomazinhos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * AgendaTomazinho upsert
-   */
-  export type AgendaTomazinhoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the AgendaTomazinho to update in case it exists.
-     */
-    where: AgendaTomazinhoWhereUniqueInput
-    /**
-     * In case the AgendaTomazinho found by the `where` argument doesn't exist, create a new AgendaTomazinho with this data.
-     */
-    create: XOR<AgendaTomazinhoCreateInput, AgendaTomazinhoUncheckedCreateInput>
-    /**
-     * In case the AgendaTomazinho was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AgendaTomazinhoUpdateInput, AgendaTomazinhoUncheckedUpdateInput>
-  }
-
-  /**
-   * AgendaTomazinho delete
-   */
-  export type AgendaTomazinhoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-    /**
-     * Filter which AgendaTomazinho to delete.
-     */
-    where: AgendaTomazinhoWhereUniqueInput
-  }
-
-  /**
-   * AgendaTomazinho deleteMany
-   */
-  export type AgendaTomazinhoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AgendaTomazinhos to delete
-     */
-    where?: AgendaTomazinhoWhereInput
-    /**
-     * Limit how many AgendaTomazinhos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * AgendaTomazinho without action
-   */
-  export type AgendaTomazinhoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaTomazinho
-     */
-    select?: AgendaTomazinhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaTomazinho
-     */
-    omit?: AgendaTomazinhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaTomazinhoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model NewCaxias
-   */
-
-  export type AggregateNewCaxias = {
-    _count: NewCaxiasCountAggregateOutputType | null
-    _min: NewCaxiasMinAggregateOutputType | null
-    _max: NewCaxiasMaxAggregateOutputType | null
-  }
-
-  export type NewCaxiasMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    coverUrl: string | null
-    content: string | null
-    title: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    page: string | null
-    updatedAt: Date | null
-    destaque: boolean | null
-    url: string | null
-  }
-
-  export type NewCaxiasMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    coverUrl: string | null
-    content: string | null
-    title: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    page: string | null
-    updatedAt: Date | null
-    destaque: boolean | null
-    url: string | null
-  }
-
-  export type NewCaxiasCountAggregateOutputType = {
-    id: number
-    userId: number
-    coverUrl: number
-    content: number
-    title: number
-    isPublic: number
-    createdAt: number
-    page: number
-    updatedAt: number
-    destaque: number
-    url: number
-    _all: number
-  }
-
-
-  export type NewCaxiasMinAggregateInputType = {
-    id?: true
-    userId?: true
-    coverUrl?: true
-    content?: true
-    title?: true
-    isPublic?: true
-    createdAt?: true
-    page?: true
-    updatedAt?: true
-    destaque?: true
-    url?: true
-  }
-
-  export type NewCaxiasMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    coverUrl?: true
-    content?: true
-    title?: true
-    isPublic?: true
-    createdAt?: true
-    page?: true
-    updatedAt?: true
-    destaque?: true
-    url?: true
-  }
-
-  export type NewCaxiasCountAggregateInputType = {
-    id?: true
-    userId?: true
-    coverUrl?: true
-    content?: true
-    title?: true
-    isPublic?: true
-    createdAt?: true
-    page?: true
-    updatedAt?: true
-    destaque?: true
-    url?: true
-    _all?: true
-  }
-
-  export type NewCaxiasAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewCaxias to aggregate.
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewCaxias to fetch.
-     */
-    orderBy?: NewCaxiasOrderByWithRelationInput | NewCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: NewCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned NewCaxias
-    **/
-    _count?: true | NewCaxiasCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: NewCaxiasMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: NewCaxiasMaxAggregateInputType
-  }
-
-  export type GetNewCaxiasAggregateType<T extends NewCaxiasAggregateArgs> = {
-        [P in keyof T & keyof AggregateNewCaxias]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNewCaxias[P]>
-      : GetScalarType<T[P], AggregateNewCaxias[P]>
-  }
-
-
-
-
-  export type NewCaxiasGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewCaxiasWhereInput
-    orderBy?: NewCaxiasOrderByWithAggregationInput | NewCaxiasOrderByWithAggregationInput[]
-    by: NewCaxiasScalarFieldEnum[] | NewCaxiasScalarFieldEnum
-    having?: NewCaxiasScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: NewCaxiasCountAggregateInputType | true
-    _min?: NewCaxiasMinAggregateInputType
-    _max?: NewCaxiasMaxAggregateInputType
-  }
-
-  export type NewCaxiasGroupByOutputType = {
-    id: string
-    userId: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic: boolean
-    createdAt: Date
-    page: string
-    updatedAt: Date
-    destaque: boolean
-    url: string
-    _count: NewCaxiasCountAggregateOutputType | null
-    _min: NewCaxiasMinAggregateOutputType | null
-    _max: NewCaxiasMaxAggregateOutputType | null
-  }
-
-  type GetNewCaxiasGroupByPayload<T extends NewCaxiasGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<NewCaxiasGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof NewCaxiasGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], NewCaxiasGroupByOutputType[P]>
-            : GetScalarType<T[P], NewCaxiasGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type NewCaxiasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newCaxias"]>
-
-  export type NewCaxiasSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newCaxias"]>
-
-  export type NewCaxiasSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newCaxias"]>
-
-  export type NewCaxiasSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    coverUrl?: boolean
-    content?: boolean
-    title?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    page?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    url?: boolean
-  }
-
-  export type NewCaxiasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "isPublic" | "createdAt" | "page" | "updatedAt" | "destaque" | "url", ExtArgs["result"]["newCaxias"]>
-  export type NewCaxiasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewCaxiasIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewCaxiasIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $NewCaxiasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "NewCaxias"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      coverUrl: string
-      content: string
-      title: string
-      isPublic: boolean
-      createdAt: Date
-      page: string
-      updatedAt: Date
-      destaque: boolean
-      url: string
-    }, ExtArgs["result"]["newCaxias"]>
-    composites: {}
-  }
-
-  type NewCaxiasGetPayload<S extends boolean | null | undefined | NewCaxiasDefaultArgs> = $Result.GetResult<Prisma.$NewCaxiasPayload, S>
-
-  type NewCaxiasCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NewCaxiasFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NewCaxiasCountAggregateInputType | true
-    }
-
-  export interface NewCaxiasDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewCaxias'], meta: { name: 'NewCaxias' } }
-    /**
-     * Find zero or one NewCaxias that matches the filter.
-     * @param {NewCaxiasFindUniqueArgs} args - Arguments to find a NewCaxias
-     * @example
-     * // Get one NewCaxias
-     * const newCaxias = await prisma.newCaxias.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends NewCaxiasFindUniqueArgs>(args: SelectSubset<T, NewCaxiasFindUniqueArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one NewCaxias that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {NewCaxiasFindUniqueOrThrowArgs} args - Arguments to find a NewCaxias
-     * @example
-     * // Get one NewCaxias
-     * const newCaxias = await prisma.newCaxias.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends NewCaxiasFindUniqueOrThrowArgs>(args: SelectSubset<T, NewCaxiasFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first NewCaxias that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasFindFirstArgs} args - Arguments to find a NewCaxias
-     * @example
-     * // Get one NewCaxias
-     * const newCaxias = await prisma.newCaxias.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends NewCaxiasFindFirstArgs>(args?: SelectSubset<T, NewCaxiasFindFirstArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first NewCaxias that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasFindFirstOrThrowArgs} args - Arguments to find a NewCaxias
-     * @example
-     * // Get one NewCaxias
-     * const newCaxias = await prisma.newCaxias.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends NewCaxiasFindFirstOrThrowArgs>(args?: SelectSubset<T, NewCaxiasFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more NewCaxias that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all NewCaxias
-     * const newCaxias = await prisma.newCaxias.findMany()
-     * 
-     * // Get first 10 NewCaxias
-     * const newCaxias = await prisma.newCaxias.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const newCaxiasWithIdOnly = await prisma.newCaxias.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends NewCaxiasFindManyArgs>(args?: SelectSubset<T, NewCaxiasFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a NewCaxias.
-     * @param {NewCaxiasCreateArgs} args - Arguments to create a NewCaxias.
-     * @example
-     * // Create one NewCaxias
-     * const NewCaxias = await prisma.newCaxias.create({
-     *   data: {
-     *     // ... data to create a NewCaxias
-     *   }
-     * })
-     * 
-     */
-    create<T extends NewCaxiasCreateArgs>(args: SelectSubset<T, NewCaxiasCreateArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many NewCaxias.
-     * @param {NewCaxiasCreateManyArgs} args - Arguments to create many NewCaxias.
-     * @example
-     * // Create many NewCaxias
-     * const newCaxias = await prisma.newCaxias.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends NewCaxiasCreateManyArgs>(args?: SelectSubset<T, NewCaxiasCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many NewCaxias and returns the data saved in the database.
-     * @param {NewCaxiasCreateManyAndReturnArgs} args - Arguments to create many NewCaxias.
-     * @example
-     * // Create many NewCaxias
-     * const newCaxias = await prisma.newCaxias.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many NewCaxias and only return the `id`
-     * const newCaxiasWithIdOnly = await prisma.newCaxias.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends NewCaxiasCreateManyAndReturnArgs>(args?: SelectSubset<T, NewCaxiasCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a NewCaxias.
-     * @param {NewCaxiasDeleteArgs} args - Arguments to delete one NewCaxias.
-     * @example
-     * // Delete one NewCaxias
-     * const NewCaxias = await prisma.newCaxias.delete({
-     *   where: {
-     *     // ... filter to delete one NewCaxias
-     *   }
-     * })
-     * 
-     */
-    delete<T extends NewCaxiasDeleteArgs>(args: SelectSubset<T, NewCaxiasDeleteArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one NewCaxias.
-     * @param {NewCaxiasUpdateArgs} args - Arguments to update one NewCaxias.
-     * @example
-     * // Update one NewCaxias
-     * const newCaxias = await prisma.newCaxias.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends NewCaxiasUpdateArgs>(args: SelectSubset<T, NewCaxiasUpdateArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more NewCaxias.
-     * @param {NewCaxiasDeleteManyArgs} args - Arguments to filter NewCaxias to delete.
-     * @example
-     * // Delete a few NewCaxias
-     * const { count } = await prisma.newCaxias.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends NewCaxiasDeleteManyArgs>(args?: SelectSubset<T, NewCaxiasDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many NewCaxias
-     * const newCaxias = await prisma.newCaxias.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends NewCaxiasUpdateManyArgs>(args: SelectSubset<T, NewCaxiasUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewCaxias and returns the data updated in the database.
-     * @param {NewCaxiasUpdateManyAndReturnArgs} args - Arguments to update many NewCaxias.
-     * @example
-     * // Update many NewCaxias
-     * const newCaxias = await prisma.newCaxias.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more NewCaxias and only return the `id`
-     * const newCaxiasWithIdOnly = await prisma.newCaxias.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends NewCaxiasUpdateManyAndReturnArgs>(args: SelectSubset<T, NewCaxiasUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one NewCaxias.
-     * @param {NewCaxiasUpsertArgs} args - Arguments to update or create a NewCaxias.
-     * @example
-     * // Update or create a NewCaxias
-     * const newCaxias = await prisma.newCaxias.upsert({
-     *   create: {
-     *     // ... data to create a NewCaxias
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the NewCaxias we want to update
-     *   }
-     * })
-     */
-    upsert<T extends NewCaxiasUpsertArgs>(args: SelectSubset<T, NewCaxiasUpsertArgs<ExtArgs>>): Prisma__NewCaxiasClient<$Result.GetResult<Prisma.$NewCaxiasPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of NewCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasCountArgs} args - Arguments to filter NewCaxias to count.
-     * @example
-     * // Count the number of NewCaxias
-     * const count = await prisma.newCaxias.count({
-     *   where: {
-     *     // ... the filter for the NewCaxias we want to count
-     *   }
-     * })
-    **/
-    count<T extends NewCaxiasCountArgs>(
-      args?: Subset<T, NewCaxiasCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], NewCaxiasCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a NewCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends NewCaxiasAggregateArgs>(args: Subset<T, NewCaxiasAggregateArgs>): Prisma.PrismaPromise<GetNewCaxiasAggregateType<T>>
-
-    /**
-     * Group by NewCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewCaxiasGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends NewCaxiasGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NewCaxiasGroupByArgs['orderBy'] }
-        : { orderBy?: NewCaxiasGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, NewCaxiasGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewCaxiasGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the NewCaxias model
-   */
-  readonly fields: NewCaxiasFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for NewCaxias.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__NewCaxiasClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the NewCaxias model
-   */
-  interface NewCaxiasFieldRefs {
-    readonly id: FieldRef<"NewCaxias", 'String'>
-    readonly userId: FieldRef<"NewCaxias", 'String'>
-    readonly coverUrl: FieldRef<"NewCaxias", 'String'>
-    readonly content: FieldRef<"NewCaxias", 'String'>
-    readonly title: FieldRef<"NewCaxias", 'String'>
-    readonly isPublic: FieldRef<"NewCaxias", 'Boolean'>
-    readonly createdAt: FieldRef<"NewCaxias", 'DateTime'>
-    readonly page: FieldRef<"NewCaxias", 'String'>
-    readonly updatedAt: FieldRef<"NewCaxias", 'DateTime'>
-    readonly destaque: FieldRef<"NewCaxias", 'Boolean'>
-    readonly url: FieldRef<"NewCaxias", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * NewCaxias findUnique
-   */
-  export type NewCaxiasFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which NewCaxias to fetch.
-     */
-    where: NewCaxiasWhereUniqueInput
-  }
-
-  /**
-   * NewCaxias findUniqueOrThrow
-   */
-  export type NewCaxiasFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which NewCaxias to fetch.
-     */
-    where: NewCaxiasWhereUniqueInput
-  }
-
-  /**
-   * NewCaxias findFirst
-   */
-  export type NewCaxiasFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which NewCaxias to fetch.
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewCaxias to fetch.
-     */
-    orderBy?: NewCaxiasOrderByWithRelationInput | NewCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewCaxias.
-     */
-    cursor?: NewCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewCaxias.
-     */
-    distinct?: NewCaxiasScalarFieldEnum | NewCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * NewCaxias findFirstOrThrow
-   */
-  export type NewCaxiasFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which NewCaxias to fetch.
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewCaxias to fetch.
-     */
-    orderBy?: NewCaxiasOrderByWithRelationInput | NewCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewCaxias.
-     */
-    cursor?: NewCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewCaxias.
-     */
-    distinct?: NewCaxiasScalarFieldEnum | NewCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * NewCaxias findMany
-   */
-  export type NewCaxiasFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which NewCaxias to fetch.
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewCaxias to fetch.
-     */
-    orderBy?: NewCaxiasOrderByWithRelationInput | NewCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing NewCaxias.
-     */
-    cursor?: NewCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewCaxias.
-     */
-    skip?: number
-    distinct?: NewCaxiasScalarFieldEnum | NewCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * NewCaxias create
-   */
-  export type NewCaxiasCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * The data needed to create a NewCaxias.
-     */
-    data: XOR<NewCaxiasCreateInput, NewCaxiasUncheckedCreateInput>
-  }
-
-  /**
-   * NewCaxias createMany
-   */
-  export type NewCaxiasCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many NewCaxias.
-     */
-    data: NewCaxiasCreateManyInput | NewCaxiasCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * NewCaxias createManyAndReturn
-   */
-  export type NewCaxiasCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * The data used to create many NewCaxias.
-     */
-    data: NewCaxiasCreateManyInput | NewCaxiasCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * NewCaxias update
-   */
-  export type NewCaxiasUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * The data needed to update a NewCaxias.
-     */
-    data: XOR<NewCaxiasUpdateInput, NewCaxiasUncheckedUpdateInput>
-    /**
-     * Choose, which NewCaxias to update.
-     */
-    where: NewCaxiasWhereUniqueInput
-  }
-
-  /**
-   * NewCaxias updateMany
-   */
-  export type NewCaxiasUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update NewCaxias.
-     */
-    data: XOR<NewCaxiasUpdateManyMutationInput, NewCaxiasUncheckedUpdateManyInput>
-    /**
-     * Filter which NewCaxias to update
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * Limit how many NewCaxias to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewCaxias updateManyAndReturn
-   */
-  export type NewCaxiasUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * The data used to update NewCaxias.
-     */
-    data: XOR<NewCaxiasUpdateManyMutationInput, NewCaxiasUncheckedUpdateManyInput>
-    /**
-     * Filter which NewCaxias to update
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * Limit how many NewCaxias to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * NewCaxias upsert
-   */
-  export type NewCaxiasUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * The filter to search for the NewCaxias to update in case it exists.
-     */
-    where: NewCaxiasWhereUniqueInput
-    /**
-     * In case the NewCaxias found by the `where` argument doesn't exist, create a new NewCaxias with this data.
-     */
-    create: XOR<NewCaxiasCreateInput, NewCaxiasUncheckedCreateInput>
-    /**
-     * In case the NewCaxias was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NewCaxiasUpdateInput, NewCaxiasUncheckedUpdateInput>
-  }
-
-  /**
-   * NewCaxias delete
-   */
-  export type NewCaxiasDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter which NewCaxias to delete.
-     */
-    where: NewCaxiasWhereUniqueInput
-  }
-
-  /**
-   * NewCaxias deleteMany
-   */
-  export type NewCaxiasDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewCaxias to delete
-     */
-    where?: NewCaxiasWhereInput
-    /**
-     * Limit how many NewCaxias to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewCaxias without action
-   */
-  export type NewCaxiasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewCaxias
-     */
-    select?: NewCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewCaxias
-     */
-    omit?: NewCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewCaxiasInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model MinisterioCaxias
-   */
-
-  export type AggregateMinisterioCaxias = {
-    _count: MinisterioCaxiasCountAggregateOutputType | null
-    _min: MinisterioCaxiasMinAggregateOutputType | null
-    _max: MinisterioCaxiasMaxAggregateOutputType | null
-  }
-
-  export type MinisterioCaxiasMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    name: string | null
-    title: string | null
-    local: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    coverUrl: string | null
-    updatedAt: Date | null
-  }
-
-  export type MinisterioCaxiasMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    name: string | null
-    title: string | null
-    local: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    coverUrl: string | null
-    updatedAt: Date | null
-  }
-
-  export type MinisterioCaxiasCountAggregateOutputType = {
-    id: number
-    userId: number
-    name: number
-    title: number
-    local: number
-    isPublic: number
-    createdAt: number
-    coverUrl: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type MinisterioCaxiasMinAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    title?: true
-    local?: true
-    isPublic?: true
-    createdAt?: true
-    coverUrl?: true
-    updatedAt?: true
-  }
-
-  export type MinisterioCaxiasMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    title?: true
-    local?: true
-    isPublic?: true
-    createdAt?: true
-    coverUrl?: true
-    updatedAt?: true
-  }
-
-  export type MinisterioCaxiasCountAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    title?: true
-    local?: true
-    isPublic?: true
-    createdAt?: true
-    coverUrl?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type MinisterioCaxiasAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MinisterioCaxias to aggregate.
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioCaxias to fetch.
-     */
-    orderBy?: MinisterioCaxiasOrderByWithRelationInput | MinisterioCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MinisterioCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MinisterioCaxias
-    **/
-    _count?: true | MinisterioCaxiasCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MinisterioCaxiasMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MinisterioCaxiasMaxAggregateInputType
-  }
-
-  export type GetMinisterioCaxiasAggregateType<T extends MinisterioCaxiasAggregateArgs> = {
-        [P in keyof T & keyof AggregateMinisterioCaxias]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMinisterioCaxias[P]>
-      : GetScalarType<T[P], AggregateMinisterioCaxias[P]>
-  }
-
-
-
-
-  export type MinisterioCaxiasGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MinisterioCaxiasWhereInput
-    orderBy?: MinisterioCaxiasOrderByWithAggregationInput | MinisterioCaxiasOrderByWithAggregationInput[]
-    by: MinisterioCaxiasScalarFieldEnum[] | MinisterioCaxiasScalarFieldEnum
-    having?: MinisterioCaxiasScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MinisterioCaxiasCountAggregateInputType | true
-    _min?: MinisterioCaxiasMinAggregateInputType
-    _max?: MinisterioCaxiasMaxAggregateInputType
-  }
-
-  export type MinisterioCaxiasGroupByOutputType = {
-    id: string
-    userId: string
-    name: string
-    title: string
-    local: string
-    isPublic: boolean
-    createdAt: Date
-    coverUrl: string
-    updatedAt: Date
-    _count: MinisterioCaxiasCountAggregateOutputType | null
-    _min: MinisterioCaxiasMinAggregateOutputType | null
-    _max: MinisterioCaxiasMaxAggregateOutputType | null
-  }
-
-  type GetMinisterioCaxiasGroupByPayload<T extends MinisterioCaxiasGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MinisterioCaxiasGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MinisterioCaxiasGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MinisterioCaxiasGroupByOutputType[P]>
-            : GetScalarType<T[P], MinisterioCaxiasGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MinisterioCaxiasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministerioCaxias"]>
-
-  export type MinisterioCaxiasSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministerioCaxias"]>
-
-  export type MinisterioCaxiasSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministerioCaxias"]>
-
-  export type MinisterioCaxiasSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    title?: boolean
-    local?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    coverUrl?: boolean
-    updatedAt?: boolean
-  }
-
-  export type MinisterioCaxiasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title" | "local" | "isPublic" | "createdAt" | "coverUrl" | "updatedAt", ExtArgs["result"]["ministerioCaxias"]>
-  export type MinisterioCaxiasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type MinisterioCaxiasIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type MinisterioCaxiasIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $MinisterioCaxiasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MinisterioCaxias"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      name: string
-      title: string
-      local: string
-      isPublic: boolean
-      createdAt: Date
-      coverUrl: string
-      updatedAt: Date
-    }, ExtArgs["result"]["ministerioCaxias"]>
-    composites: {}
-  }
-
-  type MinisterioCaxiasGetPayload<S extends boolean | null | undefined | MinisterioCaxiasDefaultArgs> = $Result.GetResult<Prisma.$MinisterioCaxiasPayload, S>
-
-  type MinisterioCaxiasCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MinisterioCaxiasFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MinisterioCaxiasCountAggregateInputType | true
-    }
-
-  export interface MinisterioCaxiasDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MinisterioCaxias'], meta: { name: 'MinisterioCaxias' } }
-    /**
-     * Find zero or one MinisterioCaxias that matches the filter.
-     * @param {MinisterioCaxiasFindUniqueArgs} args - Arguments to find a MinisterioCaxias
-     * @example
-     * // Get one MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MinisterioCaxiasFindUniqueArgs>(args: SelectSubset<T, MinisterioCaxiasFindUniqueArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one MinisterioCaxias that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {MinisterioCaxiasFindUniqueOrThrowArgs} args - Arguments to find a MinisterioCaxias
-     * @example
-     * // Get one MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MinisterioCaxiasFindUniqueOrThrowArgs>(args: SelectSubset<T, MinisterioCaxiasFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MinisterioCaxias that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasFindFirstArgs} args - Arguments to find a MinisterioCaxias
-     * @example
-     * // Get one MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MinisterioCaxiasFindFirstArgs>(args?: SelectSubset<T, MinisterioCaxiasFindFirstArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MinisterioCaxias that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasFindFirstOrThrowArgs} args - Arguments to find a MinisterioCaxias
-     * @example
-     * // Get one MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MinisterioCaxiasFindFirstOrThrowArgs>(args?: SelectSubset<T, MinisterioCaxiasFindFirstOrThrowArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more MinisterioCaxias that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.findMany()
-     * 
-     * // Get first 10 MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const ministerioCaxiasWithIdOnly = await prisma.ministerioCaxias.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MinisterioCaxiasFindManyArgs>(args?: SelectSubset<T, MinisterioCaxiasFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a MinisterioCaxias.
-     * @param {MinisterioCaxiasCreateArgs} args - Arguments to create a MinisterioCaxias.
-     * @example
-     * // Create one MinisterioCaxias
-     * const MinisterioCaxias = await prisma.ministerioCaxias.create({
-     *   data: {
-     *     // ... data to create a MinisterioCaxias
-     *   }
-     * })
-     * 
-     */
-    create<T extends MinisterioCaxiasCreateArgs>(args: SelectSubset<T, MinisterioCaxiasCreateArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many MinisterioCaxias.
-     * @param {MinisterioCaxiasCreateManyArgs} args - Arguments to create many MinisterioCaxias.
-     * @example
-     * // Create many MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MinisterioCaxiasCreateManyArgs>(args?: SelectSubset<T, MinisterioCaxiasCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MinisterioCaxias and returns the data saved in the database.
-     * @param {MinisterioCaxiasCreateManyAndReturnArgs} args - Arguments to create many MinisterioCaxias.
-     * @example
-     * // Create many MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MinisterioCaxias and only return the `id`
-     * const ministerioCaxiasWithIdOnly = await prisma.ministerioCaxias.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MinisterioCaxiasCreateManyAndReturnArgs>(args?: SelectSubset<T, MinisterioCaxiasCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a MinisterioCaxias.
-     * @param {MinisterioCaxiasDeleteArgs} args - Arguments to delete one MinisterioCaxias.
-     * @example
-     * // Delete one MinisterioCaxias
-     * const MinisterioCaxias = await prisma.ministerioCaxias.delete({
-     *   where: {
-     *     // ... filter to delete one MinisterioCaxias
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MinisterioCaxiasDeleteArgs>(args: SelectSubset<T, MinisterioCaxiasDeleteArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one MinisterioCaxias.
-     * @param {MinisterioCaxiasUpdateArgs} args - Arguments to update one MinisterioCaxias.
-     * @example
-     * // Update one MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MinisterioCaxiasUpdateArgs>(args: SelectSubset<T, MinisterioCaxiasUpdateArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more MinisterioCaxias.
-     * @param {MinisterioCaxiasDeleteManyArgs} args - Arguments to filter MinisterioCaxias to delete.
-     * @example
-     * // Delete a few MinisterioCaxias
-     * const { count } = await prisma.ministerioCaxias.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MinisterioCaxiasDeleteManyArgs>(args?: SelectSubset<T, MinisterioCaxiasDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MinisterioCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MinisterioCaxiasUpdateManyArgs>(args: SelectSubset<T, MinisterioCaxiasUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MinisterioCaxias and returns the data updated in the database.
-     * @param {MinisterioCaxiasUpdateManyAndReturnArgs} args - Arguments to update many MinisterioCaxias.
-     * @example
-     * // Update many MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more MinisterioCaxias and only return the `id`
-     * const ministerioCaxiasWithIdOnly = await prisma.ministerioCaxias.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends MinisterioCaxiasUpdateManyAndReturnArgs>(args: SelectSubset<T, MinisterioCaxiasUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one MinisterioCaxias.
-     * @param {MinisterioCaxiasUpsertArgs} args - Arguments to update or create a MinisterioCaxias.
-     * @example
-     * // Update or create a MinisterioCaxias
-     * const ministerioCaxias = await prisma.ministerioCaxias.upsert({
-     *   create: {
-     *     // ... data to create a MinisterioCaxias
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MinisterioCaxias we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MinisterioCaxiasUpsertArgs>(args: SelectSubset<T, MinisterioCaxiasUpsertArgs<ExtArgs>>): Prisma__MinisterioCaxiasClient<$Result.GetResult<Prisma.$MinisterioCaxiasPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of MinisterioCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasCountArgs} args - Arguments to filter MinisterioCaxias to count.
-     * @example
-     * // Count the number of MinisterioCaxias
-     * const count = await prisma.ministerioCaxias.count({
-     *   where: {
-     *     // ... the filter for the MinisterioCaxias we want to count
-     *   }
-     * })
-    **/
-    count<T extends MinisterioCaxiasCountArgs>(
-      args?: Subset<T, MinisterioCaxiasCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MinisterioCaxiasCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MinisterioCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MinisterioCaxiasAggregateArgs>(args: Subset<T, MinisterioCaxiasAggregateArgs>): Prisma.PrismaPromise<GetMinisterioCaxiasAggregateType<T>>
-
-    /**
-     * Group by MinisterioCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinisterioCaxiasGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MinisterioCaxiasGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MinisterioCaxiasGroupByArgs['orderBy'] }
-        : { orderBy?: MinisterioCaxiasGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MinisterioCaxiasGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMinisterioCaxiasGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MinisterioCaxias model
-   */
-  readonly fields: MinisterioCaxiasFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MinisterioCaxias.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MinisterioCaxiasClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MinisterioCaxias model
-   */
-  interface MinisterioCaxiasFieldRefs {
-    readonly id: FieldRef<"MinisterioCaxias", 'String'>
-    readonly userId: FieldRef<"MinisterioCaxias", 'String'>
-    readonly name: FieldRef<"MinisterioCaxias", 'String'>
-    readonly title: FieldRef<"MinisterioCaxias", 'String'>
-    readonly local: FieldRef<"MinisterioCaxias", 'String'>
-    readonly isPublic: FieldRef<"MinisterioCaxias", 'Boolean'>
-    readonly createdAt: FieldRef<"MinisterioCaxias", 'DateTime'>
-    readonly coverUrl: FieldRef<"MinisterioCaxias", 'String'>
-    readonly updatedAt: FieldRef<"MinisterioCaxias", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MinisterioCaxias findUnique
-   */
-  export type MinisterioCaxiasFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioCaxias to fetch.
-     */
-    where: MinisterioCaxiasWhereUniqueInput
-  }
-
-  /**
-   * MinisterioCaxias findUniqueOrThrow
-   */
-  export type MinisterioCaxiasFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioCaxias to fetch.
-     */
-    where: MinisterioCaxiasWhereUniqueInput
-  }
-
-  /**
-   * MinisterioCaxias findFirst
-   */
-  export type MinisterioCaxiasFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioCaxias to fetch.
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioCaxias to fetch.
-     */
-    orderBy?: MinisterioCaxiasOrderByWithRelationInput | MinisterioCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MinisterioCaxias.
-     */
-    cursor?: MinisterioCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MinisterioCaxias.
-     */
-    distinct?: MinisterioCaxiasScalarFieldEnum | MinisterioCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * MinisterioCaxias findFirstOrThrow
-   */
-  export type MinisterioCaxiasFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioCaxias to fetch.
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioCaxias to fetch.
-     */
-    orderBy?: MinisterioCaxiasOrderByWithRelationInput | MinisterioCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MinisterioCaxias.
-     */
-    cursor?: MinisterioCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MinisterioCaxias.
-     */
-    distinct?: MinisterioCaxiasScalarFieldEnum | MinisterioCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * MinisterioCaxias findMany
-   */
-  export type MinisterioCaxiasFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which MinisterioCaxias to fetch.
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MinisterioCaxias to fetch.
-     */
-    orderBy?: MinisterioCaxiasOrderByWithRelationInput | MinisterioCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MinisterioCaxias.
-     */
-    cursor?: MinisterioCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MinisterioCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MinisterioCaxias.
-     */
-    skip?: number
-    distinct?: MinisterioCaxiasScalarFieldEnum | MinisterioCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * MinisterioCaxias create
-   */
-  export type MinisterioCaxiasCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MinisterioCaxias.
-     */
-    data: XOR<MinisterioCaxiasCreateInput, MinisterioCaxiasUncheckedCreateInput>
-  }
-
-  /**
-   * MinisterioCaxias createMany
-   */
-  export type MinisterioCaxiasCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MinisterioCaxias.
-     */
-    data: MinisterioCaxiasCreateManyInput | MinisterioCaxiasCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MinisterioCaxias createManyAndReturn
-   */
-  export type MinisterioCaxiasCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * The data used to create many MinisterioCaxias.
-     */
-    data: MinisterioCaxiasCreateManyInput | MinisterioCaxiasCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MinisterioCaxias update
-   */
-  export type MinisterioCaxiasUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MinisterioCaxias.
-     */
-    data: XOR<MinisterioCaxiasUpdateInput, MinisterioCaxiasUncheckedUpdateInput>
-    /**
-     * Choose, which MinisterioCaxias to update.
-     */
-    where: MinisterioCaxiasWhereUniqueInput
-  }
-
-  /**
-   * MinisterioCaxias updateMany
-   */
-  export type MinisterioCaxiasUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MinisterioCaxias.
-     */
-    data: XOR<MinisterioCaxiasUpdateManyMutationInput, MinisterioCaxiasUncheckedUpdateManyInput>
-    /**
-     * Filter which MinisterioCaxias to update
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * Limit how many MinisterioCaxias to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * MinisterioCaxias updateManyAndReturn
-   */
-  export type MinisterioCaxiasUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * The data used to update MinisterioCaxias.
-     */
-    data: XOR<MinisterioCaxiasUpdateManyMutationInput, MinisterioCaxiasUncheckedUpdateManyInput>
-    /**
-     * Filter which MinisterioCaxias to update
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * Limit how many MinisterioCaxias to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MinisterioCaxias upsert
-   */
-  export type MinisterioCaxiasUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MinisterioCaxias to update in case it exists.
-     */
-    where: MinisterioCaxiasWhereUniqueInput
-    /**
-     * In case the MinisterioCaxias found by the `where` argument doesn't exist, create a new MinisterioCaxias with this data.
-     */
-    create: XOR<MinisterioCaxiasCreateInput, MinisterioCaxiasUncheckedCreateInput>
-    /**
-     * In case the MinisterioCaxias was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MinisterioCaxiasUpdateInput, MinisterioCaxiasUncheckedUpdateInput>
-  }
-
-  /**
-   * MinisterioCaxias delete
-   */
-  export type MinisterioCaxiasDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter which MinisterioCaxias to delete.
-     */
-    where: MinisterioCaxiasWhereUniqueInput
-  }
-
-  /**
-   * MinisterioCaxias deleteMany
-   */
-  export type MinisterioCaxiasDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MinisterioCaxias to delete
-     */
-    where?: MinisterioCaxiasWhereInput
-    /**
-     * Limit how many MinisterioCaxias to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * MinisterioCaxias without action
-   */
-  export type MinisterioCaxiasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinisterioCaxias
-     */
-    select?: MinisterioCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MinisterioCaxias
-     */
-    omit?: MinisterioCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MinisterioCaxiasInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model AgendaCaxias
-   */
-
-  export type AggregateAgendaCaxias = {
-    _count: AgendaCaxiasCountAggregateOutputType | null
-    _min: AgendaCaxiasMinAggregateOutputType | null
-    _max: AgendaCaxiasMaxAggregateOutputType | null
-  }
-
-  export type AgendaCaxiasMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    day: string | null
-    name: string | null
-    hour: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    destaque: boolean | null
-  }
-
-  export type AgendaCaxiasMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    day: string | null
-    name: string | null
-    hour: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    destaque: boolean | null
-  }
-
-  export type AgendaCaxiasCountAggregateOutputType = {
-    id: number
-    userId: number
-    day: number
-    name: number
-    hour: number
-    isPublic: number
-    createdAt: number
-    updatedAt: number
-    destaque: number
-    _all: number
-  }
-
-
-  export type AgendaCaxiasMinAggregateInputType = {
-    id?: true
-    userId?: true
-    day?: true
-    name?: true
-    hour?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    destaque?: true
-  }
-
-  export type AgendaCaxiasMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    day?: true
-    name?: true
-    hour?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    destaque?: true
-  }
-
-  export type AgendaCaxiasCountAggregateInputType = {
-    id?: true
-    userId?: true
-    day?: true
-    name?: true
-    hour?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    destaque?: true
-    _all?: true
-  }
-
-  export type AgendaCaxiasAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AgendaCaxias to aggregate.
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaCaxias to fetch.
-     */
-    orderBy?: AgendaCaxiasOrderByWithRelationInput | AgendaCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AgendaCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned AgendaCaxias
-    **/
-    _count?: true | AgendaCaxiasCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AgendaCaxiasMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AgendaCaxiasMaxAggregateInputType
-  }
-
-  export type GetAgendaCaxiasAggregateType<T extends AgendaCaxiasAggregateArgs> = {
-        [P in keyof T & keyof AggregateAgendaCaxias]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAgendaCaxias[P]>
-      : GetScalarType<T[P], AggregateAgendaCaxias[P]>
-  }
-
-
-
-
-  export type AgendaCaxiasGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AgendaCaxiasWhereInput
-    orderBy?: AgendaCaxiasOrderByWithAggregationInput | AgendaCaxiasOrderByWithAggregationInput[]
-    by: AgendaCaxiasScalarFieldEnum[] | AgendaCaxiasScalarFieldEnum
-    having?: AgendaCaxiasScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AgendaCaxiasCountAggregateInputType | true
-    _min?: AgendaCaxiasMinAggregateInputType
-    _max?: AgendaCaxiasMaxAggregateInputType
-  }
-
-  export type AgendaCaxiasGroupByOutputType = {
-    id: string
-    userId: string
-    day: string
-    name: string
-    hour: string
-    isPublic: boolean
-    createdAt: Date
-    updatedAt: Date
-    destaque: boolean
-    _count: AgendaCaxiasCountAggregateOutputType | null
-    _min: AgendaCaxiasMinAggregateOutputType | null
-    _max: AgendaCaxiasMaxAggregateOutputType | null
-  }
-
-  type GetAgendaCaxiasGroupByPayload<T extends AgendaCaxiasGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AgendaCaxiasGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AgendaCaxiasGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AgendaCaxiasGroupByOutputType[P]>
-            : GetScalarType<T[P], AgendaCaxiasGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AgendaCaxiasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["agendaCaxias"]>
-
-  export type AgendaCaxiasSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["agendaCaxias"]>
-
-  export type AgendaCaxiasSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["agendaCaxias"]>
-
-  export type AgendaCaxiasSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    day?: boolean
-    name?: boolean
-    hour?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    destaque?: boolean
-  }
-
-  export type AgendaCaxiasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "name" | "hour" | "isPublic" | "createdAt" | "updatedAt" | "destaque", ExtArgs["result"]["agendaCaxias"]>
-  export type AgendaCaxiasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type AgendaCaxiasIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type AgendaCaxiasIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $AgendaCaxiasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "AgendaCaxias"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      day: string
-      name: string
-      hour: string
-      isPublic: boolean
-      createdAt: Date
-      updatedAt: Date
-      destaque: boolean
-    }, ExtArgs["result"]["agendaCaxias"]>
-    composites: {}
-  }
-
-  type AgendaCaxiasGetPayload<S extends boolean | null | undefined | AgendaCaxiasDefaultArgs> = $Result.GetResult<Prisma.$AgendaCaxiasPayload, S>
-
-  type AgendaCaxiasCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AgendaCaxiasFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AgendaCaxiasCountAggregateInputType | true
-    }
-
-  export interface AgendaCaxiasDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AgendaCaxias'], meta: { name: 'AgendaCaxias' } }
-    /**
-     * Find zero or one AgendaCaxias that matches the filter.
-     * @param {AgendaCaxiasFindUniqueArgs} args - Arguments to find a AgendaCaxias
-     * @example
-     * // Get one AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AgendaCaxiasFindUniqueArgs>(args: SelectSubset<T, AgendaCaxiasFindUniqueArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one AgendaCaxias that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AgendaCaxiasFindUniqueOrThrowArgs} args - Arguments to find a AgendaCaxias
-     * @example
-     * // Get one AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AgendaCaxiasFindUniqueOrThrowArgs>(args: SelectSubset<T, AgendaCaxiasFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AgendaCaxias that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasFindFirstArgs} args - Arguments to find a AgendaCaxias
-     * @example
-     * // Get one AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AgendaCaxiasFindFirstArgs>(args?: SelectSubset<T, AgendaCaxiasFindFirstArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AgendaCaxias that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasFindFirstOrThrowArgs} args - Arguments to find a AgendaCaxias
-     * @example
-     * // Get one AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AgendaCaxiasFindFirstOrThrowArgs>(args?: SelectSubset<T, AgendaCaxiasFindFirstOrThrowArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more AgendaCaxias that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.findMany()
-     * 
-     * // Get first 10 AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const agendaCaxiasWithIdOnly = await prisma.agendaCaxias.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AgendaCaxiasFindManyArgs>(args?: SelectSubset<T, AgendaCaxiasFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a AgendaCaxias.
-     * @param {AgendaCaxiasCreateArgs} args - Arguments to create a AgendaCaxias.
-     * @example
-     * // Create one AgendaCaxias
-     * const AgendaCaxias = await prisma.agendaCaxias.create({
-     *   data: {
-     *     // ... data to create a AgendaCaxias
-     *   }
-     * })
-     * 
-     */
-    create<T extends AgendaCaxiasCreateArgs>(args: SelectSubset<T, AgendaCaxiasCreateArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many AgendaCaxias.
-     * @param {AgendaCaxiasCreateManyArgs} args - Arguments to create many AgendaCaxias.
-     * @example
-     * // Create many AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AgendaCaxiasCreateManyArgs>(args?: SelectSubset<T, AgendaCaxiasCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many AgendaCaxias and returns the data saved in the database.
-     * @param {AgendaCaxiasCreateManyAndReturnArgs} args - Arguments to create many AgendaCaxias.
-     * @example
-     * // Create many AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many AgendaCaxias and only return the `id`
-     * const agendaCaxiasWithIdOnly = await prisma.agendaCaxias.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AgendaCaxiasCreateManyAndReturnArgs>(args?: SelectSubset<T, AgendaCaxiasCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a AgendaCaxias.
-     * @param {AgendaCaxiasDeleteArgs} args - Arguments to delete one AgendaCaxias.
-     * @example
-     * // Delete one AgendaCaxias
-     * const AgendaCaxias = await prisma.agendaCaxias.delete({
-     *   where: {
-     *     // ... filter to delete one AgendaCaxias
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AgendaCaxiasDeleteArgs>(args: SelectSubset<T, AgendaCaxiasDeleteArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one AgendaCaxias.
-     * @param {AgendaCaxiasUpdateArgs} args - Arguments to update one AgendaCaxias.
-     * @example
-     * // Update one AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AgendaCaxiasUpdateArgs>(args: SelectSubset<T, AgendaCaxiasUpdateArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more AgendaCaxias.
-     * @param {AgendaCaxiasDeleteManyArgs} args - Arguments to filter AgendaCaxias to delete.
-     * @example
-     * // Delete a few AgendaCaxias
-     * const { count } = await prisma.agendaCaxias.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AgendaCaxiasDeleteManyArgs>(args?: SelectSubset<T, AgendaCaxiasDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AgendaCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AgendaCaxiasUpdateManyArgs>(args: SelectSubset<T, AgendaCaxiasUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AgendaCaxias and returns the data updated in the database.
-     * @param {AgendaCaxiasUpdateManyAndReturnArgs} args - Arguments to update many AgendaCaxias.
-     * @example
-     * // Update many AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more AgendaCaxias and only return the `id`
-     * const agendaCaxiasWithIdOnly = await prisma.agendaCaxias.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AgendaCaxiasUpdateManyAndReturnArgs>(args: SelectSubset<T, AgendaCaxiasUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one AgendaCaxias.
-     * @param {AgendaCaxiasUpsertArgs} args - Arguments to update or create a AgendaCaxias.
-     * @example
-     * // Update or create a AgendaCaxias
-     * const agendaCaxias = await prisma.agendaCaxias.upsert({
-     *   create: {
-     *     // ... data to create a AgendaCaxias
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the AgendaCaxias we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AgendaCaxiasUpsertArgs>(args: SelectSubset<T, AgendaCaxiasUpsertArgs<ExtArgs>>): Prisma__AgendaCaxiasClient<$Result.GetResult<Prisma.$AgendaCaxiasPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of AgendaCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasCountArgs} args - Arguments to filter AgendaCaxias to count.
-     * @example
-     * // Count the number of AgendaCaxias
-     * const count = await prisma.agendaCaxias.count({
-     *   where: {
-     *     // ... the filter for the AgendaCaxias we want to count
-     *   }
-     * })
-    **/
-    count<T extends AgendaCaxiasCountArgs>(
-      args?: Subset<T, AgendaCaxiasCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AgendaCaxiasCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a AgendaCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AgendaCaxiasAggregateArgs>(args: Subset<T, AgendaCaxiasAggregateArgs>): Prisma.PrismaPromise<GetAgendaCaxiasAggregateType<T>>
-
-    /**
-     * Group by AgendaCaxias.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AgendaCaxiasGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AgendaCaxiasGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AgendaCaxiasGroupByArgs['orderBy'] }
-        : { orderBy?: AgendaCaxiasGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AgendaCaxiasGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAgendaCaxiasGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the AgendaCaxias model
-   */
-  readonly fields: AgendaCaxiasFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for AgendaCaxias.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AgendaCaxiasClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the AgendaCaxias model
-   */
-  interface AgendaCaxiasFieldRefs {
-    readonly id: FieldRef<"AgendaCaxias", 'String'>
-    readonly userId: FieldRef<"AgendaCaxias", 'String'>
-    readonly day: FieldRef<"AgendaCaxias", 'String'>
-    readonly name: FieldRef<"AgendaCaxias", 'String'>
-    readonly hour: FieldRef<"AgendaCaxias", 'String'>
-    readonly isPublic: FieldRef<"AgendaCaxias", 'Boolean'>
-    readonly createdAt: FieldRef<"AgendaCaxias", 'DateTime'>
-    readonly updatedAt: FieldRef<"AgendaCaxias", 'DateTime'>
-    readonly destaque: FieldRef<"AgendaCaxias", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * AgendaCaxias findUnique
-   */
-  export type AgendaCaxiasFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaCaxias to fetch.
-     */
-    where: AgendaCaxiasWhereUniqueInput
-  }
-
-  /**
-   * AgendaCaxias findUniqueOrThrow
-   */
-  export type AgendaCaxiasFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaCaxias to fetch.
-     */
-    where: AgendaCaxiasWhereUniqueInput
-  }
-
-  /**
-   * AgendaCaxias findFirst
-   */
-  export type AgendaCaxiasFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaCaxias to fetch.
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaCaxias to fetch.
-     */
-    orderBy?: AgendaCaxiasOrderByWithRelationInput | AgendaCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AgendaCaxias.
-     */
-    cursor?: AgendaCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AgendaCaxias.
-     */
-    distinct?: AgendaCaxiasScalarFieldEnum | AgendaCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * AgendaCaxias findFirstOrThrow
-   */
-  export type AgendaCaxiasFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaCaxias to fetch.
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaCaxias to fetch.
-     */
-    orderBy?: AgendaCaxiasOrderByWithRelationInput | AgendaCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AgendaCaxias.
-     */
-    cursor?: AgendaCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaCaxias.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AgendaCaxias.
-     */
-    distinct?: AgendaCaxiasScalarFieldEnum | AgendaCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * AgendaCaxias findMany
-   */
-  export type AgendaCaxiasFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter, which AgendaCaxias to fetch.
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AgendaCaxias to fetch.
-     */
-    orderBy?: AgendaCaxiasOrderByWithRelationInput | AgendaCaxiasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing AgendaCaxias.
-     */
-    cursor?: AgendaCaxiasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AgendaCaxias from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AgendaCaxias.
-     */
-    skip?: number
-    distinct?: AgendaCaxiasScalarFieldEnum | AgendaCaxiasScalarFieldEnum[]
-  }
-
-  /**
-   * AgendaCaxias create
-   */
-  export type AgendaCaxiasCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * The data needed to create a AgendaCaxias.
-     */
-    data: XOR<AgendaCaxiasCreateInput, AgendaCaxiasUncheckedCreateInput>
-  }
-
-  /**
-   * AgendaCaxias createMany
-   */
-  export type AgendaCaxiasCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many AgendaCaxias.
-     */
-    data: AgendaCaxiasCreateManyInput | AgendaCaxiasCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * AgendaCaxias createManyAndReturn
-   */
-  export type AgendaCaxiasCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * The data used to create many AgendaCaxias.
-     */
-    data: AgendaCaxiasCreateManyInput | AgendaCaxiasCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * AgendaCaxias update
-   */
-  export type AgendaCaxiasUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * The data needed to update a AgendaCaxias.
-     */
-    data: XOR<AgendaCaxiasUpdateInput, AgendaCaxiasUncheckedUpdateInput>
-    /**
-     * Choose, which AgendaCaxias to update.
-     */
-    where: AgendaCaxiasWhereUniqueInput
-  }
-
-  /**
-   * AgendaCaxias updateMany
-   */
-  export type AgendaCaxiasUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update AgendaCaxias.
-     */
-    data: XOR<AgendaCaxiasUpdateManyMutationInput, AgendaCaxiasUncheckedUpdateManyInput>
-    /**
-     * Filter which AgendaCaxias to update
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * Limit how many AgendaCaxias to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * AgendaCaxias updateManyAndReturn
-   */
-  export type AgendaCaxiasUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * The data used to update AgendaCaxias.
-     */
-    data: XOR<AgendaCaxiasUpdateManyMutationInput, AgendaCaxiasUncheckedUpdateManyInput>
-    /**
-     * Filter which AgendaCaxias to update
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * Limit how many AgendaCaxias to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * AgendaCaxias upsert
-   */
-  export type AgendaCaxiasUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * The filter to search for the AgendaCaxias to update in case it exists.
-     */
-    where: AgendaCaxiasWhereUniqueInput
-    /**
-     * In case the AgendaCaxias found by the `where` argument doesn't exist, create a new AgendaCaxias with this data.
-     */
-    create: XOR<AgendaCaxiasCreateInput, AgendaCaxiasUncheckedCreateInput>
-    /**
-     * In case the AgendaCaxias was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AgendaCaxiasUpdateInput, AgendaCaxiasUncheckedUpdateInput>
-  }
-
-  /**
-   * AgendaCaxias delete
-   */
-  export type AgendaCaxiasDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
-    /**
-     * Filter which AgendaCaxias to delete.
-     */
-    where: AgendaCaxiasWhereUniqueInput
-  }
-
-  /**
-   * AgendaCaxias deleteMany
-   */
-  export type AgendaCaxiasDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AgendaCaxias to delete
-     */
-    where?: AgendaCaxiasWhereInput
-    /**
-     * Limit how many AgendaCaxias to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * AgendaCaxias without action
-   */
-  export type AgendaCaxiasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AgendaCaxias
-     */
-    select?: AgendaCaxiasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AgendaCaxias
-     */
-    omit?: AgendaCaxiasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AgendaCaxiasInclude<ExtArgs> | null
   }
 
 
@@ -22404,3232 +13426,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Testemunho
-   */
-
-  export type AggregateTestemunho = {
-    _count: TestemunhoCountAggregateOutputType | null
-    _min: TestemunhoMinAggregateOutputType | null
-    _max: TestemunhoMaxAggregateOutputType | null
-  }
-
-  export type TestemunhoMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    name: string | null
-    avatarUrl: string | null
-    content: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    isPublic: boolean | null
-    coverUrl: string | null
-  }
-
-  export type TestemunhoMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    name: string | null
-    avatarUrl: string | null
-    content: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    isPublic: boolean | null
-    coverUrl: string | null
-  }
-
-  export type TestemunhoCountAggregateOutputType = {
-    id: number
-    userId: number
-    name: number
-    avatarUrl: number
-    content: number
-    createdAt: number
-    updatedAt: number
-    isPublic: number
-    coverUrl: number
-    _all: number
-  }
-
-
-  export type TestemunhoMinAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    avatarUrl?: true
-    content?: true
-    createdAt?: true
-    updatedAt?: true
-    isPublic?: true
-    coverUrl?: true
-  }
-
-  export type TestemunhoMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    avatarUrl?: true
-    content?: true
-    createdAt?: true
-    updatedAt?: true
-    isPublic?: true
-    coverUrl?: true
-  }
-
-  export type TestemunhoCountAggregateInputType = {
-    id?: true
-    userId?: true
-    name?: true
-    avatarUrl?: true
-    content?: true
-    createdAt?: true
-    updatedAt?: true
-    isPublic?: true
-    coverUrl?: true
-    _all?: true
-  }
-
-  export type TestemunhoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Testemunho to aggregate.
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testemunhos to fetch.
-     */
-    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TestemunhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testemunhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testemunhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Testemunhos
-    **/
-    _count?: true | TestemunhoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TestemunhoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TestemunhoMaxAggregateInputType
-  }
-
-  export type GetTestemunhoAggregateType<T extends TestemunhoAggregateArgs> = {
-        [P in keyof T & keyof AggregateTestemunho]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTestemunho[P]>
-      : GetScalarType<T[P], AggregateTestemunho[P]>
-  }
-
-
-
-
-  export type TestemunhoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TestemunhoWhereInput
-    orderBy?: TestemunhoOrderByWithAggregationInput | TestemunhoOrderByWithAggregationInput[]
-    by: TestemunhoScalarFieldEnum[] | TestemunhoScalarFieldEnum
-    having?: TestemunhoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TestemunhoCountAggregateInputType | true
-    _min?: TestemunhoMinAggregateInputType
-    _max?: TestemunhoMaxAggregateInputType
-  }
-
-  export type TestemunhoGroupByOutputType = {
-    id: string
-    userId: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt: Date
-    updatedAt: Date
-    isPublic: boolean
-    coverUrl: string | null
-    _count: TestemunhoCountAggregateOutputType | null
-    _min: TestemunhoMinAggregateOutputType | null
-    _max: TestemunhoMaxAggregateOutputType | null
-  }
-
-  type GetTestemunhoGroupByPayload<T extends TestemunhoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TestemunhoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TestemunhoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TestemunhoGroupByOutputType[P]>
-            : GetScalarType<T[P], TestemunhoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TestemunhoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    content?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    isPublic?: boolean
-    coverUrl?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["testemunho"]>
-
-  export type TestemunhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    content?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    isPublic?: boolean
-    coverUrl?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["testemunho"]>
-
-  export type TestemunhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    content?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    isPublic?: boolean
-    coverUrl?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["testemunho"]>
-
-  export type TestemunhoSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    name?: boolean
-    avatarUrl?: boolean
-    content?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    isPublic?: boolean
-    coverUrl?: boolean
-  }
-
-  export type TestemunhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "avatarUrl" | "content" | "createdAt" | "updatedAt" | "isPublic" | "coverUrl", ExtArgs["result"]["testemunho"]>
-  export type TestemunhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-  export type TestemunhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-  export type TestemunhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-
-  export type $TestemunhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Testemunho"
-    objects: {
-      userIgreja: Prisma.$UserIgrejaPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      name: string
-      avatarUrl: string
-      content: string
-      createdAt: Date
-      updatedAt: Date
-      isPublic: boolean
-      coverUrl: string | null
-    }, ExtArgs["result"]["testemunho"]>
-    composites: {}
-  }
-
-  type TestemunhoGetPayload<S extends boolean | null | undefined | TestemunhoDefaultArgs> = $Result.GetResult<Prisma.$TestemunhoPayload, S>
-
-  type TestemunhoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TestemunhoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TestemunhoCountAggregateInputType | true
-    }
-
-  export interface TestemunhoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Testemunho'], meta: { name: 'Testemunho' } }
-    /**
-     * Find zero or one Testemunho that matches the filter.
-     * @param {TestemunhoFindUniqueArgs} args - Arguments to find a Testemunho
-     * @example
-     * // Get one Testemunho
-     * const testemunho = await prisma.testemunho.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TestemunhoFindUniqueArgs>(args: SelectSubset<T, TestemunhoFindUniqueArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Testemunho that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TestemunhoFindUniqueOrThrowArgs} args - Arguments to find a Testemunho
-     * @example
-     * // Get one Testemunho
-     * const testemunho = await prisma.testemunho.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TestemunhoFindUniqueOrThrowArgs>(args: SelectSubset<T, TestemunhoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Testemunho that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoFindFirstArgs} args - Arguments to find a Testemunho
-     * @example
-     * // Get one Testemunho
-     * const testemunho = await prisma.testemunho.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TestemunhoFindFirstArgs>(args?: SelectSubset<T, TestemunhoFindFirstArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Testemunho that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoFindFirstOrThrowArgs} args - Arguments to find a Testemunho
-     * @example
-     * // Get one Testemunho
-     * const testemunho = await prisma.testemunho.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TestemunhoFindFirstOrThrowArgs>(args?: SelectSubset<T, TestemunhoFindFirstOrThrowArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Testemunhos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Testemunhos
-     * const testemunhos = await prisma.testemunho.findMany()
-     * 
-     * // Get first 10 Testemunhos
-     * const testemunhos = await prisma.testemunho.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const testemunhoWithIdOnly = await prisma.testemunho.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TestemunhoFindManyArgs>(args?: SelectSubset<T, TestemunhoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Testemunho.
-     * @param {TestemunhoCreateArgs} args - Arguments to create a Testemunho.
-     * @example
-     * // Create one Testemunho
-     * const Testemunho = await prisma.testemunho.create({
-     *   data: {
-     *     // ... data to create a Testemunho
-     *   }
-     * })
-     * 
-     */
-    create<T extends TestemunhoCreateArgs>(args: SelectSubset<T, TestemunhoCreateArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Testemunhos.
-     * @param {TestemunhoCreateManyArgs} args - Arguments to create many Testemunhos.
-     * @example
-     * // Create many Testemunhos
-     * const testemunho = await prisma.testemunho.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TestemunhoCreateManyArgs>(args?: SelectSubset<T, TestemunhoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Testemunhos and returns the data saved in the database.
-     * @param {TestemunhoCreateManyAndReturnArgs} args - Arguments to create many Testemunhos.
-     * @example
-     * // Create many Testemunhos
-     * const testemunho = await prisma.testemunho.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Testemunhos and only return the `id`
-     * const testemunhoWithIdOnly = await prisma.testemunho.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TestemunhoCreateManyAndReturnArgs>(args?: SelectSubset<T, TestemunhoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Testemunho.
-     * @param {TestemunhoDeleteArgs} args - Arguments to delete one Testemunho.
-     * @example
-     * // Delete one Testemunho
-     * const Testemunho = await prisma.testemunho.delete({
-     *   where: {
-     *     // ... filter to delete one Testemunho
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TestemunhoDeleteArgs>(args: SelectSubset<T, TestemunhoDeleteArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Testemunho.
-     * @param {TestemunhoUpdateArgs} args - Arguments to update one Testemunho.
-     * @example
-     * // Update one Testemunho
-     * const testemunho = await prisma.testemunho.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TestemunhoUpdateArgs>(args: SelectSubset<T, TestemunhoUpdateArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Testemunhos.
-     * @param {TestemunhoDeleteManyArgs} args - Arguments to filter Testemunhos to delete.
-     * @example
-     * // Delete a few Testemunhos
-     * const { count } = await prisma.testemunho.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TestemunhoDeleteManyArgs>(args?: SelectSubset<T, TestemunhoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Testemunhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Testemunhos
-     * const testemunho = await prisma.testemunho.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TestemunhoUpdateManyArgs>(args: SelectSubset<T, TestemunhoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Testemunhos and returns the data updated in the database.
-     * @param {TestemunhoUpdateManyAndReturnArgs} args - Arguments to update many Testemunhos.
-     * @example
-     * // Update many Testemunhos
-     * const testemunho = await prisma.testemunho.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Testemunhos and only return the `id`
-     * const testemunhoWithIdOnly = await prisma.testemunho.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TestemunhoUpdateManyAndReturnArgs>(args: SelectSubset<T, TestemunhoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Testemunho.
-     * @param {TestemunhoUpsertArgs} args - Arguments to update or create a Testemunho.
-     * @example
-     * // Update or create a Testemunho
-     * const testemunho = await prisma.testemunho.upsert({
-     *   create: {
-     *     // ... data to create a Testemunho
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Testemunho we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TestemunhoUpsertArgs>(args: SelectSubset<T, TestemunhoUpsertArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Testemunhos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoCountArgs} args - Arguments to filter Testemunhos to count.
-     * @example
-     * // Count the number of Testemunhos
-     * const count = await prisma.testemunho.count({
-     *   where: {
-     *     // ... the filter for the Testemunhos we want to count
-     *   }
-     * })
-    **/
-    count<T extends TestemunhoCountArgs>(
-      args?: Subset<T, TestemunhoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TestemunhoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Testemunho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TestemunhoAggregateArgs>(args: Subset<T, TestemunhoAggregateArgs>): Prisma.PrismaPromise<GetTestemunhoAggregateType<T>>
-
-    /**
-     * Group by Testemunho.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestemunhoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TestemunhoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TestemunhoGroupByArgs['orderBy'] }
-        : { orderBy?: TestemunhoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TestemunhoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestemunhoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Testemunho model
-   */
-  readonly fields: TestemunhoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Testemunho.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TestemunhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    userIgreja<T extends UserIgrejaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserIgrejaDefaultArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Testemunho model
-   */
-  interface TestemunhoFieldRefs {
-    readonly id: FieldRef<"Testemunho", 'String'>
-    readonly userId: FieldRef<"Testemunho", 'String'>
-    readonly name: FieldRef<"Testemunho", 'String'>
-    readonly avatarUrl: FieldRef<"Testemunho", 'String'>
-    readonly content: FieldRef<"Testemunho", 'String'>
-    readonly createdAt: FieldRef<"Testemunho", 'DateTime'>
-    readonly updatedAt: FieldRef<"Testemunho", 'DateTime'>
-    readonly isPublic: FieldRef<"Testemunho", 'Boolean'>
-    readonly coverUrl: FieldRef<"Testemunho", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Testemunho findUnique
-   */
-  export type TestemunhoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * Filter, which Testemunho to fetch.
-     */
-    where: TestemunhoWhereUniqueInput
-  }
-
-  /**
-   * Testemunho findUniqueOrThrow
-   */
-  export type TestemunhoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * Filter, which Testemunho to fetch.
-     */
-    where: TestemunhoWhereUniqueInput
-  }
-
-  /**
-   * Testemunho findFirst
-   */
-  export type TestemunhoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * Filter, which Testemunho to fetch.
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testemunhos to fetch.
-     */
-    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Testemunhos.
-     */
-    cursor?: TestemunhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testemunhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testemunhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Testemunhos.
-     */
-    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
-  }
-
-  /**
-   * Testemunho findFirstOrThrow
-   */
-  export type TestemunhoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * Filter, which Testemunho to fetch.
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testemunhos to fetch.
-     */
-    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Testemunhos.
-     */
-    cursor?: TestemunhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testemunhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testemunhos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Testemunhos.
-     */
-    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
-  }
-
-  /**
-   * Testemunho findMany
-   */
-  export type TestemunhoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * Filter, which Testemunhos to fetch.
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testemunhos to fetch.
-     */
-    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Testemunhos.
-     */
-    cursor?: TestemunhoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testemunhos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testemunhos.
-     */
-    skip?: number
-    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
-  }
-
-  /**
-   * Testemunho create
-   */
-  export type TestemunhoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Testemunho.
-     */
-    data: XOR<TestemunhoCreateInput, TestemunhoUncheckedCreateInput>
-  }
-
-  /**
-   * Testemunho createMany
-   */
-  export type TestemunhoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Testemunhos.
-     */
-    data: TestemunhoCreateManyInput | TestemunhoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Testemunho createManyAndReturn
-   */
-  export type TestemunhoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * The data used to create many Testemunhos.
-     */
-    data: TestemunhoCreateManyInput | TestemunhoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Testemunho update
-   */
-  export type TestemunhoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Testemunho.
-     */
-    data: XOR<TestemunhoUpdateInput, TestemunhoUncheckedUpdateInput>
-    /**
-     * Choose, which Testemunho to update.
-     */
-    where: TestemunhoWhereUniqueInput
-  }
-
-  /**
-   * Testemunho updateMany
-   */
-  export type TestemunhoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Testemunhos.
-     */
-    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyInput>
-    /**
-     * Filter which Testemunhos to update
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * Limit how many Testemunhos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Testemunho updateManyAndReturn
-   */
-  export type TestemunhoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * The data used to update Testemunhos.
-     */
-    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyInput>
-    /**
-     * Filter which Testemunhos to update
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * Limit how many Testemunhos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Testemunho upsert
-   */
-  export type TestemunhoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Testemunho to update in case it exists.
-     */
-    where: TestemunhoWhereUniqueInput
-    /**
-     * In case the Testemunho found by the `where` argument doesn't exist, create a new Testemunho with this data.
-     */
-    create: XOR<TestemunhoCreateInput, TestemunhoUncheckedCreateInput>
-    /**
-     * In case the Testemunho was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TestemunhoUpdateInput, TestemunhoUncheckedUpdateInput>
-  }
-
-  /**
-   * Testemunho delete
-   */
-  export type TestemunhoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-    /**
-     * Filter which Testemunho to delete.
-     */
-    where: TestemunhoWhereUniqueInput
-  }
-
-  /**
-   * Testemunho deleteMany
-   */
-  export type TestemunhoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Testemunhos to delete
-     */
-    where?: TestemunhoWhereInput
-    /**
-     * Limit how many Testemunhos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Testemunho without action
-   */
-  export type TestemunhoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testemunho
-     */
-    select?: TestemunhoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testemunho
-     */
-    omit?: TestemunhoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TestemunhoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model RefreshTokenIgreja
-   */
-
-  export type AggregateRefreshTokenIgreja = {
-    _count: RefreshTokenIgrejaCountAggregateOutputType | null
-    _min: RefreshTokenIgrejaMinAggregateOutputType | null
-    _max: RefreshTokenIgrejaMaxAggregateOutputType | null
-  }
-
-  export type RefreshTokenIgrejaMinAggregateOutputType = {
-    id: string | null
-    token: string | null
-    userId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type RefreshTokenIgrejaMaxAggregateOutputType = {
-    id: string | null
-    token: string | null
-    userId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type RefreshTokenIgrejaCountAggregateOutputType = {
-    id: number
-    token: number
-    userId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type RefreshTokenIgrejaMinAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type RefreshTokenIgrejaMaxAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type RefreshTokenIgrejaCountAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type RefreshTokenIgrejaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which RefreshTokenIgreja to aggregate.
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of RefreshTokenIgrejas to fetch.
-     */
-    orderBy?: RefreshTokenIgrejaOrderByWithRelationInput | RefreshTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: RefreshTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` RefreshTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` RefreshTokenIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned RefreshTokenIgrejas
-    **/
-    _count?: true | RefreshTokenIgrejaCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: RefreshTokenIgrejaMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: RefreshTokenIgrejaMaxAggregateInputType
-  }
-
-  export type GetRefreshTokenIgrejaAggregateType<T extends RefreshTokenIgrejaAggregateArgs> = {
-        [P in keyof T & keyof AggregateRefreshTokenIgreja]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateRefreshTokenIgreja[P]>
-      : GetScalarType<T[P], AggregateRefreshTokenIgreja[P]>
-  }
-
-
-
-
-  export type RefreshTokenIgrejaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RefreshTokenIgrejaWhereInput
-    orderBy?: RefreshTokenIgrejaOrderByWithAggregationInput | RefreshTokenIgrejaOrderByWithAggregationInput[]
-    by: RefreshTokenIgrejaScalarFieldEnum[] | RefreshTokenIgrejaScalarFieldEnum
-    having?: RefreshTokenIgrejaScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: RefreshTokenIgrejaCountAggregateInputType | true
-    _min?: RefreshTokenIgrejaMinAggregateInputType
-    _max?: RefreshTokenIgrejaMaxAggregateInputType
-  }
-
-  export type RefreshTokenIgrejaGroupByOutputType = {
-    id: string
-    token: string
-    userId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: RefreshTokenIgrejaCountAggregateOutputType | null
-    _min: RefreshTokenIgrejaMinAggregateOutputType | null
-    _max: RefreshTokenIgrejaMaxAggregateOutputType | null
-  }
-
-  type GetRefreshTokenIgrejaGroupByPayload<T extends RefreshTokenIgrejaGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<RefreshTokenIgrejaGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof RefreshTokenIgrejaGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], RefreshTokenIgrejaGroupByOutputType[P]>
-            : GetScalarType<T[P], RefreshTokenIgrejaGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type RefreshTokenIgrejaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshTokenIgreja"]>
-
-  export type RefreshTokenIgrejaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshTokenIgreja"]>
-
-  export type RefreshTokenIgrejaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshTokenIgreja"]>
-
-  export type RefreshTokenIgrejaSelectScalar = {
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type RefreshTokenIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["refreshTokenIgreja"]>
-  export type RefreshTokenIgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-  export type RefreshTokenIgrejaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-  export type RefreshTokenIgrejaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-
-  export type $RefreshTokenIgrejaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "RefreshTokenIgreja"
-    objects: {
-      userIgreja: Prisma.$UserIgrejaPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      token: string
-      userId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["refreshTokenIgreja"]>
-    composites: {}
-  }
-
-  type RefreshTokenIgrejaGetPayload<S extends boolean | null | undefined | RefreshTokenIgrejaDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenIgrejaPayload, S>
-
-  type RefreshTokenIgrejaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<RefreshTokenIgrejaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: RefreshTokenIgrejaCountAggregateInputType | true
-    }
-
-  export interface RefreshTokenIgrejaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefreshTokenIgreja'], meta: { name: 'RefreshTokenIgreja' } }
-    /**
-     * Find zero or one RefreshTokenIgreja that matches the filter.
-     * @param {RefreshTokenIgrejaFindUniqueArgs} args - Arguments to find a RefreshTokenIgreja
-     * @example
-     * // Get one RefreshTokenIgreja
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends RefreshTokenIgrejaFindUniqueArgs>(args: SelectSubset<T, RefreshTokenIgrejaFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one RefreshTokenIgreja that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {RefreshTokenIgrejaFindUniqueOrThrowArgs} args - Arguments to find a RefreshTokenIgreja
-     * @example
-     * // Get one RefreshTokenIgreja
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends RefreshTokenIgrejaFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenIgrejaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first RefreshTokenIgreja that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaFindFirstArgs} args - Arguments to find a RefreshTokenIgreja
-     * @example
-     * // Get one RefreshTokenIgreja
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends RefreshTokenIgrejaFindFirstArgs>(args?: SelectSubset<T, RefreshTokenIgrejaFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first RefreshTokenIgreja that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaFindFirstOrThrowArgs} args - Arguments to find a RefreshTokenIgreja
-     * @example
-     * // Get one RefreshTokenIgreja
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends RefreshTokenIgrejaFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenIgrejaFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more RefreshTokenIgrejas that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all RefreshTokenIgrejas
-     * const refreshTokenIgrejas = await prisma.refreshTokenIgreja.findMany()
-     * 
-     * // Get first 10 RefreshTokenIgrejas
-     * const refreshTokenIgrejas = await prisma.refreshTokenIgreja.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const refreshTokenIgrejaWithIdOnly = await prisma.refreshTokenIgreja.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends RefreshTokenIgrejaFindManyArgs>(args?: SelectSubset<T, RefreshTokenIgrejaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a RefreshTokenIgreja.
-     * @param {RefreshTokenIgrejaCreateArgs} args - Arguments to create a RefreshTokenIgreja.
-     * @example
-     * // Create one RefreshTokenIgreja
-     * const RefreshTokenIgreja = await prisma.refreshTokenIgreja.create({
-     *   data: {
-     *     // ... data to create a RefreshTokenIgreja
-     *   }
-     * })
-     * 
-     */
-    create<T extends RefreshTokenIgrejaCreateArgs>(args: SelectSubset<T, RefreshTokenIgrejaCreateArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many RefreshTokenIgrejas.
-     * @param {RefreshTokenIgrejaCreateManyArgs} args - Arguments to create many RefreshTokenIgrejas.
-     * @example
-     * // Create many RefreshTokenIgrejas
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends RefreshTokenIgrejaCreateManyArgs>(args?: SelectSubset<T, RefreshTokenIgrejaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many RefreshTokenIgrejas and returns the data saved in the database.
-     * @param {RefreshTokenIgrejaCreateManyAndReturnArgs} args - Arguments to create many RefreshTokenIgrejas.
-     * @example
-     * // Create many RefreshTokenIgrejas
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many RefreshTokenIgrejas and only return the `id`
-     * const refreshTokenIgrejaWithIdOnly = await prisma.refreshTokenIgreja.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends RefreshTokenIgrejaCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenIgrejaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a RefreshTokenIgreja.
-     * @param {RefreshTokenIgrejaDeleteArgs} args - Arguments to delete one RefreshTokenIgreja.
-     * @example
-     * // Delete one RefreshTokenIgreja
-     * const RefreshTokenIgreja = await prisma.refreshTokenIgreja.delete({
-     *   where: {
-     *     // ... filter to delete one RefreshTokenIgreja
-     *   }
-     * })
-     * 
-     */
-    delete<T extends RefreshTokenIgrejaDeleteArgs>(args: SelectSubset<T, RefreshTokenIgrejaDeleteArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one RefreshTokenIgreja.
-     * @param {RefreshTokenIgrejaUpdateArgs} args - Arguments to update one RefreshTokenIgreja.
-     * @example
-     * // Update one RefreshTokenIgreja
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends RefreshTokenIgrejaUpdateArgs>(args: SelectSubset<T, RefreshTokenIgrejaUpdateArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more RefreshTokenIgrejas.
-     * @param {RefreshTokenIgrejaDeleteManyArgs} args - Arguments to filter RefreshTokenIgrejas to delete.
-     * @example
-     * // Delete a few RefreshTokenIgrejas
-     * const { count } = await prisma.refreshTokenIgreja.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends RefreshTokenIgrejaDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenIgrejaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more RefreshTokenIgrejas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many RefreshTokenIgrejas
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends RefreshTokenIgrejaUpdateManyArgs>(args: SelectSubset<T, RefreshTokenIgrejaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more RefreshTokenIgrejas and returns the data updated in the database.
-     * @param {RefreshTokenIgrejaUpdateManyAndReturnArgs} args - Arguments to update many RefreshTokenIgrejas.
-     * @example
-     * // Update many RefreshTokenIgrejas
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more RefreshTokenIgrejas and only return the `id`
-     * const refreshTokenIgrejaWithIdOnly = await prisma.refreshTokenIgreja.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends RefreshTokenIgrejaUpdateManyAndReturnArgs>(args: SelectSubset<T, RefreshTokenIgrejaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one RefreshTokenIgreja.
-     * @param {RefreshTokenIgrejaUpsertArgs} args - Arguments to update or create a RefreshTokenIgreja.
-     * @example
-     * // Update or create a RefreshTokenIgreja
-     * const refreshTokenIgreja = await prisma.refreshTokenIgreja.upsert({
-     *   create: {
-     *     // ... data to create a RefreshTokenIgreja
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the RefreshTokenIgreja we want to update
-     *   }
-     * })
-     */
-    upsert<T extends RefreshTokenIgrejaUpsertArgs>(args: SelectSubset<T, RefreshTokenIgrejaUpsertArgs<ExtArgs>>): Prisma__RefreshTokenIgrejaClient<$Result.GetResult<Prisma.$RefreshTokenIgrejaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of RefreshTokenIgrejas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaCountArgs} args - Arguments to filter RefreshTokenIgrejas to count.
-     * @example
-     * // Count the number of RefreshTokenIgrejas
-     * const count = await prisma.refreshTokenIgreja.count({
-     *   where: {
-     *     // ... the filter for the RefreshTokenIgrejas we want to count
-     *   }
-     * })
-    **/
-    count<T extends RefreshTokenIgrejaCountArgs>(
-      args?: Subset<T, RefreshTokenIgrejaCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], RefreshTokenIgrejaCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a RefreshTokenIgreja.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends RefreshTokenIgrejaAggregateArgs>(args: Subset<T, RefreshTokenIgrejaAggregateArgs>): Prisma.PrismaPromise<GetRefreshTokenIgrejaAggregateType<T>>
-
-    /**
-     * Group by RefreshTokenIgreja.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenIgrejaGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends RefreshTokenIgrejaGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: RefreshTokenIgrejaGroupByArgs['orderBy'] }
-        : { orderBy?: RefreshTokenIgrejaGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, RefreshTokenIgrejaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefreshTokenIgrejaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the RefreshTokenIgreja model
-   */
-  readonly fields: RefreshTokenIgrejaFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for RefreshTokenIgreja.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__RefreshTokenIgrejaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    userIgreja<T extends UserIgrejaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserIgrejaDefaultArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the RefreshTokenIgreja model
-   */
-  interface RefreshTokenIgrejaFieldRefs {
-    readonly id: FieldRef<"RefreshTokenIgreja", 'String'>
-    readonly token: FieldRef<"RefreshTokenIgreja", 'String'>
-    readonly userId: FieldRef<"RefreshTokenIgreja", 'String'>
-    readonly createdAt: FieldRef<"RefreshTokenIgreja", 'DateTime'>
-    readonly updatedAt: FieldRef<"RefreshTokenIgreja", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * RefreshTokenIgreja findUnique
-   */
-  export type RefreshTokenIgrejaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which RefreshTokenIgreja to fetch.
-     */
-    where: RefreshTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * RefreshTokenIgreja findUniqueOrThrow
-   */
-  export type RefreshTokenIgrejaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which RefreshTokenIgreja to fetch.
-     */
-    where: RefreshTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * RefreshTokenIgreja findFirst
-   */
-  export type RefreshTokenIgrejaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which RefreshTokenIgreja to fetch.
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of RefreshTokenIgrejas to fetch.
-     */
-    orderBy?: RefreshTokenIgrejaOrderByWithRelationInput | RefreshTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for RefreshTokenIgrejas.
-     */
-    cursor?: RefreshTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` RefreshTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` RefreshTokenIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of RefreshTokenIgrejas.
-     */
-    distinct?: RefreshTokenIgrejaScalarFieldEnum | RefreshTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * RefreshTokenIgreja findFirstOrThrow
-   */
-  export type RefreshTokenIgrejaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which RefreshTokenIgreja to fetch.
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of RefreshTokenIgrejas to fetch.
-     */
-    orderBy?: RefreshTokenIgrejaOrderByWithRelationInput | RefreshTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for RefreshTokenIgrejas.
-     */
-    cursor?: RefreshTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` RefreshTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` RefreshTokenIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of RefreshTokenIgrejas.
-     */
-    distinct?: RefreshTokenIgrejaScalarFieldEnum | RefreshTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * RefreshTokenIgreja findMany
-   */
-  export type RefreshTokenIgrejaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which RefreshTokenIgrejas to fetch.
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of RefreshTokenIgrejas to fetch.
-     */
-    orderBy?: RefreshTokenIgrejaOrderByWithRelationInput | RefreshTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing RefreshTokenIgrejas.
-     */
-    cursor?: RefreshTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` RefreshTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` RefreshTokenIgrejas.
-     */
-    skip?: number
-    distinct?: RefreshTokenIgrejaScalarFieldEnum | RefreshTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * RefreshTokenIgreja create
-   */
-  export type RefreshTokenIgrejaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * The data needed to create a RefreshTokenIgreja.
-     */
-    data: XOR<RefreshTokenIgrejaCreateInput, RefreshTokenIgrejaUncheckedCreateInput>
-  }
-
-  /**
-   * RefreshTokenIgreja createMany
-   */
-  export type RefreshTokenIgrejaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many RefreshTokenIgrejas.
-     */
-    data: RefreshTokenIgrejaCreateManyInput | RefreshTokenIgrejaCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * RefreshTokenIgreja createManyAndReturn
-   */
-  export type RefreshTokenIgrejaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * The data used to create many RefreshTokenIgrejas.
-     */
-    data: RefreshTokenIgrejaCreateManyInput | RefreshTokenIgrejaCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * RefreshTokenIgreja update
-   */
-  export type RefreshTokenIgrejaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * The data needed to update a RefreshTokenIgreja.
-     */
-    data: XOR<RefreshTokenIgrejaUpdateInput, RefreshTokenIgrejaUncheckedUpdateInput>
-    /**
-     * Choose, which RefreshTokenIgreja to update.
-     */
-    where: RefreshTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * RefreshTokenIgreja updateMany
-   */
-  export type RefreshTokenIgrejaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update RefreshTokenIgrejas.
-     */
-    data: XOR<RefreshTokenIgrejaUpdateManyMutationInput, RefreshTokenIgrejaUncheckedUpdateManyInput>
-    /**
-     * Filter which RefreshTokenIgrejas to update
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * Limit how many RefreshTokenIgrejas to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * RefreshTokenIgreja updateManyAndReturn
-   */
-  export type RefreshTokenIgrejaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * The data used to update RefreshTokenIgrejas.
-     */
-    data: XOR<RefreshTokenIgrejaUpdateManyMutationInput, RefreshTokenIgrejaUncheckedUpdateManyInput>
-    /**
-     * Filter which RefreshTokenIgrejas to update
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * Limit how many RefreshTokenIgrejas to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * RefreshTokenIgreja upsert
-   */
-  export type RefreshTokenIgrejaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * The filter to search for the RefreshTokenIgreja to update in case it exists.
-     */
-    where: RefreshTokenIgrejaWhereUniqueInput
-    /**
-     * In case the RefreshTokenIgreja found by the `where` argument doesn't exist, create a new RefreshTokenIgreja with this data.
-     */
-    create: XOR<RefreshTokenIgrejaCreateInput, RefreshTokenIgrejaUncheckedCreateInput>
-    /**
-     * In case the RefreshTokenIgreja was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<RefreshTokenIgrejaUpdateInput, RefreshTokenIgrejaUncheckedUpdateInput>
-  }
-
-  /**
-   * RefreshTokenIgreja delete
-   */
-  export type RefreshTokenIgrejaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter which RefreshTokenIgreja to delete.
-     */
-    where: RefreshTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * RefreshTokenIgreja deleteMany
-   */
-  export type RefreshTokenIgrejaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which RefreshTokenIgrejas to delete
-     */
-    where?: RefreshTokenIgrejaWhereInput
-    /**
-     * Limit how many RefreshTokenIgrejas to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * RefreshTokenIgreja without action
-   */
-  export type RefreshTokenIgrejaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshTokenIgreja
-     */
-    select?: RefreshTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RefreshTokenIgreja
-     */
-    omit?: RefreshTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIgrejaInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model PasswordResetTokenIgreja
-   */
-
-  export type AggregatePasswordResetTokenIgreja = {
-    _count: PasswordResetTokenIgrejaCountAggregateOutputType | null
-    _min: PasswordResetTokenIgrejaMinAggregateOutputType | null
-    _max: PasswordResetTokenIgrejaMaxAggregateOutputType | null
-  }
-
-  export type PasswordResetTokenIgrejaMinAggregateOutputType = {
-    id: string | null
-    token: string | null
-    userId: string | null
-    createdAt: Date | null
-    expiresAt: Date | null
-  }
-
-  export type PasswordResetTokenIgrejaMaxAggregateOutputType = {
-    id: string | null
-    token: string | null
-    userId: string | null
-    createdAt: Date | null
-    expiresAt: Date | null
-  }
-
-  export type PasswordResetTokenIgrejaCountAggregateOutputType = {
-    id: number
-    token: number
-    userId: number
-    createdAt: number
-    expiresAt: number
-    _all: number
-  }
-
-
-  export type PasswordResetTokenIgrejaMinAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    createdAt?: true
-    expiresAt?: true
-  }
-
-  export type PasswordResetTokenIgrejaMaxAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    createdAt?: true
-    expiresAt?: true
-  }
-
-  export type PasswordResetTokenIgrejaCountAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    createdAt?: true
-    expiresAt?: true
-    _all?: true
-  }
-
-  export type PasswordResetTokenIgrejaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PasswordResetTokenIgreja to aggregate.
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PasswordResetTokenIgrejas to fetch.
-     */
-    orderBy?: PasswordResetTokenIgrejaOrderByWithRelationInput | PasswordResetTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PasswordResetTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PasswordResetTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PasswordResetTokenIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PasswordResetTokenIgrejas
-    **/
-    _count?: true | PasswordResetTokenIgrejaCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PasswordResetTokenIgrejaMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PasswordResetTokenIgrejaMaxAggregateInputType
-  }
-
-  export type GetPasswordResetTokenIgrejaAggregateType<T extends PasswordResetTokenIgrejaAggregateArgs> = {
-        [P in keyof T & keyof AggregatePasswordResetTokenIgreja]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePasswordResetTokenIgreja[P]>
-      : GetScalarType<T[P], AggregatePasswordResetTokenIgreja[P]>
-  }
-
-
-
-
-  export type PasswordResetTokenIgrejaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PasswordResetTokenIgrejaWhereInput
-    orderBy?: PasswordResetTokenIgrejaOrderByWithAggregationInput | PasswordResetTokenIgrejaOrderByWithAggregationInput[]
-    by: PasswordResetTokenIgrejaScalarFieldEnum[] | PasswordResetTokenIgrejaScalarFieldEnum
-    having?: PasswordResetTokenIgrejaScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PasswordResetTokenIgrejaCountAggregateInputType | true
-    _min?: PasswordResetTokenIgrejaMinAggregateInputType
-    _max?: PasswordResetTokenIgrejaMaxAggregateInputType
-  }
-
-  export type PasswordResetTokenIgrejaGroupByOutputType = {
-    id: string
-    token: string
-    userId: string
-    createdAt: Date
-    expiresAt: Date
-    _count: PasswordResetTokenIgrejaCountAggregateOutputType | null
-    _min: PasswordResetTokenIgrejaMinAggregateOutputType | null
-    _max: PasswordResetTokenIgrejaMaxAggregateOutputType | null
-  }
-
-  type GetPasswordResetTokenIgrejaGroupByPayload<T extends PasswordResetTokenIgrejaGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PasswordResetTokenIgrejaGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PasswordResetTokenIgrejaGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PasswordResetTokenIgrejaGroupByOutputType[P]>
-            : GetScalarType<T[P], PasswordResetTokenIgrejaGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PasswordResetTokenIgrejaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["passwordResetTokenIgreja"]>
-
-  export type PasswordResetTokenIgrejaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["passwordResetTokenIgreja"]>
-
-  export type PasswordResetTokenIgrejaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["passwordResetTokenIgreja"]>
-
-  export type PasswordResetTokenIgrejaSelectScalar = {
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-  }
-
-  export type PasswordResetTokenIgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "createdAt" | "expiresAt", ExtArgs["result"]["passwordResetTokenIgreja"]>
-  export type PasswordResetTokenIgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-  export type PasswordResetTokenIgrejaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-  export type PasswordResetTokenIgrejaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userIgreja?: boolean | UserIgrejaDefaultArgs<ExtArgs>
-  }
-
-  export type $PasswordResetTokenIgrejaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PasswordResetTokenIgreja"
-    objects: {
-      userIgreja: Prisma.$UserIgrejaPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      token: string
-      userId: string
-      createdAt: Date
-      expiresAt: Date
-    }, ExtArgs["result"]["passwordResetTokenIgreja"]>
-    composites: {}
-  }
-
-  type PasswordResetTokenIgrejaGetPayload<S extends boolean | null | undefined | PasswordResetTokenIgrejaDefaultArgs> = $Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload, S>
-
-  type PasswordResetTokenIgrejaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PasswordResetTokenIgrejaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PasswordResetTokenIgrejaCountAggregateInputType | true
-    }
-
-  export interface PasswordResetTokenIgrejaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PasswordResetTokenIgreja'], meta: { name: 'PasswordResetTokenIgreja' } }
-    /**
-     * Find zero or one PasswordResetTokenIgreja that matches the filter.
-     * @param {PasswordResetTokenIgrejaFindUniqueArgs} args - Arguments to find a PasswordResetTokenIgreja
-     * @example
-     * // Get one PasswordResetTokenIgreja
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PasswordResetTokenIgrejaFindUniqueArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaFindUniqueArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PasswordResetTokenIgreja that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PasswordResetTokenIgrejaFindUniqueOrThrowArgs} args - Arguments to find a PasswordResetTokenIgreja
-     * @example
-     * // Get one PasswordResetTokenIgreja
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PasswordResetTokenIgrejaFindUniqueOrThrowArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PasswordResetTokenIgreja that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaFindFirstArgs} args - Arguments to find a PasswordResetTokenIgreja
-     * @example
-     * // Get one PasswordResetTokenIgreja
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PasswordResetTokenIgrejaFindFirstArgs>(args?: SelectSubset<T, PasswordResetTokenIgrejaFindFirstArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PasswordResetTokenIgreja that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaFindFirstOrThrowArgs} args - Arguments to find a PasswordResetTokenIgreja
-     * @example
-     * // Get one PasswordResetTokenIgreja
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PasswordResetTokenIgrejaFindFirstOrThrowArgs>(args?: SelectSubset<T, PasswordResetTokenIgrejaFindFirstOrThrowArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PasswordResetTokenIgrejas that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PasswordResetTokenIgrejas
-     * const passwordResetTokenIgrejas = await prisma.passwordResetTokenIgreja.findMany()
-     * 
-     * // Get first 10 PasswordResetTokenIgrejas
-     * const passwordResetTokenIgrejas = await prisma.passwordResetTokenIgreja.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const passwordResetTokenIgrejaWithIdOnly = await prisma.passwordResetTokenIgreja.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PasswordResetTokenIgrejaFindManyArgs>(args?: SelectSubset<T, PasswordResetTokenIgrejaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PasswordResetTokenIgreja.
-     * @param {PasswordResetTokenIgrejaCreateArgs} args - Arguments to create a PasswordResetTokenIgreja.
-     * @example
-     * // Create one PasswordResetTokenIgreja
-     * const PasswordResetTokenIgreja = await prisma.passwordResetTokenIgreja.create({
-     *   data: {
-     *     // ... data to create a PasswordResetTokenIgreja
-     *   }
-     * })
-     * 
-     */
-    create<T extends PasswordResetTokenIgrejaCreateArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaCreateArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PasswordResetTokenIgrejas.
-     * @param {PasswordResetTokenIgrejaCreateManyArgs} args - Arguments to create many PasswordResetTokenIgrejas.
-     * @example
-     * // Create many PasswordResetTokenIgrejas
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PasswordResetTokenIgrejaCreateManyArgs>(args?: SelectSubset<T, PasswordResetTokenIgrejaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PasswordResetTokenIgrejas and returns the data saved in the database.
-     * @param {PasswordResetTokenIgrejaCreateManyAndReturnArgs} args - Arguments to create many PasswordResetTokenIgrejas.
-     * @example
-     * // Create many PasswordResetTokenIgrejas
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PasswordResetTokenIgrejas and only return the `id`
-     * const passwordResetTokenIgrejaWithIdOnly = await prisma.passwordResetTokenIgreja.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PasswordResetTokenIgrejaCreateManyAndReturnArgs>(args?: SelectSubset<T, PasswordResetTokenIgrejaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PasswordResetTokenIgreja.
-     * @param {PasswordResetTokenIgrejaDeleteArgs} args - Arguments to delete one PasswordResetTokenIgreja.
-     * @example
-     * // Delete one PasswordResetTokenIgreja
-     * const PasswordResetTokenIgreja = await prisma.passwordResetTokenIgreja.delete({
-     *   where: {
-     *     // ... filter to delete one PasswordResetTokenIgreja
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PasswordResetTokenIgrejaDeleteArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaDeleteArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PasswordResetTokenIgreja.
-     * @param {PasswordResetTokenIgrejaUpdateArgs} args - Arguments to update one PasswordResetTokenIgreja.
-     * @example
-     * // Update one PasswordResetTokenIgreja
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PasswordResetTokenIgrejaUpdateArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaUpdateArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PasswordResetTokenIgrejas.
-     * @param {PasswordResetTokenIgrejaDeleteManyArgs} args - Arguments to filter PasswordResetTokenIgrejas to delete.
-     * @example
-     * // Delete a few PasswordResetTokenIgrejas
-     * const { count } = await prisma.passwordResetTokenIgreja.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PasswordResetTokenIgrejaDeleteManyArgs>(args?: SelectSubset<T, PasswordResetTokenIgrejaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PasswordResetTokenIgrejas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PasswordResetTokenIgrejas
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PasswordResetTokenIgrejaUpdateManyArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PasswordResetTokenIgrejas and returns the data updated in the database.
-     * @param {PasswordResetTokenIgrejaUpdateManyAndReturnArgs} args - Arguments to update many PasswordResetTokenIgrejas.
-     * @example
-     * // Update many PasswordResetTokenIgrejas
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PasswordResetTokenIgrejas and only return the `id`
-     * const passwordResetTokenIgrejaWithIdOnly = await prisma.passwordResetTokenIgreja.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PasswordResetTokenIgrejaUpdateManyAndReturnArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PasswordResetTokenIgreja.
-     * @param {PasswordResetTokenIgrejaUpsertArgs} args - Arguments to update or create a PasswordResetTokenIgreja.
-     * @example
-     * // Update or create a PasswordResetTokenIgreja
-     * const passwordResetTokenIgreja = await prisma.passwordResetTokenIgreja.upsert({
-     *   create: {
-     *     // ... data to create a PasswordResetTokenIgreja
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PasswordResetTokenIgreja we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PasswordResetTokenIgrejaUpsertArgs>(args: SelectSubset<T, PasswordResetTokenIgrejaUpsertArgs<ExtArgs>>): Prisma__PasswordResetTokenIgrejaClient<$Result.GetResult<Prisma.$PasswordResetTokenIgrejaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PasswordResetTokenIgrejas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaCountArgs} args - Arguments to filter PasswordResetTokenIgrejas to count.
-     * @example
-     * // Count the number of PasswordResetTokenIgrejas
-     * const count = await prisma.passwordResetTokenIgreja.count({
-     *   where: {
-     *     // ... the filter for the PasswordResetTokenIgrejas we want to count
-     *   }
-     * })
-    **/
-    count<T extends PasswordResetTokenIgrejaCountArgs>(
-      args?: Subset<T, PasswordResetTokenIgrejaCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PasswordResetTokenIgrejaCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PasswordResetTokenIgreja.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PasswordResetTokenIgrejaAggregateArgs>(args: Subset<T, PasswordResetTokenIgrejaAggregateArgs>): Prisma.PrismaPromise<GetPasswordResetTokenIgrejaAggregateType<T>>
-
-    /**
-     * Group by PasswordResetTokenIgreja.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PasswordResetTokenIgrejaGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PasswordResetTokenIgrejaGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PasswordResetTokenIgrejaGroupByArgs['orderBy'] }
-        : { orderBy?: PasswordResetTokenIgrejaGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PasswordResetTokenIgrejaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPasswordResetTokenIgrejaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PasswordResetTokenIgreja model
-   */
-  readonly fields: PasswordResetTokenIgrejaFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PasswordResetTokenIgreja.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PasswordResetTokenIgrejaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    userIgreja<T extends UserIgrejaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserIgrejaDefaultArgs<ExtArgs>>): Prisma__UserIgrejaClient<$Result.GetResult<Prisma.$UserIgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PasswordResetTokenIgreja model
-   */
-  interface PasswordResetTokenIgrejaFieldRefs {
-    readonly id: FieldRef<"PasswordResetTokenIgreja", 'String'>
-    readonly token: FieldRef<"PasswordResetTokenIgreja", 'String'>
-    readonly userId: FieldRef<"PasswordResetTokenIgreja", 'String'>
-    readonly createdAt: FieldRef<"PasswordResetTokenIgreja", 'DateTime'>
-    readonly expiresAt: FieldRef<"PasswordResetTokenIgreja", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PasswordResetTokenIgreja findUnique
-   */
-  export type PasswordResetTokenIgrejaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which PasswordResetTokenIgreja to fetch.
-     */
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * PasswordResetTokenIgreja findUniqueOrThrow
-   */
-  export type PasswordResetTokenIgrejaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which PasswordResetTokenIgreja to fetch.
-     */
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * PasswordResetTokenIgreja findFirst
-   */
-  export type PasswordResetTokenIgrejaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which PasswordResetTokenIgreja to fetch.
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PasswordResetTokenIgrejas to fetch.
-     */
-    orderBy?: PasswordResetTokenIgrejaOrderByWithRelationInput | PasswordResetTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PasswordResetTokenIgrejas.
-     */
-    cursor?: PasswordResetTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PasswordResetTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PasswordResetTokenIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PasswordResetTokenIgrejas.
-     */
-    distinct?: PasswordResetTokenIgrejaScalarFieldEnum | PasswordResetTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * PasswordResetTokenIgreja findFirstOrThrow
-   */
-  export type PasswordResetTokenIgrejaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which PasswordResetTokenIgreja to fetch.
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PasswordResetTokenIgrejas to fetch.
-     */
-    orderBy?: PasswordResetTokenIgrejaOrderByWithRelationInput | PasswordResetTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PasswordResetTokenIgrejas.
-     */
-    cursor?: PasswordResetTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PasswordResetTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PasswordResetTokenIgrejas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PasswordResetTokenIgrejas.
-     */
-    distinct?: PasswordResetTokenIgrejaScalarFieldEnum | PasswordResetTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * PasswordResetTokenIgreja findMany
-   */
-  export type PasswordResetTokenIgrejaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter, which PasswordResetTokenIgrejas to fetch.
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PasswordResetTokenIgrejas to fetch.
-     */
-    orderBy?: PasswordResetTokenIgrejaOrderByWithRelationInput | PasswordResetTokenIgrejaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PasswordResetTokenIgrejas.
-     */
-    cursor?: PasswordResetTokenIgrejaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PasswordResetTokenIgrejas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PasswordResetTokenIgrejas.
-     */
-    skip?: number
-    distinct?: PasswordResetTokenIgrejaScalarFieldEnum | PasswordResetTokenIgrejaScalarFieldEnum[]
-  }
-
-  /**
-   * PasswordResetTokenIgreja create
-   */
-  export type PasswordResetTokenIgrejaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PasswordResetTokenIgreja.
-     */
-    data: XOR<PasswordResetTokenIgrejaCreateInput, PasswordResetTokenIgrejaUncheckedCreateInput>
-  }
-
-  /**
-   * PasswordResetTokenIgreja createMany
-   */
-  export type PasswordResetTokenIgrejaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PasswordResetTokenIgrejas.
-     */
-    data: PasswordResetTokenIgrejaCreateManyInput | PasswordResetTokenIgrejaCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PasswordResetTokenIgreja createManyAndReturn
-   */
-  export type PasswordResetTokenIgrejaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * The data used to create many PasswordResetTokenIgrejas.
-     */
-    data: PasswordResetTokenIgrejaCreateManyInput | PasswordResetTokenIgrejaCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PasswordResetTokenIgreja update
-   */
-  export type PasswordResetTokenIgrejaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PasswordResetTokenIgreja.
-     */
-    data: XOR<PasswordResetTokenIgrejaUpdateInput, PasswordResetTokenIgrejaUncheckedUpdateInput>
-    /**
-     * Choose, which PasswordResetTokenIgreja to update.
-     */
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * PasswordResetTokenIgreja updateMany
-   */
-  export type PasswordResetTokenIgrejaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PasswordResetTokenIgrejas.
-     */
-    data: XOR<PasswordResetTokenIgrejaUpdateManyMutationInput, PasswordResetTokenIgrejaUncheckedUpdateManyInput>
-    /**
-     * Filter which PasswordResetTokenIgrejas to update
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * Limit how many PasswordResetTokenIgrejas to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PasswordResetTokenIgreja updateManyAndReturn
-   */
-  export type PasswordResetTokenIgrejaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * The data used to update PasswordResetTokenIgrejas.
-     */
-    data: XOR<PasswordResetTokenIgrejaUpdateManyMutationInput, PasswordResetTokenIgrejaUncheckedUpdateManyInput>
-    /**
-     * Filter which PasswordResetTokenIgrejas to update
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * Limit how many PasswordResetTokenIgrejas to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PasswordResetTokenIgreja upsert
-   */
-  export type PasswordResetTokenIgrejaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PasswordResetTokenIgreja to update in case it exists.
-     */
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-    /**
-     * In case the PasswordResetTokenIgreja found by the `where` argument doesn't exist, create a new PasswordResetTokenIgreja with this data.
-     */
-    create: XOR<PasswordResetTokenIgrejaCreateInput, PasswordResetTokenIgrejaUncheckedCreateInput>
-    /**
-     * In case the PasswordResetTokenIgreja was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PasswordResetTokenIgrejaUpdateInput, PasswordResetTokenIgrejaUncheckedUpdateInput>
-  }
-
-  /**
-   * PasswordResetTokenIgreja delete
-   */
-  export type PasswordResetTokenIgrejaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-    /**
-     * Filter which PasswordResetTokenIgreja to delete.
-     */
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-  }
-
-  /**
-   * PasswordResetTokenIgreja deleteMany
-   */
-  export type PasswordResetTokenIgrejaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PasswordResetTokenIgrejas to delete
-     */
-    where?: PasswordResetTokenIgrejaWhereInput
-    /**
-     * Limit how many PasswordResetTokenIgrejas to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PasswordResetTokenIgreja without action
-   */
-  export type PasswordResetTokenIgrejaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PasswordResetTokenIgreja
-     */
-    select?: PasswordResetTokenIgrejaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PasswordResetTokenIgreja
-     */
-    omit?: PasswordResetTokenIgrejaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PasswordResetTokenIgrejaInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model PasswordResetToken
    */
 
@@ -26688,324 +14484,398 @@ export namespace Prisma {
 
 
   /**
-   * Model Novatabela
+   * Model Testemunho
    */
 
-  export type AggregateNovatabela = {
-    _count: NovatabelaCountAggregateOutputType | null
-    _min: NovatabelaMinAggregateOutputType | null
-    _max: NovatabelaMaxAggregateOutputType | null
+  export type AggregateTestemunho = {
+    _count: TestemunhoCountAggregateOutputType | null
+    _min: TestemunhoMinAggregateOutputType | null
+    _max: TestemunhoMaxAggregateOutputType | null
   }
 
-  export type NovatabelaMinAggregateOutputType = {
+  export type TestemunhoMinAggregateOutputType = {
     id: string | null
     userId: string | null
     name: string | null
-    title: string | null
+    avatarUrl: string | null
+    content: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isPublic: boolean | null
+    coverUrl: string | null
   }
 
-  export type NovatabelaMaxAggregateOutputType = {
+  export type TestemunhoMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     name: string | null
-    title: string | null
+    avatarUrl: string | null
+    content: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isPublic: boolean | null
+    coverUrl: string | null
   }
 
-  export type NovatabelaCountAggregateOutputType = {
+  export type TestemunhoCountAggregateOutputType = {
     id: number
     userId: number
     name: number
-    title: number
+    avatarUrl: number
+    content: number
+    createdAt: number
+    updatedAt: number
+    isPublic: number
+    coverUrl: number
     _all: number
   }
 
 
-  export type NovatabelaMinAggregateInputType = {
+  export type TestemunhoMinAggregateInputType = {
     id?: true
     userId?: true
     name?: true
-    title?: true
+    avatarUrl?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+    isPublic?: true
+    coverUrl?: true
   }
 
-  export type NovatabelaMaxAggregateInputType = {
+  export type TestemunhoMaxAggregateInputType = {
     id?: true
     userId?: true
     name?: true
-    title?: true
+    avatarUrl?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+    isPublic?: true
+    coverUrl?: true
   }
 
-  export type NovatabelaCountAggregateInputType = {
+  export type TestemunhoCountAggregateInputType = {
     id?: true
     userId?: true
     name?: true
-    title?: true
+    avatarUrl?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+    isPublic?: true
+    coverUrl?: true
     _all?: true
   }
 
-  export type NovatabelaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Novatabela to aggregate.
+     * Filter which Testemunho to aggregate.
      */
-    where?: NovatabelaWhereInput
+    where?: TestemunhoWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Novatabelas to fetch.
+     * Determine the order of Testemunhos to fetch.
      */
-    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: NovatabelaWhereUniqueInput
+    cursor?: TestemunhoWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Novatabelas from the position of the cursor.
+     * Take `±n` Testemunhos from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Novatabelas.
+     * Skip the first `n` Testemunhos.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Novatabelas
+     * Count returned Testemunhos
     **/
-    _count?: true | NovatabelaCountAggregateInputType
+    _count?: true | TestemunhoCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: NovatabelaMinAggregateInputType
+    _min?: TestemunhoMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: NovatabelaMaxAggregateInputType
+    _max?: TestemunhoMaxAggregateInputType
   }
 
-  export type GetNovatabelaAggregateType<T extends NovatabelaAggregateArgs> = {
-        [P in keyof T & keyof AggregateNovatabela]: P extends '_count' | 'count'
+  export type GetTestemunhoAggregateType<T extends TestemunhoAggregateArgs> = {
+        [P in keyof T & keyof AggregateTestemunho]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateNovatabela[P]>
-      : GetScalarType<T[P], AggregateNovatabela[P]>
+        : GetScalarType<T[P], AggregateTestemunho[P]>
+      : GetScalarType<T[P], AggregateTestemunho[P]>
   }
 
 
 
 
-  export type NovatabelaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NovatabelaWhereInput
-    orderBy?: NovatabelaOrderByWithAggregationInput | NovatabelaOrderByWithAggregationInput[]
-    by: NovatabelaScalarFieldEnum[] | NovatabelaScalarFieldEnum
-    having?: NovatabelaScalarWhereWithAggregatesInput
+  export type TestemunhoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TestemunhoWhereInput
+    orderBy?: TestemunhoOrderByWithAggregationInput | TestemunhoOrderByWithAggregationInput[]
+    by: TestemunhoScalarFieldEnum[] | TestemunhoScalarFieldEnum
+    having?: TestemunhoScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: NovatabelaCountAggregateInputType | true
-    _min?: NovatabelaMinAggregateInputType
-    _max?: NovatabelaMaxAggregateInputType
+    _count?: TestemunhoCountAggregateInputType | true
+    _min?: TestemunhoMinAggregateInputType
+    _max?: TestemunhoMaxAggregateInputType
   }
 
-  export type NovatabelaGroupByOutputType = {
+  export type TestemunhoGroupByOutputType = {
     id: string
     userId: string
     name: string
-    title: string
-    _count: NovatabelaCountAggregateOutputType | null
-    _min: NovatabelaMinAggregateOutputType | null
-    _max: NovatabelaMaxAggregateOutputType | null
+    avatarUrl: string
+    content: string
+    createdAt: Date
+    updatedAt: Date
+    isPublic: boolean
+    coverUrl: string | null
+    _count: TestemunhoCountAggregateOutputType | null
+    _min: TestemunhoMinAggregateOutputType | null
+    _max: TestemunhoMaxAggregateOutputType | null
   }
 
-  type GetNovatabelaGroupByPayload<T extends NovatabelaGroupByArgs> = Prisma.PrismaPromise<
+  type GetTestemunhoGroupByPayload<T extends TestemunhoGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<NovatabelaGroupByOutputType, T['by']> &
+      PickEnumerable<TestemunhoGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof NovatabelaGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof TestemunhoGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], NovatabelaGroupByOutputType[P]>
-            : GetScalarType<T[P], NovatabelaGroupByOutputType[P]>
+              : GetScalarType<T[P], TestemunhoGroupByOutputType[P]>
+            : GetScalarType<T[P], TestemunhoGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type NovatabelaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type TestemunhoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     name?: boolean
-    title?: boolean
-  }, ExtArgs["result"]["novatabela"]>
+    avatarUrl?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isPublic?: boolean
+    coverUrl?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["testemunho"]>
 
-  export type NovatabelaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type TestemunhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     name?: boolean
-    title?: boolean
-  }, ExtArgs["result"]["novatabela"]>
+    avatarUrl?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isPublic?: boolean
+    coverUrl?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["testemunho"]>
 
-  export type NovatabelaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type TestemunhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     name?: boolean
-    title?: boolean
-  }, ExtArgs["result"]["novatabela"]>
+    avatarUrl?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isPublic?: boolean
+    coverUrl?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["testemunho"]>
 
-  export type NovatabelaSelectScalar = {
+  export type TestemunhoSelectScalar = {
     id?: boolean
     userId?: boolean
     name?: boolean
-    title?: boolean
+    avatarUrl?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isPublic?: boolean
+    coverUrl?: boolean
   }
 
-  export type NovatabelaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title", ExtArgs["result"]["novatabela"]>
+  export type TestemunhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "avatarUrl" | "content" | "createdAt" | "updatedAt" | "isPublic" | "coverUrl", ExtArgs["result"]["testemunho"]>
+  export type TestemunhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TestemunhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TestemunhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
-  export type $NovatabelaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Novatabela"
-    objects: {}
+  export type $TestemunhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Testemunho"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       name: string
-      title: string
-    }, ExtArgs["result"]["novatabela"]>
+      avatarUrl: string
+      content: string
+      createdAt: Date
+      updatedAt: Date
+      isPublic: boolean
+      coverUrl: string | null
+    }, ExtArgs["result"]["testemunho"]>
     composites: {}
   }
 
-  type NovatabelaGetPayload<S extends boolean | null | undefined | NovatabelaDefaultArgs> = $Result.GetResult<Prisma.$NovatabelaPayload, S>
+  type TestemunhoGetPayload<S extends boolean | null | undefined | TestemunhoDefaultArgs> = $Result.GetResult<Prisma.$TestemunhoPayload, S>
 
-  type NovatabelaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NovatabelaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NovatabelaCountAggregateInputType | true
+  type TestemunhoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TestemunhoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TestemunhoCountAggregateInputType | true
     }
 
-  export interface NovatabelaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Novatabela'], meta: { name: 'Novatabela' } }
+  export interface TestemunhoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Testemunho'], meta: { name: 'Testemunho' } }
     /**
-     * Find zero or one Novatabela that matches the filter.
-     * @param {NovatabelaFindUniqueArgs} args - Arguments to find a Novatabela
+     * Find zero or one Testemunho that matches the filter.
+     * @param {TestemunhoFindUniqueArgs} args - Arguments to find a Testemunho
      * @example
-     * // Get one Novatabela
-     * const novatabela = await prisma.novatabela.findUnique({
+     * // Get one Testemunho
+     * const testemunho = await prisma.testemunho.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends NovatabelaFindUniqueArgs>(args: SelectSubset<T, NovatabelaFindUniqueArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends TestemunhoFindUniqueArgs>(args: SelectSubset<T, TestemunhoFindUniqueArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Novatabela that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Testemunho that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {NovatabelaFindUniqueOrThrowArgs} args - Arguments to find a Novatabela
+     * @param {TestemunhoFindUniqueOrThrowArgs} args - Arguments to find a Testemunho
      * @example
-     * // Get one Novatabela
-     * const novatabela = await prisma.novatabela.findUniqueOrThrow({
+     * // Get one Testemunho
+     * const testemunho = await prisma.testemunho.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends NovatabelaFindUniqueOrThrowArgs>(args: SelectSubset<T, NovatabelaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends TestemunhoFindUniqueOrThrowArgs>(args: SelectSubset<T, TestemunhoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Novatabela that matches the filter.
+     * Find the first Testemunho that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaFindFirstArgs} args - Arguments to find a Novatabela
+     * @param {TestemunhoFindFirstArgs} args - Arguments to find a Testemunho
      * @example
-     * // Get one Novatabela
-     * const novatabela = await prisma.novatabela.findFirst({
+     * // Get one Testemunho
+     * const testemunho = await prisma.testemunho.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends NovatabelaFindFirstArgs>(args?: SelectSubset<T, NovatabelaFindFirstArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends TestemunhoFindFirstArgs>(args?: SelectSubset<T, TestemunhoFindFirstArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Novatabela that matches the filter or
+     * Find the first Testemunho that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaFindFirstOrThrowArgs} args - Arguments to find a Novatabela
+     * @param {TestemunhoFindFirstOrThrowArgs} args - Arguments to find a Testemunho
      * @example
-     * // Get one Novatabela
-     * const novatabela = await prisma.novatabela.findFirstOrThrow({
+     * // Get one Testemunho
+     * const testemunho = await prisma.testemunho.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends NovatabelaFindFirstOrThrowArgs>(args?: SelectSubset<T, NovatabelaFindFirstOrThrowArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends TestemunhoFindFirstOrThrowArgs>(args?: SelectSubset<T, TestemunhoFindFirstOrThrowArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Novatabelas that matches the filter.
+     * Find zero or more Testemunhos that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {TestemunhoFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Novatabelas
-     * const novatabelas = await prisma.novatabela.findMany()
+     * // Get all Testemunhos
+     * const testemunhos = await prisma.testemunho.findMany()
      * 
-     * // Get first 10 Novatabelas
-     * const novatabelas = await prisma.novatabela.findMany({ take: 10 })
+     * // Get first 10 Testemunhos
+     * const testemunhos = await prisma.testemunho.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const novatabelaWithIdOnly = await prisma.novatabela.findMany({ select: { id: true } })
+     * const testemunhoWithIdOnly = await prisma.testemunho.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends NovatabelaFindManyArgs>(args?: SelectSubset<T, NovatabelaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends TestemunhoFindManyArgs>(args?: SelectSubset<T, TestemunhoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Novatabela.
-     * @param {NovatabelaCreateArgs} args - Arguments to create a Novatabela.
+     * Create a Testemunho.
+     * @param {TestemunhoCreateArgs} args - Arguments to create a Testemunho.
      * @example
-     * // Create one Novatabela
-     * const Novatabela = await prisma.novatabela.create({
+     * // Create one Testemunho
+     * const Testemunho = await prisma.testemunho.create({
      *   data: {
-     *     // ... data to create a Novatabela
+     *     // ... data to create a Testemunho
      *   }
      * })
      * 
      */
-    create<T extends NovatabelaCreateArgs>(args: SelectSubset<T, NovatabelaCreateArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends TestemunhoCreateArgs>(args: SelectSubset<T, TestemunhoCreateArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Novatabelas.
-     * @param {NovatabelaCreateManyArgs} args - Arguments to create many Novatabelas.
+     * Create many Testemunhos.
+     * @param {TestemunhoCreateManyArgs} args - Arguments to create many Testemunhos.
      * @example
-     * // Create many Novatabelas
-     * const novatabela = await prisma.novatabela.createMany({
+     * // Create many Testemunhos
+     * const testemunho = await prisma.testemunho.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends NovatabelaCreateManyArgs>(args?: SelectSubset<T, NovatabelaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends TestemunhoCreateManyArgs>(args?: SelectSubset<T, TestemunhoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Novatabelas and returns the data saved in the database.
-     * @param {NovatabelaCreateManyAndReturnArgs} args - Arguments to create many Novatabelas.
+     * Create many Testemunhos and returns the data saved in the database.
+     * @param {TestemunhoCreateManyAndReturnArgs} args - Arguments to create many Testemunhos.
      * @example
-     * // Create many Novatabelas
-     * const novatabela = await prisma.novatabela.createManyAndReturn({
+     * // Create many Testemunhos
+     * const testemunho = await prisma.testemunho.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Novatabelas and only return the `id`
-     * const novatabelaWithIdOnly = await prisma.novatabela.createManyAndReturn({
+     * // Create many Testemunhos and only return the `id`
+     * const testemunhoWithIdOnly = await prisma.testemunho.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -27015,28 +14885,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends NovatabelaCreateManyAndReturnArgs>(args?: SelectSubset<T, NovatabelaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends TestemunhoCreateManyAndReturnArgs>(args?: SelectSubset<T, TestemunhoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Novatabela.
-     * @param {NovatabelaDeleteArgs} args - Arguments to delete one Novatabela.
+     * Delete a Testemunho.
+     * @param {TestemunhoDeleteArgs} args - Arguments to delete one Testemunho.
      * @example
-     * // Delete one Novatabela
-     * const Novatabela = await prisma.novatabela.delete({
+     * // Delete one Testemunho
+     * const Testemunho = await prisma.testemunho.delete({
      *   where: {
-     *     // ... filter to delete one Novatabela
+     *     // ... filter to delete one Testemunho
      *   }
      * })
      * 
      */
-    delete<T extends NovatabelaDeleteArgs>(args: SelectSubset<T, NovatabelaDeleteArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends TestemunhoDeleteArgs>(args: SelectSubset<T, TestemunhoDeleteArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Novatabela.
-     * @param {NovatabelaUpdateArgs} args - Arguments to update one Novatabela.
+     * Update one Testemunho.
+     * @param {TestemunhoUpdateArgs} args - Arguments to update one Testemunho.
      * @example
-     * // Update one Novatabela
-     * const novatabela = await prisma.novatabela.update({
+     * // Update one Testemunho
+     * const testemunho = await prisma.testemunho.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -27046,30 +14916,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends NovatabelaUpdateArgs>(args: SelectSubset<T, NovatabelaUpdateArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends TestemunhoUpdateArgs>(args: SelectSubset<T, TestemunhoUpdateArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Novatabelas.
-     * @param {NovatabelaDeleteManyArgs} args - Arguments to filter Novatabelas to delete.
+     * Delete zero or more Testemunhos.
+     * @param {TestemunhoDeleteManyArgs} args - Arguments to filter Testemunhos to delete.
      * @example
-     * // Delete a few Novatabelas
-     * const { count } = await prisma.novatabela.deleteMany({
+     * // Delete a few Testemunhos
+     * const { count } = await prisma.testemunho.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends NovatabelaDeleteManyArgs>(args?: SelectSubset<T, NovatabelaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends TestemunhoDeleteManyArgs>(args?: SelectSubset<T, TestemunhoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Novatabelas.
+     * Update zero or more Testemunhos.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {TestemunhoUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Novatabelas
-     * const novatabela = await prisma.novatabela.updateMany({
+     * // Update many Testemunhos
+     * const testemunho = await prisma.testemunho.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -27079,14 +14949,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends NovatabelaUpdateManyArgs>(args: SelectSubset<T, NovatabelaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends TestemunhoUpdateManyArgs>(args: SelectSubset<T, TestemunhoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Novatabelas and returns the data updated in the database.
-     * @param {NovatabelaUpdateManyAndReturnArgs} args - Arguments to update many Novatabelas.
+     * Update zero or more Testemunhos and returns the data updated in the database.
+     * @param {TestemunhoUpdateManyAndReturnArgs} args - Arguments to update many Testemunhos.
      * @example
-     * // Update many Novatabelas
-     * const novatabela = await prisma.novatabela.updateManyAndReturn({
+     * // Update many Testemunhos
+     * const testemunho = await prisma.testemunho.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -27095,8 +14965,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Novatabelas and only return the `id`
-     * const novatabelaWithIdOnly = await prisma.novatabela.updateManyAndReturn({
+     * // Update zero or more Testemunhos and only return the `id`
+     * const testemunhoWithIdOnly = await prisma.testemunho.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -27109,56 +14979,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends NovatabelaUpdateManyAndReturnArgs>(args: SelectSubset<T, NovatabelaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends TestemunhoUpdateManyAndReturnArgs>(args: SelectSubset<T, TestemunhoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Novatabela.
-     * @param {NovatabelaUpsertArgs} args - Arguments to update or create a Novatabela.
+     * Create or update one Testemunho.
+     * @param {TestemunhoUpsertArgs} args - Arguments to update or create a Testemunho.
      * @example
-     * // Update or create a Novatabela
-     * const novatabela = await prisma.novatabela.upsert({
+     * // Update or create a Testemunho
+     * const testemunho = await prisma.testemunho.upsert({
      *   create: {
-     *     // ... data to create a Novatabela
+     *     // ... data to create a Testemunho
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Novatabela we want to update
+     *     // ... the filter for the Testemunho we want to update
      *   }
      * })
      */
-    upsert<T extends NovatabelaUpsertArgs>(args: SelectSubset<T, NovatabelaUpsertArgs<ExtArgs>>): Prisma__NovatabelaClient<$Result.GetResult<Prisma.$NovatabelaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends TestemunhoUpsertArgs>(args: SelectSubset<T, TestemunhoUpsertArgs<ExtArgs>>): Prisma__TestemunhoClient<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Novatabelas.
+     * Count the number of Testemunhos.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaCountArgs} args - Arguments to filter Novatabelas to count.
+     * @param {TestemunhoCountArgs} args - Arguments to filter Testemunhos to count.
      * @example
-     * // Count the number of Novatabelas
-     * const count = await prisma.novatabela.count({
+     * // Count the number of Testemunhos
+     * const count = await prisma.testemunho.count({
      *   where: {
-     *     // ... the filter for the Novatabelas we want to count
+     *     // ... the filter for the Testemunhos we want to count
      *   }
      * })
     **/
-    count<T extends NovatabelaCountArgs>(
-      args?: Subset<T, NovatabelaCountArgs>,
+    count<T extends TestemunhoCountArgs>(
+      args?: Subset<T, TestemunhoCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], NovatabelaCountAggregateOutputType>
+          : GetScalarType<T['select'], TestemunhoCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Novatabela.
+     * Allows you to perform aggregations operations on a Testemunho.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {TestemunhoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -27178,13 +15048,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends NovatabelaAggregateArgs>(args: Subset<T, NovatabelaAggregateArgs>): Prisma.PrismaPromise<GetNovatabelaAggregateType<T>>
+    aggregate<T extends TestemunhoAggregateArgs>(args: Subset<T, TestemunhoAggregateArgs>): Prisma.PrismaPromise<GetTestemunhoAggregateType<T>>
 
     /**
-     * Group by Novatabela.
+     * Group by Testemunho.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovatabelaGroupByArgs} args - Group by arguments.
+     * @param {TestemunhoGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -27199,14 +15069,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends NovatabelaGroupByArgs,
+      T extends TestemunhoGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NovatabelaGroupByArgs['orderBy'] }
-        : { orderBy?: NovatabelaGroupByArgs['orderBy'] },
+        ? { orderBy: TestemunhoGroupByArgs['orderBy'] }
+        : { orderBy?: TestemunhoGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -27255,21 +15125,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, NovatabelaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNovatabelaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, TestemunhoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestemunhoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Novatabela model
+   * Fields of the Testemunho model
    */
-  readonly fields: NovatabelaFieldRefs;
+  readonly fields: TestemunhoFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Novatabela.
+   * The delegate class that acts as a "Promise-like" for Testemunho.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__NovatabelaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__TestemunhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27296,376 +15167,429 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Novatabela model
+   * Fields of the Testemunho model
    */
-  interface NovatabelaFieldRefs {
-    readonly id: FieldRef<"Novatabela", 'String'>
-    readonly userId: FieldRef<"Novatabela", 'String'>
-    readonly name: FieldRef<"Novatabela", 'String'>
-    readonly title: FieldRef<"Novatabela", 'String'>
+  interface TestemunhoFieldRefs {
+    readonly id: FieldRef<"Testemunho", 'String'>
+    readonly userId: FieldRef<"Testemunho", 'String'>
+    readonly name: FieldRef<"Testemunho", 'String'>
+    readonly avatarUrl: FieldRef<"Testemunho", 'String'>
+    readonly content: FieldRef<"Testemunho", 'String'>
+    readonly createdAt: FieldRef<"Testemunho", 'DateTime'>
+    readonly updatedAt: FieldRef<"Testemunho", 'DateTime'>
+    readonly isPublic: FieldRef<"Testemunho", 'Boolean'>
+    readonly coverUrl: FieldRef<"Testemunho", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * Novatabela findUnique
+   * Testemunho findUnique
    */
-  export type NovatabelaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * Filter, which Novatabela to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: NovatabelaWhereUniqueInput
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * Filter, which Testemunho to fetch.
+     */
+    where: TestemunhoWhereUniqueInput
   }
 
   /**
-   * Novatabela findUniqueOrThrow
+   * Testemunho findUniqueOrThrow
    */
-  export type NovatabelaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * Filter, which Novatabela to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: NovatabelaWhereUniqueInput
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * Filter, which Testemunho to fetch.
+     */
+    where: TestemunhoWhereUniqueInput
   }
 
   /**
-   * Novatabela findFirst
+   * Testemunho findFirst
    */
-  export type NovatabelaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * Filter, which Novatabela to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: NovatabelaWhereInput
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * Filter, which Testemunho to fetch.
+     */
+    where?: TestemunhoWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Novatabelas to fetch.
+     * Determine the order of Testemunhos to fetch.
      */
-    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Novatabelas.
+     * Sets the position for searching for Testemunhos.
      */
-    cursor?: NovatabelaWhereUniqueInput
+    cursor?: TestemunhoWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Novatabelas from the position of the cursor.
+     * Take `±n` Testemunhos from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Novatabelas.
+     * Skip the first `n` Testemunhos.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Novatabelas.
+     * Filter by unique combinations of Testemunhos.
      */
-    distinct?: NovatabelaScalarFieldEnum | NovatabelaScalarFieldEnum[]
+    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
   }
 
   /**
-   * Novatabela findFirstOrThrow
+   * Testemunho findFirstOrThrow
    */
-  export type NovatabelaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * Filter, which Novatabela to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: NovatabelaWhereInput
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * Filter, which Testemunho to fetch.
+     */
+    where?: TestemunhoWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Novatabelas to fetch.
+     * Determine the order of Testemunhos to fetch.
      */
-    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Novatabelas.
+     * Sets the position for searching for Testemunhos.
      */
-    cursor?: NovatabelaWhereUniqueInput
+    cursor?: TestemunhoWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Novatabelas from the position of the cursor.
+     * Take `±n` Testemunhos from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Novatabelas.
+     * Skip the first `n` Testemunhos.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Novatabelas.
+     * Filter by unique combinations of Testemunhos.
      */
-    distinct?: NovatabelaScalarFieldEnum | NovatabelaScalarFieldEnum[]
+    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
   }
 
   /**
-   * Novatabela findMany
+   * Testemunho findMany
    */
-  export type NovatabelaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * Filter, which Novatabelas to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: NovatabelaWhereInput
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * Filter, which Testemunhos to fetch.
+     */
+    where?: TestemunhoWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Novatabelas to fetch.
+     * Determine the order of Testemunhos to fetch.
      */
-    orderBy?: NovatabelaOrderByWithRelationInput | NovatabelaOrderByWithRelationInput[]
+    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Novatabelas.
+     * Sets the position for listing Testemunhos.
      */
-    cursor?: NovatabelaWhereUniqueInput
+    cursor?: TestemunhoWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Novatabelas from the position of the cursor.
+     * Take `±n` Testemunhos from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Novatabelas.
+     * Skip the first `n` Testemunhos.
      */
     skip?: number
-    distinct?: NovatabelaScalarFieldEnum | NovatabelaScalarFieldEnum[]
+    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
   }
 
   /**
-   * Novatabela create
+   * Testemunho create
    */
-  export type NovatabelaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * The data needed to create a Novatabela.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<NovatabelaCreateInput, NovatabelaUncheckedCreateInput>
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Testemunho.
+     */
+    data: XOR<TestemunhoCreateInput, TestemunhoUncheckedCreateInput>
   }
 
   /**
-   * Novatabela createMany
+   * Testemunho createMany
    */
-  export type NovatabelaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Novatabelas.
+     * The data used to create many Testemunhos.
      */
-    data: NovatabelaCreateManyInput | NovatabelaCreateManyInput[]
+    data: TestemunhoCreateManyInput | TestemunhoCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Novatabela createManyAndReturn
+   * Testemunho createManyAndReturn
    */
-  export type NovatabelaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelectCreateManyAndReturn<ExtArgs> | null
+    select?: TestemunhoSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * The data used to create many Novatabelas.
+     * The data used to create many Testemunhos.
      */
-    data: NovatabelaCreateManyInput | NovatabelaCreateManyInput[]
+    data: TestemunhoCreateManyInput | TestemunhoCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TestemunhoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Novatabela update
+   * Testemunho update
    */
-  export type NovatabelaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * The data needed to update a Novatabela.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<NovatabelaUpdateInput, NovatabelaUncheckedUpdateInput>
+    include?: TestemunhoInclude<ExtArgs> | null
     /**
-     * Choose, which Novatabela to update.
+     * The data needed to update a Testemunho.
      */
-    where: NovatabelaWhereUniqueInput
+    data: XOR<TestemunhoUpdateInput, TestemunhoUncheckedUpdateInput>
+    /**
+     * Choose, which Testemunho to update.
+     */
+    where: TestemunhoWhereUniqueInput
   }
 
   /**
-   * Novatabela updateMany
+   * Testemunho updateMany
    */
-  export type NovatabelaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Novatabelas.
+     * The data used to update Testemunhos.
      */
-    data: XOR<NovatabelaUpdateManyMutationInput, NovatabelaUncheckedUpdateManyInput>
+    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyInput>
     /**
-     * Filter which Novatabelas to update
+     * Filter which Testemunhos to update
      */
-    where?: NovatabelaWhereInput
+    where?: TestemunhoWhereInput
     /**
-     * Limit how many Novatabelas to update.
+     * Limit how many Testemunhos to update.
      */
     limit?: number
   }
 
   /**
-   * Novatabela updateManyAndReturn
+   * Testemunho updateManyAndReturn
    */
-  export type NovatabelaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: TestemunhoSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * The data used to update Novatabelas.
+     * The data used to update Testemunhos.
      */
-    data: XOR<NovatabelaUpdateManyMutationInput, NovatabelaUncheckedUpdateManyInput>
+    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyInput>
     /**
-     * Filter which Novatabelas to update
+     * Filter which Testemunhos to update
      */
-    where?: NovatabelaWhereInput
+    where?: TestemunhoWhereInput
     /**
-     * Limit how many Novatabelas to update.
+     * Limit how many Testemunhos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TestemunhoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Testemunho upsert
+   */
+  export type TestemunhoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testemunho
+     */
+    select?: TestemunhoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Testemunho
+     */
+    omit?: TestemunhoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Testemunho to update in case it exists.
+     */
+    where: TestemunhoWhereUniqueInput
+    /**
+     * In case the Testemunho found by the `where` argument doesn't exist, create a new Testemunho with this data.
+     */
+    create: XOR<TestemunhoCreateInput, TestemunhoUncheckedCreateInput>
+    /**
+     * In case the Testemunho was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TestemunhoUpdateInput, TestemunhoUncheckedUpdateInput>
+  }
+
+  /**
+   * Testemunho delete
+   */
+  export type TestemunhoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testemunho
+     */
+    select?: TestemunhoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Testemunho
+     */
+    omit?: TestemunhoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TestemunhoInclude<ExtArgs> | null
+    /**
+     * Filter which Testemunho to delete.
+     */
+    where: TestemunhoWhereUniqueInput
+  }
+
+  /**
+   * Testemunho deleteMany
+   */
+  export type TestemunhoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Testemunhos to delete
+     */
+    where?: TestemunhoWhereInput
+    /**
+     * Limit how many Testemunhos to delete.
      */
     limit?: number
   }
 
   /**
-   * Novatabela upsert
+   * Testemunho without action
    */
-  export type NovatabelaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TestemunhoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Novatabela
+     * Select specific fields to fetch from the Testemunho
      */
-    select?: NovatabelaSelect<ExtArgs> | null
+    select?: TestemunhoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Novatabela
+     * Omit specific fields from the Testemunho
      */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    omit?: TestemunhoOmit<ExtArgs> | null
     /**
-     * The filter to search for the Novatabela to update in case it exists.
+     * Choose, which related nodes to fetch as well
      */
-    where: NovatabelaWhereUniqueInput
-    /**
-     * In case the Novatabela found by the `where` argument doesn't exist, create a new Novatabela with this data.
-     */
-    create: XOR<NovatabelaCreateInput, NovatabelaUncheckedCreateInput>
-    /**
-     * In case the Novatabela was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NovatabelaUpdateInput, NovatabelaUncheckedUpdateInput>
-  }
-
-  /**
-   * Novatabela delete
-   */
-  export type NovatabelaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novatabela
-     */
-    select?: NovatabelaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novatabela
-     */
-    omit?: NovatabelaOmit<ExtArgs> | null
-    /**
-     * Filter which Novatabela to delete.
-     */
-    where: NovatabelaWhereUniqueInput
-  }
-
-  /**
-   * Novatabela deleteMany
-   */
-  export type NovatabelaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Novatabelas to delete
-     */
-    where?: NovatabelaWhereInput
-    /**
-     * Limit how many Novatabelas to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Novatabela without action
-   */
-  export type NovatabelaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novatabela
-     */
-    select?: NovatabelaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novatabela
-     */
-    omit?: NovatabelaOmit<ExtArgs> | null
+    include?: TestemunhoInclude<ExtArgs> | null
   }
 
 
@@ -27689,27 +15613,11 @@ export namespace Prisma {
     name: 'name',
     avatarUrl: 'avatarUrl',
     password: 'password',
-    isAdmin: 'isAdmin',
-    expires: 'expires',
-    passwordResetToken: 'passwordResetToken',
-    token: 'token'
+    role: 'role',
+    expires: 'expires'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const UserIgrejaScalarFieldEnum: {
-    id: 'id',
-    login: 'login',
-    name: 'name',
-    avatarUrl: 'avatarUrl',
-    password: 'password',
-    passwordResetToken: 'passwordResetToken',
-    expires: 'expires',
-    token: 'token'
-  };
-
-  export type UserIgrejaScalarFieldEnum = (typeof UserIgrejaScalarFieldEnum)[keyof typeof UserIgrejaScalarFieldEnum]
 
 
   export const NewScalarFieldEnum: {
@@ -27723,7 +15631,8 @@ export namespace Prisma {
     page: 'page',
     updatedAt: 'updatedAt',
     destaque: 'destaque',
-    url: 'url'
+    url: 'url',
+    role: 'role'
   };
 
   export type NewScalarFieldEnum = (typeof NewScalarFieldEnum)[keyof typeof NewScalarFieldEnum]
@@ -27738,7 +15647,8 @@ export namespace Prisma {
     isPublic: 'isPublic',
     createdAt: 'createdAt',
     coverUrl: 'coverUrl',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    role: 'role'
   };
 
   export type MinisterioScalarFieldEnum = (typeof MinisterioScalarFieldEnum)[keyof typeof MinisterioScalarFieldEnum]
@@ -27753,104 +15663,11 @@ export namespace Prisma {
     isPublic: 'isPublic',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    destaque: 'destaque'
+    destaque: 'destaque',
+    role: 'role'
   };
 
   export type AgendaScalarFieldEnum = (typeof AgendaScalarFieldEnum)[keyof typeof AgendaScalarFieldEnum]
-
-
-  export const NewTomazinhoScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    coverUrl: 'coverUrl',
-    content: 'content',
-    title: 'title',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    page: 'page',
-    updatedAt: 'updatedAt',
-    destaque: 'destaque',
-    url: 'url'
-  };
-
-  export type NewTomazinhoScalarFieldEnum = (typeof NewTomazinhoScalarFieldEnum)[keyof typeof NewTomazinhoScalarFieldEnum]
-
-
-  export const MinisterioTomazinhoScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    name: 'name',
-    title: 'title',
-    local: 'local',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    coverUrl: 'coverUrl',
-    updatedAt: 'updatedAt'
-  };
-
-  export type MinisterioTomazinhoScalarFieldEnum = (typeof MinisterioTomazinhoScalarFieldEnum)[keyof typeof MinisterioTomazinhoScalarFieldEnum]
-
-
-  export const AgendaTomazinhoScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    day: 'day',
-    name: 'name',
-    hour: 'hour',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    destaque: 'destaque'
-  };
-
-  export type AgendaTomazinhoScalarFieldEnum = (typeof AgendaTomazinhoScalarFieldEnum)[keyof typeof AgendaTomazinhoScalarFieldEnum]
-
-
-  export const NewCaxiasScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    coverUrl: 'coverUrl',
-    content: 'content',
-    title: 'title',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    page: 'page',
-    updatedAt: 'updatedAt',
-    destaque: 'destaque',
-    url: 'url'
-  };
-
-  export type NewCaxiasScalarFieldEnum = (typeof NewCaxiasScalarFieldEnum)[keyof typeof NewCaxiasScalarFieldEnum]
-
-
-  export const MinisterioCaxiasScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    name: 'name',
-    title: 'title',
-    local: 'local',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    coverUrl: 'coverUrl',
-    updatedAt: 'updatedAt'
-  };
-
-  export type MinisterioCaxiasScalarFieldEnum = (typeof MinisterioCaxiasScalarFieldEnum)[keyof typeof MinisterioCaxiasScalarFieldEnum]
-
-
-  export const AgendaCaxiasScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    day: 'day',
-    name: 'name',
-    hour: 'hour',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    destaque: 'destaque'
-  };
-
-  export type AgendaCaxiasScalarFieldEnum = (typeof AgendaCaxiasScalarFieldEnum)[keyof typeof AgendaCaxiasScalarFieldEnum]
 
 
   export const DoacaoScalarFieldEnum: {
@@ -27941,6 +15758,17 @@ export namespace Prisma {
   export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
+  export const PasswordResetTokenScalarFieldEnum: {
+    id: 'id',
+    token: 'token',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
   export const TestemunhoScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -27954,49 +15782,6 @@ export namespace Prisma {
   };
 
   export type TestemunhoScalarFieldEnum = (typeof TestemunhoScalarFieldEnum)[keyof typeof TestemunhoScalarFieldEnum]
-
-
-  export const RefreshTokenIgrejaScalarFieldEnum: {
-    id: 'id',
-    token: 'token',
-    userId: 'userId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type RefreshTokenIgrejaScalarFieldEnum = (typeof RefreshTokenIgrejaScalarFieldEnum)[keyof typeof RefreshTokenIgrejaScalarFieldEnum]
-
-
-  export const PasswordResetTokenIgrejaScalarFieldEnum: {
-    id: 'id',
-    token: 'token',
-    userId: 'userId',
-    createdAt: 'createdAt',
-    expiresAt: 'expiresAt'
-  };
-
-  export type PasswordResetTokenIgrejaScalarFieldEnum = (typeof PasswordResetTokenIgrejaScalarFieldEnum)[keyof typeof PasswordResetTokenIgrejaScalarFieldEnum]
-
-
-  export const PasswordResetTokenScalarFieldEnum: {
-    id: 'id',
-    token: 'token',
-    userId: 'userId',
-    createdAt: 'createdAt',
-    expiresAt: 'expiresAt'
-  };
-
-  export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
-
-
-  export const NovatabelaScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    name: 'name',
-    title: 'title'
-  };
-
-  export type NovatabelaScalarFieldEnum = (typeof NovatabelaScalarFieldEnum)[keyof typeof NovatabelaScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -28043,9 +15828,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'UserRole'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
     
 
 
@@ -28060,6 +15852,27 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'MinistryRole'
+   */
+  export type EnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'MinistryRole[]'
+   */
+  export type ListEnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole[]'>
     
 
 
@@ -28089,26 +15902,19 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     avatarUrl?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
-    isAdmin?: BoolFilter<"User"> | boolean
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
-    passwordResetToken?: StringNullableFilter<"User"> | string | null
-    token?: StringNullableFilter<"User"> | string | null
     agenda?: AgendaListRelationFilter
-    agendacaxias?: AgendaCaxiasListRelationFilter
-    agendatomazinho?: AgendaTomazinhoListRelationFilter
     contato?: ContatoListRelationFilter
     doacao?: DoacaoListRelationFilter
     endereco?: EnderecoListRelationFilter
     ministerio?: MinisterioListRelationFilter
-    ministeriocaxias?: MinisterioCaxiasListRelationFilter
-    ministeriotomazinho?: MinisterioTomazinhoListRelationFilter
     news?: NewListRelationFilter
-    newscaxias?: NewCaxiasListRelationFilter
-    newstomazinho?: NewTomazinhoListRelationFilter
     PasswordResetToken?: PasswordResetTokenListRelationFilter
     refreshToken?: RefreshTokenListRelationFilter
     sobre?: SobreListRelationFilter
     sobreLider?: SobreLiderListRelationFilter
+    testemunhos?: TestemunhoListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -28117,26 +15923,19 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
-    isAdmin?: SortOrder
+    role?: SortOrder
     expires?: SortOrderInput | SortOrder
-    passwordResetToken?: SortOrderInput | SortOrder
-    token?: SortOrderInput | SortOrder
     agenda?: AgendaOrderByRelationAggregateInput
-    agendacaxias?: AgendaCaxiasOrderByRelationAggregateInput
-    agendatomazinho?: AgendaTomazinhoOrderByRelationAggregateInput
     contato?: ContatoOrderByRelationAggregateInput
     doacao?: DoacaoOrderByRelationAggregateInput
     endereco?: EnderecoOrderByRelationAggregateInput
     ministerio?: MinisterioOrderByRelationAggregateInput
-    ministeriocaxias?: MinisterioCaxiasOrderByRelationAggregateInput
-    ministeriotomazinho?: MinisterioTomazinhoOrderByRelationAggregateInput
     news?: NewOrderByRelationAggregateInput
-    newscaxias?: NewCaxiasOrderByRelationAggregateInput
-    newstomazinho?: NewTomazinhoOrderByRelationAggregateInput
     PasswordResetToken?: PasswordResetTokenOrderByRelationAggregateInput
     refreshToken?: RefreshTokenOrderByRelationAggregateInput
     sobre?: SobreOrderByRelationAggregateInput
     sobreLider?: SobreLiderOrderByRelationAggregateInput
+    testemunhos?: TestemunhoOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -28148,26 +15947,19 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     avatarUrl?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
-    isAdmin?: BoolFilter<"User"> | boolean
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
-    passwordResetToken?: StringNullableFilter<"User"> | string | null
-    token?: StringNullableFilter<"User"> | string | null
     agenda?: AgendaListRelationFilter
-    agendacaxias?: AgendaCaxiasListRelationFilter
-    agendatomazinho?: AgendaTomazinhoListRelationFilter
     contato?: ContatoListRelationFilter
     doacao?: DoacaoListRelationFilter
     endereco?: EnderecoListRelationFilter
     ministerio?: MinisterioListRelationFilter
-    ministeriocaxias?: MinisterioCaxiasListRelationFilter
-    ministeriotomazinho?: MinisterioTomazinhoListRelationFilter
     news?: NewListRelationFilter
-    newscaxias?: NewCaxiasListRelationFilter
-    newstomazinho?: NewTomazinhoListRelationFilter
     PasswordResetToken?: PasswordResetTokenListRelationFilter
     refreshToken?: RefreshTokenListRelationFilter
     sobre?: SobreListRelationFilter
     sobreLider?: SobreLiderListRelationFilter
+    testemunhos?: TestemunhoListRelationFilter
   }, "id" | "login">
 
   export type UserOrderByWithAggregationInput = {
@@ -28176,10 +15968,8 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
-    isAdmin?: SortOrder
+    role?: SortOrder
     expires?: SortOrderInput | SortOrder
-    passwordResetToken?: SortOrderInput | SortOrder
-    token?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -28194,86 +15984,8 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
-    isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
+    role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     expires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    passwordResetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
-    token?: StringNullableWithAggregatesFilter<"User"> | string | null
-  }
-
-  export type UserIgrejaWhereInput = {
-    AND?: UserIgrejaWhereInput | UserIgrejaWhereInput[]
-    OR?: UserIgrejaWhereInput[]
-    NOT?: UserIgrejaWhereInput | UserIgrejaWhereInput[]
-    id?: StringFilter<"UserIgreja"> | string
-    login?: StringFilter<"UserIgreja"> | string
-    name?: StringNullableFilter<"UserIgreja"> | string | null
-    avatarUrl?: StringNullableFilter<"UserIgreja"> | string | null
-    password?: StringFilter<"UserIgreja"> | string
-    passwordResetToken?: StringNullableFilter<"UserIgreja"> | string | null
-    expires?: DateTimeNullableFilter<"UserIgreja"> | Date | string | null
-    token?: StringNullableFilter<"UserIgreja"> | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaListRelationFilter
-    refreshTokenIgreja?: RefreshTokenIgrejaListRelationFilter
-    testemunho?: TestemunhoListRelationFilter
-  }
-
-  export type UserIgrejaOrderByWithRelationInput = {
-    id?: SortOrder
-    login?: SortOrder
-    name?: SortOrderInput | SortOrder
-    avatarUrl?: SortOrderInput | SortOrder
-    password?: SortOrder
-    passwordResetToken?: SortOrderInput | SortOrder
-    expires?: SortOrderInput | SortOrder
-    token?: SortOrderInput | SortOrder
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaOrderByRelationAggregateInput
-    refreshTokenIgreja?: RefreshTokenIgrejaOrderByRelationAggregateInput
-    testemunho?: TestemunhoOrderByRelationAggregateInput
-  }
-
-  export type UserIgrejaWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    login?: string
-    AND?: UserIgrejaWhereInput | UserIgrejaWhereInput[]
-    OR?: UserIgrejaWhereInput[]
-    NOT?: UserIgrejaWhereInput | UserIgrejaWhereInput[]
-    name?: StringNullableFilter<"UserIgreja"> | string | null
-    avatarUrl?: StringNullableFilter<"UserIgreja"> | string | null
-    password?: StringFilter<"UserIgreja"> | string
-    passwordResetToken?: StringNullableFilter<"UserIgreja"> | string | null
-    expires?: DateTimeNullableFilter<"UserIgreja"> | Date | string | null
-    token?: StringNullableFilter<"UserIgreja"> | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaListRelationFilter
-    refreshTokenIgreja?: RefreshTokenIgrejaListRelationFilter
-    testemunho?: TestemunhoListRelationFilter
-  }, "id" | "login">
-
-  export type UserIgrejaOrderByWithAggregationInput = {
-    id?: SortOrder
-    login?: SortOrder
-    name?: SortOrderInput | SortOrder
-    avatarUrl?: SortOrderInput | SortOrder
-    password?: SortOrder
-    passwordResetToken?: SortOrderInput | SortOrder
-    expires?: SortOrderInput | SortOrder
-    token?: SortOrderInput | SortOrder
-    _count?: UserIgrejaCountOrderByAggregateInput
-    _max?: UserIgrejaMaxOrderByAggregateInput
-    _min?: UserIgrejaMinOrderByAggregateInput
-  }
-
-  export type UserIgrejaScalarWhereWithAggregatesInput = {
-    AND?: UserIgrejaScalarWhereWithAggregatesInput | UserIgrejaScalarWhereWithAggregatesInput[]
-    OR?: UserIgrejaScalarWhereWithAggregatesInput[]
-    NOT?: UserIgrejaScalarWhereWithAggregatesInput | UserIgrejaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"UserIgreja"> | string
-    login?: StringWithAggregatesFilter<"UserIgreja"> | string
-    name?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
-    avatarUrl?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
-    password?: StringWithAggregatesFilter<"UserIgreja"> | string
-    passwordResetToken?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
-    expires?: DateTimeNullableWithAggregatesFilter<"UserIgreja"> | Date | string | null
-    token?: StringNullableWithAggregatesFilter<"UserIgreja"> | string | null
   }
 
   export type NewWhereInput = {
@@ -28291,6 +16003,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
     url?: StringFilter<"New"> | string
+    role?: EnumMinistryRoleFilter<"New"> | $Enums.MinistryRole
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -28306,6 +16019,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
+    role?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -28324,6 +16038,7 @@ export namespace Prisma {
     page?: StringFilter<"New"> | string
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
+    role?: EnumMinistryRoleFilter<"New"> | $Enums.MinistryRole
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "url">
 
@@ -28339,6 +16054,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
+    role?: SortOrder
     _count?: NewCountOrderByAggregateInput
     _max?: NewMaxOrderByAggregateInput
     _min?: NewMinOrderByAggregateInput
@@ -28359,6 +16075,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"New"> | Date | string
     destaque?: BoolWithAggregatesFilter<"New"> | boolean
     url?: StringWithAggregatesFilter<"New"> | string
+    role?: EnumMinistryRoleWithAggregatesFilter<"New"> | $Enums.MinistryRole
   }
 
   export type MinisterioWhereInput = {
@@ -28374,6 +16091,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Ministerio"> | Date | string
     coverUrl?: StringFilter<"Ministerio"> | string
     updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
+    role?: EnumMinistryRoleFilter<"Ministerio"> | $Enums.MinistryRole
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -28387,6 +16105,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
+    role?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -28403,6 +16122,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Ministerio"> | Date | string
     coverUrl?: StringFilter<"Ministerio"> | string
     updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
+    role?: EnumMinistryRoleFilter<"Ministerio"> | $Enums.MinistryRole
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -28416,6 +16136,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
+    role?: SortOrder
     _count?: MinisterioCountOrderByAggregateInput
     _max?: MinisterioMaxOrderByAggregateInput
     _min?: MinisterioMinOrderByAggregateInput
@@ -28434,6 +16155,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Ministerio"> | Date | string
     coverUrl?: StringWithAggregatesFilter<"Ministerio"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ministerio"> | Date | string
+    role?: EnumMinistryRoleWithAggregatesFilter<"Ministerio"> | $Enums.MinistryRole
   }
 
   export type AgendaWhereInput = {
@@ -28449,6 +16171,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeFilter<"Agenda"> | Date | string
     destaque?: BoolFilter<"Agenda"> | boolean
+    role?: EnumMinistryRoleFilter<"Agenda"> | $Enums.MinistryRole
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -28462,6 +16185,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    role?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -28478,6 +16202,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeFilter<"Agenda"> | Date | string
     destaque?: BoolFilter<"Agenda"> | boolean
+    role?: EnumMinistryRoleFilter<"Agenda"> | $Enums.MinistryRole
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -28491,6 +16216,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    role?: SortOrder
     _count?: AgendaCountOrderByAggregateInput
     _max?: AgendaMaxOrderByAggregateInput
     _min?: AgendaMinOrderByAggregateInput
@@ -28509,476 +16235,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Agenda"> | Date | string
     destaque?: BoolWithAggregatesFilter<"Agenda"> | boolean
-  }
-
-  export type NewTomazinhoWhereInput = {
-    AND?: NewTomazinhoWhereInput | NewTomazinhoWhereInput[]
-    OR?: NewTomazinhoWhereInput[]
-    NOT?: NewTomazinhoWhereInput | NewTomazinhoWhereInput[]
-    id?: StringFilter<"NewTomazinho"> | string
-    userId?: StringFilter<"NewTomazinho"> | string
-    coverUrl?: StringFilter<"NewTomazinho"> | string
-    content?: StringFilter<"NewTomazinho"> | string
-    title?: StringFilter<"NewTomazinho"> | string
-    isPublic?: BoolFilter<"NewTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"NewTomazinho"> | Date | string
-    page?: StringFilter<"NewTomazinho"> | string
-    updatedAt?: DateTimeFilter<"NewTomazinho"> | Date | string
-    destaque?: BoolFilter<"NewTomazinho"> | boolean
-    url?: StringFilter<"NewTomazinho"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type NewTomazinhoOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type NewTomazinhoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    url?: string
-    AND?: NewTomazinhoWhereInput | NewTomazinhoWhereInput[]
-    OR?: NewTomazinhoWhereInput[]
-    NOT?: NewTomazinhoWhereInput | NewTomazinhoWhereInput[]
-    userId?: StringFilter<"NewTomazinho"> | string
-    coverUrl?: StringFilter<"NewTomazinho"> | string
-    content?: StringFilter<"NewTomazinho"> | string
-    title?: StringFilter<"NewTomazinho"> | string
-    isPublic?: BoolFilter<"NewTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"NewTomazinho"> | Date | string
-    page?: StringFilter<"NewTomazinho"> | string
-    updatedAt?: DateTimeFilter<"NewTomazinho"> | Date | string
-    destaque?: BoolFilter<"NewTomazinho"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "url">
-
-  export type NewTomazinhoOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-    _count?: NewTomazinhoCountOrderByAggregateInput
-    _max?: NewTomazinhoMaxOrderByAggregateInput
-    _min?: NewTomazinhoMinOrderByAggregateInput
-  }
-
-  export type NewTomazinhoScalarWhereWithAggregatesInput = {
-    AND?: NewTomazinhoScalarWhereWithAggregatesInput | NewTomazinhoScalarWhereWithAggregatesInput[]
-    OR?: NewTomazinhoScalarWhereWithAggregatesInput[]
-    NOT?: NewTomazinhoScalarWhereWithAggregatesInput | NewTomazinhoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"NewTomazinho"> | string
-    userId?: StringWithAggregatesFilter<"NewTomazinho"> | string
-    coverUrl?: StringWithAggregatesFilter<"NewTomazinho"> | string
-    content?: StringWithAggregatesFilter<"NewTomazinho"> | string
-    title?: StringWithAggregatesFilter<"NewTomazinho"> | string
-    isPublic?: BoolWithAggregatesFilter<"NewTomazinho"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"NewTomazinho"> | Date | string
-    page?: StringWithAggregatesFilter<"NewTomazinho"> | string
-    updatedAt?: DateTimeWithAggregatesFilter<"NewTomazinho"> | Date | string
-    destaque?: BoolWithAggregatesFilter<"NewTomazinho"> | boolean
-    url?: StringWithAggregatesFilter<"NewTomazinho"> | string
-  }
-
-  export type MinisterioTomazinhoWhereInput = {
-    AND?: MinisterioTomazinhoWhereInput | MinisterioTomazinhoWhereInput[]
-    OR?: MinisterioTomazinhoWhereInput[]
-    NOT?: MinisterioTomazinhoWhereInput | MinisterioTomazinhoWhereInput[]
-    id?: StringFilter<"MinisterioTomazinho"> | string
-    userId?: StringFilter<"MinisterioTomazinho"> | string
-    name?: StringFilter<"MinisterioTomazinho"> | string
-    title?: StringFilter<"MinisterioTomazinho"> | string
-    local?: StringFilter<"MinisterioTomazinho"> | string
-    isPublic?: BoolFilter<"MinisterioTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"MinisterioTomazinho"> | Date | string
-    coverUrl?: StringFilter<"MinisterioTomazinho"> | string
-    updatedAt?: DateTimeFilter<"MinisterioTomazinho"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type MinisterioTomazinhoOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type MinisterioTomazinhoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MinisterioTomazinhoWhereInput | MinisterioTomazinhoWhereInput[]
-    OR?: MinisterioTomazinhoWhereInput[]
-    NOT?: MinisterioTomazinhoWhereInput | MinisterioTomazinhoWhereInput[]
-    userId?: StringFilter<"MinisterioTomazinho"> | string
-    name?: StringFilter<"MinisterioTomazinho"> | string
-    title?: StringFilter<"MinisterioTomazinho"> | string
-    local?: StringFilter<"MinisterioTomazinho"> | string
-    isPublic?: BoolFilter<"MinisterioTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"MinisterioTomazinho"> | Date | string
-    coverUrl?: StringFilter<"MinisterioTomazinho"> | string
-    updatedAt?: DateTimeFilter<"MinisterioTomazinho"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type MinisterioTomazinhoOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-    _count?: MinisterioTomazinhoCountOrderByAggregateInput
-    _max?: MinisterioTomazinhoMaxOrderByAggregateInput
-    _min?: MinisterioTomazinhoMinOrderByAggregateInput
-  }
-
-  export type MinisterioTomazinhoScalarWhereWithAggregatesInput = {
-    AND?: MinisterioTomazinhoScalarWhereWithAggregatesInput | MinisterioTomazinhoScalarWhereWithAggregatesInput[]
-    OR?: MinisterioTomazinhoScalarWhereWithAggregatesInput[]
-    NOT?: MinisterioTomazinhoScalarWhereWithAggregatesInput | MinisterioTomazinhoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MinisterioTomazinho"> | string
-    userId?: StringWithAggregatesFilter<"MinisterioTomazinho"> | string
-    name?: StringWithAggregatesFilter<"MinisterioTomazinho"> | string
-    title?: StringWithAggregatesFilter<"MinisterioTomazinho"> | string
-    local?: StringWithAggregatesFilter<"MinisterioTomazinho"> | string
-    isPublic?: BoolWithAggregatesFilter<"MinisterioTomazinho"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"MinisterioTomazinho"> | Date | string
-    coverUrl?: StringWithAggregatesFilter<"MinisterioTomazinho"> | string
-    updatedAt?: DateTimeWithAggregatesFilter<"MinisterioTomazinho"> | Date | string
-  }
-
-  export type AgendaTomazinhoWhereInput = {
-    AND?: AgendaTomazinhoWhereInput | AgendaTomazinhoWhereInput[]
-    OR?: AgendaTomazinhoWhereInput[]
-    NOT?: AgendaTomazinhoWhereInput | AgendaTomazinhoWhereInput[]
-    id?: StringFilter<"AgendaTomazinho"> | string
-    userId?: StringFilter<"AgendaTomazinho"> | string
-    day?: StringFilter<"AgendaTomazinho"> | string
-    name?: StringFilter<"AgendaTomazinho"> | string
-    hour?: StringFilter<"AgendaTomazinho"> | string
-    isPublic?: BoolFilter<"AgendaTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"AgendaTomazinho"> | Date | string
-    updatedAt?: DateTimeFilter<"AgendaTomazinho"> | Date | string
-    destaque?: BoolFilter<"AgendaTomazinho"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type AgendaTomazinhoOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type AgendaTomazinhoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: AgendaTomazinhoWhereInput | AgendaTomazinhoWhereInput[]
-    OR?: AgendaTomazinhoWhereInput[]
-    NOT?: AgendaTomazinhoWhereInput | AgendaTomazinhoWhereInput[]
-    userId?: StringFilter<"AgendaTomazinho"> | string
-    day?: StringFilter<"AgendaTomazinho"> | string
-    name?: StringFilter<"AgendaTomazinho"> | string
-    hour?: StringFilter<"AgendaTomazinho"> | string
-    isPublic?: BoolFilter<"AgendaTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"AgendaTomazinho"> | Date | string
-    updatedAt?: DateTimeFilter<"AgendaTomazinho"> | Date | string
-    destaque?: BoolFilter<"AgendaTomazinho"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type AgendaTomazinhoOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    _count?: AgendaTomazinhoCountOrderByAggregateInput
-    _max?: AgendaTomazinhoMaxOrderByAggregateInput
-    _min?: AgendaTomazinhoMinOrderByAggregateInput
-  }
-
-  export type AgendaTomazinhoScalarWhereWithAggregatesInput = {
-    AND?: AgendaTomazinhoScalarWhereWithAggregatesInput | AgendaTomazinhoScalarWhereWithAggregatesInput[]
-    OR?: AgendaTomazinhoScalarWhereWithAggregatesInput[]
-    NOT?: AgendaTomazinhoScalarWhereWithAggregatesInput | AgendaTomazinhoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"AgendaTomazinho"> | string
-    userId?: StringWithAggregatesFilter<"AgendaTomazinho"> | string
-    day?: StringWithAggregatesFilter<"AgendaTomazinho"> | string
-    name?: StringWithAggregatesFilter<"AgendaTomazinho"> | string
-    hour?: StringWithAggregatesFilter<"AgendaTomazinho"> | string
-    isPublic?: BoolWithAggregatesFilter<"AgendaTomazinho"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"AgendaTomazinho"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"AgendaTomazinho"> | Date | string
-    destaque?: BoolWithAggregatesFilter<"AgendaTomazinho"> | boolean
-  }
-
-  export type NewCaxiasWhereInput = {
-    AND?: NewCaxiasWhereInput | NewCaxiasWhereInput[]
-    OR?: NewCaxiasWhereInput[]
-    NOT?: NewCaxiasWhereInput | NewCaxiasWhereInput[]
-    id?: StringFilter<"NewCaxias"> | string
-    userId?: StringFilter<"NewCaxias"> | string
-    coverUrl?: StringFilter<"NewCaxias"> | string
-    content?: StringFilter<"NewCaxias"> | string
-    title?: StringFilter<"NewCaxias"> | string
-    isPublic?: BoolFilter<"NewCaxias"> | boolean
-    createdAt?: DateTimeFilter<"NewCaxias"> | Date | string
-    page?: StringFilter<"NewCaxias"> | string
-    updatedAt?: DateTimeFilter<"NewCaxias"> | Date | string
-    destaque?: BoolFilter<"NewCaxias"> | boolean
-    url?: StringFilter<"NewCaxias"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type NewCaxiasOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type NewCaxiasWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    url?: string
-    AND?: NewCaxiasWhereInput | NewCaxiasWhereInput[]
-    OR?: NewCaxiasWhereInput[]
-    NOT?: NewCaxiasWhereInput | NewCaxiasWhereInput[]
-    userId?: StringFilter<"NewCaxias"> | string
-    coverUrl?: StringFilter<"NewCaxias"> | string
-    content?: StringFilter<"NewCaxias"> | string
-    title?: StringFilter<"NewCaxias"> | string
-    isPublic?: BoolFilter<"NewCaxias"> | boolean
-    createdAt?: DateTimeFilter<"NewCaxias"> | Date | string
-    page?: StringFilter<"NewCaxias"> | string
-    updatedAt?: DateTimeFilter<"NewCaxias"> | Date | string
-    destaque?: BoolFilter<"NewCaxias"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "url">
-
-  export type NewCaxiasOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-    _count?: NewCaxiasCountOrderByAggregateInput
-    _max?: NewCaxiasMaxOrderByAggregateInput
-    _min?: NewCaxiasMinOrderByAggregateInput
-  }
-
-  export type NewCaxiasScalarWhereWithAggregatesInput = {
-    AND?: NewCaxiasScalarWhereWithAggregatesInput | NewCaxiasScalarWhereWithAggregatesInput[]
-    OR?: NewCaxiasScalarWhereWithAggregatesInput[]
-    NOT?: NewCaxiasScalarWhereWithAggregatesInput | NewCaxiasScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"NewCaxias"> | string
-    userId?: StringWithAggregatesFilter<"NewCaxias"> | string
-    coverUrl?: StringWithAggregatesFilter<"NewCaxias"> | string
-    content?: StringWithAggregatesFilter<"NewCaxias"> | string
-    title?: StringWithAggregatesFilter<"NewCaxias"> | string
-    isPublic?: BoolWithAggregatesFilter<"NewCaxias"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"NewCaxias"> | Date | string
-    page?: StringWithAggregatesFilter<"NewCaxias"> | string
-    updatedAt?: DateTimeWithAggregatesFilter<"NewCaxias"> | Date | string
-    destaque?: BoolWithAggregatesFilter<"NewCaxias"> | boolean
-    url?: StringWithAggregatesFilter<"NewCaxias"> | string
-  }
-
-  export type MinisterioCaxiasWhereInput = {
-    AND?: MinisterioCaxiasWhereInput | MinisterioCaxiasWhereInput[]
-    OR?: MinisterioCaxiasWhereInput[]
-    NOT?: MinisterioCaxiasWhereInput | MinisterioCaxiasWhereInput[]
-    id?: StringFilter<"MinisterioCaxias"> | string
-    userId?: StringFilter<"MinisterioCaxias"> | string
-    name?: StringFilter<"MinisterioCaxias"> | string
-    title?: StringFilter<"MinisterioCaxias"> | string
-    local?: StringFilter<"MinisterioCaxias"> | string
-    isPublic?: BoolFilter<"MinisterioCaxias"> | boolean
-    createdAt?: DateTimeFilter<"MinisterioCaxias"> | Date | string
-    coverUrl?: StringFilter<"MinisterioCaxias"> | string
-    updatedAt?: DateTimeFilter<"MinisterioCaxias"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type MinisterioCaxiasOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type MinisterioCaxiasWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MinisterioCaxiasWhereInput | MinisterioCaxiasWhereInput[]
-    OR?: MinisterioCaxiasWhereInput[]
-    NOT?: MinisterioCaxiasWhereInput | MinisterioCaxiasWhereInput[]
-    userId?: StringFilter<"MinisterioCaxias"> | string
-    name?: StringFilter<"MinisterioCaxias"> | string
-    title?: StringFilter<"MinisterioCaxias"> | string
-    local?: StringFilter<"MinisterioCaxias"> | string
-    isPublic?: BoolFilter<"MinisterioCaxias"> | boolean
-    createdAt?: DateTimeFilter<"MinisterioCaxias"> | Date | string
-    coverUrl?: StringFilter<"MinisterioCaxias"> | string
-    updatedAt?: DateTimeFilter<"MinisterioCaxias"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type MinisterioCaxiasOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-    _count?: MinisterioCaxiasCountOrderByAggregateInput
-    _max?: MinisterioCaxiasMaxOrderByAggregateInput
-    _min?: MinisterioCaxiasMinOrderByAggregateInput
-  }
-
-  export type MinisterioCaxiasScalarWhereWithAggregatesInput = {
-    AND?: MinisterioCaxiasScalarWhereWithAggregatesInput | MinisterioCaxiasScalarWhereWithAggregatesInput[]
-    OR?: MinisterioCaxiasScalarWhereWithAggregatesInput[]
-    NOT?: MinisterioCaxiasScalarWhereWithAggregatesInput | MinisterioCaxiasScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MinisterioCaxias"> | string
-    userId?: StringWithAggregatesFilter<"MinisterioCaxias"> | string
-    name?: StringWithAggregatesFilter<"MinisterioCaxias"> | string
-    title?: StringWithAggregatesFilter<"MinisterioCaxias"> | string
-    local?: StringWithAggregatesFilter<"MinisterioCaxias"> | string
-    isPublic?: BoolWithAggregatesFilter<"MinisterioCaxias"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"MinisterioCaxias"> | Date | string
-    coverUrl?: StringWithAggregatesFilter<"MinisterioCaxias"> | string
-    updatedAt?: DateTimeWithAggregatesFilter<"MinisterioCaxias"> | Date | string
-  }
-
-  export type AgendaCaxiasWhereInput = {
-    AND?: AgendaCaxiasWhereInput | AgendaCaxiasWhereInput[]
-    OR?: AgendaCaxiasWhereInput[]
-    NOT?: AgendaCaxiasWhereInput | AgendaCaxiasWhereInput[]
-    id?: StringFilter<"AgendaCaxias"> | string
-    userId?: StringFilter<"AgendaCaxias"> | string
-    day?: StringFilter<"AgendaCaxias"> | string
-    name?: StringFilter<"AgendaCaxias"> | string
-    hour?: StringFilter<"AgendaCaxias"> | string
-    isPublic?: BoolFilter<"AgendaCaxias"> | boolean
-    createdAt?: DateTimeFilter<"AgendaCaxias"> | Date | string
-    updatedAt?: DateTimeFilter<"AgendaCaxias"> | Date | string
-    destaque?: BoolFilter<"AgendaCaxias"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type AgendaCaxiasOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type AgendaCaxiasWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: AgendaCaxiasWhereInput | AgendaCaxiasWhereInput[]
-    OR?: AgendaCaxiasWhereInput[]
-    NOT?: AgendaCaxiasWhereInput | AgendaCaxiasWhereInput[]
-    userId?: StringFilter<"AgendaCaxias"> | string
-    day?: StringFilter<"AgendaCaxias"> | string
-    name?: StringFilter<"AgendaCaxias"> | string
-    hour?: StringFilter<"AgendaCaxias"> | string
-    isPublic?: BoolFilter<"AgendaCaxias"> | boolean
-    createdAt?: DateTimeFilter<"AgendaCaxias"> | Date | string
-    updatedAt?: DateTimeFilter<"AgendaCaxias"> | Date | string
-    destaque?: BoolFilter<"AgendaCaxias"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type AgendaCaxiasOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    _count?: AgendaCaxiasCountOrderByAggregateInput
-    _max?: AgendaCaxiasMaxOrderByAggregateInput
-    _min?: AgendaCaxiasMinOrderByAggregateInput
-  }
-
-  export type AgendaCaxiasScalarWhereWithAggregatesInput = {
-    AND?: AgendaCaxiasScalarWhereWithAggregatesInput | AgendaCaxiasScalarWhereWithAggregatesInput[]
-    OR?: AgendaCaxiasScalarWhereWithAggregatesInput[]
-    NOT?: AgendaCaxiasScalarWhereWithAggregatesInput | AgendaCaxiasScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"AgendaCaxias"> | string
-    userId?: StringWithAggregatesFilter<"AgendaCaxias"> | string
-    day?: StringWithAggregatesFilter<"AgendaCaxias"> | string
-    name?: StringWithAggregatesFilter<"AgendaCaxias"> | string
-    hour?: StringWithAggregatesFilter<"AgendaCaxias"> | string
-    isPublic?: BoolWithAggregatesFilter<"AgendaCaxias"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"AgendaCaxias"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"AgendaCaxias"> | Date | string
-    destaque?: BoolWithAggregatesFilter<"AgendaCaxias"> | boolean
+    role?: EnumMinistryRoleWithAggregatesFilter<"Agenda"> | $Enums.MinistryRole
   }
 
   export type DoacaoWhereInput = {
@@ -29421,191 +16678,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
   }
 
-  export type TestemunhoWhereInput = {
-    AND?: TestemunhoWhereInput | TestemunhoWhereInput[]
-    OR?: TestemunhoWhereInput[]
-    NOT?: TestemunhoWhereInput | TestemunhoWhereInput[]
-    id?: StringFilter<"Testemunho"> | string
-    userId?: StringFilter<"Testemunho"> | string
-    name?: StringFilter<"Testemunho"> | string
-    avatarUrl?: StringFilter<"Testemunho"> | string
-    content?: StringFilter<"Testemunho"> | string
-    createdAt?: DateTimeFilter<"Testemunho"> | Date | string
-    updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
-    isPublic?: BoolFilter<"Testemunho"> | boolean
-    coverUrl?: StringNullableFilter<"Testemunho"> | string | null
-    userIgreja?: XOR<UserIgrejaScalarRelationFilter, UserIgrejaWhereInput>
-  }
-
-  export type TestemunhoOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    avatarUrl?: SortOrder
-    content?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    isPublic?: SortOrder
-    coverUrl?: SortOrderInput | SortOrder
-    userIgreja?: UserIgrejaOrderByWithRelationInput
-  }
-
-  export type TestemunhoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: TestemunhoWhereInput | TestemunhoWhereInput[]
-    OR?: TestemunhoWhereInput[]
-    NOT?: TestemunhoWhereInput | TestemunhoWhereInput[]
-    userId?: StringFilter<"Testemunho"> | string
-    name?: StringFilter<"Testemunho"> | string
-    avatarUrl?: StringFilter<"Testemunho"> | string
-    content?: StringFilter<"Testemunho"> | string
-    createdAt?: DateTimeFilter<"Testemunho"> | Date | string
-    updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
-    isPublic?: BoolFilter<"Testemunho"> | boolean
-    coverUrl?: StringNullableFilter<"Testemunho"> | string | null
-    userIgreja?: XOR<UserIgrejaScalarRelationFilter, UserIgrejaWhereInput>
-  }, "id">
-
-  export type TestemunhoOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    avatarUrl?: SortOrder
-    content?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    isPublic?: SortOrder
-    coverUrl?: SortOrderInput | SortOrder
-    _count?: TestemunhoCountOrderByAggregateInput
-    _max?: TestemunhoMaxOrderByAggregateInput
-    _min?: TestemunhoMinOrderByAggregateInput
-  }
-
-  export type TestemunhoScalarWhereWithAggregatesInput = {
-    AND?: TestemunhoScalarWhereWithAggregatesInput | TestemunhoScalarWhereWithAggregatesInput[]
-    OR?: TestemunhoScalarWhereWithAggregatesInput[]
-    NOT?: TestemunhoScalarWhereWithAggregatesInput | TestemunhoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Testemunho"> | string
-    userId?: StringWithAggregatesFilter<"Testemunho"> | string
-    name?: StringWithAggregatesFilter<"Testemunho"> | string
-    avatarUrl?: StringWithAggregatesFilter<"Testemunho"> | string
-    content?: StringWithAggregatesFilter<"Testemunho"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Testemunho"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Testemunho"> | Date | string
-    isPublic?: BoolWithAggregatesFilter<"Testemunho"> | boolean
-    coverUrl?: StringNullableWithAggregatesFilter<"Testemunho"> | string | null
-  }
-
-  export type RefreshTokenIgrejaWhereInput = {
-    AND?: RefreshTokenIgrejaWhereInput | RefreshTokenIgrejaWhereInput[]
-    OR?: RefreshTokenIgrejaWhereInput[]
-    NOT?: RefreshTokenIgrejaWhereInput | RefreshTokenIgrejaWhereInput[]
-    id?: StringFilter<"RefreshTokenIgreja"> | string
-    token?: StringFilter<"RefreshTokenIgreja"> | string
-    userId?: StringFilter<"RefreshTokenIgreja"> | string
-    createdAt?: DateTimeFilter<"RefreshTokenIgreja"> | Date | string
-    updatedAt?: DateTimeFilter<"RefreshTokenIgreja"> | Date | string
-    userIgreja?: XOR<UserIgrejaScalarRelationFilter, UserIgrejaWhereInput>
-  }
-
-  export type RefreshTokenIgrejaOrderByWithRelationInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userIgreja?: UserIgrejaOrderByWithRelationInput
-  }
-
-  export type RefreshTokenIgrejaWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    token?: string
-    AND?: RefreshTokenIgrejaWhereInput | RefreshTokenIgrejaWhereInput[]
-    OR?: RefreshTokenIgrejaWhereInput[]
-    NOT?: RefreshTokenIgrejaWhereInput | RefreshTokenIgrejaWhereInput[]
-    userId?: StringFilter<"RefreshTokenIgreja"> | string
-    createdAt?: DateTimeFilter<"RefreshTokenIgreja"> | Date | string
-    updatedAt?: DateTimeFilter<"RefreshTokenIgreja"> | Date | string
-    userIgreja?: XOR<UserIgrejaScalarRelationFilter, UserIgrejaWhereInput>
-  }, "id" | "token">
-
-  export type RefreshTokenIgrejaOrderByWithAggregationInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: RefreshTokenIgrejaCountOrderByAggregateInput
-    _max?: RefreshTokenIgrejaMaxOrderByAggregateInput
-    _min?: RefreshTokenIgrejaMinOrderByAggregateInput
-  }
-
-  export type RefreshTokenIgrejaScalarWhereWithAggregatesInput = {
-    AND?: RefreshTokenIgrejaScalarWhereWithAggregatesInput | RefreshTokenIgrejaScalarWhereWithAggregatesInput[]
-    OR?: RefreshTokenIgrejaScalarWhereWithAggregatesInput[]
-    NOT?: RefreshTokenIgrejaScalarWhereWithAggregatesInput | RefreshTokenIgrejaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"RefreshTokenIgreja"> | string
-    token?: StringWithAggregatesFilter<"RefreshTokenIgreja"> | string
-    userId?: StringWithAggregatesFilter<"RefreshTokenIgreja"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"RefreshTokenIgreja"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"RefreshTokenIgreja"> | Date | string
-  }
-
-  export type PasswordResetTokenIgrejaWhereInput = {
-    AND?: PasswordResetTokenIgrejaWhereInput | PasswordResetTokenIgrejaWhereInput[]
-    OR?: PasswordResetTokenIgrejaWhereInput[]
-    NOT?: PasswordResetTokenIgrejaWhereInput | PasswordResetTokenIgrejaWhereInput[]
-    id?: StringFilter<"PasswordResetTokenIgreja"> | string
-    token?: StringFilter<"PasswordResetTokenIgreja"> | string
-    userId?: StringFilter<"PasswordResetTokenIgreja"> | string
-    createdAt?: DateTimeFilter<"PasswordResetTokenIgreja"> | Date | string
-    expiresAt?: DateTimeFilter<"PasswordResetTokenIgreja"> | Date | string
-    userIgreja?: XOR<UserIgrejaScalarRelationFilter, UserIgrejaWhereInput>
-  }
-
-  export type PasswordResetTokenIgrejaOrderByWithRelationInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-    userIgreja?: UserIgrejaOrderByWithRelationInput
-  }
-
-  export type PasswordResetTokenIgrejaWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    token?: string
-    AND?: PasswordResetTokenIgrejaWhereInput | PasswordResetTokenIgrejaWhereInput[]
-    OR?: PasswordResetTokenIgrejaWhereInput[]
-    NOT?: PasswordResetTokenIgrejaWhereInput | PasswordResetTokenIgrejaWhereInput[]
-    userId?: StringFilter<"PasswordResetTokenIgreja"> | string
-    createdAt?: DateTimeFilter<"PasswordResetTokenIgreja"> | Date | string
-    expiresAt?: DateTimeFilter<"PasswordResetTokenIgreja"> | Date | string
-    userIgreja?: XOR<UserIgrejaScalarRelationFilter, UserIgrejaWhereInput>
-  }, "id" | "token">
-
-  export type PasswordResetTokenIgrejaOrderByWithAggregationInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-    _count?: PasswordResetTokenIgrejaCountOrderByAggregateInput
-    _max?: PasswordResetTokenIgrejaMaxOrderByAggregateInput
-    _min?: PasswordResetTokenIgrejaMinOrderByAggregateInput
-  }
-
-  export type PasswordResetTokenIgrejaScalarWhereWithAggregatesInput = {
-    AND?: PasswordResetTokenIgrejaScalarWhereWithAggregatesInput | PasswordResetTokenIgrejaScalarWhereWithAggregatesInput[]
-    OR?: PasswordResetTokenIgrejaScalarWhereWithAggregatesInput[]
-    NOT?: PasswordResetTokenIgrejaScalarWhereWithAggregatesInput | PasswordResetTokenIgrejaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PasswordResetTokenIgreja"> | string
-    token?: StringWithAggregatesFilter<"PasswordResetTokenIgreja"> | string
-    userId?: StringWithAggregatesFilter<"PasswordResetTokenIgreja"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"PasswordResetTokenIgreja"> | Date | string
-    expiresAt?: DateTimeWithAggregatesFilter<"PasswordResetTokenIgreja"> | Date | string
-  }
-
   export type PasswordResetTokenWhereInput = {
     AND?: PasswordResetTokenWhereInput | PasswordResetTokenWhereInput[]
     OR?: PasswordResetTokenWhereInput[]
@@ -29661,51 +16733,79 @@ export namespace Prisma {
     expiresAt?: DateTimeWithAggregatesFilter<"PasswordResetToken"> | Date | string
   }
 
-  export type NovatabelaWhereInput = {
-    AND?: NovatabelaWhereInput | NovatabelaWhereInput[]
-    OR?: NovatabelaWhereInput[]
-    NOT?: NovatabelaWhereInput | NovatabelaWhereInput[]
-    id?: StringFilter<"Novatabela"> | string
-    userId?: StringFilter<"Novatabela"> | string
-    name?: StringFilter<"Novatabela"> | string
-    title?: StringFilter<"Novatabela"> | string
+  export type TestemunhoWhereInput = {
+    AND?: TestemunhoWhereInput | TestemunhoWhereInput[]
+    OR?: TestemunhoWhereInput[]
+    NOT?: TestemunhoWhereInput | TestemunhoWhereInput[]
+    id?: StringFilter<"Testemunho"> | string
+    userId?: StringFilter<"Testemunho"> | string
+    name?: StringFilter<"Testemunho"> | string
+    avatarUrl?: StringFilter<"Testemunho"> | string
+    content?: StringFilter<"Testemunho"> | string
+    createdAt?: DateTimeFilter<"Testemunho"> | Date | string
+    updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
+    isPublic?: BoolFilter<"Testemunho"> | boolean
+    coverUrl?: StringNullableFilter<"Testemunho"> | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type NovatabelaOrderByWithRelationInput = {
+  export type TestemunhoOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    title?: SortOrder
+    avatarUrl?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isPublic?: SortOrder
+    coverUrl?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
-  export type NovatabelaWhereUniqueInput = Prisma.AtLeast<{
+  export type TestemunhoWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: NovatabelaWhereInput | NovatabelaWhereInput[]
-    OR?: NovatabelaWhereInput[]
-    NOT?: NovatabelaWhereInput | NovatabelaWhereInput[]
-    userId?: StringFilter<"Novatabela"> | string
-    name?: StringFilter<"Novatabela"> | string
-    title?: StringFilter<"Novatabela"> | string
+    AND?: TestemunhoWhereInput | TestemunhoWhereInput[]
+    OR?: TestemunhoWhereInput[]
+    NOT?: TestemunhoWhereInput | TestemunhoWhereInput[]
+    userId?: StringFilter<"Testemunho"> | string
+    name?: StringFilter<"Testemunho"> | string
+    avatarUrl?: StringFilter<"Testemunho"> | string
+    content?: StringFilter<"Testemunho"> | string
+    createdAt?: DateTimeFilter<"Testemunho"> | Date | string
+    updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
+    isPublic?: BoolFilter<"Testemunho"> | boolean
+    coverUrl?: StringNullableFilter<"Testemunho"> | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type NovatabelaOrderByWithAggregationInput = {
+  export type TestemunhoOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    title?: SortOrder
-    _count?: NovatabelaCountOrderByAggregateInput
-    _max?: NovatabelaMaxOrderByAggregateInput
-    _min?: NovatabelaMinOrderByAggregateInput
+    avatarUrl?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isPublic?: SortOrder
+    coverUrl?: SortOrderInput | SortOrder
+    _count?: TestemunhoCountOrderByAggregateInput
+    _max?: TestemunhoMaxOrderByAggregateInput
+    _min?: TestemunhoMinOrderByAggregateInput
   }
 
-  export type NovatabelaScalarWhereWithAggregatesInput = {
-    AND?: NovatabelaScalarWhereWithAggregatesInput | NovatabelaScalarWhereWithAggregatesInput[]
-    OR?: NovatabelaScalarWhereWithAggregatesInput[]
-    NOT?: NovatabelaScalarWhereWithAggregatesInput | NovatabelaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Novatabela"> | string
-    userId?: StringWithAggregatesFilter<"Novatabela"> | string
-    name?: StringWithAggregatesFilter<"Novatabela"> | string
-    title?: StringWithAggregatesFilter<"Novatabela"> | string
+  export type TestemunhoScalarWhereWithAggregatesInput = {
+    AND?: TestemunhoScalarWhereWithAggregatesInput | TestemunhoScalarWhereWithAggregatesInput[]
+    OR?: TestemunhoScalarWhereWithAggregatesInput[]
+    NOT?: TestemunhoScalarWhereWithAggregatesInput | TestemunhoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Testemunho"> | string
+    userId?: StringWithAggregatesFilter<"Testemunho"> | string
+    name?: StringWithAggregatesFilter<"Testemunho"> | string
+    avatarUrl?: StringWithAggregatesFilter<"Testemunho"> | string
+    content?: StringWithAggregatesFilter<"Testemunho"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Testemunho"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Testemunho"> | Date | string
+    isPublic?: BoolWithAggregatesFilter<"Testemunho"> | boolean
+    coverUrl?: StringNullableWithAggregatesFilter<"Testemunho"> | string | null
   }
 
   export type UserCreateInput = {
@@ -29714,26 +16814,19 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -29742,26 +16835,19 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -29770,26 +16856,19 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -29798,26 +16877,19 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -29826,10 +16898,8 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -29838,10 +16908,8 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -29850,99 +16918,8 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserIgrejaCreateInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
-    refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
-    testemunho?: TestemunhoCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaUncheckedCreateInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
-    refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
-    testemunho?: TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
-    refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
-    testemunho?: TestemunhoUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
-    refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
-    testemunho?: TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaCreateManyInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-  }
-
-  export type UserIgrejaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserIgrejaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewCreateInput = {
@@ -29956,6 +16933,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
+    role: $Enums.MinistryRole
     user: UserCreateNestedOneWithoutNewsInput
   }
 
@@ -29971,6 +16949,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
+    role: $Enums.MinistryRole
   }
 
   export type NewUpdateInput = {
@@ -29984,6 +16963,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
     user?: UserUpdateOneRequiredWithoutNewsNestedInput
   }
 
@@ -29999,6 +16979,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type NewCreateManyInput = {
@@ -30013,6 +16994,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
+    role: $Enums.MinistryRole
   }
 
   export type NewUpdateManyMutationInput = {
@@ -30026,6 +17008,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type NewUncheckedUpdateManyInput = {
@@ -30040,6 +17023,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type MinisterioCreateInput = {
@@ -30051,6 +17035,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
+    role: $Enums.MinistryRole
     user: UserCreateNestedOneWithoutMinisterioInput
   }
 
@@ -30064,6 +17049,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
+    role: $Enums.MinistryRole
   }
 
   export type MinisterioUpdateInput = {
@@ -30075,6 +17061,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
     user?: UserUpdateOneRequiredWithoutMinisterioNestedInput
   }
 
@@ -30088,6 +17075,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type MinisterioCreateManyInput = {
@@ -30100,6 +17088,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
+    role: $Enums.MinistryRole
   }
 
   export type MinisterioUpdateManyMutationInput = {
@@ -30111,6 +17100,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type MinisterioUncheckedUpdateManyInput = {
@@ -30123,6 +17113,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type AgendaCreateInput = {
@@ -30134,6 +17125,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
+    role: $Enums.MinistryRole
     user: UserCreateNestedOneWithoutAgendaInput
   }
 
@@ -30147,6 +17139,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
+    role: $Enums.MinistryRole
   }
 
   export type AgendaUpdateInput = {
@@ -30158,6 +17151,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
     user?: UserUpdateOneRequiredWithoutAgendaNestedInput
   }
 
@@ -30171,6 +17165,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type AgendaCreateManyInput = {
@@ -30183,6 +17178,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
+    role: $Enums.MinistryRole
   }
 
   export type AgendaUpdateManyMutationInput = {
@@ -30194,6 +17190,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type AgendaUncheckedUpdateManyInput = {
@@ -30206,532 +17203,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type NewTomazinhoCreateInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-    user: UserCreateNestedOneWithoutNewstomazinhoInput
-  }
-
-  export type NewTomazinhoUncheckedCreateInput = {
-    id?: string
-    userId: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewTomazinhoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneRequiredWithoutNewstomazinhoNestedInput
-  }
-
-  export type NewTomazinhoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewTomazinhoCreateManyInput = {
-    id?: string
-    userId: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewTomazinhoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewTomazinhoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MinisterioTomazinhoCreateInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutMinisteriotomazinhoInput
-  }
-
-  export type MinisterioTomazinhoUncheckedCreateInput = {
-    id?: string
-    userId: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioTomazinhoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMinisteriotomazinhoNestedInput
-  }
-
-  export type MinisterioTomazinhoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioTomazinhoCreateManyInput = {
-    id?: string
-    userId: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioTomazinhoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioTomazinhoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AgendaTomazinhoCreateInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-    user: UserCreateNestedOneWithoutAgendatomazinhoInput
-  }
-
-  export type AgendaTomazinhoUncheckedCreateInput = {
-    id?: string
-    userId: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaTomazinhoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutAgendatomazinhoNestedInput
-  }
-
-  export type AgendaTomazinhoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaTomazinhoCreateManyInput = {
-    id?: string
-    userId: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaTomazinhoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaTomazinhoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type NewCaxiasCreateInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-    user: UserCreateNestedOneWithoutNewscaxiasInput
-  }
-
-  export type NewCaxiasUncheckedCreateInput = {
-    id?: string
-    userId: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewCaxiasUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneRequiredWithoutNewscaxiasNestedInput
-  }
-
-  export type NewCaxiasUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewCaxiasCreateManyInput = {
-    id?: string
-    userId: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewCaxiasUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewCaxiasUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MinisterioCaxiasCreateInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutMinisteriocaxiasInput
-  }
-
-  export type MinisterioCaxiasUncheckedCreateInput = {
-    id?: string
-    userId: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioCaxiasUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMinisteriocaxiasNestedInput
-  }
-
-  export type MinisterioCaxiasUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioCaxiasCreateManyInput = {
-    id?: string
-    userId: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioCaxiasUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioCaxiasUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AgendaCaxiasCreateInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-    user: UserCreateNestedOneWithoutAgendacaxiasInput
-  }
-
-  export type AgendaCaxiasUncheckedCreateInput = {
-    id?: string
-    userId: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaCaxiasUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutAgendacaxiasNestedInput
-  }
-
-  export type AgendaCaxiasUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaCaxiasCreateManyInput = {
-    id?: string
-    userId: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaCaxiasUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaCaxiasUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type DoacaoCreateInput = {
@@ -31218,199 +17690,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TestemunhoCreateInput = {
-    id?: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isPublic?: boolean
-    coverUrl?: string | null
-    userIgreja: UserIgrejaCreateNestedOneWithoutTestemunhoInput
-  }
-
-  export type TestemunhoUncheckedCreateInput = {
-    id?: string
-    userId: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isPublic?: boolean
-    coverUrl?: string | null
-  }
-
-  export type TestemunhoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    userIgreja?: UserIgrejaUpdateOneRequiredWithoutTestemunhoNestedInput
-  }
-
-  export type TestemunhoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TestemunhoCreateManyInput = {
-    id?: string
-    userId: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isPublic?: boolean
-    coverUrl?: string | null
-  }
-
-  export type TestemunhoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TestemunhoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type RefreshTokenIgrejaCreateInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userIgreja: UserIgrejaCreateNestedOneWithoutRefreshTokenIgrejaInput
-  }
-
-  export type RefreshTokenIgrejaUncheckedCreateInput = {
-    id?: string
-    token: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type RefreshTokenIgrejaUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userIgreja?: UserIgrejaUpdateOneRequiredWithoutRefreshTokenIgrejaNestedInput
-  }
-
-  export type RefreshTokenIgrejaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RefreshTokenIgrejaCreateManyInput = {
-    id?: string
-    token: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type RefreshTokenIgrejaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RefreshTokenIgrejaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PasswordResetTokenIgrejaCreateInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-    userIgreja: UserIgrejaCreateNestedOneWithoutPasswordResetTokenIgrejaInput
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedCreateInput = {
-    id?: string
-    token: string
-    userId: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type PasswordResetTokenIgrejaUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userIgreja?: UserIgrejaUpdateOneRequiredWithoutPasswordResetTokenIgrejaNestedInput
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PasswordResetTokenIgrejaCreateManyInput = {
-    id?: string
-    token: string
-    userId: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type PasswordResetTokenIgrejaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type PasswordResetTokenCreateInput = {
     id?: string
     token: string
@@ -31466,53 +17745,87 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type NovatabelaCreateInput = {
+  export type TestemunhoCreateInput = {
+    id?: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+    user: UserCreateNestedOneWithoutTestemunhosInput
+  }
+
+  export type TestemunhoUncheckedCreateInput = {
     id?: string
     userId: string
     name: string
-    title: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
   }
 
-  export type NovatabelaUncheckedCreateInput = {
+  export type TestemunhoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutTestemunhosNestedInput
+  }
+
+  export type TestemunhoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TestemunhoCreateManyInput = {
     id?: string
     userId: string
     name: string
-    title: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
   }
 
-  export type NovatabelaUpdateInput = {
+  export type TestemunhoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TestemunhoUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NovatabelaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NovatabelaCreateManyInput = {
-    id?: string
-    userId: string
-    name: string
-    title: string
-  }
-
-  export type NovatabelaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NovatabelaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -31545,9 +17858,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -31565,18 +17880,6 @@ export namespace Prisma {
     every?: AgendaWhereInput
     some?: AgendaWhereInput
     none?: AgendaWhereInput
-  }
-
-  export type AgendaCaxiasListRelationFilter = {
-    every?: AgendaCaxiasWhereInput
-    some?: AgendaCaxiasWhereInput
-    none?: AgendaCaxiasWhereInput
-  }
-
-  export type AgendaTomazinhoListRelationFilter = {
-    every?: AgendaTomazinhoWhereInput
-    some?: AgendaTomazinhoWhereInput
-    none?: AgendaTomazinhoWhereInput
   }
 
   export type ContatoListRelationFilter = {
@@ -31603,34 +17906,10 @@ export namespace Prisma {
     none?: MinisterioWhereInput
   }
 
-  export type MinisterioCaxiasListRelationFilter = {
-    every?: MinisterioCaxiasWhereInput
-    some?: MinisterioCaxiasWhereInput
-    none?: MinisterioCaxiasWhereInput
-  }
-
-  export type MinisterioTomazinhoListRelationFilter = {
-    every?: MinisterioTomazinhoWhereInput
-    some?: MinisterioTomazinhoWhereInput
-    none?: MinisterioTomazinhoWhereInput
-  }
-
   export type NewListRelationFilter = {
     every?: NewWhereInput
     some?: NewWhereInput
     none?: NewWhereInput
-  }
-
-  export type NewCaxiasListRelationFilter = {
-    every?: NewCaxiasWhereInput
-    some?: NewCaxiasWhereInput
-    none?: NewCaxiasWhereInput
-  }
-
-  export type NewTomazinhoListRelationFilter = {
-    every?: NewTomazinhoWhereInput
-    some?: NewTomazinhoWhereInput
-    none?: NewTomazinhoWhereInput
   }
 
   export type PasswordResetTokenListRelationFilter = {
@@ -31657,20 +17936,18 @@ export namespace Prisma {
     none?: SobreLiderWhereInput
   }
 
+  export type TestemunhoListRelationFilter = {
+    every?: TestemunhoWhereInput
+    some?: TestemunhoWhereInput
+    none?: TestemunhoWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type AgendaOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AgendaCaxiasOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AgendaTomazinhoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31690,23 +17967,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type MinisterioCaxiasOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MinisterioTomazinhoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type NewOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NewCaxiasOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NewTomazinhoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31726,16 +17987,18 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type TestemunhoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     login?: SortOrder
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
-    isAdmin?: SortOrder
+    role?: SortOrder
     expires?: SortOrder
-    passwordResetToken?: SortOrder
-    token?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -31744,10 +18007,8 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
-    isAdmin?: SortOrder
+    role?: SortOrder
     expires?: SortOrder
-    passwordResetToken?: SortOrder
-    token?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -31756,10 +18017,8 @@ export namespace Prisma {
     name?: SortOrder
     avatarUrl?: SortOrder
     password?: SortOrder
-    isAdmin?: SortOrder
+    role?: SortOrder
     expires?: SortOrder
-    passwordResetToken?: SortOrder
-    token?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -31798,12 +18057,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -31820,69 +18081,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type PasswordResetTokenIgrejaListRelationFilter = {
-    every?: PasswordResetTokenIgrejaWhereInput
-    some?: PasswordResetTokenIgrejaWhereInput
-    none?: PasswordResetTokenIgrejaWhereInput
-  }
-
-  export type RefreshTokenIgrejaListRelationFilter = {
-    every?: RefreshTokenIgrejaWhereInput
-    some?: RefreshTokenIgrejaWhereInput
-    none?: RefreshTokenIgrejaWhereInput
-  }
-
-  export type TestemunhoListRelationFilter = {
-    every?: TestemunhoWhereInput
-    some?: TestemunhoWhereInput
-    none?: TestemunhoWhereInput
-  }
-
-  export type PasswordResetTokenIgrejaOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type RefreshTokenIgrejaOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TestemunhoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserIgrejaCountOrderByAggregateInput = {
-    id?: SortOrder
-    login?: SortOrder
-    name?: SortOrder
-    avatarUrl?: SortOrder
-    password?: SortOrder
-    passwordResetToken?: SortOrder
-    expires?: SortOrder
-    token?: SortOrder
-  }
-
-  export type UserIgrejaMaxOrderByAggregateInput = {
-    id?: SortOrder
-    login?: SortOrder
-    name?: SortOrder
-    avatarUrl?: SortOrder
-    password?: SortOrder
-    passwordResetToken?: SortOrder
-    expires?: SortOrder
-    token?: SortOrder
-  }
-
-  export type UserIgrejaMinOrderByAggregateInput = {
-    id?: SortOrder
-    login?: SortOrder
-    name?: SortOrder
-    avatarUrl?: SortOrder
-    password?: SortOrder
-    passwordResetToken?: SortOrder
-    expires?: SortOrder
-    token?: SortOrder
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -31892,6 +18090,18 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type EnumMinistryRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMinistryRoleFilter<$PrismaModel> | $Enums.MinistryRole
   }
 
   export type UserScalarRelationFilter = {
@@ -31911,6 +18121,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
+    role?: SortOrder
   }
 
   export type NewMaxOrderByAggregateInput = {
@@ -31925,6 +18136,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
+    role?: SortOrder
   }
 
   export type NewMinOrderByAggregateInput = {
@@ -31939,6 +18151,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
+    role?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -31955,6 +18168,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumMinistryRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMinistryRoleWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMinistryRoleFilter<$PrismaModel>
+    _max?: NestedEnumMinistryRoleFilter<$PrismaModel>
+  }
+
   export type MinisterioCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -31965,6 +18196,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
+    role?: SortOrder
   }
 
   export type MinisterioMaxOrderByAggregateInput = {
@@ -31977,6 +18209,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
+    role?: SortOrder
   }
 
   export type MinisterioMinOrderByAggregateInput = {
@@ -31989,6 +18222,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
+    role?: SortOrder
   }
 
   export type AgendaCountOrderByAggregateInput = {
@@ -32001,6 +18235,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    role?: SortOrder
   }
 
   export type AgendaMaxOrderByAggregateInput = {
@@ -32013,6 +18248,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
+    role?: SortOrder
   }
 
   export type AgendaMinOrderByAggregateInput = {
@@ -32025,234 +18261,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
-  }
-
-  export type NewTomazinhoCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-  }
-
-  export type NewTomazinhoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-  }
-
-  export type NewTomazinhoMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-  }
-
-  export type MinisterioTomazinhoCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type MinisterioTomazinhoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type MinisterioTomazinhoMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type AgendaTomazinhoCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-  }
-
-  export type AgendaTomazinhoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-  }
-
-  export type AgendaTomazinhoMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-  }
-
-  export type NewCaxiasCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-  }
-
-  export type NewCaxiasMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-  }
-
-  export type NewCaxiasMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coverUrl?: SortOrder
-    content?: SortOrder
-    title?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    page?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-    url?: SortOrder
-  }
-
-  export type MinisterioCaxiasCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type MinisterioCaxiasMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type MinisterioCaxiasMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-    local?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    coverUrl?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type AgendaCaxiasCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-  }
-
-  export type AgendaCaxiasMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
-  }
-
-  export type AgendaCaxiasMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    day?: SortOrder
-    name?: SortOrder
-    hour?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    destaque?: SortOrder
+    role?: SortOrder
   }
 
   export type DoacaoCountOrderByAggregateInput = {
@@ -32465,9 +18474,28 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type UserIgrejaScalarRelationFilter = {
-    is?: UserIgrejaWhereInput
-    isNot?: UserIgrejaWhereInput
+  export type PasswordResetTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type PasswordResetTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type PasswordResetTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type TestemunhoCountOrderByAggregateInput = {
@@ -32506,118 +18534,11 @@ export namespace Prisma {
     coverUrl?: SortOrder
   }
 
-  export type RefreshTokenIgrejaCountOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type RefreshTokenIgrejaMaxOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type RefreshTokenIgrejaMinOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PasswordResetTokenIgrejaCountOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type PasswordResetTokenIgrejaMaxOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type PasswordResetTokenIgrejaMinOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type PasswordResetTokenCountOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type PasswordResetTokenMaxOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type PasswordResetTokenMinOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type NovatabelaCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-  }
-
-  export type NovatabelaMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-  }
-
-  export type NovatabelaMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    name?: SortOrder
-    title?: SortOrder
-  }
-
   export type AgendaCreateNestedManyWithoutUserInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
     createMany?: AgendaCreateManyUserInputEnvelope
     connect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
-  }
-
-  export type AgendaCaxiasCreateNestedManyWithoutUserInput = {
-    create?: XOR<AgendaCaxiasCreateWithoutUserInput, AgendaCaxiasUncheckedCreateWithoutUserInput> | AgendaCaxiasCreateWithoutUserInput[] | AgendaCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaCaxiasCreateOrConnectWithoutUserInput | AgendaCaxiasCreateOrConnectWithoutUserInput[]
-    createMany?: AgendaCaxiasCreateManyUserInputEnvelope
-    connect?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-  }
-
-  export type AgendaTomazinhoCreateNestedManyWithoutUserInput = {
-    create?: XOR<AgendaTomazinhoCreateWithoutUserInput, AgendaTomazinhoUncheckedCreateWithoutUserInput> | AgendaTomazinhoCreateWithoutUserInput[] | AgendaTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaTomazinhoCreateOrConnectWithoutUserInput | AgendaTomazinhoCreateOrConnectWithoutUserInput[]
-    createMany?: AgendaTomazinhoCreateManyUserInputEnvelope
-    connect?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
   }
 
   export type ContatoCreateNestedManyWithoutUserInput = {
@@ -32648,39 +18569,11 @@ export namespace Prisma {
     connect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
   }
 
-  export type MinisterioCaxiasCreateNestedManyWithoutUserInput = {
-    create?: XOR<MinisterioCaxiasCreateWithoutUserInput, MinisterioCaxiasUncheckedCreateWithoutUserInput> | MinisterioCaxiasCreateWithoutUserInput[] | MinisterioCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioCaxiasCreateOrConnectWithoutUserInput | MinisterioCaxiasCreateOrConnectWithoutUserInput[]
-    createMany?: MinisterioCaxiasCreateManyUserInputEnvelope
-    connect?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-  }
-
-  export type MinisterioTomazinhoCreateNestedManyWithoutUserInput = {
-    create?: XOR<MinisterioTomazinhoCreateWithoutUserInput, MinisterioTomazinhoUncheckedCreateWithoutUserInput> | MinisterioTomazinhoCreateWithoutUserInput[] | MinisterioTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioTomazinhoCreateOrConnectWithoutUserInput | MinisterioTomazinhoCreateOrConnectWithoutUserInput[]
-    createMany?: MinisterioTomazinhoCreateManyUserInputEnvelope
-    connect?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-  }
-
   export type NewCreateNestedManyWithoutUserInput = {
     create?: XOR<NewCreateWithoutUserInput, NewUncheckedCreateWithoutUserInput> | NewCreateWithoutUserInput[] | NewUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NewCreateOrConnectWithoutUserInput | NewCreateOrConnectWithoutUserInput[]
     createMany?: NewCreateManyUserInputEnvelope
     connect?: NewWhereUniqueInput | NewWhereUniqueInput[]
-  }
-
-  export type NewCaxiasCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewCaxiasCreateWithoutUserInput, NewCaxiasUncheckedCreateWithoutUserInput> | NewCaxiasCreateWithoutUserInput[] | NewCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewCaxiasCreateOrConnectWithoutUserInput | NewCaxiasCreateOrConnectWithoutUserInput[]
-    createMany?: NewCaxiasCreateManyUserInputEnvelope
-    connect?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-  }
-
-  export type NewTomazinhoCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewTomazinhoCreateWithoutUserInput, NewTomazinhoUncheckedCreateWithoutUserInput> | NewTomazinhoCreateWithoutUserInput[] | NewTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewTomazinhoCreateOrConnectWithoutUserInput | NewTomazinhoCreateOrConnectWithoutUserInput[]
-    createMany?: NewTomazinhoCreateManyUserInputEnvelope
-    connect?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
   }
 
   export type PasswordResetTokenCreateNestedManyWithoutUserInput = {
@@ -32711,25 +18604,18 @@ export namespace Prisma {
     connect?: SobreLiderWhereUniqueInput | SobreLiderWhereUniqueInput[]
   }
 
+  export type TestemunhoCreateNestedManyWithoutUserInput = {
+    create?: XOR<TestemunhoCreateWithoutUserInput, TestemunhoUncheckedCreateWithoutUserInput> | TestemunhoCreateWithoutUserInput[] | TestemunhoUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserInput | TestemunhoCreateOrConnectWithoutUserInput[]
+    createMany?: TestemunhoCreateManyUserInputEnvelope
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+  }
+
   export type AgendaUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
     createMany?: AgendaCreateManyUserInputEnvelope
     connect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
-  }
-
-  export type AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AgendaCaxiasCreateWithoutUserInput, AgendaCaxiasUncheckedCreateWithoutUserInput> | AgendaCaxiasCreateWithoutUserInput[] | AgendaCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaCaxiasCreateOrConnectWithoutUserInput | AgendaCaxiasCreateOrConnectWithoutUserInput[]
-    createMany?: AgendaCaxiasCreateManyUserInputEnvelope
-    connect?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-  }
-
-  export type AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AgendaTomazinhoCreateWithoutUserInput, AgendaTomazinhoUncheckedCreateWithoutUserInput> | AgendaTomazinhoCreateWithoutUserInput[] | AgendaTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaTomazinhoCreateOrConnectWithoutUserInput | AgendaTomazinhoCreateOrConnectWithoutUserInput[]
-    createMany?: AgendaTomazinhoCreateManyUserInputEnvelope
-    connect?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
   }
 
   export type ContatoUncheckedCreateNestedManyWithoutUserInput = {
@@ -32760,39 +18646,11 @@ export namespace Prisma {
     connect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
   }
 
-  export type MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MinisterioCaxiasCreateWithoutUserInput, MinisterioCaxiasUncheckedCreateWithoutUserInput> | MinisterioCaxiasCreateWithoutUserInput[] | MinisterioCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioCaxiasCreateOrConnectWithoutUserInput | MinisterioCaxiasCreateOrConnectWithoutUserInput[]
-    createMany?: MinisterioCaxiasCreateManyUserInputEnvelope
-    connect?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-  }
-
-  export type MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MinisterioTomazinhoCreateWithoutUserInput, MinisterioTomazinhoUncheckedCreateWithoutUserInput> | MinisterioTomazinhoCreateWithoutUserInput[] | MinisterioTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioTomazinhoCreateOrConnectWithoutUserInput | MinisterioTomazinhoCreateOrConnectWithoutUserInput[]
-    createMany?: MinisterioTomazinhoCreateManyUserInputEnvelope
-    connect?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-  }
-
   export type NewUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<NewCreateWithoutUserInput, NewUncheckedCreateWithoutUserInput> | NewCreateWithoutUserInput[] | NewUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NewCreateOrConnectWithoutUserInput | NewCreateOrConnectWithoutUserInput[]
     createMany?: NewCreateManyUserInputEnvelope
     connect?: NewWhereUniqueInput | NewWhereUniqueInput[]
-  }
-
-  export type NewCaxiasUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewCaxiasCreateWithoutUserInput, NewCaxiasUncheckedCreateWithoutUserInput> | NewCaxiasCreateWithoutUserInput[] | NewCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewCaxiasCreateOrConnectWithoutUserInput | NewCaxiasCreateOrConnectWithoutUserInput[]
-    createMany?: NewCaxiasCreateManyUserInputEnvelope
-    connect?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-  }
-
-  export type NewTomazinhoUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewTomazinhoCreateWithoutUserInput, NewTomazinhoUncheckedCreateWithoutUserInput> | NewTomazinhoCreateWithoutUserInput[] | NewTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewTomazinhoCreateOrConnectWithoutUserInput | NewTomazinhoCreateOrConnectWithoutUserInput[]
-    createMany?: NewTomazinhoCreateManyUserInputEnvelope
-    connect?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
   }
 
   export type PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput = {
@@ -32823,6 +18681,13 @@ export namespace Prisma {
     connect?: SobreLiderWhereUniqueInput | SobreLiderWhereUniqueInput[]
   }
 
+  export type TestemunhoUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TestemunhoCreateWithoutUserInput, TestemunhoUncheckedCreateWithoutUserInput> | TestemunhoCreateWithoutUserInput[] | TestemunhoUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserInput | TestemunhoCreateOrConnectWithoutUserInput[]
+    createMany?: TestemunhoCreateManyUserInputEnvelope
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -32831,8 +18696,8 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -32851,34 +18716,6 @@ export namespace Prisma {
     update?: AgendaUpdateWithWhereUniqueWithoutUserInput | AgendaUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AgendaUpdateManyWithWhereWithoutUserInput | AgendaUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
-  }
-
-  export type AgendaCaxiasUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AgendaCaxiasCreateWithoutUserInput, AgendaCaxiasUncheckedCreateWithoutUserInput> | AgendaCaxiasCreateWithoutUserInput[] | AgendaCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaCaxiasCreateOrConnectWithoutUserInput | AgendaCaxiasCreateOrConnectWithoutUserInput[]
-    upsert?: AgendaCaxiasUpsertWithWhereUniqueWithoutUserInput | AgendaCaxiasUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AgendaCaxiasCreateManyUserInputEnvelope
-    set?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    disconnect?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    delete?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    connect?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    update?: AgendaCaxiasUpdateWithWhereUniqueWithoutUserInput | AgendaCaxiasUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AgendaCaxiasUpdateManyWithWhereWithoutUserInput | AgendaCaxiasUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AgendaCaxiasScalarWhereInput | AgendaCaxiasScalarWhereInput[]
-  }
-
-  export type AgendaTomazinhoUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AgendaTomazinhoCreateWithoutUserInput, AgendaTomazinhoUncheckedCreateWithoutUserInput> | AgendaTomazinhoCreateWithoutUserInput[] | AgendaTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaTomazinhoCreateOrConnectWithoutUserInput | AgendaTomazinhoCreateOrConnectWithoutUserInput[]
-    upsert?: AgendaTomazinhoUpsertWithWhereUniqueWithoutUserInput | AgendaTomazinhoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AgendaTomazinhoCreateManyUserInputEnvelope
-    set?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    disconnect?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    delete?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    connect?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    update?: AgendaTomazinhoUpdateWithWhereUniqueWithoutUserInput | AgendaTomazinhoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AgendaTomazinhoUpdateManyWithWhereWithoutUserInput | AgendaTomazinhoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AgendaTomazinhoScalarWhereInput | AgendaTomazinhoScalarWhereInput[]
   }
 
   export type ContatoUpdateManyWithoutUserNestedInput = {
@@ -32937,34 +18774,6 @@ export namespace Prisma {
     deleteMany?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
   }
 
-  export type MinisterioCaxiasUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MinisterioCaxiasCreateWithoutUserInput, MinisterioCaxiasUncheckedCreateWithoutUserInput> | MinisterioCaxiasCreateWithoutUserInput[] | MinisterioCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioCaxiasCreateOrConnectWithoutUserInput | MinisterioCaxiasCreateOrConnectWithoutUserInput[]
-    upsert?: MinisterioCaxiasUpsertWithWhereUniqueWithoutUserInput | MinisterioCaxiasUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MinisterioCaxiasCreateManyUserInputEnvelope
-    set?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    disconnect?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    delete?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    connect?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    update?: MinisterioCaxiasUpdateWithWhereUniqueWithoutUserInput | MinisterioCaxiasUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MinisterioCaxiasUpdateManyWithWhereWithoutUserInput | MinisterioCaxiasUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MinisterioCaxiasScalarWhereInput | MinisterioCaxiasScalarWhereInput[]
-  }
-
-  export type MinisterioTomazinhoUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MinisterioTomazinhoCreateWithoutUserInput, MinisterioTomazinhoUncheckedCreateWithoutUserInput> | MinisterioTomazinhoCreateWithoutUserInput[] | MinisterioTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioTomazinhoCreateOrConnectWithoutUserInput | MinisterioTomazinhoCreateOrConnectWithoutUserInput[]
-    upsert?: MinisterioTomazinhoUpsertWithWhereUniqueWithoutUserInput | MinisterioTomazinhoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MinisterioTomazinhoCreateManyUserInputEnvelope
-    set?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    disconnect?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    delete?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    connect?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    update?: MinisterioTomazinhoUpdateWithWhereUniqueWithoutUserInput | MinisterioTomazinhoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MinisterioTomazinhoUpdateManyWithWhereWithoutUserInput | MinisterioTomazinhoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MinisterioTomazinhoScalarWhereInput | MinisterioTomazinhoScalarWhereInput[]
-  }
-
   export type NewUpdateManyWithoutUserNestedInput = {
     create?: XOR<NewCreateWithoutUserInput, NewUncheckedCreateWithoutUserInput> | NewCreateWithoutUserInput[] | NewUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NewCreateOrConnectWithoutUserInput | NewCreateOrConnectWithoutUserInput[]
@@ -32977,34 +18786,6 @@ export namespace Prisma {
     update?: NewUpdateWithWhereUniqueWithoutUserInput | NewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NewUpdateManyWithWhereWithoutUserInput | NewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NewScalarWhereInput | NewScalarWhereInput[]
-  }
-
-  export type NewCaxiasUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewCaxiasCreateWithoutUserInput, NewCaxiasUncheckedCreateWithoutUserInput> | NewCaxiasCreateWithoutUserInput[] | NewCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewCaxiasCreateOrConnectWithoutUserInput | NewCaxiasCreateOrConnectWithoutUserInput[]
-    upsert?: NewCaxiasUpsertWithWhereUniqueWithoutUserInput | NewCaxiasUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewCaxiasCreateManyUserInputEnvelope
-    set?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    disconnect?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    delete?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    connect?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    update?: NewCaxiasUpdateWithWhereUniqueWithoutUserInput | NewCaxiasUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewCaxiasUpdateManyWithWhereWithoutUserInput | NewCaxiasUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewCaxiasScalarWhereInput | NewCaxiasScalarWhereInput[]
-  }
-
-  export type NewTomazinhoUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewTomazinhoCreateWithoutUserInput, NewTomazinhoUncheckedCreateWithoutUserInput> | NewTomazinhoCreateWithoutUserInput[] | NewTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewTomazinhoCreateOrConnectWithoutUserInput | NewTomazinhoCreateOrConnectWithoutUserInput[]
-    upsert?: NewTomazinhoUpsertWithWhereUniqueWithoutUserInput | NewTomazinhoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewTomazinhoCreateManyUserInputEnvelope
-    set?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    disconnect?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    delete?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    connect?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    update?: NewTomazinhoUpdateWithWhereUniqueWithoutUserInput | NewTomazinhoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewTomazinhoUpdateManyWithWhereWithoutUserInput | NewTomazinhoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewTomazinhoScalarWhereInput | NewTomazinhoScalarWhereInput[]
   }
 
   export type PasswordResetTokenUpdateManyWithoutUserNestedInput = {
@@ -33063,6 +18844,20 @@ export namespace Prisma {
     deleteMany?: SobreLiderScalarWhereInput | SobreLiderScalarWhereInput[]
   }
 
+  export type TestemunhoUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TestemunhoCreateWithoutUserInput, TestemunhoUncheckedCreateWithoutUserInput> | TestemunhoCreateWithoutUserInput[] | TestemunhoUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserInput | TestemunhoCreateOrConnectWithoutUserInput[]
+    upsert?: TestemunhoUpsertWithWhereUniqueWithoutUserInput | TestemunhoUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TestemunhoCreateManyUserInputEnvelope
+    set?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    disconnect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    delete?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    update?: TestemunhoUpdateWithWhereUniqueWithoutUserInput | TestemunhoUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TestemunhoUpdateManyWithWhereWithoutUserInput | TestemunhoUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
+  }
+
   export type AgendaUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
@@ -33075,34 +18870,6 @@ export namespace Prisma {
     update?: AgendaUpdateWithWhereUniqueWithoutUserInput | AgendaUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AgendaUpdateManyWithWhereWithoutUserInput | AgendaUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
-  }
-
-  export type AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AgendaCaxiasCreateWithoutUserInput, AgendaCaxiasUncheckedCreateWithoutUserInput> | AgendaCaxiasCreateWithoutUserInput[] | AgendaCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaCaxiasCreateOrConnectWithoutUserInput | AgendaCaxiasCreateOrConnectWithoutUserInput[]
-    upsert?: AgendaCaxiasUpsertWithWhereUniqueWithoutUserInput | AgendaCaxiasUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AgendaCaxiasCreateManyUserInputEnvelope
-    set?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    disconnect?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    delete?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    connect?: AgendaCaxiasWhereUniqueInput | AgendaCaxiasWhereUniqueInput[]
-    update?: AgendaCaxiasUpdateWithWhereUniqueWithoutUserInput | AgendaCaxiasUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AgendaCaxiasUpdateManyWithWhereWithoutUserInput | AgendaCaxiasUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AgendaCaxiasScalarWhereInput | AgendaCaxiasScalarWhereInput[]
-  }
-
-  export type AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AgendaTomazinhoCreateWithoutUserInput, AgendaTomazinhoUncheckedCreateWithoutUserInput> | AgendaTomazinhoCreateWithoutUserInput[] | AgendaTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AgendaTomazinhoCreateOrConnectWithoutUserInput | AgendaTomazinhoCreateOrConnectWithoutUserInput[]
-    upsert?: AgendaTomazinhoUpsertWithWhereUniqueWithoutUserInput | AgendaTomazinhoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AgendaTomazinhoCreateManyUserInputEnvelope
-    set?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    disconnect?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    delete?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    connect?: AgendaTomazinhoWhereUniqueInput | AgendaTomazinhoWhereUniqueInput[]
-    update?: AgendaTomazinhoUpdateWithWhereUniqueWithoutUserInput | AgendaTomazinhoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AgendaTomazinhoUpdateManyWithWhereWithoutUserInput | AgendaTomazinhoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AgendaTomazinhoScalarWhereInput | AgendaTomazinhoScalarWhereInput[]
   }
 
   export type ContatoUncheckedUpdateManyWithoutUserNestedInput = {
@@ -33161,34 +18928,6 @@ export namespace Prisma {
     deleteMany?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
   }
 
-  export type MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MinisterioCaxiasCreateWithoutUserInput, MinisterioCaxiasUncheckedCreateWithoutUserInput> | MinisterioCaxiasCreateWithoutUserInput[] | MinisterioCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioCaxiasCreateOrConnectWithoutUserInput | MinisterioCaxiasCreateOrConnectWithoutUserInput[]
-    upsert?: MinisterioCaxiasUpsertWithWhereUniqueWithoutUserInput | MinisterioCaxiasUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MinisterioCaxiasCreateManyUserInputEnvelope
-    set?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    disconnect?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    delete?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    connect?: MinisterioCaxiasWhereUniqueInput | MinisterioCaxiasWhereUniqueInput[]
-    update?: MinisterioCaxiasUpdateWithWhereUniqueWithoutUserInput | MinisterioCaxiasUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MinisterioCaxiasUpdateManyWithWhereWithoutUserInput | MinisterioCaxiasUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MinisterioCaxiasScalarWhereInput | MinisterioCaxiasScalarWhereInput[]
-  }
-
-  export type MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MinisterioTomazinhoCreateWithoutUserInput, MinisterioTomazinhoUncheckedCreateWithoutUserInput> | MinisterioTomazinhoCreateWithoutUserInput[] | MinisterioTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MinisterioTomazinhoCreateOrConnectWithoutUserInput | MinisterioTomazinhoCreateOrConnectWithoutUserInput[]
-    upsert?: MinisterioTomazinhoUpsertWithWhereUniqueWithoutUserInput | MinisterioTomazinhoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MinisterioTomazinhoCreateManyUserInputEnvelope
-    set?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    disconnect?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    delete?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    connect?: MinisterioTomazinhoWhereUniqueInput | MinisterioTomazinhoWhereUniqueInput[]
-    update?: MinisterioTomazinhoUpdateWithWhereUniqueWithoutUserInput | MinisterioTomazinhoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MinisterioTomazinhoUpdateManyWithWhereWithoutUserInput | MinisterioTomazinhoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MinisterioTomazinhoScalarWhereInput | MinisterioTomazinhoScalarWhereInput[]
-  }
-
   export type NewUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<NewCreateWithoutUserInput, NewUncheckedCreateWithoutUserInput> | NewCreateWithoutUserInput[] | NewUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NewCreateOrConnectWithoutUserInput | NewCreateOrConnectWithoutUserInput[]
@@ -33201,34 +18940,6 @@ export namespace Prisma {
     update?: NewUpdateWithWhereUniqueWithoutUserInput | NewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NewUpdateManyWithWhereWithoutUserInput | NewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NewScalarWhereInput | NewScalarWhereInput[]
-  }
-
-  export type NewCaxiasUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewCaxiasCreateWithoutUserInput, NewCaxiasUncheckedCreateWithoutUserInput> | NewCaxiasCreateWithoutUserInput[] | NewCaxiasUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewCaxiasCreateOrConnectWithoutUserInput | NewCaxiasCreateOrConnectWithoutUserInput[]
-    upsert?: NewCaxiasUpsertWithWhereUniqueWithoutUserInput | NewCaxiasUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewCaxiasCreateManyUserInputEnvelope
-    set?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    disconnect?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    delete?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    connect?: NewCaxiasWhereUniqueInput | NewCaxiasWhereUniqueInput[]
-    update?: NewCaxiasUpdateWithWhereUniqueWithoutUserInput | NewCaxiasUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewCaxiasUpdateManyWithWhereWithoutUserInput | NewCaxiasUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewCaxiasScalarWhereInput | NewCaxiasScalarWhereInput[]
-  }
-
-  export type NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewTomazinhoCreateWithoutUserInput, NewTomazinhoUncheckedCreateWithoutUserInput> | NewTomazinhoCreateWithoutUserInput[] | NewTomazinhoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewTomazinhoCreateOrConnectWithoutUserInput | NewTomazinhoCreateOrConnectWithoutUserInput[]
-    upsert?: NewTomazinhoUpsertWithWhereUniqueWithoutUserInput | NewTomazinhoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewTomazinhoCreateManyUserInputEnvelope
-    set?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    disconnect?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    delete?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    connect?: NewTomazinhoWhereUniqueInput | NewTomazinhoWhereUniqueInput[]
-    update?: NewTomazinhoUpdateWithWhereUniqueWithoutUserInput | NewTomazinhoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewTomazinhoUpdateManyWithWhereWithoutUserInput | NewTomazinhoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewTomazinhoScalarWhereInput | NewTomazinhoScalarWhereInput[]
   }
 
   export type PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput = {
@@ -33287,129 +18998,17 @@ export namespace Prisma {
     deleteMany?: SobreLiderScalarWhereInput | SobreLiderScalarWhereInput[]
   }
 
-  export type PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput = {
-    create?: XOR<PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput[] | PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    createMany?: PasswordResetTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    connect?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-  }
-
-  export type RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput = {
-    create?: XOR<RefreshTokenIgrejaCreateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | RefreshTokenIgrejaCreateWithoutUserIgrejaInput[] | RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    createMany?: RefreshTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    connect?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-  }
-
-  export type TestemunhoCreateNestedManyWithoutUserIgrejaInput = {
-    create?: XOR<TestemunhoCreateWithoutUserIgrejaInput, TestemunhoUncheckedCreateWithoutUserIgrejaInput> | TestemunhoCreateWithoutUserIgrejaInput[] | TestemunhoUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserIgrejaInput | TestemunhoCreateOrConnectWithoutUserIgrejaInput[]
-    createMany?: TestemunhoCreateManyUserIgrejaInputEnvelope
-    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput = {
-    create?: XOR<PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput[] | PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    createMany?: PasswordResetTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    connect?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-  }
-
-  export type RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput = {
-    create?: XOR<RefreshTokenIgrejaCreateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | RefreshTokenIgrejaCreateWithoutUserIgrejaInput[] | RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    createMany?: RefreshTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    connect?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-  }
-
-  export type TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput = {
-    create?: XOR<TestemunhoCreateWithoutUserIgrejaInput, TestemunhoUncheckedCreateWithoutUserIgrejaInput> | TestemunhoCreateWithoutUserIgrejaInput[] | TestemunhoUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserIgrejaInput | TestemunhoCreateOrConnectWithoutUserIgrejaInput[]
-    createMany?: TestemunhoCreateManyUserIgrejaInputEnvelope
-    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-  }
-
-  export type PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput = {
-    create?: XOR<PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput[] | PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    upsert?: PasswordResetTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput | PasswordResetTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput[]
-    createMany?: PasswordResetTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    set?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    disconnect?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    delete?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    connect?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    update?: PasswordResetTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput | PasswordResetTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput[]
-    updateMany?: PasswordResetTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput | PasswordResetTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput[]
-    deleteMany?: PasswordResetTokenIgrejaScalarWhereInput | PasswordResetTokenIgrejaScalarWhereInput[]
-  }
-
-  export type RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput = {
-    create?: XOR<RefreshTokenIgrejaCreateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | RefreshTokenIgrejaCreateWithoutUserIgrejaInput[] | RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    upsert?: RefreshTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput | RefreshTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput[]
-    createMany?: RefreshTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    set?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    disconnect?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    delete?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    connect?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    update?: RefreshTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput | RefreshTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput[]
-    updateMany?: RefreshTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput | RefreshTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput[]
-    deleteMany?: RefreshTokenIgrejaScalarWhereInput | RefreshTokenIgrejaScalarWhereInput[]
-  }
-
-  export type TestemunhoUpdateManyWithoutUserIgrejaNestedInput = {
-    create?: XOR<TestemunhoCreateWithoutUserIgrejaInput, TestemunhoUncheckedCreateWithoutUserIgrejaInput> | TestemunhoCreateWithoutUserIgrejaInput[] | TestemunhoUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserIgrejaInput | TestemunhoCreateOrConnectWithoutUserIgrejaInput[]
-    upsert?: TestemunhoUpsertWithWhereUniqueWithoutUserIgrejaInput | TestemunhoUpsertWithWhereUniqueWithoutUserIgrejaInput[]
-    createMany?: TestemunhoCreateManyUserIgrejaInputEnvelope
+  export type TestemunhoUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TestemunhoCreateWithoutUserInput, TestemunhoUncheckedCreateWithoutUserInput> | TestemunhoCreateWithoutUserInput[] | TestemunhoUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserInput | TestemunhoCreateOrConnectWithoutUserInput[]
+    upsert?: TestemunhoUpsertWithWhereUniqueWithoutUserInput | TestemunhoUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TestemunhoCreateManyUserInputEnvelope
     set?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
     disconnect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
     delete?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
     connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-    update?: TestemunhoUpdateWithWhereUniqueWithoutUserIgrejaInput | TestemunhoUpdateWithWhereUniqueWithoutUserIgrejaInput[]
-    updateMany?: TestemunhoUpdateManyWithWhereWithoutUserIgrejaInput | TestemunhoUpdateManyWithWhereWithoutUserIgrejaInput[]
-    deleteMany?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput = {
-    create?: XOR<PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput[] | PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    upsert?: PasswordResetTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput | PasswordResetTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput[]
-    createMany?: PasswordResetTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    set?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    disconnect?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    delete?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    connect?: PasswordResetTokenIgrejaWhereUniqueInput | PasswordResetTokenIgrejaWhereUniqueInput[]
-    update?: PasswordResetTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput | PasswordResetTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput[]
-    updateMany?: PasswordResetTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput | PasswordResetTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput[]
-    deleteMany?: PasswordResetTokenIgrejaScalarWhereInput | PasswordResetTokenIgrejaScalarWhereInput[]
-  }
-
-  export type RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput = {
-    create?: XOR<RefreshTokenIgrejaCreateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput> | RefreshTokenIgrejaCreateWithoutUserIgrejaInput[] | RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput | RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput[]
-    upsert?: RefreshTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput | RefreshTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput[]
-    createMany?: RefreshTokenIgrejaCreateManyUserIgrejaInputEnvelope
-    set?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    disconnect?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    delete?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    connect?: RefreshTokenIgrejaWhereUniqueInput | RefreshTokenIgrejaWhereUniqueInput[]
-    update?: RefreshTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput | RefreshTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput[]
-    updateMany?: RefreshTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput | RefreshTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput[]
-    deleteMany?: RefreshTokenIgrejaScalarWhereInput | RefreshTokenIgrejaScalarWhereInput[]
-  }
-
-  export type TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput = {
-    create?: XOR<TestemunhoCreateWithoutUserIgrejaInput, TestemunhoUncheckedCreateWithoutUserIgrejaInput> | TestemunhoCreateWithoutUserIgrejaInput[] | TestemunhoUncheckedCreateWithoutUserIgrejaInput[]
-    connectOrCreate?: TestemunhoCreateOrConnectWithoutUserIgrejaInput | TestemunhoCreateOrConnectWithoutUserIgrejaInput[]
-    upsert?: TestemunhoUpsertWithWhereUniqueWithoutUserIgrejaInput | TestemunhoUpsertWithWhereUniqueWithoutUserIgrejaInput[]
-    createMany?: TestemunhoCreateManyUserIgrejaInputEnvelope
-    set?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-    disconnect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-    delete?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
-    update?: TestemunhoUpdateWithWhereUniqueWithoutUserIgrejaInput | TestemunhoUpdateWithWhereUniqueWithoutUserIgrejaInput[]
-    updateMany?: TestemunhoUpdateManyWithWhereWithoutUserIgrejaInput | TestemunhoUpdateManyWithWhereWithoutUserIgrejaInput[]
+    update?: TestemunhoUpdateWithWhereUniqueWithoutUserInput | TestemunhoUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TestemunhoUpdateManyWithWhereWithoutUserInput | TestemunhoUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
   }
 
@@ -33421,6 +19020,14 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type EnumMinistryRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MinistryRole
   }
 
   export type UserUpdateOneRequiredWithoutNewsNestedInput = {
@@ -33457,90 +19064,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAgendaInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAgendaInput, UserUpdateWithoutAgendaInput>, UserUncheckedUpdateWithoutAgendaInput>
-  }
-
-  export type UserCreateNestedOneWithoutNewstomazinhoInput = {
-    create?: XOR<UserCreateWithoutNewstomazinhoInput, UserUncheckedCreateWithoutNewstomazinhoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewstomazinhoInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutNewstomazinhoNestedInput = {
-    create?: XOR<UserCreateWithoutNewstomazinhoInput, UserUncheckedCreateWithoutNewstomazinhoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewstomazinhoInput
-    upsert?: UserUpsertWithoutNewstomazinhoInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewstomazinhoInput, UserUpdateWithoutNewstomazinhoInput>, UserUncheckedUpdateWithoutNewstomazinhoInput>
-  }
-
-  export type UserCreateNestedOneWithoutMinisteriotomazinhoInput = {
-    create?: XOR<UserCreateWithoutMinisteriotomazinhoInput, UserUncheckedCreateWithoutMinisteriotomazinhoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMinisteriotomazinhoInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutMinisteriotomazinhoNestedInput = {
-    create?: XOR<UserCreateWithoutMinisteriotomazinhoInput, UserUncheckedCreateWithoutMinisteriotomazinhoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMinisteriotomazinhoInput
-    upsert?: UserUpsertWithoutMinisteriotomazinhoInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMinisteriotomazinhoInput, UserUpdateWithoutMinisteriotomazinhoInput>, UserUncheckedUpdateWithoutMinisteriotomazinhoInput>
-  }
-
-  export type UserCreateNestedOneWithoutAgendatomazinhoInput = {
-    create?: XOR<UserCreateWithoutAgendatomazinhoInput, UserUncheckedCreateWithoutAgendatomazinhoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAgendatomazinhoInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutAgendatomazinhoNestedInput = {
-    create?: XOR<UserCreateWithoutAgendatomazinhoInput, UserUncheckedCreateWithoutAgendatomazinhoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAgendatomazinhoInput
-    upsert?: UserUpsertWithoutAgendatomazinhoInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAgendatomazinhoInput, UserUpdateWithoutAgendatomazinhoInput>, UserUncheckedUpdateWithoutAgendatomazinhoInput>
-  }
-
-  export type UserCreateNestedOneWithoutNewscaxiasInput = {
-    create?: XOR<UserCreateWithoutNewscaxiasInput, UserUncheckedCreateWithoutNewscaxiasInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewscaxiasInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutNewscaxiasNestedInput = {
-    create?: XOR<UserCreateWithoutNewscaxiasInput, UserUncheckedCreateWithoutNewscaxiasInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewscaxiasInput
-    upsert?: UserUpsertWithoutNewscaxiasInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewscaxiasInput, UserUpdateWithoutNewscaxiasInput>, UserUncheckedUpdateWithoutNewscaxiasInput>
-  }
-
-  export type UserCreateNestedOneWithoutMinisteriocaxiasInput = {
-    create?: XOR<UserCreateWithoutMinisteriocaxiasInput, UserUncheckedCreateWithoutMinisteriocaxiasInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMinisteriocaxiasInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutMinisteriocaxiasNestedInput = {
-    create?: XOR<UserCreateWithoutMinisteriocaxiasInput, UserUncheckedCreateWithoutMinisteriocaxiasInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMinisteriocaxiasInput
-    upsert?: UserUpsertWithoutMinisteriocaxiasInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMinisteriocaxiasInput, UserUpdateWithoutMinisteriocaxiasInput>, UserUncheckedUpdateWithoutMinisteriocaxiasInput>
-  }
-
-  export type UserCreateNestedOneWithoutAgendacaxiasInput = {
-    create?: XOR<UserCreateWithoutAgendacaxiasInput, UserUncheckedCreateWithoutAgendacaxiasInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAgendacaxiasInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutAgendacaxiasNestedInput = {
-    create?: XOR<UserCreateWithoutAgendacaxiasInput, UserUncheckedCreateWithoutAgendacaxiasInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAgendacaxiasInput
-    upsert?: UserUpsertWithoutAgendacaxiasInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAgendacaxiasInput, UserUpdateWithoutAgendacaxiasInput>, UserUncheckedUpdateWithoutAgendacaxiasInput>
   }
 
   export type UserCreateNestedOneWithoutDoacaoInput = {
@@ -33627,48 +19150,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokenInput, UserUpdateWithoutRefreshTokenInput>, UserUncheckedUpdateWithoutRefreshTokenInput>
   }
 
-  export type UserIgrejaCreateNestedOneWithoutTestemunhoInput = {
-    create?: XOR<UserIgrejaCreateWithoutTestemunhoInput, UserIgrejaUncheckedCreateWithoutTestemunhoInput>
-    connectOrCreate?: UserIgrejaCreateOrConnectWithoutTestemunhoInput
-    connect?: UserIgrejaWhereUniqueInput
-  }
-
-  export type UserIgrejaUpdateOneRequiredWithoutTestemunhoNestedInput = {
-    create?: XOR<UserIgrejaCreateWithoutTestemunhoInput, UserIgrejaUncheckedCreateWithoutTestemunhoInput>
-    connectOrCreate?: UserIgrejaCreateOrConnectWithoutTestemunhoInput
-    upsert?: UserIgrejaUpsertWithoutTestemunhoInput
-    connect?: UserIgrejaWhereUniqueInput
-    update?: XOR<XOR<UserIgrejaUpdateToOneWithWhereWithoutTestemunhoInput, UserIgrejaUpdateWithoutTestemunhoInput>, UserIgrejaUncheckedUpdateWithoutTestemunhoInput>
-  }
-
-  export type UserIgrejaCreateNestedOneWithoutRefreshTokenIgrejaInput = {
-    create?: XOR<UserIgrejaCreateWithoutRefreshTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutRefreshTokenIgrejaInput>
-    connectOrCreate?: UserIgrejaCreateOrConnectWithoutRefreshTokenIgrejaInput
-    connect?: UserIgrejaWhereUniqueInput
-  }
-
-  export type UserIgrejaUpdateOneRequiredWithoutRefreshTokenIgrejaNestedInput = {
-    create?: XOR<UserIgrejaCreateWithoutRefreshTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutRefreshTokenIgrejaInput>
-    connectOrCreate?: UserIgrejaCreateOrConnectWithoutRefreshTokenIgrejaInput
-    upsert?: UserIgrejaUpsertWithoutRefreshTokenIgrejaInput
-    connect?: UserIgrejaWhereUniqueInput
-    update?: XOR<XOR<UserIgrejaUpdateToOneWithWhereWithoutRefreshTokenIgrejaInput, UserIgrejaUpdateWithoutRefreshTokenIgrejaInput>, UserIgrejaUncheckedUpdateWithoutRefreshTokenIgrejaInput>
-  }
-
-  export type UserIgrejaCreateNestedOneWithoutPasswordResetTokenIgrejaInput = {
-    create?: XOR<UserIgrejaCreateWithoutPasswordResetTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutPasswordResetTokenIgrejaInput>
-    connectOrCreate?: UserIgrejaCreateOrConnectWithoutPasswordResetTokenIgrejaInput
-    connect?: UserIgrejaWhereUniqueInput
-  }
-
-  export type UserIgrejaUpdateOneRequiredWithoutPasswordResetTokenIgrejaNestedInput = {
-    create?: XOR<UserIgrejaCreateWithoutPasswordResetTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutPasswordResetTokenIgrejaInput>
-    connectOrCreate?: UserIgrejaCreateOrConnectWithoutPasswordResetTokenIgrejaInput
-    upsert?: UserIgrejaUpsertWithoutPasswordResetTokenIgrejaInput
-    connect?: UserIgrejaWhereUniqueInput
-    update?: XOR<XOR<UserIgrejaUpdateToOneWithWhereWithoutPasswordResetTokenIgrejaInput, UserIgrejaUpdateWithoutPasswordResetTokenIgrejaInput>, UserIgrejaUncheckedUpdateWithoutPasswordResetTokenIgrejaInput>
-  }
-
   export type UserCreateNestedOneWithoutPasswordResetTokenInput = {
     create?: XOR<UserCreateWithoutPasswordResetTokenInput, UserUncheckedCreateWithoutPasswordResetTokenInput>
     connectOrCreate?: UserCreateOrConnectWithoutPasswordResetTokenInput
@@ -33681,6 +19162,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPasswordResetTokenInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPasswordResetTokenInput, UserUpdateWithoutPasswordResetTokenInput>, UserUncheckedUpdateWithoutPasswordResetTokenInput>
+  }
+
+  export type UserCreateNestedOneWithoutTestemunhosInput = {
+    create?: XOR<UserCreateWithoutTestemunhosInput, UserUncheckedCreateWithoutTestemunhosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTestemunhosInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutTestemunhosNestedInput = {
+    create?: XOR<UserCreateWithoutTestemunhosInput, UserUncheckedCreateWithoutTestemunhosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTestemunhosInput
+    upsert?: UserUpsertWithoutTestemunhosInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTestemunhosInput, UserUpdateWithoutTestemunhosInput>, UserUncheckedUpdateWithoutTestemunhosInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -33711,9 +19206,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -33783,12 +19280,14 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -33816,6 +19315,18 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumMinistryRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMinistryRoleFilter<$PrismaModel> | $Enums.MinistryRole
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -33830,6 +19341,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMinistryRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMinistryRoleWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMinistryRoleFilter<$PrismaModel>
+    _max?: NestedEnumMinistryRoleFilter<$PrismaModel>
+  }
+
   export type AgendaCreateWithoutUserInput = {
     id?: string
     day: string
@@ -33839,6 +19368,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
+    role: $Enums.MinistryRole
   }
 
   export type AgendaUncheckedCreateWithoutUserInput = {
@@ -33850,6 +19380,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
+    role: $Enums.MinistryRole
   }
 
   export type AgendaCreateOrConnectWithoutUserInput = {
@@ -33859,70 +19390,6 @@ export namespace Prisma {
 
   export type AgendaCreateManyUserInputEnvelope = {
     data: AgendaCreateManyUserInput | AgendaCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type AgendaCaxiasCreateWithoutUserInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaCaxiasUncheckedCreateWithoutUserInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaCaxiasCreateOrConnectWithoutUserInput = {
-    where: AgendaCaxiasWhereUniqueInput
-    create: XOR<AgendaCaxiasCreateWithoutUserInput, AgendaCaxiasUncheckedCreateWithoutUserInput>
-  }
-
-  export type AgendaCaxiasCreateManyUserInputEnvelope = {
-    data: AgendaCaxiasCreateManyUserInput | AgendaCaxiasCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type AgendaTomazinhoCreateWithoutUserInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaTomazinhoUncheckedCreateWithoutUserInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaTomazinhoCreateOrConnectWithoutUserInput = {
-    where: AgendaTomazinhoWhereUniqueInput
-    create: XOR<AgendaTomazinhoCreateWithoutUserInput, AgendaTomazinhoUncheckedCreateWithoutUserInput>
-  }
-
-  export type AgendaTomazinhoCreateManyUserInputEnvelope = {
-    data: AgendaTomazinhoCreateManyUserInput | AgendaTomazinhoCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -34039,6 +19506,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
+    role: $Enums.MinistryRole
   }
 
   export type MinisterioUncheckedCreateWithoutUserInput = {
@@ -34050,6 +19518,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
+    role: $Enums.MinistryRole
   }
 
   export type MinisterioCreateOrConnectWithoutUserInput = {
@@ -34059,70 +19528,6 @@ export namespace Prisma {
 
   export type MinisterioCreateManyUserInputEnvelope = {
     data: MinisterioCreateManyUserInput | MinisterioCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MinisterioCaxiasCreateWithoutUserInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioCaxiasUncheckedCreateWithoutUserInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioCaxiasCreateOrConnectWithoutUserInput = {
-    where: MinisterioCaxiasWhereUniqueInput
-    create: XOR<MinisterioCaxiasCreateWithoutUserInput, MinisterioCaxiasUncheckedCreateWithoutUserInput>
-  }
-
-  export type MinisterioCaxiasCreateManyUserInputEnvelope = {
-    data: MinisterioCaxiasCreateManyUserInput | MinisterioCaxiasCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MinisterioTomazinhoCreateWithoutUserInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioTomazinhoUncheckedCreateWithoutUserInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioTomazinhoCreateOrConnectWithoutUserInput = {
-    where: MinisterioTomazinhoWhereUniqueInput
-    create: XOR<MinisterioTomazinhoCreateWithoutUserInput, MinisterioTomazinhoUncheckedCreateWithoutUserInput>
-  }
-
-  export type MinisterioTomazinhoCreateManyUserInputEnvelope = {
-    data: MinisterioTomazinhoCreateManyUserInput | MinisterioTomazinhoCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -34137,6 +19542,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
+    role: $Enums.MinistryRole
   }
 
   export type NewUncheckedCreateWithoutUserInput = {
@@ -34150,6 +19556,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
+    role: $Enums.MinistryRole
   }
 
   export type NewCreateOrConnectWithoutUserInput = {
@@ -34159,78 +19566,6 @@ export namespace Prisma {
 
   export type NewCreateManyUserInputEnvelope = {
     data: NewCreateManyUserInput | NewCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NewCaxiasCreateWithoutUserInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewCaxiasUncheckedCreateWithoutUserInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewCaxiasCreateOrConnectWithoutUserInput = {
-    where: NewCaxiasWhereUniqueInput
-    create: XOR<NewCaxiasCreateWithoutUserInput, NewCaxiasUncheckedCreateWithoutUserInput>
-  }
-
-  export type NewCaxiasCreateManyUserInputEnvelope = {
-    data: NewCaxiasCreateManyUserInput | NewCaxiasCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NewTomazinhoCreateWithoutUserInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewTomazinhoUncheckedCreateWithoutUserInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewTomazinhoCreateOrConnectWithoutUserInput = {
-    where: NewTomazinhoWhereUniqueInput
-    create: XOR<NewTomazinhoCreateWithoutUserInput, NewTomazinhoUncheckedCreateWithoutUserInput>
-  }
-
-  export type NewTomazinhoCreateManyUserInputEnvelope = {
-    data: NewTomazinhoCreateManyUserInput | NewTomazinhoCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -34342,6 +19677,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TestemunhoCreateWithoutUserInput = {
+    id?: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+  }
+
+  export type TestemunhoUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+  }
+
+  export type TestemunhoCreateOrConnectWithoutUserInput = {
+    where: TestemunhoWhereUniqueInput
+    create: XOR<TestemunhoCreateWithoutUserInput, TestemunhoUncheckedCreateWithoutUserInput>
+  }
+
+  export type TestemunhoCreateManyUserInputEnvelope = {
+    data: TestemunhoCreateManyUserInput | TestemunhoCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AgendaUpsertWithWhereUniqueWithoutUserInput = {
     where: AgendaWhereUniqueInput
     update: XOR<AgendaUpdateWithoutUserInput, AgendaUncheckedUpdateWithoutUserInput>
@@ -34371,68 +19738,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeFilter<"Agenda"> | Date | string
     destaque?: BoolFilter<"Agenda"> | boolean
-  }
-
-  export type AgendaCaxiasUpsertWithWhereUniqueWithoutUserInput = {
-    where: AgendaCaxiasWhereUniqueInput
-    update: XOR<AgendaCaxiasUpdateWithoutUserInput, AgendaCaxiasUncheckedUpdateWithoutUserInput>
-    create: XOR<AgendaCaxiasCreateWithoutUserInput, AgendaCaxiasUncheckedCreateWithoutUserInput>
-  }
-
-  export type AgendaCaxiasUpdateWithWhereUniqueWithoutUserInput = {
-    where: AgendaCaxiasWhereUniqueInput
-    data: XOR<AgendaCaxiasUpdateWithoutUserInput, AgendaCaxiasUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AgendaCaxiasUpdateManyWithWhereWithoutUserInput = {
-    where: AgendaCaxiasScalarWhereInput
-    data: XOR<AgendaCaxiasUpdateManyMutationInput, AgendaCaxiasUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AgendaCaxiasScalarWhereInput = {
-    AND?: AgendaCaxiasScalarWhereInput | AgendaCaxiasScalarWhereInput[]
-    OR?: AgendaCaxiasScalarWhereInput[]
-    NOT?: AgendaCaxiasScalarWhereInput | AgendaCaxiasScalarWhereInput[]
-    id?: StringFilter<"AgendaCaxias"> | string
-    userId?: StringFilter<"AgendaCaxias"> | string
-    day?: StringFilter<"AgendaCaxias"> | string
-    name?: StringFilter<"AgendaCaxias"> | string
-    hour?: StringFilter<"AgendaCaxias"> | string
-    isPublic?: BoolFilter<"AgendaCaxias"> | boolean
-    createdAt?: DateTimeFilter<"AgendaCaxias"> | Date | string
-    updatedAt?: DateTimeFilter<"AgendaCaxias"> | Date | string
-    destaque?: BoolFilter<"AgendaCaxias"> | boolean
-  }
-
-  export type AgendaTomazinhoUpsertWithWhereUniqueWithoutUserInput = {
-    where: AgendaTomazinhoWhereUniqueInput
-    update: XOR<AgendaTomazinhoUpdateWithoutUserInput, AgendaTomazinhoUncheckedUpdateWithoutUserInput>
-    create: XOR<AgendaTomazinhoCreateWithoutUserInput, AgendaTomazinhoUncheckedCreateWithoutUserInput>
-  }
-
-  export type AgendaTomazinhoUpdateWithWhereUniqueWithoutUserInput = {
-    where: AgendaTomazinhoWhereUniqueInput
-    data: XOR<AgendaTomazinhoUpdateWithoutUserInput, AgendaTomazinhoUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AgendaTomazinhoUpdateManyWithWhereWithoutUserInput = {
-    where: AgendaTomazinhoScalarWhereInput
-    data: XOR<AgendaTomazinhoUpdateManyMutationInput, AgendaTomazinhoUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AgendaTomazinhoScalarWhereInput = {
-    AND?: AgendaTomazinhoScalarWhereInput | AgendaTomazinhoScalarWhereInput[]
-    OR?: AgendaTomazinhoScalarWhereInput[]
-    NOT?: AgendaTomazinhoScalarWhereInput | AgendaTomazinhoScalarWhereInput[]
-    id?: StringFilter<"AgendaTomazinho"> | string
-    userId?: StringFilter<"AgendaTomazinho"> | string
-    day?: StringFilter<"AgendaTomazinho"> | string
-    name?: StringFilter<"AgendaTomazinho"> | string
-    hour?: StringFilter<"AgendaTomazinho"> | string
-    isPublic?: BoolFilter<"AgendaTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"AgendaTomazinho"> | Date | string
-    updatedAt?: DateTimeFilter<"AgendaTomazinho"> | Date | string
-    destaque?: BoolFilter<"AgendaTomazinho"> | boolean
+    role?: EnumMinistryRoleFilter<"Agenda"> | $Enums.MinistryRole
   }
 
   export type ContatoUpsertWithWhereUniqueWithoutUserInput = {
@@ -34561,68 +19867,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Ministerio"> | Date | string
     coverUrl?: StringFilter<"Ministerio"> | string
     updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
-  }
-
-  export type MinisterioCaxiasUpsertWithWhereUniqueWithoutUserInput = {
-    where: MinisterioCaxiasWhereUniqueInput
-    update: XOR<MinisterioCaxiasUpdateWithoutUserInput, MinisterioCaxiasUncheckedUpdateWithoutUserInput>
-    create: XOR<MinisterioCaxiasCreateWithoutUserInput, MinisterioCaxiasUncheckedCreateWithoutUserInput>
-  }
-
-  export type MinisterioCaxiasUpdateWithWhereUniqueWithoutUserInput = {
-    where: MinisterioCaxiasWhereUniqueInput
-    data: XOR<MinisterioCaxiasUpdateWithoutUserInput, MinisterioCaxiasUncheckedUpdateWithoutUserInput>
-  }
-
-  export type MinisterioCaxiasUpdateManyWithWhereWithoutUserInput = {
-    where: MinisterioCaxiasScalarWhereInput
-    data: XOR<MinisterioCaxiasUpdateManyMutationInput, MinisterioCaxiasUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type MinisterioCaxiasScalarWhereInput = {
-    AND?: MinisterioCaxiasScalarWhereInput | MinisterioCaxiasScalarWhereInput[]
-    OR?: MinisterioCaxiasScalarWhereInput[]
-    NOT?: MinisterioCaxiasScalarWhereInput | MinisterioCaxiasScalarWhereInput[]
-    id?: StringFilter<"MinisterioCaxias"> | string
-    userId?: StringFilter<"MinisterioCaxias"> | string
-    name?: StringFilter<"MinisterioCaxias"> | string
-    title?: StringFilter<"MinisterioCaxias"> | string
-    local?: StringFilter<"MinisterioCaxias"> | string
-    isPublic?: BoolFilter<"MinisterioCaxias"> | boolean
-    createdAt?: DateTimeFilter<"MinisterioCaxias"> | Date | string
-    coverUrl?: StringFilter<"MinisterioCaxias"> | string
-    updatedAt?: DateTimeFilter<"MinisterioCaxias"> | Date | string
-  }
-
-  export type MinisterioTomazinhoUpsertWithWhereUniqueWithoutUserInput = {
-    where: MinisterioTomazinhoWhereUniqueInput
-    update: XOR<MinisterioTomazinhoUpdateWithoutUserInput, MinisterioTomazinhoUncheckedUpdateWithoutUserInput>
-    create: XOR<MinisterioTomazinhoCreateWithoutUserInput, MinisterioTomazinhoUncheckedCreateWithoutUserInput>
-  }
-
-  export type MinisterioTomazinhoUpdateWithWhereUniqueWithoutUserInput = {
-    where: MinisterioTomazinhoWhereUniqueInput
-    data: XOR<MinisterioTomazinhoUpdateWithoutUserInput, MinisterioTomazinhoUncheckedUpdateWithoutUserInput>
-  }
-
-  export type MinisterioTomazinhoUpdateManyWithWhereWithoutUserInput = {
-    where: MinisterioTomazinhoScalarWhereInput
-    data: XOR<MinisterioTomazinhoUpdateManyMutationInput, MinisterioTomazinhoUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type MinisterioTomazinhoScalarWhereInput = {
-    AND?: MinisterioTomazinhoScalarWhereInput | MinisterioTomazinhoScalarWhereInput[]
-    OR?: MinisterioTomazinhoScalarWhereInput[]
-    NOT?: MinisterioTomazinhoScalarWhereInput | MinisterioTomazinhoScalarWhereInput[]
-    id?: StringFilter<"MinisterioTomazinho"> | string
-    userId?: StringFilter<"MinisterioTomazinho"> | string
-    name?: StringFilter<"MinisterioTomazinho"> | string
-    title?: StringFilter<"MinisterioTomazinho"> | string
-    local?: StringFilter<"MinisterioTomazinho"> | string
-    isPublic?: BoolFilter<"MinisterioTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"MinisterioTomazinho"> | Date | string
-    coverUrl?: StringFilter<"MinisterioTomazinho"> | string
-    updatedAt?: DateTimeFilter<"MinisterioTomazinho"> | Date | string
+    role?: EnumMinistryRoleFilter<"Ministerio"> | $Enums.MinistryRole
   }
 
   export type NewUpsertWithWhereUniqueWithoutUserInput = {
@@ -34656,72 +19901,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
     url?: StringFilter<"New"> | string
-  }
-
-  export type NewCaxiasUpsertWithWhereUniqueWithoutUserInput = {
-    where: NewCaxiasWhereUniqueInput
-    update: XOR<NewCaxiasUpdateWithoutUserInput, NewCaxiasUncheckedUpdateWithoutUserInput>
-    create: XOR<NewCaxiasCreateWithoutUserInput, NewCaxiasUncheckedCreateWithoutUserInput>
-  }
-
-  export type NewCaxiasUpdateWithWhereUniqueWithoutUserInput = {
-    where: NewCaxiasWhereUniqueInput
-    data: XOR<NewCaxiasUpdateWithoutUserInput, NewCaxiasUncheckedUpdateWithoutUserInput>
-  }
-
-  export type NewCaxiasUpdateManyWithWhereWithoutUserInput = {
-    where: NewCaxiasScalarWhereInput
-    data: XOR<NewCaxiasUpdateManyMutationInput, NewCaxiasUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type NewCaxiasScalarWhereInput = {
-    AND?: NewCaxiasScalarWhereInput | NewCaxiasScalarWhereInput[]
-    OR?: NewCaxiasScalarWhereInput[]
-    NOT?: NewCaxiasScalarWhereInput | NewCaxiasScalarWhereInput[]
-    id?: StringFilter<"NewCaxias"> | string
-    userId?: StringFilter<"NewCaxias"> | string
-    coverUrl?: StringFilter<"NewCaxias"> | string
-    content?: StringFilter<"NewCaxias"> | string
-    title?: StringFilter<"NewCaxias"> | string
-    isPublic?: BoolFilter<"NewCaxias"> | boolean
-    createdAt?: DateTimeFilter<"NewCaxias"> | Date | string
-    page?: StringFilter<"NewCaxias"> | string
-    updatedAt?: DateTimeFilter<"NewCaxias"> | Date | string
-    destaque?: BoolFilter<"NewCaxias"> | boolean
-    url?: StringFilter<"NewCaxias"> | string
-  }
-
-  export type NewTomazinhoUpsertWithWhereUniqueWithoutUserInput = {
-    where: NewTomazinhoWhereUniqueInput
-    update: XOR<NewTomazinhoUpdateWithoutUserInput, NewTomazinhoUncheckedUpdateWithoutUserInput>
-    create: XOR<NewTomazinhoCreateWithoutUserInput, NewTomazinhoUncheckedCreateWithoutUserInput>
-  }
-
-  export type NewTomazinhoUpdateWithWhereUniqueWithoutUserInput = {
-    where: NewTomazinhoWhereUniqueInput
-    data: XOR<NewTomazinhoUpdateWithoutUserInput, NewTomazinhoUncheckedUpdateWithoutUserInput>
-  }
-
-  export type NewTomazinhoUpdateManyWithWhereWithoutUserInput = {
-    where: NewTomazinhoScalarWhereInput
-    data: XOR<NewTomazinhoUpdateManyMutationInput, NewTomazinhoUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type NewTomazinhoScalarWhereInput = {
-    AND?: NewTomazinhoScalarWhereInput | NewTomazinhoScalarWhereInput[]
-    OR?: NewTomazinhoScalarWhereInput[]
-    NOT?: NewTomazinhoScalarWhereInput | NewTomazinhoScalarWhereInput[]
-    id?: StringFilter<"NewTomazinho"> | string
-    userId?: StringFilter<"NewTomazinho"> | string
-    coverUrl?: StringFilter<"NewTomazinho"> | string
-    content?: StringFilter<"NewTomazinho"> | string
-    title?: StringFilter<"NewTomazinho"> | string
-    isPublic?: BoolFilter<"NewTomazinho"> | boolean
-    createdAt?: DateTimeFilter<"NewTomazinho"> | Date | string
-    page?: StringFilter<"NewTomazinho"> | string
-    updatedAt?: DateTimeFilter<"NewTomazinho"> | Date | string
-    destaque?: BoolFilter<"NewTomazinho"> | boolean
-    url?: StringFilter<"NewTomazinho"> | string
+    role?: EnumMinistryRoleFilter<"New"> | $Enums.MinistryRole
   }
 
   export type PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput = {
@@ -34838,154 +20018,20 @@ export namespace Prisma {
     isPublic?: BoolFilter<"SobreLider"> | boolean
   }
 
-  export type PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type PasswordResetTokenIgrejaCreateOrConnectWithoutUserIgrejaInput = {
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-    create: XOR<PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput>
-  }
-
-  export type PasswordResetTokenIgrejaCreateManyUserIgrejaInputEnvelope = {
-    data: PasswordResetTokenIgrejaCreateManyUserIgrejaInput | PasswordResetTokenIgrejaCreateManyUserIgrejaInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RefreshTokenIgrejaCreateWithoutUserIgrejaInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type RefreshTokenIgrejaCreateOrConnectWithoutUserIgrejaInput = {
-    where: RefreshTokenIgrejaWhereUniqueInput
-    create: XOR<RefreshTokenIgrejaCreateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput>
-  }
-
-  export type RefreshTokenIgrejaCreateManyUserIgrejaInputEnvelope = {
-    data: RefreshTokenIgrejaCreateManyUserIgrejaInput | RefreshTokenIgrejaCreateManyUserIgrejaInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TestemunhoCreateWithoutUserIgrejaInput = {
-    id?: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isPublic?: boolean
-    coverUrl?: string | null
-  }
-
-  export type TestemunhoUncheckedCreateWithoutUserIgrejaInput = {
-    id?: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isPublic?: boolean
-    coverUrl?: string | null
-  }
-
-  export type TestemunhoCreateOrConnectWithoutUserIgrejaInput = {
+  export type TestemunhoUpsertWithWhereUniqueWithoutUserInput = {
     where: TestemunhoWhereUniqueInput
-    create: XOR<TestemunhoCreateWithoutUserIgrejaInput, TestemunhoUncheckedCreateWithoutUserIgrejaInput>
+    update: XOR<TestemunhoUpdateWithoutUserInput, TestemunhoUncheckedUpdateWithoutUserInput>
+    create: XOR<TestemunhoCreateWithoutUserInput, TestemunhoUncheckedCreateWithoutUserInput>
   }
 
-  export type TestemunhoCreateManyUserIgrejaInputEnvelope = {
-    data: TestemunhoCreateManyUserIgrejaInput | TestemunhoCreateManyUserIgrejaInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PasswordResetTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput = {
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-    update: XOR<PasswordResetTokenIgrejaUpdateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedUpdateWithoutUserIgrejaInput>
-    create: XOR<PasswordResetTokenIgrejaCreateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedCreateWithoutUserIgrejaInput>
-  }
-
-  export type PasswordResetTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput = {
-    where: PasswordResetTokenIgrejaWhereUniqueInput
-    data: XOR<PasswordResetTokenIgrejaUpdateWithoutUserIgrejaInput, PasswordResetTokenIgrejaUncheckedUpdateWithoutUserIgrejaInput>
-  }
-
-  export type PasswordResetTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput = {
-    where: PasswordResetTokenIgrejaScalarWhereInput
-    data: XOR<PasswordResetTokenIgrejaUpdateManyMutationInput, PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaInput>
-  }
-
-  export type PasswordResetTokenIgrejaScalarWhereInput = {
-    AND?: PasswordResetTokenIgrejaScalarWhereInput | PasswordResetTokenIgrejaScalarWhereInput[]
-    OR?: PasswordResetTokenIgrejaScalarWhereInput[]
-    NOT?: PasswordResetTokenIgrejaScalarWhereInput | PasswordResetTokenIgrejaScalarWhereInput[]
-    id?: StringFilter<"PasswordResetTokenIgreja"> | string
-    token?: StringFilter<"PasswordResetTokenIgreja"> | string
-    userId?: StringFilter<"PasswordResetTokenIgreja"> | string
-    createdAt?: DateTimeFilter<"PasswordResetTokenIgreja"> | Date | string
-    expiresAt?: DateTimeFilter<"PasswordResetTokenIgreja"> | Date | string
-  }
-
-  export type RefreshTokenIgrejaUpsertWithWhereUniqueWithoutUserIgrejaInput = {
-    where: RefreshTokenIgrejaWhereUniqueInput
-    update: XOR<RefreshTokenIgrejaUpdateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedUpdateWithoutUserIgrejaInput>
-    create: XOR<RefreshTokenIgrejaCreateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedCreateWithoutUserIgrejaInput>
-  }
-
-  export type RefreshTokenIgrejaUpdateWithWhereUniqueWithoutUserIgrejaInput = {
-    where: RefreshTokenIgrejaWhereUniqueInput
-    data: XOR<RefreshTokenIgrejaUpdateWithoutUserIgrejaInput, RefreshTokenIgrejaUncheckedUpdateWithoutUserIgrejaInput>
-  }
-
-  export type RefreshTokenIgrejaUpdateManyWithWhereWithoutUserIgrejaInput = {
-    where: RefreshTokenIgrejaScalarWhereInput
-    data: XOR<RefreshTokenIgrejaUpdateManyMutationInput, RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaInput>
-  }
-
-  export type RefreshTokenIgrejaScalarWhereInput = {
-    AND?: RefreshTokenIgrejaScalarWhereInput | RefreshTokenIgrejaScalarWhereInput[]
-    OR?: RefreshTokenIgrejaScalarWhereInput[]
-    NOT?: RefreshTokenIgrejaScalarWhereInput | RefreshTokenIgrejaScalarWhereInput[]
-    id?: StringFilter<"RefreshTokenIgreja"> | string
-    token?: StringFilter<"RefreshTokenIgreja"> | string
-    userId?: StringFilter<"RefreshTokenIgreja"> | string
-    createdAt?: DateTimeFilter<"RefreshTokenIgreja"> | Date | string
-    updatedAt?: DateTimeFilter<"RefreshTokenIgreja"> | Date | string
-  }
-
-  export type TestemunhoUpsertWithWhereUniqueWithoutUserIgrejaInput = {
+  export type TestemunhoUpdateWithWhereUniqueWithoutUserInput = {
     where: TestemunhoWhereUniqueInput
-    update: XOR<TestemunhoUpdateWithoutUserIgrejaInput, TestemunhoUncheckedUpdateWithoutUserIgrejaInput>
-    create: XOR<TestemunhoCreateWithoutUserIgrejaInput, TestemunhoUncheckedCreateWithoutUserIgrejaInput>
+    data: XOR<TestemunhoUpdateWithoutUserInput, TestemunhoUncheckedUpdateWithoutUserInput>
   }
 
-  export type TestemunhoUpdateWithWhereUniqueWithoutUserIgrejaInput = {
-    where: TestemunhoWhereUniqueInput
-    data: XOR<TestemunhoUpdateWithoutUserIgrejaInput, TestemunhoUncheckedUpdateWithoutUserIgrejaInput>
-  }
-
-  export type TestemunhoUpdateManyWithWhereWithoutUserIgrejaInput = {
+  export type TestemunhoUpdateManyWithWhereWithoutUserInput = {
     where: TestemunhoScalarWhereInput
-    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyWithoutUserIgrejaInput>
+    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyWithoutUserInput>
   }
 
   export type TestemunhoScalarWhereInput = {
@@ -35009,25 +20055,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsInput = {
@@ -35036,25 +20075,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsInput = {
@@ -35079,25 +20111,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsInput = {
@@ -35106,25 +20131,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMinisterioInput = {
@@ -35133,25 +20151,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMinisterioInput = {
@@ -35160,25 +20171,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMinisterioInput = {
@@ -35203,25 +20207,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMinisterioInput = {
@@ -35230,25 +20227,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAgendaInput = {
@@ -35257,25 +20247,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAgendaInput = {
@@ -35284,25 +20267,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAgendaInput = {
@@ -35327,25 +20303,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAgendaInput = {
@@ -35354,769 +20323,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutNewstomazinhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutNewstomazinhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutNewstomazinhoInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNewstomazinhoInput, UserUncheckedCreateWithoutNewstomazinhoInput>
-  }
-
-  export type UserUpsertWithoutNewstomazinhoInput = {
-    update: XOR<UserUpdateWithoutNewstomazinhoInput, UserUncheckedUpdateWithoutNewstomazinhoInput>
-    create: XOR<UserCreateWithoutNewstomazinhoInput, UserUncheckedCreateWithoutNewstomazinhoInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutNewstomazinhoInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNewstomazinhoInput, UserUncheckedUpdateWithoutNewstomazinhoInput>
-  }
-
-  export type UserUpdateWithoutNewstomazinhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutNewstomazinhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutMinisteriotomazinhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutMinisteriotomazinhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutMinisteriotomazinhoInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMinisteriotomazinhoInput, UserUncheckedCreateWithoutMinisteriotomazinhoInput>
-  }
-
-  export type UserUpsertWithoutMinisteriotomazinhoInput = {
-    update: XOR<UserUpdateWithoutMinisteriotomazinhoInput, UserUncheckedUpdateWithoutMinisteriotomazinhoInput>
-    create: XOR<UserCreateWithoutMinisteriotomazinhoInput, UserUncheckedCreateWithoutMinisteriotomazinhoInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutMinisteriotomazinhoInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMinisteriotomazinhoInput, UserUncheckedUpdateWithoutMinisteriotomazinhoInput>
-  }
-
-  export type UserUpdateWithoutMinisteriotomazinhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMinisteriotomazinhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutAgendatomazinhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutAgendatomazinhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutAgendatomazinhoInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAgendatomazinhoInput, UserUncheckedCreateWithoutAgendatomazinhoInput>
-  }
-
-  export type UserUpsertWithoutAgendatomazinhoInput = {
-    update: XOR<UserUpdateWithoutAgendatomazinhoInput, UserUncheckedUpdateWithoutAgendatomazinhoInput>
-    create: XOR<UserCreateWithoutAgendatomazinhoInput, UserUncheckedCreateWithoutAgendatomazinhoInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutAgendatomazinhoInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAgendatomazinhoInput, UserUncheckedUpdateWithoutAgendatomazinhoInput>
-  }
-
-  export type UserUpdateWithoutAgendatomazinhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAgendatomazinhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutNewscaxiasInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutNewscaxiasInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutNewscaxiasInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNewscaxiasInput, UserUncheckedCreateWithoutNewscaxiasInput>
-  }
-
-  export type UserUpsertWithoutNewscaxiasInput = {
-    update: XOR<UserUpdateWithoutNewscaxiasInput, UserUncheckedUpdateWithoutNewscaxiasInput>
-    create: XOR<UserCreateWithoutNewscaxiasInput, UserUncheckedCreateWithoutNewscaxiasInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutNewscaxiasInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNewscaxiasInput, UserUncheckedUpdateWithoutNewscaxiasInput>
-  }
-
-  export type UserUpdateWithoutNewscaxiasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutNewscaxiasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutMinisteriocaxiasInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutMinisteriocaxiasInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutMinisteriocaxiasInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMinisteriocaxiasInput, UserUncheckedCreateWithoutMinisteriocaxiasInput>
-  }
-
-  export type UserUpsertWithoutMinisteriocaxiasInput = {
-    update: XOR<UserUpdateWithoutMinisteriocaxiasInput, UserUncheckedUpdateWithoutMinisteriocaxiasInput>
-    create: XOR<UserCreateWithoutMinisteriocaxiasInput, UserUncheckedCreateWithoutMinisteriocaxiasInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutMinisteriocaxiasInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMinisteriocaxiasInput, UserUncheckedUpdateWithoutMinisteriocaxiasInput>
-  }
-
-  export type UserUpdateWithoutMinisteriocaxiasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMinisteriocaxiasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutAgendacaxiasInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutAgendacaxiasInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    isAdmin?: boolean
-    expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutAgendacaxiasInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAgendacaxiasInput, UserUncheckedCreateWithoutAgendacaxiasInput>
-  }
-
-  export type UserUpsertWithoutAgendacaxiasInput = {
-    update: XOR<UserUpdateWithoutAgendacaxiasInput, UserUncheckedUpdateWithoutAgendacaxiasInput>
-    create: XOR<UserCreateWithoutAgendacaxiasInput, UserUncheckedCreateWithoutAgendacaxiasInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutAgendacaxiasInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAgendacaxiasInput, UserUncheckedUpdateWithoutAgendacaxiasInput>
-  }
-
-  export type UserUpdateWithoutAgendacaxiasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAgendacaxiasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutDoacaoInput = {
@@ -36125,25 +20343,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDoacaoInput = {
@@ -36152,25 +20363,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDoacaoInput = {
@@ -36195,25 +20399,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDoacaoInput = {
@@ -36222,25 +20419,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutEnderecoInput = {
@@ -36249,25 +20439,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnderecoInput = {
@@ -36276,25 +20459,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnderecoInput = {
@@ -36319,25 +20495,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnderecoInput = {
@@ -36346,25 +20515,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutContatoInput = {
@@ -36373,25 +20535,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutContatoInput = {
@@ -36400,25 +20555,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutContatoInput = {
@@ -36443,25 +20591,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContatoInput = {
@@ -36470,25 +20611,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSobreInput = {
@@ -36497,25 +20631,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSobreInput = {
@@ -36524,25 +20651,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSobreInput = {
@@ -36567,25 +20687,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSobreInput = {
@@ -36594,25 +20707,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSobreLiderInput = {
@@ -36621,25 +20727,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSobreLiderInput = {
@@ -36648,25 +20747,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSobreLiderInput = {
@@ -36691,25 +20783,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSobreLiderInput = {
@@ -36718,25 +20803,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRefreshTokenInput = {
@@ -36745,25 +20823,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokenInput = {
@@ -36772,25 +20843,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokenInput = {
@@ -36815,25 +20879,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokenInput = {
@@ -36842,229 +20899,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserIgrejaCreateWithoutTestemunhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
-    refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaUncheckedCreateWithoutTestemunhoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
-    refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaCreateOrConnectWithoutTestemunhoInput = {
-    where: UserIgrejaWhereUniqueInput
-    create: XOR<UserIgrejaCreateWithoutTestemunhoInput, UserIgrejaUncheckedCreateWithoutTestemunhoInput>
-  }
-
-  export type UserIgrejaUpsertWithoutTestemunhoInput = {
-    update: XOR<UserIgrejaUpdateWithoutTestemunhoInput, UserIgrejaUncheckedUpdateWithoutTestemunhoInput>
-    create: XOR<UserIgrejaCreateWithoutTestemunhoInput, UserIgrejaUncheckedCreateWithoutTestemunhoInput>
-    where?: UserIgrejaWhereInput
-  }
-
-  export type UserIgrejaUpdateToOneWithWhereWithoutTestemunhoInput = {
-    where?: UserIgrejaWhereInput
-    data: XOR<UserIgrejaUpdateWithoutTestemunhoInput, UserIgrejaUncheckedUpdateWithoutTestemunhoInput>
-  }
-
-  export type UserIgrejaUpdateWithoutTestemunhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
-    refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaUncheckedUpdateWithoutTestemunhoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
-    refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaCreateWithoutRefreshTokenIgrejaInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
-    testemunho?: TestemunhoCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaUncheckedCreateWithoutRefreshTokenIgrejaInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
-    testemunho?: TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaCreateOrConnectWithoutRefreshTokenIgrejaInput = {
-    where: UserIgrejaWhereUniqueInput
-    create: XOR<UserIgrejaCreateWithoutRefreshTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutRefreshTokenIgrejaInput>
-  }
-
-  export type UserIgrejaUpsertWithoutRefreshTokenIgrejaInput = {
-    update: XOR<UserIgrejaUpdateWithoutRefreshTokenIgrejaInput, UserIgrejaUncheckedUpdateWithoutRefreshTokenIgrejaInput>
-    create: XOR<UserIgrejaCreateWithoutRefreshTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutRefreshTokenIgrejaInput>
-    where?: UserIgrejaWhereInput
-  }
-
-  export type UserIgrejaUpdateToOneWithWhereWithoutRefreshTokenIgrejaInput = {
-    where?: UserIgrejaWhereInput
-    data: XOR<UserIgrejaUpdateWithoutRefreshTokenIgrejaInput, UserIgrejaUncheckedUpdateWithoutRefreshTokenIgrejaInput>
-  }
-
-  export type UserIgrejaUpdateWithoutRefreshTokenIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
-    testemunho?: TestemunhoUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaUncheckedUpdateWithoutRefreshTokenIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    PasswordResetTokenIgreja?: PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
-    testemunho?: TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaCreateWithoutPasswordResetTokenIgrejaInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    refreshTokenIgreja?: RefreshTokenIgrejaCreateNestedManyWithoutUserIgrejaInput
-    testemunho?: TestemunhoCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaUncheckedCreateWithoutPasswordResetTokenIgrejaInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    passwordResetToken?: string | null
-    expires?: Date | string | null
-    token?: string | null
-    refreshTokenIgreja?: RefreshTokenIgrejaUncheckedCreateNestedManyWithoutUserIgrejaInput
-    testemunho?: TestemunhoUncheckedCreateNestedManyWithoutUserIgrejaInput
-  }
-
-  export type UserIgrejaCreateOrConnectWithoutPasswordResetTokenIgrejaInput = {
-    where: UserIgrejaWhereUniqueInput
-    create: XOR<UserIgrejaCreateWithoutPasswordResetTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutPasswordResetTokenIgrejaInput>
-  }
-
-  export type UserIgrejaUpsertWithoutPasswordResetTokenIgrejaInput = {
-    update: XOR<UserIgrejaUpdateWithoutPasswordResetTokenIgrejaInput, UserIgrejaUncheckedUpdateWithoutPasswordResetTokenIgrejaInput>
-    create: XOR<UserIgrejaCreateWithoutPasswordResetTokenIgrejaInput, UserIgrejaUncheckedCreateWithoutPasswordResetTokenIgrejaInput>
-    where?: UserIgrejaWhereInput
-  }
-
-  export type UserIgrejaUpdateToOneWithWhereWithoutPasswordResetTokenIgrejaInput = {
-    where?: UserIgrejaWhereInput
-    data: XOR<UserIgrejaUpdateWithoutPasswordResetTokenIgrejaInput, UserIgrejaUncheckedUpdateWithoutPasswordResetTokenIgrejaInput>
-  }
-
-  export type UserIgrejaUpdateWithoutPasswordResetTokenIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokenIgreja?: RefreshTokenIgrejaUpdateManyWithoutUserIgrejaNestedInput
-    testemunho?: TestemunhoUpdateManyWithoutUserIgrejaNestedInput
-  }
-
-  export type UserIgrejaUncheckedUpdateWithoutPasswordResetTokenIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokenIgreja?: RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaNestedInput
-    testemunho?: TestemunhoUncheckedUpdateManyWithoutUserIgrejaNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPasswordResetTokenInput = {
@@ -37073,25 +20919,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPasswordResetTokenInput = {
@@ -37100,25 +20939,18 @@ export namespace Prisma {
     name?: string | null
     avatarUrl?: string | null
     password: string
-    isAdmin?: boolean
+    role?: $Enums.UserRole
     expires?: Date | string | null
-    passwordResetToken?: string | null
-    token?: string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    agendacaxias?: AgendaCaxiasUncheckedCreateNestedManyWithoutUserInput
-    agendatomazinho?: AgendaTomazinhoUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedCreateNestedManyWithoutUserInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
-    newscaxias?: NewCaxiasUncheckedCreateNestedManyWithoutUserInput
-    newstomazinho?: NewTomazinhoUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPasswordResetTokenInput = {
@@ -37143,25 +20975,18 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPasswordResetTokenInput = {
@@ -37170,22 +20995,111 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
-    token?: NullableStringFieldUpdateOperationsInput | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    agendacaxias?: AgendaCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    agendatomazinho?: AgendaTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    ministeriocaxias?: MinisterioCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    ministeriotomazinho?: MinisterioTomazinhoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    newscaxias?: NewCaxiasUncheckedUpdateManyWithoutUserNestedInput
-    newstomazinho?: NewTomazinhoUncheckedUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutTestemunhosInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    expires?: Date | string | null
+    agenda?: AgendaCreateNestedManyWithoutUserInput
+    contato?: ContatoCreateNestedManyWithoutUserInput
+    doacao?: DoacaoCreateNestedManyWithoutUserInput
+    endereco?: EnderecoCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioCreateNestedManyWithoutUserInput
+    news?: NewCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
+    sobre?: SobreCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTestemunhosInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    expires?: Date | string | null
+    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
+    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
+    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
+    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
+    news?: NewUncheckedCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTestemunhosInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTestemunhosInput, UserUncheckedCreateWithoutTestemunhosInput>
+  }
+
+  export type UserUpsertWithoutTestemunhosInput = {
+    update: XOR<UserUpdateWithoutTestemunhosInput, UserUncheckedUpdateWithoutTestemunhosInput>
+    create: XOR<UserCreateWithoutTestemunhosInput, UserUncheckedCreateWithoutTestemunhosInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTestemunhosInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTestemunhosInput, UserUncheckedUpdateWithoutTestemunhosInput>
+  }
+
+  export type UserUpdateWithoutTestemunhosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agenda?: AgendaUpdateManyWithoutUserNestedInput
+    contato?: ContatoUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
+    news?: NewUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
+    sobre?: SobreUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTestemunhosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
+    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewUncheckedUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
@@ -37200,28 +21114,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-  }
-
-  export type AgendaCaxiasCreateManyUserInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
-  }
-
-  export type AgendaTomazinhoCreateManyUserInput = {
-    id?: string
-    day: string
-    name: string
-    hour: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    destaque?: boolean
+    role: $Enums.MinistryRole
   }
 
   export type ContatoCreateManyUserInput = {
@@ -37270,28 +21163,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-  }
-
-  export type MinisterioCaxiasCreateManyUserInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
-  }
-
-  export type MinisterioTomazinhoCreateManyUserInput = {
-    id?: string
-    name: string
-    title: string
-    local: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    coverUrl: string
-    updatedAt?: Date | string
+    role: $Enums.MinistryRole
   }
 
   export type NewCreateManyUserInput = {
@@ -37305,32 +21177,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-  }
-
-  export type NewCaxiasCreateManyUserInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
-  }
-
-  export type NewTomazinhoCreateManyUserInput = {
-    id?: string
-    coverUrl: string
-    content: string
-    title: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    page: string
-    updatedAt?: Date | string
-    destaque?: boolean
-    url: string
+    role: $Enums.MinistryRole
   }
 
   export type PasswordResetTokenCreateManyUserInput = {
@@ -37367,6 +21214,17 @@ export namespace Prisma {
     isPublic?: boolean
   }
 
+  export type TestemunhoCreateManyUserInput = {
+    id?: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+  }
+
   export type AgendaUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
@@ -37376,6 +21234,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type AgendaUncheckedUpdateWithoutUserInput = {
@@ -37387,6 +21246,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type AgendaUncheckedUpdateManyWithoutUserInput = {
@@ -37398,72 +21258,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaCaxiasUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaCaxiasUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaCaxiasUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaTomazinhoUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaTomazinhoUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type AgendaTomazinhoUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    day?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    hour?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type ContatoUpdateWithoutUserInput = {
@@ -37586,6 +21381,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type MinisterioUncheckedUpdateWithoutUserInput = {
@@ -37597,6 +21393,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type MinisterioUncheckedUpdateManyWithoutUserInput = {
@@ -37608,72 +21405,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioCaxiasUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioCaxiasUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioCaxiasUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioTomazinhoUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioTomazinhoUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MinisterioTomazinhoUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type NewUpdateWithoutUserInput = {
@@ -37687,6 +21419,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type NewUncheckedUpdateWithoutUserInput = {
@@ -37700,6 +21433,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type NewUncheckedUpdateManyWithoutUserInput = {
@@ -37713,84 +21447,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewCaxiasUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewCaxiasUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewCaxiasUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewTomazinhoUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewTomazinhoUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewTomazinhoUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    destaque?: BoolFieldUpdateOperationsInput | boolean
-    url?: StringFieldUpdateOperationsInput | string
+    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type PasswordResetTokenUpdateWithoutUserInput = {
@@ -37895,74 +21552,7 @@ export namespace Prisma {
     isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type PasswordResetTokenIgrejaCreateManyUserIgrejaInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type RefreshTokenIgrejaCreateManyUserIgrejaInput = {
-    id?: string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TestemunhoCreateManyUserIgrejaInput = {
-    id?: string
-    name: string
-    avatarUrl: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isPublic?: boolean
-    coverUrl?: string | null
-  }
-
-  export type PasswordResetTokenIgrejaUpdateWithoutUserIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedUpdateWithoutUserIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PasswordResetTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RefreshTokenIgrejaUpdateWithoutUserIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RefreshTokenIgrejaUncheckedUpdateWithoutUserIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RefreshTokenIgrejaUncheckedUpdateManyWithoutUserIgrejaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TestemunhoUpdateWithoutUserIgrejaInput = {
+  export type TestemunhoUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: StringFieldUpdateOperationsInput | string
@@ -37973,7 +21563,7 @@ export namespace Prisma {
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type TestemunhoUncheckedUpdateWithoutUserIgrejaInput = {
+  export type TestemunhoUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: StringFieldUpdateOperationsInput | string
@@ -37984,7 +21574,7 @@ export namespace Prisma {
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type TestemunhoUncheckedUpdateManyWithoutUserIgrejaInput = {
+  export type TestemunhoUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: StringFieldUpdateOperationsInput | string

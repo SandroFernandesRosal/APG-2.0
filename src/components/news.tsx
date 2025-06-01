@@ -21,7 +21,7 @@ export default function News() {
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        const response = await fetch(`/api/${local}/news/search?q=${search}`)
+        const response = await fetch(`/api/news/search?q=${search}`)
         if (!response.ok) throw new Error('Erro ao buscar resultados')
         const data = await response.json()
         setDataSearch(data)
@@ -37,7 +37,7 @@ export default function News() {
     const fetchNews = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`/api/${local}/news?offset=${offset}`)
+        const response = await fetch(`/api/news?offset=${offset}`)
         if (!response.ok) throw new Error('Erro ao buscar notícias')
         const data = await response.json()
         console.log('Dados iniciais:', data)
@@ -60,7 +60,7 @@ export default function News() {
     const newOffset = offset + itemsPerPage
 
     try {
-      const response = await fetch(`/api/${local}/news?offset=${newOffset}`)
+      const response = await fetch(`/api/news?offset=${newOffset}`)
       if (!response.ok) throw new Error('Erro ao carregar mais notícias')
       const data = await response.json()
       console.log('Novos dados carregados:', data)
@@ -75,6 +75,13 @@ export default function News() {
       console.log(err)
     }
   }
+  const filteredDataSearch = dataSearch.filter(
+    (item: New) => item.role === local.toUpperCase(),
+  )
+
+  const filteredData = data.filter(
+    (item: New) => item.role === local.toUpperCase(),
+  )
 
   return (
     <div className="flex flex-col items-center self-center mb-4 w-full">
@@ -87,12 +94,12 @@ export default function News() {
         </h1>
       )}
 
-      {search ? <ResultLength dataSearch={dataSearch} /> : null}
+      {search ? <ResultLength dataSearch={filteredDataSearch} /> : null}
 
       <div className="flex justify-center gap-5 flex-wrap w-full px-2">
         {search ? (
-          dataSearch && dataSearch.length > 0 ? (
-            dataSearch.map((product: New) => (
+          filteredDataSearch && filteredDataSearch.length > 0 ? (
+            filteredDataSearch.map((product: New) => (
               <ItemNew
                 key={product.id}
                 id={product.id}
@@ -104,6 +111,7 @@ export default function News() {
                 page={product.page}
                 updatedAt={product.updatedAt}
                 url={product.url}
+                role={product.role}
               />
             ))
           ) : (
@@ -114,8 +122,8 @@ export default function News() {
             )
           )
         ) : !loading ? (
-          Array.isArray(data) && data.length > 0 ? (
-            data.map((product: New) => (
+          Array.isArray(filteredData) && filteredData.length > 0 ? (
+            filteredData.map((product: New) => (
               <ItemNew
                 key={product.id}
                 id={product.id}
@@ -127,6 +135,7 @@ export default function News() {
                 page={product.page}
                 updatedAt={product.updatedAt}
                 url={product.url}
+                role={product.role}
               />
             ))
           ) : (
@@ -147,7 +156,7 @@ export default function News() {
         </button>
       )}
 
-      {!search && !hasMore && data.length > 0 && (
+      {!search && !hasMore && filteredData.length > 0 && (
         <p className="mt-4 text-gray-500">
           Não há mais notícias para carregar.
         </p>

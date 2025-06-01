@@ -1,14 +1,14 @@
-import EditUserIgreja from '@/components/crud/EditUserIgreja'
-import { getUserIgreja } from '@/lib/getUserIgreja'
-import { UserIgreja } from '@/data/types/userigreja'
+import EditUser from '@/components/crud/EditUser'
+import { getUser } from '@/lib/getUser'
+import { User } from '@/data/types/user'
 
 export default async function EditPerfil() {
-  const user: UserIgreja | null = await getUserIgreja()
+  const user: User | null = await getUser()
 
   if (!user) {
     return <div>Usuário não encontrado</div>
   }
 
   const { name, avatarUrl, login, id } = user
-  return <EditUserIgreja nome={name} img={avatarUrl} email={login} id={id} />
+  return <EditUser nome={name} img={avatarUrl} email={login} id={id} />
 }

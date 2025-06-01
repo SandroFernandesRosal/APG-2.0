@@ -17,11 +17,12 @@ export async function POST(req: Request) {
       await req.json(),
     )
 
-    const user = await prisma.userIgreja.findFirst({
-      where: { passwordResetToken },
+    const resetToken = await prisma.passwordResetToken.findUnique({
+      where: { token: passwordResetToken },
+      include: { user: true },
     })
 
-    if (!user || !user.expires || user.expires < new Date()) {
+    if (!resetToken || !resetToken.user || resetToken.expiresAt < new Date()) {
       return NextResponse.json(
         { error: 'Token inválido ou expirado' },
         { status: 400 },
@@ -30,12 +31,13 @@ export async function POST(req: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    await prisma.userIgreja.update({
-      where: { id: user.id },
-      data: {
-        password: hashedPassword,
-        passwordResetToken: null,
-      },
+    await prisma.user.update({
+      where: { id: resetToken.user.id },
+      data: { password: hashedPassword },
+    })
+
+    await prisma.passwordResetToken.delete({
+      where: { id: resetToken.id },
     })
 
     return NextResponse.json({ message: 'Senha redefinida com sucesso' })

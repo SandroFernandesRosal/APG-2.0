@@ -11,9 +11,7 @@ export default function Logout() {
     console.log('Iniciando logout...')
 
     try {
-      console.log('Fazendo requisição para /api/auth/admin/logout...')
-
-      const response = await fetch('/api/auth/admin/logout', {
+      const response = await fetch('/api/auth/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,12 +27,12 @@ export default function Logout() {
       const data = await response.json()
       console.log('Dados da resposta:', data)
 
-      router.push('/login/adm')
-      window.location.href = '/login/adm'
+      router.push('/login')
+      window.location.href = '/login'
     } catch (error) {
       console.error('Falha no logout:', error)
 
-      window.location.href = '/login/adm'
+      window.location.href = '/login'
     } finally {
       setLoading(false)
     }

@@ -21,7 +21,7 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
 
   return (
     <Suspense fallback={<div>Carregando...</div>}>
-      {token && (
+      {token?.role === 'ADMIN' && (
         <>
           {open === false && (
             <button className="button" onClick={() => setOpen(true)}>
@@ -52,7 +52,7 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
             alt={`imagem de ${item.title}`}
             className="m-2 w-[90%] max-w-[800px] rounded-xl border-[1px] border-zinc-300 dark:border-zinc-800 p-2"
           />
-          {token && (
+          {token?.role === 'ADMIN' && (
             <div className="mb-2 flex w-full justify-center gap-2 text-white">
               {openEdit !== item.id ? (
                 <button

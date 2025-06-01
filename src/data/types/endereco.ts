@@ -7,4 +7,5 @@ export interface Endereco {
   cidade: string
   createdAt: string
   updatedAt: string
+  role: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
 }

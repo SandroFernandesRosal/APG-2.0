@@ -15,7 +15,7 @@ import Image from 'next/image'
 import logo from '../../public/img/logo.png'
 import logob from '../../public/img/logob.png'
 import { useToken } from '@/hooks/useToken'
-import { useTokenIgreja } from '@/hooks/useTokenIgreja'
+
 import { useTheme } from 'next-themes'
 import { SearchForm } from './search-form'
 import { Notification } from './notification'
@@ -29,7 +29,6 @@ export default function Header({ children }: HeaderProps) {
   const { theme } = useTheme()
 
   const token = useToken()
-  const tokenIgreja = useTokenIgreja()
 
   const pathname = usePathname()
 
@@ -82,11 +81,11 @@ export default function Header({ children }: HeaderProps) {
             <div className="hidden md:flex">
               <ChangeTheme />
             </div>
-            {token || tokenIgreja ? (
+            {token ? (
               <div className="hidden text-white md:flex">{children}</div>
             ) : (
               <Link
-                href={'/login/igreja'}
+                href={'/login'}
                 className="hidden md:flex md:flex-col md:items-center"
               >
                 <FaUserCircle

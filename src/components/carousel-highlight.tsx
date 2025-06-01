@@ -69,7 +69,8 @@ export default function CarouselHighlight() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`/api/${local}/news`)
+    setLoading(true)
+    fetch(`/api/news`)
       .then((res) => {
         if (!res.ok) throw new Error('Erro ao buscar dados')
         return res.json()
@@ -85,7 +86,10 @@ export default function CarouselHighlight() {
   }, [setData, local])
 
   const highlightedNews = data
-    .filter((item: New) => item.destaque === true)
+    .filter(
+      (item: New) =>
+        item.destaque === true && item.role === local.toUpperCase(),
+    )
     .slice(0, 8)
 
   const settings = {
@@ -148,8 +152,8 @@ export default function CarouselHighlight() {
                 <Link
                   aria-hidden="true"
                   tabIndex={-1}
-                  href={`/noticias/${item.page}/${item.url}`}
-                  className="group flex justify-center items-center h-[300px] md:h-[500px] overflow-hidden w-full relative"
+                  href={`/noticias/${item.role.toLowerCase()}/${item.url}`}
+                  className="group flex justify-center items-center h-[300px] md:h-[500px]  overflow-hidden w-full  relative"
                 >
                   <div
                     className="absolute inset-0 bg-cover bg-center blur-md scale-110 "

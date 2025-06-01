@@ -3,8 +3,8 @@ import { prisma } from '@/lib/prisma'
 import { authMiddleware } from '@/lib/auth' // use o middleware de admin aqui
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
-  const admin = await authMiddleware(req)
-  if (!admin) {
+  const user = await authMiddleware(req)
+  if (!user || user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 

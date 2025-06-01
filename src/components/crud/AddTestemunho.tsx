@@ -98,81 +98,83 @@ export default function AddTestemunho({
   return (
     <form
       ref={formRef}
-      className="z-20 flex w-[100vw] flex-col items-start gap-3 px-6 py-4 md:flex-row md:justify-center"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      {avatarUrl && (
-        <Image
-          width={120}
-          height={120}
-          src={avatarUrl}
-          alt={name}
-          className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary dark:border-secundary"
-        />
-      )}
-
-      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800 mt-4">
-        <div className="flex items-center justify-between">
-          <p className="pl-3 text-lg font-bold">{name}</p>
-          <button onClick={() => setOpen(false)} className="pr-1">
-            <AiFillCloseCircle className="text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
-          </button>
-        </div>
-
-        <textarea
-          className="mx-1 flex w-full flex-col gap-2 border-none bg-bglightsecundary outline-none ring-0 focus:ring-0 dark:bg-bgdarksecundary"
-          name="content"
-          required
-          placeholder="Escreva seu testemunho"
-          onChange={(e) => setContent(e.target.value)}
-        />
-
-        {preview && (
-          <div className="mb-4 flex w-full items-center justify-center">
-            <Image
-              src={preview}
-              width={200}
-              height={200}
-              alt="imagem perfil"
-              className="aspect-video w-[200px]"
-            />
-          </div>
+      <div className="relative flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[90%]  max-w-3xl">
+        <button onClick={() => setOpen(false)}>
+          <AiFillCloseCircle className=" absolute right-2 top-2 text-3xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
+        </button>
+        {avatarUrl && (
+          <Image
+            width={120}
+            height={120}
+            src={avatarUrl}
+            alt={name}
+            className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary dark:border-secundary"
+          />
         )}
 
-        <div className="mx-2 mb-2 flex w-full justify-center gap-4">
-          <label
-            htmlFor="coverUrl"
-            className="flex cursor-pointer items-center gap-2 font-bold"
-          >
-            <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-            Anexar foto (Opcional)
-          </label>
+        <div className="flex w-[90%] flex-col gap-2 rounded-2xl border-[1px] border-zinc-300 bg-bglightsecundary dark:border-zinc-800 dark:bg-bgdarksecundary md:w-[70%] lg:min-w-[700px] mt-4">
+          <div className="flex items-center justify-between">
+            <p className="pl-3 text-lg font-bold">{name}</p>
+          </div>
 
-          <button
-            type="submit"
-            className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <FaSpinner className="animate-spin" />
-                Enviando testemunho...
-              </>
-            ) : (
-              'Enviar'
-            )}
-          </button>
+          <textarea
+            className="mx-1 flex w-full flex-col gap-2 border-none bg-bglightsecundary outline-none ring-0 focus:ring-0 dark:bg-bgdarksefcundary"
+            name="content"
+            required
+            placeholder="Escreva seu testemunho"
+            onChange={(e) => setContent(e.target.value)}
+          />
+
+          {preview && (
+            <div className="mb-4 flex w-full items-center justify-center">
+              <Image
+                src={preview}
+                width={200}
+                height={200}
+                alt="imagem perfil"
+                className="aspect-video w-[200px]"
+              />
+            </div>
+          )}
+
+          <div className="mx-2 mb-2 flex w-full justify-center gap-4">
+            <label
+              htmlFor="coverUrl"
+              className="flex cursor-pointer items-center gap-2 font-bold"
+            >
+              <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
+              Anexar foto (Opcional)
+            </label>
+
+            <button
+              type="submit"
+              className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <FaSpinner className="animate-spin" />
+                  Enviando testemunho...
+                </>
+              ) : (
+                'Enviar'
+              )}
+            </button>
+          </div>
         </div>
-      </div>
 
-      <input
-        className="invisible h-0 w-0"
-        type="file"
-        name="coverUrl"
-        id="coverUrl"
-        placeholder="Digite a url da notícia"
-        onChange={onFileSelected}
-      />
+        <input
+          className="invisible h-0 w-0"
+          type="file"
+          name="coverUrl"
+          id="coverUrl"
+          placeholder="Digite a url da notícia"
+          onChange={onFileSelected}
+        />
+      </div>
     </form>
   )
 }

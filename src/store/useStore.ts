@@ -113,7 +113,7 @@ export const useData = create<DataState>((set) => ({
 
 export const useLocal = create<LocalState>((set) => {
   const cookieValue = Cookies.get('local')
-  const initialValue = cookieValue || 'viladapenha'
+  const initialValue = cookieValue || 'VILADAPENHA'
 
   return {
     local: initialValue,

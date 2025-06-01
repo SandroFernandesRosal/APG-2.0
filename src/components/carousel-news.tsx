@@ -33,7 +33,7 @@ export default function CarouselNews({
 
   useEffect(() => {
     setLoading(true)
-    fetch(`/api/${local}/news`)
+    fetch(`/api/news`)
       .then(async (res) => {
         if (!res.ok) {
           throw new Error('Erro ao buscar notícias')
@@ -62,6 +62,10 @@ export default function CarouselNews({
     const year = date.getFullYear()
     return `${day} de ${month} de ${year}`
   }
+
+  const filteredNews = data.filter(
+    (item: New) => item.role === local.toUpperCase(),
+  )
 
   const settings = {
     dots: true,
@@ -109,7 +113,7 @@ export default function CarouselNews({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full">
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {!openNew && (
               <button className="button" onClick={() => setOpenNew(true)}>
@@ -144,13 +148,13 @@ export default function CarouselNews({
                 <SkeletonNew key={index} />
               ))}
             </Slider>
-          ) : data.length === 0 ? (
+          ) : filteredNews.length === 0 ? (
             <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
               <p>Nenhuma notícia cadastrada.</p>
             </div>
           ) : (
             <Slider {...settings} className="w-[80vw] lg:max-w-[1200px] my-5 ">
-              {data.map((product: New) => {
+              {filteredNews.map((product: New) => {
                 if (!page) {
                   setPage(product.page)
                 }
@@ -165,7 +169,7 @@ export default function CarouselNews({
                       <Link
                         aria-hidden="true"
                         tabIndex={-1}
-                        href={`/noticias/${product.page}/${product.url}`}
+                        href={`/noticias/${product.role?.toLowerCase()}/${product.url}`}
                         className="group h-full rounded-md overflow-hidden relative"
                       >
                         <div
@@ -210,7 +214,7 @@ export default function CarouselNews({
                         Ler notícia
                       </Link>
                     </div>
-                    {token && (
+                    {token?.role === 'ADMIN' && (
                       <div className="flex w-full items-start justify-around text-white py-3">
                         {openEdit !== product.id && (
                           <button
@@ -257,6 +261,7 @@ export default function CarouselNews({
           img={selectedProduct.coverUrl}
           setOpenEdit={setOpenEdit}
           destacar={selectedProduct.destaque}
+          role={selectedProduct.role}
         />
       )}
     </>

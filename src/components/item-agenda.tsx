@@ -38,7 +38,7 @@ export default function ItemAgenda({ id, day, name, hour }: Agenda) {
             </p>
           </li>
         </ul>
-        {token && (
+        {token?.role === 'ADMIN' && (
           <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
             {openEdit !== id ? (
               <button

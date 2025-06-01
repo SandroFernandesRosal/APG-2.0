@@ -103,7 +103,7 @@ export default function CarouselLideres() {
         </h1>
 
         <ArrowDown size={40} className="text-white" />
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {!openNew && (
               <button
@@ -177,7 +177,7 @@ export default function CarouselLideres() {
                     </div>
                   </div>
 
-                  {token && (
+                  {token?.role === 'ADMIN' && (
                     <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
                       {openEdit !== product.id && (
                         <button

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(req: NextRequest) {
-  const token = req.cookies.get('tokenigreja')?.value
+  const token = req.cookies.get('token')?.value
 
   if (!token) {
     return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
@@ -14,13 +14,14 @@ export async function GET(req: NextRequest) {
       id: string
     }
 
-    const user = await prisma.userIgreja.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id: decoded.id },
       select: {
         id: true,
         name: true,
         login: true,
         avatarUrl: true,
+        role: true,
       },
     })
 

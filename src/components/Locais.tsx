@@ -63,7 +63,7 @@ export default function Locais() {
 
   return (
     <section className="mb-5 flex w-[100vw] flex-col items-center">
-      {token && (
+      {token?.role === 'ADMIN' && (
         <>
           {!openEndereco && (
             <div className="button" onClick={() => setOpenEndereco(true)}>
@@ -91,11 +91,11 @@ export default function Locais() {
               <ItemEndereco
                 key={item.id}
                 item={item}
-                token={token}
                 openEdit={openEdit}
                 setOpenEdit={setOpenEdit}
                 setSelectedProduct={setSelectedProduct}
                 coordinates={coordinates[item.id]}
+                token={token}
               />
             ))
           )

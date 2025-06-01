@@ -38,7 +38,7 @@ export default function NavBar({ handleMenu, menu, user }: NavBarProps) {
         ) : (
           <div className="mx-2 flex w-full items-center justify-around">
             <Link
-              href={'/login/igreja'}
+              href={'/login'}
               onClick={handleMenu}
               className="flex flex-col items-center justify-center"
             >

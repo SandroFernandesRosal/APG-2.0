@@ -21,9 +21,7 @@ export default function Ministerioo() {
     const fetchMinisterio = async () => {
       setLoading(true)
       try {
-        const response = await fetch(
-          `/api/${local}/ministerio?offset=${offset}`,
-        )
+        const response = await fetch(`/api/ministerio?offset=${offset}`)
         if (!response.ok) throw new Error('Erro ao buscar dados do ministério')
         const data = await response.json()
         console.log('Dados iniciais:', data)
@@ -46,7 +44,7 @@ export default function Ministerioo() {
     const newOffset = offset + itemsPerPage
 
     try {
-      const response = await fetch(`/ministerio/${local}?offset=${newOffset}`)
+      const response = await fetch(`/ministerio?offset=${newOffset}`)
       if (!response.ok) throw new Error('Erro ao carregar mais dados')
       const data = await response.json()
       console.log('Novos dados carregados:', data)
@@ -62,6 +60,12 @@ export default function Ministerioo() {
     }
   }
 
+  const filteredMinisterio = Array.isArray(dataMinisterio)
+    ? dataMinisterio.filter(
+        (item: Ministerio) => item.role === local.toUpperCase(),
+      )
+    : []
+
   return (
     <div className="flex flex-col items-center self-center mb-4 w-full">
       {search && (
@@ -76,7 +80,7 @@ export default function Ministerioo() {
       <div className="flex justify-center gap-5 flex-wrap w-full">
         {!loading
           ? Array.isArray(dataMinisterio) &&
-            dataMinisterio.map((product: Ministerio) => (
+            filteredMinisterio.map((product: Ministerio) => (
               <ItemMinisterio
                 id={product.id}
                 key={product.id}
@@ -86,6 +90,7 @@ export default function Ministerioo() {
                 coverUrl={product.coverUrl}
                 createdAt={product.createdAt}
                 updatedAt={product.updatedAt}
+                role={product.role}
               />
             ))
           : Array.from({ length: 4 }).map((_, index) => (

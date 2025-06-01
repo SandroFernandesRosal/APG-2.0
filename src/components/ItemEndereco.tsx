@@ -3,6 +3,7 @@ import { Endereco } from '@/data/types/endereco'
 import EditEndereco from './crud/EditEndereco'
 import RemoveEndereco from './crud/RemoveEndereco'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { User } from '@/data/types/user'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
@@ -16,7 +17,7 @@ const HouseIcon = new L.Icon({
 
 export interface ItemEnderecoProps {
   item: Endereco
-  token: string | null
+  token: User | null
   openEdit: string | null
   setOpenEdit: (id: string | null) => void
   setSelectedProduct: (product: Endereco | null) => void

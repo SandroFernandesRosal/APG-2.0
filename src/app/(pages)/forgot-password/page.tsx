@@ -23,7 +23,7 @@ export default function ForgotPasswordPage() {
       if (response.ok) {
         console.log('email enviado')
         alert('email enviado com sucesso!')
-        router.push('/login/igreja')
+        router.push('/login')
       } else if (response.status === 404) {
         alert(`Não existe usuário com esse email: ${login}`)
       } else {

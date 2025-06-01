@@ -75,79 +75,81 @@ export default function EditEndereco({
   return (
     <form
       onSubmit={handleSubmit}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
     >
-      <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Editar endereço{' '}
-        <AiFillCloseCircle
-          onClick={() => setOpenEdit(null)}
-          className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Editar endereço{' '}
+          <AiFillCloseCircle
+            onClick={() => setOpenEdit(null)}
+            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+          />
+        </h1>
+
+        <input
+          className="input mt-2"
+          type="text"
+          name="local"
+          required
+          placeholder="Digite o local"
+          value={local}
+          onChange={(e) => setLocal(e.target.value)}
         />
-      </h1>
 
-      <input
-        className="input mt-2"
-        type="text"
-        name="local"
-        required
-        placeholder="Digite o local"
-        value={local}
-        onChange={(e) => setLocal(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="rua"
+          required
+          placeholder="Digite nome da rua"
+          value={rua}
+          onChange={(e) => setRua(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="rua"
-        required
-        placeholder="Digite nome da rua"
-        value={rua}
-        onChange={(e) => setRua(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="numero"
+          required
+          placeholder="Digite o número da igreja"
+          value={numero}
+          onChange={(e) => setNumero(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="numero"
-        required
-        placeholder="Digite o número da igreja"
-        value={numero}
-        onChange={(e) => setNumero(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="cidade"
+          required
+          placeholder="Digite a cidade"
+          value={cidade}
+          onChange={(e) => setCidade(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="cidade"
-        required
-        placeholder="Digite a cidade"
-        value={cidade}
-        onChange={(e) => setCidade(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="cep"
+          required
+          placeholder="Digite o cep"
+          value={cep}
+          onChange={(e) => setCep(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="cep"
-        required
-        placeholder="Digite o cep"
-        value={cep}
-        onChange={(e) => setCep(e.target.value)}
-      />
-
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center"
-      >
-        {isEditing ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Editando endereço...
-          </>
-        ) : (
-          'Editar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center"
+        >
+          {isEditing ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Editando endereço...
+            </>
+          ) : (
+            'Editar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

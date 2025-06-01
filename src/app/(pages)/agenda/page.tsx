@@ -16,7 +16,7 @@ export default function AgendaPage() {
       <div className=" w-full  flex-col items-center  md:min-w-[35%] flex">
         <AgendaHeader />
 
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {openAgenda === false && (
               <button
@@ -29,7 +29,6 @@ export default function AgendaPage() {
 
             {openAgenda && (
               <div className="md:min-w-[35%]">
-                {' '}
                 <AddAgenda
                   openAgenda={openAgenda}
                   setOpenAgenda={setOpenAgenda}

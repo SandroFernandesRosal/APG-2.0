@@ -110,78 +110,80 @@ export default function AddSobreContent({
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar história{' '}
-        {open === true && (
-          <AiFillCloseCircle
-            onClick={() => setOpen(false)}
-            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Adicionar história{' '}
+          {open === true && (
+            <AiFillCloseCircle
+              onClick={() => setOpen(false)}
+              className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+            />
+          )}
+        </h1>
+
+        <label
+          htmlFor="coverUrl"
+          className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
+        >
+          <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
+          Anexar foto (até 50mb)
+        </label>
+
+        {preview && (
+          <Image
+            width={200}
+            height={200}
+            src={preview}
+            alt={`imagem de ${title}`}
+            className="aspect-video w-[200px]"
           />
         )}
-      </h1>
 
-      <label
-        htmlFor="coverUrl"
-        className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
-      >
-        <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
-        Anexar foto (até 50mb)
-      </label>
-
-      {preview && (
-        <Image
-          width={200}
-          height={200}
-          src={preview}
-          alt={`imagem de ${title}`}
-          className="aspect-video w-[200px]"
+        <input
+          className="input mt-4"
+          type="text"
+          name="title"
+          required
+          placeholder="Escreva um título"
+          onChange={(e) => setTitle(e.target.value.toLowerCase())}
         />
-      )}
 
-      <input
-        className="input mt-4"
-        type="text"
-        name="title"
-        required
-        placeholder="Escreva um título"
-        onChange={(e) => setTitle(e.target.value.toLowerCase())}
-      />
+        <textarea
+          className="input"
+          name="content"
+          required
+          placeholder="Escreva a história"
+          onChange={(e) => setContent(e.target.value)}
+        />
 
-      <textarea
-        className="input"
-        name="content"
-        required
-        placeholder="Escreva a história"
-        onChange={(e) => setContent(e.target.value)}
-      />
+        <input
+          className="invisible h-0 w-0"
+          type="file"
+          name="coverUrl"
+          id="coverUrl"
+          required
+          placeholder="Escolha uma imagem"
+          onChange={onFileSelected}
+        />
 
-      <input
-        className="invisible h-0 w-0"
-        type="file"
-        name="coverUrl"
-        id="coverUrl"
-        required
-        placeholder="Escolha uma imagem"
-        onChange={onFileSelected}
-      />
-
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? (
-          <>
-            <FaSpinner className="animate-spin text-lg" />
-            Adicionando história...
-          </>
-        ) : (
-          'Enviar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <FaSpinner className="animate-spin text-lg" />
+              Adicionando história...
+            </>
+          ) : (
+            'Enviar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

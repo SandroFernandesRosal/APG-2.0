@@ -111,7 +111,7 @@ export default function CarouselDoacao() {
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full border-b-[1px] border-zinc-300 dark:border-zinc-800">
         <DoacaoHeader />
 
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {openDoacao === false && (
               <button className="button" onClick={() => setOpenDoacao(true)}>

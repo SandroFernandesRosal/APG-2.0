@@ -30,11 +30,11 @@ export default function LogoutIgreja() {
       console.log('Dados da resposta:', data)
 
       router.push('/login/igreja')
-      window.location.href = '/login/igreja'
+      window.location.href = '/login'
     } catch (error) {
       console.error('Falha no logout:', error)
 
-      window.location.href = '/login/igreja'
+      window.location.href = '/login'
     } finally {
       setLoading(false)
     }

@@ -9,36 +9,13 @@ interface SearchProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Buscando produtos',
+  title: 'Buscando notícias',
 }
 
-async function searchVp(query: string): Promise<New[]> {
+async function searchAllNews(query: string): Promise<New[]> {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/viladapenha/news/search?q=${query}`,
-  )
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return response.json()
-}
-
-async function searchVmh(query: string): Promise<New[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/caxias/news/search?q=${query}`,
-  )
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return response.json()
-}
-
-async function searchTomazinho(query: string): Promise<New[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/tomazinho/news/search?q=${query}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/news/search?q=${query}`,
+    { cache: 'no-store' },
   )
 
   if (!response.ok) {
@@ -56,12 +33,12 @@ export default async function Search({ searchParams }: SearchProps) {
   }
 
   const normalizedQuery = query.toLowerCase()
+  const allNews = await searchAllNews(normalizedQuery).catch(() => [])
 
-  const [newsVp, newsVmh, newsTomazinho] = await Promise.all([
-    searchVp(normalizedQuery).catch(() => []),
-    searchVmh(normalizedQuery).catch(() => []),
-    searchTomazinho(normalizedQuery).catch(() => []),
-  ])
+  // Filtra por role/local
+  const newsVp = allNews.filter((item) => item.role === 'VILADAPENHA')
+  const newsVmh = allNews.filter((item) => item.role === 'MARIAHELENA')
+  const newsTomazinho = allNews.filter((item) => item.role === 'TOMAZINHO')
 
   return (
     <div className="flex flex-col gap-16 pt-[150px] md:pt-[180px] px-8 min-h-screen pb-10">
@@ -99,6 +76,7 @@ export default async function Search({ searchParams }: SearchProps) {
                     key={item.id}
                     updatedAt={item.updatedAt}
                     url={item.url}
+                    role={item.role}
                   />
                 )
               }
@@ -129,6 +107,7 @@ export default async function Search({ searchParams }: SearchProps) {
                     key={item.id}
                     updatedAt={item.updatedAt}
                     url={item.url}
+                    role={item.role}
                   />
                 )
               }
@@ -157,6 +136,7 @@ export default async function Search({ searchParams }: SearchProps) {
                     key={item.id}
                     updatedAt={item.updatedAt}
                     url={item.url}
+                    role={item.role}
                   />
                 )
               }

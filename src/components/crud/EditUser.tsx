@@ -11,7 +11,7 @@ interface EditUserProps {
   id: string
   nome: string
   email: string
-  img: string
+  img?: string
 }
 
 export default function EditUser({ id, nome, email, img }: EditUserProps) {
@@ -58,7 +58,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
         console.error('Erro ao carregar foto:', error)
       }
     } else {
-      avatarUrl = img
+      avatarUrl = img || PlaceHolder
     }
 
     try {
@@ -83,9 +83,9 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
             'Content-Type': 'application/json',
           },
         })
-        Cookies.remove('tokennn')
-        router.push('/login/adm')
-        window.location.href = '/login/adm'
+        Cookies.remove('token')
+        router.push('/login')
+        window.location.href = '/login'
         return response
       }
 
@@ -140,7 +140,10 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
                   />
                 ) : (
                   <Image
-                    src={img}
+                    src={
+                      img ||
+                      'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
+                    }
                     alt="Avatar"
                     width={150}
                     height={150}

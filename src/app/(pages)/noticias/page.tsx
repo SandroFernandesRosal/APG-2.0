@@ -15,7 +15,7 @@ export default function Noticias() {
       <div className=" w-full  flex-col items-center  md:min-w-[35%] flex">
         <NoticiasHeader />
 
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {openNew === false && (
               <div

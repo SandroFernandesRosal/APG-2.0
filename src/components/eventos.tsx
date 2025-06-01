@@ -15,11 +15,15 @@ export default function Eventos() {
 
   const itemsPerPage = 12
 
+  const filteredAgenda = Array.isArray(dataAgenda)
+    ? dataAgenda.filter((item) => item.role === local.toUpperCase())
+    : []
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`/api/${local}/agenda?offset=${offset}`)
+        const response = await fetch(`/api/agenda?offset=${offset}`)
         if (!response.ok) {
           throw new Error('Erro ao buscar eventos')
         }
@@ -43,7 +47,7 @@ export default function Eventos() {
     const newOffset = offset + itemsPerPage
 
     try {
-      const response = await fetch(`/api/${local}/agenda?offset=${newOffset}`)
+      const response = await fetch(`/api/agenda?offset=${newOffset}`)
       if (!response.ok) {
         throw new Error('Erro ao carregar mais eventos')
       }
@@ -75,7 +79,7 @@ export default function Eventos() {
       <div className="flex justify-center gap-5 flex-wrap w-full">
         {!loading
           ? Array.isArray(dataAgenda) &&
-            dataAgenda.map((product: Agenda) => (
+            filteredAgenda.map((product: Agenda) => (
               <ItemAgenda
                 key={product.id}
                 id={product.id}
@@ -84,6 +88,7 @@ export default function Eventos() {
                 hour={product.hour}
                 createdAt={product.createdAt}
                 updatedAt={product.updatedAt}
+                role={product.role}
               />
             ))
           : Array.from({ length: 4 }).map((_, index) => (

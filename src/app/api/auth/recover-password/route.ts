@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   try {
     const { login } = userSchema.parse(await req.json())
 
-    const user = await prisma.userIgreja.findUnique({
+    const user = await prisma.user.findUnique({
       where: { login },
     })
 
@@ -34,11 +34,11 @@ export async function POST(req: Request) {
 
     const token = uuidv4()
 
-    await prisma.userIgreja.update({
-      where: { login },
+    await prisma.passwordResetToken.create({
       data: {
-        passwordResetToken: token,
-        expires: new Date(Date.now() + 3600000), // Expira em 1 hora
+        token,
+        userId: user.id,
+        expiresAt: new Date(Date.now() + 3600000), // Expira em 1 hora
       },
     })
 

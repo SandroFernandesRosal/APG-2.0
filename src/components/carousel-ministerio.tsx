@@ -19,6 +19,7 @@ import RemoveMinisterio from './crud/RemoveMinisterio'
 import CarouselEndereco from './carousel-endereco'
 import QuemSomosHeader from './quemsomos-header'
 import MinisterioHeader from './ministerio-header'
+import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
 export default function CarouselMinisterio({
   titleproducts,
@@ -43,7 +44,7 @@ export default function CarouselMinisterio({
     const fetchMinisterios = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`/api/${local}/ministerio`, {
+        const response = await fetch(`/api/ministerio`, {
           cache: 'no-store',
         })
         if (!response.ok) {
@@ -66,6 +67,10 @@ export default function CarouselMinisterio({
     setLocalLoading(true)
     setLocal(newLocal)
   }
+
+  const filteredMinisterios = dataMinisterio.filter(
+    (item: Ministerio) => item.role === local.toUpperCase(),
+  )
 
   const settings = {
     dots: true,
@@ -116,13 +121,12 @@ export default function CarouselMinisterio({
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
           <QuemSomosHeader />
           {children}
-
           <CarouselEndereco />
         </section>
 
         <MinisterioHeader />
 
-        {token && (
+        {token?.role === 'ADMIN' && (
           <>
             {!openMinisterio && (
               <button
@@ -165,7 +169,7 @@ export default function CarouselMinisterio({
                 <SkeletonNew key={index} />
               ))}
             </Slider>
-          ) : dataMinisterio.length === 0 ? (
+          ) : filteredMinisterios.length === 0 ? (
             <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-400 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
               <p>Nenhum membro cadastrado.</p>
             </div>
@@ -174,7 +178,7 @@ export default function CarouselMinisterio({
               {...settings}
               className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
             >
-              {dataMinisterio.map((product: Ministerio) => (
+              {filteredMinisterios.map((product: Ministerio) => (
                 <div
                   key={product.id}
                   className={`justify-between mb-12 relative flex flex-col h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
@@ -203,10 +207,10 @@ export default function CarouselMinisterio({
                       <p className="text-center font-bold">{product.name}</p>
                     </div>
                     <div className="flex px-2 z-30">{product.title}</div>
-                    <span>{product.local}</span>
+                    <span>{getIgrejaLabel(product.local)}</span>
                   </div>
 
-                  {token && (
+                  {token?.role === 'ADMIN' && (
                     <div className="mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
                       {openEdit !== product.id && (
                         <button
@@ -251,6 +255,7 @@ export default function CarouselMinisterio({
           lugar={selectedProduct.local}
           id={selectedProduct.id}
           setOpenEdit={setOpenEdit}
+          role={selectedProduct.role}
         />
       )}
     </>

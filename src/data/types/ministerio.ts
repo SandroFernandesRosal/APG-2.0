@@ -6,4 +6,5 @@ export interface Ministerio {
   createdAt: string
   local: string
   updatedAt: string
+  role: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
 }

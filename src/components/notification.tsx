@@ -21,11 +21,14 @@ export const Notification = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const authRes = await fetch('/api/auth/admin/login/me', {
+        const authRes = await fetch('/api/auth/login/me', {
           credentials: 'include',
         })
 
         if (!authRes.ok) return
+
+        const user = await authRes.json()
+        if (user?.user?.role !== 'ADMIN') return // Só ADMIN vê
 
         setIsAuthenticated(true)
 
@@ -52,7 +55,7 @@ export const Notification = () => {
   if (!isAuthenticated) return null
 
   return (
-    <Link href="/perfil/adm/testemunhos" className="relative">
+    <Link href="/perfil/testemunhos" className="relative">
       <FaBell className="text-2xl text-zinc-500 hover:text-blue-600 transition-colors" />
       {pendingCount > 0 && (
         <span className="absolute -top-2 -right-2 bg-primary dark:bg-secundary text-black text-xs font-bold rounded-full w-[20px] h-[20px] flex items-center justify-center">

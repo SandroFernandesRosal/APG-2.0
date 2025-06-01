@@ -123,21 +123,8 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   avatarUrl: 'avatarUrl',
   password: 'password',
-  isAdmin: 'isAdmin',
-  expires: 'expires',
-  passwordResetToken: 'passwordResetToken',
-  token: 'token'
-};
-
-exports.Prisma.UserIgrejaScalarFieldEnum = {
-  id: 'id',
-  login: 'login',
-  name: 'name',
-  avatarUrl: 'avatarUrl',
-  password: 'password',
-  passwordResetToken: 'passwordResetToken',
-  expires: 'expires',
-  token: 'token'
+  role: 'role',
+  expires: 'expires'
 };
 
 exports.Prisma.NewScalarFieldEnum = {
@@ -151,7 +138,8 @@ exports.Prisma.NewScalarFieldEnum = {
   page: 'page',
   updatedAt: 'updatedAt',
   destaque: 'destaque',
-  url: 'url'
+  url: 'url',
+  role: 'role'
 };
 
 exports.Prisma.MinisterioScalarFieldEnum = {
@@ -163,7 +151,8 @@ exports.Prisma.MinisterioScalarFieldEnum = {
   isPublic: 'isPublic',
   createdAt: 'createdAt',
   coverUrl: 'coverUrl',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  role: 'role'
 };
 
 exports.Prisma.AgendaScalarFieldEnum = {
@@ -175,83 +164,8 @@ exports.Prisma.AgendaScalarFieldEnum = {
   isPublic: 'isPublic',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  destaque: 'destaque'
-};
-
-exports.Prisma.NewTomazinhoScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  coverUrl: 'coverUrl',
-  content: 'content',
-  title: 'title',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  page: 'page',
-  updatedAt: 'updatedAt',
   destaque: 'destaque',
-  url: 'url'
-};
-
-exports.Prisma.MinisterioTomazinhoScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  title: 'title',
-  local: 'local',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  coverUrl: 'coverUrl',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AgendaTomazinhoScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  day: 'day',
-  name: 'name',
-  hour: 'hour',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  destaque: 'destaque'
-};
-
-exports.Prisma.NewCaxiasScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  coverUrl: 'coverUrl',
-  content: 'content',
-  title: 'title',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  page: 'page',
-  updatedAt: 'updatedAt',
-  destaque: 'destaque',
-  url: 'url'
-};
-
-exports.Prisma.MinisterioCaxiasScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  title: 'title',
-  local: 'local',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  coverUrl: 'coverUrl',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AgendaCaxiasScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  day: 'day',
-  name: 'name',
-  hour: 'hour',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  destaque: 'destaque'
+  role: 'role'
 };
 
 exports.Prisma.DoacaoScalarFieldEnum = {
@@ -324,6 +238,14 @@ exports.Prisma.RefreshTokenScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.TestemunhoScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -334,37 +256,6 @@ exports.Prisma.TestemunhoScalarFieldEnum = {
   updatedAt: 'updatedAt',
   isPublic: 'isPublic',
   coverUrl: 'coverUrl'
-};
-
-exports.Prisma.RefreshTokenIgrejaScalarFieldEnum = {
-  id: 'id',
-  token: 'token',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PasswordResetTokenIgrejaScalarFieldEnum = {
-  id: 'id',
-  token: 'token',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  expiresAt: 'expiresAt'
-};
-
-exports.Prisma.PasswordResetTokenScalarFieldEnum = {
-  id: 'id',
-  token: 'token',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  expiresAt: 'expiresAt'
-};
-
-exports.Prisma.NovatabelaScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  title: 'title'
 };
 
 exports.Prisma.SortOrder = {
@@ -381,31 +272,30 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserRole = exports.$Enums.UserRole = {
+  ADMIN: 'ADMIN',
+  MEMBRO: 'MEMBRO'
+};
 
+exports.MinistryRole = exports.$Enums.MinistryRole = {
+  VILADAPENHA: 'VILADAPENHA',
+  TOMAZINHO: 'TOMAZINHO',
+  MARIAHELENA: 'MARIAHELENA'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
-  UserIgreja: 'UserIgreja',
   New: 'New',
   Ministerio: 'Ministerio',
   Agenda: 'Agenda',
-  NewTomazinho: 'NewTomazinho',
-  MinisterioTomazinho: 'MinisterioTomazinho',
-  AgendaTomazinho: 'AgendaTomazinho',
-  NewCaxias: 'NewCaxias',
-  MinisterioCaxias: 'MinisterioCaxias',
-  AgendaCaxias: 'AgendaCaxias',
   Doacao: 'Doacao',
   Endereco: 'Endereco',
   Contato: 'Contato',
   Sobre: 'Sobre',
   SobreLider: 'SobreLider',
   RefreshToken: 'RefreshToken',
-  Testemunho: 'Testemunho',
-  RefreshTokenIgreja: 'RefreshTokenIgreja',
-  PasswordResetTokenIgreja: 'PasswordResetTokenIgreja',
   PasswordResetToken: 'PasswordResetToken',
-  Novatabela: 'Novatabela'
+  Testemunho: 'Testemunho'
 };
 
 /**

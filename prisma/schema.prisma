@@ -5,9 +5,19 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MEMBRO
+}
+
+enum MinistryRole {
+  VILADAPENHA
+  TOMAZINHO
+  MARIAHELENA
 }
 
 model User {
@@ -16,163 +26,63 @@ model User {
   name                String?
   avatarUrl           String?
   password            String
-  isAdmin             Boolean               @default(true)
+  role                UserRole              @default(MEMBRO)
   expires             DateTime?
-  passwordResetToken  String?
-  token               String?
   agenda              Agenda[]
-  agendacaxias        AgendaCaxias[]
-  agendatomazinho     AgendaTomazinho[]
   contato             Contato[]
   doacao              Doacao[]
   endereco            Endereco[]
   ministerio          Ministerio[]
-  ministeriocaxias    MinisterioCaxias[]
-  ministeriotomazinho MinisterioTomazinho[]
   news                New[]
-  newscaxias          NewCaxias[]
-  newstomazinho       NewTomazinho[]
   PasswordResetToken  PasswordResetToken[]
   refreshToken        RefreshToken[]
   sobre               Sobre[]
   sobreLider          SobreLider[]
-}
-
-model UserIgreja {
-  id                       String                     @id @default(uuid())
-  login                    String                     @unique
-  name                     String?
-  avatarUrl                String?
-  password                 String
-  passwordResetToken       String?
-  expires                  DateTime?
-  token                    String?
-  PasswordResetTokenIgreja PasswordResetTokenIgreja[]
-  refreshTokenIgreja       RefreshTokenIgreja[]
-  testemunho               Testemunho[]
+  testemunhos         Testemunho[]
 }
 
 model New {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   userId    String
   coverUrl  String
   content   String
   title     String
-  createdAt DateTime @default(now())
-  isPublic  Boolean  @default(true)
+  createdAt DateTime      @default(now())
+  isPublic  Boolean       @default(true)
   page      String
-  updatedAt DateTime @updatedAt
-  destaque  Boolean  @default(false)
-  url       String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime      @updatedAt
+  destaque  Boolean       @default(false)
+  url       String        @unique
+  role      MinistryRole
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Ministerio {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   userId    String
   name      String
   title     String
   local     String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
+  isPublic  Boolean       @default(true)
+  createdAt DateTime      @default(now())
   coverUrl  String
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime      @updatedAt
+  role      MinistryRole
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Agenda {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   userId    String
   day       String
   name      String
   hour      String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  destaque  Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model NewTomazinho {
-  id        String   @id @default(uuid())
-  userId    String
-  coverUrl  String
-  content   String
-  title     String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  page      String
-  updatedAt DateTime @updatedAt
-  destaque  Boolean  @default(false)
-  url       String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model MinisterioTomazinho {
-  id        String   @id @default(uuid())
-  userId    String
-  name      String
-  title     String
-  local     String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  coverUrl  String
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model AgendaTomazinho {
-  id        String   @id @default(uuid())
-  userId    String
-  day       String
-  name      String
-  hour      String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  destaque  Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model NewCaxias {
-  id        String   @id @default(uuid())
-  userId    String
-  coverUrl  String
-  content   String
-  title     String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  page      String
-  updatedAt DateTime @updatedAt
-  destaque  Boolean  @default(false)
-  url       String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model MinisterioCaxias {
-  id        String   @id @default(uuid())
-  userId    String
-  name      String
-  title     String
-  local     String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  coverUrl  String
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model AgendaCaxias {
-  id        String   @id @default(uuid())
-  userId    String
-  day       String
-  name      String
-  hour      String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  destaque  Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPublic  Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  destaque  Boolean       @default(false)
+  role      MinistryRole
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Doacao {
@@ -251,37 +161,6 @@ model RefreshToken {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Testemunho {
-  id         String     @id @default(uuid())
-  userId     String
-  name       String
-  avatarUrl  String
-  content    String
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  isPublic   Boolean    @default(true)
-  coverUrl   String?
-  userIgreja UserIgreja @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model RefreshTokenIgreja {
-  id         String     @id @default(uuid())
-  token      String     @unique
-  userId     String
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  userIgreja UserIgreja @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model PasswordResetTokenIgreja {
-  id         String     @id @default(uuid())
-  token      String     @unique
-  userId     String
-  createdAt  DateTime   @default(now())
-  expiresAt  DateTime
-  userIgreja UserIgreja @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model PasswordResetToken {
   id        String   @id @default(uuid())
   token     String   @unique
@@ -291,11 +170,15 @@ model PasswordResetToken {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Novatabela {
-  id       String   @id @default(uuid())
+model Testemunho {
+  id        String   @id @default(uuid())
   userId    String
   name      String
-  title     String
-
-
+  avatarUrl String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isPublic  Boolean  @default(true)
+  coverUrl  String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
-import { authMiddlewareMember } from '@/lib/auth-member'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -33,10 +32,8 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const admin = await authMiddleware(req)
-  const member = await authMiddlewareMember(req)
-
-  if (!admin && !member) {
+  const user = await authMiddleware(req)
+  if (!user) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -49,9 +46,9 @@ export async function PUT(
     where: { id },
   })
 
-  const isOwner = member?.sub === testemunho.userId
+  const isOwner = user.sub === testemunho.userId
 
-  if (admin || isOwner) {
+  if (user.role === 'ADMIN' || isOwner) {
     const updated = await prisma.testemunho.update({
       where: { id },
       data: {
@@ -76,10 +73,8 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const admin = await authMiddleware(req)
-  const member = await authMiddlewareMember(req)
-
-  if (!admin && !member) {
+  const user = await authMiddleware(req)
+  if (!user) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -89,9 +84,9 @@ export async function DELETE(
     where: { id },
   })
 
-  const isOwner = member?.sub === testemunho.userId
+  const isOwner = user.sub === testemunho.userId
 
-  if (admin || isOwner) {
+  if (user.role === 'ADMIN' || isOwner) {
     await prisma.testemunho.delete({ where: { id } })
 
     return NextResponse.json({ message: 'Testemunho deletado com sucesso.' })

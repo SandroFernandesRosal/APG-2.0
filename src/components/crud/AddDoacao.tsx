@@ -69,96 +69,98 @@ export default function AddDoacao({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bglight dark:bg-bgdark"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-        Adicionar doação{' '}
-        {openDoacao && (
-          <AiFillCloseCircle
-            onClick={() => setOpenDoacao(false)}
-            className="cursor-pointer text-2xl font-bold text-black dark:text-white"
-          />
-        )}
-      </h1>
+      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+          Adicionar doação{' '}
+          {openDoacao && (
+            <AiFillCloseCircle
+              onClick={() => setOpenDoacao(false)}
+              className="cursor-pointer text-2xl font-bold text-black dark:text-white"
+            />
+          )}
+        </h1>
 
-      <input
-        className="input mt-4"
-        type="text"
-        name="local"
-        required
-        placeholder="Digite um local"
-        onChange={(e) => setLocal(e.target.value)}
-      />
+        <input
+          className="input mt-4"
+          type="text"
+          name="local"
+          required
+          placeholder="Digite um local"
+          onChange={(e) => setLocal(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="banco"
-        required
-        placeholder="Digite o nome do banco"
-        onChange={(e) => setBanco(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="banco"
+          required
+          placeholder="Digite o nome do banco"
+          onChange={(e) => setBanco(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="conta"
-        required
-        placeholder="Digite número da conta"
-        onChange={(e) => setConta(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="conta"
+          required
+          placeholder="Digite número da conta"
+          onChange={(e) => setConta(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="agencia"
-        required
-        placeholder="Digite a agência"
-        onChange={(e) => setAgencia(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="agencia"
+          required
+          placeholder="Digite a agência"
+          onChange={(e) => setAgencia(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="nomeBanco"
-        required
-        placeholder="Nome do beneficiário"
-        onChange={(e) => setNomeBanco(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="nomeBanco"
+          required
+          placeholder="Nome do beneficiário"
+          onChange={(e) => setNomeBanco(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="pix"
-        required
-        placeholder="Digite a chave pix"
-        onChange={(e) => setPix(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="pix"
+          required
+          placeholder="Digite a chave pix"
+          onChange={(e) => setPix(e.target.value)}
+        />
 
-      <input
-        className="input"
-        type="text"
-        name="nomePix"
-        required
-        placeholder="Nome do beneficiário"
-        onChange={(e) => setNomePix(e.target.value)}
-      />
+        <input
+          className="input"
+          type="text"
+          name="nomePix"
+          required
+          placeholder="Nome do beneficiário"
+          onChange={(e) => setNomePix(e.target.value)}
+        />
 
-      <button
-        type="submit"
-        className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? (
-          <>
-            <FaSpinner className="animate-spin" />
-            Adicionando igreja...
-          </>
-        ) : (
-          'Enviar'
-        )}
-      </button>
+        <button
+          type="submit"
+          className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Adicionando igreja...
+            </>
+          ) : (
+            'Enviar'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

@@ -89,7 +89,7 @@ export default function ItemDoe({
         )}
         <h2>{nomepix}</h2>
 
-        {token && (
+        {token?.role === 'ADMIN' && (
           <div className="flex w-full mt-4 gap-2 justify-around">
             {openEdit !== id ? (
               <button className="button !mb-0" onClick={() => setOpenEdit(id)}>

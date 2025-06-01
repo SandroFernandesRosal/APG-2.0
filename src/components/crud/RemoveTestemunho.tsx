@@ -21,8 +21,7 @@ export default function RemoveTestemunho({ id }: RemoveTestemunhoProps) {
     setDataTestemunho: React.Dispatch<React.SetStateAction<Testemunho[]>>
   }
 
-  const token = Cookies.get('tokenigreja')
-  const tokenAdm = Cookies.get('tokennn')
+  const token = Cookies.get('tokennn')
 
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
@@ -36,7 +35,7 @@ export default function RemoveTestemunho({ id }: RemoveTestemunhoProps) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || tokenAdm}`,
+          Authorization: `Bearer ${token}`,
         },
       })
 
