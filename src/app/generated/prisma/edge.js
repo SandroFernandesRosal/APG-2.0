@@ -283,7 +283,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\tstsa\\apg-2.0 - Copia\\src\\app\\generated\\prisma",
+      "value": "C:\\Users\\tstsa\\OneDrive\\Documentos\\GitHub\\APG-2.0\\src\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -301,7 +301,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\tstsa\\apg-2.0 - Copia\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\tstsa\\OneDrive\\Documentos\\GitHub\\APG-2.0\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
