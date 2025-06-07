@@ -8,6 +8,7 @@ import ChangeTheme from './ChangeTheme'
 interface User {
   name: string
   avatarUrl?: string
+  role: 'ADMIN' | 'MEMBRO'
 }
 
 export default async function UserComponent() {
@@ -17,13 +18,13 @@ export default async function UserComponent() {
     return null
   }
 
-  const { name, avatarUrl } = user
+  const { name, avatarUrl, role } = user
 
   return (
     <>
       {user && (
         <div className="flex flex-col items-center gap-1 md:flex-row md:items-center">
-          <ItemUser name={name} avatarUrl={avatarUrl} />
+          <ItemUser name={name} avatarUrl={avatarUrl} role={role} />
 
           <div className="flex flex-col items-center gap-1 md:hidden">
             {avatarUrl && (
@@ -39,6 +40,7 @@ export default async function UserComponent() {
             <p className="text-lg font-bold text-black dark:text-white">
               {name}
             </p>
+            <span className="text-sm">({role})</span>
           </div>
           <div className="flex items-center md:hidden">
             <Link href={'/perfil'} className="button mr-2 !mb-0">
