@@ -21,6 +21,14 @@ export default function ItemTestemunho({
   const { showModal, setShowModal } = useShowModal()
   const token = useToken()
 
+  const podeGerenciar =
+    token &&
+    (token.role === 'SUPERADMIN' ||
+      token.sub === item.userId ||
+      (token.role === 'ADMIN' &&
+        (token.ministryRole === item.ministryRole ||
+          item.ministryRole === null)))
+
   function formatDate(dateString: string): string {
     const date = new Date(dateString)
     return format(date, 'dd/MM/yyyy HH:mm')
@@ -42,7 +50,20 @@ export default function ItemTestemunho({
                 />
               )}
               <div>
-                <p className="text-lg font-bold">{item.name}</p>
+                <p className="text-lg font-bold">
+                  {item.name}{' '}
+                  <span className="text-sm font-normal text-zinc-600">
+                    {item.ministryRole
+                      ? ` - APG ${
+                          item.ministryRole === 'VILADAPENHA'
+                            ? 'Vila da Penha'
+                            : item.ministryRole === 'TOMAZINHO'
+                              ? 'Tomazinho'
+                              : 'Vila Maria Helena'
+                        }`
+                      : ' - Membro sem igreja'}
+                  </span>
+                </p>
                 <div className="flex md:hidden">
                   {item.updatedAt ? (
                     <span className="text-xs">
@@ -82,7 +103,7 @@ export default function ItemTestemunho({
           </div>
         )}
 
-        {token || (userIgreja && userIgreja.sub === item.userId) ? (
+        {podeGerenciar && (
           <div className="mb-2 flex justify-center gap-4">
             {openEdit === null && (
               <button
@@ -103,6 +124,7 @@ export default function ItemTestemunho({
                   conteudo={item.content}
                   userIgreja={userIgreja}
                   setOpenEdit={setOpenEdit}
+                  ministryRole={item.ministryRole}
                 />
               </div>
             )}
@@ -117,7 +139,7 @@ export default function ItemTestemunho({
               Remover
             </button>
           </div>
-        ) : null}
+        )}
       </div>
       {showModal && <RemoveTestemunho id={item.id} />}
     </div>

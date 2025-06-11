@@ -39,6 +39,8 @@ export default function ItemEndereco({
     window.open(url, '_blank')
   }
 
+  const podeGerenciar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
+
   return (
     <div
       className={`flex flex-col items-center justify-between h-[400px] w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800 ${token && 'mb-20 md:mb-24'}`}
@@ -76,7 +78,7 @@ export default function ItemEndereco({
           Abrir mapa
         </button>
       </div>
-      {token && (
+      {podeGerenciar && (
         <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
           {openEdit !== item.id ? (
             <button

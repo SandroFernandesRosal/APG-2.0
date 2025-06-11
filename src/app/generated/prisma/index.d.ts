@@ -79,6 +79,7 @@ export type Testemunho = $Result.DefaultSelection<Prisma.$TestemunhoPayload>
  */
 export namespace $Enums {
   export const UserRole: {
+  SUPERADMIN: 'SUPERADMIN',
   ADMIN: 'ADMIN',
   MEMBRO: 'MEMBRO'
 };
@@ -406,8 +407,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.9.0
+   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
    */
   export type PrismaVersion = {
     client: string
@@ -2037,6 +2038,7 @@ export namespace Prisma {
     avatarUrl: string | null
     password: string | null
     role: $Enums.UserRole | null
+    ministryRole: $Enums.MinistryRole | null
     expires: Date | null
   }
 
@@ -2047,6 +2049,7 @@ export namespace Prisma {
     avatarUrl: string | null
     password: string | null
     role: $Enums.UserRole | null
+    ministryRole: $Enums.MinistryRole | null
     expires: Date | null
   }
 
@@ -2057,6 +2060,7 @@ export namespace Prisma {
     avatarUrl: number
     password: number
     role: number
+    ministryRole: number
     expires: number
     _all: number
   }
@@ -2069,6 +2073,7 @@ export namespace Prisma {
     avatarUrl?: true
     password?: true
     role?: true
+    ministryRole?: true
     expires?: true
   }
 
@@ -2079,6 +2084,7 @@ export namespace Prisma {
     avatarUrl?: true
     password?: true
     role?: true
+    ministryRole?: true
     expires?: true
   }
 
@@ -2089,6 +2095,7 @@ export namespace Prisma {
     avatarUrl?: true
     password?: true
     role?: true
+    ministryRole?: true
     expires?: true
     _all?: true
   }
@@ -2172,6 +2179,7 @@ export namespace Prisma {
     avatarUrl: string | null
     password: string
     role: $Enums.UserRole
+    ministryRole: $Enums.MinistryRole | null
     expires: Date | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -2199,6 +2207,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
+    ministryRole?: boolean
     expires?: boolean
     agenda?: boolean | User$agendaArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
@@ -2221,6 +2230,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
+    ministryRole?: boolean
     expires?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -2231,6 +2241,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
+    ministryRole?: boolean
     expires?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -2241,10 +2252,11 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
+    ministryRole?: boolean
     expires?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "expires", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "ministryRole" | "expires", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | User$agendaArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
@@ -2284,6 +2296,7 @@ export namespace Prisma {
       avatarUrl: string | null
       password: string
       role: $Enums.UserRole
+      ministryRole: $Enums.MinistryRole | null
       expires: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2725,6 +2738,7 @@ export namespace Prisma {
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
+    readonly ministryRole: FieldRef<"User", 'MinistryRole'>
     readonly expires: FieldRef<"User", 'DateTime'>
   }
     
@@ -14503,6 +14517,7 @@ export namespace Prisma {
     updatedAt: Date | null
     isPublic: boolean | null
     coverUrl: string | null
+    ministryRole: $Enums.MinistryRole | null
   }
 
   export type TestemunhoMaxAggregateOutputType = {
@@ -14515,6 +14530,7 @@ export namespace Prisma {
     updatedAt: Date | null
     isPublic: boolean | null
     coverUrl: string | null
+    ministryRole: $Enums.MinistryRole | null
   }
 
   export type TestemunhoCountAggregateOutputType = {
@@ -14527,6 +14543,7 @@ export namespace Prisma {
     updatedAt: number
     isPublic: number
     coverUrl: number
+    ministryRole: number
     _all: number
   }
 
@@ -14541,6 +14558,7 @@ export namespace Prisma {
     updatedAt?: true
     isPublic?: true
     coverUrl?: true
+    ministryRole?: true
   }
 
   export type TestemunhoMaxAggregateInputType = {
@@ -14553,6 +14571,7 @@ export namespace Prisma {
     updatedAt?: true
     isPublic?: true
     coverUrl?: true
+    ministryRole?: true
   }
 
   export type TestemunhoCountAggregateInputType = {
@@ -14565,6 +14584,7 @@ export namespace Prisma {
     updatedAt?: true
     isPublic?: true
     coverUrl?: true
+    ministryRole?: true
     _all?: true
   }
 
@@ -14650,6 +14670,7 @@ export namespace Prisma {
     updatedAt: Date
     isPublic: boolean
     coverUrl: string | null
+    ministryRole: $Enums.MinistryRole | null
     _count: TestemunhoCountAggregateOutputType | null
     _min: TestemunhoMinAggregateOutputType | null
     _max: TestemunhoMaxAggregateOutputType | null
@@ -14679,6 +14700,7 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
+    ministryRole?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testemunho"]>
 
@@ -14692,6 +14714,7 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
+    ministryRole?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testemunho"]>
 
@@ -14705,6 +14728,7 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
+    ministryRole?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testemunho"]>
 
@@ -14718,9 +14742,10 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
+    ministryRole?: boolean
   }
 
-  export type TestemunhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "avatarUrl" | "content" | "createdAt" | "updatedAt" | "isPublic" | "coverUrl", ExtArgs["result"]["testemunho"]>
+  export type TestemunhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "avatarUrl" | "content" | "createdAt" | "updatedAt" | "isPublic" | "coverUrl" | "ministryRole", ExtArgs["result"]["testemunho"]>
   export type TestemunhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -14746,6 +14771,7 @@ export namespace Prisma {
       updatedAt: Date
       isPublic: boolean
       coverUrl: string | null
+      ministryRole: $Enums.MinistryRole | null
     }, ExtArgs["result"]["testemunho"]>
     composites: {}
   }
@@ -15179,6 +15205,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Testemunho", 'DateTime'>
     readonly isPublic: FieldRef<"Testemunho", 'Boolean'>
     readonly coverUrl: FieldRef<"Testemunho", 'String'>
+    readonly ministryRole: FieldRef<"Testemunho", 'MinistryRole'>
   }
     
 
@@ -15614,6 +15641,7 @@ export namespace Prisma {
     avatarUrl: 'avatarUrl',
     password: 'password',
     role: 'role',
+    ministryRole: 'ministryRole',
     expires: 'expires'
   };
 
@@ -15778,7 +15806,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     isPublic: 'isPublic',
-    coverUrl: 'coverUrl'
+    coverUrl: 'coverUrl',
+    ministryRole: 'ministryRole'
   };
 
   export type TestemunhoScalarFieldEnum = (typeof TestemunhoScalarFieldEnum)[keyof typeof TestemunhoScalarFieldEnum]
@@ -15842,6 +15871,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'MinistryRole'
+   */
+  export type EnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'MinistryRole[]'
+   */
+  export type ListEnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -15859,20 +15902,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'MinistryRole'
-   */
-  export type EnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole'>
-    
-
-
-  /**
-   * Reference to a field of type 'MinistryRole[]'
-   */
-  export type ListEnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole[]'>
     
 
 
@@ -15903,6 +15932,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    ministryRole?: EnumMinistryRoleNullableFilter<"User"> | $Enums.MinistryRole | null
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
     agenda?: AgendaListRelationFilter
     contato?: ContatoListRelationFilter
@@ -15924,6 +15954,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
+    ministryRole?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
     agenda?: AgendaOrderByRelationAggregateInput
     contato?: ContatoOrderByRelationAggregateInput
@@ -15948,6 +15979,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    ministryRole?: EnumMinistryRoleNullableFilter<"User"> | $Enums.MinistryRole | null
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
     agenda?: AgendaListRelationFilter
     contato?: ContatoListRelationFilter
@@ -15969,6 +16001,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
+    ministryRole?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -15985,6 +16018,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+    ministryRole?: EnumMinistryRoleNullableWithAggregatesFilter<"User"> | $Enums.MinistryRole | null
     expires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
@@ -16746,6 +16780,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
     isPublic?: BoolFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableFilter<"Testemunho"> | string | null
+    ministryRole?: EnumMinistryRoleNullableFilter<"Testemunho"> | $Enums.MinistryRole | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -16759,6 +16794,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
+    ministryRole?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -16775,6 +16811,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
     isPublic?: BoolFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableFilter<"Testemunho"> | string | null
+    ministryRole?: EnumMinistryRoleNullableFilter<"Testemunho"> | $Enums.MinistryRole | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -16788,6 +16825,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
+    ministryRole?: SortOrderInput | SortOrder
     _count?: TestemunhoCountOrderByAggregateInput
     _max?: TestemunhoMaxOrderByAggregateInput
     _min?: TestemunhoMinOrderByAggregateInput
@@ -16806,6 +16844,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Testemunho"> | Date | string
     isPublic?: BoolWithAggregatesFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableWithAggregatesFilter<"Testemunho"> | string | null
+    ministryRole?: EnumMinistryRoleNullableWithAggregatesFilter<"Testemunho"> | $Enums.MinistryRole | null
   }
 
   export type UserCreateInput = {
@@ -16815,6 +16854,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -16836,6 +16876,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -16857,6 +16898,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -16878,6 +16920,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -16899,6 +16942,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
   }
 
@@ -16909,6 +16953,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -16919,6 +16964,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -17754,6 +17800,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
+    ministryRole?: $Enums.MinistryRole | null
     user: UserCreateNestedOneWithoutTestemunhosInput
   }
 
@@ -17767,6 +17814,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
+    ministryRole?: $Enums.MinistryRole | null
   }
 
   export type TestemunhoUpdateInput = {
@@ -17778,6 +17826,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     user?: UserUpdateOneRequiredWithoutTestemunhosNestedInput
   }
 
@@ -17791,6 +17840,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
   export type TestemunhoCreateManyInput = {
@@ -17803,6 +17853,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
+    ministryRole?: $Enums.MinistryRole | null
   }
 
   export type TestemunhoUpdateManyMutationInput = {
@@ -17814,6 +17865,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
   export type TestemunhoUncheckedUpdateManyInput = {
@@ -17826,6 +17878,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -17863,6 +17916,13 @@ export namespace Prisma {
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
     notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
+  export type EnumMinistryRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMinistryRoleNullableFilter<$PrismaModel> | $Enums.MinistryRole | null
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -17998,6 +18058,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    ministryRole?: SortOrder
     expires?: SortOrder
   }
 
@@ -18008,6 +18069,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    ministryRole?: SortOrder
     expires?: SortOrder
   }
 
@@ -18018,6 +18080,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    ministryRole?: SortOrder
     expires?: SortOrder
   }
 
@@ -18065,6 +18128,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumUserRoleFilter<$PrismaModel>
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type EnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18508,6 +18581,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrder
+    ministryRole?: SortOrder
   }
 
   export type TestemunhoMaxOrderByAggregateInput = {
@@ -18520,6 +18594,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrder
+    ministryRole?: SortOrder
   }
 
   export type TestemunhoMinOrderByAggregateInput = {
@@ -18532,6 +18607,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrder
+    ministryRole?: SortOrder
   }
 
   export type AgendaCreateNestedManyWithoutUserInput = {
@@ -18698,6 +18774,10 @@ export namespace Prisma {
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
     set?: $Enums.UserRole
+  }
+
+  export type NullableEnumMinistryRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MinistryRole | null
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -19213,6 +19293,13 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+  export type NestedEnumMinistryRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMinistryRoleNullableFilter<$PrismaModel> | $Enums.MinistryRole | null
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -19288,6 +19375,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumUserRoleFilter<$PrismaModel>
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -19686,6 +19783,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
+    ministryRole?: $Enums.MinistryRole | null
   }
 
   export type TestemunhoUncheckedCreateWithoutUserInput = {
@@ -19697,6 +19795,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
+    ministryRole?: $Enums.MinistryRole | null
   }
 
   export type TestemunhoCreateOrConnectWithoutUserInput = {
@@ -20047,6 +20146,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
     isPublic?: BoolFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableFilter<"Testemunho"> | string | null
+    ministryRole?: EnumMinistryRoleNullableFilter<"Testemunho"> | $Enums.MinistryRole | null
   }
 
   export type UserCreateWithoutNewsInput = {
@@ -20056,6 +20156,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20076,6 +20177,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20112,6 +20214,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20132,6 +20235,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20152,6 +20256,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20172,6 +20277,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20208,6 +20314,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20228,6 +20335,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20248,6 +20356,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20268,6 +20377,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20304,6 +20414,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20324,6 +20435,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20344,6 +20456,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20364,6 +20477,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20400,6 +20514,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20420,6 +20535,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20440,6 +20556,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20460,6 +20577,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20496,6 +20614,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20516,6 +20635,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20536,6 +20656,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20556,6 +20677,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20592,6 +20714,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20612,6 +20735,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20632,6 +20756,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20652,6 +20777,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20688,6 +20814,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20708,6 +20835,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20728,6 +20856,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20748,6 +20877,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20784,6 +20914,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20804,6 +20935,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20824,6 +20956,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20844,6 +20977,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20880,6 +21014,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20900,6 +21035,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -20920,6 +21056,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -20940,6 +21077,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -20976,6 +21114,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -20996,6 +21135,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -21016,6 +21156,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
@@ -21036,6 +21177,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
@@ -21072,6 +21214,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
@@ -21092,6 +21235,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
@@ -21223,6 +21367,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
+    ministryRole?: $Enums.MinistryRole | null
   }
 
   export type AgendaUpdateWithoutUserInput = {
@@ -21561,6 +21706,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
   export type TestemunhoUncheckedUpdateWithoutUserInput = {
@@ -21572,6 +21718,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
   export type TestemunhoUncheckedUpdateManyWithoutUserInput = {
@@ -21583,6 +21730,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
 

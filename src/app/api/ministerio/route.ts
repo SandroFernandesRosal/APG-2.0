@@ -19,14 +19,22 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN')
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const body = await req.json()
   const { name, title, local, isPublic, coverUrl, role } = body
 
   if (!role) {
     return NextResponse.json({ error: 'Role é obrigatório' }, { status: 400 })
+  }
+
+  if (user.role === 'ADMIN' && user.ministryRole !== role) {
+    return NextResponse.json(
+      { error: 'ADMIN só pode postar na sua igreja' },
+      { status: 403 },
+    )
   }
 
   const ministerio = await prisma.ministerio.create({

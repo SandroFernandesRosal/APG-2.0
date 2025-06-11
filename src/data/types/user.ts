@@ -5,5 +5,6 @@ export interface User {
   avatarUrl?: string
   sub?: string
   userId: string
-  role: 'ADMIN' | 'MEMBRO'
+  role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
+  ministryRole?: 'VILADAPENHA' | 'TOMAZINHO' | 'MARIAHELENA' | null
 }

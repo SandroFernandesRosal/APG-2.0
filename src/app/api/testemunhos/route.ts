@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
-
 import { authMiddleware } from '@/lib/auth'
 
 const bodySchema = z.object({
@@ -10,12 +10,14 @@ const bodySchema = z.object({
   avatarUrl: z.string(),
   content: z.string(),
   isPublic: z.coerce.boolean().default(false),
+  ministryRole: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']).optional(),
 })
 
 const bodySchemaUser = z.object({
   userId: z.string().uuid(),
   name: z.string(),
   avatarUrl: z.string(),
+  ministryRole: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']).optional(),
 })
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
@@ -40,8 +42,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   const body = await req.json()
-  const { name, coverUrl, avatarUrl, content, isPublic } =
+  const { name, coverUrl, avatarUrl, content, isPublic, ministryRole } =
     bodySchema.parse(body)
+
+  if (
+    member.role === 'ADMIN' &&
+    ministryRole !== member.ministryRole &&
+    ministryRole !== null
+  ) {
+    return NextResponse.json(
+      { error: 'ADMIN só pode criar testemunho para sua igreja ou sem igreja' },
+      { status: 403 },
+    )
+  }
 
   const testemunho = await prisma.testemunho.create({
     data: {
@@ -51,6 +64,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       content,
       isPublic,
       userId: member.sub,
+      ministryRole: ministryRole ?? null,
     },
   })
 
@@ -59,17 +73,39 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
 export async function PUT(req: NextRequest): Promise<NextResponse> {
   const user = await authMiddleware(req)
-  if (!user || (user.role !== 'ADMIN' && user.role !== 'MEMBRO')) {
+  if (
+    !user ||
+    (user.role !== 'ADMIN' &&
+      user.role !== 'SUPERADMIN' &&
+      user.role !== 'MEMBRO')
+  ) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
   const body = await req.json()
-  const { userId, name, avatarUrl } = bodySchemaUser.parse(body)
+  const { userId, name, avatarUrl, ministryRole } = bodySchemaUser.parse(body)
+
+  if (user.role === 'ADMIN' || user.role === 'SUPERADMIN') {
+    const testemunhos = await prisma.testemunho.findMany({
+      where: { userId },
+    })
+
+    if (user.role === 'ADMIN') {
+      const naoPermitido = testemunhos.some(
+        (t) => t.ministryRole !== user.ministryRole && t.ministryRole !== null,
+      )
+      if (naoPermitido) {
+        return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+      }
+    }
+  } else if (user.role === 'MEMBRO' && user.sub !== userId) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+  }
 
   try {
     await prisma.testemunho.updateMany({
       where: { userId },
-      data: { name, avatarUrl },
+      data: { name, avatarUrl, ministryRole },
     })
 
     return NextResponse.json({ message: 'Postagens atualizadas com sucesso' })

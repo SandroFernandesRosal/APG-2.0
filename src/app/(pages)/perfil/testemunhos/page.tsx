@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Trash2 } from 'lucide-react'
 import { format } from 'date-fns'
 import { FaSpinner } from 'react-icons/fa'
+import { useToken } from '@/hooks/useToken'
 
 interface Testemunho {
   id: string
@@ -14,97 +15,118 @@ interface Testemunho {
   coverUrl: string
   createdAt: string
   updatedAt?: string
+  ministryRole?: string
 }
 
 export default function AdminTestemunhosPage() {
   const [testemunhos, setTestemunhos] = useState<Testemunho[]>([])
+  const [loading, setLoading] = useState(true)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
-  const [isApproved, setIsAproved] = useState(false)
+
+  const [approvingId, setApprovingId] = useState<string | null>(null)
+
   const router = useRouter()
+  const token = useToken()
 
   function formatDate(dateString: string): string {
-    const date = new Date(dateString)
-    return format(date, 'dd/MM/yyyy HH:mm')
+    if (!dateString) return ''
+    try {
+      const date = new Date(dateString)
+      if (isNaN(date.getTime())) return ''
+      return format(date, 'dd/MM/yyyy HH:mm')
+    } catch {
+      return ''
+    }
   }
 
   useEffect(() => {
-    async function checkAuthAndFetch() {
-      try {
-        const resAuth = await fetch('/api/auth/login/me', {
-          credentials: 'include',
-        })
-
-        if (!resAuth.ok) {
-          router.push('/login')
-          window.location.href = '/login'
-          return
-        }
-
-        const user = await resAuth.json()
-        if (user?.user?.role !== 'ADMIN') {
-          router.push('/login')
-          window.location.href = '/login'
-          return
-        }
-
-        const res = await fetch('/api/auth/admin/testemunho', {
-          credentials: 'include',
-        })
-
-        if (!res.ok) {
-          const errText = await res.text()
-          console.error('Erro ao buscar testemunhos:', errText)
-          return
-        }
-
-        const data = await res.json()
-        setTestemunhos(data)
-      } catch (error) {
-        console.error('Erro ao verificar login ou buscar testemunhos:', error)
+    if (token) {
+      const temPermissao = token.role === 'ADMIN' || token.role === 'SUPERADMIN'
+      if (!temPermissao) {
         router.push('/login')
+        return
       }
-    }
 
-    checkAuthAndFetch()
-  }, [router])
+      fetch('/api/auth/admin/testemunho', {
+        credentials: 'include',
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error('Falha ao buscar testemunhos')
+          return res.json()
+        })
+        .then((data) => {
+          setTestemunhos(data)
+        })
+        .catch((error) => {
+          console.error('Erro ao buscar testemunhos:', error)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    } else {
+      const timeout = setTimeout(() => {
+        if (!token) {
+          setLoading(false)
+          router.push('/login')
+        }
+      }, 1000)
+      return () => clearTimeout(timeout)
+    }
+  }, [token, router])
 
   async function handleAprovar(id: string) {
-    setIsAproved(true)
-    await fetch(`/api/auth/admin/testemunho/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ isPublic: true }),
-    })
+    setApprovingId(id)
+    try {
+      await fetch(`/api/testemunhos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ isPublic: true }),
+      })
+      setTestemunhos((prev) => prev.filter((t) => t.id !== id))
 
-    setTestemunhos((prev) => prev.filter((t) => t.id !== id))
-
-    router.push('/perfil/testemunhos')
-    window.location.href = '/perfil/testemunhos'
+      router.refresh()
+    } catch (error) {
+      console.error('Erro ao aprovar testemunho:', error)
+      alert('Falha ao aprovar o testemunho.')
+    } finally {
+      setApprovingId(null)
+    }
   }
 
   async function handleDelete(id: string) {
-    const res = await fetch(`/api/auth/admin/testemunho/${id}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    })
+    try {
+      const res = await fetch(`/api/testemunhos/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      })
 
-    if (res.ok) {
-      setTestemunhos((prev) => prev.filter((t) => t.id !== id))
-      setShowModal(false)
-      setSelectedId(null)
-      router.push('/perfil/testemunhos')
-      window.location.href = '/perfil/testemunhos'
-    } else {
-      const errText = await res.text()
-      console.error('Erro ao deletar:', errText)
+      if (res.ok) {
+        setTestemunhos((prev) => prev.filter((t) => t.id !== id))
+        setShowModal(false)
+        setSelectedId(null)
+        router.refresh()
+      } else {
+        throw new Error('Falha ao deletar')
+      }
+    } catch (error) {
+      console.error('Erro ao deletar:', error)
       alert('Erro ao deletar o testemunho.')
+      setShowModal(false)
     }
   }
 
+  if (loading) {
+    return (
+      <div className="pt-24 pb-10 md:pt-52 min-h-screen flex items-center justify-center">
+        <FaSpinner className="animate-spin text-2xl" />
+      </div>
+    )
+  }
+
   return (
-    <div className="pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 justify-center w-full">
+    <div className="pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 w-full">
       <h1 className="text-2xl font-bold mb-4">Testemunhos Pendentes</h1>
 
       {testemunhos.length === 0 ? (
@@ -114,7 +136,7 @@ export default function AdminTestemunhosPage() {
           {testemunhos.map((t) => (
             <li
               key={t.id}
-              className="flex  flex-col border[1px] rounded-lg p-4  bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-800 border-[1px]"
+              className="flex flex-col border[1px] rounded-lg p-4 bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-800 border-[1px]"
             >
               <div className="flex items-center gap-4 relative mb-5">
                 {t.avatarUrl && (
@@ -123,27 +145,34 @@ export default function AdminTestemunhosPage() {
                     height={80}
                     src={t.avatarUrl}
                     alt={t.name}
-                    className="p-[2px] mr-1  rounded-full border-[1px] border-primary dark:border-secundary"
+                    className="p-[2px] mr-1 rounded-full border-[1px] border-primary dark:border-secundary"
                   />
                 )}
                 <div>
-                  <p className="text-lg font-bold">{t.name}</p>
-                  <div className="text-xs self-center absolute right-0 top-0   flex-col  hidden md:flex">
+                  <p className="text-lg font-bold">
+                    {t.name}
+                    <span className="text-sm font-normal text-zinc-600">
+                      {t.ministryRole
+                        ? ` - APG ${
+                            t.ministryRole === 'VILADAPENHA'
+                              ? 'Vila da Penha'
+                              : t.ministryRole === 'TOMAZINHO'
+                                ? 'Tomazinho'
+                                : 'Vila Maria Helena'
+                          }`
+                        : ' - Membro sem igreja'}
+                    </span>
+                  </p>
+                  <div className="text-xs flex flex-col">
                     <span>Postado: {formatDate(t.createdAt)}</span>
-                    {t.updatedAt && (
-                      <span>Atualizado: {formatDate(t.updatedAt)}</span>
-                    )}
-                  </div>
-                  <div className="text-xs flex self-center   flex-col  ">
-                    <span>Postado: {formatDate(t.createdAt)}</span>
-                    {t.updatedAt && (
+                    {t.updatedAt && t.createdAt !== t.updatedAt && (
                       <span>Última atualização: {formatDate(t.updatedAt)}</span>
                     )}
                   </div>
                 </div>
               </div>
 
-              <p className="mb-4">{t.content}</p>
+              <p className="mb-4 whitespace-pre-wrap">{t.content}</p>
 
               {t.coverUrl && (
                 <div className="relative w-full max-w-md h-64 mb-4 flex self-center ">
@@ -159,9 +188,10 @@ export default function AdminTestemunhosPage() {
               <div className="flex gap-3 items-center">
                 <button
                   onClick={() => handleAprovar(t.id)}
-                  className="button  !mb-0 flex items-center gap-2 justify-center"
+                  className="button !mb-0 flex items-center gap-2 justify-center"
+                  disabled={approvingId === t.id}
                 >
-                  {isApproved ? (
+                  {approvingId === t.id ? (
                     <>
                       <FaSpinner className="animate-spin" />
                       Aprovando...
@@ -176,7 +206,7 @@ export default function AdminTestemunhosPage() {
                     setSelectedId(t.id)
                     setShowModal(true)
                   }}
-                  className=" button !mb-0 !flex items-center gap-2 !text-red-500 !border-red-500 hover:!bg-red-500 hover:!text-white"
+                  className="button !mb-0 !flex items-center gap-2 !text-red-500 !border-red-500 hover:!bg-red-500 hover:!text-white"
                   title="Excluir testemunho"
                 >
                   Deletar
@@ -195,7 +225,6 @@ export default function AdminTestemunhosPage() {
             <p className="mb-6">
               Tem certeza que deseja excluir este testemunho?
             </p>
-
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowModal(false)}

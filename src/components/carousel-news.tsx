@@ -67,6 +67,21 @@ export default function CarouselNews({
     (item: New) => item.role === local.toUpperCase(),
   )
 
+  const podeAdicionar =
+    token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
+
+  const podeEditarRemover = (itemRole: string | undefined) => {
+    if (!token?.role) return false
+    if (token.role === 'SUPERADMIN') return true
+    if (
+      token.role === 'ADMIN' &&
+      token.ministryRole?.toUpperCase() === local?.toUpperCase() &&
+      itemRole?.toUpperCase() === local?.toUpperCase()
+    )
+      return true
+    return false
+  }
+
   const settings = {
     dots: true,
     infinite: false,
@@ -113,7 +128,7 @@ export default function CarouselNews({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-5 mt-5  justify-center overflow-hidden  w-full">
-        {token?.role === 'ADMIN' && (
+        {podeAdicionar && (
           <>
             {!openNew && (
               <button className="button" onClick={() => setOpenNew(true)}>
@@ -127,7 +142,9 @@ export default function CarouselNews({
             )}
           </>
         )}
+
         <SelectLocal onChange={handleLocalChange} />
+
         <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
           <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
           <Link
@@ -214,7 +231,8 @@ export default function CarouselNews({
                         Ler notícia
                       </Link>
                     </div>
-                    {token?.role === 'ADMIN' && (
+
+                    {podeEditarRemover(product.role) && (
                       <div className="flex w-full items-start justify-around text-white py-3">
                         {openEdit !== product.id && (
                           <button

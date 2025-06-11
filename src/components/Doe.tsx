@@ -12,6 +12,8 @@ export default function Doe() {
   const [openDoacao, setOpenDoacao] = useState(false)
   const token = useToken()
 
+  const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,10 +35,13 @@ export default function Doe() {
 
   return (
     <div className="mb-4 flex w-[100vw] flex-col items-center">
-      {token?.role === 'ADMIN' && (
+      {podeAdicionar && (
         <>
           {!openDoacao && (
-            <div className="button" onClick={() => setOpenDoacao(true)}>
+            <div
+              className="button cursor-pointer"
+              onClick={() => setOpenDoacao(true)}
+            >
               Adicionar igreja
             </div>
           )}
@@ -68,7 +73,7 @@ export default function Doe() {
                 nomebanco={item.nomebanco}
                 pix={item.pix}
                 nomepix={item.nomepix}
-                isAdmin={item.isAdmin}
+                isAdmin={item.isAdmin} // A prop 'isAdmin' parece não existir no seu tipo 'Doacao', talvez precise de a remover ou adicionar ao tipo.
                 updatedAt={item.updatedAt}
                 createdAt={item.createdAt}
               />

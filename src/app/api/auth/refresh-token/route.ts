@@ -32,6 +32,7 @@ export async function POST(req: Request) {
         avatarUrl: user.avatarUrl,
         login: user.login,
         role: user.role,
+        ministryRole: user.ministryRole,
       },
       process.env.JWT_SECRET || 'secret',
       {

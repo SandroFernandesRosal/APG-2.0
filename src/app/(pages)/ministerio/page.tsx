@@ -11,12 +11,14 @@ import MinisterioHeader from '@/components/ministerio-header'
 export default function MinisterioPage() {
   const [openMinisterio, setOpenMinisterio] = useState(false)
   const token = useToken()
+  const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
+
   return (
     <main className="mb-8  mt-20 flex flex-col items-center justify-center  gap-4 rounded-[35px] bg-transparent  md:mt-[145px]   md:items-start    lg:mt-[160px] ">
       <div className=" w-full  flex-col items-center  md:min-w-[35%] flex">
         <MinisterioHeader />
 
-        {token && token.role === 'ADMIN' && (
+        {podeAdicionar && (
           <>
             {openMinisterio === false && (
               <button

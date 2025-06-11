@@ -15,6 +15,7 @@ interface EditTestemunhoProps {
   name: string
   avatarUrl?: string
   userIgreja: UserIgreja
+  ministryRole?: string
 }
 
 export default function EditTestemunho({
@@ -24,6 +25,7 @@ export default function EditTestemunho({
   conteudo,
   name,
   avatarUrl,
+  ministryRole,
 }: EditTestemunhoProps) {
   const [content, setContent] = useState(conteudo)
   const [preview, setPreview] = useState<string | null>(null)
@@ -31,8 +33,7 @@ export default function EditTestemunho({
   const formRef = useRef<HTMLFormElement>(null)
 
   const router = useRouter()
-  const token = Cookies.get('tokenigreja')
-  const tokenAdm = Cookies.get('tokennn')
+  const token = Cookies.get('tokennn')
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -69,7 +70,7 @@ export default function EditTestemunho({
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || tokenAdm}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           name,
@@ -77,6 +78,7 @@ export default function EditTestemunho({
           content,
           coverUrl,
           isPublic: false,
+          ministryRole: ministryRole || null,
         }),
       })
 

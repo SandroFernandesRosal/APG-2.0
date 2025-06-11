@@ -76,7 +76,7 @@ export default function EditMinisterio({
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          credentials: 'include',
         },
         body: JSON.stringify({
           title: title || titulo,
@@ -132,7 +132,7 @@ export default function EditMinisterio({
           htmlFor="coverUrl"
           className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
         >
-          <p className="flex items-center gap-3">
+          <p className="flex items-center gap-3 text-textlight dark:text-textdark">
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
             Anexar nova foto (até 5mb)
           </p>
@@ -146,7 +146,7 @@ export default function EditMinisterio({
         </label>
 
         <input
-          className="input mt-4"
+          className="input mt-4 text-textlight dark:text-textdark"
           type="text"
           name="name"
           required
@@ -156,7 +156,7 @@ export default function EditMinisterio({
         />
 
         <input
-          className="input"
+          className="input text-textlight dark:text-textdark"
           type="text"
           name="title"
           required
@@ -165,7 +165,7 @@ export default function EditMinisterio({
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <div className="input bg-gray-100 dark:bg-gray-800 cursor-not-allowed mb-3">
+        <div className="input bg-bglight dark:bg-bgdark cursor-not-allowed mb-3 text-textlight dark:text-textdark">
           {getIgrejaLabel(lugar)}
         </div>
 

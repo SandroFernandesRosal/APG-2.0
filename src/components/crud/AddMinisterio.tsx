@@ -1,12 +1,15 @@
+// AddMinisterio.tsx
+
 'use client'
 
 import Cookies from 'js-cookie'
-import { useState, useRef, FormEvent, ChangeEvent } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import Image from 'next/image'
+import { useToken } from '@/hooks/useToken'
 
 interface AddMinisterioProps {
   openMinisterio: boolean
@@ -14,7 +17,6 @@ interface AddMinisterioProps {
 }
 
 export default function AddMinisterio({
-  openMinisterio,
   setOpenMinisterio,
 }: AddMinisterioProps) {
   const [title, setTitle] = useState<string>('')
@@ -25,9 +27,20 @@ export default function AddMinisterio({
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { local } = useLocal()
-  const [role, setRole] = useState<string>(local)
   const router = useRouter()
-  const token = Cookies.get('tokennn')
+  const cookieToken = Cookies.get('tokennn')
+
+  const decodedToken = useToken()
+
+  const [role, setRole] = useState<string>(
+    decodedToken?.role === 'ADMIN' ? (decodedToken.ministryRole ?? '') : local,
+  )
+
+  useEffect(() => {
+    if (decodedToken?.role === 'ADMIN') {
+      setRole(decodedToken.ministryRole ?? '')
+    }
+  }, [decodedToken])
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -69,8 +82,9 @@ export default function AddMinisterio({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookieToken}`,
         },
+
         body: JSON.stringify({
           name,
           title,
@@ -109,15 +123,17 @@ export default function AddMinisterio({
       className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
-        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+      <div className="relative flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%] max-w-md">
+        <button
+          type="button"
+          aria-label="Fechar modal"
+          onClick={() => setOpenMinisterio(false)}
+          className="absolute top-4 right-4 text-primary dark:text-secundary hover:text-primary/70 dark:hover:text-secundary/70"
+        >
+          <AiFillCloseCircle className="text-3xl" />
+        </button>
+        <h1 className="mb-2 text-center text-lg font-bold text-primary dark:text-secundary">
           Adicionar líder
-          {openMinisterio && (
-            <AiFillCloseCircle
-              onClick={() => setOpenMinisterio(false)}
-              className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
-            />
-          )}
         </h1>
 
         <label
@@ -162,9 +178,14 @@ export default function AddMinisterio({
           placeholder="Escolha uma imagem"
           onChange={onFileSelected}
         />
-        <label htmlFor="igreja" className="font-bold mb-1">
+
+        <label
+          htmlFor="igreja"
+          className={`font-bold mb-1 ${decodedToken?.role === 'ADMIN' ? 'hidden' : ''}`}
+        >
           Selecione a igreja
         </label>
+
         <select
           id="igreja"
           name="igreja"
@@ -172,6 +193,7 @@ export default function AddMinisterio({
           value={role}
           onChange={(e) => setRole(e.target.value)}
           required
+          disabled={decodedToken?.role === 'ADMIN'}
         >
           <option value="">Selecione...</option>
           <option value="VILADAPENHA">Vila da Penha</option>

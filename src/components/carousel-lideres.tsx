@@ -103,7 +103,7 @@ export default function CarouselLideres() {
         </h1>
 
         <ArrowDown size={40} className="text-white" />
-        {token?.role === 'ADMIN' && (
+        {token?.role === 'SUPERADMIN' && (
           <>
             {!openNew && (
               <button

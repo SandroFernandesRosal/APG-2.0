@@ -19,27 +19,42 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const userSchema = z.object({
-    login: z.string().email({ message: 'Email inválido' }),
-    name: z.string(),
-    avatarUrl: z.string().url(),
-    password: z
-      .string()
-      .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
-      .max(10, { message: 'A senha deve ter no máximo 10 caracteres' })
-      .regex(/[!@#$%^&*(),.?":{}|<>]/, {
-        message: 'A senha deve conter pelo menos um caractere especial',
-      })
-      .refine((value) => /[a-zA-Z]/.test(value), {
-        message: 'A senha deve conter pelo menos uma letra',
-      }),
-    role: z.enum(['ADMIN', 'MEMBRO']).optional(), // Permite definir o role, default é MEMBRO
-  })
+  const userSchema = z
+    .object({
+      login: z.string().email({ message: 'Email inválido' }),
+      name: z.string(),
+      avatarUrl: z.string().url(),
+      password: z
+        .string()
+        .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
+        .max(10, { message: 'A senha deve ter no máximo 10 caracteres' })
+        .regex(/[!@#$%^&*(),.?":{}|<>]/, {
+          message: 'A senha deve conter pelo menos um caractere especial',
+        })
+        .refine((value) => /[a-zA-Z]/.test(value), {
+          message: 'A senha deve conter pelo menos uma letra',
+        }),
+      role: z.enum(['SUPERADMIN', 'ADMIN', 'MEMBRO']).optional(),
+      ministryRole: z
+        .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
+        .optional(),
+    })
+    .refine(
+      (data) => {
+        if (data.role === 'ADMIN') return !!data.ministryRole
+        if (data.role === 'SUPERADMIN') return !data.ministryRole
+        return true
+      },
+      {
+        message:
+          'ADMIN precisa de ministryRole e SUPERADMIN não pode ter ministryRole',
+        path: ['ministryRole'],
+      },
+    )
 
   try {
-    const { login, name, avatarUrl, password, role } = userSchema.parse(
-      await req.json(),
-    )
+    const { login, name, avatarUrl, password, role, ministryRole } =
+      userSchema.parse(await req.json())
 
     const existingUser = await prisma.user.findUnique({
       where: { login },
@@ -62,6 +77,8 @@ export async function POST(req: Request) {
         avatarUrl,
         password: hashedPassword,
         role: role || 'MEMBRO',
+
+        ministryRole: ministryRole || null,
       },
     })
 
@@ -80,6 +97,7 @@ export async function POST(req: Request) {
         { status: 400 },
       )
     }
+    console.error('Erro no registro:', error)
     return NextResponse.json(
       { error: 'Erro interno do servidor' },
       { status: 500 },

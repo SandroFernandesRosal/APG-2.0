@@ -3,17 +3,17 @@
 import Cookies from 'js-cookie'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef, FormEvent, ChangeEvent } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import Image from 'next/image'
-
+import { useToken } from '@/hooks/useToken'
 interface AddNewProps {
   openNew: boolean
   setOpenNew: (open: boolean) => void
 }
 
-export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
+export default function AddNew({ setOpenNew }: AddNewProps) {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [destaque, setDestaque] = useState(false)
@@ -22,9 +22,20 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const { local } = useLocal()
-  const [role, setRole] = useState<string>(local)
+  const token = useToken()
+
+  const [role, setRole] = useState<string>(
+    token?.role === 'ADMIN' ? (token.ministryRole ?? '') : local,
+  )
+
   const router = useRouter()
-  const token = Cookies.get('tokennn')
+  const cookieToken = Cookies.get('tokennn')
+
+  useEffect(() => {
+    if (token?.role === 'ADMIN') {
+      setRole(token.ministryRole ?? '')
+    }
+  }, [token])
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -65,7 +76,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookieToken}`,
         },
         body: JSON.stringify({
           title,
@@ -105,15 +116,18 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
       className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
-        <h1 className="mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
+      <div className="relative flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%] max-w-md">
+        <button
+          type="button"
+          aria-label="Fechar modal"
+          onClick={() => setOpenNew(false)}
+          className="absolute top-4 right-4 text-primary dark:text-secundary hover:text-primary/70 dark:hover:text-secundary/70"
+        >
+          <AiFillCloseCircle className="text-3xl" />
+        </button>
+
+        <h1 className="mb-2 text-center text-lg font-bold text-primary dark:text-secundary">
           Adicionar Notícia
-          {openNew && (
-            <AiFillCloseCircle
-              onClick={() => setOpenNew(false)}
-              className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
-            />
-          )}
         </h1>
 
         <label
@@ -160,7 +174,10 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
           onChange={onFileSelected}
         />
 
-        <label htmlFor="role" className="font-bold mb-1">
+        <label
+          htmlFor="role"
+          className={`font-bold mb-1 ${token?.role === 'ADMIN' ? 'hidden' : ''}`}
+        >
           Selecione a igreja
         </label>
         <select
@@ -170,6 +187,7 @@ export default function AddNew({ openNew, setOpenNew }: AddNewProps) {
           value={role}
           onChange={(e) => setRole(e.target.value)}
           required
+          disabled={token?.role === 'ADMIN'}
         >
           <option value="">Selecione...</option>
           <option value="VILADAPENHA">Vila da Penha</option>

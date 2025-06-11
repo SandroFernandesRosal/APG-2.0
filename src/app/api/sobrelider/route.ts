@@ -19,7 +19,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN') {
+  if (!user || user.role !== 'SUPERADMIN') {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 

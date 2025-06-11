@@ -13,10 +13,17 @@ export default function ItemMinisterio({
   name,
   local,
   coverUrl,
+  role,
 }: Ministerio) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
 
   const token = useToken()
+
+  const podeGerenciar =
+    token &&
+    (token.role === 'SUPERADMIN' ||
+      (token.role === 'ADMIN' && token.ministryRole === role))
+
   return (
     <div
       className={`justify-between mb-12 relative  flex flex-col h-[400px] w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800   bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
@@ -49,7 +56,7 @@ export default function ItemMinisterio({
         <span>{local}</span>
       </div>
 
-      {token && (
+      {podeGerenciar && (
         <div className=" mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
           {openEdit !== id ? (
             <button
@@ -68,6 +75,7 @@ export default function ItemMinisterio({
               lugar={local}
               id={id}
               setOpenEdit={setOpenEdit}
+              role={role}
             />
           )}
           <RemoveMinisterio id={id} />

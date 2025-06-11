@@ -20,7 +20,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN') {
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -28,7 +28,19 @@ export async function PUT(
   const body = await req.json()
   const { name, day, hour, isPublic, destaque } = body
 
-  //
+  // Busca agenda para checar permissão
+  const agenda = await prisma.agenda.findUnique({ where: { id } })
+  if (!agenda) {
+    return NextResponse.json(
+      { error: 'Agenda não encontrada' },
+      { status: 404 },
+    )
+  }
+
+  if (user.role === 'ADMIN' && agenda.role !== user.ministryRole) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
+
   const updated = await prisma.agenda.update({
     where: { id },
     data: {
@@ -48,11 +60,24 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN') {
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
   const { id } = paramsSchema.parse(await params)
+
+  // Busca agenda para checar permissão
+  const agenda = await prisma.agenda.findUnique({ where: { id } })
+  if (!agenda) {
+    return NextResponse.json(
+      { error: 'Agenda não encontrada' },
+      { status: 404 },
+    )
+  }
+
+  if (user.role === 'ADMIN' && agenda.role !== user.ministryRole) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   await prisma.agenda.delete({ where: { id } })
 

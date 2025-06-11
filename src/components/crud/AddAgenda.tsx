@@ -1,11 +1,18 @@
 'use client'
 
 import Cookies from 'js-cookie'
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { useToken } from '@/hooks/useToken'
+import DatePicker, { registerLocale } from 'react-datepicker'
+
+import { ptBR } from 'date-fns/locale'
+import 'react-datepicker/dist/react-datepicker.css'
+
+registerLocale('pt-BR', ptBR)
 
 interface AddAgendaProps {
   openAgenda: boolean
@@ -16,15 +23,24 @@ export default function AddAgenda({
   openAgenda,
   setOpenAgenda,
 }: AddAgendaProps) {
-  const [day, setDay] = useState<string>('')
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [name, setName] = useState<string>('')
   const [hour, setHour] = useState<string>('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { local } = useLocal()
-  const [role, setRole] = useState<string>(local)
+  const token = useToken()
+  const [role, setRole] = useState<string>(
+    token?.role === 'ADMIN' ? (token.ministryRole ?? '') : local,
+  )
   const router = useRouter()
-  const token = Cookies.get('tokennn')
+  const cookieToken = Cookies.get('tokennn')
+
+  useEffect(() => {
+    if (token?.role === 'ADMIN') {
+      setRole(token.ministryRole ?? '')
+    }
+  }, [token])
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -35,10 +51,10 @@ export default function AddAgenda({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookieToken}`,
         },
         body: JSON.stringify({
-          day,
+          day: selectedDate?.toISOString().split('T')[0], // formato YYYY-MM-DD
           name,
           hour,
           role,
@@ -66,10 +82,10 @@ export default function AddAgenda({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-full flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+      <div className="flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%] max-w-md">
         <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
           Adicionar evento{' '}
           {openAgenda && (
@@ -80,12 +96,14 @@ export default function AddAgenda({
           )}
         </h1>
 
-        <input
-          className="input mt-4"
-          type="text"
-          name="day"
-          placeholder="Dia da semana"
-          onChange={(e) => setDay(e.target.value)}
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date: Date | null) => setSelectedDate(date)}
+          locale="pt-BR"
+          dateFormat="EEEE - dd/MM/yyyy"
+          placeholderText="Selecione a data"
+          className="input mb-2 z-40 flex place-self-center"
+          required
         />
 
         <input
@@ -94,17 +112,22 @@ export default function AddAgenda({
           name="name"
           placeholder="Nome do evento"
           onChange={(e) => setName(e.target.value)}
+          required
         />
 
         <input
           className="input"
-          type="text"
+          type="time"
           name="hour"
           placeholder="Horário do evento"
           onChange={(e) => setHour(e.target.value)}
+          required
         />
 
-        <label htmlFor="role" className="font-bold mb-1">
+        <label
+          htmlFor="role"
+          className={`font-bold mb-1 ${token?.role === 'ADMIN' && 'hidden'} `}
+        >
           Selecione a igreja
         </label>
         <select
@@ -114,6 +137,7 @@ export default function AddAgenda({
           value={role}
           onChange={(e) => setRole(e.target.value)}
           required
+          disabled={token?.role === 'ADMIN'}
         >
           <option value="">Selecione...</option>
           <option value="VILADAPENHA">Vila da Penha</option>
@@ -123,7 +147,7 @@ export default function AddAgenda({
 
         <button
           type="submit"
-          className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
+          className="button !z-0 !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

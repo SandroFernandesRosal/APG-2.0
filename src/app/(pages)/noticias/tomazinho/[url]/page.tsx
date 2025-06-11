@@ -26,6 +26,12 @@ export default function NoticiaTomazinho({ params }: ParamsProps) {
       item.url === url && item.role === local.toUpperCase(),
   )
 
+  const podeGerenciar =
+    token &&
+    selectedItem &&
+    (token.role === 'SUPERADMIN' ||
+      (token.role === 'ADMIN' && token.ministryRole === selectedItem.role))
+
   useEffect(() => {
     fetch(`/api/news`)
       .then((response) => response.json())
@@ -52,19 +58,12 @@ export default function NoticiaTomazinho({ params }: ParamsProps) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col  items-center gap-5 pt-24 md:pt-[165px]">
-      <article className="mb-5  flex w-full flex-col items-center">
+    <main className="flex min-h-screen flex-col 	items-center gap-5 pt-24 md:pt-[165px]">
+      <article className="mb-5 	flex w-full flex-col items-center">
         <div className="flex w-full items-center justify-around">
-          {token?.role === 'ADMIN' && selectedItem && (
+          {podeGerenciar && (
             <div className="mt-2 flex gap-3">
-              {openEdit !== selectedItem.id ? (
-                <button
-                  className="rounded-md border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
-                  onClick={() => setOpenEdit(selectedItem.id)}
-                >
-                  Editar
-                </button>
-              ) : (
+              {openEdit === selectedItem.id ? (
                 <EditNew
                   img={selectedItem.coverUrl}
                   titulo={selectedItem.title}
@@ -72,14 +71,23 @@ export default function NoticiaTomazinho({ params }: ParamsProps) {
                   id={selectedItem.id}
                   destacar={selectedItem.destaque}
                   setOpenEdit={setOpenEdit}
+                  role={selectedItem.role}
                 />
+              ) : (
+                <>
+                  <button
+                    className="button !mb-0"
+                    onClick={() => setOpenEdit(selectedItem.id)}
+                  >
+                    Editar
+                  </button>
+                  <RemoveNew id={selectedItem.id} />
+                </>
               )}
-
-              <RemoveNew id={selectedItem.id} />
             </div>
           )}
         </div>
-        <h1 className="w-[90vw] max-w-[500px]  text-center text-2xl font-bold">
+        <h1 className="w-[90vw] max-w-[500px] 	text-center text-2xl font-bold">
           {selectedItem && selectedItem.title ? (
             <>{selectedItem.title}</>
           ) : (

@@ -24,12 +24,25 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN')
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const { id } = paramsSchema.parse(await params)
-  const body = await req.json()
+  const news = await prisma.new.findUnique({ where: { id } })
+  if (!news) {
+    return NextResponse.json(
+      { error: 'Notícia não encontrada' },
+      { status: 404 },
+    )
+  }
 
+  // ADMIN só pode editar notícia da sua igreja
+  if (user.role === 'ADMIN' && news.role !== user.ministryRole) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+  }
+
+  const body = await req.json()
   const schema = z.object({
     content: z.string(),
     coverUrl: z.string(),
@@ -62,10 +75,22 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN')
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const { id } = paramsSchema.parse(await params)
+  const news = await prisma.new.findUnique({ where: { id } })
+  if (!news) {
+    return NextResponse.json(
+      { error: 'Notícia não encontrada' },
+      { status: 404 },
+    )
+  }
+
+  if (user.role === 'ADMIN' && news.role !== user.ministryRole) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+  }
 
   await prisma.new.delete({ where: { id } })
 

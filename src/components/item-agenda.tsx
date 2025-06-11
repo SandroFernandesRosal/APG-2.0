@@ -6,10 +6,16 @@ import Image from 'next/image'
 import { Agenda } from '@/data/types/agenda'
 import RemoveAgenda from './crud/RemoveAgenda'
 import EditAgenda from './crud/EditAgenda'
-export default function ItemAgenda({ id, day, name, hour }: Agenda) {
+export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
 
   const token = useToken()
+
+  const podeGerenciar =
+    token &&
+    (token.role === 'SUPERADMIN' ||
+      (token.role === 'ADMIN' && token.ministryRole === role))
+
   return (
     <div
       className="flex flex-col  justify-center relative content-center  h-[400px]  w-[47%] max-w-[300px] rounded-md border-[1px] border-zinc-400 dark:border-zinc-700"
@@ -38,7 +44,7 @@ export default function ItemAgenda({ id, day, name, hour }: Agenda) {
             </p>
           </li>
         </ul>
-        {token?.role === 'ADMIN' && (
+        {podeGerenciar && (
           <div className="mt-2 flex w-full flex-1 items-end justify-around text-white ">
             {openEdit !== id ? (
               <button
@@ -56,6 +62,7 @@ export default function ItemAgenda({ id, day, name, hour }: Agenda) {
                 title={name}
                 hora={hour}
                 dia={day}
+                role={role}
               />
             )}
             <RemoveAgenda id={id} />

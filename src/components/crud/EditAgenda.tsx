@@ -1,10 +1,16 @@
 'use client'
+
 import Cookies from 'js-cookie'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import DatePicker, { registerLocale } from 'react-datepicker'
+import { ptBR } from 'date-fns/locale'
+import { format, parseISO } from 'date-fns'
+import 'react-datepicker/dist/react-datepicker.css'
+
+registerLocale('pt-BR', ptBR)
 
 interface EditAgendaProps {
   setOpenEdit: (open: string | null) => void
@@ -23,9 +29,9 @@ export default function EditAgenda({
   dia,
   role,
 }: EditAgendaProps) {
-  const [day, setDay] = useState<string>('')
-  const [name, setName] = useState<string>('')
-  const [hour, setHour] = useState<string>('')
+  const [day, setDay] = useState<Date | null>(parseISO(dia))
+  const [name, setName] = useState<string>(title)
+  const [hour, setHour] = useState<string>(hora)
   const [isEditing, setIsEditing] = useState(false)
 
   const router = useRouter()
@@ -43,7 +49,7 @@ export default function EditAgenda({
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          day: day || dia,
+          day: day ? format(day, 'yyyy-MM-dd') : dia,
           name: name || title,
           hour: hour || hora,
           role,
@@ -80,39 +86,40 @@ export default function EditAgenda({
             className="cursor-pointer text-2xl font-bold text-primary hover:text-primary/50 dark:text-secundary dark:hover:text-secundary/50"
           />
         </h1>
-        <input
-          className="input mt-2"
-          type="text"
-          name="day"
-          required={true}
-          placeholder="Digite o dia"
-          defaultValue={dia}
-          onChange={(e) => setDay(e.target.value)}
+
+        <DatePicker
+          selected={day}
+          onChange={(date: Date | null) => setDay(date)}
+          dateFormat="EEEE - dd/MM/yyyy"
+          locale="pt-BR"
+          className="input mt-2 flex  place-self-center"
+          placeholderText="Selecione a data"
+          wrapperClassName="w-full"
         />
 
         <input
           className="input"
           type="text"
           name="name"
-          required={true}
+          required
           placeholder="Digite nome do evento"
-          defaultValue={title}
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
         <input
-          className="input "
-          type="text"
+          className="input"
+          type="time"
           name="hour"
-          required={true}
+          required
           placeholder="Digite o horário"
-          defaultValue={hora}
+          value={hour}
           onChange={(e) => setHour(e.target.value)}
         />
 
         <button
           type="submit"
-          className="button !mb-0 flex items-center gap-2 justify-center"
+          className="button !z-0 !mb-0 flex items-center gap-2 justify-center"
         >
           {isEditing ? (
             <>

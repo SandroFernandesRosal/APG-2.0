@@ -17,6 +17,7 @@ export default function Locais() {
     [key: string]: [number, number]
   }>({})
   const token = useToken()
+  const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
 
   useEffect(() => {
     const fetchEnderecos = async () => {
@@ -63,7 +64,7 @@ export default function Locais() {
 
   return (
     <section className="mb-5 flex w-[100vw] flex-col items-center">
-      {token?.role === 'ADMIN' && (
+      {podeAdicionar && (
         <>
           {!openEndereco && (
             <div className="button" onClick={() => setOpenEndereco(true)}>

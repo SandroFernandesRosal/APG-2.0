@@ -21,7 +21,7 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
 
   return (
     <Suspense fallback={<div>Carregando...</div>}>
-      {token?.role === 'ADMIN' && (
+      {token?.role === 'SUPERADMIN' && (
         <>
           {open === false && (
             <button className="button" onClick={() => setOpen(true)}>
