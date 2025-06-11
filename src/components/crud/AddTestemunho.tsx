@@ -4,8 +4,8 @@ import Cookies from 'js-cookie'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, ChangeEvent, FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { useToken } from '@/hooks/useToken'
 
 interface AddTestemunhoProps {
   setOpen: (value: boolean) => void
@@ -25,8 +25,9 @@ export default function AddTestemunho({
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const { name, avatarUrl } = userIgreja
-  const router = useRouter()
-  const token = Cookies.get('tokenigreja')
+
+  const decodedToken = useToken()
+  const cookieToken = Cookies.get('tokennn')
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -58,27 +59,43 @@ export default function AddTestemunho({
     }
 
     try {
+      const bodyPayload: {
+        name: string
+        content: string
+        coverUrl: string
+        avatarUrl: string
+        ministryRole?: string
+      } = {
+        name,
+        content,
+        coverUrl,
+        avatarUrl,
+      }
+
+      // --- CORREÇÃO AQUI ---
+      // A lógica agora envia o ministryRole se o membro logado tiver um.
+      if (decodedToken?.ministryRole) {
+        bodyPayload.ministryRole = decodedToken.ministryRole
+      }
+
       const response = await fetch('/api/testemunhos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookieToken}`,
         },
-        body: JSON.stringify({
-          name,
-          content,
-          coverUrl,
-          avatarUrl,
-        }),
+        body: JSON.stringify(bodyPayload),
       })
 
       if (response.ok) {
         setOpen(false)
-        router.push('/testemunhos')
         window.location.href = '/testemunhos'
       } else {
         const errorData = await response.json()
         console.error('Erro ao criar testemunho:', errorData)
+        alert(
+          `Erro: ${errorData.error || 'Não foi possível enviar o testemunho.'}`,
+        )
       }
     } catch (error) {
       console.error('Erro durante requisição:', error)
@@ -102,7 +119,7 @@ export default function AddTestemunho({
       onSubmit={handleSubmit}
     >
       <div className="relative flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[90%]  max-w-3xl">
-        <button onClick={() => setOpen(false)}>
+        <button type="button" onClick={() => setOpen(false)}>
           <AiFillCloseCircle className=" absolute right-2 top-2 text-3xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
         </button>
         {avatarUrl && (
@@ -121,7 +138,7 @@ export default function AddTestemunho({
           </div>
 
           <textarea
-            className="mx-1 flex w-full flex-col gap-2 border-none bg-bglightsecundary outline-none ring-0 focus:ring-0 dark:bg-bgdarksefcundary"
+            className="mx-1 flex w-full flex-col gap-2 border-none bg-bglightsecundary outline-none ring-0 focus:ring-0 dark:bg-bgdarksecundary"
             name="content"
             required
             placeholder="Escreva seu testemunho"

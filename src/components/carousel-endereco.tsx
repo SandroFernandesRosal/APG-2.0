@@ -1,3 +1,5 @@
+// CarouselEndereco.tsx
+
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -35,6 +37,8 @@ export default function CarouselEndereco() {
   const [coordinates, setCoordinates] = useState<{
     [key: string]: [number, number]
   }>({})
+
+  const podeGerenciar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
 
   useEffect(() => {
     const fetchEnderecos = async () => {
@@ -81,7 +85,9 @@ export default function CarouselEndereco() {
   const openGoogleMaps = (coords: Endereco) => {
     const { rua, numero, local, cidade, cep } = coords
     const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
-    const url = `https://www.google.com/maps/search/?api=1&query=${enderecoFormatado}`
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      enderecoFormatado,
+    )}`
     window.open(url, '_blank')
   }
 
@@ -131,7 +137,7 @@ export default function CarouselEndereco() {
   return (
     <>
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full dark:bg-bgdark mt-4">
-        {token?.role === 'ADMIN' && (
+        {podeGerenciar && (
           <>
             {!openEndereco && (
               <button className="button" onClick={() => setOpenEndereco(true)}>
@@ -173,7 +179,7 @@ export default function CarouselEndereco() {
 
                 return (
                   <div
-                    className={`flex justify-between h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 ${token && 'mb-20 md:mb-24'}`}
+                    className={`flex justify-between h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 ${podeGerenciar && 'mb-20 md:mb-24'}`}
                     key={product.id}
                   >
                     <div className="flex justify-center items-center h-[50%]">
@@ -211,7 +217,8 @@ export default function CarouselEndereco() {
                         Abrir mapa
                       </button>
                     </div>
-                    {token && (
+
+                    {podeGerenciar && (
                       <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
                         {openEdit !== product.id && (
                           <button

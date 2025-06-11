@@ -7,25 +7,12 @@ const paramsSchema = z.object({
   id: z.string().uuid(),
 })
 
-export async function GET(
-  _: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
-  const { id } = paramsSchema.parse(await params)
-
-  const contato = await prisma.contato.findUniqueOrThrow({
-    where: { id },
-  })
-
-  return NextResponse.json(contato)
-}
-
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN') {
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -62,7 +49,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN') {
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 

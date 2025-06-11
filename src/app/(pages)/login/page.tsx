@@ -26,7 +26,8 @@ export default function Register() {
         })
         if (res.ok) {
           const data = await res.json()
-          if (data.user?.role === 'ADMIN') {
+
+          if (data.user?.role === 'ADMIN' || data.user?.role === 'SUPERADMIN') {
             setIsAdminLogged(true)
           } else if (data.user?.role === 'MEMBRO') {
             setIsMemberLogged(true)

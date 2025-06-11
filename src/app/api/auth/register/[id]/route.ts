@@ -1,20 +1,19 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import bcrypt from 'bcrypt'
+import { authMiddleware } from '@/lib/auth'
 
 interface ParamsProps {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
-export async function GET(req: Request, { params }: ParamsProps) {
+export async function GET(req: NextRequest, { params }: ParamsProps) {
   try {
     const { id } = await params
 
     const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        id,
-      },
+      where: { id },
     })
 
     if (!user) {
@@ -34,7 +33,12 @@ export async function GET(req: Request, { params }: ParamsProps) {
   }
 }
 
-export async function PUT(req: Request, { params }: ParamsProps) {
+export async function PUT(req: NextRequest, { params }: ParamsProps) {
+  const userAuth = await authMiddleware(req)
+  if (!userAuth) {
+    return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
+  }
+
   const bodySchema = z.object({
     name: z.string(),
     avatarUrl: z.string().url(),
@@ -48,11 +52,38 @@ export async function PUT(req: Request, { params }: ParamsProps) {
       .refine((value) => /[a-zA-Z]/.test(value), {
         message: 'A senha deve conter pelo menos uma letra',
       }),
+    // 1. ADICIONADO: 'ministryRole' opcional no schema.
+    ministryRole: z
+      .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
+      .optional(),
   })
 
   try {
     const { id } = await params
-    const { name, avatarUrl, password } = bodySchema.parse(await req.json())
+
+    const userToUpdate = await prisma.user.findUnique({ where: { id } })
+    if (!userToUpdate) {
+      return NextResponse.json(
+        { error: 'Usuário não encontrado' },
+        { status: 404 },
+      )
+    }
+
+    if (
+      userAuth.role !== 'SUPERADMIN' &&
+      userAuth.sub !== id &&
+      !(
+        userAuth.role === 'ADMIN' &&
+        (userToUpdate.ministryRole === userAuth.ministryRole ||
+          userToUpdate.ministryRole === null)
+      )
+    ) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+    }
+
+    const { name, avatarUrl, password, ministryRole } = bodySchema.parse(
+      await req.json(),
+    )
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -62,6 +93,14 @@ export async function PUT(req: Request, { params }: ParamsProps) {
         name,
         avatarUrl,
         password: hashedPassword,
+        ministryRole,
+      },
+    })
+
+    await prisma.testemunho.updateMany({
+      where: { userId: id },
+      data: {
+        ministryRole: ministryRole || null,
       },
     })
 
@@ -80,9 +119,34 @@ export async function PUT(req: Request, { params }: ParamsProps) {
   }
 }
 
-export async function DELETE(req: Request, { params }: ParamsProps) {
+export async function DELETE(req: NextRequest, { params }: ParamsProps) {
+  const userAuth = await authMiddleware(req)
+  if (!userAuth) {
+    return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
+  }
+
   try {
     const { id } = await params
+
+    const userToDelete = await prisma.user.findUnique({ where: { id } })
+    if (!userToDelete) {
+      return NextResponse.json(
+        { error: 'Usuário não encontrado' },
+        { status: 404 },
+      )
+    }
+
+    if (
+      userAuth.role !== 'SUPERADMIN' &&
+      userAuth.sub !== id &&
+      !(
+        userAuth.role === 'ADMIN' &&
+        (userToDelete.ministryRole === userAuth.ministryRole ||
+          userToDelete.ministryRole === null)
+      )
+    ) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+    }
 
     await prisma.user.delete({
       where: { id },

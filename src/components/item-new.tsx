@@ -17,10 +17,16 @@ export default function ItemNew({
   createdAt,
   destaque,
   url,
+  role,
 }: New) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
 
   const token = useToken()
+
+  const podeGerenciar =
+    token &&
+    (token.role === 'SUPERADMIN' ||
+      (token.role === 'ADMIN' && token.ministryRole === role))
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -83,7 +89,7 @@ export default function ItemNew({
           Ler notícia
         </Link>
       </div>
-      {token?.role === 'ADMIN' && (
+      {podeGerenciar && (
         <div className="flex w-full items-start justify-around text-white py-3 ">
           {openEdit !== id ? (
             <button

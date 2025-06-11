@@ -41,6 +41,8 @@ export default function ItemDoe({
     }
   }
 
+  const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
+
   return (
     <div
       className="flex flex-col justify-between h-[400px] max-w-[300px] w-[47%] rounded-md border-[1px] border-zinc-300 dark:border-zinc-700 transition-all p-2"
@@ -89,7 +91,7 @@ export default function ItemDoe({
         )}
         <h2>{nomepix}</h2>
 
-        {token?.role === 'ADMIN' && (
+        {podeAdicionar && (
           <div className="flex w-full mt-4 gap-2 justify-around">
             {openEdit !== id ? (
               <button className="button !mb-0" onClick={() => setOpenEdit(id)}>

@@ -54,7 +54,7 @@ async function main() {
         name: defaultAdmin.name,
         password: hashedPassword,
         avatarUrl: defaultAdmin.avatarUrl,
-        role: 'ADMIN',
+        role: 'SUPERADMIN',
       },
     })
 

@@ -11,6 +11,7 @@ export async function authMiddleware(req: NextRequest) {
     return decoded as {
       role: string
       sub: string
+      ministryRole?: string | null
     }
   } catch {
     return null

@@ -8,7 +8,7 @@ import { slugify } from '@/lib/slug'
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const offset = parseInt(searchParams.get('offset') || '0', 10)
-  const itemsPerPage = 12 // ou um valor grande para pegar tudo
+  const itemsPerPage = 12
 
   const news = await prisma.new.findMany({
     orderBy: { createdAt: 'desc' },
@@ -21,8 +21,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN')
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const body = await req.json()
 
@@ -37,6 +38,14 @@ export async function POST(req: NextRequest) {
   })
 
   const data = schema.parse(body)
+
+  if (user.role === 'ADMIN' && user.ministryRole !== data.role) {
+    return NextResponse.json(
+      { error: 'ADMIN só pode postar na sua igreja' },
+      { status: 403 },
+    )
+  }
+
   const uuid = randomUUID()
   const slug = `${slugify(data.title)}-${uuid.slice(-5)}`
 

@@ -38,7 +38,7 @@ export default async function Perfil() {
                   Editar perfil
                 </Link>
                 <RemoveUser id={user.id} />
-                {user.role === 'ADMIN' && (
+                {user.role === 'SUPERADMIN' && (
                   <Link href={'/register'} className="button !mb-0">
                     Criar novo administrador
                   </Link>

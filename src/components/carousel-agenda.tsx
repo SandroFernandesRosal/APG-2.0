@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import { Agenda } from '@/data/types/agenda'
 import { useEffect, useState } from 'react'
-import { useDataAgenda, useLocal, useShowModal } from '@/store/useStore'
+import { useDataAgenda, useShowModal, useLocal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
@@ -16,15 +16,11 @@ import RemoveAgenda from './crud/RemoveAgenda'
 import Image from 'next/image'
 import AgendaHeader from './agenda-header'
 
-export default function CarouselAgenda({
-  titleproducts,
-}: {
-  titleproducts: string
-}) {
+export default function CarouselAgenda({ title }: { title: string }) {
   const { dataAgenda, setDataAgenda } = useDataAgenda()
-  const { local, setLocal } = useLocal()
+  const { local, setLocal } = useLocal() // uso do hook useLocal no lugar do role
   const [loading, setLoading] = useState(true)
-  const [localLoading, setLocalLoading] = useState(false)
+  const [localLoading, setLocalLoading] = useState(false) // para indicar loading do local
   const [openAgenda, setOpenAgenda] = useState(false)
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
@@ -36,10 +32,7 @@ export default function CarouselAgenda({
       setLoading(true)
       try {
         const response = await fetch(`/api/agenda`)
-
-        if (!response.ok) {
-          throw new Error('Falha ao carregar agenda')
-        }
+        if (!response.ok) throw new Error('Falha ao carregar agenda')
 
         const data = await response.json()
         setDataAgenda(data)
@@ -59,9 +52,23 @@ export default function CarouselAgenda({
     setLocal(newLocal)
   }
 
-  const filteredAgenda = dataAgenda.filter(
-    (item: Agenda) => item.role === local.toUpperCase(),
-  )
+  const podeAdicionar =
+    token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
+
+  const filteredAgenda = dataAgenda.filter((item: Agenda) => {
+    if (!token?.role) return false
+
+    if (token.role === 'SUPERADMIN') return true
+
+    if (token.role === 'ADMIN') {
+      return (
+        token.ministryRole?.toUpperCase() === local?.toUpperCase() &&
+        item.role?.toUpperCase() === local?.toUpperCase()
+      )
+    }
+
+    return false
+  })
 
   const settings = {
     dots: true,
@@ -111,9 +118,10 @@ export default function CarouselAgenda({
       <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full mb-10">
         <AgendaHeader />
 
-        {token?.role === 'ADMIN' && (
+        {/* Botão adicionar evento só para quem pode */}
+        {podeAdicionar && (
           <>
-            {openAgenda === false && (
+            {!openAgenda && (
               <button className="button" onClick={() => setOpenAgenda(true)}>
                 Adicionar evento
               </button>
@@ -129,9 +137,11 @@ export default function CarouselAgenda({
             )}
           </>
         )}
+
         <SelectLocal onChange={handleLocalChange} />
+
         <div className="flex gap-2 items-center justify-between px-2 w-[80vw] lg:max-w-[1200px] mt-5 text-primary dark:text-secundary">
-          <h1 className="md:text-2xl w-full font-bold">{titleproducts}</h1>
+          <h1 className="md:text-2xl w-full font-bold">{title}</h1>
           <Link
             href={`/agenda`}
             className="font-bold md:text-lg w-full justify-end flex items-center gap-2"
@@ -185,7 +195,8 @@ export default function CarouselAgenda({
                       </p>
                     </div>
                   </div>
-                  {token && (
+                  {(token?.role === 'ADMIN' ||
+                    token?.role === 'SUPERADMIN') && (
                     <div className="mt-2 flex w-full flex-1 items-end justify-around text-white">
                       {openEdit !== product.id ? (
                         <button

@@ -72,6 +72,24 @@ export default function CarouselMinisterio({
     (item: Ministerio) => item.role === local.toUpperCase(),
   )
 
+  const podeAdicionar =
+    token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
+
+  const podeEditarRemover = (itemLocal: string | undefined) => {
+    if (!token?.role) return false
+
+    if (token.role === 'SUPERADMIN') return true
+
+    if (
+      token.role === 'ADMIN' &&
+      token.ministryRole?.toUpperCase() === local?.toUpperCase() &&
+      itemLocal?.toUpperCase() === local?.toUpperCase()
+    )
+      return true
+
+    return false
+  }
+
   const settings = {
     dots: true,
     infinite: false,
@@ -126,7 +144,7 @@ export default function CarouselMinisterio({
 
         <MinisterioHeader />
 
-        {token?.role === 'ADMIN' && (
+        {podeAdicionar && (
           <>
             {!openMinisterio && (
               <button
@@ -210,7 +228,7 @@ export default function CarouselMinisterio({
                     <span>{getIgrejaLabel(product.local)}</span>
                   </div>
 
-                  {token?.role === 'ADMIN' && (
+                  {podeEditarRemover(product.local) && (
                     <div className="mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
                       {openEdit !== product.id && (
                         <button

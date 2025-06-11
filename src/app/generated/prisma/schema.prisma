@@ -10,6 +10,7 @@ datasource db {
 }
 
 enum UserRole {
+  SUPERADMIN
   ADMIN
   MEMBRO
 }
@@ -27,6 +28,7 @@ model User {
   avatarUrl          String?
   password           String
   role               UserRole             @default(MEMBRO)
+  ministryRole       MinistryRole?
   expires            DateTime?
   agenda             Agenda[]
   contato            Contato[]
@@ -171,14 +173,15 @@ model PasswordResetToken {
 }
 
 model Testemunho {
-  id        String   @id @default(uuid())
-  userId    String
-  name      String
-  avatarUrl String
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  isPublic  Boolean  @default(true)
-  coverUrl  String?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String        @id @default(uuid())
+  userId       String
+  name         String
+  avatarUrl    String
+  content      String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  isPublic     Boolean       @default(true)
+  coverUrl     String?
+  ministryRole MinistryRole?
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

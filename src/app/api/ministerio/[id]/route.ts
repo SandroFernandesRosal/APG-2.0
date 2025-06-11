@@ -23,10 +23,24 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN')
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const { id } = paramsSchema.parse(await params)
+  const ministerio = await prisma.ministerio.findUnique({ where: { id } })
+  if (!ministerio) {
+    return NextResponse.json(
+      { error: 'Ministério não encontrado' },
+      { status: 404 },
+    )
+  }
+
+  // ADMIN só pode editar ministério da sua igreja
+  if (user.role === 'ADMIN' && ministerio.role !== user.ministryRole) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+  }
+
   const body = await req.json()
   const { name, title, local, isPublic, coverUrl } = body
 
@@ -49,10 +63,22 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await authMiddleware(req)
-  if (!user || user.role !== 'ADMIN')
+  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
 
   const { id } = paramsSchema.parse(await params)
+  const ministerio = await prisma.ministerio.findUnique({ where: { id } })
+  if (!ministerio) {
+    return NextResponse.json(
+      { error: 'Ministério não encontrado' },
+      { status: 404 },
+    )
+  }
+
+  if (user.role === 'ADMIN' && ministerio.role !== user.ministryRole) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
+  }
 
   await prisma.ministerio.delete({ where: { id } })
 

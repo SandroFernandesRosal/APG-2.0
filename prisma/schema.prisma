@@ -11,6 +11,7 @@ datasource db {
 }
 
 enum UserRole {
+  SUPERADMIN
   ADMIN
   MEMBRO
 }
@@ -28,6 +29,7 @@ model User {
   avatarUrl           String?
   password            String
   role                UserRole              @default(MEMBRO)
+  ministryRole        MinistryRole? 
   expires             DateTime?
   agenda              Agenda[]
   contato             Contato[]
@@ -181,5 +183,6 @@ model Testemunho {
   updatedAt DateTime @updatedAt
   isPublic  Boolean  @default(true)
   coverUrl  String?
+  ministryRole  MinistryRole?
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
