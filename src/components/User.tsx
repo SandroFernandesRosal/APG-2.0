@@ -8,7 +8,7 @@ import ChangeTheme from './ChangeTheme'
 interface User {
   name: string
   avatarUrl?: string
-  role: 'ADMIN' | 'MEMBRO'
+  role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
 }
 
 export default async function UserComponent() {
