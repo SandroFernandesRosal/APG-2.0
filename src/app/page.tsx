@@ -12,7 +12,7 @@ export default function Home() {
       <CarouselHighlight />
       <CarouselNews titleproducts="Últimas noticias" />
       <CarouselMinisterio titleproducts="Membros" />
-      <CarouselAgenda titleproducts="Últimos eventos" />
+      <CarouselAgenda title="Últimos eventos" />
       <CarouselDoacao />
       <Testemunhos />
     </main>
