@@ -9,7 +9,7 @@ import { X } from 'lucide-react'
 interface userProps {
   avatarUrl?: string
   name: string
-  role?: 'ADMIN' | 'MEMBRO'
+  role?: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
 }
 
 export default function ItemUser({ avatarUrl, name, role }: userProps) {
