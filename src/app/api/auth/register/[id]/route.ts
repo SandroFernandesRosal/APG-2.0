@@ -4,13 +4,16 @@ import { z } from 'zod'
 import bcrypt from 'bcrypt'
 import { authMiddleware } from '@/lib/auth'
 
-interface ParamsProps {
-  params: { id: string }
-}
+const paramsSchema = z.object({
+  id: z.string().uuid(),
+})
 
-export async function GET(req: NextRequest, { params }: ParamsProps) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
-    const { id } = params
+    const { id } = paramsSchema.parse(await params)
 
     const user = await prisma.user.findUniqueOrThrow({
       where: { id },
@@ -33,7 +36,10 @@ export async function GET(req: NextRequest, { params }: ParamsProps) {
   }
 }
 
-export async function PUT(req: NextRequest, { params }: ParamsProps) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const userAuth = await authMiddleware(req)
   if (!userAuth) {
     return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
@@ -59,7 +65,7 @@ export async function PUT(req: NextRequest, { params }: ParamsProps) {
   })
 
   try {
-    const { id } = params
+    const { id } = paramsSchema.parse(await params)
 
     const userToUpdate = await prisma.user.findUnique({ where: { id } })
     if (!userToUpdate) {
@@ -119,14 +125,17 @@ export async function PUT(req: NextRequest, { params }: ParamsProps) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: ParamsProps) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const userAuth = await authMiddleware(req)
   if (!userAuth) {
     return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
   }
 
   try {
-    const { id } = params
+    const { id } = paramsSchema.parse(await params)
 
     const userToDelete = await prisma.user.findUnique({ where: { id } })
     if (!userToDelete) {
