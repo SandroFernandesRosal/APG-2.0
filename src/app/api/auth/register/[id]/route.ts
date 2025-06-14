@@ -10,7 +10,7 @@ interface ParamsProps {
 
 export async function GET(req: NextRequest, { params }: ParamsProps) {
   try {
-    const { id } = await params
+    const { id } = params
 
     const user = await prisma.user.findUniqueOrThrow({
       where: { id },
@@ -59,7 +59,7 @@ export async function PUT(req: NextRequest, { params }: ParamsProps) {
   })
 
   try {
-    const { id } = await params
+    const { id } = params
 
     const userToUpdate = await prisma.user.findUnique({ where: { id } })
     if (!userToUpdate) {
@@ -126,7 +126,7 @@ export async function DELETE(req: NextRequest, { params }: ParamsProps) {
   }
 
   try {
-    const { id } = await params
+    const { id } = params
 
     const userToDelete = await prisma.user.findUnique({ where: { id } })
     if (!userToDelete) {
