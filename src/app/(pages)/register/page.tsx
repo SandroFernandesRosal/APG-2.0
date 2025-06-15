@@ -91,7 +91,8 @@ export default function RegisterIgreja() {
             ? 'Administrador criado com sucesso!'
             : 'Registo concluído com sucesso!',
         )
-        router.push('/login')
+
+        router.push(`/${isSuperAdmin ? 'perfil' : 'login'}`)
         return
       }
 
