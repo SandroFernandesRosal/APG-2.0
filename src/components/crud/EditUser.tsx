@@ -12,6 +12,8 @@ interface EditUserProps {
   nome: string
   email: string
   img?: string
+  ministryRole?: string | null
+  role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
 }
 
 export default function EditUser({ id, nome, email, img }: EditUserProps) {
@@ -62,7 +64,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
     }
 
     try {
-      const response = await fetch(`/api/auth/admin/register/${id}`, {
+      const response = await fetch(`/api/auth/register/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -72,12 +74,12 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
           name: name || nome,
           login: login || email,
           avatarUrl: avatarUrl || PlaceHolder,
-          password,
+          password: password || null,
         }),
       })
 
       if (response.ok) {
-        const response = await fetch('/api/auth/admin/logout', {
+        const response = await fetch('/api/auth/logout', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

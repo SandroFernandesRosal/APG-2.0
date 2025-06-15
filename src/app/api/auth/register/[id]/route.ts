@@ -57,7 +57,7 @@ export async function PUT(
       })
       .refine((value) => /[a-zA-Z]/.test(value), {
         message: 'A senha deve conter pelo menos uma letra',
-      }),
+      }), // Tornando a senha opcional
     // 1. ADICIONADO: 'ministryRole' opcional no schema.
     ministryRole: z
       .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
@@ -99,7 +99,7 @@ export async function PUT(
         name,
         avatarUrl,
         password: hashedPassword,
-        ministryRole,
+        ministryRole: ministryRole || null,
       },
     })
 

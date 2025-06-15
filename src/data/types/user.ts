@@ -7,4 +7,5 @@ export interface User {
   userId: string
   role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
   ministryRole?: 'VILADAPENHA' | 'TOMAZINHO' | 'MARIAHELENA' | null
+  password?: string
 }
