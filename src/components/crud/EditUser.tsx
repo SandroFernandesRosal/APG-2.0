@@ -1,7 +1,7 @@
 'use client'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
-import { useRouter } from 'next/navigation'
+
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,6 +20,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
   const [name, setName] = useState<string>('')
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>('')
   const [isEditing, setIsEditing] = useState(false)
   const PlaceHolder =
     'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
@@ -27,12 +28,12 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
   const [preview, setPreview] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  const router = useRouter()
   const token = useToken()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setIsEditing(true)
+    setError('')
 
     const form = formRef.current
     const fileInput = form?.querySelector(
@@ -79,34 +80,35 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
       })
 
       if (response.ok) {
-        const response = await fetch('/api/auth/logout', {
+        alert('Perfil atualizado! Por favor, faça login novamente.')
+        const logoutResponse = await fetch('/api/auth/logout', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
         })
         Cookies.remove('token')
-        router.push('/login')
         window.location.href = '/login'
-        return response
-      }
+        return logoutResponse
+      } else {
+        const errorData = await response.json()
 
-      console.log(response)
-      return null
-    } catch (error) {
-      console.error('Erro ao editar', error)
+        setError(errorData.error || 'Ocorreu um erro desconhecido.')
+      }
+      // --------------------
+    } catch {
+      setError('Erro de conexão. Tente novamente.')
+    } finally {
+      setIsEditing(false)
     }
   }
 
   function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
-
     if (!files) {
       return
     }
-
     const previewUrl = URL.createObjectURL(files[0])
-
     setPreview(previewUrl)
   }
 
@@ -132,26 +134,13 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
                   <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
                   Anexar foto de perfil (opcional)
                 </p>
-                {preview ? (
-                  <Image
-                    src={preview}
-                    alt="Preview"
-                    width={150}
-                    height={150}
-                    className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
-                  />
-                ) : (
-                  <Image
-                    src={
-                      img ||
-                      'https://drive.google.com/uc?export=view&id=1hYXAUQfIieWGK0P9VCW8bpCgnamvnB1C'
-                    }
-                    alt="Avatar"
-                    width={150}
-                    height={150}
-                    className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
-                  />
-                )}
+                <Image
+                  src={preview || img || PlaceHolder}
+                  alt="Avatar"
+                  width={150}
+                  height={150}
+                  className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
+                />
               </label>
 
               <input
@@ -192,17 +181,22 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
                 onChange={onFileSelected}
               />
 
+              <div className="h-6 text-center">
+                {error && <p className="font-bold text-red-500">{error}</p>}
+              </div>
+
               <button
                 type="submit"
                 className="button !mb-0 flex items-center gap-2 justify-center"
+                disabled={isEditing}
               >
                 {isEditing ? (
                   <>
                     <FaSpinner className="animate-spin" />
-                    Editando admin...
+                    Editando...
                   </>
                 ) : (
-                  'Editar'
+                  'Salvar Alterações'
                 )}
               </button>
             </form>
@@ -217,12 +211,10 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
               </h1>
               <p className="mb-4 text-xl">Faça login ou registre-se</p>
             </div>
-
             <div className="flex gap-3">
               <Link href={'/login/igreja'} className="button !mb-0">
                 login
               </Link>
-
               <Link href={'/register'} className="button !mb-0">
                 Registre-se
               </Link>
