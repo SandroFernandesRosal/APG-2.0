@@ -28,7 +28,8 @@ export const Notification = () => {
         if (!authRes.ok) return
 
         const user = await authRes.json()
-        if (user?.user?.role !== 'ADMIN') return // Só ADMIN vê
+        if (user?.user?.role !== 'ADMIN' && user?.user?.role !== 'SUPERADMIN')
+          return
 
         setIsAuthenticated(true)
 

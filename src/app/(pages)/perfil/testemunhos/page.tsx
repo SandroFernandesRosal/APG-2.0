@@ -78,7 +78,7 @@ export default function AdminTestemunhosPage() {
   async function handleAprovar(id: string) {
     setApprovingId(id)
     try {
-      await fetch(`/api/testemunhos/${id}`, {
+      await fetch(`/api/auth/admin/testemunho/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

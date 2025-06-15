@@ -95,7 +95,6 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
 
         setError(errorData.error || 'Ocorreu um erro desconhecido.')
       }
-      // --------------------
     } catch {
       setError('Erro de conexão. Tente novamente.')
     } finally {
