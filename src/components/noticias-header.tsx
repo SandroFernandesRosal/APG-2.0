@@ -1,36 +1,99 @@
-import Image from 'next/image'
+'use client'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+// Importamos ícones relevantes para as categorias de notícias
+import { Megaphone, CalendarCheck, Users, BookMarked } from 'lucide-react'
 
-export default function NoticiasHeader() {
+// Componente para os cartões de categoria
+function NewsCategoryCard({
+  icon,
+  title,
+  description,
+  delay,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+  delay: string
+}) {
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const transitionClasses = `transition-all duration-500 ease-out ${delay} ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`
+
   return (
-    <div className="flex relative flex-col-reverse md:flex-row-reverse justify-center w-full mb-5">
-      <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
-        <div className="absolute inset-0 bg-[url(/img/noticias.png)] bg-cover bg-center blur-sm scale-110"></div>
-        <Image
-          src={'/img/noticias.png'}
-          height={300}
-          width={300}
-          priority
-          quality={100}
-          alt="imagem de notícias"
-          className="object-contain w-full h-[200px] md:h-full relative z-10"
-        />
-      </div>
-
-      <div className="flex flex-col w-full bg-primary text-white justify-center py-5 px-5">
-        <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
-          Notícias
-        </h1>
-        <div className="flex flex-col items-start gap-3">
-          <div>
-            <p className="mb-4">
-              Fique por dentro das novidades da Igreja Alcançados pela Graça!
-              Nesta área você encontra notícias, comunicados, eventos futuros e
-              tudo o que está acontecendo em nossas congregações. Acompanhe e
-              esteja sempre informado!
-            </p>
-          </div>
+    <div
+      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses}`}
+    >
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">
+          {icon}
+        </div>
+        <div>
+          <h4 className="font-bold text-lg text-gray-800 dark:text-white">
+            {title}
+          </h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {description}
+          </p>
         </div>
       </div>
     </div>
+  )
+}
+
+export default function NoticiasHeader() {
+  return (
+    <section className="w-full bg-gray-50 dark:bg-gray-900/70 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
+        {/* Coluna de Texto */}
+        <div className="flex flex-col">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+            Fique por Dentro de{' '}
+            <span className="text-primary dark:text-secundary">Tudo.</span>
+          </h1>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Acompanhe as novidades, comunicados e eventos futuros. Aqui você
+            encontra tudo o que está a acontecer em nossas congregações para não
+            perder nenhum momento.
+          </p>
+          <div className="mt-8">
+            <Link href={'/noticias'} className="button">
+              Ver Todas as Notícias
+            </Link>
+          </div>
+        </div>
+
+        {/* Coluna com os Cartões de Categorias */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <NewsCategoryCard
+            icon={<Megaphone className="w-6 h-6" />}
+            title="Comunicados Oficiais"
+            description="Informações importantes da liderança."
+            delay="delay-100"
+          />
+          <NewsCategoryCard
+            icon={<CalendarCheck className="w-6 h-6" />}
+            title="Próximos Eventos"
+            description="Agende-se para nossos encontros."
+            delay="delay-200"
+          />
+          <NewsCategoryCard
+            icon={<Users className="w-6 h-6" />}
+            title="Vida da Igreja"
+            description="Celebrações, batismos e comunhão."
+            delay="delay-300"
+          />
+          <NewsCategoryCard
+            icon={<BookMarked className="w-6 h-6" />}
+            title="Palavra da Semana"
+            description="Reflexões e estudos da última pregação."
+            delay="delay-400"
+          />
+        </div>
+      </div>
+    </section>
   )
 }

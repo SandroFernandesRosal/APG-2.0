@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
         hostname: 'asset.cloudinary.com',
         pathname: '**',
       },
+
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '**',
+      },
     ],
   },
 }

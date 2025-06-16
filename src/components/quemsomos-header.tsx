@@ -1,52 +1,101 @@
+'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import logob from '../../public/img/logob.png'
+// Importamos os ícones que representam os valores da igreja
+import { Megaphone, BookOpen, HeartHandshake, Music } from 'lucide-react'
 
-export default function QuemSomosHeader() {
+// Componente para os cartões de valores, para manter o código limpo
+function ValueCard({
+  icon,
+  title,
+  description,
+  delay,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+  delay: string
+}) {
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const transitionClasses = `transition-all duration-500 ease-out ${delay} ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`
+
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-center w-full mb-4">
-      <div className="w-full lg:max-w-[400px] md:flex justify-center items-center relative overflow-hidden hidden">
-        <div className="absolute inset-0 bg-[url(/img/igreja2.png)] bg-cover bg-center  scale-110"></div>
-
-        <Image
-          src={logob}
-          height={150}
-          width={150}
-          priority
-          quality={100}
-          alt="logo do site"
-          className="object-contain z-10   "
-        />
-      </div>
-
-      <div className="flex flex-col w-full bg-primary text-white justify-center py-5 px-5">
-        <h1 className="text-3xl mb-2 font-bold text-center md:text-start">
-          Ministerio Alcançados pela Graça
-        </h1>
-        <div className="flex flex-col items-start gap-3">
-          <h2 className="text-xl italic">
-            &quot;Porque pela graça sois salvos, por meio da fé.&ldquo; -
-            Efésios 2:8
-          </h2>
-
-          <div>
-            <p className="mb-4">
-              Fundada em XX de X de XXXX, somos a Igreja Evangélica Alcançados
-              pela Graça, uma comunidade de fé comprometida com a proclamação do
-              evangelho e a edificação dos cristãos. Atuamos em três
-              localidades, levando a mensagem de Cristo e promovendo comunhão e
-              crescimento espiritual. Nossa missão é alcançar vidas com a graça
-              de Deus, fortalecendo famílias e edificando discípulos.
-            </p>
-            <Link
-              href={'/sobre'}
-              className="button p-2 !text-white !border-secundary"
-            >
-              Conheça nossa Igreja
-            </Link>
-          </div>
+    <div
+      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses}`}
+    >
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">
+          {icon}
+        </div>
+        <div>
+          <h4 className="font-bold text-lg text-gray-800 dark:text-white">
+            {title}
+          </h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {description}
+          </p>
         </div>
       </div>
     </div>
+  )
+}
+
+export default function QuemSomosHeader() {
+  return (
+    <section className="w-full bg-gray-50 dark:bg-gray-900/70 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
+        {/* Coluna de Texto */}
+        <div className="flex flex-col">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+            Nossa Identidade,{' '}
+            <span className="text-primary dark:text-secundary">
+              Nossa Missão.
+            </span>
+          </h1>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Somos uma comunidade de fé comprometida com a proclamação do
+            evangelho. A nossa missão é alcançar vidas com a graça de Deus,
+            fortalecendo famílias e edificando discípulos.
+          </p>
+          <div className="mt-8">
+            <Link href={'/sobre'} className="button">
+              Conheça mais sobre nós
+            </Link>
+          </div>
+        </div>
+
+        {/* Coluna com os Cartões de Valores */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <ValueCard
+            icon={<Megaphone className="w-6 h-6" />}
+            title="Proclamação"
+            description="Levando o Evangelho a todos."
+            delay="delay-100"
+          />
+          <ValueCard
+            icon={<BookOpen className="w-6 h-6" />}
+            title="Edificação"
+            description="Crescendo juntos na Palavra."
+            delay="delay-200"
+          />
+          <ValueCard
+            icon={<HeartHandshake className="w-6 h-6" />}
+            title="Comunhão"
+            description="Fortalecendo famílias e laços."
+            delay="delay-300"
+          />
+          <ValueCard
+            icon={<Music className="w-6 h-6" />}
+            title="Adoração"
+            description="Celebrando a grandeza de Deus."
+            delay="delay-400"
+          />
+        </div>
+      </div>
+    </section>
   )
 }
