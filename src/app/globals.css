@@ -28,7 +28,8 @@ body::-webkit-scrollbar-thumb {
 
 .slick-prev:before, .slick-next:before, .slick-dots li.slick-active button:before, .slick-dots li button:before {
   
-  @apply !text-primary dark:!text-secundary !text-lg ;
+  @apply !text-primary dark:!text-secundary !text-lg;
+   
   
 }
 
@@ -36,6 +37,8 @@ body::-webkit-scrollbar-thumb {
 
 .highligt .slick-prev:before, .highligt .slick-next:before {
   display: none!important;
+  
+  
 }
 
 .highligt .slick-prev:before, .highligt .slick-next:before, .highligt .slick-dots li.slick-active button:before, .highligt .slick-dots li button:before {
@@ -47,11 +50,15 @@ body::-webkit-scrollbar-thumb {
 .highligt .slick-slide>div {
   margin: 0 !important;
   padding: 0 !important;
+  
 }
 
 .slick-slide>div {
   margin: 0 6px;
+  
 }
+
+
 
 .openform {
 position: absolute !important;

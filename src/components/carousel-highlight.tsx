@@ -118,7 +118,7 @@ export default function CarouselHighlight() {
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: highlightedNews.length > 1,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -134,7 +134,7 @@ export default function CarouselHighlight() {
   }
 
   return (
-    <section className="highligt text-textprimary flex flex-col items-center mb-5 justify-center w-full">
+    <section className="highligt text-textprimary flex flex-col items-center  justify-center w-full">
       <div className="flex w-full gap-3 justify-center">
         {loading ? (
           <SkeletonHighlight />

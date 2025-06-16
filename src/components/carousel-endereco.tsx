@@ -1,5 +1,3 @@
-// CarouselEndereco.tsx
-
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -13,6 +11,7 @@ import { useToken } from '@/hooks/useToken'
 import EditEndereco from './crud/EditEndereco'
 import RemoveEndereco from './crud/RemoveEndereco'
 import AddEndereco from './crud/AddEndereco'
+import EnderecosHeader from './enderecos-header'
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -20,10 +19,15 @@ import L from 'leaflet'
 
 const HouseIcon = new L.Icon({
   iconUrl:
-    'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconSize: [22, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  iconRetinaUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
 })
 
 export default function CarouselEndereco() {
@@ -46,17 +50,20 @@ export default function CarouselEndereco() {
         setLoading(true)
         const res = await fetch('/api/endereco', { cache: 'no-store' })
         if (!res.ok) throw new Error('Erro ao buscar endereços')
-
         const json = await res.json()
-        setData(json)
-        json.forEach((endereco: Endereco) => geocodeAddress(endereco))
+        if (Array.isArray(json)) {
+          setData(json)
+          json.forEach((endereco: Endereco) => geocodeAddress(endereco))
+        } else {
+          setData([])
+        }
       } catch (err) {
         console.error(err)
+        setData([])
       } finally {
         setLoading(false)
       }
     }
-
     fetchEnderecos()
   }, [])
 
@@ -66,7 +73,6 @@ export default function CarouselEndereco() {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
       enderecoFormatado,
     )}`
-
     try {
       const response = await fetch(url)
       const data = await response.json()
@@ -93,22 +99,19 @@ export default function CarouselEndereco() {
 
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: data.length > 2,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     autoplay: true,
-    initialSlide: 0,
     arrows: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: false,
-          dots: true,
-          arrows: true,
+          infinite: data.length > 2,
         },
       },
       {
@@ -116,19 +119,7 @@ export default function CarouselEndereco() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: false,
-          dots: true,
-          arrows: true,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: false,
-          dots: true,
-          arrows: true,
+          infinite: data.length > 1,
         },
       },
     ],
@@ -136,118 +127,142 @@ export default function CarouselEndereco() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden bg-bglight w-full dark:bg-bgdark mt-4">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full">
+        <EnderecosHeader />
         {podeGerenciar && (
-          <>
-            {!openEndereco && (
+          <div className="my-4">
+            {!openEndereco ? (
               <button className="button" onClick={() => setOpenEndereco(true)}>
                 Adicionar endereço
               </button>
-            )}
-            {openEndereco && (
-              <div className="md:min-w-[35%]">
+            ) : (
+              <div className="w-full max-w-2xl">
                 <AddEndereco
                   openEndereco={openEndereco}
                   setOpenEndereco={setOpenEndereco}
                 />
               </div>
             )}
-          </>
+          </div>
         )}
 
-        <div className="flex w-full gap-3 justify-center">
+        <div className="w-full lg:max-w-6xl px-8 pb-4">
           {loading ? (
-            <Slider
-              {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 gap-2 overflow-hidden"
-            >
-              {Array.from({ length: 4 }).map((_, index) => (
-                <SkeletonNew key={index} />
-              ))}
-            </Slider>
+            <div className="w-full mt-5">
+              <Slider {...settings}>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <div key={index} className="p-2">
+                    <SkeletonNew />
+                  </div>
+                ))}
+              </Slider>
+            </div>
           ) : data.length === 0 ? (
-            <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
+            <div className="flex flex-col h-40 my-5 border border-dashed border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center text-gray-500">
               <p>Nenhum endereço cadastrado.</p>
             </div>
           ) : (
-            <Slider
-              {...settings}
-              className="w-[80vw] lg:max-w-[1200px] my-5 mx-10 gap-2"
-            >
-              {data.map((product: Endereco) => {
-                const coords = coordinates[product.id]
-
-                return (
-                  <div
-                    className={`flex justify-between h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 ${podeGerenciar && 'mb-20 md:mb-24'}`}
-                    key={product.id}
-                  >
-                    <div className="flex justify-center items-center h-[50%]">
-                      {coords ? (
-                        <MapContainer
-                          center={coords}
-                          zoom={13}
-                          className="h-full w-full"
-                        >
-                          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                          <Marker position={coords} icon={HouseIcon}>
-                            <Popup>
-                              {product.local}, {product.rua}, {product.numero},{' '}
-                              {product.cidade}, {product.cep}
-                            </Popup>
-                          </Marker>
-                        </MapContainer>
-                      ) : (
-                        <p>Carregando mapa...</p>
-                      )}
-                    </div>
-                    <div className="px-2 gap-1 flex md:text-xl justify-evenly py-1 h-[50%] flex-col items-center">
-                      <h1 className="text-primary dark:text-secundary text-xl">
-                        {product.local}
-                      </h1>
-                      <h2 className="text-center">
-                        {product.rua}, {product.numero}, {product.cidade}
-                      </h2>
-                      <span className="">CEP: {product.cep}</span>
-
-                      <button
-                        onClick={() => openGoogleMaps(product)}
-                        className="button mb-0"
-                      >
-                        Abrir mapa
-                      </button>
-                    </div>
-
-                    {podeGerenciar && (
-                      <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
-                        {openEdit !== product.id && (
-                          <button
-                            className="button !mb-0"
-                            onClick={() => {
-                              setOpenEdit(product.id)
-                              setSelectedProduct(product)
-                            }}
-                          >
-                            Editar
-                          </button>
+            <div className="w-full mt-5">
+              <Slider {...settings}>
+                {data.map((product: Endereco) => {
+                  const coords = coordinates[product.id]
+                  return (
+                    <div key={product.id} className="p-2">
+                      <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-auto min-h-[450px] overflow-hidden group relative">
+                        {podeGerenciar && (
+                          <div className="absolute top-2 right-2 flex gap-2 z-[1001]">
+                            <button
+                              onClick={() => {
+                                setOpenEdit(product.id)
+                                setSelectedProduct(product)
+                              }}
+                              className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-blue-600 shadow-md transition"
+                              title="Editar"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                <path
+                                  fillRule="evenodd"
+                                  d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => {
+                                setShowModal(product.id)
+                                setSelectedProduct(product)
+                              }}
+                              className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
+                              title="Remover"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                          </div>
                         )}
-                        <button
-                          aria-hidden="true"
-                          tabIndex={-1}
-                          className="button !mb-0"
-                          onClick={() => {
-                            setShowModal(product.id)
-                            setSelectedProduct(product)
-                          }}
-                        >
-                          Remover
-                        </button>
+
+                        <div className="h-56 w-full">
+                          {coords ? (
+                            <MapContainer
+                              center={coords}
+                              zoom={15}
+                              scrollWheelZoom={false}
+                              className="h-full w-full"
+                            >
+                              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                              <Marker position={coords} icon={HouseIcon}>
+                                <Popup>{product.local}</Popup>
+                              </Marker>
+                            </MapContainer>
+                          ) : (
+                            <div className="h-full w-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+                              <p className="text-gray-500">
+                                Carregando mapa...
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4 flex flex-col flex-grow">
+                          <h3 className="text-xl font-bold text-primary dark:text-secundary mb-2">
+                            {product.local}
+                          </h3>
+                          <p className="text-base text-gray-700 dark:text-gray-300">
+                            {product.rua}, {product.numero}
+                          </p>
+                          <p className="text-base text-gray-600 dark:text-gray-400">
+                            {product.cidade} - CEP: {product.cep}
+                          </p>
+                          <div className="mt-auto pt-4">
+                            <button
+                              onClick={() => openGoogleMaps(product)}
+                              className="button w-full"
+                            >
+                              Ver no Google Maps
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                )
-              })}
-            </Slider>
+                    </div>
+                  )
+                })}
+              </Slider>
+            </div>
           )}
         </div>
       </section>
@@ -255,7 +270,6 @@ export default function CarouselEndereco() {
       {showModal && selectedProduct && (
         <RemoveEndereco id={selectedProduct.id} />
       )}
-
       {openEdit && selectedProduct && (
         <EditEndereco
           localInitial={selectedProduct.local}

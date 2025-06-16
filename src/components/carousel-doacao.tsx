@@ -33,13 +33,7 @@ export default function CarouselDoacao() {
   const { showModal, setShowModal } = useShowModal()
   const [copiedId, setCopiedId] = useState<string | null>(null)
 
-  // --- LÓGICA DE PERMISSÃO ADICIONADA ---
-  /**
-   * @description Verifica se o utilizador tem a função 'ADMIN' ou 'SUPERADMIN'.
-   * @returns {boolean} True se o utilizador tiver permissão, senão false.
-   */
   const podeGerenciar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
-  // --- FIM DA LÓGICA DE PERMISSÃO ---
 
   useEffect(() => {
     const fetchDoacoes = async () => {
@@ -118,12 +112,9 @@ export default function CarouselDoacao() {
 
   return (
     <>
-      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full border-b-[1px] border-zinc-300 dark:border-zinc-800">
+      <section className="text-textprimary flex flex-col items-center py-4 justify-center overflow-hidden w-full ">
         <DoacaoHeader />
 
-        {/* --- JSX ATUALIZADO ---
-            A condição foi alterada para usar a variável 'podeGerenciar'.
-        */}
         {podeGerenciar && (
           <>
             {openDoacao === false && (
@@ -209,9 +200,6 @@ export default function CarouselDoacao() {
                     )}
                     <h2>{product.nomepix}</h2>
 
-                    {/* --- JSX ATUALIZADO ---
-                        A mesma variável 'podeGerenciar' é usada aqui.
-                    */}
                     {podeGerenciar && (
                       <div className="flex w-full mt-4 gap-2 justify-around">
                         {openEdit !== product.id && (

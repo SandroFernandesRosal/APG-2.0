@@ -133,7 +133,7 @@ export default function EditNew({
           htmlFor="coverUrl"
           className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
         >
-          <p className="flex items-center gap-3 text-white">
+          <p className="flex items-center gap-3 text-black dark:text-white">
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
             Anexar nova imagem (até 5mb)
           </p>
