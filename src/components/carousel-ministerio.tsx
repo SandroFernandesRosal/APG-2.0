@@ -16,10 +16,8 @@ import AddMinisterio from './crud/AddMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 
-import CarouselEndereco from './carousel-endereco'
 import MinisterioHeader from './ministerio-header'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
-import EnderecosHeader from './enderecos-header'
 
 export default function CarouselMinisterio({
   titleproducts,
@@ -119,11 +117,8 @@ export default function CarouselMinisterio({
   return (
     <>
       <section className="text-textprimary flex flex-col items-center relative justify-center overflow-hidden w-full">
-        {/* O seu código original de headers e AddMinisterio mantido */}
         <section className="flex flex-col bg-bglight dark:bg-bgdark w-full py-5 ">
-          <EnderecosHeader />
           {children}
-          <CarouselEndereco />
         </section>
         <MinisterioHeader />
         {podeAdicionar && (

@@ -7,6 +7,7 @@ import ContentQuemSomos from '@/components/ContentQuemSomos'
 import { Sobre } from '@/data/types/sobre'
 import { SobreLider } from '@/data/types/sobrelider'
 import CarouselMinisterio from '@/components/carousel-ministerio'
+import QuemSomosHeader from '@/components/quemsomos-header'
 
 export default function QuemSomos() {
   const [dataSobre, setDataSobre] = useState<Sobre[]>([])
@@ -42,6 +43,7 @@ export default function QuemSomos() {
   return (
     <main className="mb-2 flex min-h-screen flex-col items-center pt-[60px] md:mt-0 md:pt-[135px]">
       <CarouselMinisterio titleproducts="Ministério">
+        <QuemSomosHeader />
         <article className="mb-5 flex w-full flex-col items-center pb-5 pt-5">
           {error ? (
             <div className="text-red-500 p-4">
