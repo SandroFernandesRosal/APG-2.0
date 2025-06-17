@@ -95,6 +95,23 @@ export const MinistryRole: {
 
 export type MinistryRole = (typeof MinistryRole)[keyof typeof MinistryRole]
 
+
+export const CargoRole: {
+  PASTOR: 'PASTOR',
+  DIACONO: 'DIACONO',
+  PRESBITERO: 'PRESBITERO',
+  EVANGELISTA: 'EVANGELISTA',
+  MISSIONARIO: 'MISSIONARIO',
+  SECRETARIO: 'SECRETARIO',
+  TESOUREIRO: 'TESOUREIRO',
+  PASTOR_PRESIDENTE: 'PASTOR_PRESIDENTE',
+  PASTOR_DIRIGENTE: 'PASTOR_DIRIGENTE',
+  MUSICO: 'MUSICO',
+  AUXILIAR: 'AUXILIAR'
+};
+
+export type CargoRole = (typeof CargoRole)[keyof typeof CargoRole]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -104,6 +121,10 @@ export const UserRole: typeof $Enums.UserRole
 export type MinistryRole = $Enums.MinistryRole
 
 export const MinistryRole: typeof $Enums.MinistryRole
+
+export type CargoRole = $Enums.CargoRole
+
+export const CargoRole: typeof $Enums.CargoRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2040,6 +2061,7 @@ export namespace Prisma {
     role: $Enums.UserRole | null
     ministryRole: $Enums.MinistryRole | null
     expires: Date | null
+    cargo: $Enums.CargoRole | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2051,6 +2073,7 @@ export namespace Prisma {
     role: $Enums.UserRole | null
     ministryRole: $Enums.MinistryRole | null
     expires: Date | null
+    cargo: $Enums.CargoRole | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2062,6 +2085,7 @@ export namespace Prisma {
     role: number
     ministryRole: number
     expires: number
+    cargo: number
     _all: number
   }
 
@@ -2075,6 +2099,7 @@ export namespace Prisma {
     role?: true
     ministryRole?: true
     expires?: true
+    cargo?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2086,6 +2111,7 @@ export namespace Prisma {
     role?: true
     ministryRole?: true
     expires?: true
+    cargo?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2097,6 +2123,7 @@ export namespace Prisma {
     role?: true
     ministryRole?: true
     expires?: true
+    cargo?: true
     _all?: true
   }
 
@@ -2181,6 +2208,7 @@ export namespace Prisma {
     role: $Enums.UserRole
     ministryRole: $Enums.MinistryRole | null
     expires: Date | null
+    cargo: $Enums.CargoRole | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2209,6 +2237,7 @@ export namespace Prisma {
     role?: boolean
     ministryRole?: boolean
     expires?: boolean
+    cargo?: boolean
     agenda?: boolean | User$agendaArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
     doacao?: boolean | User$doacaoArgs<ExtArgs>
@@ -2232,6 +2261,7 @@ export namespace Prisma {
     role?: boolean
     ministryRole?: boolean
     expires?: boolean
+    cargo?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2243,6 +2273,7 @@ export namespace Prisma {
     role?: boolean
     ministryRole?: boolean
     expires?: boolean
+    cargo?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2254,9 +2285,10 @@ export namespace Prisma {
     role?: boolean
     ministryRole?: boolean
     expires?: boolean
+    cargo?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "ministryRole" | "expires", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "ministryRole" | "expires" | "cargo", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | User$agendaArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
@@ -2298,6 +2330,7 @@ export namespace Prisma {
       role: $Enums.UserRole
       ministryRole: $Enums.MinistryRole | null
       expires: Date | null
+      cargo: $Enums.CargoRole | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2740,6 +2773,7 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'UserRole'>
     readonly ministryRole: FieldRef<"User", 'MinistryRole'>
     readonly expires: FieldRef<"User", 'DateTime'>
+    readonly cargo: FieldRef<"User", 'CargoRole'>
   }
     
 
@@ -15642,7 +15676,8 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     ministryRole: 'ministryRole',
-    expires: 'expires'
+    expires: 'expires',
+    cargo: 'cargo'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -15899,6 +15934,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'CargoRole'
+   */
+  export type EnumCargoRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CargoRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'CargoRole[]'
+   */
+  export type ListEnumCargoRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CargoRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -15934,6 +15983,7 @@ export namespace Prisma {
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     ministryRole?: EnumMinistryRoleNullableFilter<"User"> | $Enums.MinistryRole | null
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
+    cargo?: EnumCargoRoleNullableFilter<"User"> | $Enums.CargoRole | null
     agenda?: AgendaListRelationFilter
     contato?: ContatoListRelationFilter
     doacao?: DoacaoListRelationFilter
@@ -15956,6 +16006,7 @@ export namespace Prisma {
     role?: SortOrder
     ministryRole?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
+    cargo?: SortOrderInput | SortOrder
     agenda?: AgendaOrderByRelationAggregateInput
     contato?: ContatoOrderByRelationAggregateInput
     doacao?: DoacaoOrderByRelationAggregateInput
@@ -15981,6 +16032,7 @@ export namespace Prisma {
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     ministryRole?: EnumMinistryRoleNullableFilter<"User"> | $Enums.MinistryRole | null
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
+    cargo?: EnumCargoRoleNullableFilter<"User"> | $Enums.CargoRole | null
     agenda?: AgendaListRelationFilter
     contato?: ContatoListRelationFilter
     doacao?: DoacaoListRelationFilter
@@ -16003,6 +16055,7 @@ export namespace Prisma {
     role?: SortOrder
     ministryRole?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
+    cargo?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -16020,6 +16073,7 @@ export namespace Prisma {
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     ministryRole?: EnumMinistryRoleNullableWithAggregatesFilter<"User"> | $Enums.MinistryRole | null
     expires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    cargo?: EnumCargoRoleNullableWithAggregatesFilter<"User"> | $Enums.CargoRole | null
   }
 
   export type NewWhereInput = {
@@ -16856,6 +16910,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -16878,6 +16933,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -16900,6 +16956,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -16922,6 +16979,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -16944,6 +17002,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -16955,6 +17014,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -16966,6 +17026,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
   }
 
   export type NewCreateInput = {
@@ -17936,6 +17997,13 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type EnumCargoRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CargoRole | EnumCargoRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCargoRoleNullableFilter<$PrismaModel> | $Enums.CargoRole | null
+  }
+
   export type AgendaListRelationFilter = {
     every?: AgendaWhereInput
     some?: AgendaWhereInput
@@ -18060,6 +18128,7 @@ export namespace Prisma {
     role?: SortOrder
     ministryRole?: SortOrder
     expires?: SortOrder
+    cargo?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -18071,6 +18140,7 @@ export namespace Prisma {
     role?: SortOrder
     ministryRole?: SortOrder
     expires?: SortOrder
+    cargo?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -18082,6 +18152,7 @@ export namespace Prisma {
     role?: SortOrder
     ministryRole?: SortOrder
     expires?: SortOrder
+    cargo?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -18152,6 +18223,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumCargoRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CargoRole | EnumCargoRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCargoRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.CargoRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCargoRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumCargoRoleNullableFilter<$PrismaModel>
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -18784,6 +18865,10 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type NullableEnumCargoRoleFieldUpdateOperationsInput = {
+    set?: $Enums.CargoRole | null
+  }
+
   export type AgendaUpdateManyWithoutUserNestedInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
@@ -19311,6 +19396,13 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedEnumCargoRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CargoRole | EnumCargoRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCargoRoleNullableFilter<$PrismaModel> | $Enums.CargoRole | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -19399,6 +19491,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCargoRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CargoRole | EnumCargoRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CargoRole[] | ListEnumCargoRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCargoRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.CargoRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCargoRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumCargoRoleNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -20158,6 +20260,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20179,6 +20282,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20216,6 +20320,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20237,6 +20342,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20258,6 +20364,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20279,6 +20386,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20316,6 +20424,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20337,6 +20446,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20358,6 +20468,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
@@ -20379,6 +20490,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
@@ -20416,6 +20528,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
@@ -20437,6 +20550,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
@@ -20458,6 +20572,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
@@ -20479,6 +20594,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
@@ -20516,6 +20632,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
@@ -20537,6 +20654,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
@@ -20558,6 +20676,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20579,6 +20698,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20616,6 +20736,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20637,6 +20758,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20658,6 +20780,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
     endereco?: EnderecoCreateNestedManyWithoutUserInput
@@ -20679,6 +20802,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
     endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
@@ -20716,6 +20840,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUpdateManyWithoutUserNestedInput
@@ -20737,6 +20862,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
     endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
@@ -20758,6 +20884,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20779,6 +20906,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20816,6 +20944,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20837,6 +20966,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20858,6 +20988,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20879,6 +21010,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -20916,6 +21048,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -20937,6 +21070,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -20958,6 +21092,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -20979,6 +21114,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -21016,6 +21152,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -21037,6 +21174,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -21058,6 +21196,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -21079,6 +21218,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -21116,6 +21256,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -21137,6 +21278,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
@@ -21158,6 +21300,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
     doacao?: DoacaoCreateNestedManyWithoutUserInput
@@ -21179,6 +21322,7 @@ export namespace Prisma {
     role?: $Enums.UserRole
     ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
+    cargo?: $Enums.CargoRole | null
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
     doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
@@ -21216,6 +21360,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUpdateManyWithoutUserNestedInput
@@ -21237,6 +21382,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: NullableEnumCargoRoleFieldUpdateOperationsInput | $Enums.CargoRole | null
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
     doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
