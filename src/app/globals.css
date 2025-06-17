@@ -83,3 +83,56 @@ height: 100vh !important;
     @apply dark:bg-bgdark bg-bglight dark:text-textdark text-textlight;
   }
 }
+
+
+@media (max-width: 897px) {
+  table, thead, tbody, th, td, tr {
+    display: block !important;
+    width: 100%;
+  }
+  thead {
+    display: none !important;
+  }
+  tr {
+    margin-bottom: 1rem;
+    
+    
+    border-radius: 8px;
+   
+    
+  }
+  td {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border: none;
+   
+    font-size: 1rem;
+    background: none;
+    
+    
+  }
+
+
+
+  td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    
+    margin-right: 1rem;
+    flex-shrink: 0;
+     @apply text-primary dark:text-secundary;
+  }
+
+  td:last-child {
+    border: none;
+  }
+
+  tbody td {
+    border-bottom: 1px solid #ddd;
+    @apply border-b-[1px] border-zinc-300 dark:border-zinc-600;
+  }
+
+  
+}

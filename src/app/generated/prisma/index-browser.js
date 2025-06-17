@@ -128,7 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   ministryRole: 'ministryRole',
-  expires: 'expires'
+  expires: 'expires',
+  cargo: 'cargo'
 };
 
 exports.Prisma.NewScalarFieldEnum = {
@@ -287,6 +288,20 @@ exports.MinistryRole = exports.$Enums.MinistryRole = {
   VILADAPENHA: 'VILADAPENHA',
   TOMAZINHO: 'TOMAZINHO',
   MARIAHELENA: 'MARIAHELENA'
+};
+
+exports.CargoRole = exports.$Enums.CargoRole = {
+  PASTOR: 'PASTOR',
+  DIACONO: 'DIACONO',
+  PRESBITERO: 'PRESBITERO',
+  EVANGELISTA: 'EVANGELISTA',
+  MISSIONARIO: 'MISSIONARIO',
+  SECRETARIO: 'SECRETARIO',
+  TESOUREIRO: 'TESOUREIRO',
+  PASTOR_PRESIDENTE: 'PASTOR_PRESIDENTE',
+  PASTOR_DIRIGENTE: 'PASTOR_DIRIGENTE',
+  MUSICO: 'MUSICO',
+  AUXILIAR: 'AUXILIAR'
 };
 
 exports.Prisma.ModelName = {
