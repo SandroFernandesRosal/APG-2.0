@@ -1,5 +1,3 @@
-// CarouselDoacao.tsx
-
 'use client'
 
 import Slider from 'react-slick'
@@ -101,7 +99,6 @@ export default function CarouselDoacao() {
     try {
       await navigator.clipboard.writeText(text)
       setCopiedId(id)
-
       setTimeout(() => {
         setCopiedId(null)
       }, 2000)
@@ -154,43 +151,104 @@ export default function CarouselDoacao() {
             >
               {data.map((product: Doacao) => (
                 <div
-                  className="flex flex-col justify-between h-[400px] rounded-lg  border-[1px] border-zinc-300 dark:border-zinc-800  transition-all"
                   key={product.id}
+                  className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 min-h-[420px] max-w-xs w-full mx-auto p-0 overflow-hidden group transition-all"
                 >
-                  <div className=" flex flex-col  justify-center  gap-2 h-[50%]  w-fit place-self-center">
-                    <h1 className="font-bold text-lg flex items-center gap-2">
-                      <Church className="w-5 h-5" />
+                  {/* Botões flutuantes no canto superior direito */}
+                  {podeGerenciar && (
+                    <div className="absolute top-3 right-3 flex gap-2 z-20">
+                      <button
+                        onClick={() => {
+                          setOpenEdit(product.id)
+                          setSelectedProduct(product)
+                        }}
+                        className="p-2 rounded-full bg-white/90 dark:bg-slate-700/80 hover:bg-primary/10 text-blue-600 shadow-md transition"
+                        title="Editar"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                          <path
+                            fillRule="evenodd"
+                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowModal(product.id)
+                          setSelectedProduct(product)
+                        }}
+                        className="p-2 rounded-full bg-white/90 dark:bg-slate-700/80 hover:bg-red-100 text-red-600 shadow-md transition"
+                        title="Remover"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Badge da igreja */}
+                  <div className="flex items-center gap-2 mt-6 mb-2 px-6">
+                    <Church className="w-7 h-7 text-primary dark:text-secundary" />
+                    <span className="bg-primary/90 dark:bg-secundary/80 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                       {product.local}
-                    </h1>
-                    <span className="flex items-center gap-2 ">
-                      <Landmark className="w-4 h-4" />
-                      {product.banco}
                     </span>
-                    <span className="flex items-center gap-2 ">
-                      <CreditCard className="w-4 h-4" />
-                      Conta: {product.conta}
-                    </span>
-                    <span className="flex items-center gap-2 ">
-                      <BadgeCent className="w-4 h-4" />
-                      Agência: {product.agencia}
-                    </span>
-                    <span>{product.nomebanco}</span>
                   </div>
 
-                  <div className="border-b-[1px] border-zinc-300 dark:border-zinc-700" />
+                  {/* Dados bancários */}
+                  <div className="flex flex-col gap-2 px-6">
+                    <div className="flex items-center gap-2 text-base">
+                      <Landmark className="w-5 h-5 text-primary dark:text-secundary" />
+                      <span className="font-semibold">Banco:</span>
+                      <span>{product.banco}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-base">
+                      <CreditCard className="w-5 h-5 text-primary dark:text-secundary" />
+                      <span className="font-semibold">Conta:</span>
+                      <span>{product.conta}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-base">
+                      <BadgeCent className="w-5 h-5 text-primary dark:text-secundary" />
+                      <span className="font-semibold">Agência:</span>
+                      <span>{product.agencia}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-base">
+                      <span className="font-semibold">Titular:</span>
+                      <span>{product.nomebanco}</span>
+                    </div>
+                  </div>
 
-                  <div className="flex flex-col justify-center h-[50%] gap-2  w-fit place-self-center">
-                    <span className="font-semibold text-center flex items-center justify-center gap-2 text-lg">
-                      <KeyRound className="w-4 h-4" />
-                      Chave PIX:
+                  {/* PIX destacado */}
+                  <div className="flex flex-col items-center justify-center bg-gradient-to-r from-primary/10 via-white to-secundary/10 dark:from-bgdarksecundary dark:via-slate-800 dark:to-bgdark p-4 mt-4 rounded-b-2xl">
+                    <span className="font-bold flex items-center gap-2 text-lg text-primary dark:text-secundary mb-1">
+                      <KeyRound className="w-6 h-6" /> Chave PIX
                     </span>
-                    <div className="flex items-center gap-2">
-                      <h1 className="break-all">{product.pix}</h1>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="break-all font-mono text-base text-gray-800 dark:text-gray-100">
+                        {product.pix}
+                      </span>
                       <button
                         onClick={() => handleCopy(product.pix, product.id)}
                         className="p-1 hover:bg-primary/20 dark:hover:bg-secundary/20 rounded-md transition"
+                        title="Copiar PIX"
                       >
-                        <Copy className="w-4 h-4 text-primary dark:text-secundary" />
+                        <Copy className="w-5 h-5 text-primary dark:text-secundary" />
                       </button>
                     </div>
                     {copiedId === product.id && (
@@ -198,34 +256,14 @@ export default function CarouselDoacao() {
                         PIX copiado!
                       </span>
                     )}
-                    <h2>{product.nomepix}</h2>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {product.nomepix}
+                    </span>
+                  </div>
 
-                    {podeGerenciar && (
-                      <div className="flex w-full mt-4 gap-2 justify-around">
-                        {openEdit !== product.id && (
-                          <button
-                            className="button !mb-0"
-                            onClick={() => {
-                              setOpenEdit(product.id)
-                              setSelectedProduct(product)
-                            }}
-                          >
-                            Editar
-                          </button>
-                        )}
-                        <button
-                          aria-hidden="true"
-                          tabIndex={-1}
-                          className="button !mb-0"
-                          onClick={() => {
-                            setShowModal(product.id)
-                            setSelectedProduct(product)
-                          }}
-                        >
-                          Remover
-                        </button>
-                      </div>
-                    )}
+                  {/* Mensagem de agradecimento */}
+                  <div className="absolute bottom-3 right-4 text-xs text-gray-400">
+                    Obrigado por contribuir!
                   </div>
                 </div>
               ))}

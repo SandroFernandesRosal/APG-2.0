@@ -73,7 +73,7 @@ export default function Doe() {
                 nomebanco={item.nomebanco}
                 pix={item.pix}
                 nomepix={item.nomepix}
-                isAdmin={item.isAdmin} // A prop 'isAdmin' parece não existir no seu tipo 'Doacao', talvez precise de a remover ou adicionar ao tipo.
+                isAdmin={item.isAdmin}
                 updatedAt={item.updatedAt}
                 createdAt={item.createdAt}
               />

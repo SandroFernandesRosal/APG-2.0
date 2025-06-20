@@ -12,7 +12,23 @@ const bodySchema = z.object({
   isPublic: z.coerce.boolean().default(false),
 })
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  // Se vier ?geocode=1&q=..., faz proxy para o Nominatim
+  const { searchParams } = new URL(req.url)
+  if (searchParams.get('geocode') === '1') {
+    const q = searchParams.get('q')
+    if (!q)
+      return NextResponse.json({ error: 'Missing query' }, { status: 400 })
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}`
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'SeuApp/1.0' },
+    })
+    const data = await res.json()
+    return NextResponse.json(data)
+  }
+
+  // Caso contrário, busca endereços do banco normalmente
   const enderecos = await prisma.endereco.findMany({
     orderBy: {
       createdAt: 'desc',

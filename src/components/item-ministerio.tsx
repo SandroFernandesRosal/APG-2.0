@@ -2,85 +2,103 @@
 import { useToken } from '@/hooks/useToken'
 import { useState } from 'react'
 import Image from 'next/image'
-import { Ministerio } from '@/data/types/ministerio'
-
+import { Ministerioo } from '@/data/types/ministerio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
+import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
 export default function ItemMinisterio({
   id,
-  title,
+  cargo,
   name,
-  local,
-  coverUrl,
-  role,
-}: Ministerio) {
+  ministryRole,
+  avatarUrl,
+}: Ministerioo) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-
+  const [showRemove, setShowRemove] = useState(false)
   const token = useToken()
 
   const podeGerenciar =
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.ministryRole === role))
+      (token.role === 'ADMIN' && token.ministryRole === ministryRole))
 
   return (
-    <div
-      className={`justify-between mb-12 relative  flex flex-col h-[400px] w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800   bg-bglight dark:bg-bgdark group ${token && 'mb-10 md:mb-14'}`}
-      key={id}
-    >
-      <div className="h-[60%] relative overflow-hidden">
-        <div className="group h-full  overflow-hidden relative ">
-          <div
-            className="absolute inset-0 bg-cover bg-center  blur-sm scale-110"
-            style={{
-              backgroundImage: `url(${coverUrl})`,
-            }}
-          />
-          <Image
-            src={coverUrl}
-            width={500}
-            height={500}
-            alt={title}
-            quality={100}
-            className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
-          />
-        </div>
+    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] w-[47%] max-w-[300px] overflow-hidden group relative items-center justify-center">
+      <div className="h-3/5 relative  flex items-center justify-center">
+        <Image
+          src={avatarUrl || '/img/Placeholder.png'}
+          width={160}
+          height={160}
+          alt={name || 'Líder'}
+          quality={100}
+          className="relative z-10 h-40 w-40 object-cover object-center rounded-full border-4 border-primary mx-auto mt-6 p-1 dark:border-secundary group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
-
-      <div className="flex flex-col gap-1  h-[40%]  w-full justify-evenly items-center text-xl">
-        <div className="text-primary dark:text-secundary z-30">
-          <p className="text-center  font-bold ">{name}</p>
-        </div>
-        <div className="flex px-2  z-30 ">{title}</div>
-        <span>{local}</span>
+      <div className="p-4 flex flex-col flex-grow text-center items-center justify-center">
+        <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+          {name}
+        </h3>
+        <p className="text-base text-primary dark:text-secundary font-semibold">
+          {cargo ? cargo.replace(/_/g, ' ') : ''}
+        </p>
+        <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          {getIgrejaLabel(ministryRole || '')}
+        </span>
       </div>
-
       {podeGerenciar && (
-        <div className=" mb-1 flex w-full mt-5 flex-1 items-end justify-around text-white">
-          {openEdit !== id ? (
-            <button
-              className="button"
-              onClick={() => {
-                setOpenEdit(id)
-              }}
+        <div className="absolute top-2 left-2 flex gap-2 z-10">
+          <button
+            onClick={() => setOpenEdit(id)}
+            className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-blue-600 shadow-md transition"
+            title="Editar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
             >
-              Editar
-            </button>
-          ) : (
-            <EditMinisterio
-              nome={name}
-              titulo={title}
-              img={coverUrl}
-              lugar={local}
-              id={id}
-              setOpenEdit={setOpenEdit}
-              role={role}
-            />
-          )}
-          <RemoveMinisterio id={id} />
+              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+              <path
+                fillRule="evenodd"
+                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={() => setShowRemove(true)}
+            className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
+            title="Remover"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
         </div>
       )}
+      {openEdit === id && (
+        <EditMinisterio
+          nome={name}
+          titulo={cargo ?? ''}
+          img={avatarUrl ?? '/img/Placeholder.png'}
+          lugar={ministryRole ?? ''}
+          id={id}
+          setOpenEdit={setOpenEdit}
+          role={ministryRole}
+        />
+      )}
+      {showRemove && <RemoveMinisterio id={id} />}
     </div>
   )
 }

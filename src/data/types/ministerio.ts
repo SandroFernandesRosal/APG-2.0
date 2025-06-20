@@ -1,10 +1,8 @@
-export interface Ministerio {
+export interface Ministerioo {
+  avatarUrl?: string
+  cargo?: string
   id: string
-  coverUrl: string
-  title: string
+
   name: string
-  createdAt: string
-  local: string
-  updatedAt: string
-  role: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
+  ministryRole?: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
 }

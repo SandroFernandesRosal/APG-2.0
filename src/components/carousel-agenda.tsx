@@ -54,15 +54,10 @@ export default function CarouselAgenda({ title }: { title: string }) {
   const podeAdicionar =
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
 
-  const filteredAgenda = dataAgenda.filter((item: Agenda) => {
-    // Sua lógica de filtro original
-    if (!token) return item.role?.toUpperCase() === local.toUpperCase()
-    if (token.role === 'SUPERADMIN')
-      return item.role?.toUpperCase() === local.toUpperCase()
-    if (token.role === 'ADMIN')
-      return item.role?.toUpperCase() === token.ministryRole?.toUpperCase()
-    return item.role?.toUpperCase() === local.toUpperCase()
-  })
+  // CORRIGIDO: Todos veem as agendas do local selecionado
+  const filteredAgenda = dataAgenda.filter(
+    (item: Agenda) => item.role?.toUpperCase() === local.toUpperCase(),
+  )
 
   const podeEditarRemover = (item: Agenda) => {
     if (!token) return false
@@ -155,36 +150,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                   return (
                     <div key={product.id} className="p-3">
                       {/* --- NOVO DESIGN CRIATIVO DO CARTÃO DE AGENDA --- */}
-                      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex  min-h-[450px]  overflow-hidden group relative flex-col ">
-                        {/* Coluna da Data */}
-                        <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
-                          <div className="bg-primary text-white text-sm font-semibold py-1">
-                            {mes?.substring(0, 3).toUpperCase()}
-                          </div>
-                          <div className="flex-grow flex items-center justify-center">
-                            <span className="text-xl font-bold text-gray-700 dark:text-gray-200">
-                              {dia}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Coluna dos Detalhes */}
-                        <div className=" p-4 flex flex-col   w-full h-full flex-1 justify-around">
-                          <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                            {product.name}
-                          </h3>
-                          <div className="mt-2 space-y-1  text-gray-500 dark:text-gray-400 text-xl">
-                            <p className="flex items-center gap-2">
-                              <Clock size={24} />
-                              <span>{product.hour}</span>
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <MapPin size={24} />
-                              <span>{getIgrejaLabel(product.role)}</span>
-                            </p>
-                          </div>
-                        </div>
-
+                      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[450px] overflow-hidden group relative flex-col ">
                         {/* Botões de Admin (flutuantes no canto superior direito) */}
                         {podeEditarRemover(product) && (
                           <div className="absolute top-2 right-2 flex gap-2 z-10">
@@ -233,6 +199,33 @@ export default function CarouselAgenda({ title }: { title: string }) {
                             </button>
                           </div>
                         )}
+                        {/* Coluna da Data */}
+                        <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
+                          <div className="bg-primary text-white text-sm font-semibold py-1">
+                            {mes?.substring(0, 3).toUpperCase()}
+                          </div>
+                          <div className="flex-grow flex items-center justify-center">
+                            <span className="text-xl font-bold text-gray-700 dark:text-gray-200">
+                              {dia}
+                            </span>
+                          </div>
+                        </div>
+                        {/* Coluna dos Detalhes */}
+                        <div className="p-4 flex flex-col w-full h-full flex-1 justify-around">
+                          <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+                            {product.name}
+                          </h3>
+                          <div className="mt-2 space-y-1 text-gray-500 dark:text-gray-400 text-xl">
+                            <p className="flex items-center gap-2">
+                              <Clock size={24} />
+                              <span>{product.hour}</span>
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <MapPin size={24} />
+                              <span>{getIgrejaLabel(product.role)}</span>
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )

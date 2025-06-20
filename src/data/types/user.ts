@@ -8,4 +8,5 @@ export interface User {
   role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
   ministryRole?: 'VILADAPENHA' | 'TOMAZINHO' | 'MARIAHELENA' | null
   password?: string
+  cargo?: string
 }

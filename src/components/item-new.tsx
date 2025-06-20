@@ -7,6 +7,7 @@ import { useToken } from '@/hooks/useToken'
 import RemoveNew from './crud/RemoveNew'
 import EditNew from './crud/EditNew'
 import { useState } from 'react'
+import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
 export default function ItemNew({
   id,
@@ -20,7 +21,7 @@ export default function ItemNew({
   role,
 }: New) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-
+  const [showRemove, setShowRemove] = useState(false)
   const token = useToken()
 
   const podeGerenciar =
@@ -31,90 +32,103 @@ export default function ItemNew({
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const day = date.getDate()
-    const month = date.toLocaleString('default', { month: 'short' })
-    return `${day} ${month}`
+    const month = date.toLocaleString('pt-BR', { month: 'long' })
+    const year = date.getFullYear()
+    return `${day} de ${month} de ${year}`
   }
+
   return (
-    <div
-      className={`justify-between relative flex flex-col h-[400px] w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800   group ${token && 'mb-20 md:mb-24'} `}
-      key={id}
-    >
-      <div className="h-[50%] relative overflow-hidden">
+    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative w-[47%] max-w-[300px]">
+      <div className="h-48 relative overflow-hidden">
         <Link
-          aria-hidden="true"
-          tabIndex={-1}
           href={`/noticias/${page}/${url}`}
-          className="group h-full rounded-md overflow-hidden relative"
+          className="block h-full w-full"
+          tabIndex={-1}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
-            style={{
-              backgroundImage: `url(${coverUrl})`,
-            }}
-          />
           <Image
             src={coverUrl}
-            width={200}
-            height={500}
             alt={title}
-            className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110"
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+            {getIgrejaLabel(role)}
+          </span>
         </Link>
       </div>
-
-      <div className="flex flex-col gap-1 justify-around   h-[50%] w-full z-10 mx-2">
-        <Link
-          aria-hidden="true"
-          tabIndex={-1}
-          href={`/noticias/${page}/${url}`}
-          className="text-primary z-30"
-        >
-          <h1 className="text-center  text-xl  font-semibold text-primary dark:text-secundary">
-            {title}
-          </h1>
-        </Link>
-        <div className="flex  text-lg">
-          {content.slice(0, 50).concat('...')}
+      <div className="p-4 flex flex-col flex-grow">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2 line-clamp-2">
+          {title}
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 flex-grow line-clamp-3">
+          {content}
+        </p>
+        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+            <span>{formatDate(createdAt)}</span>
+            <Link
+              href={`/noticias/${page}/${url}`}
+              className="font-semibold text-primary dark:text-secundary hover:underline"
+            >
+              Ler mais
+            </Link>
+          </div>
         </div>
-
-        <span className=" text-sm  flex flex-wrap   items-center ">
-          {formatDate(createdAt)}
-        </span>
-        <Link
-          aria-hidden="true"
-          tabIndex={-1}
-          href={`/noticias/${page}/${url}`}
-          className="button  !mb-0 flex items-center justify-center self-center"
-        >
-          Ler notícia
-        </Link>
       </div>
       {podeGerenciar && (
-        <div className="flex w-full items-start justify-around text-white py-3 ">
-          {openEdit !== id ? (
-            <button
-              aria-hidden="true"
-              tabIndex={-1}
-              className="button !mb-0"
-              onClick={() => {
-                setOpenEdit(id)
-              }}
+        <div className="absolute top-2 left-2 flex gap-2 z-10">
+          <button
+            onClick={() => setOpenEdit(id)}
+            className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-blue-600 shadow-md transition"
+            title="Editar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
             >
-              Editar
-            </button>
-          ) : (
-            <EditNew
-              id={id}
-              titulo={title}
-              conteudo={content}
-              img={coverUrl}
-              setOpenEdit={setOpenEdit}
-              destacar={destaque}
-            />
-          )}
-          <RemoveNew id={id} />
+              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+              <path
+                fillRule="evenodd"
+                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={() => setShowRemove(true)}
+            className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
+            title="Remover"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
         </div>
       )}
+      {openEdit === id && (
+        <EditNew
+          id={id}
+          titulo={title}
+          conteudo={content}
+          img={coverUrl}
+          setOpenEdit={setOpenEdit}
+          destacar={destaque}
+          role={role}
+        />
+      )}
+      {showRemove && <RemoveNew id={id} />}
     </div>
   )
 }
