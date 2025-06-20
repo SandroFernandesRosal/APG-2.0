@@ -1,13 +1,31 @@
 'use client'
 
-import Cookies from 'js-cookie'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef, FormEvent, ChangeEvent } from 'react'
-import { useRouter } from 'next/navigation'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { useState, useRef, FormEvent } from 'react'
+import { useToken } from '@/hooks/useToken'
 
 import Image from 'next/image'
+
+const CARGOS = [
+  'PASTOR',
+  'DIACONO',
+  'PRESBITERO',
+  'EVANGELISTA',
+  'MISSIONARIO',
+  'SECRETARIO',
+  'TESOUREIRO',
+  'PASTOR_PRESIDENTE',
+  'PASTOR_DIRIGENTE',
+  'MUSICO',
+  'AUXILIAR',
+]
+
+const IGREJAS = [
+  { key: 'VILADAPENHA', label: 'Vila da Penha' },
+  { key: 'TOMAZINHO', label: 'Tomazinho' },
+  { key: 'MARIAHELENA', label: 'Vila Maria Helena' },
+]
 
 interface EditMinisterioProps {
   setOpenEdit: (open: string | null) => void
@@ -23,94 +41,42 @@ export default function EditMinisterio({
   setOpenEdit,
   id,
   nome,
-  lugar,
   titulo,
   img,
   role,
 }: EditMinisterioProps) {
-  const [title, setTitle] = useState<string>('')
-  const [name, setName] = useState<string>('')
-
-  const [preview, setPreview] = useState<string | null>(null)
+  const [title, setTitle] = useState<string>(titulo || '')
+  const [igreja, setIgreja] = useState<string>(role || '')
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
-
-  const router = useRouter()
-  const token = Cookies.get('tokennn')
+  const token = useToken()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setIsEditing(true)
-
-    const form = formRef.current
-    const fileInput = form?.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement
-    const fileToUpload = fileInput?.files?.[0]
-
-    let coverUrl = img
-
-    if (fileToUpload) {
-      try {
-        const uploadFormData = new FormData()
-        uploadFormData.append('file', fileToUpload)
-
-        const uploadResponse = await fetch('/api/upload', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: uploadFormData,
-        })
-
-        const uploadData = await uploadResponse.json()
-        coverUrl = uploadData.fileUrl
-      } catch (error) {
-        console.error('Erro ao enviar imagem:', error)
-        return
-      }
-    }
-
     try {
       const response = await fetch(`/api/ministerio/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          credentials: 'include',
+          Authorization: token ? `Bearer ${token}` : '',
         },
         body: JSON.stringify({
-          title: title || titulo,
-          name: name || nome,
-          local: lugar,
-          coverUrl,
-          role,
+          cargo: title || '',
+          ministryRole: igreja || null,
         }),
       })
-
       const data = await response.json()
-
       if (response.ok) {
         setOpenEdit(null)
-        router.push('/')
-        window.location.href = '/'
-        return data
+        window.location.reload()
+      } else {
+        alert(data.error || 'Erro ao editar usuário')
       }
-
-      console.error('Erro ao editar um líder:', data)
-    } catch (error) {
-      console.error('Erro ao editar um líder:', error)
+    } catch {
+      alert('Erro ao editar usuário')
     }
-
-    return null
-  }
-
-  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
-    const { files } = event.target
-
-    if (!files) return
-
-    const previewUrl = URL.createObjectURL(files[0])
-    setPreview(previewUrl)
+    setIsEditing(false)
   }
 
   return (
@@ -128,58 +94,59 @@ export default function EditMinisterio({
           />
         </h1>
 
-        <label
-          htmlFor="coverUrl"
-          className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
-        >
+        <label className="mb-3 flex flex-col items-center gap-2 font-bold">
           <p className="flex items-center gap-3 text-textlight dark:text-textdark">
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
-            Anexar nova foto (até 5mb)
+            Foto do líder
           </p>
           <Image
             width={120}
             height={120}
-            src={preview || img}
+            src={img || '/img/Placeholder.png'}
             alt={nome}
             className="flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 p-1 border-primary dark:border-secundary"
           />
         </label>
 
-        <input
-          className="input mt-4 text-textlight dark:text-textdark"
-          type="text"
-          name="name"
-          required
-          defaultValue={nome}
-          placeholder="Digite um nome"
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          className="input text-textlight dark:text-textdark"
-          type="text"
-          name="title"
-          required
-          defaultValue={titulo}
-          placeholder="Digite um título"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        <div className="input bg-bglight dark:bg-bgdark cursor-not-allowed mb-3 text-textlight dark:text-textdark">
-          {getIgrejaLabel(lugar)}
+        <div className="input mt-4 text-textlight dark:text-textdark font-bold text-lg text-center cursor-not-allowed bg-gray-100 dark:bg-gray-800 mb-2">
+          {nome}
         </div>
 
-        <input
-          className="invisible h-0 w-0"
-          type="file"
-          name="coverUrl"
-          id="coverUrl"
-          onChange={onFileSelected}
-        />
+        {/* Select de cargo */}
+        <select
+          className="input text-textlight dark:text-textdark"
+          name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        >
+          <option value="">Sem cargo</option>
+          {CARGOS.map((cargo) => (
+            <option key={cargo} value={cargo}>
+              {cargo.replace(/_/g, ' ')}
+            </option>
+          ))}
+        </select>
+
+        {/* Select de igreja/ministryRole */}
+        <select
+          className="input text-textlight dark:text-textdark mt-2"
+          name="igreja"
+          value={igreja}
+          onChange={(e) => setIgreja(e.target.value)}
+          disabled={token?.role !== 'SUPERADMIN'}
+        >
+          <option value="">Sem igreja</option>
+          {IGREJAS.map((igreja) => (
+            <option key={igreja.key} value={igreja.key}>
+              {igreja.label}
+            </option>
+          ))}
+        </select>
 
         <button
           type="submit"
           className="button !mb-0 flex items-center gap-2 justify-center"
+          disabled={isEditing}
         >
           {isEditing ? (
             <>

@@ -6,16 +6,15 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Ministerio } from '@/data/types/ministerio'
+import { Ministerioo } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
 import { useDataMinisterio, useLocal, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
-import AddMinisterio from './crud/AddMinisterio'
+
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
-
 import MinisterioHeader from './ministerio-header'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
@@ -30,10 +29,10 @@ export default function CarouselMinisterio({
   const { local, setLocal } = useLocal()
   const [loading, setLoading] = useState(true)
   const [localLoading, setLocalLoading] = useState(false)
-  const [openMinisterio, setOpenMinisterio] = useState(false)
+
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const [selectedProduct, setSelectedProduct] = useState<Ministerio | null>(
+  const [selectedProduct, setSelectedProduct] = useState<Ministerioo | null>(
     null,
   )
   const { showModal, setShowModal } = useShowModal()
@@ -42,22 +41,21 @@ export default function CarouselMinisterio({
     const fetchMinisterios = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`/api/ministerio`, {
+        const response = await fetch(`/api/auth/register`, {
           cache: 'no-store',
         })
         if (!response.ok) {
-          throw new Error('Erro ao buscar ministérios')
+          throw new Error('Erro ao buscar membros')
         }
         const data = await response.json()
-        setDataMinisterio(data)
+        setDataMinisterio(Array.isArray(data) ? data : [])
       } catch (error) {
-        console.error('Erro ao buscar ministérios:', error)
+        console.error('Erro ao buscar membros:', error)
       } finally {
         setLoading(false)
         setLocalLoading(false)
       }
     }
-
     fetchMinisterios()
   }, [local, setDataMinisterio])
 
@@ -66,19 +64,19 @@ export default function CarouselMinisterio({
     setLocal(newLocal)
   }
 
-  const filteredMinisterios = dataMinisterio.filter(
-    (item: Ministerio) => item.role === local.toUpperCase(),
-  )
+  const filteredMinisterios = dataMinisterio
+    .filter((item: Ministerioo) => !!item.cargo)
+    .filter((item: Ministerioo) => item.ministryRole === local.toUpperCase())
 
   const podeAdicionar =
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
 
-  const podeEditarRemover = (itemRole: string | undefined) => {
+  const podeEditarRemover = (item: Ministerioo) => {
     if (!token?.role) return false
     if (token.role === 'SUPERADMIN') return true
     if (
       token.role === 'ADMIN' &&
-      token.ministryRole?.toUpperCase() === itemRole?.toUpperCase()
+      token.ministryRole?.toUpperCase() === item.ministryRole?.toUpperCase()
     )
       return true
 
@@ -122,24 +120,10 @@ export default function CarouselMinisterio({
         </section>
         <MinisterioHeader />
         {podeAdicionar && (
-          <div className="my-4">
-            {!openMinisterio ? (
-              <button
-                className="button"
-                onClick={() => setOpenMinisterio(true)}
-              >
-                {' '}
-                Adicionar líder{' '}
-              </button>
-            ) : (
-              <div className="w-full max-w-2xl">
-                <AddMinisterio
-                  openMinisterio={openMinisterio}
-                  setOpenMinisterio={setOpenMinisterio}
-                />
-              </div>
-            )}
-          </div>
+          <Link href="/usuarios" className="button">
+            {' '}
+            Adicionar líder{' '}
+          </Link>
         )}
         <SelectLocal onChange={handleLocalChange} />
         <div className="flex gap-2 items-center justify-between px-4 w-full lg:max-w-6xl mt-5 text-primary dark:text-secundary">
@@ -152,7 +136,7 @@ export default function CarouselMinisterio({
           </Link>
         </div>
 
-        <div className="w-full lg:max-w-6xl px-8 pb-4">
+        <div className="w-full lg:max-w-6xl px-8 pb-8">
           {loading || localLoading ? (
             <div className="w-full mt-5">
               <Slider {...settings}>
@@ -165,47 +149,38 @@ export default function CarouselMinisterio({
             </div>
           ) : filteredMinisterios.length === 0 ? (
             <div className="flex flex-col h-40 my-5 border border-dashed border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center text-gray-500">
-              <p>Nenhum membro cadastrado para {getIgrejaLabel(local)}.</p>
+              <p>Nenhum membro cadastrado para {local}.</p>
             </div>
           ) : (
             <div className="w-full mt-5">
               <Slider {...settings}>
-                {filteredMinisterios.map((product: Ministerio) => (
+                {filteredMinisterios.map((product: Ministerioo) => (
                   <div key={product.id} className="p-2">
                     <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative">
-                      {/* --- SEU EFEITO DE IMAGEM ORIGINAL RESTAURADO AQUI --- */}
-                      <div className="h-3/5 relative overflow-hidden">
-                        <div className="group h-full overflow-hidden relative ">
-                          <div
-                            className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
-                            style={{
-                              backgroundImage: `url(${product.coverUrl})`,
-                            }}
-                          />
-                          <Image
-                            src={product.coverUrl}
-                            width={500}
-                            height={500}
-                            alt={product.title}
-                            quality={100}
-                            className="relative z-10 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110"
-                          />
-                        </div>
+                      <div className="h-3/5 relative overflow-hidden flex items-center justify-center">
+                        <Image
+                          src={product.avatarUrl || '/img/Placeholder.png'}
+                          width={160}
+                          height={160}
+                          alt={product.name || 'Líder'}
+                          quality={100}
+                          className="relative z-10 h-40 w-40 object-cover object-center rounded-full border-4 border-primary mx-auto mt-6 p-1 dark:border-secundary group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
-
                       <div className="p-4 flex flex-col flex-grow text-center items-center justify-center">
                         <h3 className="text-xl font-bold text-gray-800 dark:text-white">
                           {product.name}
                         </h3>
                         <p className="text-base text-primary dark:text-secundary font-semibold">
-                          {product.title}
+                          {product.cargo
+                            ? product.cargo.replace(/_/g, ' ')
+                            : ''}
                         </p>
                         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                          {getIgrejaLabel(product.role)}
+                          {getIgrejaLabel(product.ministryRole || '')}
                         </span>
                       </div>
-
-                      {podeEditarRemover(product.role) && (
+                      {podeEditarRemover(product) && (
                         <div className="absolute top-2 left-2 flex gap-2 z-10">
                           <button
                             onClick={() => {
@@ -267,12 +242,12 @@ export default function CarouselMinisterio({
       {openEdit && selectedProduct && (
         <EditMinisterio
           nome={selectedProduct.name}
-          titulo={selectedProduct.title}
-          img={selectedProduct.coverUrl}
-          lugar={selectedProduct.local}
+          titulo={selectedProduct.cargo || ''}
+          img={selectedProduct.avatarUrl || ''}
+          lugar={selectedProduct.ministryRole || ''}
           id={selectedProduct.id}
           setOpenEdit={setOpenEdit}
-          role={selectedProduct.role}
+          role={selectedProduct.ministryRole}
         />
       )}
     </>

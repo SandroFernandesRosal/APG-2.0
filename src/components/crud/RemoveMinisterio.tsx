@@ -20,7 +20,7 @@ export default function RemoveMinisterio({ id }: RemoveMinisterioProps) {
     setIsDeleting(true)
 
     try {
-      const response = await fetch(`/api/ministerio/${id}`, {
+      const response = await fetch(`/api/auth/register/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

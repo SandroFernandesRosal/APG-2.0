@@ -9,26 +9,48 @@ type User = {
   id: string
   name: string
   avatarUrl?: string
-  cargo?: string // <- agora usa o campo correto
+  cargo?: string
 }
 
 function LeaderCard({
   icon,
   title,
   subtitle,
-  images,
+  users,
   delay,
+  cargoFilter,
 }: {
   icon: React.ReactNode
   title: string
   subtitle: string
-  images: string[]
+  users: User[]
   delay: string
+  cargoFilter?: string
 }) {
   const [isMounted, setIsMounted] = useState(false)
   useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  // Filtra os usuários conforme o cargo, se necessário
+  const filteredUsers = cargoFilter
+    ? users.filter(
+        (user) => user.cargo && user.cargo.toUpperCase() === cargoFilter,
+      )
+    : users
+
+  // Se não houver usuários, mostra avatar padrão
+  const displayUsers =
+    filteredUsers.length > 0
+      ? filteredUsers
+      : [
+          {
+            id: 'default',
+            name: 'Desconhecido',
+            avatarUrl: DEFAULT_AVATAR,
+            cargo: '',
+          },
+        ]
 
   const transitionClasses = `transition-all duration-500 ease-out ${delay} ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`
 
@@ -49,19 +71,26 @@ function LeaderCard({
       </div>
       <hr className="my-4 border-gray-200 dark:border-gray-700" />
       <div className="flex items-center -space-x-3">
-        {images.slice(0, 5).map((imgSrc, index) => (
-          <Image
-            key={index}
-            src={imgSrc}
-            alt={`Líder ${index + 1}`}
-            width={40}
-            height={40}
-            className="w-10 h-10 rounded-full object-cover ring-2 ring-white dark:ring-slate-800"
-          />
+        {displayUsers.slice(0, 5).map((user, index) => (
+          <div key={user.id || index} className="relative group">
+            <Image
+              src={user.avatarUrl || DEFAULT_AVATAR}
+              alt={user.name || 'Líder'}
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-white dark:ring-slate-800"
+            />
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 hidden group-hover:flex flex-col items-center">
+              <span className="px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap shadow-lg">
+                {user.name} {user.name !== 'Desconhecido' && ' - '}{' '}
+                {user.cargo ? user.cargo.replace(/_/g, ' ') : ''}
+              </span>
+            </div>
+          </div>
         ))}
-        {images.length > 5 && (
+        {displayUsers.length > 5 && (
           <div className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full dark:border-gray-800">
-            +{images.length - 5}
+            +{displayUsers.length - 5}
           </div>
         )}
       </div>
@@ -83,30 +112,12 @@ export default function MinisterioHeader() {
       .catch(() => setUsers([]))
   }, [])
 
-  // Helper para obter avatares por cargo
-  const getAvatarsByCargo = (cargo: string) => {
-    const filtered = users.filter(
-      (user) => user.cargo && user.cargo.toUpperCase() === cargo,
-    )
-    if (filtered.length === 0) return [DEFAULT_AVATAR]
-    return filtered.map((user) => user.avatarUrl || DEFAULT_AVATAR)
-  }
-
   // Para "equipes", mostra quem não é PASTOR, DIACONO ou PRESBITERO
-  const getEquipeAvatars = () => {
-    const cargosPrincipais = ['PASTOR', 'DIACONO', 'PRESBITERO']
-    const filtered = users.filter(
-      (user) =>
-        !user.cargo || !cargosPrincipais.includes(user.cargo.toUpperCase()),
-    )
-    if (filtered.length === 0) return [DEFAULT_AVATAR]
-    return filtered.map((user) => user.avatarUrl || DEFAULT_AVATAR)
-  }
-
-  const pastoresImages = getAvatarsByCargo('PASTOR')
-  const diaconatoImages = getAvatarsByCargo('DIACONO')
-  const presbiterosImages = getAvatarsByCargo('PRESBITERO')
-  const equipesImages = getEquipeAvatars()
+  const cargosPrincipais = ['PASTOR', 'DIACONO', 'PRESBITERO']
+  const equipeUsers = users.filter(
+    (user) =>
+      !user.cargo || !cargosPrincipais.includes(user.cargo.toUpperCase()),
+  )
 
   const transitionClasses = (delay: string) =>
     `transition-all duration-500 ease-out ${delay} ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`
@@ -136,22 +147,25 @@ export default function MinisterioHeader() {
             icon={<Users className="w-6 h-6" />}
             title="Pastorado"
             subtitle="Liderança Principal"
-            images={pastoresImages}
+            users={users}
             delay="delay-100"
+            cargoFilter="PASTOR"
           />
           <LeaderCard
             icon={<HeartHandshake className="w-6 h-6" />}
             title="Diaconato"
             subtitle="Serviço e Cuidado"
-            images={diaconatoImages}
+            users={users}
             delay="delay-200"
+            cargoFilter="DIACONO"
           />
           <LeaderCard
             icon={<ShieldCheck className="w-6 h-6" />}
             title="Presbíteros"
             subtitle="Doutrina e Conselho"
-            images={presbiterosImages}
+            users={users}
             delay="delay-300"
+            cargoFilter="PRESBITERO"
           />
           {/* --- ALTERAÇÃO AQUI --- */}
           <div
@@ -162,19 +176,43 @@ export default function MinisterioHeader() {
             </p>
             <hr className="my-4 border-gray-200 dark:border-gray-700" />
             <div className="flex items-center justify-center -space-x-3">
-              {equipesImages.slice(0, 5).map((imgSrc, index) => (
-                <Image
-                  key={index}
-                  src={imgSrc}
-                  alt={`Voluntário ${index + 1}`}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 rounded-full object-cover ring-2 ring-white dark:ring-slate-800"
-                />
-              ))}
-              {equipesImages.length > 5 && (
+              {equipeUsers.length > 0 ? (
+                equipeUsers.slice(0, 5).map((user, index) => (
+                  <div key={user.id || index} className="relative group">
+                    <Image
+                      src={user.avatarUrl || DEFAULT_AVATAR}
+                      alt={user.name || 'Voluntário'}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10 rounded-full object-cover ring-2 ring-white dark:ring-slate-800"
+                    />
+                    <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 hidden group-hover:flex flex-col items-center">
+                      <span className="px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap shadow-lg">
+                        {user.name} {user.cargo !== null && ' - '}
+                        {user.cargo ? user.cargo.replace(/_/g, ' ') : ''}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="relative group">
+                  <Image
+                    src={DEFAULT_AVATAR}
+                    alt="Voluntário"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-white dark:ring-slate-800"
+                  />
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 hidden group-hover:flex flex-col items-center">
+                    <span className="px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap shadow-lg">
+                      Voluntário Desconhecido
+                    </span>
+                  </div>
+                </div>
+              )}
+              {equipeUsers.length > 5 && (
                 <div className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full dark:border-gray-800">
-                  +{equipesImages.length - 5}
+                  +{equipeUsers.length - 5}
                 </div>
               )}
             </div>

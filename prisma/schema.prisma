@@ -23,8 +23,7 @@ enum MinistryRole {
   MARIAHELENA
 }
 
-// 1. NOVO ENUM 'CargoRole' ADICIONADO AQUI
-// Nota: Nomes com espaços foram convertidos para o padrão SNAKE_CASE
+
 enum CargoRole {
   PASTOR
   DIACONO

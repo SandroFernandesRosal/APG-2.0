@@ -1,13 +1,12 @@
 'use client'
 
-import { Ministerio } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
 import { useDataMinisterio, useLocal, useSearch } from '@/store/useStore'
-
 import ItemMinisterio from './item-ministerio'
 import SkeletonNew from './skeleton/SkeletonNew'
+import { Ministerioo } from '@/data/types/ministerio'
 
-export default function Ministerioo() {
+export default function Ministerio() {
   const { dataMinisterio, setDataMinisterio } = useDataMinisterio()
   const { search } = useSearch()
   const { local } = useLocal()
@@ -18,17 +17,14 @@ export default function Ministerioo() {
   const itemsPerPage = 12
 
   useEffect(() => {
-    const fetchMinisterio = async () => {
+    const fetchUsuarios = async () => {
       setLoading(true)
       try {
         const response = await fetch(`/api/ministerio?offset=${offset}`)
-        if (!response.ok) throw new Error('Erro ao buscar dados do ministério')
+        if (!response.ok) throw new Error('Erro ao buscar usuários')
         const data = await response.json()
-        console.log('Dados iniciais:', data)
-
         setDataMinisterio(Array.isArray(data) ? data : [])
         setLoading(false)
-
         setHasMore(data.length === itemsPerPage)
       } catch (err) {
         console.log(err)
@@ -37,32 +33,30 @@ export default function Ministerioo() {
       }
     }
 
-    fetchMinisterio()
+    fetchUsuarios()
   }, [setDataMinisterio, local, offset])
 
   const loadMore = async () => {
     const newOffset = offset + itemsPerPage
-
     try {
-      const response = await fetch(`/ministerio?offset=${newOffset}`)
-      if (!response.ok) throw new Error('Erro ao carregar mais dados')
+      const response = await fetch(`/api/ministerio?offset=${newOffset}`)
+      if (!response.ok) throw new Error('Erro ao carregar mais usuários')
       const data = await response.json()
-      console.log('Novos dados carregados:', data)
-
       if (Array.isArray(data) && data.length > 0) {
-        setDataMinisterio((prevData: Ministerio[]) => [...prevData, ...data])
+        setDataMinisterio((prevData: Ministerioo[]) => [...prevData, ...data])
         setOffset(newOffset)
       }
-
       setHasMore(data.length === itemsPerPage)
     } catch (err) {
       console.log(err)
     }
   }
 
-  const filteredMinisterio = Array.isArray(dataMinisterio)
+  // Filtro por igreja/local
+  const filteredUsuarios = Array.isArray(dataMinisterio)
     ? dataMinisterio.filter(
-        (item: Ministerio) => item.role === local.toUpperCase(),
+        (item: Ministerioo) =>
+          !local || item.ministryRole === local.toUpperCase(),
       )
     : []
 
@@ -79,18 +73,14 @@ export default function Ministerioo() {
 
       <div className="flex justify-center gap-5 flex-wrap w-full">
         {!loading
-          ? Array.isArray(dataMinisterio) &&
-            filteredMinisterio.map((product: Ministerio) => (
+          ? filteredUsuarios.map((user: Ministerioo) => (
               <ItemMinisterio
-                id={product.id}
-                key={product.id}
-                title={product.title}
-                name={product.name}
-                local={product.local}
-                coverUrl={product.coverUrl}
-                createdAt={product.createdAt}
-                updatedAt={product.updatedAt}
-                role={product.role}
+                id={user.id}
+                key={user.id}
+                name={user.name}
+                avatarUrl={user.avatarUrl ?? ''}
+                cargo={user.cargo}
+                ministryRole={user.ministryRole}
               />
             ))
           : Array.from({ length: 4 }).map((_, index) => (
@@ -105,7 +95,9 @@ export default function Ministerioo() {
       )}
 
       {!hasMore && dataMinisterio.length > 0 && (
-        <p className="mt-4 text-gray-500">Não há mais líder para carregar.</p>
+        <p className="mt-4 text-gray-500">
+          Não há mais usuários para carregar.
+        </p>
       )}
     </div>
   )
