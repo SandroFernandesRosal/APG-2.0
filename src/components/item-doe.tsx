@@ -45,7 +45,7 @@ export default function ItemDoe({
   return (
     <div
       key={id}
-      className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 min-h-[420px] max-w-xs w-full mx-auto p-0 overflow-hidden group transition-all"
+      className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 min-h-[420px] max-w-xs w-full  p-0 overflow-hidden group transition-all"
     >
       {/* Botões flutuantes no canto superior direito */}
       {podeGerenciar && (
