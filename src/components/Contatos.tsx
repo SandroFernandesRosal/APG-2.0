@@ -34,27 +34,26 @@ export default function Contatos() {
 
   return (
     <div>
-      {token?.role === 'SUPERADMIN' ||
-        (token?.role === 'ADMIN' && (
-          <>
-            {!openContato && (
-              <div className="flex w-full justify-center">
-                <button className="button" onClick={() => setOpenContato(true)}>
-                  Adicionar contato
-                </button>
-              </div>
-            )}
+      {(token?.role === 'SUPERADMIN' || token?.role === 'ADMIN') && (
+        <>
+          {!openContato && (
+            <div className="flex w-full justify-center">
+              <button className="button" onClick={() => setOpenContato(true)}>
+                Adicionar contato
+              </button>
+            </div>
+          )}
 
-            {openContato && (
-              <div className="md:min-w-[35%]">
-                <AddContatos
-                  openContato={openContato}
-                  setOpenContato={setOpenContato}
-                />
-              </div>
-            )}
-          </>
-        ))}
+          {openContato && (
+            <div className="md:min-w-[35%]">
+              <AddContatos
+                openContato={openContato}
+                setOpenContato={setOpenContato}
+              />
+            </div>
+          )}
+        </>
+      )}
 
       <div className="m-2 flex w-full flex-wrap justify-center gap-5">
         {!loading ? (

@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
+import { FaEdit } from 'react-icons/fa' // ADICIONADO
+import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
 type User = {
   id: string
@@ -198,15 +200,6 @@ export default function UsuariosPage() {
               <th data-label="Tipo" className="px-3 py-2">
                 Tipo
               </th>
-              <th data-label="Ações" className="px-3 py-2">
-                Alterar Cargo
-              </th>
-              <th data-label="Ações" className="px-3 py-2">
-                Alterar Igreja
-              </th>
-              <th data-label="Ações" className="px-3 py-2">
-                Alterar Função
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -228,23 +221,47 @@ export default function UsuariosPage() {
                       quality={100}
                     />
                   </td>
-                  <td data-label="Nome" className="px-3 py-2 font-semibold">
+                  <td data-label="Nome" className=" py-2 font-semibold ">
                     {u.name}
                   </td>
                   <td data-label="Email" className="px-3 py-2">
                     {u.login}
                   </td>
-                  <td data-label="Cargo" className="px-3 py-2">
+                  <td data-label="Cargo" className="py-2 ">
                     {u.cargo ? (
                       u.cargo.replace(/_/g, ' ')
                     ) : (
-                      <span className="text-gray-400">-</span>
+                      <span className="text-gray-400">Sem Cargo</span>
                     )}
+                    <button
+                      className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      onClick={() => {
+                        setSelectedUser(u)
+                        setCargo(u.cargo ?? '')
+                        setShowModal(true)
+                      }}
+                      title="Editar cargo"
+                    >
+                      <FaEdit size={16} />
+                    </button>
                   </td>
-                  <td data-label="Igreja" className="px-3 py-2">
-                    {u.ministryRole ?? <span className="text-gray-400">-</span>}
+                  <td data-label="Igreja" className="py-2 text-center ">
+                    {getIgrejaLabel(u.ministryRole || '') ?? null ?? (
+                      <span className="text-gray-400">Sem Igreja</span>
+                    )}
+                    <button
+                      className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      onClick={() => {
+                        setSelectedUser(u)
+                        setIgreja(u.ministryRole ?? '')
+                        setShowIgrejaModal(true)
+                      }}
+                      title="Editar igreja"
+                    >
+                      <FaEdit size={16} />
+                    </button>
                   </td>
-                  <td data-label="Tipo" className="px-3 py-2">
+                  <td data-label="Tipo" className="py-2 text-center">
                     <span
                       className={
                         u.role === 'SUPERADMIN'
@@ -256,42 +273,17 @@ export default function UsuariosPage() {
                     >
                       {u.role}
                     </span>
-                  </td>
-                  <td data-label="Alterar Cargo" className="px-3 py-2">
                     <button
-                      className="bg-primary hover:bg-primary/80 text-white px-3 py-1 rounded shadow transition"
-                      onClick={() => {
-                        setSelectedUser(u)
-                        setCargo(u.cargo ?? '')
-                        setShowModal(true)
-                      }}
-                    >
-                      Atribuir Cargo
-                    </button>
-                  </td>
-                  <td data-label="Alterar Igreja" className="px-3 py-2">
-                    <button
-                      className="bg-primary hover:bg-primary/80 text-white px-3 py-1 rounded shadow transition"
-                      onClick={() => {
-                        setSelectedUser(u)
-                        setIgreja(u.ministryRole ?? '')
-                        setShowIgrejaModal(true)
-                      }}
-                    >
-                      Atribuir Igreja
-                    </button>
-                  </td>
-                  <td data-label="Alterar Função" className="px-3 py-2">
-                    <button
-                      className="bg-primary hover:bg-primary/80 text-white px-3 py-1 rounded shadow transition"
+                      className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                       onClick={() => {
                         setSelectedUser(u)
                         setFuncao(u.role === 'ADMIN' ? 'ADMIN' : 'MEMBRO')
                         setShowFuncaoModal(true)
                       }}
+                      title="Editar função"
                       disabled={token?.role !== 'SUPERADMIN'}
                     >
-                      Atribuir Função
+                      <FaEdit size={16} />
                     </button>
                   </td>
                 </tr>

@@ -1,6 +1,8 @@
 'use client'
 
+import { useState, useEffect, useRef } from 'react'
 import { useLocal } from '../store/useStore'
+import { MapPin, Check, ChevronDown } from 'lucide-react'
 
 interface SelectLocalProps {
   onChange: (newLocal: string) => void
@@ -14,27 +16,92 @@ const ROLES = [
 
 export default function SelectLocal({ onChange }: SelectLocalProps) {
   const { local, setLocal } = useLocal()
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Lógica para fechar o dropdown ao clicar fora dele
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dropdownRef])
 
   const handleLocalSelection = (selected: string) => {
     setLocal(selected)
     onChange(selected)
+    setIsOpen(false) // Fecha o menu após a seleção
+  }
+
+  const getSelectedLabel = () => {
+    const selectedRole = ROLES.find((r) => r.key === local)
+    return selectedRole ? selectedRole.label : 'Selecione um local'
   }
 
   return (
-    <ul className="flex flex-wrap justify-center pb-3">
-      {ROLES.map((role) => (
-        <li
-          key={role.key}
-          className={`m-2 flex cursor-pointer rounded-lg border-[1px] border-primary text-primary font-bold hover:border-secundary dark:border-secundary dark:text-secundary dark:hover:text-white p-2 placeholder-black outline-none hover:bg-primary dark:hover:bg-primary hover:text-white focus:ring-0 dark:placeholder-white ${
-            local === role.key
-              ? 'bg-primary dark:bg-primary text-white dark:text-white border-secundary'
-              : ''
-          }`}
-          onClick={() => handleLocalSelection(role.key)}
+    <div className="relative inline-block text-left" ref={dropdownRef}>
+      <div className="flex items-center w-full flex-wrap gap-2 justify-center">
+        <div className="flex items-center gap-2 font-bold">
+          <MapPin
+            className="h-5 w-5 text-primary dark:text-secundary"
+            aria-hidden="true"
+          />{' '}
+          Selecionar local:
+        </div>
+        <button
+          type="button"
+          className="inline-flex  justify-center items-center gap-x-2 rounded-full bg-white dark:bg-slate-800 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700"
+          id="menu-button"
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {role.label}
-        </li>
-      ))}
-    </ul>
+          {getSelectedLabel()}
+          <ChevronDown
+            className="-mr-1 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+        </button>
+      </div>
+
+      {/* O menu dropdown que aparece/desaparece */}
+      <div
+        className={`absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 ${isOpen ? 'transform opacity-100 scale-100' : 'transform opacity-0 scale-95'}`}
+        role="menu"
+        aria-orientation="vertical"
+        aria-labelledby="menu-button"
+        tabIndex={-1}
+        style={{ display: isOpen ? 'block' : 'none' }} // Garante que não ocupa espaço quando fechado
+      >
+        <div className="py-1" role="none">
+          {ROLES.map((role) => (
+            <button
+              key={role.key}
+              onClick={() => handleLocalSelection(role.key)}
+              className="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 block w-full text-left px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+              id={`menu-item-${role.key}`}
+            >
+              <span className="flex items-center justify-between">
+                {role.label}
+                {/* Mostra um ícone de 'check' no item selecionado */}
+                {local === role.key && (
+                  <Check className="h-5 w-5 text-primary dark:text-secundary" />
+                )}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
