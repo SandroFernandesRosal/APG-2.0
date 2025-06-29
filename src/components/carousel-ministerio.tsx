@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Ministerioo } from '@/data/types/ministerio'
+import { Ministerio } from '@/data/types/ministerio'
 import { useEffect, useState } from 'react'
 import { useDataMinisterio, useLocal, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -32,7 +32,7 @@ export default function CarouselMinisterio({
 
   const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const [selectedProduct, setSelectedProduct] = useState<Ministerioo | null>(
+  const [selectedProduct, setSelectedProduct] = useState<Ministerio | null>(
     null,
   )
   const { showModal, setShowModal } = useShowModal()
@@ -65,13 +65,13 @@ export default function CarouselMinisterio({
   }
 
   const filteredMinisterios = dataMinisterio
-    .filter((item: Ministerioo) => !!item.cargo)
-    .filter((item: Ministerioo) => item.ministryRole === local.toUpperCase())
+    .filter((item: Ministerio) => !!item.cargo)
+    .filter((item: Ministerio) => item.ministryRole === local.toUpperCase())
 
   const podeAdicionar =
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
 
-  const podeEditarRemover = (item: Ministerioo) => {
+  const podeEditarRemover = (item: Ministerio) => {
     if (!token?.role) return false
     if (token.role === 'SUPERADMIN') return true
     if (
@@ -154,7 +154,7 @@ export default function CarouselMinisterio({
           ) : (
             <div className="w-full mt-5">
               <Slider {...settings}>
-                {filteredMinisterios.map((product: Ministerioo) => (
+                {filteredMinisterios.map((product: Ministerio) => (
                   <div key={product.id} className="p-2">
                     <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative">
                       <div className="h-3/5 relative overflow-hidden flex items-center justify-center">
