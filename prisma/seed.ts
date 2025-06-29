@@ -26,8 +26,8 @@ async function main() {
   })
 
   const defaultAdmin = {
-    login: 'apg.adm.viladapenha@gmail.com',
-    name: 'Administrador Vila da Penha',
+    login: 'superadmapg@gmail.com',
+    name: 'SUPER ADMIN',
     password: senha,
     avatarUrl: PlaceHolder,
    

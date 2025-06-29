@@ -1,4 +1,4 @@
-export interface Ministerioo {
+export interface Ministerio {
   avatarUrl?: string
   cargo?: string
   id: string
