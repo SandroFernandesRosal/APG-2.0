@@ -40,7 +40,9 @@ export default function ItemMinisterio({
           {name}
         </h3>
         <p className="text-base text-primary dark:text-secundary font-semibold">
-          {cargo ? cargo.replace(/_/g, ' ') : ''}
+          {cargo && Array.isArray(cargo) && cargo.length > 0
+            ? cargo.map((c) => c.replace(/_/g, ' ')).join(', ')
+            : 'Sem Cargo'}
         </p>
         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           {getIgrejaLabel(ministryRole || '')}
@@ -90,7 +92,7 @@ export default function ItemMinisterio({
       {openEdit === id && (
         <EditMinisterio
           nome={name}
-          titulo={cargo ?? ''}
+          titulo={cargo ?? []}
           img={avatarUrl ?? '/img/Placeholder.png'}
           lugar={ministryRole ?? ''}
           id={id}

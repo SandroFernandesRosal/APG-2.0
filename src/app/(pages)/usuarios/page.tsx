@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
-import { FaEdit } from 'react-icons/fa' // ADICIONADO
+import { FaEdit } from 'react-icons/fa'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
 type User = {
@@ -12,7 +12,7 @@ type User = {
   avatarUrl: string
   role: 'ADMIN' | 'SUPERADMIN' | 'MEMBRO'
   ministryRole: string | null
-  cargo?: string | null
+  cargo?: string[]
 }
 
 const cargos = [
@@ -43,7 +43,7 @@ export default function UsuariosPage() {
 
   const [showModal, setShowModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [cargo, setCargo] = useState<string>('')
+  const [cargo, setCargo] = useState<string[]>([])
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -64,7 +64,18 @@ export default function UsuariosPage() {
         },
       })
       const data = await res.json()
-      setUsers(Array.isArray(data) ? data : [])
+      setUsers(
+        Array.isArray(data)
+          ? data.map((u) => ({
+              ...u,
+              cargo: Array.isArray(u.cargo)
+                ? u.cargo
+                : u.cargo
+                  ? [u.cargo]
+                  : [],
+            }))
+          : [],
+      )
       setLoading(false)
     }
     if (token) fetchUsers()
@@ -78,7 +89,7 @@ export default function UsuariosPage() {
       const res = await fetch(`/api/auth/cargo/${selectedUser.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cargo: cargo || null }),
+        body: JSON.stringify({ cargo }),
       })
       if (!res.ok) {
         const err = await res.json()
@@ -88,12 +99,10 @@ export default function UsuariosPage() {
       }
 
       setUsers((prev) =>
-        prev.map((u) =>
-          u.id === selectedUser.id ? { ...u, cargo: cargo || null } : u,
-        ),
+        prev.map((u) => (u.id === selectedUser.id ? { ...u, cargo } : u)),
       )
       setShowModal(false)
-      setCargo('')
+      setCargo([])
       setSelectedUser(null)
     } catch {
       setError('Erro de rede')
@@ -173,6 +182,18 @@ export default function UsuariosPage() {
       </div>
     )
 
+  const handleCargoCheckboxChange = (cargoSelecionado: string) => {
+    setCargo((cargosAtuais) => {
+      if (cargosAtuais.includes(cargoSelecionado)) {
+        // Se o cargo já está selecionado, remove-o
+        return cargosAtuais.filter((c) => c !== cargoSelecionado)
+      } else {
+        // Se não está selecionado, adiciona-o
+        return [...cargosAtuais, cargoSelecionado]
+      }
+    })
+  }
+
   return (
     <div className="mx-4 lg:mx-auto max-w-[1200px] min-h-screen mt-[160px] px-2">
       <h1 className="text-3xl font-bold mb-8 text-center text-primary dark:text-secundary">
@@ -228,8 +249,8 @@ export default function UsuariosPage() {
                     {u.login}
                   </td>
                   <td data-label="Cargo" className="py-2 ">
-                    {u.cargo ? (
-                      u.cargo.replace(/_/g, ' ')
+                    {Array.isArray(u.cargo) && u.cargo.length > 0 ? (
+                      u.cargo.map((c) => c.replace(/_/g, ' ')).join(', ')
                     ) : (
                       <span className="text-gray-400">Sem Cargo</span>
                     )}
@@ -237,7 +258,7 @@ export default function UsuariosPage() {
                       className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                       onClick={() => {
                         setSelectedUser(u)
-                        setCargo(u.cargo ?? '')
+                        setCargo(Array.isArray(u.cargo) ? u.cargo : [])
                         setShowModal(true)
                       }}
                       title="Editar cargo"
@@ -246,7 +267,7 @@ export default function UsuariosPage() {
                     </button>
                   </td>
                   <td data-label="Igreja" className="py-2 text-center ">
-                    {getIgrejaLabel(u.ministryRole || '') ?? null ?? (
+                    {getIgrejaLabel(u.ministryRole || '') ?? (
                       <span className="text-gray-400">Sem Igreja</span>
                     )}
                     <button
@@ -302,23 +323,36 @@ export default function UsuariosPage() {
                 {selectedUser.name}
               </span>
             </h2>
-            <select
-              className="input w-full mb-6 border rounded px-2 py-2"
-              value={cargo}
-              onChange={(e) => setCargo(e.target.value)}
-            >
-              <option value="">Sem cargo</option>
-              {cargos.map((c) => (
-                <option key={c} value={c}>
-                  {c.replace(/_/g, ' ')}
-                </option>
-              ))}
-            </select>
+
+            {/* LISTA DE CHECKBOXES SUBSTITUINDO O <SELECT> */}
+            <div className="w-full p-3 border rounded-lg border-gray-300 dark:border-gray-600 max-h-48 overflow-y-auto mb-6">
+              <div className="flex flex-col gap-2">
+                {cargos.map((c) => (
+                  <label
+                    key={c}
+                    className="flex items-center justify-between cursor-pointer p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/5"
+                  >
+                    <span className="text-textlight dark:text-textdark">
+                      {c.replace(/_/g, ' ')}
+                    </span>
+                    <input
+                      type="checkbox"
+                      value={c}
+                      checked={cargo.includes(c)}
+                      onChange={() => handleCargoCheckboxChange(c)}
+                      className="h-5 w-5 rounded border-gray-300 bg-gray-100 text-primary focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+
             {error && (
               <div className="text-red-600 text-sm mb-2 text-center">
                 {error}
               </div>
             )}
+
             <div className="flex gap-2 justify-center">
               <button
                 className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded font-bold shadow"
@@ -331,7 +365,7 @@ export default function UsuariosPage() {
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded font-bold"
                 onClick={() => {
                   setShowModal(false)
-                  setCargo('')
+                  setCargo([])
                   setSelectedUser(null)
                   setError(null)
                 }}

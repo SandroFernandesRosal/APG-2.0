@@ -77,7 +77,7 @@ export async function POST(req: Request) {
         avatarUrl,
         password: hashedPassword,
         role: role || 'MEMBRO',
-
+        cargo: [],
         ministryRole: ministryRole || null,
       },
     })

@@ -9,7 +9,7 @@ type User = {
   id: string
   name: string
   avatarUrl?: string
-  cargo?: string
+  cargo?: string[]
 }
 
 function LeaderCard({
@@ -33,9 +33,12 @@ function LeaderCard({
   }, [])
 
   // Filtra os usuários conforme o cargo, se necessário
+  // CÓDIGO CORRIGIDO ✅
   const filteredUsers = cargoFilter
     ? users.filter(
-        (user) => user.cargo && user.cargo.toUpperCase() === cargoFilter,
+        (user) =>
+          // Verifica se o array de cargos do utilizador INCLUI o cargo que estamos a filtrar
+          user.cargo && user.cargo.includes(cargoFilter),
       )
     : users
 
@@ -82,8 +85,15 @@ function LeaderCard({
             />
             <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 hidden group-hover:flex flex-col items-center">
               <span className="px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap shadow-lg">
-                {user.name} {user.name !== 'Desconhecido' && ' - '}{' '}
-                {user.cargo ? user.cargo.replace(/_/g, ' ') : ''}
+                {user.name} {user.name !== 'Desconhecido' && ' - '}
+                {user.cargo
+                  ? Array.isArray(user.cargo)
+                    ? // Se for um array, mapeia e junta
+                      user.cargo.map((c) => c.replace(/_/g, ' ')).join(', ')
+                    : // Se NÃO for um array (ou seja, é uma string), faz o replace normalmente
+                      user.cargo.replace(/_/g, ' ')
+                  : // Se não houver cargo, mostra um texto apropriado
+                    'Sem Cargo'}
               </span>
             </div>
           </div>
@@ -112,11 +122,13 @@ export default function MinisterioHeader() {
       .catch(() => setUsers([]))
   }, [])
 
-  // Para "equipes", mostra quem não é PASTOR, DIACONO ou PRESBITERO
   const cargosPrincipais = ['PASTOR', 'DIACONO', 'PRESBITERO']
+
   const equipeUsers = users.filter(
     (user) =>
-      !user.cargo || !cargosPrincipais.includes(user.cargo.toUpperCase()),
+      user.cargo &&
+      user.cargo.length > 0 &&
+      !user.cargo.some((c) => cargosPrincipais.includes(c)),
   )
 
   const transitionClasses = (delay: string) =>
@@ -189,7 +201,11 @@ export default function MinisterioHeader() {
                     <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 hidden group-hover:flex flex-col items-center">
                       <span className="px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap shadow-lg">
                         {user.name} {user.cargo !== null && ' - '}
-                        {user.cargo ? user.cargo.replace(/_/g, ' ') : ''}
+                        {user.cargo && user.cargo.length > 0
+                          ? user.cargo
+                              .map((c) => c.replace(/_/g, ' '))
+                              .join(', ')
+                          : 'Sem Cargo'}
                       </span>
                     </div>
                   </div>

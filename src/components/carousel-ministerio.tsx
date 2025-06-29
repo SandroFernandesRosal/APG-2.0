@@ -64,8 +64,13 @@ export default function CarouselMinisterio({
     setLocal(newLocal)
   }
 
+  // CÓDIGO CORRIGIDO ✅
   const filteredMinisterios = dataMinisterio
-    .filter((item: Ministerio) => !!item.cargo)
+    .filter(
+      (item: Ministerio) =>
+        // 1. GARANTE que o array de cargos existe E que o seu comprimento é maior que zero.
+        item.cargo && item.cargo.length > 0,
+    )
     .filter((item: Ministerio) => item.ministryRole === local.toUpperCase())
 
   const podeAdicionar =
@@ -172,8 +177,11 @@ export default function CarouselMinisterio({
                           {product.name}
                         </h3>
                         <p className="text-base text-primary dark:text-secundary font-semibold">
-                          {product.cargo
-                            ? product.cargo.replace(/_/g, ' ')
+                          {Array.isArray(product.cargo) &&
+                          product.cargo.length > 0
+                            ? product.cargo
+                                .map((c) => c.replace(/_/g, ' '))
+                                .join(', ')
                             : ''}
                         </p>
                         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -242,7 +250,7 @@ export default function CarouselMinisterio({
       {openEdit && selectedProduct && (
         <EditMinisterio
           nome={selectedProduct.name}
-          titulo={selectedProduct.cargo || ''}
+          titulo={selectedProduct.cargo}
           img={selectedProduct.avatarUrl || ''}
           lugar={selectedProduct.ministryRole || ''}
           id={selectedProduct.id}
