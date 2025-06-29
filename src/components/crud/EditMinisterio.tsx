@@ -4,7 +4,6 @@ import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent } from 'react'
 import { useToken } from '@/hooks/useToken'
-
 import Image from 'next/image'
 
 const CARGOS = [
@@ -32,7 +31,7 @@ interface EditMinisterioProps {
   id: string
   nome: string
   lugar: string
-  titulo: string
+  titulo: string[] | undefined
   img: string
   role?: string
 }
@@ -45,11 +44,23 @@ export default function EditMinisterio({
   img,
   role,
 }: EditMinisterioProps) {
-  const [title, setTitle] = useState<string>(titulo || '')
+  const [title, setTitle] = useState<string[]>(
+    titulo ? titulo.map((t: string) => t.trim()) : [],
+  )
   const [igreja, setIgreja] = useState<string>(role || '')
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
   const token = useToken()
+
+  const handleCargoChange = (cargoSelecionado: string) => {
+    if (title.includes(cargoSelecionado)) {
+      setTitle((cargosAtuais) =>
+        cargosAtuais.filter((c) => c !== cargoSelecionado),
+      )
+    } else {
+      setTitle((cargosAtuais) => [...cargosAtuais, cargoSelecionado])
+    }
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -62,7 +73,7 @@ export default function EditMinisterio({
           Authorization: token ? `Bearer ${token}` : '',
         },
         body: JSON.stringify({
-          cargo: title || '',
+          cargo: title,
           ministryRole: igreja || null,
         }),
       })
@@ -85,7 +96,7 @@ export default function EditMinisterio({
       className="fixed left-0 top-0 z-50 mt-10 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+      <div className="flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%] max-w-md gap-4">
         <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
           Editar Líder{' '}
           <AiFillCloseCircle
@@ -108,40 +119,59 @@ export default function EditMinisterio({
           />
         </label>
 
-        <div className="input mt-4 text-textlight dark:text-textdark font-bold text-lg text-center cursor-not-allowed bg-gray-100 dark:bg-gray-800 mb-2">
+        <div className="input mt-4 text-textlight dark:text-textdark font-bold text-lg text-center cursor-not-allowed bg-gray-100 dark:bg-gray-800 w-[90%]">
           {nome}
         </div>
 
-        {/* Select de cargo */}
-        <select
-          className="input text-textlight dark:text-textdark"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        >
-          <option value="">Sem cargo</option>
-          {CARGOS.map((cargo) => (
-            <option key={cargo} value={cargo}>
-              {cargo.replace(/_/g, ' ')}
-            </option>
-          ))}
-        </select>
+        {/* Grupo de Checkboxes para Cargos */}
+        <div className="w-[90%] p-3 border rounded-lg border-gray-300 dark:border-gray-600 max-h-48 overflow-y-auto">
+          <p className="font-bold text-sm mb-2 text-textlight dark:text-textdark">
+            Cargos:
+          </p>
+          <div className="flex flex-col gap-2">
+            {CARGOS.map((cargo) => (
+              <label
+                key={cargo}
+                className="flex items-center justify-between cursor-pointer text-textlight dark:text-textdark p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/5"
+              >
+                <span>{cargo.replace(/_/g, ' ')}</span>
+                <input
+                  type="checkbox"
+                  value={cargo}
+                  checked={title.includes(cargo)}
+                  onChange={() => handleCargoChange(cargo)}
+                  className="h-5 w-5 rounded border-gray-300 bg-gray-100 text-primary focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+              </label>
+            ))}
+          </div>
+        </div>
 
-        {/* Select de igreja/ministryRole */}
-        <select
-          className="input text-textlight dark:text-textdark mt-2"
-          name="igreja"
-          value={igreja}
-          onChange={(e) => setIgreja(e.target.value)}
-          disabled={token?.role !== 'SUPERADMIN'}
-        >
-          <option value="">Sem igreja</option>
-          {IGREJAS.map((igreja) => (
-            <option key={igreja.key} value={igreja.key}>
-              {igreja.label}
-            </option>
-          ))}
-        </select>
+        {/* Grupo de Botões de Rádio para Igreja */}
+        <div className="w-[90%] p-3 border rounded-lg border-gray-300 dark:border-gray-600">
+          <p className="font-bold text-sm mb-2 text-textlight dark:text-textdark">
+            Igreja:
+          </p>
+          <div className="flex flex-col gap-2">
+            {IGREJAS.map((ig) => (
+              <label
+                key={ig.key}
+                className={`flex items-center justify-between cursor-pointer text-textlight dark:text-textdark p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/5 ${token?.role !== 'SUPERADMIN' ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <span>{ig.label}</span>
+                <input
+                  type="radio"
+                  name="igreja"
+                  value={ig.key}
+                  checked={igreja === ig.key}
+                  onChange={(e) => setIgreja(e.target.value)}
+                  disabled={token?.role !== 'SUPERADMIN'}
+                  className="h-5 w-5 border-gray-300 bg-gray-100 text-primary focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+              </label>
+            ))}
+          </div>
+        </div>
 
         <button
           type="submit"

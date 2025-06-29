@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { CargoRole } from '@/app/generated/prisma'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -10,24 +11,17 @@ const paramsSchema = z.object({
 const bodySchema = z.object({
   cargo: z
     .union([
-      z.enum([
-        'PASTOR',
-        'DIACONO',
-        'PRESBITERO',
-        'EVANGELISTA',
-        'MISSIONARIO',
-        'SECRETARIO',
-        'TESOUREIRO',
-        'PASTOR_PRESIDENTE',
-        'PASTOR_DIRIGENTE',
-        'MUSICO',
-        'AUXILIAR',
-      ]),
+      z.array(z.nativeEnum(CargoRole)), // Aceita um array de cargos
+      z.nativeEnum(CargoRole), // Aceita um único cargo
       z.literal(''),
       z.null(),
       z.undefined(),
     ])
-    .transform((val) => (val === '' || val === undefined ? null : val)),
+    .transform((val) => {
+      if (Array.isArray(val)) return val // Se já for um array, ótimo.
+      if (!val) return [] // Se for null, undefined ou '', transforma num array vazio.
+      return [val] // Se for um valor único, envolve-o num array.
+    }),
   ministryRole: z
     .union([
       z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),

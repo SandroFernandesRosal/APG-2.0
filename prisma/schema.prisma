@@ -52,7 +52,7 @@ model User {
   doacao              Doacao[]
   endereco            Endereco[]
   ministerio          Ministerio[]
-  cargo              CargoRole?
+  cargo              CargoRole[]
   news                New[]
   PasswordResetToken  PasswordResetToken[]
   refreshToken        RefreshToken[]

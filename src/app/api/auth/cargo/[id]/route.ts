@@ -8,28 +8,35 @@ const paramsSchema = z.object({
   id: z.string().uuid(),
 })
 
+const cargoEnum = z.enum([
+  'PASTOR',
+  'DIACONO',
+  'PRESBITERO',
+  'EVANGELISTA',
+  'MISSIONARIO',
+  'SECRETARIO',
+  'TESOUREIRO',
+  'PASTOR_PRESIDENTE',
+  'PASTOR_DIRIGENTE',
+  'MUSICO',
+  'AUXILIAR',
+])
+
 // Schema para validar o cargo enviado no corpo da requisição
 const bodySchema = z.object({
   cargo: z
     .union([
-      z.enum([
-        'PASTOR',
-        'DIACONO',
-        'PRESBITERO',
-        'EVANGELISTA',
-        'MISSIONARIO',
-        'SECRETARIO',
-        'TESOUREIRO',
-        'PASTOR_PRESIDENTE',
-        'PASTOR_DIRIGENTE',
-        'MUSICO',
-        'AUXILIAR',
-      ]),
+      z.array(cargoEnum), // 1. Tenta validar como um array de cargos.
+      cargoEnum, // 2. Tenta validar como um único cargo (string).
       z.literal(''),
       z.null(),
       z.undefined(),
     ])
-    .transform((val) => (val === '' || val === undefined ? null : val)),
+    .transform((val) => {
+      if (Array.isArray(val)) return val // Se já for um array, mantém-no.
+      if (!val) return [] // Se for null, undefined ou '', retorna um array vazio.
+      return [val] // Se for um valor único, transforma-o num array.
+    }),
 })
 
 export async function PUT(

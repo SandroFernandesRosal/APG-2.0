@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import bcrypt from 'bcrypt'
 import { authMiddleware } from '@/lib/auth'
+import { CargoRole } from '@/app/generated/prisma'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -61,6 +62,7 @@ export async function PUT(
     ministryRole: z
       .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
       .optional(),
+    cargo: z.array(z.nativeEnum(CargoRole)).optional(),
   })
 
   try {
@@ -86,7 +88,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
     }
 
-    const { name, avatarUrl, password, ministryRole } = bodySchema.parse(
+    const { name, avatarUrl, password, ministryRole, cargo } = bodySchema.parse(
       await req.json(),
     )
 
@@ -99,6 +101,7 @@ export async function PUT(
         avatarUrl,
         password: hashedPassword,
         ministryRole: ministryRole || null,
+        cargo: cargo || [],
       },
     })
 
