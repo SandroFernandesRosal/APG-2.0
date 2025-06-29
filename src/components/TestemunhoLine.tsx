@@ -109,35 +109,36 @@ export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
           </div>
         )}
 
-        {token?.role === 'MEMBRO' && (
-          <>
-            {qtdAguardandoAprovacao > 0 && (
-              <div className="my-4 mx-5 rounded border border-primary dark:border-secundary bg-bglightsecundary dark:bg-bgdarksecundary p-4">
-                Você tem {qtdAguardandoAprovacao} testemunho
-                {qtdAguardandoAprovacao > 1 ? 's' : ''} aguardando aprovação de
-                um administrador.
-              </div>
-            )}
+        {token?.role === 'MEMBRO' ||
+          (token?.role === 'ADMIN' && (
+            <>
+              {qtdAguardandoAprovacao > 0 && (
+                <div className="my-4 mx-5 rounded border border-primary dark:border-secundary bg-bglightsecundary dark:bg-bgdarksecundary p-4">
+                  Você tem {qtdAguardandoAprovacao} testemunho
+                  {qtdAguardandoAprovacao > 1 ? 's' : ''} aguardando aprovação
+                  de um administrador.
+                </div>
+              )}
 
-            {open === false && (
-              <button className="button" onClick={() => setOpen(true)}>
-                Adicionar testemunho
-              </button>
-            )}
+              {open === false && (
+                <button className="button" onClick={() => setOpen(true)}>
+                  Adicionar testemunho
+                </button>
+              )}
 
-            {open && (
-              <div className="md:min-w-[35%]">
-                <AddTestemunho
-                  userIgreja={{
-                    ...userIgreja,
-                    avatarUrl: userIgreja.avatarUrl || '',
-                  }}
-                  setOpen={setOpen}
-                />
-              </div>
-            )}
-          </>
-        )}
+              {open && (
+                <div className="md:min-w-[35%]">
+                  <AddTestemunho
+                    userIgreja={{
+                      ...userIgreja,
+                      avatarUrl: userIgreja.avatarUrl || '',
+                    }}
+                    setOpen={setOpen}
+                  />
+                </div>
+              )}
+            </>
+          ))}
 
         {!loading ? (
           Array.isArray(dataTestemunho) && dataTestemunho.length > 0 ? (

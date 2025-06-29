@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { useDataMinisterio, useLocal, useSearch } from '@/store/useStore'
 import ItemMinisterio from './item-ministerio'
 import SkeletonNew from './skeleton/SkeletonNew'
-import { Ministerioo } from '@/data/types/ministerio'
+import { Ministerio } from '@/data/types/ministerio'
 
-export default function Ministerio() {
+export default function Ministerioo() {
   const { dataMinisterio, setDataMinisterio } = useDataMinisterio()
   const { search } = useSearch()
   const { local } = useLocal()
@@ -43,7 +43,7 @@ export default function Ministerio() {
       if (!response.ok) throw new Error('Erro ao carregar mais usuários')
       const data = await response.json()
       if (Array.isArray(data) && data.length > 0) {
-        setDataMinisterio((prevData: Ministerioo[]) => [...prevData, ...data])
+        setDataMinisterio((prevData: Ministerio[]) => [...prevData, ...data])
         setOffset(newOffset)
       }
       setHasMore(data.length === itemsPerPage)
@@ -55,7 +55,7 @@ export default function Ministerio() {
   // Filtro por igreja/local
   const filteredUsuarios = Array.isArray(dataMinisterio)
     ? dataMinisterio.filter(
-        (item: Ministerioo) =>
+        (item: Ministerio) =>
           !local || item.ministryRole === local.toUpperCase(),
       )
     : []
@@ -73,7 +73,7 @@ export default function Ministerio() {
 
       <div className="flex justify-center gap-5 flex-wrap w-full">
         {!loading
-          ? filteredUsuarios.map((user: Ministerioo) => (
+          ? filteredUsuarios.map((user: Ministerio) => (
               <ItemMinisterio
                 id={user.id}
                 key={user.id}
