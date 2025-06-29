@@ -2,7 +2,7 @@
 import { useToken } from '@/hooks/useToken'
 import { useState } from 'react'
 import Image from 'next/image'
-import { Ministerioo } from '@/data/types/ministerio'
+import { Ministerio } from '@/data/types/ministerio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
@@ -13,7 +13,7 @@ export default function ItemMinisterio({
   name,
   ministryRole,
   avatarUrl,
-}: Ministerioo) {
+}: Ministerio) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [showRemove, setShowRemove] = useState(false)
   const token = useToken()
