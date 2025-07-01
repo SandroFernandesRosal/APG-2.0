@@ -36,7 +36,7 @@ export default function ItemTestemunho({
 
   return (
     <div className="flex w-full flex-col items-start gap-3 px-6 py-4 md:flex-row md:justify-center">
-      <div className="flex w-full flex-col gap-2 rounded-2xl bg-bglightsecundary shadow-light dark:bg-bgdarksecundary md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
+      <div className="flex w-full flex-col gap-2 rounded-2xl bg-white shadow-light dark:bg-slate-800 md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
         <div className="flex flex-col  gap-5 p-3 ">
           <div className="flex items-center  md:justify-between">
             <div className="flex items-center gap-4 ">
