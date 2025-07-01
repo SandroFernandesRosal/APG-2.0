@@ -123,7 +123,7 @@ export default function Footer() {
         {/* Redes sociais rápidas */}
         <div className="flex gap-4 mb-2">
           <a
-            href="https://www.instagram.com"
+            href="https://www.instagram.com/apgviladapenha"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -142,7 +142,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.facebook.com"
+            href="https://www.facebook.com/apgviladapenha"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -157,7 +157,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://wa.me/5521999999999"
+            href="https://wa.me/5521967514085"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
