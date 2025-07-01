@@ -43,7 +43,7 @@ function LocationCard({
 
 export default function EnderecosHeader() {
   return (
-    <section className="w-full bg-gray-50 dark:bg-gray-900/70 py-16 md:py-24">
+    <section className="w-full  dark:bg-bgdark pb-16 bg-bglight">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
         {/* Coluna de Texto */}
         <div className="flex flex-col">

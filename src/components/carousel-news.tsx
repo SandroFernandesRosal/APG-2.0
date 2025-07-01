@@ -249,6 +249,7 @@ export default function CarouselNews({
             </div>
           )}
         </div>
+        <div className="border-t-[1px] border-zinc-300 dark:border-zinc-800 w-[70%] mx-auto mt-16"></div>
       </section>
 
       {showModal && selectedProduct && <RemoveNew id={selectedProduct.id} />}
