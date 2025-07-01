@@ -269,6 +269,7 @@ export default function CarouselDoacao() {
             </div>
           )}
         </div>
+        <div className="border-t-[1px] border-zinc-300 dark:border-zinc-800 w-[70%] mx-auto mt-16"></div>
       </section>
 
       {showModal && selectedProduct && <RemoveDoacao id={selectedProduct.id} />}

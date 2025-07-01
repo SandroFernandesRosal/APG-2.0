@@ -46,7 +46,7 @@ function TestimonyThemeCard({
 
 export default function TestemunhosHeader() {
   return (
-    <section className="w-full bg-gray-50 dark:bg-gray-900/70 py-16 md:py-24">
+    <section className="w-full bg-bglight dark:bg-bgdark py-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
         {/* Coluna de Texto */}
         <div className="flex flex-col">

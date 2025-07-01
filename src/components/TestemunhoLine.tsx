@@ -96,17 +96,23 @@ export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
     <div className="flex flex-col items-center self-center mb-4 w-full">
       <section className="mb-8 flex w-full flex-col items-center pb-4 md:rounded-xl">
         {!token && (
-          <div className="flex w-full flex-wrap items-end justify-center gap-1">
-            Faça
-            <Link href={'/login/igreja'} className="button">
+          <p className="w-full text-center text-base text-gray-600 dark:text-gray-300">
+            <span>Faça </span>
+            <Link
+              href="/login"
+              className="mx-1 font-semibold text-indigo-600 transition-colors hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-200"
+            >
               login
-            </Link>{' '}
-            ou{' '}
-            <Link href={'/register'} className="button">
+            </Link>
+            <span> ou </span>
+            <Link
+              href="/register"
+              className="mx-1 font-semibold text-indigo-600 transition-colors hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-200"
+            >
               Registre-se
             </Link>
-            e envie seu testemunho.
-          </div>
+            <span> e envie seu testemunho.</span>
+          </p>
         )}
 
         {token?.role === 'MEMBRO' ||

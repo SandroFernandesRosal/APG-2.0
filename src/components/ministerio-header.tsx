@@ -135,7 +135,7 @@ export default function MinisterioHeader() {
     `transition-all duration-500 ease-out ${delay} ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`
 
   return (
-    <section className="w-full bg-gray-50 dark:bg-gray-900/70 py-16 md:py-24">
+    <section className="w-full bg-bglight dark:bg-bgdark pb-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
         {/* Coluna de Texto */}
         <div className="flex flex-col">
