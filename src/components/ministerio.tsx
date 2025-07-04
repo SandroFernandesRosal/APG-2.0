@@ -52,13 +52,8 @@ export default function Ministerioo() {
     }
   }
 
-  // CÓDIGO CORRIGIDO ✅
   const filteredUsuarios = dataMinisterio
-    .filter(
-      (item: Ministerio) =>
-        // 1. GARANTE que o array de cargos existe E que o seu comprimento é maior que zero.
-        item.cargo && item.cargo.length > 0,
-    )
+    .filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
     .filter((item: Ministerio) => item.ministryRole === local.toUpperCase())
 
   return (

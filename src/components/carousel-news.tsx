@@ -160,7 +160,7 @@ export default function CarouselNews({
                   }
                   return (
                     <div key={product.id} className="p-2">
-                      <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative">
+                      <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800">
                         <div className="h-48 relative overflow-hidden">
                           <Image
                             src={product.coverUrl}

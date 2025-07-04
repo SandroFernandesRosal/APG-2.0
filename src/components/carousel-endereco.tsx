@@ -168,7 +168,7 @@ export default function CarouselEndereco() {
                   const coords = coordinates[product.id]
                   return (
                     <div key={product.id} className="p-2">
-                      <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-auto min-h-[450px] overflow-hidden group relative">
+                      <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-auto min-h-[450px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800">
                         {podeGerenciar && (
                           <div className="absolute top-2 right-2 flex gap-2 z-[1001]">
                             <button

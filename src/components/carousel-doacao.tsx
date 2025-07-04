@@ -150,9 +150,8 @@ export default function CarouselDoacao() {
                 {data.map((product: Doacao) => (
                   <div
                     key={product.id}
-                    className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 min-h-[420px]  w-full p-0 overflow-hidden group transition-all"
+                    className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-lg border border-zinc-300 dark:border-zinc-800 min-h-[420px]  w-full p-0 overflow-hidden group transition-all"
                   >
-                    {/* Botões flutuantes no canto superior direito */}
                     {podeGerenciar && (
                       <div className="absolute top-3 right-3 flex gap-2 z-20">
                         <button
@@ -201,7 +200,6 @@ export default function CarouselDoacao() {
                       </div>
                     )}
 
-                    {/* Badge da igreja */}
                     <div className="flex items-center gap-2 mt-6 mb-2 px-6">
                       <Church className="w-7 h-7 text-primary dark:text-secundary" />
                       <span className="bg-primary/90 dark:bg-secundary/80 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
@@ -209,7 +207,6 @@ export default function CarouselDoacao() {
                       </span>
                     </div>
 
-                    {/* Dados bancários */}
                     <div className="flex flex-col gap-2 px-6">
                       <div className="flex items-center gap-2 text-base">
                         <Landmark className="w-5 h-5 text-primary dark:text-secundary" />
@@ -232,7 +229,6 @@ export default function CarouselDoacao() {
                       </div>
                     </div>
 
-                    {/* PIX destacado */}
                     <div className="flex flex-col items-center justify-center bg-gradient-to-r from-primary/10 via-white to-secundary/10 dark:from-bgdarksecundary dark:via-slate-800 dark:to-bgdark p-4 mt-4 rounded-b-2xl">
                       <span className="font-bold flex items-center gap-2 text-lg text-primary dark:text-secundary mb-1">
                         <KeyRound className="w-6 h-6" /> Chave PIX
@@ -259,7 +255,6 @@ export default function CarouselDoacao() {
                       </span>
                     </div>
 
-                    {/* Mensagem de agradecimento */}
                     <div className="absolute bottom-3 right-4 text-xs text-gray-400">
                       Obrigado por contribuir!
                     </div>

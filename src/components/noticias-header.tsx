@@ -1,10 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-// Importamos ícones relevantes para as categorias de notícias
+
 import { Megaphone, CalendarCheck, Users, BookMarked } from 'lucide-react'
 
-// Componente para os cartões de categoria
 function NewsCategoryCard({
   icon,
   title,
@@ -25,9 +24,9 @@ function NewsCategoryCard({
 
   return (
     <div
-      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses}`}
+      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses} border-[1px] border-zinc-300 dark:border-zinc-800`}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 ">
         <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">
           {icon}
         </div>
@@ -48,7 +47,6 @@ export default function NoticiasHeader() {
   return (
     <section className="w-full bg-bglight dark:bg-bgdark py-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
-        {/* Coluna de Texto */}
         <div className="flex flex-col">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
             Fique por Dentro de{' '}
@@ -66,7 +64,6 @@ export default function NoticiasHeader() {
           </div>
         </div>
 
-        {/* Coluna com os Cartões de Categorias */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <NewsCategoryCard
             icon={<Megaphone className="w-6 h-6" />}
