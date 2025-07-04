@@ -54,7 +54,6 @@ export default function CarouselAgenda({ title }: { title: string }) {
   const podeAdicionar =
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
 
-  // CORRIGIDO: Todos veem as agendas do local selecionado
   const filteredAgenda = dataAgenda.filter(
     (item: Agenda) => item.role?.toUpperCase() === local.toUpperCase(),
   )
@@ -146,7 +145,9 @@ export default function CarouselAgenda({ title }: { title: string }) {
             <div className="w-full mt-5">
               <Slider {...settings}>
                 {filteredAgenda.map((product: Agenda) => {
-                  const [dia, mes] = product.day.split(' ')
+                  const dataBR = new Date(product.day).toLocaleDateString(
+                    'pt-BR',
+                  )
                   return (
                     <div key={product.id} className="p-3">
                       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[450px] overflow-hidden group relative flex-col border-[1px] border-zinc-300 dark:border-zinc-800 ">
@@ -199,12 +200,10 @@ export default function CarouselAgenda({ title }: { title: string }) {
                         )}
 
                         <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
-                          <div className="bg-primary text-white text-sm font-semibold py-1">
-                            {mes?.substring(0, 3).toUpperCase()}
-                          </div>
+                          <div className="bg-primary text-white text-sm font-semibold py-1"></div>
                           <div className="flex-grow flex items-center justify-center">
                             <span className="text-xl font-bold text-gray-700 dark:text-gray-200">
-                              {dia}
+                              {dataBR}
                             </span>
                           </div>
                         </div>
