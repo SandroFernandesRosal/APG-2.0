@@ -32,17 +32,10 @@ function LeaderCard({
     setIsMounted(true)
   }, [])
 
-  // Filtra os usuários conforme o cargo, se necessário
-  // CÓDIGO CORRIGIDO ✅
   const filteredUsers = cargoFilter
-    ? users.filter(
-        (user) =>
-          // Verifica se o array de cargos do utilizador INCLUI o cargo que estamos a filtrar
-          user.cargo && user.cargo.includes(cargoFilter),
-      )
+    ? users.filter((user) => user.cargo && user.cargo.includes(cargoFilter))
     : users
 
-  // Se não houver usuários, mostra avatar padrão
   const displayUsers =
     filteredUsers.length > 0
       ? filteredUsers
@@ -59,7 +52,7 @@ function LeaderCard({
 
   return (
     <div
-      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 flex flex-col justify-between ${transitionClasses}`}
+      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 flex flex-col justify-between ${transitionClasses} border-zinc-300 dark:border-zinc-800`}
     >
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">
@@ -88,12 +81,9 @@ function LeaderCard({
                 {user.name} {user.name !== 'Desconhecido' && ' - '}
                 {user.cargo
                   ? Array.isArray(user.cargo)
-                    ? // Se for um array, mapeia e junta
-                      user.cargo.map((c) => c.replace(/_/g, ' ')).join(', ')
-                    : // Se NÃO for um array (ou seja, é uma string), faz o replace normalmente
-                      user.cargo.replace(/_/g, ' ')
-                  : // Se não houver cargo, mostra um texto apropriado
-                    'Sem Cargo'}
+                    ? user.cargo.map((c) => c.replace(/_/g, ' ')).join(', ')
+                    : user.cargo.replace(/_/g, ' ')
+                  : 'Sem Cargo'}
               </span>
             </div>
           </div>
@@ -137,7 +127,6 @@ export default function MinisterioHeader() {
   return (
     <section className="w-full bg-bglight dark:bg-bgdark pb-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
-        {/* Coluna de Texto */}
         <div className="flex flex-col">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
             Liderança que Inspira,{' '}
@@ -153,7 +142,6 @@ export default function MinisterioHeader() {
           </p>
         </div>
 
-        {/* Coluna com os Cartões de Liderança */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <LeaderCard
             icon={<Users className="w-6 h-6" />}
@@ -179,7 +167,7 @@ export default function MinisterioHeader() {
             delay="delay-300"
             cargoFilter="PRESBITERO"
           />
-          {/* --- ALTERAÇÃO AQUI --- */}
+
           <div
             className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 flex flex-col justify-between ${transitionClasses('delay-400')}`}
           >
