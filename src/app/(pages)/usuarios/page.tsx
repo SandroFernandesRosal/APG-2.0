@@ -295,7 +295,9 @@ export default function UsuariosPage() {
                       {u.role}
                     </span>
                     <button
-                      className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                        token?.role !== 'SUPERADMIN' && 'hidden'
+                      }`}
                       onClick={() => {
                         setSelectedUser(u)
                         setFuncao(u.role === 'ADMIN' ? 'ADMIN' : 'MEMBRO')
