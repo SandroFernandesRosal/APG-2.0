@@ -25,7 +25,7 @@ function TestimonyThemeCard({
 
   return (
     <div
-      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses}`}
+      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses} border-[1px] border-zinc-300 dark:border-zinc-800`}
     >
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">

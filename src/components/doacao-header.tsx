@@ -1,9 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
-// Importamos ícones relevantes para os tipos de contribuição
+
 import { Landmark, HandHeart, Globe, HelpingHand } from 'lucide-react'
 
-// Componente para os cartões de contribuição
 function ContributionCard({
   icon,
   title,
@@ -24,7 +23,7 @@ function ContributionCard({
 
   return (
     <div
-      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses}`}
+      className={`bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 ${transitionClasses} border-[1px] border-zinc-300 dark:border-zinc-800`}
     >
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">
@@ -47,7 +46,6 @@ export default function DoacaoHeader() {
   return (
     <section className="w-full bg-bglight dark:bg-bgdark pb-16 ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-6">
-        {/* Coluna de Texto */}
         <div className="flex flex-col">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
             Sua Generosidade{' '}
@@ -66,7 +64,6 @@ export default function DoacaoHeader() {
           </blockquote>
         </div>
 
-        {/* Coluna com os Cartões de Contribuição */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <ContributionCard
             icon={<Landmark className="w-6 h-6" />}

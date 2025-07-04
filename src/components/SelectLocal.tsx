@@ -58,7 +58,7 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
         </div>
         <button
           type="button"
-          className="inline-flex  justify-center items-center gap-x-2 rounded-full bg-white dark:bg-slate-800 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700"
+          className="inline-flex  justify-center items-center gap-x-2 rounded-full bg-white dark:bg-slate-800 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-800 hover:bg-gray-50 dark:hover:bg-slate-700"
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -72,14 +72,13 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
         </button>
       </div>
 
-      {/* O menu dropdown que aparece/desaparece */}
       <div
-        className={`absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 ${isOpen ? 'transform opacity-100 scale-100' : 'transform opacity-0 scale-95'}`}
+        className={`absolute z-50 right-0  mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 ${isOpen ? 'transform opacity-100 scale-100' : 'transform opacity-0 scale-95'}`}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
         tabIndex={-1}
-        style={{ display: isOpen ? 'block' : 'none' }} // Garante que não ocupa espaço quando fechado
+        style={{ display: isOpen ? 'block' : 'none' }}
       >
         <div className="py-1" role="none">
           {ROLES.map((role) => (
@@ -93,7 +92,7 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
             >
               <span className="flex items-center justify-between">
                 {role.label}
-                {/* Mostra um ícone de 'check' no item selecionado */}
+
                 {local === role.key && (
                   <Check className="h-5 w-5 text-primary dark:text-secundary" />
                 )}

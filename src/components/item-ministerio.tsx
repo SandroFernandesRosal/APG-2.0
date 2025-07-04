@@ -24,7 +24,7 @@ export default function ItemMinisterio({
       (token.role === 'ADMIN' && token.ministryRole === ministryRole))
 
   return (
-    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] w-[47%] max-w-[300px] overflow-hidden group relative items-center justify-center">
+    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] w-[47%] max-w-[300px] overflow-hidden group relative items-center justify-center border-[1px] border-zinc-300 dark:border-zinc-800">
       <div className="h-3/5 relative  flex items-center justify-center">
         <Image
           src={avatarUrl || '/img/Placeholder.png'}
@@ -35,7 +35,8 @@ export default function ItemMinisterio({
           className="relative z-10 h-40 w-40 object-cover object-center rounded-full border-4 border-primary mx-auto mt-6 p-1 dark:border-secundary group-hover:scale-105 transition-transform duration-300"
         />
       </div>
-      <div className="p-4 flex flex-col flex-grow text-center items-center justify-center">
+      <div className="border-b-[1px] border-zinc-300 dark:border-zinc-800 w-[70%] mx-auto"></div>
+      <div className="p-4 flex flex-col flex-grow text-center items-center justify-around ">
         <h3 className="text-xl font-bold text-gray-800 dark:text-white">
           {name}
         </h3>

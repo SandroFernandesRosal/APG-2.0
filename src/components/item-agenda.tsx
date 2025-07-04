@@ -17,12 +17,10 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
     (token.role === 'SUPERADMIN' ||
       (token.role === 'ADMIN' && token.ministryRole === role))
 
-  // Extrai dia e mês do campo day (esperado: "12 Junho")
   const [dia, mes] = day.split(' ')
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[400px] overflow-hidden group relative flex-col w-[47%] max-w-[300px]">
-      {/* Coluna da Data */}
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[400px] overflow-hidden group relative flex-col w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800">
       <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
         <div className="bg-primary text-white text-sm font-semibold py-1">
           {mes?.substring(0, 3).toUpperCase()}
@@ -34,7 +32,6 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
         </div>
       </div>
 
-      {/* Coluna dos Detalhes */}
       <div className="p-4 flex flex-col w-full h-full flex-1 justify-around">
         <h3 className="text-lg font-bold text-gray-800 dark:text-white">
           {name}
@@ -51,7 +48,6 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
         </div>
       </div>
 
-      {/* Botões de Admin (flutuantes no canto superior direito) */}
       {podeGerenciar && (
         <div className="absolute top-2 right-2 flex gap-2 z-10">
           <button

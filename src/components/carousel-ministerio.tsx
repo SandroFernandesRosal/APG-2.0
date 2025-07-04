@@ -64,13 +64,8 @@ export default function CarouselMinisterio({
     setLocal(newLocal)
   }
 
-  // CÓDIGO CORRIGIDO ✅
   const filteredMinisterios = dataMinisterio
-    .filter(
-      (item: Ministerio) =>
-        // 1. GARANTE que o array de cargos existe E que o seu comprimento é maior que zero.
-        item.cargo && item.cargo.length > 0,
-    )
+    .filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
     .filter((item: Ministerio) => item.ministryRole === local.toUpperCase())
 
   const podeAdicionar =
@@ -161,7 +156,7 @@ export default function CarouselMinisterio({
               <Slider {...settings}>
                 {filteredMinisterios.map((product: Ministerio) => (
                   <div key={product.id} className="p-2">
-                    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative">
+                    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl border-[1px] border-zinc-300 dark:border-zinc-800 transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative">
                       <div className="h-3/5 relative overflow-hidden flex items-center justify-center">
                         <Image
                           src={product.avatarUrl || '/img/Placeholder.png'}
@@ -172,7 +167,8 @@ export default function CarouselMinisterio({
                           className="relative z-10 h-40 w-40 object-cover object-center rounded-full border-4 border-primary mx-auto mt-6 p-1 dark:border-secundary group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
-                      <div className="p-4 flex flex-col flex-grow text-center items-center justify-center">
+                      <div className="border-b-[1px] border-zinc-300 dark:border-zinc-800 w-[70%] mx-auto"></div>
+                      <div className="p-4 flex flex-col flex-grow text-center items-center justify-around">
                         <h3 className="text-xl font-bold text-gray-800 dark:text-white">
                           {product.name}
                         </h3>

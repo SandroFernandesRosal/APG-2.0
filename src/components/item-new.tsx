@@ -38,7 +38,7 @@ export default function ItemNew({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative w-[47%] max-w-[300px]">
+    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800">
       <div className="h-48 relative overflow-hidden">
         <Link
           href={`/noticias/${page}/${url}`}

@@ -149,9 +149,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                   const [dia, mes] = product.day.split(' ')
                   return (
                     <div key={product.id} className="p-3">
-                      {/* --- NOVO DESIGN CRIATIVO DO CARTÃO DE AGENDA --- */}
-                      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[450px] overflow-hidden group relative flex-col ">
-                        {/* Botões de Admin (flutuantes no canto superior direito) */}
+                      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[450px] overflow-hidden group relative flex-col border-[1px] border-zinc-300 dark:border-zinc-800 ">
                         {podeEditarRemover(product) && (
                           <div className="absolute top-2 right-2 flex gap-2 z-10">
                             <button
@@ -199,7 +197,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                             </button>
                           </div>
                         )}
-                        {/* Coluna da Data */}
+
                         <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
                           <div className="bg-primary text-white text-sm font-semibold py-1">
                             {mes?.substring(0, 3).toUpperCase()}
@@ -210,7 +208,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                             </span>
                           </div>
                         </div>
-                        {/* Coluna dos Detalhes */}
+
                         <div className="p-4 flex flex-col w-full h-full flex-1 justify-around">
                           <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                             {product.name}
