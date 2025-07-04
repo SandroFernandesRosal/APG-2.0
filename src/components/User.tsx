@@ -42,10 +42,16 @@ export default async function UserComponent() {
             </p>
             <span className="text-sm">({role})</span>
           </div>
-          <div className="flex items-center md:hidden">
-            <Link href={'/perfil'} className="button mr-2 !mb-0">
+          <div className="flex items-center md:hidden gap-2 flex-wrap justify-center mx-1 mt-2">
+            <Link href={'/perfil'} className="button  !mb-0">
               Perfil
             </Link>
+
+            {(role === 'SUPERADMIN' || role === 'ADMIN') && (
+              <Link href={'/usuarios'} className="button !mb-0">
+                Usuários
+              </Link>
+            )}
             <Logout />
             <div className="m-2 flex md:hidden">
               <ChangeTheme />
