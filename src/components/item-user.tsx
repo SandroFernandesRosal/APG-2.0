@@ -31,21 +31,29 @@ export default function ItemUser({ avatarUrl, name, role }: userProps) {
       </div>
 
       {open && (
-        <div className="flex items-center p-5 absolute top-16 right-5 bg-bglightsecundary dark:bg-bgdarksecundary z-30 rounded-md gap-2 border-[1px] border-zinc-300 dark:border-zinc-700 cursor-pointer">
+        <div className="flex flex-col items-center p-5 absolute top-20 right-[15%] lg:right-[20%] bg-bglightsecundary dark:bg-bgdarksecundary z-30 rounded-md gap-2 border-[1px] border-zinc-300 dark:border-zinc-700 cursor-pointer">
           <X
             className="text-primary dark:text-secundary cursor-pointer hover:text-secundary/50 dark:hover:text-primary/50"
             onClick={() => setOpen(!open)}
           />
           <p className="text-lg font-bold text-black dark:text-white">{name}</p>{' '}
-          <span className="text-sm text-textlight dark:text:textdark">
+          <span className="text-sm text-textlight dark:text-textdark">
             ({role})
           </span>
           <Link
             href={'/perfil'}
-            className="rounded-md mx-2 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold"
+            className="rounded-md mx-2 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white   px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold w-[100px] text-center"
           >
             Perfil
           </Link>
+          {(role === 'SUPERADMIN' || role === 'ADMIN') && (
+            <Link
+              href={'/usuarios'}
+              className="button !mb-0 w-[100px] text-center"
+            >
+              Usuários
+            </Link>
+          )}
           <Logout />
           <div className="m-2 flex md:hidden">
             <ChangeTheme />
