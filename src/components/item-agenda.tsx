@@ -17,17 +17,15 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
     (token.role === 'SUPERADMIN' ||
       (token.role === 'ADMIN' && token.ministryRole === role))
 
-  const [dia, mes] = day.split(' ')
+  const dataBR = new Date(day).toLocaleDateString('pt-BR')
 
   return (
     <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[400px] overflow-hidden group relative flex-col w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800">
       <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
-        <div className="bg-primary text-white text-sm font-semibold py-1">
-          {mes?.substring(0, 3).toUpperCase()}
-        </div>
+        <div className="bg-primary text-white text-sm font-semibold py-1"></div>
         <div className="flex-grow flex items-center justify-center">
           <span className="text-xl font-bold text-gray-700 dark:text-gray-200">
-            {dia}
+            {dataBR}
           </span>
         </div>
       </div>
