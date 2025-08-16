@@ -52,10 +52,7 @@ export default function Contatos() {
 
           {openContato && (
             <div className="md:min-w-[35%]">
-              <AddContatos
-                openContato={openContato}
-                setOpenContato={setOpenContato}
-              />
+              <AddContatos setOpenContato={setOpenContato} />
             </div>
           )}
         </>
