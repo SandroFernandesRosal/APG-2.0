@@ -176,11 +176,18 @@ export default function CarouselHighlight() {
                     <div className="w-full h-full relative">
                       <video
                         src={item.videoUrl}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
+                        muted
+                        preload="metadata"
+                        style={{ filter: 'blur(8px)' }}
+                      />
+                      <video
+                        src={item.videoUrl}
+                        className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
                         muted
                         preload="metadata"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center justify-center z-20">
                         <div className="bg-black/50 rounded-full p-6">
                           <svg
                             className="w-12 h-12 text-white"
