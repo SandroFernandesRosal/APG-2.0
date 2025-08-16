@@ -158,7 +158,7 @@ export default function EditTestemunho({
             <p className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-3">
               Foto do testemunho:
             </p>
-            
+
             {/* Preview da imagem atual ou nova */}
             {(preview || img) && (
               <div className="mb-3 flex justify-center">
@@ -171,7 +171,7 @@ export default function EditTestemunho({
                 />
               </div>
             )}
-            
+
             <label
               htmlFor="coverUrl"
               className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-blue-300 dark:border-blue-600 rounded-lg cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 transition-colors bg-white dark:bg-gray-700"
@@ -179,7 +179,8 @@ export default function EditTestemunho({
               <div className="flex flex-col items-center justify-center">
                 <FaCameraRetro className="w-6 h-6 mb-1 text-blue-500 dark:text-blue-400" />
                 <p className="text-xs text-blue-600 dark:text-blue-400">
-                  <span className="font-semibold">Clique para anexar</span> uma foto
+                  <span className="font-semibold">Clique para anexar</span> uma
+                  foto
                 </p>
                 <p className="text-xs text-blue-500 dark:text-blue-500">
                   JPG, PNG (até 50MB)
