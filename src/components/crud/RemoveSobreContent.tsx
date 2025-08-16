@@ -49,13 +49,15 @@ export default function RemoveSobreContent({ id }: RemoveSobreContentProps) {
         className="button !mb-0"
       >
         {isDeleting ? 'Removendo...' : 'Remover'}
-      </button>{' '}
-      <ShowModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        handleDelete={handleDelete}
-        id={id}
-      />
+      </button>
+      {showModal === id && (
+        <ShowModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleDelete={handleDelete}
+          id={id}
+        />
+      )}
     </>
   )
 }

@@ -9,6 +9,7 @@ import EditNew from './crud/EditNew'
 import { useState } from 'react'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 import { FaCameraRetro } from 'react-icons/fa'
+import { useShowModal } from '@/store/useStore'
 
 export default function ItemNew({
   id,
@@ -23,7 +24,7 @@ export default function ItemNew({
   role,
 }: New) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const [showRemove, setShowRemove] = useState(false)
+  const { showModal, setShowModal } = useShowModal()
   const token = useToken()
 
   const podeGerenciar =
@@ -126,7 +127,7 @@ export default function ItemNew({
             </svg>
           </button>
           <button
-            onClick={() => setShowRemove(true)}
+            onClick={() => setShowModal(id)}
             className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
             title="Remover"
           >
@@ -157,7 +158,7 @@ export default function ItemNew({
           role={role}
         />
       )}
-      {showRemove && <RemoveNew id={id} />}
+      {showModal === id && <RemoveNew id={id} />}
     </div>
   )
 }
