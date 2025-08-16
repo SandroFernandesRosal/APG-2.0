@@ -74,10 +74,7 @@ export default function Locais() {
 
           {openEndereco && (
             <div className="md:min-w-[35%]">
-              <AddEndereco
-                openEndereco={openEndereco}
-                setOpenEndereco={setOpenEndereco}
-              />
+              <AddEndereco setOpenEndereco={setOpenEndereco} />
             </div>
           )}
         </>
