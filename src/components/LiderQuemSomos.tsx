@@ -35,7 +35,7 @@ export default function LiderQuemSomos({
 
           {open && (
             <div className="md:min-w-[35%]">
-              <AddSobreLider open={open} setOpen={setOpen} />
+              <AddSobreLider setOpen={setOpen} />
             </div>
           )}
         </>
