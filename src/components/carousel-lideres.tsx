@@ -15,6 +15,7 @@ import AddSobreLider from './crud/AddSobreLider'
 import EditSobreLider from './crud/EditSobreLider'
 import RemoveSobreLider from './crud/RemoveSobreLider'
 import { ArrowDown } from 'lucide-react'
+import { FaCameraRetro } from 'react-icons/fa6'
 
 export default function CarouselLideres() {
   const { dataSobre, setDataSobre } = useDataSobre()
@@ -147,22 +148,30 @@ export default function CarouselLideres() {
                 >
                   <div className="h-[100%] relative overflow-hidden">
                     <div className="group h-full rounded-md overflow-hidden relative">
-                      <div
-                        className="absolute inset-0 bg-cover bg-center blur-sm scale-110 transition-transform duration-500 group-hover:scale-115"
-                        style={{
-                          backgroundImage: `url(${product.coverUrl})`,
-                        }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Image
-                          src={product.coverUrl}
-                          width={300}
-                          height={300}
-                          alt={product.title}
-                          quality={100}
-                          className="relative z-10 h-auto w-auto max-h-full max-w-full group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
+                      {product.coverUrl ? (
+                        <>
+                          <div
+                            className="absolute inset-0 bg-cover bg-center blur-sm scale-110 transition-transform duration-500 group-hover:scale-115"
+                            style={{
+                              backgroundImage: `url(${product.coverUrl})`,
+                            }}
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <Image
+                              src={product.coverUrl}
+                              width={300}
+                              height={300}
+                              alt={product.title}
+                              quality={100}
+                              className="relative z-10 h-auto w-auto max-h-full max-w-full group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center">
+                          <FaCameraRetro className="text-6xl text-primary/50 dark:text-secundary/50" />
+                        </div>
+                      )}
                     </div>
                   </div>
 

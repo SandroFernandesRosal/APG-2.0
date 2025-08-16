@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "New" ALTER COLUMN "coverUrl" DROP NOT NULL;

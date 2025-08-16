@@ -1,5 +1,5 @@
 'use client'
-import { FaArrowRight } from 'react-icons/fa'
+import { FaArrowRight, FaCameraRetro } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -162,13 +162,38 @@ export default function CarouselNews({
                     <div key={product.id} className="p-2">
                       <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800">
                         <div className="h-48 relative overflow-hidden">
-                          <Image
-                            src={product.coverUrl}
-                            alt={product.title}
-                            layout="fill"
-                            objectFit="cover"
-                            className="transition-transform duration-500 group-hover:scale-105"
-                          />
+                          {product.coverUrl ? (
+                            <Image
+                              src={product.coverUrl}
+                              alt={product.title}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          ) : product.videoUrl ? (
+                            <div className="w-full h-full relative">
+                              <video
+                                src={product.videoUrl}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                muted
+                                preload="metadata"
+                              />
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="bg-black/50 rounded-full p-3">
+                                  <svg
+                                    className="w-8 h-8 text-white"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path d="M8 5v14l11-7z" />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center">
+                              <FaCameraRetro className="text-4xl text-primary/50 dark:text-secundary/50" />
+                            </div>
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                           <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full">
                             {getIgrejaLabel(product.role)}

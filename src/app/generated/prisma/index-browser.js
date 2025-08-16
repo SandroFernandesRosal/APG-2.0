@@ -136,6 +136,7 @@ exports.Prisma.NewScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   coverUrl: 'coverUrl',
+  videoUrl: 'videoUrl',
   content: 'content',
   title: 'title',
   createdAt: 'createdAt',

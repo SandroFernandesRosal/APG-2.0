@@ -6,6 +6,7 @@ import AddSobreLider from './crud/AddSobreLider'
 import RemoveSobreLider from './crud/RemoveSobreLider'
 import EditSobreLider from './crud/EditSobreLider'
 import { SobreLider } from '@/data/types/sobrelider'
+import { FaCameraRetro } from 'react-icons/fa'
 
 interface LiderQuemSomosProps {
   dataSobreLider: SobreLider[]
@@ -45,20 +46,28 @@ export default function LiderQuemSomos({
             >
               <div className="h-[60%] relative overflow-hidden">
                 <div className="group h-full overflow-hidden relative ">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
-                    style={{
-                      backgroundImage: `url(${product.coverUrl})`,
-                    }}
-                  />
-                  <Image
-                    src={product.coverUrl}
-                    width={500}
-                    height={500}
-                    alt={product.title}
-                    quality={100}
-                    className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
-                  />
+                  {product.coverUrl ? (
+                    <>
+                      <div
+                        className="absolute inset-0 bg-cover bg-center blur-sm scale-110"
+                        style={{
+                          backgroundImage: `url(${product.coverUrl})`,
+                        }}
+                      />
+                      <Image
+                        src={product.coverUrl}
+                        width={500}
+                        height={500}
+                        alt={product.title}
+                        quality={100}
+                        className="relative z-10 h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </>
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center">
+                      <FaCameraRetro className="text-6xl text-primary/50 dark:text-secundary/50" />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col gap-1 h-[40%] w-full justify-evenly items-center text-xl">

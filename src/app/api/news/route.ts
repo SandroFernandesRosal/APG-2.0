@@ -20,42 +20,65 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const user = await authMiddleware(req)
-  if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
-    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
-  }
+  try {
+    console.log('Iniciando POST /api/news')
 
-  const body = await req.json()
+    const user = await authMiddleware(req)
+    console.log('Usuário autenticado:', user ? 'sim' : 'não')
 
-  const schema = z.object({
-    content: z.string(),
-    coverUrl: z.string(),
-    title: z.string(),
-    isPublic: z.coerce.boolean().default(false),
-    destaque: z.coerce.boolean().default(false),
-    page: z.string(),
-    role: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),
-  })
+    if (!user || (user.role !== 'ADMIN' && user.role !== 'SUPERADMIN')) {
+      console.log('Usuário não autorizado:', user?.role)
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    }
 
-  const data = schema.parse(body)
+    const body = await req.json()
+    console.log('Body recebido:', body)
 
-  if (user.role === 'ADMIN' && user.ministryRole !== data.role) {
+    const schema = z.object({
+      content: z.string(),
+      coverUrl: z.string().nullable().optional(),
+      videoUrl: z.string().nullable().optional(),
+      title: z.string(),
+      isPublic: z.coerce.boolean().default(false),
+      destaque: z.coerce.boolean().default(false),
+      page: z.string(),
+      role: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),
+    })
+
+    const data = schema.parse(body)
+    console.log('Dados validados:', data)
+
+    if (user.role === 'ADMIN' && user.ministryRole !== data.role) {
+      console.log('ADMIN tentando postar em igreja diferente')
+      return NextResponse.json(
+        { error: 'ADMIN só pode postar na sua igreja' },
+        { status: 403 },
+      )
+    }
+
+    const uuid = randomUUID()
+    const slug = `${slugify(data.title)}-${uuid.slice(-5)}`
+    console.log('Slug gerado:', slug)
+
+    console.log('Tentando criar no banco...')
+    const created = await prisma.new.create({
+      data: {
+        ...data,
+        userId: user.sub,
+        url: slug,
+      },
+    })
+    console.log('Notícia criada com sucesso:', created.id)
+
+    return NextResponse.json(created)
+  } catch (error) {
+    console.error('Erro completo na API /api/news:', error)
     return NextResponse.json(
-      { error: 'ADMIN só pode postar na sua igreja' },
-      { status: 403 },
+      {
+        error: 'Erro interno do servidor',
+        details: error instanceof Error ? error.message : 'Erro desconhecido',
+      },
+      { status: 500 },
     )
   }
-
-  const uuid = randomUUID()
-  const slug = `${slugify(data.title)}-${uuid.slice(-5)}`
-
-  const created = await prisma.new.create({
-    data: {
-      ...data,
-      userId: user.sub,
-      url: slug,
-    },
-  })
-
-  return NextResponse.json(created)
 }

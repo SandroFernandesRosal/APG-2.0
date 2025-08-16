@@ -42,12 +42,15 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
+    // Determinar o tipo de recurso baseado no MIME type
+    const resourceType = file.type.startsWith('image/') ? 'image' : 'video'
+
     const result = await cloudinary.uploader.upload(
       `data:${file.type};base64,${buffer.toString('base64')}`,
       {
-        resource_type: 'auto',
+        resource_type: resourceType,
         public_id: fileName,
-        format: 'webp',
+        format: resourceType === 'image' ? 'webp' : undefined,
       },
     )
 

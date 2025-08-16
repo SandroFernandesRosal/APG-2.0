@@ -7,6 +7,7 @@ import EditSobreContent from './crud/EditSobreContent'
 import RemoveSobreContent from './crud/RemoveSobreContent'
 import { Sobre } from '@/data/types/sobre'
 import { useShowModal } from '@/store/useStore'
+import { FaCameraRetro } from 'react-icons/fa'
 
 interface ContentQuemSomosProps {
   dataSobre: Sobre[]
@@ -45,13 +46,19 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
             {item.title}
           </h1>
           <p className="w-[90%] max-w-[800px]">{item.content}</p>
-          <Image
-            src={item.coverUrl}
-            height={800}
-            width={800}
-            alt={`imagem de ${item.title}`}
-            className="m-2 w-[90%] max-w-[800px] rounded-xl border-[1px] border-zinc-300 dark:border-zinc-800 p-2"
-          />
+          {item.coverUrl ? (
+            <Image
+              src={item.coverUrl}
+              height={800}
+              width={800}
+              alt={`imagem de ${item.title}`}
+              className="m-2 w-[90%] max-w-[800px] rounded-xl border-[1px] border-zinc-300 dark:border-zinc-800 p-2"
+            />
+          ) : (
+            <div className="m-2 w-[90%] max-w-[800px] h-[400px] bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center rounded-xl border-[1px] border-zinc-300 dark:border-zinc-800 p-2">
+              <FaCameraRetro className="text-6xl text-primary/50 dark:text-secundary/50" />
+            </div>
+          )}
           {token?.role === 'ADMIN' && (
             <div className="mb-2 flex w-full justify-center gap-2 text-white">
               {openEdit !== item.id ? (

@@ -17,7 +17,10 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [destaque, setDestaque] = useState(false)
-  const [preview, setPreview] = useState<string | null>(null)
+  const [mediaPreview, setMediaPreview] = useState<{
+    url: string
+    type: 'image' | 'video'
+  } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
@@ -42,31 +45,53 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
     setIsSubmitting(true)
 
     const form = formRef.current
-    const fileInput = form?.querySelector(
-      'input[type="file"]',
+    const mediaInput = form?.querySelector(
+      'input[name="mediaFile"]',
     ) as HTMLInputElement
-    const fileToUpload = fileInput?.files?.[0]
 
-    if (!fileToUpload) {
-      alert('Você precisa adicionar uma imagem.')
+    const mediaFile = mediaInput?.files?.[0]
+
+    if (!mediaFile) {
+      alert('Você precisa adicionar uma imagem ou um vídeo.')
       setIsSubmitting(false)
       return
     }
 
-    let coverUrl = ''
-    const formData = new FormData()
-    formData.append('file', fileToUpload)
+    if (!title.trim()) {
+      alert('Você precisa adicionar um título.')
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!content.trim()) {
+      alert('Você precisa adicionar um conteúdo.')
+      setIsSubmitting(false)
+      return
+    }
+
+    let coverUrl: string | null = null
+    let videoUrl: string | null = null
+
+    // Upload do arquivo de mídia
+    const mediaFormData = new FormData()
+    mediaFormData.append('file', mediaFile)
 
     try {
       const uploadResponse = await fetch('/api/upload', {
         method: 'POST',
-        body: formData,
+        body: mediaFormData,
       })
 
       const uploadResult = await uploadResponse.json()
-      coverUrl = uploadResult.fileUrl
+
+      // Determinar se é imagem ou vídeo baseado no tipo MIME
+      if (mediaFile.type.startsWith('image/')) {
+        coverUrl = uploadResult.fileUrl
+      } else if (mediaFile.type.startsWith('video/')) {
+        videoUrl = uploadResult.fileUrl
+      }
     } catch (error) {
-      console.error('Erro ao fazer upload da imagem:', error)
+      console.error('Erro ao fazer upload do arquivo:', error)
       setIsSubmitting(false)
       return
     }
@@ -81,7 +106,8 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
         body: JSON.stringify({
           title,
           content,
-          coverUrl,
+          coverUrl: coverUrl || undefined,
+          videoUrl: videoUrl || undefined,
           page: local,
           role,
           destaque,
@@ -103,11 +129,17 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
     }
   }
 
-  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
+  function onMediaSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
-    if (!files) return
-    const previewUrl = URL.createObjectURL(files[0])
-    setPreview(previewUrl)
+    if (!files || !files[0]) return
+
+    const file = files[0]
+    const previewUrl = URL.createObjectURL(file)
+
+    // Determinar o tipo baseado no MIME type
+    const type = file.type.startsWith('image/') ? 'image' : 'video'
+
+    setMediaPreview({ url: previewUrl, type })
   }
 
   return (
@@ -131,22 +163,29 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
         </h1>
 
         <label
-          htmlFor="coverUrl"
+          htmlFor="mediaFile"
           className="mb-3 flex cursor-pointer items-center gap-2 font-bold"
         >
           <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
-          Anexar foto (até 5mb)
+          Anexar imagem ou vídeo (até 50mb)
         </label>
 
-        {preview && (
-          <Image
-            src={preview}
-            width={200}
-            height={200}
-            alt="Imagem"
-            className="aspect-video w-[200px]"
-          />
-        )}
+        {mediaPreview &&
+          (mediaPreview.type === 'image' ? (
+            <Image
+              src={mediaPreview.url}
+              width={200}
+              height={200}
+              alt="Preview da mídia"
+              className="aspect-video w-[200px]"
+            />
+          ) : (
+            <video
+              src={mediaPreview.url}
+              controls
+              className="aspect-video w-[200px]"
+            />
+          ))}
 
         <input
           className="input mt-4"
@@ -168,10 +207,10 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
         <input
           className="invisible h-0 w-0"
           type="file"
-          name="coverUrl"
-          id="coverUrl"
-          required
-          onChange={onFileSelected}
+          name="mediaFile"
+          id="mediaFile"
+          accept="image/*,video/*"
+          onChange={onMediaSelected}
         />
 
         <label

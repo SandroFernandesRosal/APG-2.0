@@ -1,6 +1,7 @@
 export interface New {
   id: string
-  coverUrl: string
+  coverUrl?: string
+  videoUrl?: string
   content: string
   title: string
   createdAt: string
