@@ -118,7 +118,7 @@ export default function CarouselLideres() {
 
             {openNew && (
               <div className="md:min-w-[35%]">
-                <AddSobreLider open={openNew} setOpen={setOpenNew} />
+                <AddSobreLider setOpen={setOpenNew} />
               </div>
             )}
           </>
