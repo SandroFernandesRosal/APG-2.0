@@ -35,10 +35,7 @@ export default function AgendaPage() {
 
             {openAgenda && (
               <div className="md:min-w-[35%]">
-                <AddAgenda
-                  openAgenda={openAgenda}
-                  setOpenAgenda={setOpenAgenda}
-                />
+                <AddAgenda setOpenAgenda={setOpenAgenda} />
               </div>
             )}
           </>
