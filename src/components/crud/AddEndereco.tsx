@@ -6,14 +6,10 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 
 interface AddEnderecoProps {
-  openEndereco: boolean
   setOpenEndereco: (open: boolean) => void
 }
 
-export default function AddEndereco({
-  openEndereco,
-  setOpenEndereco,
-}: AddEnderecoProps) {
+export default function AddEndereco({ setOpenEndereco }: AddEnderecoProps) {
   const [local, setLocal] = useState('')
   const [rua, setRua] = useState('')
   const [cep, setCep] = useState('')

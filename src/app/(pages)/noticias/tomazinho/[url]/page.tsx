@@ -6,7 +6,7 @@ import RemoveNew from '@/components/crud/RemoveNew'
 import EditNew from '@/components/crud/EditNew'
 import { useToken } from '@/hooks/useToken'
 import { format } from 'date-fns'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit } from 'react-icons/fa'
 
 interface ParamsProps {
   params: Promise<{ url: string }>

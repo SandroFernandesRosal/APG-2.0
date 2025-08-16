@@ -1,14 +1,13 @@
 'use client'
 
-import { use } from 'react'
 import { format } from 'date-fns'
 import { useData, useLocal } from '@/store/useStore'
 import { useToken } from '@/hooks/useToken'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import EditNew from '@/components/crud/EditNew'
 import RemoveNew from '@/components/crud/RemoveNew'
 import Image from 'next/image'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit } from 'react-icons/fa'
 
 interface ParamsProps {
   params: Promise<{ url: string }>

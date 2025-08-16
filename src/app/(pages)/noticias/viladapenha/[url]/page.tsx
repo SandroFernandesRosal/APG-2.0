@@ -6,7 +6,7 @@ import RemoveNew from '@/components/crud/RemoveNew'
 import EditNew from '@/components/crud/EditNew'
 import { useToken } from '@/hooks/useToken'
 import { format } from 'date-fns'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit } from 'react-icons/fa'
 
 interface ParamsProps {
   params: Promise<{ url: string }>
@@ -90,7 +90,7 @@ export default function NoticiaVilaDaPenha({ params }: ParamsProps) {
             </div>
           )}
         </div>
-        <h1 className="w-[90vw] max-w-[500px] 	text-center text-2xl font-bold">
+        <h1 className="w-[90vw] max-w-[500px] text-center text-2xl font-bold">
           {selectedItem && selectedItem.title ? (
             <>{selectedItem.title}</>
           ) : (

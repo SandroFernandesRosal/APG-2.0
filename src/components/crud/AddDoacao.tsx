@@ -6,14 +6,10 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 
 interface AddDoacaoProps {
-  openDoacao: boolean
   setOpenDoacao: (open: boolean) => void
 }
 
-export default function AddDoacao({
-  openDoacao,
-  setOpenDoacao,
-}: AddDoacaoProps) {
+export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
   const [local, setLocal] = useState<string>('')
   const [banco, setBanco] = useState<string>('')
   const [conta, setConta] = useState<string>('')
