@@ -6,7 +6,7 @@ import { useToken } from '@/hooks/useToken'
 import EditSobreContent from './crud/EditSobreContent'
 import RemoveSobreContent from './crud/RemoveSobreContent'
 import { Sobre } from '@/data/types/sobre'
-import { useShowModal } from '@/store/useStore'
+
 import { FaCameraRetro, FaPlus } from 'react-icons/fa'
 
 interface ContentQuemSomosProps {
@@ -16,8 +16,6 @@ interface ContentQuemSomosProps {
 export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
   const [open, setOpen] = useState(false)
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const { showModal, setShowModal } = useShowModal()
-  const [selectedProduct, setSelectedProduct] = useState<Sobre | null>(null)
   const token = useToken()
 
   return (
@@ -82,21 +80,8 @@ export default function ContentQuemSomos({ dataSobre }: ContentQuemSomosProps) {
                 />
               )}
 
-              <button
-                aria-hidden="true"
-                tabIndex={-1}
-                className="button !mb-0"
-                onClick={() => {
-                  setShowModal(item.id)
-                  setSelectedProduct(item)
-                }}
-              >
-                Remover
-              </button>
+              <RemoveSobreContent id={item.id} />
             </div>
-          )}
-          {showModal && selectedProduct && (
-            <RemoveSobreContent id={selectedProduct.id} />
           )}
         </div>
       ))}

@@ -48,10 +48,7 @@ export default function Doe() {
 
           {openDoacao && (
             <div className="md:min-w-[35%]">
-              <AddDoacao
-                openDoacao={openDoacao}
-                setOpenDoacao={setOpenDoacao}
-              />
+              <AddDoacao setOpenDoacao={setOpenDoacao} />
             </div>
           )}
         </>

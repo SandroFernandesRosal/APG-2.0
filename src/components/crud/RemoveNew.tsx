@@ -47,22 +47,14 @@ export default function RemoveNew({ id }: RemoveNewProps) {
 
   return (
     <>
-      <button
-        onClick={() => setShowModal(id)}
-        disabled={isDeleting}
-        className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-        aria-hidden="true"
-        tabIndex={-1}
-      >
-        <FaTrash className="text-sm" />
-        {isDeleting ? 'Removendo...' : 'Remover'}
-      </button>
-      <ShowModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        handleDelete={handleDelete}
-        id={id}
-      />
+      {showModal === id && (
+        <ShowModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleDelete={handleDelete}
+          id={id}
+        />
+      )}
     </>
   )
 }
