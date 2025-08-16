@@ -68,6 +68,7 @@ export default async function Search({ searchParams }: SearchProps) {
                   <ItemNew
                     id={item.id}
                     coverUrl={item.coverUrl}
+                    videoUrl={item.videoUrl}
                     title={item.title}
                     content={item.content}
                     createdAt={item.createdAt}
@@ -99,6 +100,7 @@ export default async function Search({ searchParams }: SearchProps) {
                   <ItemNew
                     id={item.id}
                     coverUrl={item.coverUrl}
+                    videoUrl={item.videoUrl}
                     title={item.title}
                     content={item.content}
                     createdAt={item.createdAt}
@@ -128,6 +130,7 @@ export default async function Search({ searchParams }: SearchProps) {
                   <ItemNew
                     id={item.id}
                     coverUrl={item.coverUrl}
+                    videoUrl={item.videoUrl}
                     title={item.title}
                     content={item.content}
                     createdAt={item.createdAt}

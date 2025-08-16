@@ -104,6 +104,7 @@ export default function News() {
                 key={product.id}
                 id={product.id}
                 coverUrl={product.coverUrl}
+                videoUrl={product.videoUrl}
                 content={product.content}
                 title={product.title}
                 createdAt={product.createdAt}
@@ -128,6 +129,7 @@ export default function News() {
                 key={product.id}
                 id={product.id}
                 coverUrl={product.coverUrl}
+                videoUrl={product.videoUrl}
                 content={product.content}
                 title={product.title}
                 createdAt={product.createdAt}

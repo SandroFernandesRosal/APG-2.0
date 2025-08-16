@@ -1,17 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { useShowModal } from '@/store/useStore'
 import { Endereco } from '@/data/types/endereco'
+import { useEffect, useState } from 'react'
+import { useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { useToken } from '@/hooks/useToken'
+import AddEndereco from './crud/AddEndereco'
 import EditEndereco from './crud/EditEndereco'
 import RemoveEndereco from './crud/RemoveEndereco'
-import AddEndereco from './crud/AddEndereco'
 import EnderecosHeader from './enderecos-header'
+import { FaPlus } from 'react-icons/fa'
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -19,11 +20,9 @@ import L from 'leaflet'
 
 const HouseIcon = new L.Icon({
   iconUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  iconRetinaUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
   shadowUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -33,60 +32,32 @@ const HouseIcon = new L.Icon({
 export default function CarouselEndereco() {
   const [data, setData] = useState<Endereco[]>([])
   const [loading, setLoading] = useState(true)
-  const token = useToken()
   const [openEndereco, setOpenEndereco] = useState(false)
+  const token = useToken()
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<Endereco | null>(null)
   const { showModal, setShowModal } = useShowModal()
-  const [coordinates, setCoordinates] = useState<{
-    [key: string]: [number, number]
-  }>({})
 
   const podeGerenciar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
 
   useEffect(() => {
     const fetchEnderecos = async () => {
+      setLoading(true)
       try {
-        setLoading(true)
-        const res = await fetch('/api/endereco', { cache: 'no-store' })
-        if (!res.ok) throw new Error('Erro ao buscar endereços')
-        const json = await res.json()
-        if (Array.isArray(json)) {
-          setData(json)
-          json.forEach((endereco: Endereco) => geocodeAddress(endereco))
-        } else {
-          setData([])
+        const response = await fetch('/api/endereco')
+        if (!response.ok) {
+          throw new Error('Falha ao carregar endereços')
         }
-      } catch (err) {
-        console.error(err)
-        setData([])
+        const enderecos = await response.json()
+        setData(enderecos)
+      } catch (error) {
+        console.error('Erro ao buscar endereços:', error)
       } finally {
         setLoading(false)
       }
     }
     fetchEnderecos()
   }, [])
-
-  const geocodeAddress = async (endereco: Endereco) => {
-    const { rua, numero, local, cidade, cep } = endereco
-    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      enderecoFormatado,
-    )}`
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0]
-        setCoordinates((prev) => ({
-          ...prev,
-          [endereco.id]: [parseFloat(lat), parseFloat(lon)],
-        }))
-      }
-    } catch (error) {
-      console.error('Erro ao geocodificar endereço:', error)
-    }
-  }
 
   const openGoogleMaps = (coords: Endereco) => {
     const { rua, numero, local, cidade, cep } = coords
@@ -132,7 +103,11 @@ export default function CarouselEndereco() {
         {podeGerenciar && (
           <div className="my-4">
             {!openEndereco ? (
-              <button className="button" onClick={() => setOpenEndereco(true)}>
+              <button
+                className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-secundary text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                onClick={() => setOpenEndereco(true)}
+              >
+                <FaPlus className="text-sm" />
                 Adicionar endereço
               </button>
             ) : (
@@ -163,9 +138,8 @@ export default function CarouselEndereco() {
             </div>
           ) : (
             <div className="w-full mt-5">
-              <Slider {...settings}>
+              <Slider {...settings} className="w-full">
                 {data.map((product: Endereco) => {
-                  const coords = coordinates[product.id]
                   return (
                     <div key={product.id} className="p-2">
                       <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-auto min-h-[450px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800">
@@ -176,7 +150,7 @@ export default function CarouselEndereco() {
                                 setOpenEdit(product.id)
                                 setSelectedProduct(product)
                               }}
-                              className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-blue-600 shadow-md transition"
+                              className="p-2 rounded-full bg-white/90 dark:bg-slate-700/90 hover:bg-white text-blue-600 shadow-lg transition-all duration-200 hover:scale-110"
                               title="Editar"
                             >
                               <svg
@@ -198,7 +172,7 @@ export default function CarouselEndereco() {
                                 setShowModal(product.id)
                                 setSelectedProduct(product)
                               }}
-                              className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
+                              className="p-2 rounded-full bg-white/90 dark:bg-slate-700/90 hover:bg-white text-red-600 shadow-lg transition-all duration-200 hover:scale-110"
                               title="Remover"
                             >
                               <svg
@@ -218,25 +192,20 @@ export default function CarouselEndereco() {
                         )}
 
                         <div className="h-56 w-full">
-                          {coords ? (
-                            <MapContainer
-                              center={coords}
-                              zoom={15}
-                              scrollWheelZoom={false}
-                              className="h-full w-full"
+                          <MapContainer
+                            center={[-22.9068, -43.1729]} // Coordenadas do Rio de Janeiro
+                            zoom={10}
+                            scrollWheelZoom={false}
+                            className="h-full w-full"
+                          >
+                            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                            <Marker
+                              position={[-22.9068, -43.1729]}
+                              icon={HouseIcon}
                             >
-                              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                              <Marker position={coords} icon={HouseIcon}>
-                                <Popup>{product.local}</Popup>
-                              </Marker>
-                            </MapContainer>
-                          ) : (
-                            <div className="h-full w-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-                              <p className="text-gray-500">
-                                Carregando mapa...
-                              </p>
-                            </div>
-                          )}
+                              <Popup>{product.local}</Popup>
+                            </Marker>
+                          </MapContainer>
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
                           <h3 className="text-xl font-bold text-primary dark:text-secundary mb-2">

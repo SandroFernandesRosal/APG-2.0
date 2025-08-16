@@ -6,6 +6,7 @@ import RemoveNew from '@/components/crud/RemoveNew'
 import EditNew from '@/components/crud/EditNew'
 import { useToken } from '@/hooks/useToken'
 import { format } from 'date-fns'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 
 interface ParamsProps {
   params: Promise<{ url: string }>
@@ -77,9 +78,10 @@ export default function NoticiaTomazinho({ params }: ParamsProps) {
               ) : (
                 <>
                   <button
-                    className="button !mb-0"
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                     onClick={() => setOpenEdit(selectedItem.id)}
                   >
+                    <FaEdit className="text-sm" />
                     Editar
                   </button>
                   <RemoveNew id={selectedItem.id} />

@@ -73,83 +73,131 @@ export default function EditEndereco({
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
-    >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
-        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-          Editar endereço{' '}
+    <div className="fixed left-0 top-0 z-50 flex min-h-screen w-full items-center justify-center bg-bgdark/50 dark:bg-bglight/30 p-4">
+      <div className="w-full max-w-2xl bg-bglight dark:bg-bgdark rounded-lg shadow-xl">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+          <h1 className="text-xl font-bold text-primary dark:text-secundary">
+            Editar Endereço
+          </h1>
           <AiFillCloseCircle
             onClick={() => setOpenEdit(null)}
-            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+            className="cursor-pointer text-2xl text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
           />
-        </h1>
+        </div>
 
-        <input
-          className="input mt-2"
-          type="text"
-          name="local"
-          required
-          placeholder="Digite o local"
-          value={local}
-          onChange={(e) => setLocal(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          {/* Conteúdo scrollável */}
+          <div className="overflow-y-auto max-h-[60vh] p-4">
+            <div className="space-y-4">
+              {/* Local */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Local
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="local"
+                  required
+                  placeholder="Digite o local"
+                  value={local}
+                  onChange={(e) => setLocal(e.target.value)}
+                />
+              </div>
 
-        <input
-          className="input"
-          type="text"
-          name="rua"
-          required
-          placeholder="Digite nome da rua"
-          value={rua}
-          onChange={(e) => setRua(e.target.value)}
-        />
+              {/* Rua */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Rua
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="rua"
+                  required
+                  placeholder="Digite nome da rua"
+                  value={rua}
+                  onChange={(e) => setRua(e.target.value)}
+                />
+              </div>
 
-        <input
-          className="input"
-          type="text"
-          name="numero"
-          required
-          placeholder="Digite o número da igreja"
-          value={numero}
-          onChange={(e) => setNumero(e.target.value)}
-        />
+              {/* Número */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Número
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="numero"
+                  required
+                  placeholder="Digite o número da igreja"
+                  value={numero}
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+              </div>
 
-        <input
-          className="input"
-          type="text"
-          name="cidade"
-          required
-          placeholder="Digite a cidade"
-          value={cidade}
-          onChange={(e) => setCidade(e.target.value)}
-        />
+              {/* Cidade */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Cidade
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="cidade"
+                  required
+                  placeholder="Digite a cidade"
+                  value={cidade}
+                  onChange={(e) => setCidade(e.target.value)}
+                />
+              </div>
 
-        <input
-          className="input"
-          type="text"
-          name="cep"
-          required
-          placeholder="Digite o cep"
-          value={cep}
-          onChange={(e) => setCep(e.target.value)}
-        />
+              {/* CEP */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  CEP
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="cep"
+                  required
+                  placeholder="Digite o cep"
+                  value={cep}
+                  onChange={(e) => setCep(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
 
-        <button
-          type="submit"
-          className="button !mb-0 flex items-center gap-2 justify-center"
-        >
-          {isEditing ? (
-            <>
-              <FaSpinner className="animate-spin" />
-              Editando endereço...
-            </>
-          ) : (
-            'Editar'
-          )}
-        </button>
+          {/* Footer */}
+          <div className="flex items-center justify-end gap-3 p-4 border-t border-gray-200 dark:border-gray-700">
+            <button
+              type="button"
+              onClick={() => setOpenEdit(null)}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="button flex items-center gap-2"
+              disabled={isEditing}
+            >
+              {isEditing ? (
+                <>
+                  <FaSpinner className="animate-spin" />
+                  Editando endereço...
+                </>
+              ) : (
+                'Editar'
+              )}
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   )
 }
