@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { useData, useLocal } from '@/store/useStore'
 import SkeletonHighlight from './skeleton/SkeletonHighlight'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { FaCameraRetro } from 'react-icons/fa6'
 
 interface ArrowProps {
   className?: string
@@ -155,19 +156,47 @@ export default function CarouselHighlight() {
                   href={`/noticias/${item.role.toLowerCase()}/${item.url}`}
                   className="group flex justify-center items-center h-[300px] md:h-[500px]  overflow-hidden w-full  relative"
                 >
-                  <div
-                    className="absolute inset-0 bg-cover bg-center blur-md scale-110 "
-                    style={{ backgroundImage: `url(${item.coverUrl})` }}
-                  />
-                  <Image
-                    src={item.coverUrl}
-                    width={1100}
-                    height={500}
-                    alt={item.title}
-                    priority
-                    quality={100}
-                    className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
+                  {item.coverUrl ? (
+                    <>
+                      <div
+                        className="absolute inset-0 bg-cover bg-center blur-md scale-110 "
+                        style={{ backgroundImage: `url(${item.coverUrl})` }}
+                      />
+                      <Image
+                        src={item.coverUrl}
+                        width={1100}
+                        height={500}
+                        alt={item.title}
+                        priority
+                        quality={100}
+                        className="relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </>
+                  ) : item.videoUrl ? (
+                    <div className="w-full h-full relative">
+                      <video
+                        src={item.videoUrl}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        muted
+                        preload="metadata"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-black/50 rounded-full p-6">
+                          <svg
+                            className="w-12 h-12 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center">
+                      <FaCameraRetro className="text-6xl text-primary/50 dark:text-secundary/50" />
+                    </div>
+                  )}
                 </Link>
               </div>
             ))}

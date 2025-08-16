@@ -3454,6 +3454,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     coverUrl: string | null
+    videoUrl: string | null
     content: string | null
     title: string | null
     createdAt: Date | null
@@ -3469,6 +3470,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     coverUrl: string | null
+    videoUrl: string | null
     content: string | null
     title: string | null
     createdAt: Date | null
@@ -3484,6 +3486,7 @@ export namespace Prisma {
     id: number
     userId: number
     coverUrl: number
+    videoUrl: number
     content: number
     title: number
     createdAt: number
@@ -3501,6 +3504,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     coverUrl?: true
+    videoUrl?: true
     content?: true
     title?: true
     createdAt?: true
@@ -3516,6 +3520,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     coverUrl?: true
+    videoUrl?: true
     content?: true
     title?: true
     createdAt?: true
@@ -3531,6 +3536,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     coverUrl?: true
+    videoUrl?: true
     content?: true
     title?: true
     createdAt?: true
@@ -3618,7 +3624,8 @@ export namespace Prisma {
   export type NewGroupByOutputType = {
     id: string
     userId: string
-    coverUrl: string
+    coverUrl: string | null
+    videoUrl: string | null
     content: string
     title: string
     createdAt: Date
@@ -3651,6 +3658,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     coverUrl?: boolean
+    videoUrl?: boolean
     content?: boolean
     title?: boolean
     createdAt?: boolean
@@ -3667,6 +3675,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     coverUrl?: boolean
+    videoUrl?: boolean
     content?: boolean
     title?: boolean
     createdAt?: boolean
@@ -3683,6 +3692,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     coverUrl?: boolean
+    videoUrl?: boolean
     content?: boolean
     title?: boolean
     createdAt?: boolean
@@ -3699,6 +3709,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     coverUrl?: boolean
+    videoUrl?: boolean
     content?: boolean
     title?: boolean
     createdAt?: boolean
@@ -3710,7 +3721,7 @@ export namespace Prisma {
     role?: boolean
   }
 
-  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url" | "role", ExtArgs["result"]["new"]>
+  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "videoUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url" | "role", ExtArgs["result"]["new"]>
   export type NewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3729,7 +3740,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      coverUrl: string
+      coverUrl: string | null
+      videoUrl: string | null
       content: string
       title: string
       createdAt: Date
@@ -4166,6 +4178,7 @@ export namespace Prisma {
     readonly id: FieldRef<"New", 'String'>
     readonly userId: FieldRef<"New", 'String'>
     readonly coverUrl: FieldRef<"New", 'String'>
+    readonly videoUrl: FieldRef<"New", 'String'>
     readonly content: FieldRef<"New", 'String'>
     readonly title: FieldRef<"New", 'String'>
     readonly createdAt: FieldRef<"New", 'DateTime'>
@@ -15683,6 +15696,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     coverUrl: 'coverUrl',
+    videoUrl: 'videoUrl',
     content: 'content',
     title: 'title',
     createdAt: 'createdAt',
@@ -16078,7 +16092,8 @@ export namespace Prisma {
     NOT?: NewWhereInput | NewWhereInput[]
     id?: StringFilter<"New"> | string
     userId?: StringFilter<"New"> | string
-    coverUrl?: StringFilter<"New"> | string
+    coverUrl?: StringNullableFilter<"New"> | string | null
+    videoUrl?: StringNullableFilter<"New"> | string | null
     content?: StringFilter<"New"> | string
     title?: StringFilter<"New"> | string
     createdAt?: DateTimeFilter<"New"> | Date | string
@@ -16094,7 +16109,8 @@ export namespace Prisma {
   export type NewOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    coverUrl?: SortOrder
+    coverUrl?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
     content?: SortOrder
     title?: SortOrder
     createdAt?: SortOrder
@@ -16114,7 +16130,8 @@ export namespace Prisma {
     OR?: NewWhereInput[]
     NOT?: NewWhereInput | NewWhereInput[]
     userId?: StringFilter<"New"> | string
-    coverUrl?: StringFilter<"New"> | string
+    coverUrl?: StringNullableFilter<"New"> | string | null
+    videoUrl?: StringNullableFilter<"New"> | string | null
     content?: StringFilter<"New"> | string
     title?: StringFilter<"New"> | string
     createdAt?: DateTimeFilter<"New"> | Date | string
@@ -16129,7 +16146,8 @@ export namespace Prisma {
   export type NewOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    coverUrl?: SortOrder
+    coverUrl?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
     content?: SortOrder
     title?: SortOrder
     createdAt?: SortOrder
@@ -16150,7 +16168,8 @@ export namespace Prisma {
     NOT?: NewScalarWhereWithAggregatesInput | NewScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"New"> | string
     userId?: StringWithAggregatesFilter<"New"> | string
-    coverUrl?: StringWithAggregatesFilter<"New"> | string
+    coverUrl?: StringNullableWithAggregatesFilter<"New"> | string | null
+    videoUrl?: StringNullableWithAggregatesFilter<"New"> | string | null
     content?: StringWithAggregatesFilter<"New"> | string
     title?: StringWithAggregatesFilter<"New"> | string
     createdAt?: DateTimeWithAggregatesFilter<"New"> | Date | string
@@ -17027,7 +17046,8 @@ export namespace Prisma {
 
   export type NewCreateInput = {
     id?: string
-    coverUrl: string
+    coverUrl?: string | null
+    videoUrl?: string | null
     content: string
     title: string
     createdAt?: Date | string
@@ -17043,7 +17063,8 @@ export namespace Prisma {
   export type NewUncheckedCreateInput = {
     id?: string
     userId: string
-    coverUrl: string
+    coverUrl?: string | null
+    videoUrl?: string | null
     content: string
     title: string
     createdAt?: Date | string
@@ -17057,7 +17078,8 @@ export namespace Prisma {
 
   export type NewUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17073,7 +17095,8 @@ export namespace Prisma {
   export type NewUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17088,7 +17111,8 @@ export namespace Prisma {
   export type NewCreateManyInput = {
     id?: string
     userId: string
-    coverUrl: string
+    coverUrl?: string | null
+    videoUrl?: string | null
     content: string
     title: string
     createdAt?: Date | string
@@ -17102,7 +17126,8 @@ export namespace Prisma {
 
   export type NewUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17117,7 +17142,8 @@ export namespace Prisma {
   export type NewUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18252,6 +18278,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     coverUrl?: SortOrder
+    videoUrl?: SortOrder
     content?: SortOrder
     title?: SortOrder
     createdAt?: SortOrder
@@ -18267,6 +18294,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     coverUrl?: SortOrder
+    videoUrl?: SortOrder
     content?: SortOrder
     title?: SortOrder
     createdAt?: SortOrder
@@ -18282,6 +18310,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     coverUrl?: SortOrder
+    videoUrl?: SortOrder
     content?: SortOrder
     title?: SortOrder
     createdAt?: SortOrder
@@ -19705,7 +19734,8 @@ export namespace Prisma {
 
   export type NewCreateWithoutUserInput = {
     id?: string
-    coverUrl: string
+    coverUrl?: string | null
+    videoUrl?: string | null
     content: string
     title: string
     createdAt?: Date | string
@@ -19719,7 +19749,8 @@ export namespace Prisma {
 
   export type NewUncheckedCreateWithoutUserInput = {
     id?: string
-    coverUrl: string
+    coverUrl?: string | null
+    videoUrl?: string | null
     content: string
     title: string
     createdAt?: Date | string
@@ -20066,7 +20097,8 @@ export namespace Prisma {
     NOT?: NewScalarWhereInput | NewScalarWhereInput[]
     id?: StringFilter<"New"> | string
     userId?: StringFilter<"New"> | string
-    coverUrl?: StringFilter<"New"> | string
+    coverUrl?: StringNullableFilter<"New"> | string | null
+    videoUrl?: StringNullableFilter<"New"> | string | null
     content?: StringFilter<"New"> | string
     title?: StringFilter<"New"> | string
     createdAt?: DateTimeFilter<"New"> | Date | string
@@ -21431,7 +21463,8 @@ export namespace Prisma {
 
   export type NewCreateManyUserInput = {
     id?: string
-    coverUrl: string
+    coverUrl?: string | null
+    videoUrl?: string | null
     content: string
     title: string
     createdAt?: Date | string
@@ -21674,7 +21707,8 @@ export namespace Prisma {
 
   export type NewUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21688,7 +21722,8 @@ export namespace Prisma {
 
   export type NewUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21702,7 +21737,8 @@ export namespace Prisma {
 
   export type NewUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverUrl?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

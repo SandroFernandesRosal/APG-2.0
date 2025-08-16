@@ -64,7 +64,8 @@ model User {
 model New {
   id        String        @id @default(uuid())
   userId    String
-  coverUrl  String
+  coverUrl  String?
+  videoUrl  String?
   content   String
   title     String
   createdAt DateTime      @default(now())

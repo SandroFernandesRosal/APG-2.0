@@ -8,11 +8,13 @@ import RemoveNew from './crud/RemoveNew'
 import EditNew from './crud/EditNew'
 import { useState } from 'react'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { FaCameraRetro } from 'react-icons/fa'
 
 export default function ItemNew({
   id,
   page,
   coverUrl,
+  videoUrl,
   title,
   content,
   createdAt,
@@ -45,12 +47,38 @@ export default function ItemNew({
           className="block h-full w-full"
           tabIndex={-1}
         >
-          <Image
-            src={coverUrl}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          {coverUrl ? (
+            <Image
+              src={coverUrl}
+              alt={title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : videoUrl ? (
+            <div className="w-full h-full relative">
+              <video
+                src={videoUrl}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                muted
+                preload="metadata"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-black/50 rounded-full p-2">
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center">
+              <FaCameraRetro className="text-4xl text-primary/50 dark:text-secundary/50" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
             {getIgrejaLabel(role)}
@@ -123,6 +151,7 @@ export default function ItemNew({
           titulo={title}
           conteudo={content}
           img={coverUrl}
+          videoUrl={videoUrl}
           setOpenEdit={setOpenEdit}
           destacar={destaque}
           role={role}

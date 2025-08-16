@@ -66,6 +66,7 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
               {openEdit === selectedItem.id ? (
                 <EditNew
                   img={selectedItem.coverUrl}
+                  videoUrl={selectedItem.videoUrl}
                   titulo={selectedItem.title}
                   conteudo={selectedItem.content}
                   id={selectedItem.id}
@@ -96,14 +97,24 @@ export default function NoticiaCaxias({ params }: ParamsProps) {
         </h1>
         {selectedItem ? (
           <>
-            <Image
-              src={selectedItem.coverUrl}
-              alt={selectedItem.title}
-              width={500}
-              height={500}
-              priority
-              className="w-[100vw] max-w-[500px] pt-2"
-            />
+            {selectedItem.coverUrl && (
+              <Image
+                src={selectedItem.coverUrl}
+                alt={selectedItem.title}
+                width={500}
+                height={500}
+                priority
+                className="w-[100vw] max-w-[500px] pt-2"
+              />
+            )}
+
+            {selectedItem.videoUrl && (
+              <video
+                src={selectedItem.videoUrl}
+                controls
+                className="w-[100vw] max-w-[500px] pt-2"
+              />
+            )}
 
             {selectedItem && selectedItem.createdAt ? (
               <h1 className="flex w-[100vw] max-w-[500px] justify-between px-2 text-sm">

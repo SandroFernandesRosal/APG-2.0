@@ -10,7 +10,8 @@ import Image from 'next/image'
 interface EditNewProps {
   setOpenEdit: (open: string | null) => void
   id: string
-  img: string
+  img?: string
+  videoUrl?: string
   titulo: string
   conteudo: string
   destacar: boolean
@@ -21,6 +22,7 @@ export default function EditNew({
   setOpenEdit,
   id,
   img,
+  videoUrl,
   titulo,
   conteudo,
   destacar,
@@ -29,7 +31,10 @@ export default function EditNew({
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [destaque, setDestaque] = useState<boolean>(destacar)
-  const [preview, setPreview] = useState<string | null>(null)
+  const [mediaPreview, setMediaPreview] = useState<{
+    url: string
+    type: 'image' | 'video'
+  } | null>(null)
   const [isEditing, setIsEditing] = useState(false)
 
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -41,34 +46,52 @@ export default function EditNew({
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setIsEditing(true)
+
     const form = formRef.current
-    const fileInput = form?.querySelector(
-      'input[type="file"]',
+    const mediaInput = form?.querySelector(
+      'input[name="mediaFile"]',
     ) as HTMLInputElement
-    const fileToUpload = fileInput?.files?.[0]
 
-    let coverUrl = ''
+    const mediaFile = mediaInput?.files?.[0]
 
-    if (fileToUpload) {
+    let coverUrl = img || ''
+    let newVideoUrl = videoUrl || ''
+
+    // Se um novo arquivo foi selecionado, fazer upload
+    if (mediaFile) {
+      const mediaFormData = new FormData()
+      mediaFormData.append('file', mediaFile)
+
       try {
-        const uploadFormData = new FormData()
-        uploadFormData.append('file', fileToUpload)
-
         const uploadResponse = await fetch('/api/upload', {
           method: 'POST',
-          body: uploadFormData,
+          body: mediaFormData,
         })
 
-        if (!uploadResponse.ok) throw new Error('Erro ao enviar imagem')
+        if (!uploadResponse.ok) throw new Error('Erro ao enviar arquivo')
 
         const uploadData = await uploadResponse.json()
-        coverUrl = uploadData.fileUrl
+
+        // Determinar se é imagem ou vídeo baseado no tipo MIME
+        if (mediaFile.type.startsWith('image/')) {
+          coverUrl = uploadData.fileUrl
+          newVideoUrl = '' // Limpar vídeo se for imagem
+        } else if (mediaFile.type.startsWith('video/')) {
+          newVideoUrl = uploadData.fileUrl
+          coverUrl = '' // Limpar imagem se for vídeo
+        }
       } catch (error) {
-        console.error('Erro ao enviar imagem:', error)
+        console.error('Erro ao enviar arquivo:', error)
+        setIsEditing(false)
         return
       }
-    } else {
-      coverUrl = img
+    }
+
+    // Verificar se pelo menos um dos dois (imagem ou vídeo) está presente
+    if (!coverUrl && !newVideoUrl) {
+      alert('Você precisa ter pelo menos uma imagem ou um vídeo.')
+      setIsEditing(false)
+      return
     }
 
     try {
@@ -81,7 +104,8 @@ export default function EditNew({
         body: JSON.stringify({
           title: title || titulo,
           content: content || conteudo,
-          coverUrl,
+          coverUrl: coverUrl || undefined,
+          videoUrl: newVideoUrl || undefined,
           page: local,
           destaque,
           role,
@@ -97,21 +121,24 @@ export default function EditNew({
       console.error('Erro ao editar notícia:', response.statusText)
     } catch (error) {
       console.error('Erro ao editar notícia:', error)
+    } finally {
+      setIsEditing(false)
     }
 
     return null
   }
 
-  function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
+  function onMediaSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target
+    if (!files || !files[0]) return
 
-    if (!files) {
-      return
-    }
+    const file = files[0]
+    const previewUrl = URL.createObjectURL(file)
 
-    const previewUrl = URL.createObjectURL(files[0])
+    // Determinar o tipo baseado no MIME type
+    const type = file.type.startsWith('image/') ? 'image' : 'video'
 
-    setPreview(previewUrl)
+    setMediaPreview({ url: previewUrl, type })
   }
 
   return (
@@ -120,7 +147,7 @@ export default function EditNew({
       className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
+      <div className="flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%] max-w-md">
         <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
           Editar Notícia{' '}
           <AiFillCloseCircle
@@ -130,30 +157,52 @@ export default function EditNew({
         </h1>
 
         <label
-          htmlFor="coverUrl"
+          htmlFor="mediaFile"
           className="mb-3 flex cursor-pointer flex-col items-center gap-2 font-bold"
         >
           <p className="flex items-center gap-3 text-black dark:text-white">
             <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-            Anexar nova imagem (até 5mb)
+            Anexar nova imagem ou vídeo (até 50mb)
           </p>
 
-          {preview ? (
-            <Image
-              src={preview}
-              width={200}
-              height={100}
-              alt={titulo}
-              className="aspect-video p-1 border-[1px] border-primary dark:border-secundary"
-            />
-          ) : (
-            <Image
-              src={img}
-              alt={titulo}
-              width={500}
-              height={250}
-              className="aspect-video w-[70%] md:w-[50%] p-1 border-[1px] border-primary dark:border-secundary"
-            />
+          {/* Preview do novo arquivo selecionado */}
+          {mediaPreview &&
+            (mediaPreview.type === 'image' ? (
+              <Image
+                src={mediaPreview.url}
+                width={200}
+                height={100}
+                alt={titulo}
+                className="aspect-video p-1 border-[1px] border-primary dark:border-secundary"
+              />
+            ) : (
+              <video
+                src={mediaPreview.url}
+                controls
+                className="aspect-video w-[200px] p-1 border-[1px] border-primary dark:border-secundary"
+              />
+            ))}
+
+          {/* Mostrar arquivo atual se não houver preview */}
+          {!mediaPreview && (
+            <>
+              {img && (
+                <Image
+                  src={img}
+                  alt={titulo}
+                  width={500}
+                  height={250}
+                  className="aspect-video w-[70%] md:w-[50%] p-1 border-[1px] border-primary dark:border-secundary"
+                />
+              )}
+              {videoUrl && !img && (
+                <video
+                  src={videoUrl}
+                  controls
+                  className="aspect-video w-[200px] p-1 border-[1px] border-primary dark:border-secundary"
+                />
+              )}
+            </>
           )}
         </label>
 
@@ -162,7 +211,6 @@ export default function EditNew({
           type="text"
           name="title"
           id="title"
-          required
           defaultValue={titulo}
           placeholder="Você precisa digitar um título"
           onChange={(e) => setTitle(e.target.value.toLowerCase())}
@@ -172,7 +220,6 @@ export default function EditNew({
           className="input"
           name="content"
           id="content"
-          required
           defaultValue={conteudo}
           placeholder="Você precisa digitar um conteúdo"
           onChange={(e) => setContent(e.target.value)}
@@ -181,9 +228,10 @@ export default function EditNew({
         <input
           className="invisible h-0 w-0"
           type="file"
-          name="coverUrl"
-          id="coverUrl"
-          onChange={onFileSelected}
+          name="mediaFile"
+          id="mediaFile"
+          accept="image/*,video/*"
+          onChange={onMediaSelected}
         />
 
         <div className="mb-4 flex items-center gap-2 p-2">
@@ -205,7 +253,7 @@ export default function EditNew({
 
         <button
           type="submit"
-          className="button !mb-0 flex items-center gap-2 justify-center "
+          className="button !mb-0 flex items-center gap-2 justify-center"
         >
           {isEditing ? (
             <>
