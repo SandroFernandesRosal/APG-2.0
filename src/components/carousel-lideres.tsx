@@ -15,7 +15,7 @@ import AddSobreLider from './crud/AddSobreLider'
 import EditSobreLider from './crud/EditSobreLider'
 import RemoveSobreLider from './crud/RemoveSobreLider'
 import { ArrowDown } from 'lucide-react'
-import { FaCameraRetro } from 'react-icons/fa6'
+import { FaCameraRetro, FaPlus } from 'react-icons/fa6'
 
 export default function CarouselLideres() {
   const { dataSobre, setDataSobre } = useDataSobre()
@@ -108,9 +108,10 @@ export default function CarouselLideres() {
           <>
             {!openNew && (
               <button
-                className="text-white border-secundary border-[1px] px-2 rounded-md hover:text-secundary font-bold"
+                className="flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 border border-white/30"
                 onClick={() => setOpenNew(true)}
               >
+                <FaPlus className="text-sm" />
                 Adicionar Líder
               </button>
             )}
@@ -135,83 +136,69 @@ export default function CarouselLideres() {
             </Slider>
           ) : dataSobre.length === 0 ? (
             <div className="flex flex-col h-full overflow-hidden border-[1px] my-5 border-zinc-300 dark:border-zinc-800 p-5 rounded-lg justify-center items-center">
-              <p>Nenhum líder cadastrado.</p>
+              <FaCameraRetro className="text-6xl text-white/50 mb-4" />
+              <h2 className="text-xl font-bold text-white mb-2">
+                Nenhum líder encontrado
+              </h2>
+              <p className="text-white/70 text-center">
+                Não há líderes cadastrados ainda.
+              </p>
             </div>
           ) : (
             <Slider {...settings} className="w-[80vw] lg:max-w-[1200px] my-5">
-              {dataSobre.map((product: SobreLider) => (
-                <div
-                  key={product.id}
-                  className={`justify-between relative flex flex-col h-[300px] md:h-[400px] rounded-md border-[1px] border-zinc-300 dark:border-zinc-800 group ${
-                    token && 'mb-10 md:mb-14'
-                  }`}
-                >
-                  <div className="h-[100%] relative overflow-hidden">
-                    <div className="group h-full rounded-md overflow-hidden relative">
-                      {product.coverUrl ? (
-                        <>
-                          <div
-                            className="absolute inset-0 bg-cover bg-center blur-sm scale-110 transition-transform duration-500 group-hover:scale-115"
-                            style={{
-                              backgroundImage: `url(${product.coverUrl})`,
-                            }}
+              {dataSobre.map((item) => (
+                <div key={item.id} className="p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative border border-white/20">
+                    <div className="p-6 flex flex-col flex-grow">
+                      <div className="flex items-center justify-center mb-4">
+                        <div className="relative">
+                          <Image
+                            width={120}
+                            height={120}
+                            src={item.coverUrl || '/img/Placeholder.png'}
+                            alt={item.name}
+                            className="h-[120px] w-[120px] rounded-full border-4 border-white/30 object-cover"
                           />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <Image
-                              src={product.coverUrl}
-                              width={300}
-                              height={300}
-                              alt={product.title}
-                              quality={100}
-                              className="relative z-10 h-auto w-auto max-h-full max-w-full group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
-                        </>
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secundary/20 flex items-center justify-center">
-                          <FaCameraRetro className="text-6xl text-primary/50 dark:text-secundary/50" />
                         </div>
-                      )}
-                    </div>
-                  </div>
+                      </div>
 
-                  <div className="hidden z-10 group-hover:flex flex-col gap-1 absolute bottom-0 rounded-b-md h-[50%] bg-black/80 w-full justify-center items-center cursor-pointer border-primary dark:border-secundary border-t-2">
-                    <div className="text-primary z-30">
-                      <p className="text-center px-1 text-xl text-white font-semibold">
-                        {product.name}
-                      </p>
+                      <div className="text-center flex-grow">
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          {item.name}
+                        </h3>
+                        <p className="text-white/80 text-sm mb-4">
+                          {item.title}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex px-2 text-white z-30">
-                      {product.title}
-                    </div>
-                  </div>
 
-                  {token?.role === 'ADMIN' && (
-                    <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
-                      {openEdit !== product.id && (
+                    {token?.role === 'SUPERADMIN' && (
+                      <div className="flex w-full items-start justify-around text-white py-3 h-[170px]">
+                        {openEdit !== item.id && (
+                          <button
+                            className="button !mb-0"
+                            onClick={() => {
+                              setOpenEdit(item.id)
+                              setSelectedProduct(item)
+                            }}
+                          >
+                            Editar
+                          </button>
+                        )}
                         <button
+                          aria-hidden="true"
+                          tabIndex={-1}
                           className="button !mb-0"
                           onClick={() => {
-                            setOpenEdit(product.id)
-                            setSelectedProduct(product)
+                            setShowModal(item.id)
+                            setSelectedProduct(item)
                           }}
                         >
-                          Editar
+                          Remover
                         </button>
-                      )}
-                      <button
-                        aria-hidden="true"
-                        tabIndex={-1}
-                        className="button !mb-0"
-                        onClick={() => {
-                          setShowModal(product.id)
-                          setSelectedProduct(product)
-                        }}
-                      >
-                        Remover
-                      </button>
-                    </div>
-                  )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </Slider>
@@ -219,18 +206,18 @@ export default function CarouselLideres() {
         </div>
       </section>
 
-      {showModal && selectedProduct && (
-        <RemoveSobreLider id={selectedProduct.id} />
-      )}
-
       {openEdit && selectedProduct && (
         <EditSobreLider
+          setOpenEdit={setOpenEdit}
+          id={selectedProduct.id}
           nome={selectedProduct.name}
           titulo={selectedProduct.title}
           img={selectedProduct.coverUrl}
-          id={selectedProduct.id}
-          setOpenEdit={setOpenEdit}
         />
+      )}
+
+      {showModal && selectedProduct && (
+        <RemoveSobreLider id={selectedProduct.id} />
       )}
     </>
   )

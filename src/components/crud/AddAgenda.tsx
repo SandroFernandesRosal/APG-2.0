@@ -82,83 +82,130 @@ export default function AddAgenda({
 
   return (
     <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-full flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%] max-w-md">
-        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-          Adicionar evento{' '}
-          {openAgenda && (
-            <AiFillCloseCircle
-              onClick={() => setOpenAgenda(false)}
-              className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
-            />
-          )}
-        </h1>
+      <div className="flex flex-col items-center justify-center rounded-xl bg-white dark:bg-gray-800 shadow-2xl w-full max-w-2xl my-4">
+        {/* Header */}
+        <div className="flex items-center justify-between w-full p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <h1 className="text-xl font-bold text-gray-800 dark:text-white">
+            Adicionar Evento
+          </h1>
+          <button
+            type="button"
+            onClick={() => setOpenAgenda(false)}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          >
+            <AiFillCloseCircle className="text-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" />
+          </button>
+        </div>
 
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date: Date | null) => setSelectedDate(date)}
-          locale="pt-BR"
-          dateFormat="EEEE - dd/MM/yyyy"
-          placeholderText="Selecione a data"
-          className="input mb-2 z-40 flex place-self-center"
-          required
-        />
+        {/* Content */}
+        <div className="w-full p-4 space-y-4 overflow-y-auto max-h-[60vh]">
+          {/* Form Fields */}
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="date"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
+                Data do Evento
+              </label>
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date: Date | null) => setSelectedDate(date)}
+                locale="pt-BR"
+                dateFormat="EEEE - dd/MM/yyyy"
+                placeholderText="Selecione a data"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
 
-        <input
-          className="input"
-          type="text"
-          name="name"
-          placeholder="Nome do evento"
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
+                Nome do Evento
+              </label>
+              <input
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Digite o nome do evento"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
-        <input
-          className="input"
-          type="time"
-          name="hour"
-          placeholder="Horário do evento"
-          onChange={(e) => setHour(e.target.value)}
-          required
-        />
+            <div>
+              <label
+                htmlFor="hour"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
+                Horário do Evento
+              </label>
+              <input
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                type="time"
+                name="hour"
+                id="hour"
+                onChange={(e) => setHour(e.target.value)}
+                required
+              />
+            </div>
 
-        <label
-          htmlFor="role"
-          className={`font-bold mb-1 ${token?.role === 'ADMIN' && 'hidden'} `}
-        >
-          Selecione a igreja
-        </label>
-        <select
-          id="role"
-          name="role"
-          className="input mb-3"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          required
-          disabled={token?.role === 'ADMIN'}
-        >
-          <option value="">Selecione...</option>
-          <option value="VILADAPENHA">Vila da Penha</option>
-          <option value="MARIAHELENA">Maria Helena</option>
-          <option value="TOMAZINHO">Tomazinho</option>
-        </select>
+            <div>
+              <label
+                htmlFor="role"
+                className={`block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ${token?.role === 'ADMIN' ? 'hidden' : ''}`}
+              >
+                Selecione a igreja
+              </label>
+              <select
+                id="role"
+                name="role"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                required
+                disabled={token?.role === 'ADMIN'}
+              >
+                <option value="">Selecione...</option>
+                <option value="VILADAPENHA">Vila da Penha</option>
+                <option value="MARIAHELENA">Maria Helena</option>
+                <option value="TOMAZINHO">Tomazinho</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-        <button
-          type="submit"
-          className="button !z-0 !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <>
-              <FaSpinner className="animate-spin" />
-              Adicionando evento...
-            </>
-          ) : (
-            'Enviar'
-          )}
-        </button>
+        {/* Footer */}
+        <div className="flex items-center justify-end w-full p-4 border-t border-gray-200 dark:border-gray-700 space-x-3 bg-white dark:bg-gray-800">
+          <button
+            type="button"
+            onClick={() => setOpenAgenda(false)}
+            className="px-6 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-6 py-2 text-sm font-medium text-white bg-primary dark:bg-secundary rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+          >
+            {isSubmitting ? (
+              <>
+                <FaSpinner className="animate-spin" />
+                <span>Adicionando...</span>
+              </>
+            ) : (
+              <span>Adicionar Evento</span>
+            )}
+          </button>
+        </div>
       </div>
     </form>
   )

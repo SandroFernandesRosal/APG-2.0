@@ -1,5 +1,5 @@
 'use client'
-import { FaArrowRight } from 'react-icons/fa'
+import { FaArrowRight, FaPlus } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -101,9 +101,12 @@ export default function CarouselAgenda({ title }: { title: string }) {
         {podeAdicionar && (
           <div className="my-4">
             {!openAgenda ? (
-              <button className="button" onClick={() => setOpenAgenda(true)}>
-                {' '}
-                Adicionar evento{' '}
+              <button
+                className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-secundary text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                onClick={() => setOpenAgenda(true)}
+              >
+                <FaPlus className="text-sm" />
+                Adicionar evento
               </button>
             ) : (
               <div className="w-full max-w-2xl">

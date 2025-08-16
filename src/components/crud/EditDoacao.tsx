@@ -75,95 +75,163 @@ export default function EditDoacao({
   }
 
   return (
-    <form
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
-      onSubmit={handleSubmit}
-    >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
-        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-          Editar doação{' '}
+    <div className="fixed left-0 top-0 z-50 flex min-h-screen w-full items-center justify-center bg-bgdark/50 dark:bg-bglight/30 p-4">
+      <div className="w-full max-w-2xl bg-bglight dark:bg-bgdark rounded-lg shadow-xl">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+          <h1 className="text-xl font-bold text-primary dark:text-secundary">
+            Editar Doação
+          </h1>
           <AiFillCloseCircle
             onClick={() => setOpenEdit(null)}
-            className="cursor-pointer text-2xl font-bold text-black dark:text-white"
+            className="cursor-pointer text-2xl text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
           />
-        </h1>
-        <input
-          className="input mt-2"
-          type="text"
-          name="local"
-          required
-          placeholder="Digite o local"
-          value={local}
-          onChange={(e) => setLocal(e.target.value)}
-        />
-        <input
-          className="input"
-          type="text"
-          name="banco"
-          required
-          placeholder="Digite o nome do banco"
-          value={banco}
-          onChange={(e) => setBanco(e.target.value)}
-        />
-        <input
-          className="input"
-          type="text"
-          name="conta"
-          required
-          placeholder="Digite número da conta"
-          value={conta}
-          onChange={(e) => setConta(e.target.value)}
-        />
-        <input
-          className="input"
-          type="text"
-          name="agencia"
-          required
-          placeholder="Digite número da agência"
-          value={agencia}
-          onChange={(e) => setAgencia(e.target.value)}
-        />
-        <input
-          className="input"
-          type="text"
-          name="nomebanco"
-          required
-          placeholder="Digite nome titular da conta"
-          value={nomebanco}
-          onChange={(e) => setNomeBanco(e.target.value)}
-        />
-        <input
-          className="input"
-          type="text"
-          name="pix"
-          required
-          placeholder="Digite o pix"
-          value={pix}
-          onChange={(e) => setPix(e.target.value)}
-        />
-        <input
-          className="input"
-          type="text"
-          name="nomepix"
-          required
-          placeholder="Digite nome do titular do pix"
-          value={nomepix}
-          onChange={(e) => setNomePix(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="button !mb-0 flex items-center gap-2 justify-center"
-        >
-          {isEditing ? (
-            <>
-              <FaSpinner className="animate-spin" />
-              Editando igreja...
-            </>
-          ) : (
-            'Editar'
-          )}
-        </button>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          {/* Conteúdo scrollável */}
+          <div className="overflow-y-auto max-h-[60vh] p-4">
+            <div className="space-y-4">
+              {/* Local */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Local
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="local"
+                  required
+                  placeholder="Digite o local"
+                  value={local}
+                  onChange={(e) => setLocal(e.target.value)}
+                />
+              </div>
+
+              {/* Banco */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Banco
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="banco"
+                  required
+                  placeholder="Digite o nome do banco"
+                  value={banco}
+                  onChange={(e) => setBanco(e.target.value)}
+                />
+              </div>
+
+              {/* Conta */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Conta
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="conta"
+                  required
+                  placeholder="Digite número da conta"
+                  value={conta}
+                  onChange={(e) => setConta(e.target.value)}
+                />
+              </div>
+
+              {/* Agência */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Agência
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="agencia"
+                  required
+                  placeholder="Digite número da agência"
+                  value={agencia}
+                  onChange={(e) => setAgencia(e.target.value)}
+                />
+              </div>
+
+              {/* Nome do Banco */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Nome do Titular da Conta
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="nomebanco"
+                  required
+                  placeholder="Digite nome titular da conta"
+                  value={nomebanco}
+                  onChange={(e) => setNomeBanco(e.target.value)}
+                />
+              </div>
+
+              {/* PIX */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  PIX
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="pix"
+                  required
+                  placeholder="Digite o pix"
+                  value={pix}
+                  onChange={(e) => setPix(e.target.value)}
+                />
+              </div>
+
+              {/* Nome do PIX */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Nome do Titular do PIX
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="nomepix"
+                  required
+                  placeholder="Digite nome do titular do pix"
+                  value={nomepix}
+                  onChange={(e) => setNomePix(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="flex items-center justify-end gap-3 p-4 border-t border-gray-200 dark:border-gray-700">
+            <button
+              type="button"
+              onClick={() => setOpenEdit(null)}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="button flex items-center gap-2"
+              disabled={isEditing}
+            >
+              {isEditing ? (
+                <>
+                  <FaSpinner className="animate-spin" />
+                  Editando doação...
+                </>
+              ) : (
+                'Editar'
+              )}
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   )
 }

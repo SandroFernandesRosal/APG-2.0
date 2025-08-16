@@ -20,6 +20,7 @@ import {
   Copy,
   KeyRound,
 } from 'lucide-react'
+import { FaPlus } from 'react-icons/fa6'
 
 export default function CarouselDoacao() {
   const [data, setData] = useState<Doacao[]>([])
@@ -115,7 +116,11 @@ export default function CarouselDoacao() {
         {podeGerenciar && (
           <>
             {openDoacao === false && (
-              <button className="button" onClick={() => setOpenDoacao(true)}>
+              <button
+                className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-secundary text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mb-4"
+                onClick={() => setOpenDoacao(true)}
+              >
+                <FaPlus className="text-sm" />
                 Adicionar igreja
               </button>
             )}

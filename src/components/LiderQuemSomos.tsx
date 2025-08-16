@@ -6,7 +6,7 @@ import AddSobreLider from './crud/AddSobreLider'
 import RemoveSobreLider from './crud/RemoveSobreLider'
 import EditSobreLider from './crud/EditSobreLider'
 import { SobreLider } from '@/data/types/sobrelider'
-import { FaCameraRetro } from 'react-icons/fa'
+import { FaCameraRetro, FaPlus } from 'react-icons/fa'
 
 interface LiderQuemSomosProps {
   dataSobreLider: SobreLider[]
@@ -24,8 +24,12 @@ export default function LiderQuemSomos({
       {token?.role === 'SUPERADMIN' && (
         <>
           {open === false && (
-            <button className="button" onClick={() => setOpen(true)}>
-              Adicionar lider
+            <button
+              className="!flex !items-center !gap-2 !px-6 !py-3 !bg-primary dark:!bg-secundary !text-white !font-semibold !rounded-lg hover:!bg-primary/90 dark:hover:!bg-secundary/90 !transition-all !duration-200 !shadow-lg hover:!shadow-xl !transform hover:!scale-105 !mb-4"
+              onClick={() => setOpen(true)}
+            >
+              <FaPlus className="text-sm" />
+              Adicionar líder
             </button>
           )}
 

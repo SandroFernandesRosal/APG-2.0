@@ -106,91 +106,129 @@ export default function EditSobreContent({
   }
 
   return (
-    <form
-      ref={formRef}
-      className="fixed left-0 top-0  z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30 text-textlight dark:text-textdark"
-      onSubmit={handleSubmit}
-    >
-      <div className="flex flex-col items-center justify-center  rounded-lg bg-bglight py-6 dark:bg-bgdark w-[80%]  max-w-md">
-        <h1 className="z-20 mb-2 flex items-center justify-center gap-3 text-lg font-bold text-primary dark:text-secundary">
-          Editar Notícia{' '}
+    <div className="fixed left-0 top-0 z-50 flex min-h-screen w-full items-center justify-center bg-bgdark/50 dark:bg-bglight/30 p-4">
+      <div className="w-full max-w-2xl bg-bglight dark:bg-bgdark rounded-lg shadow-xl">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+          <h1 className="text-xl font-bold text-primary dark:text-secundary">
+            Editar História
+          </h1>
           <AiFillCloseCircle
             onClick={() => setOpenEdit(null)}
-            className="cursor-pointer text-2xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
+            className="cursor-pointer text-2xl text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50"
           />
-        </h1>
+        </div>
 
-        <label
-          htmlFor="coverUrl"
-          className="mb-3 flex cursor-pointer flex-col items-center gap-2  font-bold"
-        >
-          <p className="flex items-center gap-3">
-            <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-            Anexar nova imagem (até 5mb)
-          </p>
+        {/* Área de upload única no topo */}
+        <div className="w-full p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 text-textlight dark:text-textdark">
+              <FaCameraRetro className="text-xl text-primary dark:text-secundary" />
+              <span className="font-semibold">Imagem da história</span>
+            </div>
+            <div className="relative">
+              {preview ? (
+                <Image
+                  src={preview}
+                  width={200}
+                  height={100}
+                  alt={titulo}
+                  className="aspect-video w-[200px] rounded-lg object-cover"
+                />
+              ) : (
+                <Image
+                  src={img}
+                  alt={titulo}
+                  width={500}
+                  height={250}
+                  className="aspect-video w-[200px] rounded-lg object-cover"
+                />
+              )}
+            </div>
+          </div>
+        </div>
 
-          {preview ? (
-            <Image
-              src={preview}
-              width={200}
-              height={100}
-              alt={titulo}
-              className="aspect-video"
-            />
-          ) : (
-            <Image
-              src={img}
-              alt={titulo}
-              width={500}
-              height={250}
-              className="aspect-video w-[70%] md:w-[50%]"
-            />
-          )}
-        </label>
+        <form ref={formRef} onSubmit={handleSubmit}>
+          {/* Conteúdo scrollável */}
+          <div className="overflow-y-auto max-h-[60vh] p-4">
+            <div className="space-y-4">
+              {/* Título */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Título
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark focus:ring-2 focus:ring-primary focus:border-transparent"
+                  type="text"
+                  name="title"
+                  id="title"
+                  required
+                  defaultValue={titulo}
+                  placeholder="Você precisa digitar um título"
+                  onChange={(e) => setTitle(e.target.value.toLowerCase())}
+                />
+              </div>
+
+              {/* Conteúdo */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-textlight dark:text-textdark">
+                  Conteúdo
+                </label>
+                <textarea
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-textlight dark:text-textdark resize-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  name="content"
+                  id="content"
+                  required
+                  defaultValue={conteudo}
+                  placeholder="Você precisa digitar um conteúdo"
+                  onChange={(e) => setContent(e.target.value)}
+                  rows={6}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="flex items-center justify-end gap-3 p-4 border-t border-gray-200 dark:border-gray-700">
+            <label
+              htmlFor="coverUrl"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+            >
+              <FaCameraRetro className="text-primary dark:text-secundary" />
+              Nova imagem
+            </label>
+            <button
+              type="button"
+              onClick={() => setOpenEdit(null)}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="button flex items-center gap-2"
+              disabled={isEditing}
+            >
+              {isEditing ? (
+                <>
+                  <FaSpinner className="animate-spin" />
+                  Editando história...
+                </>
+              ) : (
+                'Editar'
+              )}
+            </button>
+          </div>
+        </form>
 
         <input
-          className="input mt-4"
-          type="text"
-          name="title"
-          id="title"
-          required
-          defaultValue={titulo}
-          placeholder="Você precisa digitar um título"
-          onChange={(e) => setTitle(e.target.value.toLowerCase())}
-        />
-
-        <textarea
-          className="input"
-          name="content"
-          id="content"
-          required
-          defaultValue={conteudo}
-          placeholder="Você precisa digitar um conteúdo"
-          onChange={(e) => setContent(e.target.value)}
-        />
-
-        <input
-          className="invisible h-0 w-0"
+          className="hidden"
           type="file"
           name="coverUrl"
           id="coverUrl"
           onChange={onFileSelected}
         />
-
-        <button
-          type="submit"
-          className="button !mb-0 flex items-center gap-2 justify-center"
-        >
-          {isEditing ? (
-            <>
-              <FaSpinner className="animate-spin" />
-              Editando história...
-            </>
-          ) : (
-            'Editar'
-          )}
-        </button>
       </div>
-    </form>
+    </div>
   )
 }

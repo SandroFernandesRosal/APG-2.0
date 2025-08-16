@@ -115,82 +115,144 @@ export default function AddTestemunho({
   return (
     <form
       ref={formRef}
-      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-bgdark/50 dark:bg-bglight/30"
+      className="fixed left-0 top-0 z-50 flex min-h-screen w-[100vw] flex-col items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
       onSubmit={handleSubmit}
     >
-      <div className="relative flex flex-col items-center justify-center rounded-lg bg-bglight py-6 dark:bg-bgdark w-[90%]  max-w-3xl">
-        <button type="button" onClick={() => setOpen(false)}>
-          <AiFillCloseCircle className=" absolute right-2 top-2 text-3xl font-bold text-primary dark:text-secundary hover:text-primary/50 dark:hover:text-secundary/50" />
-        </button>
-        {avatarUrl && (
-          <Image
-            width={120}
-            height={120}
-            src={avatarUrl}
-            alt={name}
-            className="p-[2px] mr-1 h-[120px] w-[120px] rounded-full border-[1px] border-primary dark:border-secundary"
-          />
-        )}
+      <div className="flex flex-col items-center justify-center rounded-xl bg-white dark:bg-gray-800 shadow-2xl w-full max-w-2xl my-4">
+        {/* Header */}
+        <div className="flex items-center justify-between w-full p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <h1 className="text-xl font-bold text-gray-800 dark:text-white">
+            Adicionar Testemunho
+          </h1>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          >
+            <AiFillCloseCircle className="text-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" />
+          </button>
+        </div>
 
-        <div className="flex w-[90%] flex-col gap-2 rounded-2xl border-[1px] border-zinc-300 bg-bglightsecundary dark:border-zinc-800 dark:bg-bgdarksecundary md:w-[70%] lg:min-w-[700px] mt-4">
-          <div className="flex items-center justify-between">
-            <p className="pl-3 text-lg font-bold">{name}</p>
-          </div>
-
-          <textarea
-            className="mx-1 flex w-full flex-col gap-2 border-none bg-bglightsecundary outline-none ring-0 focus:ring-0 dark:bg-bgdarksecundary"
-            name="content"
-            required
-            placeholder="Escreva seu testemunho"
-            onChange={(e) => setContent(e.target.value)}
-          />
-
-          {preview && (
-            <div className="mb-4 flex w-full items-center justify-center">
+        {/* User Info */}
+        <div className="w-full p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-center space-x-4">
+            {avatarUrl && (
               <Image
-                src={preview}
-                width={200}
-                height={200}
-                alt="imagem perfil"
-                className="aspect-video w-[200px]"
+                width={80}
+                height={80}
+                src={avatarUrl}
+                alt={name}
+                className="h-[80px] w-[80px] rounded-full border-2 border-primary dark:border-secundary"
               />
+            )}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+                {name}
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Compartilhando um testemunho
+              </p>
             </div>
-          )}
-
-          <div className="mx-2 mb-2 flex w-full justify-center gap-4">
-            <label
-              htmlFor="coverUrl"
-              className="flex cursor-pointer items-center gap-2 font-bold"
-            >
-              <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-              Anexar foto (Opcional)
-            </label>
-
-            <button
-              type="submit"
-              className="button !mb-0 flex items-center gap-2 justify-center disabled:opacity-60"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <FaSpinner className="animate-spin" />
-                  Enviando testemunho...
-                </>
-              ) : (
-                'Enviar'
-              )}
-            </button>
           </div>
         </div>
 
-        <input
-          className="invisible h-0 w-0"
-          type="file"
-          name="coverUrl"
-          id="coverUrl"
-          placeholder="Digite a url da notícia"
-          onChange={onFileSelected}
-        />
+        {/* Área de upload única no topo - SEMPRE VISÍVEL */}
+        <div className="w-full p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800 min-h-[120px] flex-shrink-0">
+            <p className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-3">
+              Para adicionar uma foto (opcional):
+            </p>
+            <label
+              htmlFor="coverUrl"
+              className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-blue-300 dark:border-blue-600 rounded-lg cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 transition-colors bg-white dark:bg-gray-700"
+            >
+              <div className="flex flex-col items-center justify-center">
+                <FaCameraRetro className="w-6 h-6 mb-1 text-blue-500 dark:text-blue-400" />
+                <p className="text-xs text-blue-600 dark:text-blue-400">
+                  <span className="font-semibold">Clique para anexar</span> uma foto
+                </p>
+                <p className="text-xs text-blue-500 dark:text-blue-500">
+                  JPG, PNG (opcional)
+                </p>
+              </div>
+              <input
+                className="hidden"
+                type="file"
+                name="coverUrl"
+                id="coverUrl"
+                accept="image/*"
+                onChange={onFileSelected}
+              />
+            </label>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="w-full p-4 space-y-4 overflow-y-auto max-h-[60vh]">
+          {/* Media Preview */}
+          {preview && (
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Preview da foto selecionada:
+              </p>
+              <div className="flex justify-center">
+                <Image
+                  src={preview}
+                  width={200}
+                  height={200}
+                  alt="imagem perfil"
+                  className="aspect-video w-[200px] rounded-lg border border-gray-200 dark:border-gray-600"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Form Fields */}
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="content"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
+                Seu Testemunho
+              </label>
+              <textarea
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none"
+                name="content"
+                id="content"
+                rows={6}
+                placeholder="Escreva seu testemunho aqui..."
+                onChange={(e) => setContent(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end w-full p-4 border-t border-gray-200 dark:border-gray-700 space-x-3 bg-white dark:bg-gray-800">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="px-6 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-6 py-2 text-sm font-medium text-white bg-primary dark:bg-secundary rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+          >
+            {isSubmitting ? (
+              <>
+                <FaSpinner className="animate-spin" />
+                <span>Enviando...</span>
+              </>
+            ) : (
+              <span>Enviar Testemunho</span>
+            )}
+          </button>
+        </div>
       </div>
     </form>
   )

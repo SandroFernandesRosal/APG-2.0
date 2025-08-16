@@ -6,6 +6,7 @@ import Socials from './Socials'
 import AddContatos from './crud/AddContatos'
 import SkeletonContato from './skeleton/SkeletonContato'
 import { Contato } from '@/data/types/contato'
+import { FaPlus } from 'react-icons/fa'
 
 export default function Contatos() {
   const { dataContato, setDataContato } = useDataContato()
@@ -15,15 +16,16 @@ export default function Contatos() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
         const response = await fetch('/api/contato')
         if (!response.ok) {
-          throw new Error('Erro ao buscar contatos')
+          throw new Error('Falha ao carregar contatos')
         }
         const data = await response.json()
         setDataContato(data)
       } catch (error) {
-        console.error(error)
+        console.error('Erro ao buscar contatos:', error)
       } finally {
         setLoading(false)
       }
@@ -38,7 +40,11 @@ export default function Contatos() {
         <>
           {!openContato && (
             <div className="flex w-full justify-center">
-              <button className="button" onClick={() => setOpenContato(true)}>
+              <button
+                className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-secundary text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mb-6"
+                onClick={() => setOpenContato(true)}
+              >
+                <FaPlus className="text-sm" />
                 Adicionar contato
               </button>
             </div>

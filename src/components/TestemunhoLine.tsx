@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useTokenIgreja } from '@/hooks/useTokenIgreja'
 import { useToken } from '@/hooks/useToken'
 import AddTestemunho from '@/components/crud/AddTestemunho'
+import { FaPlus } from 'react-icons/fa'
 
 export interface testemunhoProps {
   id: string
@@ -127,7 +128,11 @@ export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
               )}
 
               {open === false && (
-                <button className="button" onClick={() => setOpen(true)}>
+                <button
+                  className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-secundary text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mb-4"
+                  onClick={() => setOpen(true)}
+                >
+                  <FaPlus className="text-sm" />
                   Adicionar testemunho
                 </button>
               )}
@@ -165,7 +170,22 @@ export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
         )}
 
         {hasMore && (
-          <button onClick={loadMore} className="button">
+          <button
+            onClick={loadMore}
+            className="flex items-center gap-2 px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
             Carregar mais
           </button>
         )}
