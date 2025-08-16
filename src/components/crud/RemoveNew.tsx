@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import ShowModal from '../showModal'
 import { useShowModal } from '@/store/useStore'
-import { FaTrash } from 'react-icons/fa'
 
 interface RemoveNewProps {
   id: string
