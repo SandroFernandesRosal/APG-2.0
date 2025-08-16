@@ -97,7 +97,7 @@ export default function NoticiaVilaDaPenha({ params }: ParamsProps) {
         </h1>
         {selectedItem ? (
           <>
-                        {selectedItem.coverUrl && (
+            {selectedItem.coverUrl && (
               <Image
                 src={selectedItem.coverUrl}
                 alt={selectedItem.title}
