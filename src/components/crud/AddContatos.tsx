@@ -6,14 +6,10 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 
 interface AddContatoProps {
-  openContato: boolean
   setOpenContato: (open: boolean) => void
 }
 
-export default function AddContatos({
-  openContato,
-  setOpenContato,
-}: AddContatoProps) {
+export default function AddContatos({ setOpenContato }: AddContatoProps) {
   const [local, setLocal] = useState<string>('')
   const [whatsapp, setWhatsapp] = useState<string>('')
   const [facebook, setFacebook] = useState<string>('')

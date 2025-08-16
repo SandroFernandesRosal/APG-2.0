@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Trash2 } from 'lucide-react'
 import { format } from 'date-fns'
 import { FaSpinner } from 'react-icons/fa'
 import { useToken } from '@/hooks/useToken'

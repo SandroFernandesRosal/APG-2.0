@@ -8,14 +8,10 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 interface AddSobreContentProps {
-  open: boolean
   setOpen: (open: boolean) => void
 }
 
-export default function AddSobreContent({
-  open,
-  setOpen,
-}: AddSobreContentProps) {
+export default function AddSobreContent({ setOpen }: AddSobreContentProps) {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [preview, setPreview] = useState<string | null>(null)
@@ -141,7 +137,8 @@ export default function AddSobreContent({
               <div className="flex flex-col items-center justify-center">
                 <FaCameraRetro className="w-6 h-6 mb-1 text-blue-500 dark:text-blue-400" />
                 <p className="text-xs text-blue-600 dark:text-blue-400">
-                  <span className="font-semibold">Clique para anexar</span> uma foto
+                  <span className="font-semibold">Clique para anexar</span> uma
+                  foto
                 </p>
                 <p className="text-xs text-blue-500 dark:text-blue-500">
                   JPG, PNG (até 50MB)

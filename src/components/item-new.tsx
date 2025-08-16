@@ -43,7 +43,7 @@ export default function ItemNew({
     <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800">
       <div className="h-48 relative overflow-hidden">
         <Link
-          href={`/noticias/${page}/${url}`}
+          href={`/noticias/${page.toLowerCase()}/${url}`}
           className="block h-full w-full"
           tabIndex={-1}
         >
@@ -96,7 +96,7 @@ export default function ItemNew({
           <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
             <span>{formatDate(createdAt)}</span>
             <Link
-              href={`/noticias/${page}/${url}`}
+              href={`/noticias/${page.toLowerCase()}/${url}`}
               className="font-semibold text-primary dark:text-secundary hover:underline"
             >
               Ler mais

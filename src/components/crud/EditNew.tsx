@@ -114,7 +114,7 @@ export default function EditNew({
           content: content || conteudo,
           coverUrl: coverUrl || undefined,
           videoUrl: newVideoUrl || undefined,
-          page: local,
+          page: local.toLowerCase(),
           destaque,
           role,
         }),

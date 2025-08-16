@@ -15,14 +15,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 registerLocale('pt-BR', ptBR)
 
 interface AddAgendaProps {
-  openAgenda: boolean
   setOpenAgenda: (open: boolean) => void
 }
 
-export default function AddAgenda({
-  openAgenda,
-  setOpenAgenda,
-}: AddAgendaProps) {
+export default function AddAgenda({ setOpenAgenda }: AddAgendaProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [name, setName] = useState<string>('')
   const [hour, setHour] = useState<string>('')

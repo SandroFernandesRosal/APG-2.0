@@ -61,6 +61,10 @@ export default function CarouselNews({
     return `${day} de ${month} de ${year}`
   }
 
+  const convertLocalToLowercase = (local: string) => {
+    return local.toLowerCase()
+  }
+
   const podeAdicionar =
     token &&
     (token.role === 'SUPERADMIN' ||
@@ -171,7 +175,7 @@ export default function CarouselNews({
                     <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800">
                       <div className="h-48 relative overflow-hidden">
                         <Link
-                          href={`/noticias/${product.page}/${product.url}`}
+                          href={`/noticias/${convertLocalToLowercase(product.page)}/${product.url}`}
                           className="block h-full w-full"
                           tabIndex={-1}
                         >
@@ -224,7 +228,7 @@ export default function CarouselNews({
                           <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
                             <span>{formatDate(product.createdAt)}</span>
                             <Link
-                              href={`/noticias/${product.page}/${product.url}`}
+                              href={`/noticias/${convertLocalToLowercase(product.page)}/${product.url}`}
                               className="font-semibold text-primary dark:text-secundary hover:underline"
                             >
                               Ler mais
