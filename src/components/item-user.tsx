@@ -119,9 +119,9 @@ export default function ItemUser({
       </div>
 
       {modalOpen && (
-        <div className="absolute top-20 right-[15%] lg:right-[20%] bg-white dark:bg-gray-800 z-30 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 min-w-[320px] overflow-hidden">
+        <div className="absolute top-20 right-[15%] lg:right-[20%] bg-white dark:bg-gray-800 z-30 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 min-w-[320px] max-h-[80vh]">
           {/* Header */}
-          <div className="relative bg-gradient-to-r from-primary/10 to-secundary/10 dark:from-primary/20 dark:to-secundary/20 p-4">
+          <div className="relative bg-gradient-to-r from-primary/10 to-secundary/10 dark:from-primary/20 dark:to-secundary/20 p-4 sticky top-0 z-10">
             <button
               onClick={toggleModal}
               className="absolute top-3 right-3 p-1 rounded-full bg-white/80 dark:bg-gray-700/80 hover:bg-white dark:hover:bg-gray-700 transition-colors"
@@ -204,83 +204,64 @@ export default function ItemUser({
             </div>
           </div>
 
-          {/* Navigation Section */}
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
-              Navegação
-            </h3>
-            <div className="grid grid-cols-2 gap-2">
-              {navItems.map((item) => {
-                const Icon = item.icon
-                const isActive = activePage === item.href
-
-                return (
-                  <Link key={item.href} href={item.href}>
-                    <div
-                      className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 cursor-pointer group ${
-                        isActive
-                          ? 'bg-gradient-to-r ' +
-                            item.color +
-                            ' text-white shadow-md'
-                          : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
-                      }`}
-                      onClick={() => {
-                        handleClick?.(item.href)
-                        toggleModal()
-                      }}
-                    >
-                      <Icon
-                        className={`text-lg mb-1 ${
-                          isActive
-                            ? 'text-white'
-                            : 'text-primary dark:text-secundary'
-                        }`}
-                      />
-                      <p
-                        className={`text-xs font-bold text-center ${
-                          isActive ? 'text-white' : ''
-                        }`}
-                      >
-                        {item.label}
-                      </p>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* User Actions - Apenas para usuários autenticados */}
-          {token && (
-            <div className="p-4">
+          {/* Content with scroll */}
+          <div className="overflow-y-auto max-h-[calc(80vh-120px)]">
+            {/* Navigation Section */}
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
-                Configurações
+                Navegação
               </h3>
               <div className="grid grid-cols-2 gap-2">
-                <Link
-                  href={'/perfil'}
-                  className="flex flex-col items-center justify-center p-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                >
-                  <svg
-                    className="w-5 h-5 mb-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                  <span className="text-xs font-bold">Perfil</span>
-                </Link>
+                {navItems.map((item) => {
+                  const Icon = item.icon
+                  const isActive = activePage === item.href
 
-                {(role === 'SUPERADMIN' || role === 'ADMIN') && (
+                  return (
+                    <Link key={item.href} href={item.href}>
+                      <div
+                        className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 cursor-pointer group ${
+                          isActive
+                            ? 'bg-gradient-to-r ' +
+                              item.color +
+                              ' text-white shadow-md'
+                            : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => {
+                          handleClick?.(item.href)
+                          toggleModal()
+                        }}
+                      >
+                        <Icon
+                          className={`text-lg mb-1 ${
+                            isActive
+                              ? 'text-white'
+                              : 'text-primary dark:text-secundary'
+                          }`}
+                        />
+                        <p
+                          className={`text-xs font-bold text-center ${
+                            isActive ? 'text-white' : ''
+                          }`}
+                        >
+                          {item.label}
+                        </p>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* User Actions - Apenas para usuários autenticados */}
+            {token && (
+              <div className="p-4">
+                <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
+                  Configurações
+                </h3>
+                <div className="grid grid-cols-2 gap-2">
                   <Link
-                    href={'/usuarios'}
-                    className="flex flex-col items-center justify-center p-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    href={'/perfil'}
+                    className="flex flex-col items-center justify-center p-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                   >
                     <svg
                       className="w-5 h-5 mb-1"
@@ -292,49 +273,81 @@ export default function ItemUser({
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                       />
                     </svg>
-                    <span className="text-xs font-bold">Usuários</span>
+                    <span className="text-xs font-bold">Perfil</span>
                   </Link>
-                )}
 
-                <LogoutIgreja
-                  className="flex flex-col items-center justify-center p-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
-                  showIcon={true}
-                />
-
-                <div
-                  className="flex flex-col items-center justify-center p-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-white rounded-lg transition-colors cursor-pointer border border-gray-200 dark:border-transparent group"
-                  onClick={handleThemeChange}
-                >
-                  <div className="w-6 h-6 mb-1 flex items-center justify-center">
-                    {theme === 'dark' ? (
+                  {(role === 'SUPERADMIN' || role === 'ADMIN') && (
+                    <Link
+                      href={'/usuarios'}
+                      className="flex flex-col items-center justify-center p-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    >
                       <svg
-                        className="w-6 h-6 text-yellow-400"
+                        className="w-5 h-5 mb-1"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <circle cx="12" cy="12" r="5" />
-                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                        />
                       </svg>
-                    ) : (
-                      <svg
-                        className="w-6 h-6 text-purple-800"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                      </svg>
-                    )}
+                      <span className="text-xs font-bold">Usuários</span>
+                    </Link>
+                  )}
+
+                  <LogoutIgreja
+                    className="flex flex-col items-center justify-center p-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                    showIcon={true}
+                  />
+
+                  <div
+                    className="flex flex-col items-center justify-center p-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-white rounded-lg transition-colors cursor-pointer border border-gray-200 dark:border-transparent group"
+                    onClick={handleThemeChange}
+                  >
+                    <div className="w-6 h-6 mb-1 flex items-center justify-center">
+                      {theme === 'dark' ? (
+                        <svg
+                          className="w-6 h-6 text-yellow-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle cx="12" cy="12" r="5" />
+                          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-6 h-6 text-purple-800"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className="text-xs font-bold">Tema</span>
                   </div>
-                  <span className="text-xs font-bold">Tema</span>
                 </div>
               </div>
+            )}
+
+            {/* Footer Section */}
+            <div className="p-6 border-t border-gray-200 dark:border-gray-700 mt-4">
+              <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+                <p className="font-bold">Igreja Alcançados pela Graça</p>
+                <p className="text-xs mt-1 font-bold">
+                  Conectando vidas através da fé
+                </p>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>

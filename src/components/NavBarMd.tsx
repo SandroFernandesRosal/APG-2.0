@@ -58,7 +58,7 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
   ]
 
   return (
-    <nav className="font-Roboto hidden md:flex items-center justify-center gap-4 p-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700">
+    <nav className="font-Roboto hidden md:flex items-center justify-center gap-4 p-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700 max-h-[80vh] overflow-y-auto">
       <div className="flex items-center gap-3 max-w-6xl w-full justify-center flex-wrap">
         {navItems.map((item) => {
           const Icon = item.icon
