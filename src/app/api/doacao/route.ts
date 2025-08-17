@@ -18,6 +18,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: user.sub },
+    select: { name: true },
+  })
+
   const body = await req.json()
 
   const bodySchema = z.object({
@@ -54,7 +60,7 @@ export async function POST(req: NextRequest) {
       entityType: 'Doacao',
       entityId: doacao.id,
       userId: user.sub,
-      userName: user.name || 'Administrador',
+      userName: userData?.name || 'Administrador',
       userRole: user.role,
       newData: doacao,
     })
