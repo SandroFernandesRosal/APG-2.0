@@ -2,6 +2,37 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { authMiddleware } from '@/lib/auth'
 
+// Tipos para as estatísticas
+interface ActionStat {
+  action: string
+  _count: {
+    action: number
+  }
+}
+
+interface EntityStat {
+  entityType: string
+  _count: {
+    entityType: number
+  }
+}
+
+// Tipo para o where clause
+interface WhereClause {
+  action?: string
+  entityType?: string
+  userId?: string
+  timestamp?: {
+    gte?: Date
+    lte?: Date
+  }
+  OR?: Array<{
+    userName?: { contains: string; mode: 'insensitive' }
+    entityType?: { contains: string; mode: 'insensitive' }
+    action?: { contains: string; mode: 'insensitive' }
+  }>
+}
+
 export async function GET(req: NextRequest) {
   const user = await authMiddleware(req)
   if (!user || user.role !== 'SUPERADMIN') {
@@ -24,7 +55,7 @@ export async function GET(req: NextRequest) {
   const search = searchParams.get('search')
 
   // Construir where clause
-  const where: any = {}
+  const where: WhereClause = {}
 
   if (action) {
     where.action = action
@@ -57,12 +88,11 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Testar se o modelo AuditLog está disponível
-    console.log('Prisma client:', prisma)
-    console.log('AuditLog model:', (prisma as any).auditLog)
+    // Verificar se o modelo AuditLog está disponível no Prisma client
+    const prismaClient = prisma as unknown as Record<string, unknown>
+    const auditLogModel = prismaClient.auditLog
 
-    // Se o modelo não estiver disponível, retornar dados vazios
-    if (!(prisma as any).auditLog) {
+    if (!auditLogModel || typeof auditLogModel !== 'object') {
       console.log('Modelo AuditLog não encontrado, retornando dados vazios')
       return NextResponse.json({
         logs: [],
@@ -79,9 +109,35 @@ export async function GET(req: NextRequest) {
       })
     }
 
-    // Se estiver disponível, tentar usar
+    // Cast para o tipo correto do modelo AuditLog
+    const auditLog = auditLogModel as {
+      findMany: (params: {
+        where: WhereClause
+        orderBy: { timestamp: string }
+        skip: number
+        take: number
+        include: {
+          user: {
+            select: {
+              id: boolean
+              name: boolean
+              role: boolean
+              ministryRole: boolean
+            }
+          }
+        }
+      }) => Promise<unknown[]>
+      count: (params: { where: WhereClause }) => Promise<number>
+      groupBy: (params: {
+        by: string[]
+        where: WhereClause
+        _count: Record<string, boolean>
+      }) => Promise<ActionStat[] | EntityStat[]>
+    }
+
+    // Buscar logs e total
     const [logs, total] = await Promise.all([
-      (prisma as any).auditLog.findMany({
+      auditLog.findMany({
         where,
         orderBy: { timestamp: 'desc' },
         skip: offset,
@@ -97,25 +153,25 @@ export async function GET(req: NextRequest) {
           },
         },
       }),
-      (prisma as any).auditLog.count({ where }),
+      auditLog.count({ where }),
     ])
 
     // Calcular estatísticas
-    const stats = await (prisma as any).auditLog.groupBy({
+    const stats = (await auditLog.groupBy({
       by: ['action'],
       where,
       _count: {
         action: true,
       },
-    })
+    })) as ActionStat[]
 
-    const entityStats = await (prisma as any).auditLog.groupBy({
+    const entityStats = (await auditLog.groupBy({
       by: ['entityType'],
       where,
       _count: {
         entityType: true,
       },
-    })
+    })) as EntityStat[]
 
     return NextResponse.json({
       logs,
@@ -126,14 +182,20 @@ export async function GET(req: NextRequest) {
         totalPages: Math.ceil(total / limit),
       },
       stats: {
-        actions: stats.reduce((acc, stat) => {
-          acc[stat.action] = stat._count.action
-          return acc
-        }, {} as Record<string, number>),
-        entities: entityStats.reduce((acc, stat) => {
-          acc[stat.entityType] = stat._count.entityType
-          return acc
-        }, {} as Record<string, number>),
+        actions: stats.reduce(
+          (acc: Record<string, number>, stat: ActionStat) => {
+            acc[stat.action] = stat._count.action
+            return acc
+          },
+          {} as Record<string, number>,
+        ),
+        entities: entityStats.reduce(
+          (acc: Record<string, number>, stat: EntityStat) => {
+            acc[stat.entityType] = stat._count.entityType
+            return acc
+          },
+          {} as Record<string, number>,
+        ),
       },
     })
   } catch (error) {
