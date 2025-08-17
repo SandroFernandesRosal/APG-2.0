@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 const paramsSchema = z.object({ id: z.string().uuid() })
 
@@ -52,6 +53,22 @@ export async function PUT(
     },
   })
 
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logUpdate({
+      entityType: 'Agenda',
+      entityId: id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      oldData: agenda,
+      newData: updated,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
+
   return NextResponse.json(updated)
 }
 
@@ -80,6 +97,21 @@ export async function DELETE(
   }
 
   await prisma.agenda.delete({ where: { id } })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logDelete({
+      entityType: 'Agenda',
+      entityId: id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      oldData: agenda,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json({ message: 'Deletado com sucesso' })
 }

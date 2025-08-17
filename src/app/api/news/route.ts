@@ -3,14 +3,25 @@ import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
 import { randomUUID } from 'crypto'
-import { slugify } from '@/lib/slug'
+import slugify from 'slugify'
+import { AuditLogger } from '@/lib/audit'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
+  const page = searchParams.get('page')
   const offset = parseInt(searchParams.get('offset') || '0', 10)
   const itemsPerPage = 12
 
+  // Construir where clause
+  const where: any = {}
+  
+  // Só filtrar por página se especificado
+  if (page) {
+    where.page = page
+  }
+
   const news = await prisma.new.findMany({
+    where,
     orderBy: { createdAt: 'desc' },
     skip: offset,
     take: itemsPerPage,
@@ -69,6 +80,21 @@ export async function POST(req: NextRequest) {
       },
     })
     console.log('Notícia criada com sucesso:', created.id)
+
+    // Auditoria - não interfere na resposta
+    try {
+      await AuditLogger.logCreate({
+        entityType: 'New',
+        entityId: created.id,
+        userId: user.sub,
+        userName: user.name || 'Usuário',
+        userRole: user.role,
+        newData: created,
+      })
+    } catch (error) {
+      console.error('Erro ao registrar auditoria:', error)
+      // Não quebra a API se a auditoria falhar
+    }
 
     return NextResponse.json(created)
   } catch (error) {

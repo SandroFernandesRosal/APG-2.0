@@ -301,6 +301,28 @@ export default function ItemUser({
                     </Link>
                   )}
 
+                  {role === 'SUPERADMIN' && (
+                    <Link
+                      href={'/admin/historico'}
+                      className="flex flex-col items-center justify-center p-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    >
+                      <svg
+                        className="w-5 h-5 mb-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span className="text-xs font-bold">Histórico</span>
+                    </Link>
+                  )}
+
                   <LogoutIgreja
                     className="flex flex-col items-center justify-center p-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                     showIcon={true}

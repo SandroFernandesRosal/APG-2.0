@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 const bodySchema = z.object({
   name: z.string(),
@@ -37,7 +38,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const member = await authMiddleware(req)
-  if (!member || (member.role !== 'ADMIN' && member.role !== 'MEMBRO')) {
+  if (!member || (member.role !== 'ADMIN' && member.role !== 'SUPERADMIN' && member.role !== 'MEMBRO')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -67,6 +68,21 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       ministryRole: ministryRole ?? null,
     },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logCreate({
+      entityType: 'Testemunho',
+      entityId: testemunho.id,
+      userId: member.sub,
+      userName: member.name || 'Usuário',
+      userRole: member.role,
+      newData: testemunho,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json(testemunho)
 }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -48,6 +49,21 @@ export async function POST(req: NextRequest) {
       role,
     },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logCreate({
+      entityType: 'Agenda',
+      entityId: agenda.id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      newData: agenda,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json(agenda)
 }

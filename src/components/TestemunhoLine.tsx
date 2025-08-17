@@ -117,39 +117,40 @@ export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
         )}
 
         {token?.role === 'MEMBRO' ||
-          (token?.role === 'ADMIN' && (
-            <>
-              {qtdAguardandoAprovacao > 0 && (
-                <div className="my-4 mx-5 rounded border border-primary dark:border-secundary bg-bglightsecundary dark:bg-bgdarksecundary p-4">
-                  Você tem {qtdAguardandoAprovacao} testemunho
-                  {qtdAguardandoAprovacao > 1 ? 's' : ''} aguardando aprovação
-                  de um administrador.
-                </div>
-              )}
+        token?.role === 'ADMIN' ||
+        token?.role === 'SUPERADMIN' ? (
+          <>
+            {qtdAguardandoAprovacao > 0 && (
+              <div className="my-4 mx-5 rounded border border-primary dark:border-secundary bg-bglightsecundary dark:bg-bgdarksecundary p-4">
+                Você tem {qtdAguardandoAprovacao} testemunho
+                {qtdAguardandoAprovacao > 1 ? 's' : ''} aguardando aprovação de
+                um administrador.
+              </div>
+            )}
 
-              {open === false && (
-                <button
-                  className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-gray-600 text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-gray-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mb-4"
-                  onClick={() => setOpen(true)}
-                >
-                  <FaPlus className="text-sm" />
-                  Adicionar testemunho
-                </button>
-              )}
+            {open === false && (
+              <button
+                className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-gray-600 text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-gray-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mb-4"
+                onClick={() => setOpen(true)}
+              >
+                <FaPlus className="text-sm" />
+                Adicionar testemunho
+              </button>
+            )}
 
-              {open && (
-                <div className="md:min-w-[35%]">
-                  <AddTestemunho
-                    userIgreja={{
-                      ...userIgreja,
-                      avatarUrl: userIgreja.avatarUrl || '',
-                    }}
-                    setOpen={setOpen}
-                  />
-                </div>
-              )}
-            </>
-          ))}
+            {open && (
+              <div className="md:min-w-[35%]">
+                <AddTestemunho
+                  userIgreja={{
+                    ...userIgreja,
+                    avatarUrl: userIgreja.avatarUrl || '',
+                  }}
+                  setOpen={setOpen}
+                />
+              </div>
+            )}
+          </>
+        ) : null}
 
         {!loading ? (
           Array.isArray(dataTestemunho) && dataTestemunho.length > 0 ? (

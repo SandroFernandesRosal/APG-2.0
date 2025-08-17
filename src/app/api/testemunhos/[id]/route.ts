@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -48,7 +49,7 @@ export async function PUT(
 
   const isOwner = user.sub === testemunho.userId
 
-  if (user.role === 'ADMIN' || isOwner) {
+  if (user.role === 'SUPERADMIN' || user.role === 'ADMIN' || isOwner) {
     const updated = await prisma.testemunho.update({
       where: { id },
       data: {
@@ -59,6 +60,22 @@ export async function PUT(
         isPublic,
       },
     })
+
+    // Auditoria - não interfere na resposta
+    try {
+      await AuditLogger.logUpdate({
+        entityType: 'Testemunho',
+        entityId: id,
+        userId: user.sub,
+        userName: user.name || 'Usuário',
+        userRole: user.role,
+        oldData: testemunho,
+        newData: updated,
+      })
+    } catch (error) {
+      console.error('Erro ao registrar auditoria:', error)
+      // Não quebra a API se a auditoria falhar
+    }
 
     return NextResponse.json(updated)
   }
@@ -86,8 +103,23 @@ export async function DELETE(
 
   const isOwner = user.sub === testemunho.userId
 
-  if (user.role === 'ADMIN' || isOwner) {
+  if (user.role === 'SUPERADMIN' || user.role === 'ADMIN' || isOwner) {
     await prisma.testemunho.delete({ where: { id } })
+
+    // Auditoria - não interfere na resposta
+    try {
+      await AuditLogger.logDelete({
+        entityType: 'Testemunho',
+        entityId: id,
+        userId: user.sub,
+        userName: user.name || 'Usuário',
+        userRole: user.role,
+        oldData: testemunho,
+      })
+    } catch (error) {
+      console.error('Erro ao registrar auditoria:', error)
+      // Não quebra a API se a auditoria falhar
+    }
 
     return NextResponse.json({ message: 'Testemunho deletado com sucesso.' })
   }

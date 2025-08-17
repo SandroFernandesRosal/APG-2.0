@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 const bodySchema = z.object({
   content: z.string(),
@@ -38,6 +39,9 @@ export async function PUT(
   const body = await req.json()
   const { content, coverUrl, isPublic, title } = bodySchema.parse(body)
 
+  // Buscar dados antigos para auditoria
+  const oldMemory = await prisma.sobre.findUnique({ where: { id } })
+
   const memory = await prisma.sobre.update({
     where: { id },
     data: {
@@ -47,6 +51,22 @@ export async function PUT(
       isPublic,
     },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logUpdate({
+      entityType: 'Sobre',
+      entityId: id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      oldData: oldMemory,
+      newData: memory,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json(memory)
 }
@@ -62,7 +82,25 @@ export async function DELETE(
 
   const { id } = paramsSchema.parse(await params)
 
+  // Buscar dados antigos para auditoria
+  const oldMemory = await prisma.sobre.findUnique({ where: { id } })
+
   await prisma.sobre.delete({ where: { id } })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logDelete({
+      entityType: 'Sobre',
+      entityId: id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      oldData: oldMemory,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json({ message: 'Removido com sucesso.' })
 }

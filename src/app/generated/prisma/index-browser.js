@@ -265,9 +265,30 @@ exports.Prisma.TestemunhoScalarFieldEnum = {
   ministryRole: 'ministryRole'
 };
 
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  userId: 'userId',
+  userName: 'userName',
+  userRole: 'userRole',
+  oldData: 'oldData',
+  newData: 'newData',
+  changes: 'changes',
+  timestamp: 'timestamp',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -278,6 +299,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.UserRole = exports.$Enums.UserRole = {
   SUPERADMIN: 'SUPERADMIN',
@@ -317,7 +344,8 @@ exports.Prisma.ModelName = {
   SobreLider: 'SobreLider',
   RefreshToken: 'RefreshToken',
   PasswordResetToken: 'PasswordResetToken',
-  Testemunho: 'Testemunho'
+  Testemunho: 'Testemunho',
+  AuditLog: 'AuditLog'
 };
 
 /**

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 const bodySchema = z.object({
   local: z.string(),
@@ -58,6 +59,21 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       userId: user.sub,
     },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logCreate({
+      entityType: 'Endereco',
+      entityId: endereco.id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      newData: endereco,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json(endereco)
 }

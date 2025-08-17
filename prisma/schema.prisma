@@ -59,6 +59,7 @@ model User {
   sobre               Sobre[]
   sobreLider          SobreLider[]
   testemunhos         Testemunho[]
+  auditLogs           AuditLog[]
 }
 
 model New {
@@ -203,4 +204,28 @@ model Testemunho {
   coverUrl  String?
   ministryRole  MinistryRole?
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  action      String      // CREATE, UPDATE, DELETE
+  entityType  String      // "User", "New", "Testemunho", "Contato", "Doacao", "Agenda", "Endereco", "Sobre", "SobreLider"
+  entityId    String      // ID da entidade modificada
+  userId      String      // Quem fez a ação
+  userName    String      // Nome do usuário (para facilitar consultas)
+  userRole    String      // Role do usuário no momento da ação
+  oldData     Json?       // Dados antes da mudança (para UPDATE)
+  newData     Json?       // Dados depois da mudança (para CREATE/UPDATE)
+  changes     Json?       // Apenas os campos que mudaram (para UPDATE)
+  timestamp   DateTime    @default(now())
+  ipAddress   String?     // Opcional, se quiser no futuro
+  userAgent   String?     // Opcional, se quiser no futuro
+  
+  // Relacionamentos
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([timestamp])
+  @@index([action])
 }
