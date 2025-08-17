@@ -8,8 +8,8 @@ export function useAudit() {
     userId: string
     userName: string
     userRole: string
-    oldData?: any
-    newData?: any
+    oldData?: Record<string, unknown>
+    newData?: Record<string, unknown>
     ipAddress?: string
     userAgent?: string
   }) => {
