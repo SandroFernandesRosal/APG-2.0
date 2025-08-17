@@ -2,22 +2,36 @@
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
-export default function ChangeTheme() {
+interface ChangeThemeProps {
+  className?: string
+  onClick?: () => void
+}
+
+export default function ChangeTheme({ className = '', onClick }: ChangeThemeProps) {
   const { theme, setTheme } = useTheme()
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick()
+    } else {
+      setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
+  }
+
   return (
-    <div className="flex justify-center items-center border-[1px] border-primary dark:border-white p-1 rounded-full">
+    <div 
+      className={`flex justify-center items-center cursor-pointer ${className}`}
+      onClick={handleClick}
+    >
       {theme === 'dark' ? (
         <Sun
-          size={28}
-          className="cursor-pointer text-primary dark:text-white hover:text-primary/50 dark:hover:text-yellow-500"
-          onClick={() => setTheme('light')}
+          size={32}
+          className="text-yellow-400 hover:text-yellow-300"
         />
       ) : (
         <Moon
-          size={30}
-          className="cursor-pointer text-primary dark:text-secundary hover:text-zinc-600"
-          onClick={() => setTheme('dark')}
+          size={32}
+          className="text-slate-600 hover:text-slate-700"
         />
       )}
     </div>

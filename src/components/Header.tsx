@@ -1,34 +1,37 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useActivePage } from '@/store/useStore'
 import { usePathname } from 'next/navigation'
-
-import { FaUserCircle } from 'react-icons/fa'
-import { AlignRight, X } from 'lucide-react'
+import { AlignRight, X, ChevronDown } from 'lucide-react'
 import NavBar from './NavBar'
-import NavBarMd from './NavBarMd'
 
 import Link from 'next/link'
-import ChangeTheme from './ChangeTheme'
 import Image from 'next/image'
 import logo from '../../public/img/logo.png'
 import logob from '../../public/img/logob.png'
-import { useToken } from '@/hooks/useToken'
 
 import { useTheme } from 'next-themes'
 import { SearchForm } from './search-form'
 import { Notification } from './notification'
 
 interface HeaderProps {
-  children: React.ReactNode
+  children: React.ReactElement<{
+    isOpen?: boolean
+    onToggle?: () => void
+    activePage?: string
+    handleClick?: (href: string) => void
+    onLoadingChange?: (loading: boolean) => void
+    onRoleChange?: (role: string) => void
+  }>
 }
 
 export default function Header({ children }: HeaderProps) {
   const [menu, setMenu] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [userLoading, setUserLoading] = useState(true)
+  const [userRole, setUserRole] = useState<string>('')
   const { theme } = useTheme()
-
-  const token = useToken()
 
   const pathname = usePathname()
 
@@ -46,9 +49,31 @@ export default function Header({ children }: HeaderProps) {
     setMenu(!menu)
   }
 
+  const toggleUserMenu = () => {
+    setUserMenuOpen(!userMenuOpen)
+  }
+
+  const handleUserLoadingChange = (loading: boolean) => {
+    setUserLoading(loading)
+  }
+
+  const handleUserRoleChange = (role: string) => {
+    setUserRole(role)
+  }
+
+  // Clonar o children para passar as props de controle
+  const childrenWithProps = React.cloneElement(children, {
+    isOpen: userMenuOpen,
+    onToggle: toggleUserMenu,
+    activePage,
+    handleClick,
+    onLoadingChange: handleUserLoadingChange,
+    onRoleChange: handleUserRoleChange,
+  })
+
   return (
     <>
-      <header className="font-Roboto fixed z-50 flex flex-col top-0">
+      <header className="font-Roboto fixed z-40 flex flex-col top-0">
         <div className="flex h-20 w-[100vw] items-center justify-evenly overflow-hidden border-b-2 border-solid border-b-primary dark:border-b-secundary bg-bglight dark:bg-bgdark">
           <Link href="/" onClick={() => handleClick('/')}>
             {theme === 'dark' ? (
@@ -77,27 +102,36 @@ export default function Header({ children }: HeaderProps) {
           <div className="flex justify-center items-center ">
             <SearchForm />
           </div>
+          
           <div className="items-center gap-4 hidden md:flex">
-            <div className="hidden md:flex">
-              <ChangeTheme />
-            </div>
-            {token ? (
-              <div className="hidden text-white md:flex">{children}</div>
-            ) : (
-              <Link
-                href={'/login'}
-                className="hidden md:flex md:flex-col md:items-center"
-              >
-                <FaUserCircle
-                  size={40}
-                  className="font-bold text-primary dark:text-white hover:text-primary/50 dark:hover:text-secundary"
+            {/* Botão Adquirir Livro */}
+            <a
+              href="https://www.instagram.com/generosidade.livro/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center px-4 py-2 bg-primary dark:bg-slate-800 hover:bg-primary/90 dark:hover:bg-slate-700 text-white font-bold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              📖 Adquirir Livro
+            </a>
+            
+            <div
+              onClick={toggleUserMenu}
+              className="hidden text-white md:flex items-center gap-1 cursor-pointer group"
+            >
+              {childrenWithProps}
+              {!userLoading && (
+                <ChevronDown
+                  size={16}
+                  className={`text-primary dark:text-white group-hover:text-secundary transition-all duration-200 ${
+                    userMenuOpen ? 'rotate-180' : ''
+                  }`}
                 />
-              </Link>
-            )}
+              )}
+            </div>
             <Notification />
           </div>
 
-          <div onClick={handleMenu} className={'md:hidden'}>
+          <div onClick={handleMenu} className="md:hidden">
             {menu === false ? (
               <AlignRight
                 size={40}
@@ -111,10 +145,14 @@ export default function Header({ children }: HeaderProps) {
             )}
           </div>
         </div>
-        <NavBarMd activePage={activePage} handleClick={handleClick} />
       </header>
 
-      <NavBar handleMenu={handleMenu} menu={menu} user={children} />
+      <NavBar
+        handleMenu={handleMenu}
+        menu={menu}
+        user={childrenWithProps}
+        userRole={userRole}
+      />
     </>
   )
 }

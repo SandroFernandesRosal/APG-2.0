@@ -10,8 +10,18 @@ export async function POST() {
       { status: 200 },
     )
 
+    // Remover o cookie httpOnly 'token'
     response.cookies.set('token', '', {
       httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      expires: new Date(0),
+    })
+
+    // Remover o cookie 'tokennn' também
+    response.cookies.set('tokennn', '', {
+      httpOnly: false,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       path: '/',

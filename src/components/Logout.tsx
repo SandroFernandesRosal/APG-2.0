@@ -11,6 +11,8 @@ export default function Logout() {
     console.log('Iniciando logout...')
 
     try {
+      console.log('Fazendo requisição para /api/auth/logout...')
+
       const response = await fetch('/api/auth/logout', {
         method: 'POST',
         headers: {
@@ -39,7 +41,11 @@ export default function Logout() {
   }
 
   return (
-    <button onClick={handleLogout} disabled={loading} className="button !mb-0">
+    <button
+      onClick={handleLogout}
+      disabled={loading}
+      className="text-white font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
       {loading ? 'Saindo...' : 'Sair'}
     </button>
   )
