@@ -89,7 +89,7 @@ export default function NavBar({
     >
       <div className="flex flex-col w-full h-full">
         {/* Header Section - Apenas imagem, nome, role e notificação */}
-        <div className="relative bg-gradient-to-r from-primary/10 to-secundary/10 dark:from-primary/20 dark:to-secundary/20 p-4 sticky top-0 z-10">
+        <div className="bg-gradient-to-r from-primary/10 to-secundary/10 dark:from-primary/20 dark:to-secundary/20 p-4 sticky top-0 z-10">
           <div className="flex items-center justify-between mb-4">
             <Notification />
             <button
@@ -114,7 +114,9 @@ export default function NavBar({
 
           <div className="flex w-full items-center justify-center">
             {token ? (
-              <div className="w-full">{user}</div>
+              <div className="w-full text-textlight dark:text-textdark">
+                {user}
+              </div>
             ) : (
               <div className="flex w-full items-center justify-center gap-4">
                 <Link

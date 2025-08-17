@@ -137,8 +137,10 @@ export default function UserComponent({
               )}
 
               <div className="flex flex-col">
-                <p className="text-lg font-bold text-white">{name}</p>
-                <span className="text-sm font-medium text-primary dark:text-secundary bg-primary/10 dark:bg-secundary/10 px-2 py-1 rounded-full inline-block w-fit">
+                <p className="text-lg font-bold text-textlight dark:text-textdark">
+                  {name}
+                </p>
+                <span className="text-sm  text-primary dark:text-secundary bg-primary/10 dark:bg-secundary/10 px-2 py-1 rounded-full inline-block w-fit font-bold">
                   {role}
                 </span>
               </div>
