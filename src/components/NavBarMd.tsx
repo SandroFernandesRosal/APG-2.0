@@ -17,44 +17,44 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
       href: '/quemsomos',
       icon: BiHomeHeart,
       label: 'Quem Somos',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-blue-500 to-blue-600',
     },
     {
       href: '/enderecos',
       icon: FaMapMarkerAlt,
       label: 'Endereços',
-      color: 'from-green-500 to-green-600'
+      color: 'from-green-500 to-green-600',
     },
     {
       href: '/ministerio',
       icon: BsFillPersonLinesFill,
       label: 'Ministério',
-      color: 'from-purple-500 to-purple-600'
+      color: 'from-purple-500 to-purple-600',
     },
     {
       href: '/doacao',
       icon: FaHandHoldingHeart,
       label: 'Doação',
-      color: 'from-red-500 to-red-600'
+      color: 'from-red-500 to-red-600',
     },
     {
       href: '/agenda',
       icon: AiOutlineSchedule,
       label: 'Agenda',
-      color: 'from-orange-500 to-orange-600'
+      color: 'from-orange-500 to-orange-600',
     },
     {
       href: '/noticias',
       icon: BiNews,
       label: 'Notícias',
-      color: 'from-indigo-500 to-indigo-600'
+      color: 'from-indigo-500 to-indigo-600',
     },
     {
       href: '/testemunhos',
       icon: VscHeartFilled,
       label: 'Testemunhos',
-      color: 'from-pink-500 to-pink-600'
-    }
+      color: 'from-pink-500 to-pink-600',
+    },
   ]
 
   return (
@@ -63,29 +63,31 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive = activePage === item.href
-          
+
           return (
             <Link key={item.href} href={item.href}>
               <div
                 className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 cursor-pointer group min-w-[100px] ${
                   isActive
-                    ? 'bg-gradient-to-r ' + item.color + ' text-white shadow-lg transform scale-105'
+                    ? 'bg-gradient-to-r ' +
+                      item.color +
+                      ' text-white shadow-lg transform scale-105'
                     : 'bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                 }`}
                 onClick={() => handleClick(item.href)}
               >
-                <Icon 
+                <Icon
                   className={`text-2xl mb-2 transition-all duration-300 ${
-                    isActive 
-                      ? 'text-white' 
+                    isActive
+                      ? 'text-white'
                       : 'text-primary dark:text-secundary group-hover:scale-110'
-                  }`} 
+                  }`}
                 />
-                <p className={`text-sm font-medium text-center transition-all duration-300 ${
-                  isActive 
-                    ? 'text-white' 
-                    : 'group-hover:font-semibold'
-                }`}>
+                <p
+                  className={`text-sm font-medium text-center transition-all duration-300 ${
+                    isActive ? 'text-white' : 'group-hover:font-semibold'
+                  }`}
+                >
                   {item.label}
                 </p>
                 {isActive && (
