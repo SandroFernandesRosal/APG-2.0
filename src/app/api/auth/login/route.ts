@@ -67,6 +67,14 @@ export async function POST(req: Request) {
       maxAge: 30 * 24 * 60 * 60, // 30 dias
     })
 
+    // Também definir o cookie 'tokennn' para os componentes CRUD
+    response.cookies.set('tokennn', token, {
+      httpOnly: false,
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 30 * 24 * 60 * 60, // 30 dias
+    })
+
     return response
   } catch {
     return NextResponse.json(

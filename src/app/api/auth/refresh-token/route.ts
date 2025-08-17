@@ -41,7 +41,25 @@ export async function POST(req: Request) {
       },
     )
 
-    return NextResponse.json({ token: newToken })
+    const response = NextResponse.json({ token: newToken })
+
+    // Atualizar o cookie httpOnly 'token'
+    response.cookies.set('token', newToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 30 * 24 * 60 * 60, // 30 dias
+    })
+
+    // Também atualizar o cookie 'tokennn' para os componentes CRUD
+    response.cookies.set('tokennn', newToken, {
+      httpOnly: false,
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 30 * 24 * 60 * 60, // 30 dias
+    })
+
+    return response
   } catch (error) {
     console.error('Erro ao processar o refresh token:', error)
     return NextResponse.json(
