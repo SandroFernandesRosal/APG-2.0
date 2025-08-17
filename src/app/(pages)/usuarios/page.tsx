@@ -2,7 +2,13 @@
 import { useEffect, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
-import { FaEdit } from 'react-icons/fa'
+import {
+  FaEdit,
+  FaUsers,
+  FaUserTie,
+  FaUserShield,
+  FaFilter,
+} from 'react-icons/fa'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 
 type User = {
@@ -38,8 +44,14 @@ const funcoes = [
 
 export default function UsuariosPage() {
   const [users, setUsers] = useState<User[]>([])
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const token = useToken()
+
+  // Estados para filtros
+  const [filterIgreja, setFilterIgreja] = useState<string>('')
+  const [filterCargo, setFilterCargo] = useState<string>('')
+  const [showFilters, setShowFilters] = useState(false)
 
   const [showModal, setShowModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
@@ -55,6 +67,131 @@ export default function UsuariosPage() {
   const [showFuncaoModal, setShowFuncaoModal] = useState(false)
   const [funcao, setFuncao] = useState<'ADMIN' | 'MEMBRO'>('MEMBRO')
 
+  // Calcular estatísticas
+  const stats = {
+    total: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
+      if (token?.role === 'ADMIN')
+        return u.role !== 'SUPERADMIN' && u.ministryRole === token.ministryRole
+      return false
+    }).length,
+    pastores: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.cargo &&
+          u.cargo.some((c) => c.includes('PASTOR'))
+        )
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          u.cargo &&
+          u.cargo.some((c) => c.includes('PASTOR'))
+        )
+      }
+      return false
+    }).length,
+    diaconos: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return u.role !== 'SUPERADMIN' && u.cargo && u.cargo.includes('DIACONO')
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          u.cargo &&
+          u.cargo.includes('DIACONO')
+        )
+      }
+      return false
+    }).length,
+    membros: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return u.role !== 'SUPERADMIN' && u.role === 'MEMBRO'
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          u.role === 'MEMBRO'
+        )
+      }
+      return false
+    }).length,
+    admins: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') return u.role === 'ADMIN'
+      if (token?.role === 'ADMIN')
+        return u.role === 'ADMIN' && u.ministryRole === token.ministryRole
+      return false
+    }).length,
+    semIgreja: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return u.role !== 'SUPERADMIN' && !u.ministryRole
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          !u.ministryRole
+        )
+      }
+      return false
+    }).length,
+    semCargo: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return u.role !== 'SUPERADMIN' && (!u.cargo || u.cargo.length === 0)
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          (!u.cargo || u.cargo.length === 0)
+        )
+      }
+      return false
+    }).length,
+    outrosCargos: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.cargo &&
+          u.cargo.length > 0 &&
+          !u.cargo.some((c) => c.includes('PASTOR')) &&
+          !u.cargo.includes('DIACONO')
+        )
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          u.cargo &&
+          u.cargo.length > 0 &&
+          !u.cargo.some((c) => c.includes('PASTOR')) &&
+          !u.cargo.includes('DIACONO')
+        )
+      }
+      return false
+    }).length,
+    presbiteros: users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' && u.cargo && u.cargo.includes('PRESBITERO')
+        )
+      }
+      if (token?.role === 'ADMIN') {
+        return (
+          u.role !== 'SUPERADMIN' &&
+          u.ministryRole === token.ministryRole &&
+          u.cargo &&
+          u.cargo.includes('PRESBITERO')
+        )
+      }
+      return false
+    }).length,
+  }
+
   useEffect(() => {
     async function fetchUsers() {
       setLoading(true)
@@ -64,22 +201,59 @@ export default function UsuariosPage() {
         },
       })
       const data = await res.json()
-      setUsers(
-        Array.isArray(data)
-          ? data.map((u) => ({
-              ...u,
-              cargo: Array.isArray(u.cargo)
-                ? u.cargo
-                : u.cargo
-                  ? [u.cargo]
-                  : [],
-            }))
-          : [],
+      const usersData = Array.isArray(data)
+        ? data.map((u) => ({
+            ...u,
+            cargo: Array.isArray(u.cargo) ? u.cargo : u.cargo ? [u.cargo] : [],
+          }))
+        : []
+      setUsers(usersData)
+      setFilteredUsers(
+        usersData.filter((u) => {
+          if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
+          if (token?.role === 'ADMIN')
+            return (
+              u.role !== 'SUPERADMIN' && u.ministryRole === token.ministryRole
+            )
+          return false
+        }),
       )
       setLoading(false)
     }
     if (token) fetchUsers()
   }, [token])
+
+  // Aplicar filtros
+  useEffect(() => {
+    let filtered = users.filter((u) => {
+      if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
+      if (token?.role === 'ADMIN')
+        return u.role !== 'SUPERADMIN' && u.ministryRole === token.ministryRole
+      return false
+    })
+
+    if (filterIgreja) {
+      filtered = filtered.filter((u) => u.ministryRole === filterIgreja)
+    }
+
+    if (filterCargo) {
+      if (filterCargo === 'MEMBRO') {
+        filtered = filtered.filter((u) => u.role === 'MEMBRO')
+      } else {
+        filtered = filtered.filter(
+          (u) => u.cargo && u.cargo.includes(filterCargo),
+        )
+      }
+    }
+
+    setFilteredUsers(filtered)
+  }, [users, filterIgreja, filterCargo, token])
+
+  // Função para limpar filtros
+  const clearFilters = () => {
+    setFilterIgreja('')
+    setFilterCargo('')
+  }
 
   async function handleSaveCargo() {
     if (!selectedUser) return
@@ -196,40 +370,259 @@ export default function UsuariosPage() {
 
   return (
     <div className="mx-4 lg:mx-auto max-w-[1200px] min-h-screen mt-[160px] px-2">
-      <h1 className="text-3xl font-bold mb-8 text-center text-primary dark:text-secundary">
-        Usuários
+      <h1 className="text-3xl font-bold mb-8  text-primary dark:text-secundary flex items-center  gap-3">
+        <FaUsers className="w-8 h-8" />
+        Gerenciamento de Usuários
       </h1>
-      <div className="overflow-x-auto rounded-lg shadow">
-        <table className="w-full ">
-          <thead className="hidden md:table-header-group">
-            <tr className="bg-primary/90 dark:bg-secundary/80 text-white ">
-              <th data-label="Avatar" className="px-3 py-2">
-                Avatar
-              </th>
-              <th data-label="Nome" className="px-3 py-2">
-                Nome
-              </th>
-              <th data-label="Email" className="px-3 py-2">
-                Email
-              </th>
-              <th data-label="Cargo" className="px-3 py-2">
-                Cargo
-              </th>
-              <th data-label="Igreja" className="px-3 py-2">
-                Igreja
-              </th>
-              <th data-label="Tipo" className="px-3 py-2">
-                Tipo
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {users
-              .filter((u) => u.role !== 'SUPERADMIN')
-              .map((u) => (
+
+      {/* Cards Informativos */}
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Total de Usuários
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.total}
+              </p>
+            </div>
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+              <FaUsers className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Administradores
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.admins}
+              </p>
+            </div>
+            <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-full">
+              <FaUserShield className="w-6 h-6 text-red-600 dark:text-red-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Pastores
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.pastores}
+              </p>
+            </div>
+            <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full">
+              <FaUserTie className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Presbíteros
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.presbiteros}
+              </p>
+            </div>
+            <div className="p-3 bg-teal-100 dark:bg-teal-900/30 rounded-full">
+              <FaUserTie className="w-6 h-6 text-teal-600 dark:text-teal-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Diáconos
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.diaconos}
+              </p>
+            </div>
+            <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full">
+              <FaUserShield className="w-6 h-6 text-green-600 dark:text-green-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Membros
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.membros}
+              </p>
+            </div>
+            <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-full">
+              <FaUsers className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Sem Cargo
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.semCargo}
+              </p>
+            </div>
+            <div className="p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-full">
+              <FaUsers className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Sem Igreja
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.semIgreja}
+              </p>
+            </div>
+            <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-full">
+              <FaUsers className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filtros */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <FaFilter className="w-5 h-5" />
+            Filtros
+          </h2>
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className="text-primary dark:text-secundary hover:text-primary/80 dark:hover:text-secundary/80 transition-colors"
+          >
+            {showFilters ? 'Ocultar' : 'Mostrar'} Filtros
+          </button>
+        </div>
+
+        {showFilters && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Filtro por Igreja */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Filtrar por Igreja
+              </label>
+              <select
+                value={filterIgreja}
+                onChange={(e) => setFilterIgreja(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">Todas as igrejas</option>
+                {igrejas.map((igreja) => (
+                  <option key={igreja} value={igreja}>
+                    {getIgrejaLabel(igreja)}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Filtro por Cargo */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Filtrar por Cargo
+              </label>
+              <select
+                value={filterCargo}
+                onChange={(e) => setFilterCargo(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">Todos os cargos</option>
+                <option value="MEMBRO">Membros</option>
+                {cargos.map((cargo) => (
+                  <option key={cargo} value={cargo}>
+                    {cargo.replace(/_/g, ' ')}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Botão Limpar Filtros */}
+            <div className="flex items-end">
+              <button
+                onClick={clearFilters}
+                className="w-full px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+              >
+                Limpar Filtros
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Resultados */}
+        <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+          Mostrando {filteredUsers.length} de{' '}
+          {
+            users.filter((u) => {
+              if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
+              if (token?.role === 'ADMIN')
+                return (
+                  u.role !== 'SUPERADMIN' &&
+                  u.ministryRole === token.ministryRole
+                )
+              return false
+            }).length
+          }{' '}
+          usuários
+        </div>
+      </div>
+
+      {/* Tabela de Usuários ou Mensagem de Aviso */}
+      {filteredUsers.length > 0 ? (
+        <div className="overflow-x-auto rounded-lg shadow mb-10">
+          <table className="w-full ">
+            <thead className="hidden md:table-header-group">
+              <tr className="bg-primary/90 dark:bg-secundary/80 text-white ">
+                <th data-label="Avatar" className="px-3 py-2">
+                  Avatar
+                </th>
+                <th data-label="Nome" className="px-3 py-2">
+                  Nome
+                </th>
+                <th data-label="Email" className="px-3 py-2">
+                  Email
+                </th>
+                <th data-label="Cargo" className="px-3 py-2">
+                  Cargo
+                </th>
+                <th data-label="Igreja" className="px-3 py-2">
+                  Igreja
+                </th>
+                <th data-label="Tipo" className="px-3 py-2">
+                  Tipo
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map((u) => (
                 <tr
                   key={u.id}
-                  className={`hover:bg-primary/10 bg- dark:hover:bg-secundary/10 transition-colors ${u.id === selectedUser?.id ? ' dark:bg-secundary/10' : ' dark:bg-primary/10 border border-zinc-300 dark:border-gray-700'}   `}
+                  className={`hover:bg-primary/10 dark:hover:bg-gray-800/10 transition-colors ${u.id === selectedUser?.id ? 'dark:bg-secundary/10' : 'dark:bg-gray-800 border border-zinc-300 dark:border-gray-700'}`}
                 >
                   <td data-label="Avatar" className="px-3 py-2 text-center ">
                     <Image
@@ -311,9 +704,34 @@ export default function UsuariosPage() {
                   </td>
                 </tr>
               ))}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 border border-gray-200 dark:border-gray-700 text-center">
+          <div className="flex flex-col items-center justify-center">
+            <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-full mb-4">
+              <FaUsers className="w-12 h-12 text-gray-400 dark:text-gray-500" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              Nenhum usuário encontrado
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              {filterIgreja || filterCargo
+                ? 'Não há usuários que correspondam aos filtros aplicados.'
+                : 'Ainda não há usuários cadastrados no sistema.'}
+            </p>
+            {(filterIgreja || filterCargo) && (
+              <button
+                onClick={clearFilters}
+                className="px-6 py-2 bg-primary dark:bg-secundary text-white rounded-lg font-medium hover:bg-primary/90 dark:hover:bg-secundary/90 transition-colors"
+              >
+                Limpar Filtros
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Modal de cargo */}
       {showModal && selectedUser && (
