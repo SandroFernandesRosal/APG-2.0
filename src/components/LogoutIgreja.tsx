@@ -8,7 +8,10 @@ interface LogoutIgrejaProps {
   showIcon?: boolean
 }
 
-export default function LogoutIgreja({ className = "button !mb-0", showIcon = false }: LogoutIgrejaProps) {
+export default function LogoutIgreja({
+  className = 'button !mb-0',
+  showIcon = false,
+}: LogoutIgrejaProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 

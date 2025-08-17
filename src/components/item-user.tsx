@@ -194,7 +194,9 @@ export default function ItemUser({
                           </svg>
                         )}
                       </div>
-                      <span className="text-xs mt-1 font-bold text-gray-700 dark:text-gray-300">Tema</span>
+                      <span className="text-xs mt-1 font-bold text-gray-700 dark:text-gray-300">
+                        Tema
+                      </span>
                     </div>
                   </div>
                 </div>

@@ -7,7 +7,10 @@ interface ChangeThemeProps {
   onClick?: () => void
 }
 
-export default function ChangeTheme({ className = '', onClick }: ChangeThemeProps) {
+export default function ChangeTheme({
+  className = '',
+  onClick,
+}: ChangeThemeProps) {
   const { theme, setTheme } = useTheme()
 
   const handleClick = () => {
@@ -19,20 +22,14 @@ export default function ChangeTheme({ className = '', onClick }: ChangeThemeProp
   }
 
   return (
-    <div 
+    <div
       className={`flex justify-center items-center cursor-pointer ${className}`}
       onClick={handleClick}
     >
       {theme === 'dark' ? (
-        <Sun
-          size={32}
-          className="text-yellow-400 hover:text-yellow-300"
-        />
+        <Sun size={32} className="text-yellow-400 hover:text-yellow-300" />
       ) : (
-        <Moon
-          size={32}
-          className="text-slate-600 hover:text-slate-700"
-        />
+        <Moon size={32} className="text-slate-600 hover:text-slate-700" />
       )}
     </div>
   )

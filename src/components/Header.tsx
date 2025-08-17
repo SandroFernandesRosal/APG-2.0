@@ -102,7 +102,7 @@ export default function Header({ children }: HeaderProps) {
           <div className="flex justify-center items-center ">
             <SearchForm />
           </div>
-          
+
           <div className="items-center gap-4 hidden md:flex">
             {/* Botão Adquirir Livro */}
             <a
@@ -113,7 +113,7 @@ export default function Header({ children }: HeaderProps) {
             >
               📖 Adquirir Livro
             </a>
-            
+
             <div
               onClick={toggleUserMenu}
               className="hidden text-white md:flex items-center gap-1 cursor-pointer group"
