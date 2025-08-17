@@ -34,7 +34,10 @@ export async function GET(
   })
 
   if (!user) {
-    return NextResponse.json({ error: 'Usuário não encontrado' }, { status: 404 })
+    return NextResponse.json(
+      { error: 'Usuário não encontrado' },
+      { status: 404 },
+    )
   }
 
   return NextResponse.json({ user })
@@ -49,12 +52,36 @@ export async function PUT(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: userAuth.sub },
+    select: { name: true },
+  })
+
   const bodySchema = z.object({
     name: z.string(),
     avatarUrl: z.string(),
     password: z.string(),
-    ministryRole: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']).optional(),
-    cargo: z.array(z.enum(['PASTOR', 'DIACONO', 'PRESBITERO', 'EVANGELISTA', 'MISSIONARIO', 'SECRETARIO', 'TESOUREIRO', 'PASTOR_PRESIDENTE', 'PASTOR_DIRIGENTE', 'MUSICO', 'AUXILIAR'])).optional(),
+    ministryRole: z
+      .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
+      .optional(),
+    cargo: z
+      .array(
+        z.enum([
+          'PASTOR',
+          'DIACONO',
+          'PRESBITERO',
+          'EVANGELISTA',
+          'MISSIONARIO',
+          'SECRETARIO',
+          'TESOUREIRO',
+          'PASTOR_PRESIDENTE',
+          'PASTOR_DIRIGENTE',
+          'MUSICO',
+          'AUXILIAR',
+        ]),
+      )
+      .optional(),
   })
 
   try {
@@ -110,7 +137,7 @@ export async function PUT(
         entityType: 'User',
         entityId: id,
         userId: userAuth.sub,
-        userName: userAuth.name || 'Administrador',
+        userName: userData?.name || 'Administrador',
         userRole: userAuth.role,
         oldData: userToUpdate,
         newData: user,
@@ -144,6 +171,12 @@ export async function DELETE(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: userAuth.sub },
+    select: { name: true },
+  })
+
   try {
     const { id } = paramsSchema.parse(await params)
 
@@ -174,7 +207,7 @@ export async function DELETE(
         entityType: 'User',
         entityId: id,
         userId: userAuth.sub,
-        userName: userAuth.name || 'Administrador',
+        userName: userData?.name || 'Administrador',
         userRole: userAuth.role,
         oldData: userToDelete,
       })
@@ -184,7 +217,7 @@ export async function DELETE(
     }
 
     return NextResponse.json({ message: 'Usuário deletado com sucesso' })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Erro ao deletar usuário' },
       { status: 500 },
