@@ -35,79 +35,98 @@ export default function ItemTestemunho({
   }
 
   return (
-    <div className="flex w-full flex-col items-start gap-3 px-6 py-4 md:flex-row md:justify-center">
-      <div className="flex w-full flex-col gap-2 rounded-2xl bg-white shadow-light dark:bg-slate-800 md:w-[70%] lg:min-w-[700px] border-[1px] border-zinc-300 dark:border-zinc-800">
-        <div className="flex flex-col  gap-5 p-3 ">
-          <div className="flex items-center  md:justify-between">
-            <div className="flex items-center gap-4 ">
+    <div className="flex w-full flex-col items-start gap-4 px-4 py-6 md:flex-row md:justify-center">
+      <div className="flex w-full flex-col gap-6 rounded-3xl bg-white/80 backdrop-blur-sm shadow-xl dark:bg-slate-800/80 md:w-[75%] lg:min-w-[750px] border border-gray-200/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-300">
+        {/* Header do Testemunho */}
+        <div className="flex flex-col gap-4 p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
               {item.avatarUrl && (
                 <Image
                   width={100}
                   height={100}
                   src={item.avatarUrl}
                   alt={item.name}
-                  className="p-[2px] mr-1 w-[100px] h-[100px]  rounded-full border-[1px] border-primary dark:border-secundary"
+                  className="p-[2px] mr-1 w-[100px] h-[100px] rounded-full border-[1px] border-primary dark:border-secundary"
                 />
               )}
-              <div>
-                <p className="text-lg font-bold">
-                  {item.name}{' '}
-                  <span className="text-sm font-normal text-zinc-600">
-                    {item.ministryRole
-                      ? ` - APG ${
-                          item.ministryRole === 'VILADAPENHA'
-                            ? 'Vila da Penha'
-                            : item.ministryRole === 'TOMAZINHO'
-                              ? 'Tomazinho'
-                              : 'Vila Maria Helena'
-                        }`
-                      : ' - Membro sem igreja'}
-                  </span>
-                </p>
-                <div className="flex md:hidden">
+              <div className="flex flex-col">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white">
+                  {item.name}
+                </h3>
+                <span className="text-sm font-medium text-primary dark:text-secundary">
+                  {item.ministryRole
+                    ? `APG ${
+                        item.ministryRole === 'VILADAPENHA'
+                          ? 'Vila da Penha'
+                          : item.ministryRole === 'TOMAZINHO'
+                            ? 'Tomazinho'
+                            : 'Vila Maria Helena'
+                      }`
+                    : 'Membro sem igreja'}
+                </span>
+                <div className="flex md:hidden mt-1">
                   {item.updatedAt ? (
-                    <span className="text-xs">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
                       Atualizado: {formatDate(item.updatedAt)}
                     </span>
                   ) : (
-                    <span className="text-xs">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
                       {formatDate(item.createdAt)}
                     </span>
                   )}
                 </div>
               </div>
-            </div>{' '}
-            <div className="md:flex justify-center hidden self-start">
-              {item.updatedAt ? (
-                <span className="text-xs">
-                  Atualizado: {formatDate(item.updatedAt)}
-                </span>
-              ) : (
-                <span className="text-xs">{formatDate(item.createdAt)}</span>
-              )}
+            </div>
+
+            <div className="hidden md:flex items-center">
+              <div className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                {item.updatedAt ? (
+                  <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                    Atualizado: {formatDate(item.updatedAt)}
+                  </span>
+                ) : (
+                  <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                    {formatDate(item.createdAt)}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        <p className="pl-3">{item.content}</p>
+        {/* Conteúdo do Testemunho */}
+        <div className="px-6 pb-4">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-6 border border-gray-200/50 dark:border-gray-600/50">
+            <p className="text-gray-800 dark:text-gray-200 leading-relaxed text-base md:text-lg">
+              {item.content}
+            </p>
+          </div>
+        </div>
+
+        {/* Imagem do Testemunho */}
         {item.coverUrl && (
-          <div className="mb-4 flex w-full items-center justify-center">
-            <Image
-              width={500}
-              height={500}
-              priority
-              src={item.coverUrl}
-              alt={item.name}
-              className="m-2 w-[80%] rounded-xl shadow-light dark:shadow-dark md:max-w-[500px]"
-            />
+          <div className="px-6 pb-4">
+            <div className="relative overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                width={600}
+                height={400}
+                priority
+                src={item.coverUrl}
+                alt={item.name}
+                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
           </div>
         )}
 
+        {/* Botões de Ação */}
         {podeGerenciar && (
-          <div className="mb-2 flex justify-center gap-4">
+          <div className="flex justify-end gap-3 px-6 pb-6">
             {openEdit === null && (
               <button
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                 onClick={() => setOpenEdit(item.id)}
               >
                 <svg
@@ -128,7 +147,7 @@ export default function ItemTestemunho({
             )}
 
             {openEdit === item.id && (
-              <div>
+              <div className="w-full">
                 <EditTestemunho
                   avatarUrl={item.avatarUrl}
                   name={item.name}
@@ -141,10 +160,11 @@ export default function ItemTestemunho({
                 />
               </div>
             )}
+
             <button
               aria-hidden="true"
               tabIndex={-1}
-              className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
               onClick={() => {
                 setShowModal(item.id)
               }}

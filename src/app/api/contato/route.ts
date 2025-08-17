@@ -2,12 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 export async function GET() {
   const contatos = await prisma.contato.findMany({
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: { createdAt: 'desc' },
   })
 
   return NextResponse.json(contatos)
@@ -41,6 +40,21 @@ export async function POST(req: NextRequest) {
       userId: user.sub,
     },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logCreate({
+      entityType: 'Contato',
+      entityId: contato.id,
+      userId: user.sub,
+      userName: user.name || 'Administrador',
+      userRole: user.role,
+      newData: contato,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json(contato)
 }

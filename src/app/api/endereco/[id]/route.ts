@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { authMiddleware } from '@/lib/auth'
+import { AuditLogger } from '@/lib/audit'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -42,6 +43,9 @@ export async function PUT(
   const body = await req.json()
   const { local, rua, isPublic, cep, numero, cidade } = bodySchema.parse(body)
 
+  // Buscar dados antigos para auditoria
+  const oldEndereco = await prisma.endereco.findUnique({ where: { id } })
+
   const endereco = await prisma.endereco.update({
     where: { id },
     data: {
@@ -53,6 +57,22 @@ export async function PUT(
       isPublic,
     },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logUpdate({
+      entityType: 'Endereco',
+      entityId: id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      oldData: oldEndereco,
+      newData: endereco,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json(endereco)
 }
@@ -68,9 +88,27 @@ export async function DELETE(
 
   const { id } = paramsSchema.parse(await params)
 
+  // Buscar dados antigos para auditoria
+  const oldEndereco = await prisma.endereco.findUnique({ where: { id } })
+
   await prisma.endereco.delete({
     where: { id },
   })
+
+  // Auditoria - não interfere na resposta
+  try {
+    await AuditLogger.logDelete({
+      entityType: 'Endereco',
+      entityId: id,
+      userId: user.sub,
+      userName: user.name || 'Usuário',
+      userRole: user.role,
+      oldData: oldEndereco,
+    })
+  } catch (error) {
+    console.error('Erro ao registrar auditoria:', error)
+    // Não quebra a API se a auditoria falhar
+  }
 
   return NextResponse.json({ message: 'Endereço deletado com sucesso.' })
 }
