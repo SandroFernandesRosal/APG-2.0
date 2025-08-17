@@ -41,6 +41,12 @@ export async function PUT(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: user.sub },
+    select: { name: true },
+  })
+
   const { id } = paramsSchema.parse(await params)
   const body = await req.json()
   const data = bodySchema.parse(body)
@@ -63,7 +69,7 @@ export async function PUT(
         entityType: 'New',
         entityId: id,
         userId: user.sub,
-        userName: user.name || 'Usuário',
+        userName: userData?.name || 'Usuário',
         userRole: user.role,
         oldData: news,
         newData: updated,
@@ -91,6 +97,12 @@ export async function DELETE(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: user.sub },
+    select: { name: true },
+  })
+
   const { id } = paramsSchema.parse(await params)
 
   const news = await prisma.new.findUniqueOrThrow({
@@ -108,7 +120,7 @@ export async function DELETE(
         entityType: 'New',
         entityId: id,
         userId: user.sub,
-        userName: user.name || 'Usuário',
+        userName: userData?.name || 'Usuário',
         userRole: user.role,
         oldData: news,
       })

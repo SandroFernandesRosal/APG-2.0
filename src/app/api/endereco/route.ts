@@ -45,6 +45,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: user.sub },
+    select: { name: true },
+  })
+
   const body = await req.json()
   const { local, rua, cep, numero, cidade, isPublic } = bodySchema.parse(body)
 
@@ -66,7 +72,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       entityType: 'Endereco',
       entityId: endereco.id,
       userId: user.sub,
-      userName: user.name || 'Usuário',
+      userName: userData?.name || 'Usuário',
       userRole: user.role,
       newData: endereco,
     })

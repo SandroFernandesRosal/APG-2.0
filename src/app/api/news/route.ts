@@ -13,8 +13,8 @@ export async function GET(req: NextRequest) {
   const itemsPerPage = 12
 
   // Construir where clause
-  const where: any = {}
-  
+  const where: Record<string, unknown> = {}
+
   // Só filtrar por página se especificado
   if (page) {
     where.page = page
@@ -41,6 +41,12 @@ export async function POST(req: NextRequest) {
       console.log('Usuário não autorizado:', user?.role)
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
     }
+
+    // Buscar dados completos do usuário para auditoria
+    const userData = await prisma.user.findUnique({
+      where: { id: user.sub },
+      select: { name: true },
+    })
 
     const body = await req.json()
     console.log('Body recebido:', body)
@@ -87,7 +93,7 @@ export async function POST(req: NextRequest) {
         entityType: 'New',
         entityId: created.id,
         userId: user.sub,
-        userName: user.name || 'Usuário',
+        userName: userData?.name || 'Usuário',
         userRole: user.role,
         newData: created,
       })

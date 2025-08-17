@@ -38,6 +38,12 @@ export async function PUT(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: user.sub },
+    select: { name: true },
+  })
+
   const { id } = paramsSchema.parse(await params)
   const body = await req.json()
   const { name, coverUrl, avatarUrl, content, isPublic } =
@@ -67,7 +73,7 @@ export async function PUT(
         entityType: 'Testemunho',
         entityId: id,
         userId: user.sub,
-        userName: user.name || 'Usuário',
+        userName: userData?.name || 'Usuário',
         userRole: user.role,
         oldData: testemunho,
         newData: updated,
@@ -95,6 +101,12 @@ export async function DELETE(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: user.sub },
+    select: { name: true },
+  })
+
   const { id } = paramsSchema.parse(await params)
 
   const testemunho = await prisma.testemunho.findUniqueOrThrow({
@@ -112,7 +124,7 @@ export async function DELETE(
         entityType: 'Testemunho',
         entityId: id,
         userId: user.sub,
-        userName: user.name || 'Usuário',
+        userName: userData?.name || 'Usuário',
         userRole: user.role,
         oldData: testemunho,
       })

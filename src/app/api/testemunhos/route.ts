@@ -38,9 +38,20 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const member = await authMiddleware(req)
-  if (!member || (member.role !== 'ADMIN' && member.role !== 'SUPERADMIN' && member.role !== 'MEMBRO')) {
+  if (
+    !member ||
+    (member.role !== 'ADMIN' &&
+      member.role !== 'SUPERADMIN' &&
+      member.role !== 'MEMBRO')
+  ) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
+
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: member.sub },
+    select: { name: true },
+  })
 
   const body = await req.json()
   const { name, coverUrl, avatarUrl, content, isPublic, ministryRole } =
@@ -75,7 +86,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       entityType: 'Testemunho',
       entityId: testemunho.id,
       userId: member.sub,
-      userName: member.name || 'Usuário',
+      userName: userData?.name || 'Usuário',
       userRole: member.role,
       newData: testemunho,
     })
