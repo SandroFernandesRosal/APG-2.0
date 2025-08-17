@@ -17,6 +17,12 @@ export async function PUT(
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: admin.sub },
+    select: { name: true },
+  })
+
   const { id } = await params
   const body = await req.json()
   const { isPublic } = bodySchema.parse(body)
@@ -49,7 +55,7 @@ export async function PUT(
       entityType: 'Testemunho',
       entityId: id,
       userId: admin.sub,
-      userName: admin.name || 'Administrador',
+      userName: userData?.name || 'Administrador',
       userRole: admin.role,
       oldData: testemunho,
       newData: updated,
@@ -70,6 +76,12 @@ export async function DELETE(
   if (!admin || (admin.role !== 'ADMIN' && admin.role !== 'SUPERADMIN')) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
+
+  // Buscar dados completos do usuário para auditoria
+  const userData = await prisma.user.findUnique({
+    where: { id: admin.sub },
+    select: { name: true },
+  })
 
   const { id } = await params
 
@@ -101,7 +113,7 @@ export async function DELETE(
         entityType: 'Testemunho',
         entityId: id,
         userId: admin.sub,
-        userName: admin.name || 'Administrador',
+        userName: userData?.name || 'Administrador',
         userRole: admin.role,
         oldData: testemunho,
       })
