@@ -57,12 +57,18 @@ model User {
   sobre              Sobre[]
   sobreLider         SobreLider[]
   testemunhos        Testemunho[]
+  auditLogs          AuditLog[]
+  bibleFavorites     BibleFavorite[]
+  bibleReadingPlan   BibleReadingPlan?
+  bibleReadChapters  BibleReadChapter[]
+  bibleReadVerses    BibleReadVerse[]
 }
 
 model New {
   id        String       @id @default(uuid())
   userId    String
-  coverUrl  String
+  coverUrl  String?
+  videoUrl  String?
   content   String
   title     String
   createdAt DateTime     @default(now())
@@ -200,4 +206,92 @@ model Testemunho {
   coverUrl     String?
   ministryRole MinistryRole?
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BibleFavorite {
+  id        String   @id @default(uuid())
+  userId    String
+  bookName  String
+  chapter   Int
+  verse     Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookName, chapter, verse])
+  @@index([userId])
+}
+
+model BibleReadingPlan {
+  id             String   @id @default(uuid())
+  userId         String
+  totalDays      Int
+  chaptersPerDay Int
+  startDate      DateTime
+  endDate        DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId]) // Um usuário só pode ter um plano ativo
+  @@index([userId])
+}
+
+model BibleReadChapter {
+  id       String   @id @default(uuid())
+  userId   String
+  bookName String
+  chapter  Int
+  readAt   DateTime @default(now())
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookName, chapter]) // Um usuário só pode marcar um capítulo como lido uma vez
+  @@index([userId])
+  @@index([readAt])
+}
+
+model BibleReadVerse {
+  id       String   @id @default(uuid())
+  userId   String
+  bookName String
+  chapter  Int
+  verse    Int
+  readAt   DateTime @default(now())
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookName, chapter, verse]) // Um usuário só pode marcar um versículo como lido uma vez
+  @@index([userId])
+  @@index([readAt])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  action     String // CREATE, UPDATE, DELETE
+  entityType String // "User", "New", "Testemunho", "Contato", "Doacao", "Agenda", "Endereco", "Sobre", "SobreLider"
+  entityId   String // ID da entidade modificada
+  userId     String // Quem fez a ação
+  userName   String // Nome do usuário (para facilitar consultas)
+  userRole   String // Role do usuário no momento da ação
+  oldData    Json? // Dados antes da mudança (para UPDATE)
+  newData    Json? // Dados depois da mudança (para CREATE/UPDATE)
+  changes    Json? // Apenas os campos que mudaram (para UPDATE)
+  timestamp  DateTime @default(now())
+  ipAddress  String? // Opcional, se quiser no futuro
+  userAgent  String? // Opcional, se quiser no futuro
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([timestamp])
+  @@index([action])
 }

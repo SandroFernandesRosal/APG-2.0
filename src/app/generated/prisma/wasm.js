@@ -265,6 +265,44 @@ exports.Prisma.TestemunhoScalarFieldEnum = {
   ministryRole: 'ministryRole'
 };
 
+exports.Prisma.BibleFavoriteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookName: 'bookName',
+  chapter: 'chapter',
+  verse: 'verse',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BibleReadingPlanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalDays: 'totalDays',
+  chaptersPerDay: 'chaptersPerDay',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BibleReadChapterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookName: 'bookName',
+  chapter: 'chapter',
+  readAt: 'readAt'
+};
+
+exports.Prisma.BibleReadVerseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookName: 'bookName',
+  chapter: 'chapter',
+  verse: 'verse',
+  readAt: 'readAt'
+};
+
 exports.Prisma.AuditLogScalarFieldEnum = {
   id: 'id',
   action: 'action',
@@ -345,6 +383,10 @@ exports.Prisma.ModelName = {
   RefreshToken: 'RefreshToken',
   PasswordResetToken: 'PasswordResetToken',
   Testemunho: 'Testemunho',
+  BibleFavorite: 'BibleFavorite',
+  BibleReadingPlan: 'BibleReadingPlan',
+  BibleReadChapter: 'BibleReadChapter',
+  BibleReadVerse: 'BibleReadVerse',
   AuditLog: 'AuditLog'
 };
 

@@ -74,6 +74,26 @@ export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetT
  */
 export type Testemunho = $Result.DefaultSelection<Prisma.$TestemunhoPayload>
 /**
+ * Model BibleFavorite
+ * 
+ */
+export type BibleFavorite = $Result.DefaultSelection<Prisma.$BibleFavoritePayload>
+/**
+ * Model BibleReadingPlan
+ * 
+ */
+export type BibleReadingPlan = $Result.DefaultSelection<Prisma.$BibleReadingPlanPayload>
+/**
+ * Model BibleReadChapter
+ * 
+ */
+export type BibleReadChapter = $Result.DefaultSelection<Prisma.$BibleReadChapterPayload>
+/**
+ * Model BibleReadVerse
+ * 
+ */
+export type BibleReadVerse = $Result.DefaultSelection<Prisma.$BibleReadVersePayload>
+/**
  * Model AuditLog
  * 
  */
@@ -375,6 +395,46 @@ export class PrismaClient<
     * ```
     */
   get testemunho(): Prisma.TestemunhoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bibleFavorite`: Exposes CRUD operations for the **BibleFavorite** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BibleFavorites
+    * const bibleFavorites = await prisma.bibleFavorite.findMany()
+    * ```
+    */
+  get bibleFavorite(): Prisma.BibleFavoriteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bibleReadingPlan`: Exposes CRUD operations for the **BibleReadingPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BibleReadingPlans
+    * const bibleReadingPlans = await prisma.bibleReadingPlan.findMany()
+    * ```
+    */
+  get bibleReadingPlan(): Prisma.BibleReadingPlanDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bibleReadChapter`: Exposes CRUD operations for the **BibleReadChapter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BibleReadChapters
+    * const bibleReadChapters = await prisma.bibleReadChapter.findMany()
+    * ```
+    */
+  get bibleReadChapter(): Prisma.BibleReadChapterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bibleReadVerse`: Exposes CRUD operations for the **BibleReadVerse** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BibleReadVerses
+    * const bibleReadVerses = await prisma.bibleReadVerse.findMany()
+    * ```
+    */
+  get bibleReadVerse(): Prisma.BibleReadVerseDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.auditLog`: Exposes CRUD operations for the **AuditLog** model.
@@ -837,6 +897,10 @@ export namespace Prisma {
     RefreshToken: 'RefreshToken',
     PasswordResetToken: 'PasswordResetToken',
     Testemunho: 'Testemunho',
+    BibleFavorite: 'BibleFavorite',
+    BibleReadingPlan: 'BibleReadingPlan',
+    BibleReadChapter: 'BibleReadChapter',
+    BibleReadVerse: 'BibleReadVerse',
     AuditLog: 'AuditLog'
   };
 
@@ -856,7 +920,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "new" | "ministerio" | "agenda" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "passwordResetToken" | "testemunho" | "auditLog"
+      modelProps: "user" | "new" | "ministerio" | "agenda" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "passwordResetToken" | "testemunho" | "bibleFavorite" | "bibleReadingPlan" | "bibleReadChapter" | "bibleReadVerse" | "auditLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1748,6 +1812,302 @@ export namespace Prisma {
           }
         }
       }
+      BibleFavorite: {
+        payload: Prisma.$BibleFavoritePayload<ExtArgs>
+        fields: Prisma.BibleFavoriteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BibleFavoriteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BibleFavoriteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>
+          }
+          findFirst: {
+            args: Prisma.BibleFavoriteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BibleFavoriteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>
+          }
+          findMany: {
+            args: Prisma.BibleFavoriteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>[]
+          }
+          create: {
+            args: Prisma.BibleFavoriteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>
+          }
+          createMany: {
+            args: Prisma.BibleFavoriteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BibleFavoriteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>[]
+          }
+          delete: {
+            args: Prisma.BibleFavoriteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>
+          }
+          update: {
+            args: Prisma.BibleFavoriteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>
+          }
+          deleteMany: {
+            args: Prisma.BibleFavoriteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BibleFavoriteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BibleFavoriteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>[]
+          }
+          upsert: {
+            args: Prisma.BibleFavoriteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleFavoritePayload>
+          }
+          aggregate: {
+            args: Prisma.BibleFavoriteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBibleFavorite>
+          }
+          groupBy: {
+            args: Prisma.BibleFavoriteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BibleFavoriteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BibleFavoriteCountArgs<ExtArgs>
+            result: $Utils.Optional<BibleFavoriteCountAggregateOutputType> | number
+          }
+        }
+      }
+      BibleReadingPlan: {
+        payload: Prisma.$BibleReadingPlanPayload<ExtArgs>
+        fields: Prisma.BibleReadingPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BibleReadingPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BibleReadingPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.BibleReadingPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BibleReadingPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>
+          }
+          findMany: {
+            args: Prisma.BibleReadingPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>[]
+          }
+          create: {
+            args: Prisma.BibleReadingPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>
+          }
+          createMany: {
+            args: Prisma.BibleReadingPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BibleReadingPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.BibleReadingPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>
+          }
+          update: {
+            args: Prisma.BibleReadingPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.BibleReadingPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BibleReadingPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BibleReadingPlanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>[]
+          }
+          upsert: {
+            args: Prisma.BibleReadingPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadingPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.BibleReadingPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBibleReadingPlan>
+          }
+          groupBy: {
+            args: Prisma.BibleReadingPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BibleReadingPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BibleReadingPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<BibleReadingPlanCountAggregateOutputType> | number
+          }
+        }
+      }
+      BibleReadChapter: {
+        payload: Prisma.$BibleReadChapterPayload<ExtArgs>
+        fields: Prisma.BibleReadChapterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BibleReadChapterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BibleReadChapterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>
+          }
+          findFirst: {
+            args: Prisma.BibleReadChapterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BibleReadChapterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>
+          }
+          findMany: {
+            args: Prisma.BibleReadChapterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>[]
+          }
+          create: {
+            args: Prisma.BibleReadChapterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>
+          }
+          createMany: {
+            args: Prisma.BibleReadChapterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BibleReadChapterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>[]
+          }
+          delete: {
+            args: Prisma.BibleReadChapterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>
+          }
+          update: {
+            args: Prisma.BibleReadChapterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>
+          }
+          deleteMany: {
+            args: Prisma.BibleReadChapterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BibleReadChapterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BibleReadChapterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>[]
+          }
+          upsert: {
+            args: Prisma.BibleReadChapterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadChapterPayload>
+          }
+          aggregate: {
+            args: Prisma.BibleReadChapterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBibleReadChapter>
+          }
+          groupBy: {
+            args: Prisma.BibleReadChapterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BibleReadChapterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BibleReadChapterCountArgs<ExtArgs>
+            result: $Utils.Optional<BibleReadChapterCountAggregateOutputType> | number
+          }
+        }
+      }
+      BibleReadVerse: {
+        payload: Prisma.$BibleReadVersePayload<ExtArgs>
+        fields: Prisma.BibleReadVerseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BibleReadVerseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BibleReadVerseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>
+          }
+          findFirst: {
+            args: Prisma.BibleReadVerseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BibleReadVerseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>
+          }
+          findMany: {
+            args: Prisma.BibleReadVerseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>[]
+          }
+          create: {
+            args: Prisma.BibleReadVerseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>
+          }
+          createMany: {
+            args: Prisma.BibleReadVerseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BibleReadVerseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>[]
+          }
+          delete: {
+            args: Prisma.BibleReadVerseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>
+          }
+          update: {
+            args: Prisma.BibleReadVerseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>
+          }
+          deleteMany: {
+            args: Prisma.BibleReadVerseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BibleReadVerseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BibleReadVerseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>[]
+          }
+          upsert: {
+            args: Prisma.BibleReadVerseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BibleReadVersePayload>
+          }
+          aggregate: {
+            args: Prisma.BibleReadVerseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBibleReadVerse>
+          }
+          groupBy: {
+            args: Prisma.BibleReadVerseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BibleReadVerseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BibleReadVerseCountArgs<ExtArgs>
+            result: $Utils.Optional<BibleReadVerseCountAggregateOutputType> | number
+          }
+        }
+      }
       AuditLog: {
         payload: Prisma.$AuditLogPayload<ExtArgs>
         fields: Prisma.AuditLogFieldRefs
@@ -1918,6 +2278,10 @@ export namespace Prisma {
     refreshToken?: RefreshTokenOmit
     passwordResetToken?: PasswordResetTokenOmit
     testemunho?: TestemunhoOmit
+    bibleFavorite?: BibleFavoriteOmit
+    bibleReadingPlan?: BibleReadingPlanOmit
+    bibleReadChapter?: BibleReadChapterOmit
+    bibleReadVerse?: BibleReadVerseOmit
     auditLog?: AuditLogOmit
   }
 
@@ -2025,6 +2389,9 @@ export namespace Prisma {
     sobreLider: number
     testemunhos: number
     auditLogs: number
+    bibleFavorites: number
+    bibleReadChapters: number
+    bibleReadVerses: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2040,6 +2407,9 @@ export namespace Prisma {
     sobreLider?: boolean | UserCountOutputTypeCountSobreLiderArgs
     testemunhos?: boolean | UserCountOutputTypeCountTestemunhosArgs
     auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
+    bibleFavorites?: boolean | UserCountOutputTypeCountBibleFavoritesArgs
+    bibleReadChapters?: boolean | UserCountOutputTypeCountBibleReadChaptersArgs
+    bibleReadVerses?: boolean | UserCountOutputTypeCountBibleReadVersesArgs
   }
 
   // Custom InputTypes
@@ -2135,6 +2505,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditLogWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBibleFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleFavoriteWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBibleReadChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleReadChapterWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBibleReadVersesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleReadVerseWhereInput
   }
 
 
@@ -2346,6 +2737,10 @@ export namespace Prisma {
     sobreLider?: boolean | User$sobreLiderArgs<ExtArgs>
     testemunhos?: boolean | User$testemunhosArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
+    bibleFavorites?: boolean | User$bibleFavoritesArgs<ExtArgs>
+    bibleReadingPlan?: boolean | User$bibleReadingPlanArgs<ExtArgs>
+    bibleReadChapters?: boolean | User$bibleReadChaptersArgs<ExtArgs>
+    bibleReadVerses?: boolean | User$bibleReadVersesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2399,6 +2794,10 @@ export namespace Prisma {
     sobreLider?: boolean | User$sobreLiderArgs<ExtArgs>
     testemunhos?: boolean | User$testemunhosArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
+    bibleFavorites?: boolean | User$bibleFavoritesArgs<ExtArgs>
+    bibleReadingPlan?: boolean | User$bibleReadingPlanArgs<ExtArgs>
+    bibleReadChapters?: boolean | User$bibleReadChaptersArgs<ExtArgs>
+    bibleReadVerses?: boolean | User$bibleReadVersesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2419,6 +2818,10 @@ export namespace Prisma {
       sobreLider: Prisma.$SobreLiderPayload<ExtArgs>[]
       testemunhos: Prisma.$TestemunhoPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+      bibleFavorites: Prisma.$BibleFavoritePayload<ExtArgs>[]
+      bibleReadingPlan: Prisma.$BibleReadingPlanPayload<ExtArgs> | null
+      bibleReadChapters: Prisma.$BibleReadChapterPayload<ExtArgs>[]
+      bibleReadVerses: Prisma.$BibleReadVersePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2836,6 +3239,10 @@ export namespace Prisma {
     sobreLider<T extends User$sobreLiderArgs<ExtArgs> = {}>(args?: Subset<T, User$sobreLiderArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SobreLiderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     testemunhos<T extends User$testemunhosArgs<ExtArgs> = {}>(args?: Subset<T, User$testemunhosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditLogs<T extends User$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bibleFavorites<T extends User$bibleFavoritesArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleFavoritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bibleReadingPlan<T extends User$bibleReadingPlanArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleReadingPlanArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    bibleReadChapters<T extends User$bibleReadChaptersArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleReadChaptersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bibleReadVerses<T extends User$bibleReadVersesArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleReadVersesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3547,6 +3954,97 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuditLogScalarFieldEnum | AuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * User.bibleFavorites
+   */
+  export type User$bibleFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    where?: BibleFavoriteWhereInput
+    orderBy?: BibleFavoriteOrderByWithRelationInput | BibleFavoriteOrderByWithRelationInput[]
+    cursor?: BibleFavoriteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BibleFavoriteScalarFieldEnum | BibleFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * User.bibleReadingPlan
+   */
+  export type User$bibleReadingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    where?: BibleReadingPlanWhereInput
+  }
+
+  /**
+   * User.bibleReadChapters
+   */
+  export type User$bibleReadChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    where?: BibleReadChapterWhereInput
+    orderBy?: BibleReadChapterOrderByWithRelationInput | BibleReadChapterOrderByWithRelationInput[]
+    cursor?: BibleReadChapterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BibleReadChapterScalarFieldEnum | BibleReadChapterScalarFieldEnum[]
+  }
+
+  /**
+   * User.bibleReadVerses
+   */
+  export type User$bibleReadVersesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    where?: BibleReadVerseWhereInput
+    orderBy?: BibleReadVerseOrderByWithRelationInput | BibleReadVerseOrderByWithRelationInput[]
+    cursor?: BibleReadVerseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BibleReadVerseScalarFieldEnum | BibleReadVerseScalarFieldEnum[]
   }
 
   /**
@@ -15792,6 +16290,4464 @@ export namespace Prisma {
 
 
   /**
+   * Model BibleFavorite
+   */
+
+  export type AggregateBibleFavorite = {
+    _count: BibleFavoriteCountAggregateOutputType | null
+    _avg: BibleFavoriteAvgAggregateOutputType | null
+    _sum: BibleFavoriteSumAggregateOutputType | null
+    _min: BibleFavoriteMinAggregateOutputType | null
+    _max: BibleFavoriteMaxAggregateOutputType | null
+  }
+
+  export type BibleFavoriteAvgAggregateOutputType = {
+    chapter: number | null
+    verse: number | null
+  }
+
+  export type BibleFavoriteSumAggregateOutputType = {
+    chapter: number | null
+    verse: number | null
+  }
+
+  export type BibleFavoriteMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookName: string | null
+    chapter: number | null
+    verse: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BibleFavoriteMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookName: string | null
+    chapter: number | null
+    verse: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BibleFavoriteCountAggregateOutputType = {
+    id: number
+    userId: number
+    bookName: number
+    chapter: number
+    verse: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BibleFavoriteAvgAggregateInputType = {
+    chapter?: true
+    verse?: true
+  }
+
+  export type BibleFavoriteSumAggregateInputType = {
+    chapter?: true
+    verse?: true
+  }
+
+  export type BibleFavoriteMinAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    verse?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BibleFavoriteMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    verse?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BibleFavoriteCountAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    verse?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BibleFavoriteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleFavorite to aggregate.
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleFavorites to fetch.
+     */
+    orderBy?: BibleFavoriteOrderByWithRelationInput | BibleFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BibleFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleFavorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BibleFavorites
+    **/
+    _count?: true | BibleFavoriteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BibleFavoriteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BibleFavoriteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BibleFavoriteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BibleFavoriteMaxAggregateInputType
+  }
+
+  export type GetBibleFavoriteAggregateType<T extends BibleFavoriteAggregateArgs> = {
+        [P in keyof T & keyof AggregateBibleFavorite]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBibleFavorite[P]>
+      : GetScalarType<T[P], AggregateBibleFavorite[P]>
+  }
+
+
+
+
+  export type BibleFavoriteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleFavoriteWhereInput
+    orderBy?: BibleFavoriteOrderByWithAggregationInput | BibleFavoriteOrderByWithAggregationInput[]
+    by: BibleFavoriteScalarFieldEnum[] | BibleFavoriteScalarFieldEnum
+    having?: BibleFavoriteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BibleFavoriteCountAggregateInputType | true
+    _avg?: BibleFavoriteAvgAggregateInputType
+    _sum?: BibleFavoriteSumAggregateInputType
+    _min?: BibleFavoriteMinAggregateInputType
+    _max?: BibleFavoriteMaxAggregateInputType
+  }
+
+  export type BibleFavoriteGroupByOutputType = {
+    id: string
+    userId: string
+    bookName: string
+    chapter: number
+    verse: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BibleFavoriteCountAggregateOutputType | null
+    _avg: BibleFavoriteAvgAggregateOutputType | null
+    _sum: BibleFavoriteSumAggregateOutputType | null
+    _min: BibleFavoriteMinAggregateOutputType | null
+    _max: BibleFavoriteMaxAggregateOutputType | null
+  }
+
+  type GetBibleFavoriteGroupByPayload<T extends BibleFavoriteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BibleFavoriteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BibleFavoriteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BibleFavoriteGroupByOutputType[P]>
+            : GetScalarType<T[P], BibleFavoriteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BibleFavoriteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleFavorite"]>
+
+  export type BibleFavoriteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleFavorite"]>
+
+  export type BibleFavoriteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleFavorite"]>
+
+  export type BibleFavoriteSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BibleFavoriteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "bookName" | "chapter" | "verse" | "createdAt" | "updatedAt", ExtArgs["result"]["bibleFavorite"]>
+  export type BibleFavoriteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleFavoriteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleFavoriteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BibleFavoritePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BibleFavorite"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      bookName: string
+      chapter: number
+      verse: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["bibleFavorite"]>
+    composites: {}
+  }
+
+  type BibleFavoriteGetPayload<S extends boolean | null | undefined | BibleFavoriteDefaultArgs> = $Result.GetResult<Prisma.$BibleFavoritePayload, S>
+
+  type BibleFavoriteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BibleFavoriteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BibleFavoriteCountAggregateInputType | true
+    }
+
+  export interface BibleFavoriteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BibleFavorite'], meta: { name: 'BibleFavorite' } }
+    /**
+     * Find zero or one BibleFavorite that matches the filter.
+     * @param {BibleFavoriteFindUniqueArgs} args - Arguments to find a BibleFavorite
+     * @example
+     * // Get one BibleFavorite
+     * const bibleFavorite = await prisma.bibleFavorite.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BibleFavoriteFindUniqueArgs>(args: SelectSubset<T, BibleFavoriteFindUniqueArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BibleFavorite that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BibleFavoriteFindUniqueOrThrowArgs} args - Arguments to find a BibleFavorite
+     * @example
+     * // Get one BibleFavorite
+     * const bibleFavorite = await prisma.bibleFavorite.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BibleFavoriteFindUniqueOrThrowArgs>(args: SelectSubset<T, BibleFavoriteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleFavorite that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteFindFirstArgs} args - Arguments to find a BibleFavorite
+     * @example
+     * // Get one BibleFavorite
+     * const bibleFavorite = await prisma.bibleFavorite.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BibleFavoriteFindFirstArgs>(args?: SelectSubset<T, BibleFavoriteFindFirstArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleFavorite that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteFindFirstOrThrowArgs} args - Arguments to find a BibleFavorite
+     * @example
+     * // Get one BibleFavorite
+     * const bibleFavorite = await prisma.bibleFavorite.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BibleFavoriteFindFirstOrThrowArgs>(args?: SelectSubset<T, BibleFavoriteFindFirstOrThrowArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BibleFavorites that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BibleFavorites
+     * const bibleFavorites = await prisma.bibleFavorite.findMany()
+     * 
+     * // Get first 10 BibleFavorites
+     * const bibleFavorites = await prisma.bibleFavorite.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bibleFavoriteWithIdOnly = await prisma.bibleFavorite.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BibleFavoriteFindManyArgs>(args?: SelectSubset<T, BibleFavoriteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BibleFavorite.
+     * @param {BibleFavoriteCreateArgs} args - Arguments to create a BibleFavorite.
+     * @example
+     * // Create one BibleFavorite
+     * const BibleFavorite = await prisma.bibleFavorite.create({
+     *   data: {
+     *     // ... data to create a BibleFavorite
+     *   }
+     * })
+     * 
+     */
+    create<T extends BibleFavoriteCreateArgs>(args: SelectSubset<T, BibleFavoriteCreateArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BibleFavorites.
+     * @param {BibleFavoriteCreateManyArgs} args - Arguments to create many BibleFavorites.
+     * @example
+     * // Create many BibleFavorites
+     * const bibleFavorite = await prisma.bibleFavorite.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BibleFavoriteCreateManyArgs>(args?: SelectSubset<T, BibleFavoriteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BibleFavorites and returns the data saved in the database.
+     * @param {BibleFavoriteCreateManyAndReturnArgs} args - Arguments to create many BibleFavorites.
+     * @example
+     * // Create many BibleFavorites
+     * const bibleFavorite = await prisma.bibleFavorite.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BibleFavorites and only return the `id`
+     * const bibleFavoriteWithIdOnly = await prisma.bibleFavorite.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BibleFavoriteCreateManyAndReturnArgs>(args?: SelectSubset<T, BibleFavoriteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BibleFavorite.
+     * @param {BibleFavoriteDeleteArgs} args - Arguments to delete one BibleFavorite.
+     * @example
+     * // Delete one BibleFavorite
+     * const BibleFavorite = await prisma.bibleFavorite.delete({
+     *   where: {
+     *     // ... filter to delete one BibleFavorite
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BibleFavoriteDeleteArgs>(args: SelectSubset<T, BibleFavoriteDeleteArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BibleFavorite.
+     * @param {BibleFavoriteUpdateArgs} args - Arguments to update one BibleFavorite.
+     * @example
+     * // Update one BibleFavorite
+     * const bibleFavorite = await prisma.bibleFavorite.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BibleFavoriteUpdateArgs>(args: SelectSubset<T, BibleFavoriteUpdateArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BibleFavorites.
+     * @param {BibleFavoriteDeleteManyArgs} args - Arguments to filter BibleFavorites to delete.
+     * @example
+     * // Delete a few BibleFavorites
+     * const { count } = await prisma.bibleFavorite.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BibleFavoriteDeleteManyArgs>(args?: SelectSubset<T, BibleFavoriteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleFavorites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BibleFavorites
+     * const bibleFavorite = await prisma.bibleFavorite.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BibleFavoriteUpdateManyArgs>(args: SelectSubset<T, BibleFavoriteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleFavorites and returns the data updated in the database.
+     * @param {BibleFavoriteUpdateManyAndReturnArgs} args - Arguments to update many BibleFavorites.
+     * @example
+     * // Update many BibleFavorites
+     * const bibleFavorite = await prisma.bibleFavorite.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BibleFavorites and only return the `id`
+     * const bibleFavoriteWithIdOnly = await prisma.bibleFavorite.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BibleFavoriteUpdateManyAndReturnArgs>(args: SelectSubset<T, BibleFavoriteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BibleFavorite.
+     * @param {BibleFavoriteUpsertArgs} args - Arguments to update or create a BibleFavorite.
+     * @example
+     * // Update or create a BibleFavorite
+     * const bibleFavorite = await prisma.bibleFavorite.upsert({
+     *   create: {
+     *     // ... data to create a BibleFavorite
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BibleFavorite we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BibleFavoriteUpsertArgs>(args: SelectSubset<T, BibleFavoriteUpsertArgs<ExtArgs>>): Prisma__BibleFavoriteClient<$Result.GetResult<Prisma.$BibleFavoritePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BibleFavorites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteCountArgs} args - Arguments to filter BibleFavorites to count.
+     * @example
+     * // Count the number of BibleFavorites
+     * const count = await prisma.bibleFavorite.count({
+     *   where: {
+     *     // ... the filter for the BibleFavorites we want to count
+     *   }
+     * })
+    **/
+    count<T extends BibleFavoriteCountArgs>(
+      args?: Subset<T, BibleFavoriteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BibleFavoriteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BibleFavorite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BibleFavoriteAggregateArgs>(args: Subset<T, BibleFavoriteAggregateArgs>): Prisma.PrismaPromise<GetBibleFavoriteAggregateType<T>>
+
+    /**
+     * Group by BibleFavorite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleFavoriteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BibleFavoriteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BibleFavoriteGroupByArgs['orderBy'] }
+        : { orderBy?: BibleFavoriteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BibleFavoriteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBibleFavoriteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BibleFavorite model
+   */
+  readonly fields: BibleFavoriteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BibleFavorite.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BibleFavoriteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BibleFavorite model
+   */
+  interface BibleFavoriteFieldRefs {
+    readonly id: FieldRef<"BibleFavorite", 'String'>
+    readonly userId: FieldRef<"BibleFavorite", 'String'>
+    readonly bookName: FieldRef<"BibleFavorite", 'String'>
+    readonly chapter: FieldRef<"BibleFavorite", 'Int'>
+    readonly verse: FieldRef<"BibleFavorite", 'Int'>
+    readonly createdAt: FieldRef<"BibleFavorite", 'DateTime'>
+    readonly updatedAt: FieldRef<"BibleFavorite", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BibleFavorite findUnique
+   */
+  export type BibleFavoriteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleFavorite to fetch.
+     */
+    where: BibleFavoriteWhereUniqueInput
+  }
+
+  /**
+   * BibleFavorite findUniqueOrThrow
+   */
+  export type BibleFavoriteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleFavorite to fetch.
+     */
+    where: BibleFavoriteWhereUniqueInput
+  }
+
+  /**
+   * BibleFavorite findFirst
+   */
+  export type BibleFavoriteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleFavorite to fetch.
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleFavorites to fetch.
+     */
+    orderBy?: BibleFavoriteOrderByWithRelationInput | BibleFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleFavorites.
+     */
+    cursor?: BibleFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleFavorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleFavorites.
+     */
+    distinct?: BibleFavoriteScalarFieldEnum | BibleFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * BibleFavorite findFirstOrThrow
+   */
+  export type BibleFavoriteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleFavorite to fetch.
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleFavorites to fetch.
+     */
+    orderBy?: BibleFavoriteOrderByWithRelationInput | BibleFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleFavorites.
+     */
+    cursor?: BibleFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleFavorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleFavorites.
+     */
+    distinct?: BibleFavoriteScalarFieldEnum | BibleFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * BibleFavorite findMany
+   */
+  export type BibleFavoriteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleFavorites to fetch.
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleFavorites to fetch.
+     */
+    orderBy?: BibleFavoriteOrderByWithRelationInput | BibleFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BibleFavorites.
+     */
+    cursor?: BibleFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleFavorites.
+     */
+    skip?: number
+    distinct?: BibleFavoriteScalarFieldEnum | BibleFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * BibleFavorite create
+   */
+  export type BibleFavoriteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BibleFavorite.
+     */
+    data: XOR<BibleFavoriteCreateInput, BibleFavoriteUncheckedCreateInput>
+  }
+
+  /**
+   * BibleFavorite createMany
+   */
+  export type BibleFavoriteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BibleFavorites.
+     */
+    data: BibleFavoriteCreateManyInput | BibleFavoriteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BibleFavorite createManyAndReturn
+   */
+  export type BibleFavoriteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * The data used to create many BibleFavorites.
+     */
+    data: BibleFavoriteCreateManyInput | BibleFavoriteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleFavorite update
+   */
+  export type BibleFavoriteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BibleFavorite.
+     */
+    data: XOR<BibleFavoriteUpdateInput, BibleFavoriteUncheckedUpdateInput>
+    /**
+     * Choose, which BibleFavorite to update.
+     */
+    where: BibleFavoriteWhereUniqueInput
+  }
+
+  /**
+   * BibleFavorite updateMany
+   */
+  export type BibleFavoriteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BibleFavorites.
+     */
+    data: XOR<BibleFavoriteUpdateManyMutationInput, BibleFavoriteUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleFavorites to update
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * Limit how many BibleFavorites to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleFavorite updateManyAndReturn
+   */
+  export type BibleFavoriteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * The data used to update BibleFavorites.
+     */
+    data: XOR<BibleFavoriteUpdateManyMutationInput, BibleFavoriteUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleFavorites to update
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * Limit how many BibleFavorites to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleFavorite upsert
+   */
+  export type BibleFavoriteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BibleFavorite to update in case it exists.
+     */
+    where: BibleFavoriteWhereUniqueInput
+    /**
+     * In case the BibleFavorite found by the `where` argument doesn't exist, create a new BibleFavorite with this data.
+     */
+    create: XOR<BibleFavoriteCreateInput, BibleFavoriteUncheckedCreateInput>
+    /**
+     * In case the BibleFavorite was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BibleFavoriteUpdateInput, BibleFavoriteUncheckedUpdateInput>
+  }
+
+  /**
+   * BibleFavorite delete
+   */
+  export type BibleFavoriteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter which BibleFavorite to delete.
+     */
+    where: BibleFavoriteWhereUniqueInput
+  }
+
+  /**
+   * BibleFavorite deleteMany
+   */
+  export type BibleFavoriteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleFavorites to delete
+     */
+    where?: BibleFavoriteWhereInput
+    /**
+     * Limit how many BibleFavorites to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleFavorite without action
+   */
+  export type BibleFavoriteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleFavorite
+     */
+    select?: BibleFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleFavorite
+     */
+    omit?: BibleFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleFavoriteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BibleReadingPlan
+   */
+
+  export type AggregateBibleReadingPlan = {
+    _count: BibleReadingPlanCountAggregateOutputType | null
+    _avg: BibleReadingPlanAvgAggregateOutputType | null
+    _sum: BibleReadingPlanSumAggregateOutputType | null
+    _min: BibleReadingPlanMinAggregateOutputType | null
+    _max: BibleReadingPlanMaxAggregateOutputType | null
+  }
+
+  export type BibleReadingPlanAvgAggregateOutputType = {
+    totalDays: number | null
+    chaptersPerDay: number | null
+  }
+
+  export type BibleReadingPlanSumAggregateOutputType = {
+    totalDays: number | null
+    chaptersPerDay: number | null
+  }
+
+  export type BibleReadingPlanMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalDays: number | null
+    chaptersPerDay: number | null
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BibleReadingPlanMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalDays: number | null
+    chaptersPerDay: number | null
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BibleReadingPlanCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalDays: number
+    chaptersPerDay: number
+    startDate: number
+    endDate: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BibleReadingPlanAvgAggregateInputType = {
+    totalDays?: true
+    chaptersPerDay?: true
+  }
+
+  export type BibleReadingPlanSumAggregateInputType = {
+    totalDays?: true
+    chaptersPerDay?: true
+  }
+
+  export type BibleReadingPlanMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalDays?: true
+    chaptersPerDay?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BibleReadingPlanMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalDays?: true
+    chaptersPerDay?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BibleReadingPlanCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalDays?: true
+    chaptersPerDay?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BibleReadingPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleReadingPlan to aggregate.
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadingPlans to fetch.
+     */
+    orderBy?: BibleReadingPlanOrderByWithRelationInput | BibleReadingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BibleReadingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadingPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BibleReadingPlans
+    **/
+    _count?: true | BibleReadingPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BibleReadingPlanAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BibleReadingPlanSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BibleReadingPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BibleReadingPlanMaxAggregateInputType
+  }
+
+  export type GetBibleReadingPlanAggregateType<T extends BibleReadingPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateBibleReadingPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBibleReadingPlan[P]>
+      : GetScalarType<T[P], AggregateBibleReadingPlan[P]>
+  }
+
+
+
+
+  export type BibleReadingPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleReadingPlanWhereInput
+    orderBy?: BibleReadingPlanOrderByWithAggregationInput | BibleReadingPlanOrderByWithAggregationInput[]
+    by: BibleReadingPlanScalarFieldEnum[] | BibleReadingPlanScalarFieldEnum
+    having?: BibleReadingPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BibleReadingPlanCountAggregateInputType | true
+    _avg?: BibleReadingPlanAvgAggregateInputType
+    _sum?: BibleReadingPlanSumAggregateInputType
+    _min?: BibleReadingPlanMinAggregateInputType
+    _max?: BibleReadingPlanMaxAggregateInputType
+  }
+
+  export type BibleReadingPlanGroupByOutputType = {
+    id: string
+    userId: string
+    totalDays: number
+    chaptersPerDay: number
+    startDate: Date
+    endDate: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: BibleReadingPlanCountAggregateOutputType | null
+    _avg: BibleReadingPlanAvgAggregateOutputType | null
+    _sum: BibleReadingPlanSumAggregateOutputType | null
+    _min: BibleReadingPlanMinAggregateOutputType | null
+    _max: BibleReadingPlanMaxAggregateOutputType | null
+  }
+
+  type GetBibleReadingPlanGroupByPayload<T extends BibleReadingPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BibleReadingPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BibleReadingPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BibleReadingPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], BibleReadingPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BibleReadingPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    chaptersPerDay?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadingPlan"]>
+
+  export type BibleReadingPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    chaptersPerDay?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadingPlan"]>
+
+  export type BibleReadingPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    chaptersPerDay?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadingPlan"]>
+
+  export type BibleReadingPlanSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    chaptersPerDay?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BibleReadingPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalDays" | "chaptersPerDay" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["bibleReadingPlan"]>
+  export type BibleReadingPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleReadingPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleReadingPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BibleReadingPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BibleReadingPlan"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      totalDays: number
+      chaptersPerDay: number
+      startDate: Date
+      endDate: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["bibleReadingPlan"]>
+    composites: {}
+  }
+
+  type BibleReadingPlanGetPayload<S extends boolean | null | undefined | BibleReadingPlanDefaultArgs> = $Result.GetResult<Prisma.$BibleReadingPlanPayload, S>
+
+  type BibleReadingPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BibleReadingPlanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BibleReadingPlanCountAggregateInputType | true
+    }
+
+  export interface BibleReadingPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BibleReadingPlan'], meta: { name: 'BibleReadingPlan' } }
+    /**
+     * Find zero or one BibleReadingPlan that matches the filter.
+     * @param {BibleReadingPlanFindUniqueArgs} args - Arguments to find a BibleReadingPlan
+     * @example
+     * // Get one BibleReadingPlan
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BibleReadingPlanFindUniqueArgs>(args: SelectSubset<T, BibleReadingPlanFindUniqueArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BibleReadingPlan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BibleReadingPlanFindUniqueOrThrowArgs} args - Arguments to find a BibleReadingPlan
+     * @example
+     * // Get one BibleReadingPlan
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BibleReadingPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, BibleReadingPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleReadingPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanFindFirstArgs} args - Arguments to find a BibleReadingPlan
+     * @example
+     * // Get one BibleReadingPlan
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BibleReadingPlanFindFirstArgs>(args?: SelectSubset<T, BibleReadingPlanFindFirstArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleReadingPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanFindFirstOrThrowArgs} args - Arguments to find a BibleReadingPlan
+     * @example
+     * // Get one BibleReadingPlan
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BibleReadingPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, BibleReadingPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BibleReadingPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BibleReadingPlans
+     * const bibleReadingPlans = await prisma.bibleReadingPlan.findMany()
+     * 
+     * // Get first 10 BibleReadingPlans
+     * const bibleReadingPlans = await prisma.bibleReadingPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bibleReadingPlanWithIdOnly = await prisma.bibleReadingPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BibleReadingPlanFindManyArgs>(args?: SelectSubset<T, BibleReadingPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BibleReadingPlan.
+     * @param {BibleReadingPlanCreateArgs} args - Arguments to create a BibleReadingPlan.
+     * @example
+     * // Create one BibleReadingPlan
+     * const BibleReadingPlan = await prisma.bibleReadingPlan.create({
+     *   data: {
+     *     // ... data to create a BibleReadingPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends BibleReadingPlanCreateArgs>(args: SelectSubset<T, BibleReadingPlanCreateArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BibleReadingPlans.
+     * @param {BibleReadingPlanCreateManyArgs} args - Arguments to create many BibleReadingPlans.
+     * @example
+     * // Create many BibleReadingPlans
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BibleReadingPlanCreateManyArgs>(args?: SelectSubset<T, BibleReadingPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BibleReadingPlans and returns the data saved in the database.
+     * @param {BibleReadingPlanCreateManyAndReturnArgs} args - Arguments to create many BibleReadingPlans.
+     * @example
+     * // Create many BibleReadingPlans
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BibleReadingPlans and only return the `id`
+     * const bibleReadingPlanWithIdOnly = await prisma.bibleReadingPlan.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BibleReadingPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, BibleReadingPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BibleReadingPlan.
+     * @param {BibleReadingPlanDeleteArgs} args - Arguments to delete one BibleReadingPlan.
+     * @example
+     * // Delete one BibleReadingPlan
+     * const BibleReadingPlan = await prisma.bibleReadingPlan.delete({
+     *   where: {
+     *     // ... filter to delete one BibleReadingPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BibleReadingPlanDeleteArgs>(args: SelectSubset<T, BibleReadingPlanDeleteArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BibleReadingPlan.
+     * @param {BibleReadingPlanUpdateArgs} args - Arguments to update one BibleReadingPlan.
+     * @example
+     * // Update one BibleReadingPlan
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BibleReadingPlanUpdateArgs>(args: SelectSubset<T, BibleReadingPlanUpdateArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BibleReadingPlans.
+     * @param {BibleReadingPlanDeleteManyArgs} args - Arguments to filter BibleReadingPlans to delete.
+     * @example
+     * // Delete a few BibleReadingPlans
+     * const { count } = await prisma.bibleReadingPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BibleReadingPlanDeleteManyArgs>(args?: SelectSubset<T, BibleReadingPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleReadingPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BibleReadingPlans
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BibleReadingPlanUpdateManyArgs>(args: SelectSubset<T, BibleReadingPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleReadingPlans and returns the data updated in the database.
+     * @param {BibleReadingPlanUpdateManyAndReturnArgs} args - Arguments to update many BibleReadingPlans.
+     * @example
+     * // Update many BibleReadingPlans
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BibleReadingPlans and only return the `id`
+     * const bibleReadingPlanWithIdOnly = await prisma.bibleReadingPlan.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BibleReadingPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, BibleReadingPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BibleReadingPlan.
+     * @param {BibleReadingPlanUpsertArgs} args - Arguments to update or create a BibleReadingPlan.
+     * @example
+     * // Update or create a BibleReadingPlan
+     * const bibleReadingPlan = await prisma.bibleReadingPlan.upsert({
+     *   create: {
+     *     // ... data to create a BibleReadingPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BibleReadingPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BibleReadingPlanUpsertArgs>(args: SelectSubset<T, BibleReadingPlanUpsertArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BibleReadingPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanCountArgs} args - Arguments to filter BibleReadingPlans to count.
+     * @example
+     * // Count the number of BibleReadingPlans
+     * const count = await prisma.bibleReadingPlan.count({
+     *   where: {
+     *     // ... the filter for the BibleReadingPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends BibleReadingPlanCountArgs>(
+      args?: Subset<T, BibleReadingPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BibleReadingPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BibleReadingPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BibleReadingPlanAggregateArgs>(args: Subset<T, BibleReadingPlanAggregateArgs>): Prisma.PrismaPromise<GetBibleReadingPlanAggregateType<T>>
+
+    /**
+     * Group by BibleReadingPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadingPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BibleReadingPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BibleReadingPlanGroupByArgs['orderBy'] }
+        : { orderBy?: BibleReadingPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BibleReadingPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBibleReadingPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BibleReadingPlan model
+   */
+  readonly fields: BibleReadingPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BibleReadingPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BibleReadingPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BibleReadingPlan model
+   */
+  interface BibleReadingPlanFieldRefs {
+    readonly id: FieldRef<"BibleReadingPlan", 'String'>
+    readonly userId: FieldRef<"BibleReadingPlan", 'String'>
+    readonly totalDays: FieldRef<"BibleReadingPlan", 'Int'>
+    readonly chaptersPerDay: FieldRef<"BibleReadingPlan", 'Int'>
+    readonly startDate: FieldRef<"BibleReadingPlan", 'DateTime'>
+    readonly endDate: FieldRef<"BibleReadingPlan", 'DateTime'>
+    readonly createdAt: FieldRef<"BibleReadingPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"BibleReadingPlan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BibleReadingPlan findUnique
+   */
+  export type BibleReadingPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadingPlan to fetch.
+     */
+    where: BibleReadingPlanWhereUniqueInput
+  }
+
+  /**
+   * BibleReadingPlan findUniqueOrThrow
+   */
+  export type BibleReadingPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadingPlan to fetch.
+     */
+    where: BibleReadingPlanWhereUniqueInput
+  }
+
+  /**
+   * BibleReadingPlan findFirst
+   */
+  export type BibleReadingPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadingPlan to fetch.
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadingPlans to fetch.
+     */
+    orderBy?: BibleReadingPlanOrderByWithRelationInput | BibleReadingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleReadingPlans.
+     */
+    cursor?: BibleReadingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadingPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleReadingPlans.
+     */
+    distinct?: BibleReadingPlanScalarFieldEnum | BibleReadingPlanScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadingPlan findFirstOrThrow
+   */
+  export type BibleReadingPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadingPlan to fetch.
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadingPlans to fetch.
+     */
+    orderBy?: BibleReadingPlanOrderByWithRelationInput | BibleReadingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleReadingPlans.
+     */
+    cursor?: BibleReadingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadingPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleReadingPlans.
+     */
+    distinct?: BibleReadingPlanScalarFieldEnum | BibleReadingPlanScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadingPlan findMany
+   */
+  export type BibleReadingPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadingPlans to fetch.
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadingPlans to fetch.
+     */
+    orderBy?: BibleReadingPlanOrderByWithRelationInput | BibleReadingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BibleReadingPlans.
+     */
+    cursor?: BibleReadingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadingPlans.
+     */
+    skip?: number
+    distinct?: BibleReadingPlanScalarFieldEnum | BibleReadingPlanScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadingPlan create
+   */
+  export type BibleReadingPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BibleReadingPlan.
+     */
+    data: XOR<BibleReadingPlanCreateInput, BibleReadingPlanUncheckedCreateInput>
+  }
+
+  /**
+   * BibleReadingPlan createMany
+   */
+  export type BibleReadingPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BibleReadingPlans.
+     */
+    data: BibleReadingPlanCreateManyInput | BibleReadingPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BibleReadingPlan createManyAndReturn
+   */
+  export type BibleReadingPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * The data used to create many BibleReadingPlans.
+     */
+    data: BibleReadingPlanCreateManyInput | BibleReadingPlanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleReadingPlan update
+   */
+  export type BibleReadingPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BibleReadingPlan.
+     */
+    data: XOR<BibleReadingPlanUpdateInput, BibleReadingPlanUncheckedUpdateInput>
+    /**
+     * Choose, which BibleReadingPlan to update.
+     */
+    where: BibleReadingPlanWhereUniqueInput
+  }
+
+  /**
+   * BibleReadingPlan updateMany
+   */
+  export type BibleReadingPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BibleReadingPlans.
+     */
+    data: XOR<BibleReadingPlanUpdateManyMutationInput, BibleReadingPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleReadingPlans to update
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * Limit how many BibleReadingPlans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleReadingPlan updateManyAndReturn
+   */
+  export type BibleReadingPlanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * The data used to update BibleReadingPlans.
+     */
+    data: XOR<BibleReadingPlanUpdateManyMutationInput, BibleReadingPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleReadingPlans to update
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * Limit how many BibleReadingPlans to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleReadingPlan upsert
+   */
+  export type BibleReadingPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BibleReadingPlan to update in case it exists.
+     */
+    where: BibleReadingPlanWhereUniqueInput
+    /**
+     * In case the BibleReadingPlan found by the `where` argument doesn't exist, create a new BibleReadingPlan with this data.
+     */
+    create: XOR<BibleReadingPlanCreateInput, BibleReadingPlanUncheckedCreateInput>
+    /**
+     * In case the BibleReadingPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BibleReadingPlanUpdateInput, BibleReadingPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * BibleReadingPlan delete
+   */
+  export type BibleReadingPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+    /**
+     * Filter which BibleReadingPlan to delete.
+     */
+    where: BibleReadingPlanWhereUniqueInput
+  }
+
+  /**
+   * BibleReadingPlan deleteMany
+   */
+  export type BibleReadingPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleReadingPlans to delete
+     */
+    where?: BibleReadingPlanWhereInput
+    /**
+     * Limit how many BibleReadingPlans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleReadingPlan without action
+   */
+  export type BibleReadingPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadingPlan
+     */
+    select?: BibleReadingPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadingPlan
+     */
+    omit?: BibleReadingPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadingPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BibleReadChapter
+   */
+
+  export type AggregateBibleReadChapter = {
+    _count: BibleReadChapterCountAggregateOutputType | null
+    _avg: BibleReadChapterAvgAggregateOutputType | null
+    _sum: BibleReadChapterSumAggregateOutputType | null
+    _min: BibleReadChapterMinAggregateOutputType | null
+    _max: BibleReadChapterMaxAggregateOutputType | null
+  }
+
+  export type BibleReadChapterAvgAggregateOutputType = {
+    chapter: number | null
+  }
+
+  export type BibleReadChapterSumAggregateOutputType = {
+    chapter: number | null
+  }
+
+  export type BibleReadChapterMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookName: string | null
+    chapter: number | null
+    readAt: Date | null
+  }
+
+  export type BibleReadChapterMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookName: string | null
+    chapter: number | null
+    readAt: Date | null
+  }
+
+  export type BibleReadChapterCountAggregateOutputType = {
+    id: number
+    userId: number
+    bookName: number
+    chapter: number
+    readAt: number
+    _all: number
+  }
+
+
+  export type BibleReadChapterAvgAggregateInputType = {
+    chapter?: true
+  }
+
+  export type BibleReadChapterSumAggregateInputType = {
+    chapter?: true
+  }
+
+  export type BibleReadChapterMinAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    readAt?: true
+  }
+
+  export type BibleReadChapterMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    readAt?: true
+  }
+
+  export type BibleReadChapterCountAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    readAt?: true
+    _all?: true
+  }
+
+  export type BibleReadChapterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleReadChapter to aggregate.
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadChapters to fetch.
+     */
+    orderBy?: BibleReadChapterOrderByWithRelationInput | BibleReadChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BibleReadChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BibleReadChapters
+    **/
+    _count?: true | BibleReadChapterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BibleReadChapterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BibleReadChapterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BibleReadChapterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BibleReadChapterMaxAggregateInputType
+  }
+
+  export type GetBibleReadChapterAggregateType<T extends BibleReadChapterAggregateArgs> = {
+        [P in keyof T & keyof AggregateBibleReadChapter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBibleReadChapter[P]>
+      : GetScalarType<T[P], AggregateBibleReadChapter[P]>
+  }
+
+
+
+
+  export type BibleReadChapterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleReadChapterWhereInput
+    orderBy?: BibleReadChapterOrderByWithAggregationInput | BibleReadChapterOrderByWithAggregationInput[]
+    by: BibleReadChapterScalarFieldEnum[] | BibleReadChapterScalarFieldEnum
+    having?: BibleReadChapterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BibleReadChapterCountAggregateInputType | true
+    _avg?: BibleReadChapterAvgAggregateInputType
+    _sum?: BibleReadChapterSumAggregateInputType
+    _min?: BibleReadChapterMinAggregateInputType
+    _max?: BibleReadChapterMaxAggregateInputType
+  }
+
+  export type BibleReadChapterGroupByOutputType = {
+    id: string
+    userId: string
+    bookName: string
+    chapter: number
+    readAt: Date
+    _count: BibleReadChapterCountAggregateOutputType | null
+    _avg: BibleReadChapterAvgAggregateOutputType | null
+    _sum: BibleReadChapterSumAggregateOutputType | null
+    _min: BibleReadChapterMinAggregateOutputType | null
+    _max: BibleReadChapterMaxAggregateOutputType | null
+  }
+
+  type GetBibleReadChapterGroupByPayload<T extends BibleReadChapterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BibleReadChapterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BibleReadChapterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BibleReadChapterGroupByOutputType[P]>
+            : GetScalarType<T[P], BibleReadChapterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BibleReadChapterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    readAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadChapter"]>
+
+  export type BibleReadChapterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    readAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadChapter"]>
+
+  export type BibleReadChapterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    readAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadChapter"]>
+
+  export type BibleReadChapterSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    readAt?: boolean
+  }
+
+  export type BibleReadChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "bookName" | "chapter" | "readAt", ExtArgs["result"]["bibleReadChapter"]>
+  export type BibleReadChapterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleReadChapterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleReadChapterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BibleReadChapterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BibleReadChapter"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      bookName: string
+      chapter: number
+      readAt: Date
+    }, ExtArgs["result"]["bibleReadChapter"]>
+    composites: {}
+  }
+
+  type BibleReadChapterGetPayload<S extends boolean | null | undefined | BibleReadChapterDefaultArgs> = $Result.GetResult<Prisma.$BibleReadChapterPayload, S>
+
+  type BibleReadChapterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BibleReadChapterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BibleReadChapterCountAggregateInputType | true
+    }
+
+  export interface BibleReadChapterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BibleReadChapter'], meta: { name: 'BibleReadChapter' } }
+    /**
+     * Find zero or one BibleReadChapter that matches the filter.
+     * @param {BibleReadChapterFindUniqueArgs} args - Arguments to find a BibleReadChapter
+     * @example
+     * // Get one BibleReadChapter
+     * const bibleReadChapter = await prisma.bibleReadChapter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BibleReadChapterFindUniqueArgs>(args: SelectSubset<T, BibleReadChapterFindUniqueArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BibleReadChapter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BibleReadChapterFindUniqueOrThrowArgs} args - Arguments to find a BibleReadChapter
+     * @example
+     * // Get one BibleReadChapter
+     * const bibleReadChapter = await prisma.bibleReadChapter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BibleReadChapterFindUniqueOrThrowArgs>(args: SelectSubset<T, BibleReadChapterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleReadChapter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterFindFirstArgs} args - Arguments to find a BibleReadChapter
+     * @example
+     * // Get one BibleReadChapter
+     * const bibleReadChapter = await prisma.bibleReadChapter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BibleReadChapterFindFirstArgs>(args?: SelectSubset<T, BibleReadChapterFindFirstArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleReadChapter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterFindFirstOrThrowArgs} args - Arguments to find a BibleReadChapter
+     * @example
+     * // Get one BibleReadChapter
+     * const bibleReadChapter = await prisma.bibleReadChapter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BibleReadChapterFindFirstOrThrowArgs>(args?: SelectSubset<T, BibleReadChapterFindFirstOrThrowArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BibleReadChapters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BibleReadChapters
+     * const bibleReadChapters = await prisma.bibleReadChapter.findMany()
+     * 
+     * // Get first 10 BibleReadChapters
+     * const bibleReadChapters = await prisma.bibleReadChapter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bibleReadChapterWithIdOnly = await prisma.bibleReadChapter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BibleReadChapterFindManyArgs>(args?: SelectSubset<T, BibleReadChapterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BibleReadChapter.
+     * @param {BibleReadChapterCreateArgs} args - Arguments to create a BibleReadChapter.
+     * @example
+     * // Create one BibleReadChapter
+     * const BibleReadChapter = await prisma.bibleReadChapter.create({
+     *   data: {
+     *     // ... data to create a BibleReadChapter
+     *   }
+     * })
+     * 
+     */
+    create<T extends BibleReadChapterCreateArgs>(args: SelectSubset<T, BibleReadChapterCreateArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BibleReadChapters.
+     * @param {BibleReadChapterCreateManyArgs} args - Arguments to create many BibleReadChapters.
+     * @example
+     * // Create many BibleReadChapters
+     * const bibleReadChapter = await prisma.bibleReadChapter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BibleReadChapterCreateManyArgs>(args?: SelectSubset<T, BibleReadChapterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BibleReadChapters and returns the data saved in the database.
+     * @param {BibleReadChapterCreateManyAndReturnArgs} args - Arguments to create many BibleReadChapters.
+     * @example
+     * // Create many BibleReadChapters
+     * const bibleReadChapter = await prisma.bibleReadChapter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BibleReadChapters and only return the `id`
+     * const bibleReadChapterWithIdOnly = await prisma.bibleReadChapter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BibleReadChapterCreateManyAndReturnArgs>(args?: SelectSubset<T, BibleReadChapterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BibleReadChapter.
+     * @param {BibleReadChapterDeleteArgs} args - Arguments to delete one BibleReadChapter.
+     * @example
+     * // Delete one BibleReadChapter
+     * const BibleReadChapter = await prisma.bibleReadChapter.delete({
+     *   where: {
+     *     // ... filter to delete one BibleReadChapter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BibleReadChapterDeleteArgs>(args: SelectSubset<T, BibleReadChapterDeleteArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BibleReadChapter.
+     * @param {BibleReadChapterUpdateArgs} args - Arguments to update one BibleReadChapter.
+     * @example
+     * // Update one BibleReadChapter
+     * const bibleReadChapter = await prisma.bibleReadChapter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BibleReadChapterUpdateArgs>(args: SelectSubset<T, BibleReadChapterUpdateArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BibleReadChapters.
+     * @param {BibleReadChapterDeleteManyArgs} args - Arguments to filter BibleReadChapters to delete.
+     * @example
+     * // Delete a few BibleReadChapters
+     * const { count } = await prisma.bibleReadChapter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BibleReadChapterDeleteManyArgs>(args?: SelectSubset<T, BibleReadChapterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleReadChapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BibleReadChapters
+     * const bibleReadChapter = await prisma.bibleReadChapter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BibleReadChapterUpdateManyArgs>(args: SelectSubset<T, BibleReadChapterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleReadChapters and returns the data updated in the database.
+     * @param {BibleReadChapterUpdateManyAndReturnArgs} args - Arguments to update many BibleReadChapters.
+     * @example
+     * // Update many BibleReadChapters
+     * const bibleReadChapter = await prisma.bibleReadChapter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BibleReadChapters and only return the `id`
+     * const bibleReadChapterWithIdOnly = await prisma.bibleReadChapter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BibleReadChapterUpdateManyAndReturnArgs>(args: SelectSubset<T, BibleReadChapterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BibleReadChapter.
+     * @param {BibleReadChapterUpsertArgs} args - Arguments to update or create a BibleReadChapter.
+     * @example
+     * // Update or create a BibleReadChapter
+     * const bibleReadChapter = await prisma.bibleReadChapter.upsert({
+     *   create: {
+     *     // ... data to create a BibleReadChapter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BibleReadChapter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BibleReadChapterUpsertArgs>(args: SelectSubset<T, BibleReadChapterUpsertArgs<ExtArgs>>): Prisma__BibleReadChapterClient<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BibleReadChapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterCountArgs} args - Arguments to filter BibleReadChapters to count.
+     * @example
+     * // Count the number of BibleReadChapters
+     * const count = await prisma.bibleReadChapter.count({
+     *   where: {
+     *     // ... the filter for the BibleReadChapters we want to count
+     *   }
+     * })
+    **/
+    count<T extends BibleReadChapterCountArgs>(
+      args?: Subset<T, BibleReadChapterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BibleReadChapterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BibleReadChapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BibleReadChapterAggregateArgs>(args: Subset<T, BibleReadChapterAggregateArgs>): Prisma.PrismaPromise<GetBibleReadChapterAggregateType<T>>
+
+    /**
+     * Group by BibleReadChapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadChapterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BibleReadChapterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BibleReadChapterGroupByArgs['orderBy'] }
+        : { orderBy?: BibleReadChapterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BibleReadChapterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBibleReadChapterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BibleReadChapter model
+   */
+  readonly fields: BibleReadChapterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BibleReadChapter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BibleReadChapterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BibleReadChapter model
+   */
+  interface BibleReadChapterFieldRefs {
+    readonly id: FieldRef<"BibleReadChapter", 'String'>
+    readonly userId: FieldRef<"BibleReadChapter", 'String'>
+    readonly bookName: FieldRef<"BibleReadChapter", 'String'>
+    readonly chapter: FieldRef<"BibleReadChapter", 'Int'>
+    readonly readAt: FieldRef<"BibleReadChapter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BibleReadChapter findUnique
+   */
+  export type BibleReadChapterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadChapter to fetch.
+     */
+    where: BibleReadChapterWhereUniqueInput
+  }
+
+  /**
+   * BibleReadChapter findUniqueOrThrow
+   */
+  export type BibleReadChapterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadChapter to fetch.
+     */
+    where: BibleReadChapterWhereUniqueInput
+  }
+
+  /**
+   * BibleReadChapter findFirst
+   */
+  export type BibleReadChapterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadChapter to fetch.
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadChapters to fetch.
+     */
+    orderBy?: BibleReadChapterOrderByWithRelationInput | BibleReadChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleReadChapters.
+     */
+    cursor?: BibleReadChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleReadChapters.
+     */
+    distinct?: BibleReadChapterScalarFieldEnum | BibleReadChapterScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadChapter findFirstOrThrow
+   */
+  export type BibleReadChapterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadChapter to fetch.
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadChapters to fetch.
+     */
+    orderBy?: BibleReadChapterOrderByWithRelationInput | BibleReadChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleReadChapters.
+     */
+    cursor?: BibleReadChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleReadChapters.
+     */
+    distinct?: BibleReadChapterScalarFieldEnum | BibleReadChapterScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadChapter findMany
+   */
+  export type BibleReadChapterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadChapters to fetch.
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadChapters to fetch.
+     */
+    orderBy?: BibleReadChapterOrderByWithRelationInput | BibleReadChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BibleReadChapters.
+     */
+    cursor?: BibleReadChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadChapters.
+     */
+    skip?: number
+    distinct?: BibleReadChapterScalarFieldEnum | BibleReadChapterScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadChapter create
+   */
+  export type BibleReadChapterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BibleReadChapter.
+     */
+    data: XOR<BibleReadChapterCreateInput, BibleReadChapterUncheckedCreateInput>
+  }
+
+  /**
+   * BibleReadChapter createMany
+   */
+  export type BibleReadChapterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BibleReadChapters.
+     */
+    data: BibleReadChapterCreateManyInput | BibleReadChapterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BibleReadChapter createManyAndReturn
+   */
+  export type BibleReadChapterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * The data used to create many BibleReadChapters.
+     */
+    data: BibleReadChapterCreateManyInput | BibleReadChapterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleReadChapter update
+   */
+  export type BibleReadChapterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BibleReadChapter.
+     */
+    data: XOR<BibleReadChapterUpdateInput, BibleReadChapterUncheckedUpdateInput>
+    /**
+     * Choose, which BibleReadChapter to update.
+     */
+    where: BibleReadChapterWhereUniqueInput
+  }
+
+  /**
+   * BibleReadChapter updateMany
+   */
+  export type BibleReadChapterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BibleReadChapters.
+     */
+    data: XOR<BibleReadChapterUpdateManyMutationInput, BibleReadChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleReadChapters to update
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * Limit how many BibleReadChapters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleReadChapter updateManyAndReturn
+   */
+  export type BibleReadChapterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * The data used to update BibleReadChapters.
+     */
+    data: XOR<BibleReadChapterUpdateManyMutationInput, BibleReadChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleReadChapters to update
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * Limit how many BibleReadChapters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleReadChapter upsert
+   */
+  export type BibleReadChapterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BibleReadChapter to update in case it exists.
+     */
+    where: BibleReadChapterWhereUniqueInput
+    /**
+     * In case the BibleReadChapter found by the `where` argument doesn't exist, create a new BibleReadChapter with this data.
+     */
+    create: XOR<BibleReadChapterCreateInput, BibleReadChapterUncheckedCreateInput>
+    /**
+     * In case the BibleReadChapter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BibleReadChapterUpdateInput, BibleReadChapterUncheckedUpdateInput>
+  }
+
+  /**
+   * BibleReadChapter delete
+   */
+  export type BibleReadChapterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+    /**
+     * Filter which BibleReadChapter to delete.
+     */
+    where: BibleReadChapterWhereUniqueInput
+  }
+
+  /**
+   * BibleReadChapter deleteMany
+   */
+  export type BibleReadChapterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleReadChapters to delete
+     */
+    where?: BibleReadChapterWhereInput
+    /**
+     * Limit how many BibleReadChapters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleReadChapter without action
+   */
+  export type BibleReadChapterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadChapter
+     */
+    select?: BibleReadChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadChapter
+     */
+    omit?: BibleReadChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadChapterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BibleReadVerse
+   */
+
+  export type AggregateBibleReadVerse = {
+    _count: BibleReadVerseCountAggregateOutputType | null
+    _avg: BibleReadVerseAvgAggregateOutputType | null
+    _sum: BibleReadVerseSumAggregateOutputType | null
+    _min: BibleReadVerseMinAggregateOutputType | null
+    _max: BibleReadVerseMaxAggregateOutputType | null
+  }
+
+  export type BibleReadVerseAvgAggregateOutputType = {
+    chapter: number | null
+    verse: number | null
+  }
+
+  export type BibleReadVerseSumAggregateOutputType = {
+    chapter: number | null
+    verse: number | null
+  }
+
+  export type BibleReadVerseMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookName: string | null
+    chapter: number | null
+    verse: number | null
+    readAt: Date | null
+  }
+
+  export type BibleReadVerseMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookName: string | null
+    chapter: number | null
+    verse: number | null
+    readAt: Date | null
+  }
+
+  export type BibleReadVerseCountAggregateOutputType = {
+    id: number
+    userId: number
+    bookName: number
+    chapter: number
+    verse: number
+    readAt: number
+    _all: number
+  }
+
+
+  export type BibleReadVerseAvgAggregateInputType = {
+    chapter?: true
+    verse?: true
+  }
+
+  export type BibleReadVerseSumAggregateInputType = {
+    chapter?: true
+    verse?: true
+  }
+
+  export type BibleReadVerseMinAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    verse?: true
+    readAt?: true
+  }
+
+  export type BibleReadVerseMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    verse?: true
+    readAt?: true
+  }
+
+  export type BibleReadVerseCountAggregateInputType = {
+    id?: true
+    userId?: true
+    bookName?: true
+    chapter?: true
+    verse?: true
+    readAt?: true
+    _all?: true
+  }
+
+  export type BibleReadVerseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleReadVerse to aggregate.
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadVerses to fetch.
+     */
+    orderBy?: BibleReadVerseOrderByWithRelationInput | BibleReadVerseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BibleReadVerseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadVerses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadVerses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BibleReadVerses
+    **/
+    _count?: true | BibleReadVerseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BibleReadVerseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BibleReadVerseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BibleReadVerseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BibleReadVerseMaxAggregateInputType
+  }
+
+  export type GetBibleReadVerseAggregateType<T extends BibleReadVerseAggregateArgs> = {
+        [P in keyof T & keyof AggregateBibleReadVerse]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBibleReadVerse[P]>
+      : GetScalarType<T[P], AggregateBibleReadVerse[P]>
+  }
+
+
+
+
+  export type BibleReadVerseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BibleReadVerseWhereInput
+    orderBy?: BibleReadVerseOrderByWithAggregationInput | BibleReadVerseOrderByWithAggregationInput[]
+    by: BibleReadVerseScalarFieldEnum[] | BibleReadVerseScalarFieldEnum
+    having?: BibleReadVerseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BibleReadVerseCountAggregateInputType | true
+    _avg?: BibleReadVerseAvgAggregateInputType
+    _sum?: BibleReadVerseSumAggregateInputType
+    _min?: BibleReadVerseMinAggregateInputType
+    _max?: BibleReadVerseMaxAggregateInputType
+  }
+
+  export type BibleReadVerseGroupByOutputType = {
+    id: string
+    userId: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt: Date
+    _count: BibleReadVerseCountAggregateOutputType | null
+    _avg: BibleReadVerseAvgAggregateOutputType | null
+    _sum: BibleReadVerseSumAggregateOutputType | null
+    _min: BibleReadVerseMinAggregateOutputType | null
+    _max: BibleReadVerseMaxAggregateOutputType | null
+  }
+
+  type GetBibleReadVerseGroupByPayload<T extends BibleReadVerseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BibleReadVerseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BibleReadVerseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BibleReadVerseGroupByOutputType[P]>
+            : GetScalarType<T[P], BibleReadVerseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BibleReadVerseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    readAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadVerse"]>
+
+  export type BibleReadVerseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    readAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadVerse"]>
+
+  export type BibleReadVerseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    readAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bibleReadVerse"]>
+
+  export type BibleReadVerseSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    bookName?: boolean
+    chapter?: boolean
+    verse?: boolean
+    readAt?: boolean
+  }
+
+  export type BibleReadVerseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "bookName" | "chapter" | "verse" | "readAt", ExtArgs["result"]["bibleReadVerse"]>
+  export type BibleReadVerseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleReadVerseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BibleReadVerseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BibleReadVersePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BibleReadVerse"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      bookName: string
+      chapter: number
+      verse: number
+      readAt: Date
+    }, ExtArgs["result"]["bibleReadVerse"]>
+    composites: {}
+  }
+
+  type BibleReadVerseGetPayload<S extends boolean | null | undefined | BibleReadVerseDefaultArgs> = $Result.GetResult<Prisma.$BibleReadVersePayload, S>
+
+  type BibleReadVerseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BibleReadVerseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BibleReadVerseCountAggregateInputType | true
+    }
+
+  export interface BibleReadVerseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BibleReadVerse'], meta: { name: 'BibleReadVerse' } }
+    /**
+     * Find zero or one BibleReadVerse that matches the filter.
+     * @param {BibleReadVerseFindUniqueArgs} args - Arguments to find a BibleReadVerse
+     * @example
+     * // Get one BibleReadVerse
+     * const bibleReadVerse = await prisma.bibleReadVerse.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BibleReadVerseFindUniqueArgs>(args: SelectSubset<T, BibleReadVerseFindUniqueArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BibleReadVerse that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BibleReadVerseFindUniqueOrThrowArgs} args - Arguments to find a BibleReadVerse
+     * @example
+     * // Get one BibleReadVerse
+     * const bibleReadVerse = await prisma.bibleReadVerse.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BibleReadVerseFindUniqueOrThrowArgs>(args: SelectSubset<T, BibleReadVerseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleReadVerse that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseFindFirstArgs} args - Arguments to find a BibleReadVerse
+     * @example
+     * // Get one BibleReadVerse
+     * const bibleReadVerse = await prisma.bibleReadVerse.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BibleReadVerseFindFirstArgs>(args?: SelectSubset<T, BibleReadVerseFindFirstArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BibleReadVerse that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseFindFirstOrThrowArgs} args - Arguments to find a BibleReadVerse
+     * @example
+     * // Get one BibleReadVerse
+     * const bibleReadVerse = await prisma.bibleReadVerse.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BibleReadVerseFindFirstOrThrowArgs>(args?: SelectSubset<T, BibleReadVerseFindFirstOrThrowArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BibleReadVerses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BibleReadVerses
+     * const bibleReadVerses = await prisma.bibleReadVerse.findMany()
+     * 
+     * // Get first 10 BibleReadVerses
+     * const bibleReadVerses = await prisma.bibleReadVerse.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bibleReadVerseWithIdOnly = await prisma.bibleReadVerse.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BibleReadVerseFindManyArgs>(args?: SelectSubset<T, BibleReadVerseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BibleReadVerse.
+     * @param {BibleReadVerseCreateArgs} args - Arguments to create a BibleReadVerse.
+     * @example
+     * // Create one BibleReadVerse
+     * const BibleReadVerse = await prisma.bibleReadVerse.create({
+     *   data: {
+     *     // ... data to create a BibleReadVerse
+     *   }
+     * })
+     * 
+     */
+    create<T extends BibleReadVerseCreateArgs>(args: SelectSubset<T, BibleReadVerseCreateArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BibleReadVerses.
+     * @param {BibleReadVerseCreateManyArgs} args - Arguments to create many BibleReadVerses.
+     * @example
+     * // Create many BibleReadVerses
+     * const bibleReadVerse = await prisma.bibleReadVerse.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BibleReadVerseCreateManyArgs>(args?: SelectSubset<T, BibleReadVerseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BibleReadVerses and returns the data saved in the database.
+     * @param {BibleReadVerseCreateManyAndReturnArgs} args - Arguments to create many BibleReadVerses.
+     * @example
+     * // Create many BibleReadVerses
+     * const bibleReadVerse = await prisma.bibleReadVerse.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BibleReadVerses and only return the `id`
+     * const bibleReadVerseWithIdOnly = await prisma.bibleReadVerse.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BibleReadVerseCreateManyAndReturnArgs>(args?: SelectSubset<T, BibleReadVerseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BibleReadVerse.
+     * @param {BibleReadVerseDeleteArgs} args - Arguments to delete one BibleReadVerse.
+     * @example
+     * // Delete one BibleReadVerse
+     * const BibleReadVerse = await prisma.bibleReadVerse.delete({
+     *   where: {
+     *     // ... filter to delete one BibleReadVerse
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BibleReadVerseDeleteArgs>(args: SelectSubset<T, BibleReadVerseDeleteArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BibleReadVerse.
+     * @param {BibleReadVerseUpdateArgs} args - Arguments to update one BibleReadVerse.
+     * @example
+     * // Update one BibleReadVerse
+     * const bibleReadVerse = await prisma.bibleReadVerse.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BibleReadVerseUpdateArgs>(args: SelectSubset<T, BibleReadVerseUpdateArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BibleReadVerses.
+     * @param {BibleReadVerseDeleteManyArgs} args - Arguments to filter BibleReadVerses to delete.
+     * @example
+     * // Delete a few BibleReadVerses
+     * const { count } = await prisma.bibleReadVerse.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BibleReadVerseDeleteManyArgs>(args?: SelectSubset<T, BibleReadVerseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleReadVerses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BibleReadVerses
+     * const bibleReadVerse = await prisma.bibleReadVerse.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BibleReadVerseUpdateManyArgs>(args: SelectSubset<T, BibleReadVerseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BibleReadVerses and returns the data updated in the database.
+     * @param {BibleReadVerseUpdateManyAndReturnArgs} args - Arguments to update many BibleReadVerses.
+     * @example
+     * // Update many BibleReadVerses
+     * const bibleReadVerse = await prisma.bibleReadVerse.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BibleReadVerses and only return the `id`
+     * const bibleReadVerseWithIdOnly = await prisma.bibleReadVerse.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BibleReadVerseUpdateManyAndReturnArgs>(args: SelectSubset<T, BibleReadVerseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BibleReadVerse.
+     * @param {BibleReadVerseUpsertArgs} args - Arguments to update or create a BibleReadVerse.
+     * @example
+     * // Update or create a BibleReadVerse
+     * const bibleReadVerse = await prisma.bibleReadVerse.upsert({
+     *   create: {
+     *     // ... data to create a BibleReadVerse
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BibleReadVerse we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BibleReadVerseUpsertArgs>(args: SelectSubset<T, BibleReadVerseUpsertArgs<ExtArgs>>): Prisma__BibleReadVerseClient<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BibleReadVerses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseCountArgs} args - Arguments to filter BibleReadVerses to count.
+     * @example
+     * // Count the number of BibleReadVerses
+     * const count = await prisma.bibleReadVerse.count({
+     *   where: {
+     *     // ... the filter for the BibleReadVerses we want to count
+     *   }
+     * })
+    **/
+    count<T extends BibleReadVerseCountArgs>(
+      args?: Subset<T, BibleReadVerseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BibleReadVerseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BibleReadVerse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BibleReadVerseAggregateArgs>(args: Subset<T, BibleReadVerseAggregateArgs>): Prisma.PrismaPromise<GetBibleReadVerseAggregateType<T>>
+
+    /**
+     * Group by BibleReadVerse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BibleReadVerseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BibleReadVerseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BibleReadVerseGroupByArgs['orderBy'] }
+        : { orderBy?: BibleReadVerseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BibleReadVerseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBibleReadVerseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BibleReadVerse model
+   */
+  readonly fields: BibleReadVerseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BibleReadVerse.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BibleReadVerseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BibleReadVerse model
+   */
+  interface BibleReadVerseFieldRefs {
+    readonly id: FieldRef<"BibleReadVerse", 'String'>
+    readonly userId: FieldRef<"BibleReadVerse", 'String'>
+    readonly bookName: FieldRef<"BibleReadVerse", 'String'>
+    readonly chapter: FieldRef<"BibleReadVerse", 'Int'>
+    readonly verse: FieldRef<"BibleReadVerse", 'Int'>
+    readonly readAt: FieldRef<"BibleReadVerse", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BibleReadVerse findUnique
+   */
+  export type BibleReadVerseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadVerse to fetch.
+     */
+    where: BibleReadVerseWhereUniqueInput
+  }
+
+  /**
+   * BibleReadVerse findUniqueOrThrow
+   */
+  export type BibleReadVerseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadVerse to fetch.
+     */
+    where: BibleReadVerseWhereUniqueInput
+  }
+
+  /**
+   * BibleReadVerse findFirst
+   */
+  export type BibleReadVerseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadVerse to fetch.
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadVerses to fetch.
+     */
+    orderBy?: BibleReadVerseOrderByWithRelationInput | BibleReadVerseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleReadVerses.
+     */
+    cursor?: BibleReadVerseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadVerses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadVerses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleReadVerses.
+     */
+    distinct?: BibleReadVerseScalarFieldEnum | BibleReadVerseScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadVerse findFirstOrThrow
+   */
+  export type BibleReadVerseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadVerse to fetch.
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadVerses to fetch.
+     */
+    orderBy?: BibleReadVerseOrderByWithRelationInput | BibleReadVerseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BibleReadVerses.
+     */
+    cursor?: BibleReadVerseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadVerses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadVerses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BibleReadVerses.
+     */
+    distinct?: BibleReadVerseScalarFieldEnum | BibleReadVerseScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadVerse findMany
+   */
+  export type BibleReadVerseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * Filter, which BibleReadVerses to fetch.
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BibleReadVerses to fetch.
+     */
+    orderBy?: BibleReadVerseOrderByWithRelationInput | BibleReadVerseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BibleReadVerses.
+     */
+    cursor?: BibleReadVerseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BibleReadVerses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BibleReadVerses.
+     */
+    skip?: number
+    distinct?: BibleReadVerseScalarFieldEnum | BibleReadVerseScalarFieldEnum[]
+  }
+
+  /**
+   * BibleReadVerse create
+   */
+  export type BibleReadVerseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BibleReadVerse.
+     */
+    data: XOR<BibleReadVerseCreateInput, BibleReadVerseUncheckedCreateInput>
+  }
+
+  /**
+   * BibleReadVerse createMany
+   */
+  export type BibleReadVerseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BibleReadVerses.
+     */
+    data: BibleReadVerseCreateManyInput | BibleReadVerseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BibleReadVerse createManyAndReturn
+   */
+  export type BibleReadVerseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * The data used to create many BibleReadVerses.
+     */
+    data: BibleReadVerseCreateManyInput | BibleReadVerseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleReadVerse update
+   */
+  export type BibleReadVerseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BibleReadVerse.
+     */
+    data: XOR<BibleReadVerseUpdateInput, BibleReadVerseUncheckedUpdateInput>
+    /**
+     * Choose, which BibleReadVerse to update.
+     */
+    where: BibleReadVerseWhereUniqueInput
+  }
+
+  /**
+   * BibleReadVerse updateMany
+   */
+  export type BibleReadVerseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BibleReadVerses.
+     */
+    data: XOR<BibleReadVerseUpdateManyMutationInput, BibleReadVerseUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleReadVerses to update
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * Limit how many BibleReadVerses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleReadVerse updateManyAndReturn
+   */
+  export type BibleReadVerseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * The data used to update BibleReadVerses.
+     */
+    data: XOR<BibleReadVerseUpdateManyMutationInput, BibleReadVerseUncheckedUpdateManyInput>
+    /**
+     * Filter which BibleReadVerses to update
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * Limit how many BibleReadVerses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BibleReadVerse upsert
+   */
+  export type BibleReadVerseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BibleReadVerse to update in case it exists.
+     */
+    where: BibleReadVerseWhereUniqueInput
+    /**
+     * In case the BibleReadVerse found by the `where` argument doesn't exist, create a new BibleReadVerse with this data.
+     */
+    create: XOR<BibleReadVerseCreateInput, BibleReadVerseUncheckedCreateInput>
+    /**
+     * In case the BibleReadVerse was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BibleReadVerseUpdateInput, BibleReadVerseUncheckedUpdateInput>
+  }
+
+  /**
+   * BibleReadVerse delete
+   */
+  export type BibleReadVerseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+    /**
+     * Filter which BibleReadVerse to delete.
+     */
+    where: BibleReadVerseWhereUniqueInput
+  }
+
+  /**
+   * BibleReadVerse deleteMany
+   */
+  export type BibleReadVerseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BibleReadVerses to delete
+     */
+    where?: BibleReadVerseWhereInput
+    /**
+     * Limit how many BibleReadVerses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BibleReadVerse without action
+   */
+  export type BibleReadVerseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BibleReadVerse
+     */
+    select?: BibleReadVerseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BibleReadVerse
+     */
+    omit?: BibleReadVerseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BibleReadVerseInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model AuditLog
    */
 
@@ -17136,6 +22092,56 @@ export namespace Prisma {
   export type TestemunhoScalarFieldEnum = (typeof TestemunhoScalarFieldEnum)[keyof typeof TestemunhoScalarFieldEnum]
 
 
+  export const BibleFavoriteScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    bookName: 'bookName',
+    chapter: 'chapter',
+    verse: 'verse',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BibleFavoriteScalarFieldEnum = (typeof BibleFavoriteScalarFieldEnum)[keyof typeof BibleFavoriteScalarFieldEnum]
+
+
+  export const BibleReadingPlanScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalDays: 'totalDays',
+    chaptersPerDay: 'chaptersPerDay',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BibleReadingPlanScalarFieldEnum = (typeof BibleReadingPlanScalarFieldEnum)[keyof typeof BibleReadingPlanScalarFieldEnum]
+
+
+  export const BibleReadChapterScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    bookName: 'bookName',
+    chapter: 'chapter',
+    readAt: 'readAt'
+  };
+
+  export type BibleReadChapterScalarFieldEnum = (typeof BibleReadChapterScalarFieldEnum)[keyof typeof BibleReadChapterScalarFieldEnum]
+
+
+  export const BibleReadVerseScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    bookName: 'bookName',
+    chapter: 'chapter',
+    verse: 'verse',
+    readAt: 'readAt'
+  };
+
+  export type BibleReadVerseScalarFieldEnum = (typeof BibleReadVerseScalarFieldEnum)[keyof typeof BibleReadVerseScalarFieldEnum]
+
+
   export const AuditLogScalarFieldEnum: {
     id: 'id',
     action: 'action',
@@ -17279,6 +22285,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -17293,16 +22313,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -17334,6 +22354,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderListRelationFilter
     testemunhos?: TestemunhoListRelationFilter
     auditLogs?: AuditLogListRelationFilter
+    bibleFavorites?: BibleFavoriteListRelationFilter
+    bibleReadingPlan?: XOR<BibleReadingPlanNullableScalarRelationFilter, BibleReadingPlanWhereInput> | null
+    bibleReadChapters?: BibleReadChapterListRelationFilter
+    bibleReadVerses?: BibleReadVerseListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -17358,6 +22382,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderOrderByRelationAggregateInput
     testemunhos?: TestemunhoOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
+    bibleFavorites?: BibleFavoriteOrderByRelationAggregateInput
+    bibleReadingPlan?: BibleReadingPlanOrderByWithRelationInput
+    bibleReadChapters?: BibleReadChapterOrderByRelationAggregateInput
+    bibleReadVerses?: BibleReadVerseOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -17385,6 +22413,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderListRelationFilter
     testemunhos?: TestemunhoListRelationFilter
     auditLogs?: AuditLogListRelationFilter
+    bibleFavorites?: BibleFavoriteListRelationFilter
+    bibleReadingPlan?: XOR<BibleReadingPlanNullableScalarRelationFilter, BibleReadingPlanWhereInput> | null
+    bibleReadChapters?: BibleReadChapterListRelationFilter
+    bibleReadVerses?: BibleReadVerseListRelationFilter
   }, "id" | "login">
 
   export type UserOrderByWithAggregationInput = {
@@ -18247,6 +23279,267 @@ export namespace Prisma {
     ministryRole?: EnumMinistryRoleNullableWithAggregatesFilter<"Testemunho"> | $Enums.MinistryRole | null
   }
 
+  export type BibleFavoriteWhereInput = {
+    AND?: BibleFavoriteWhereInput | BibleFavoriteWhereInput[]
+    OR?: BibleFavoriteWhereInput[]
+    NOT?: BibleFavoriteWhereInput | BibleFavoriteWhereInput[]
+    id?: StringFilter<"BibleFavorite"> | string
+    userId?: StringFilter<"BibleFavorite"> | string
+    bookName?: StringFilter<"BibleFavorite"> | string
+    chapter?: IntFilter<"BibleFavorite"> | number
+    verse?: IntNullableFilter<"BibleFavorite"> | number | null
+    createdAt?: DateTimeFilter<"BibleFavorite"> | Date | string
+    updatedAt?: DateTimeFilter<"BibleFavorite"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BibleFavoriteOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BibleFavoriteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_bookName_chapter_verse?: BibleFavoriteUserIdBookNameChapterVerseCompoundUniqueInput
+    AND?: BibleFavoriteWhereInput | BibleFavoriteWhereInput[]
+    OR?: BibleFavoriteWhereInput[]
+    NOT?: BibleFavoriteWhereInput | BibleFavoriteWhereInput[]
+    userId?: StringFilter<"BibleFavorite"> | string
+    bookName?: StringFilter<"BibleFavorite"> | string
+    chapter?: IntFilter<"BibleFavorite"> | number
+    verse?: IntNullableFilter<"BibleFavorite"> | number | null
+    createdAt?: DateTimeFilter<"BibleFavorite"> | Date | string
+    updatedAt?: DateTimeFilter<"BibleFavorite"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_bookName_chapter_verse">
+
+  export type BibleFavoriteOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BibleFavoriteCountOrderByAggregateInput
+    _avg?: BibleFavoriteAvgOrderByAggregateInput
+    _max?: BibleFavoriteMaxOrderByAggregateInput
+    _min?: BibleFavoriteMinOrderByAggregateInput
+    _sum?: BibleFavoriteSumOrderByAggregateInput
+  }
+
+  export type BibleFavoriteScalarWhereWithAggregatesInput = {
+    AND?: BibleFavoriteScalarWhereWithAggregatesInput | BibleFavoriteScalarWhereWithAggregatesInput[]
+    OR?: BibleFavoriteScalarWhereWithAggregatesInput[]
+    NOT?: BibleFavoriteScalarWhereWithAggregatesInput | BibleFavoriteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BibleFavorite"> | string
+    userId?: StringWithAggregatesFilter<"BibleFavorite"> | string
+    bookName?: StringWithAggregatesFilter<"BibleFavorite"> | string
+    chapter?: IntWithAggregatesFilter<"BibleFavorite"> | number
+    verse?: IntNullableWithAggregatesFilter<"BibleFavorite"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"BibleFavorite"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BibleFavorite"> | Date | string
+  }
+
+  export type BibleReadingPlanWhereInput = {
+    AND?: BibleReadingPlanWhereInput | BibleReadingPlanWhereInput[]
+    OR?: BibleReadingPlanWhereInput[]
+    NOT?: BibleReadingPlanWhereInput | BibleReadingPlanWhereInput[]
+    id?: StringFilter<"BibleReadingPlan"> | string
+    userId?: StringFilter<"BibleReadingPlan"> | string
+    totalDays?: IntFilter<"BibleReadingPlan"> | number
+    chaptersPerDay?: IntFilter<"BibleReadingPlan"> | number
+    startDate?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    endDate?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    createdAt?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BibleReadingPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BibleReadingPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: BibleReadingPlanWhereInput | BibleReadingPlanWhereInput[]
+    OR?: BibleReadingPlanWhereInput[]
+    NOT?: BibleReadingPlanWhereInput | BibleReadingPlanWhereInput[]
+    totalDays?: IntFilter<"BibleReadingPlan"> | number
+    chaptersPerDay?: IntFilter<"BibleReadingPlan"> | number
+    startDate?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    endDate?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    createdAt?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"BibleReadingPlan"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type BibleReadingPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BibleReadingPlanCountOrderByAggregateInput
+    _avg?: BibleReadingPlanAvgOrderByAggregateInput
+    _max?: BibleReadingPlanMaxOrderByAggregateInput
+    _min?: BibleReadingPlanMinOrderByAggregateInput
+    _sum?: BibleReadingPlanSumOrderByAggregateInput
+  }
+
+  export type BibleReadingPlanScalarWhereWithAggregatesInput = {
+    AND?: BibleReadingPlanScalarWhereWithAggregatesInput | BibleReadingPlanScalarWhereWithAggregatesInput[]
+    OR?: BibleReadingPlanScalarWhereWithAggregatesInput[]
+    NOT?: BibleReadingPlanScalarWhereWithAggregatesInput | BibleReadingPlanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BibleReadingPlan"> | string
+    userId?: StringWithAggregatesFilter<"BibleReadingPlan"> | string
+    totalDays?: IntWithAggregatesFilter<"BibleReadingPlan"> | number
+    chaptersPerDay?: IntWithAggregatesFilter<"BibleReadingPlan"> | number
+    startDate?: DateTimeWithAggregatesFilter<"BibleReadingPlan"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"BibleReadingPlan"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"BibleReadingPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BibleReadingPlan"> | Date | string
+  }
+
+  export type BibleReadChapterWhereInput = {
+    AND?: BibleReadChapterWhereInput | BibleReadChapterWhereInput[]
+    OR?: BibleReadChapterWhereInput[]
+    NOT?: BibleReadChapterWhereInput | BibleReadChapterWhereInput[]
+    id?: StringFilter<"BibleReadChapter"> | string
+    userId?: StringFilter<"BibleReadChapter"> | string
+    bookName?: StringFilter<"BibleReadChapter"> | string
+    chapter?: IntFilter<"BibleReadChapter"> | number
+    readAt?: DateTimeFilter<"BibleReadChapter"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BibleReadChapterOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    readAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BibleReadChapterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_bookName_chapter?: BibleReadChapterUserIdBookNameChapterCompoundUniqueInput
+    AND?: BibleReadChapterWhereInput | BibleReadChapterWhereInput[]
+    OR?: BibleReadChapterWhereInput[]
+    NOT?: BibleReadChapterWhereInput | BibleReadChapterWhereInput[]
+    userId?: StringFilter<"BibleReadChapter"> | string
+    bookName?: StringFilter<"BibleReadChapter"> | string
+    chapter?: IntFilter<"BibleReadChapter"> | number
+    readAt?: DateTimeFilter<"BibleReadChapter"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_bookName_chapter">
+
+  export type BibleReadChapterOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    readAt?: SortOrder
+    _count?: BibleReadChapterCountOrderByAggregateInput
+    _avg?: BibleReadChapterAvgOrderByAggregateInput
+    _max?: BibleReadChapterMaxOrderByAggregateInput
+    _min?: BibleReadChapterMinOrderByAggregateInput
+    _sum?: BibleReadChapterSumOrderByAggregateInput
+  }
+
+  export type BibleReadChapterScalarWhereWithAggregatesInput = {
+    AND?: BibleReadChapterScalarWhereWithAggregatesInput | BibleReadChapterScalarWhereWithAggregatesInput[]
+    OR?: BibleReadChapterScalarWhereWithAggregatesInput[]
+    NOT?: BibleReadChapterScalarWhereWithAggregatesInput | BibleReadChapterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BibleReadChapter"> | string
+    userId?: StringWithAggregatesFilter<"BibleReadChapter"> | string
+    bookName?: StringWithAggregatesFilter<"BibleReadChapter"> | string
+    chapter?: IntWithAggregatesFilter<"BibleReadChapter"> | number
+    readAt?: DateTimeWithAggregatesFilter<"BibleReadChapter"> | Date | string
+  }
+
+  export type BibleReadVerseWhereInput = {
+    AND?: BibleReadVerseWhereInput | BibleReadVerseWhereInput[]
+    OR?: BibleReadVerseWhereInput[]
+    NOT?: BibleReadVerseWhereInput | BibleReadVerseWhereInput[]
+    id?: StringFilter<"BibleReadVerse"> | string
+    userId?: StringFilter<"BibleReadVerse"> | string
+    bookName?: StringFilter<"BibleReadVerse"> | string
+    chapter?: IntFilter<"BibleReadVerse"> | number
+    verse?: IntFilter<"BibleReadVerse"> | number
+    readAt?: DateTimeFilter<"BibleReadVerse"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BibleReadVerseOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    readAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BibleReadVerseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_bookName_chapter_verse?: BibleReadVerseUserIdBookNameChapterVerseCompoundUniqueInput
+    AND?: BibleReadVerseWhereInput | BibleReadVerseWhereInput[]
+    OR?: BibleReadVerseWhereInput[]
+    NOT?: BibleReadVerseWhereInput | BibleReadVerseWhereInput[]
+    userId?: StringFilter<"BibleReadVerse"> | string
+    bookName?: StringFilter<"BibleReadVerse"> | string
+    chapter?: IntFilter<"BibleReadVerse"> | number
+    verse?: IntFilter<"BibleReadVerse"> | number
+    readAt?: DateTimeFilter<"BibleReadVerse"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_bookName_chapter_verse">
+
+  export type BibleReadVerseOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    readAt?: SortOrder
+    _count?: BibleReadVerseCountOrderByAggregateInput
+    _avg?: BibleReadVerseAvgOrderByAggregateInput
+    _max?: BibleReadVerseMaxOrderByAggregateInput
+    _min?: BibleReadVerseMinOrderByAggregateInput
+    _sum?: BibleReadVerseSumOrderByAggregateInput
+  }
+
+  export type BibleReadVerseScalarWhereWithAggregatesInput = {
+    AND?: BibleReadVerseScalarWhereWithAggregatesInput | BibleReadVerseScalarWhereWithAggregatesInput[]
+    OR?: BibleReadVerseScalarWhereWithAggregatesInput[]
+    NOT?: BibleReadVerseScalarWhereWithAggregatesInput | BibleReadVerseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BibleReadVerse"> | string
+    userId?: StringWithAggregatesFilter<"BibleReadVerse"> | string
+    bookName?: StringWithAggregatesFilter<"BibleReadVerse"> | string
+    chapter?: IntWithAggregatesFilter<"BibleReadVerse"> | number
+    verse?: IntWithAggregatesFilter<"BibleReadVerse"> | number
+    readAt?: DateTimeWithAggregatesFilter<"BibleReadVerse"> | Date | string
+  }
+
   export type AuditLogWhereInput = {
     AND?: AuditLogWhereInput | AuditLogWhereInput[]
     OR?: AuditLogWhereInput[]
@@ -18364,6 +23657,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -18388,6 +23685,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -18412,6 +23713,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -18436,6 +23741,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -19394,6 +24703,268 @@ export namespace Prisma {
     ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
+  export type BibleFavoriteCreateInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBibleFavoritesInput
+  }
+
+  export type BibleFavoriteUncheckedCreateInput = {
+    id?: string
+    userId: string
+    bookName: string
+    chapter: number
+    verse?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleFavoriteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBibleFavoritesNestedInput
+  }
+
+  export type BibleFavoriteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleFavoriteCreateManyInput = {
+    id?: string
+    userId: string
+    bookName: string
+    chapter: number
+    verse?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleFavoriteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleFavoriteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadingPlanCreateInput = {
+    id?: string
+    totalDays: number
+    chaptersPerDay: number
+    startDate: Date | string
+    endDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBibleReadingPlanInput
+  }
+
+  export type BibleReadingPlanUncheckedCreateInput = {
+    id?: string
+    userId: string
+    totalDays: number
+    chaptersPerDay: number
+    startDate: Date | string
+    endDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleReadingPlanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    chaptersPerDay?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBibleReadingPlanNestedInput
+  }
+
+  export type BibleReadingPlanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    chaptersPerDay?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadingPlanCreateManyInput = {
+    id?: string
+    userId: string
+    totalDays: number
+    chaptersPerDay: number
+    startDate: Date | string
+    endDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleReadingPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    chaptersPerDay?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadingPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    chaptersPerDay?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterCreateInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    readAt?: Date | string
+    user: UserCreateNestedOneWithoutBibleReadChaptersInput
+  }
+
+  export type BibleReadChapterUncheckedCreateInput = {
+    id?: string
+    userId: string
+    bookName: string
+    chapter: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadChapterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBibleReadChaptersNestedInput
+  }
+
+  export type BibleReadChapterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterCreateManyInput = {
+    id?: string
+    userId: string
+    bookName: string
+    chapter: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadChapterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadVerseCreateInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt?: Date | string
+    user: UserCreateNestedOneWithoutBibleReadVersesInput
+  }
+
+  export type BibleReadVerseUncheckedCreateInput = {
+    id?: string
+    userId: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadVerseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBibleReadVersesNestedInput
+  }
+
+  export type BibleReadVerseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadVerseCreateManyInput = {
+    id?: string
+    userId: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadVerseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadVerseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AuditLogCreateInput = {
     id?: string
     action: string
@@ -19640,6 +25211,29 @@ export namespace Prisma {
     none?: AuditLogWhereInput
   }
 
+  export type BibleFavoriteListRelationFilter = {
+    every?: BibleFavoriteWhereInput
+    some?: BibleFavoriteWhereInput
+    none?: BibleFavoriteWhereInput
+  }
+
+  export type BibleReadingPlanNullableScalarRelationFilter = {
+    is?: BibleReadingPlanWhereInput | null
+    isNot?: BibleReadingPlanWhereInput | null
+  }
+
+  export type BibleReadChapterListRelationFilter = {
+    every?: BibleReadChapterWhereInput
+    some?: BibleReadChapterWhereInput
+    none?: BibleReadChapterWhereInput
+  }
+
+  export type BibleReadVerseListRelationFilter = {
+    every?: BibleReadVerseWhereInput
+    some?: BibleReadVerseWhereInput
+    none?: BibleReadVerseWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -19690,6 +25284,18 @@ export namespace Prisma {
   }
 
   export type AuditLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BibleFavoriteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BibleReadChapterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BibleReadVerseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20255,6 +25861,232 @@ export namespace Prisma {
     coverUrl?: SortOrder
     ministryRole?: SortOrder
   }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type BibleFavoriteUserIdBookNameChapterVerseCompoundUniqueInput = {
+    userId: string
+    bookName: string
+    chapter: number
+    verse: number
+  }
+
+  export type BibleFavoriteCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BibleFavoriteAvgOrderByAggregateInput = {
+    chapter?: SortOrder
+    verse?: SortOrder
+  }
+
+  export type BibleFavoriteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BibleFavoriteMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BibleFavoriteSumOrderByAggregateInput = {
+    chapter?: SortOrder
+    verse?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type BibleReadingPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BibleReadingPlanAvgOrderByAggregateInput = {
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+  }
+
+  export type BibleReadingPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BibleReadingPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BibleReadingPlanSumOrderByAggregateInput = {
+    totalDays?: SortOrder
+    chaptersPerDay?: SortOrder
+  }
+
+  export type BibleReadChapterUserIdBookNameChapterCompoundUniqueInput = {
+    userId: string
+    bookName: string
+    chapter: number
+  }
+
+  export type BibleReadChapterCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type BibleReadChapterAvgOrderByAggregateInput = {
+    chapter?: SortOrder
+  }
+
+  export type BibleReadChapterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type BibleReadChapterMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type BibleReadChapterSumOrderByAggregateInput = {
+    chapter?: SortOrder
+  }
+
+  export type BibleReadVerseUserIdBookNameChapterVerseCompoundUniqueInput = {
+    userId: string
+    bookName: string
+    chapter: number
+    verse: number
+  }
+
+  export type BibleReadVerseCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type BibleReadVerseAvgOrderByAggregateInput = {
+    chapter?: SortOrder
+    verse?: SortOrder
+  }
+
+  export type BibleReadVerseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type BibleReadVerseMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookName?: SortOrder
+    chapter?: SortOrder
+    verse?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type BibleReadVerseSumOrderByAggregateInput = {
+    chapter?: SortOrder
+    verse?: SortOrder
+  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -20435,6 +26267,33 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
   }
 
+  export type BibleFavoriteCreateNestedManyWithoutUserInput = {
+    create?: XOR<BibleFavoriteCreateWithoutUserInput, BibleFavoriteUncheckedCreateWithoutUserInput> | BibleFavoriteCreateWithoutUserInput[] | BibleFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleFavoriteCreateOrConnectWithoutUserInput | BibleFavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: BibleFavoriteCreateManyUserInputEnvelope
+    connect?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+  }
+
+  export type BibleReadingPlanCreateNestedOneWithoutUserInput = {
+    create?: XOR<BibleReadingPlanCreateWithoutUserInput, BibleReadingPlanUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibleReadingPlanCreateOrConnectWithoutUserInput
+    connect?: BibleReadingPlanWhereUniqueInput
+  }
+
+  export type BibleReadChapterCreateNestedManyWithoutUserInput = {
+    create?: XOR<BibleReadChapterCreateWithoutUserInput, BibleReadChapterUncheckedCreateWithoutUserInput> | BibleReadChapterCreateWithoutUserInput[] | BibleReadChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadChapterCreateOrConnectWithoutUserInput | BibleReadChapterCreateOrConnectWithoutUserInput[]
+    createMany?: BibleReadChapterCreateManyUserInputEnvelope
+    connect?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+  }
+
+  export type BibleReadVerseCreateNestedManyWithoutUserInput = {
+    create?: XOR<BibleReadVerseCreateWithoutUserInput, BibleReadVerseUncheckedCreateWithoutUserInput> | BibleReadVerseCreateWithoutUserInput[] | BibleReadVerseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadVerseCreateOrConnectWithoutUserInput | BibleReadVerseCreateOrConnectWithoutUserInput[]
+    createMany?: BibleReadVerseCreateManyUserInputEnvelope
+    connect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+  }
+
   export type AgendaUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
@@ -20517,6 +26376,33 @@ export namespace Prisma {
     connectOrCreate?: AuditLogCreateOrConnectWithoutUserInput | AuditLogCreateOrConnectWithoutUserInput[]
     createMany?: AuditLogCreateManyUserInputEnvelope
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+  }
+
+  export type BibleFavoriteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BibleFavoriteCreateWithoutUserInput, BibleFavoriteUncheckedCreateWithoutUserInput> | BibleFavoriteCreateWithoutUserInput[] | BibleFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleFavoriteCreateOrConnectWithoutUserInput | BibleFavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: BibleFavoriteCreateManyUserInputEnvelope
+    connect?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+  }
+
+  export type BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<BibleReadingPlanCreateWithoutUserInput, BibleReadingPlanUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibleReadingPlanCreateOrConnectWithoutUserInput
+    connect?: BibleReadingPlanWhereUniqueInput
+  }
+
+  export type BibleReadChapterUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BibleReadChapterCreateWithoutUserInput, BibleReadChapterUncheckedCreateWithoutUserInput> | BibleReadChapterCreateWithoutUserInput[] | BibleReadChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadChapterCreateOrConnectWithoutUserInput | BibleReadChapterCreateOrConnectWithoutUserInput[]
+    createMany?: BibleReadChapterCreateManyUserInputEnvelope
+    connect?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+  }
+
+  export type BibleReadVerseUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BibleReadVerseCreateWithoutUserInput, BibleReadVerseUncheckedCreateWithoutUserInput> | BibleReadVerseCreateWithoutUserInput[] | BibleReadVerseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadVerseCreateOrConnectWithoutUserInput | BibleReadVerseCreateOrConnectWithoutUserInput[]
+    createMany?: BibleReadVerseCreateManyUserInputEnvelope
+    connect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -20712,6 +26598,58 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
+  export type BibleFavoriteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BibleFavoriteCreateWithoutUserInput, BibleFavoriteUncheckedCreateWithoutUserInput> | BibleFavoriteCreateWithoutUserInput[] | BibleFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleFavoriteCreateOrConnectWithoutUserInput | BibleFavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: BibleFavoriteUpsertWithWhereUniqueWithoutUserInput | BibleFavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BibleFavoriteCreateManyUserInputEnvelope
+    set?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    disconnect?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    delete?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    connect?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    update?: BibleFavoriteUpdateWithWhereUniqueWithoutUserInput | BibleFavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BibleFavoriteUpdateManyWithWhereWithoutUserInput | BibleFavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BibleFavoriteScalarWhereInput | BibleFavoriteScalarWhereInput[]
+  }
+
+  export type BibleReadingPlanUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BibleReadingPlanCreateWithoutUserInput, BibleReadingPlanUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibleReadingPlanCreateOrConnectWithoutUserInput
+    upsert?: BibleReadingPlanUpsertWithoutUserInput
+    disconnect?: BibleReadingPlanWhereInput | boolean
+    delete?: BibleReadingPlanWhereInput | boolean
+    connect?: BibleReadingPlanWhereUniqueInput
+    update?: XOR<XOR<BibleReadingPlanUpdateToOneWithWhereWithoutUserInput, BibleReadingPlanUpdateWithoutUserInput>, BibleReadingPlanUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BibleReadChapterUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BibleReadChapterCreateWithoutUserInput, BibleReadChapterUncheckedCreateWithoutUserInput> | BibleReadChapterCreateWithoutUserInput[] | BibleReadChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadChapterCreateOrConnectWithoutUserInput | BibleReadChapterCreateOrConnectWithoutUserInput[]
+    upsert?: BibleReadChapterUpsertWithWhereUniqueWithoutUserInput | BibleReadChapterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BibleReadChapterCreateManyUserInputEnvelope
+    set?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    disconnect?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    delete?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    connect?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    update?: BibleReadChapterUpdateWithWhereUniqueWithoutUserInput | BibleReadChapterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BibleReadChapterUpdateManyWithWhereWithoutUserInput | BibleReadChapterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BibleReadChapterScalarWhereInput | BibleReadChapterScalarWhereInput[]
+  }
+
+  export type BibleReadVerseUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BibleReadVerseCreateWithoutUserInput, BibleReadVerseUncheckedCreateWithoutUserInput> | BibleReadVerseCreateWithoutUserInput[] | BibleReadVerseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadVerseCreateOrConnectWithoutUserInput | BibleReadVerseCreateOrConnectWithoutUserInput[]
+    upsert?: BibleReadVerseUpsertWithWhereUniqueWithoutUserInput | BibleReadVerseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BibleReadVerseCreateManyUserInputEnvelope
+    set?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    disconnect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    delete?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    connect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    update?: BibleReadVerseUpdateWithWhereUniqueWithoutUserInput | BibleReadVerseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BibleReadVerseUpdateManyWithWhereWithoutUserInput | BibleReadVerseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BibleReadVerseScalarWhereInput | BibleReadVerseScalarWhereInput[]
+  }
+
   export type AgendaUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
@@ -20880,6 +26818,58 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
+  export type BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BibleFavoriteCreateWithoutUserInput, BibleFavoriteUncheckedCreateWithoutUserInput> | BibleFavoriteCreateWithoutUserInput[] | BibleFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleFavoriteCreateOrConnectWithoutUserInput | BibleFavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: BibleFavoriteUpsertWithWhereUniqueWithoutUserInput | BibleFavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BibleFavoriteCreateManyUserInputEnvelope
+    set?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    disconnect?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    delete?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    connect?: BibleFavoriteWhereUniqueInput | BibleFavoriteWhereUniqueInput[]
+    update?: BibleFavoriteUpdateWithWhereUniqueWithoutUserInput | BibleFavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BibleFavoriteUpdateManyWithWhereWithoutUserInput | BibleFavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BibleFavoriteScalarWhereInput | BibleFavoriteScalarWhereInput[]
+  }
+
+  export type BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BibleReadingPlanCreateWithoutUserInput, BibleReadingPlanUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibleReadingPlanCreateOrConnectWithoutUserInput
+    upsert?: BibleReadingPlanUpsertWithoutUserInput
+    disconnect?: BibleReadingPlanWhereInput | boolean
+    delete?: BibleReadingPlanWhereInput | boolean
+    connect?: BibleReadingPlanWhereUniqueInput
+    update?: XOR<XOR<BibleReadingPlanUpdateToOneWithWhereWithoutUserInput, BibleReadingPlanUpdateWithoutUserInput>, BibleReadingPlanUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BibleReadChapterCreateWithoutUserInput, BibleReadChapterUncheckedCreateWithoutUserInput> | BibleReadChapterCreateWithoutUserInput[] | BibleReadChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadChapterCreateOrConnectWithoutUserInput | BibleReadChapterCreateOrConnectWithoutUserInput[]
+    upsert?: BibleReadChapterUpsertWithWhereUniqueWithoutUserInput | BibleReadChapterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BibleReadChapterCreateManyUserInputEnvelope
+    set?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    disconnect?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    delete?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    connect?: BibleReadChapterWhereUniqueInput | BibleReadChapterWhereUniqueInput[]
+    update?: BibleReadChapterUpdateWithWhereUniqueWithoutUserInput | BibleReadChapterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BibleReadChapterUpdateManyWithWhereWithoutUserInput | BibleReadChapterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BibleReadChapterScalarWhereInput | BibleReadChapterScalarWhereInput[]
+  }
+
+  export type BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BibleReadVerseCreateWithoutUserInput, BibleReadVerseUncheckedCreateWithoutUserInput> | BibleReadVerseCreateWithoutUserInput[] | BibleReadVerseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BibleReadVerseCreateOrConnectWithoutUserInput | BibleReadVerseCreateOrConnectWithoutUserInput[]
+    upsert?: BibleReadVerseUpsertWithWhereUniqueWithoutUserInput | BibleReadVerseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BibleReadVerseCreateManyUserInputEnvelope
+    set?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    disconnect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    delete?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    connect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
+    update?: BibleReadVerseUpdateWithWhereUniqueWithoutUserInput | BibleReadVerseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BibleReadVerseUpdateManyWithWhereWithoutUserInput | BibleReadVerseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BibleReadVerseScalarWhereInput | BibleReadVerseScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutNewsInput = {
     create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNewsInput
@@ -21044,6 +27034,78 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutTestemunhosInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTestemunhosInput, UserUpdateWithoutTestemunhosInput>, UserUncheckedUpdateWithoutTestemunhosInput>
+  }
+
+  export type UserCreateNestedOneWithoutBibleFavoritesInput = {
+    create?: XOR<UserCreateWithoutBibleFavoritesInput, UserUncheckedCreateWithoutBibleFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleFavoritesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutBibleFavoritesNestedInput = {
+    create?: XOR<UserCreateWithoutBibleFavoritesInput, UserUncheckedCreateWithoutBibleFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleFavoritesInput
+    upsert?: UserUpsertWithoutBibleFavoritesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBibleFavoritesInput, UserUpdateWithoutBibleFavoritesInput>, UserUncheckedUpdateWithoutBibleFavoritesInput>
+  }
+
+  export type UserCreateNestedOneWithoutBibleReadingPlanInput = {
+    create?: XOR<UserCreateWithoutBibleReadingPlanInput, UserUncheckedCreateWithoutBibleReadingPlanInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleReadingPlanInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBibleReadingPlanNestedInput = {
+    create?: XOR<UserCreateWithoutBibleReadingPlanInput, UserUncheckedCreateWithoutBibleReadingPlanInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleReadingPlanInput
+    upsert?: UserUpsertWithoutBibleReadingPlanInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBibleReadingPlanInput, UserUpdateWithoutBibleReadingPlanInput>, UserUncheckedUpdateWithoutBibleReadingPlanInput>
+  }
+
+  export type UserCreateNestedOneWithoutBibleReadChaptersInput = {
+    create?: XOR<UserCreateWithoutBibleReadChaptersInput, UserUncheckedCreateWithoutBibleReadChaptersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleReadChaptersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBibleReadChaptersNestedInput = {
+    create?: XOR<UserCreateWithoutBibleReadChaptersInput, UserUncheckedCreateWithoutBibleReadChaptersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleReadChaptersInput
+    upsert?: UserUpsertWithoutBibleReadChaptersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBibleReadChaptersInput, UserUpdateWithoutBibleReadChaptersInput>, UserUncheckedUpdateWithoutBibleReadChaptersInput>
+  }
+
+  export type UserCreateNestedOneWithoutBibleReadVersesInput = {
+    create?: XOR<UserCreateWithoutBibleReadVersesInput, UserUncheckedCreateWithoutBibleReadVersesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleReadVersesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBibleReadVersesNestedInput = {
+    create?: XOR<UserCreateWithoutBibleReadVersesInput, UserUncheckedCreateWithoutBibleReadVersesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibleReadVersesInput
+    upsert?: UserUpsertWithoutBibleReadVersesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBibleReadVersesInput, UserUpdateWithoutBibleReadVersesInput>, UserUncheckedUpdateWithoutBibleReadVersesInput>
   }
 
   export type UserCreateNestedOneWithoutAuditLogsInput = {
@@ -21256,6 +27318,60 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumMinistryRoleFilter<$PrismaModel>
     _max?: NestedEnumMinistryRoleFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -21675,6 +27791,109 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BibleFavoriteCreateWithoutUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleFavoriteUncheckedCreateWithoutUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleFavoriteCreateOrConnectWithoutUserInput = {
+    where: BibleFavoriteWhereUniqueInput
+    create: XOR<BibleFavoriteCreateWithoutUserInput, BibleFavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleFavoriteCreateManyUserInputEnvelope = {
+    data: BibleFavoriteCreateManyUserInput | BibleFavoriteCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BibleReadingPlanCreateWithoutUserInput = {
+    id?: string
+    totalDays: number
+    chaptersPerDay: number
+    startDate: Date | string
+    endDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleReadingPlanUncheckedCreateWithoutUserInput = {
+    id?: string
+    totalDays: number
+    chaptersPerDay: number
+    startDate: Date | string
+    endDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleReadingPlanCreateOrConnectWithoutUserInput = {
+    where: BibleReadingPlanWhereUniqueInput
+    create: XOR<BibleReadingPlanCreateWithoutUserInput, BibleReadingPlanUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleReadChapterCreateWithoutUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadChapterUncheckedCreateWithoutUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadChapterCreateOrConnectWithoutUserInput = {
+    where: BibleReadChapterWhereUniqueInput
+    create: XOR<BibleReadChapterCreateWithoutUserInput, BibleReadChapterUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleReadChapterCreateManyUserInputEnvelope = {
+    data: BibleReadChapterCreateManyUserInput | BibleReadChapterCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BibleReadVerseCreateWithoutUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadVerseUncheckedCreateWithoutUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadVerseCreateOrConnectWithoutUserInput = {
+    where: BibleReadVerseWhereUniqueInput
+    create: XOR<BibleReadVerseCreateWithoutUserInput, BibleReadVerseUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleReadVerseCreateManyUserInputEnvelope = {
+    data: BibleReadVerseCreateManyUserInput | BibleReadVerseCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AgendaUpsertWithWhereUniqueWithoutUserInput = {
     where: AgendaWhereUniqueInput
     update: XOR<AgendaUpdateWithoutUserInput, AgendaUncheckedUpdateWithoutUserInput>
@@ -22052,6 +28271,121 @@ export namespace Prisma {
     userAgent?: StringNullableFilter<"AuditLog"> | string | null
   }
 
+  export type BibleFavoriteUpsertWithWhereUniqueWithoutUserInput = {
+    where: BibleFavoriteWhereUniqueInput
+    update: XOR<BibleFavoriteUpdateWithoutUserInput, BibleFavoriteUncheckedUpdateWithoutUserInput>
+    create: XOR<BibleFavoriteCreateWithoutUserInput, BibleFavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleFavoriteUpdateWithWhereUniqueWithoutUserInput = {
+    where: BibleFavoriteWhereUniqueInput
+    data: XOR<BibleFavoriteUpdateWithoutUserInput, BibleFavoriteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BibleFavoriteUpdateManyWithWhereWithoutUserInput = {
+    where: BibleFavoriteScalarWhereInput
+    data: XOR<BibleFavoriteUpdateManyMutationInput, BibleFavoriteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BibleFavoriteScalarWhereInput = {
+    AND?: BibleFavoriteScalarWhereInput | BibleFavoriteScalarWhereInput[]
+    OR?: BibleFavoriteScalarWhereInput[]
+    NOT?: BibleFavoriteScalarWhereInput | BibleFavoriteScalarWhereInput[]
+    id?: StringFilter<"BibleFavorite"> | string
+    userId?: StringFilter<"BibleFavorite"> | string
+    bookName?: StringFilter<"BibleFavorite"> | string
+    chapter?: IntFilter<"BibleFavorite"> | number
+    verse?: IntNullableFilter<"BibleFavorite"> | number | null
+    createdAt?: DateTimeFilter<"BibleFavorite"> | Date | string
+    updatedAt?: DateTimeFilter<"BibleFavorite"> | Date | string
+  }
+
+  export type BibleReadingPlanUpsertWithoutUserInput = {
+    update: XOR<BibleReadingPlanUpdateWithoutUserInput, BibleReadingPlanUncheckedUpdateWithoutUserInput>
+    create: XOR<BibleReadingPlanCreateWithoutUserInput, BibleReadingPlanUncheckedCreateWithoutUserInput>
+    where?: BibleReadingPlanWhereInput
+  }
+
+  export type BibleReadingPlanUpdateToOneWithWhereWithoutUserInput = {
+    where?: BibleReadingPlanWhereInput
+    data: XOR<BibleReadingPlanUpdateWithoutUserInput, BibleReadingPlanUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BibleReadingPlanUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    chaptersPerDay?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadingPlanUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    chaptersPerDay?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterUpsertWithWhereUniqueWithoutUserInput = {
+    where: BibleReadChapterWhereUniqueInput
+    update: XOR<BibleReadChapterUpdateWithoutUserInput, BibleReadChapterUncheckedUpdateWithoutUserInput>
+    create: XOR<BibleReadChapterCreateWithoutUserInput, BibleReadChapterUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleReadChapterUpdateWithWhereUniqueWithoutUserInput = {
+    where: BibleReadChapterWhereUniqueInput
+    data: XOR<BibleReadChapterUpdateWithoutUserInput, BibleReadChapterUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BibleReadChapterUpdateManyWithWhereWithoutUserInput = {
+    where: BibleReadChapterScalarWhereInput
+    data: XOR<BibleReadChapterUpdateManyMutationInput, BibleReadChapterUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BibleReadChapterScalarWhereInput = {
+    AND?: BibleReadChapterScalarWhereInput | BibleReadChapterScalarWhereInput[]
+    OR?: BibleReadChapterScalarWhereInput[]
+    NOT?: BibleReadChapterScalarWhereInput | BibleReadChapterScalarWhereInput[]
+    id?: StringFilter<"BibleReadChapter"> | string
+    userId?: StringFilter<"BibleReadChapter"> | string
+    bookName?: StringFilter<"BibleReadChapter"> | string
+    chapter?: IntFilter<"BibleReadChapter"> | number
+    readAt?: DateTimeFilter<"BibleReadChapter"> | Date | string
+  }
+
+  export type BibleReadVerseUpsertWithWhereUniqueWithoutUserInput = {
+    where: BibleReadVerseWhereUniqueInput
+    update: XOR<BibleReadVerseUpdateWithoutUserInput, BibleReadVerseUncheckedUpdateWithoutUserInput>
+    create: XOR<BibleReadVerseCreateWithoutUserInput, BibleReadVerseUncheckedCreateWithoutUserInput>
+  }
+
+  export type BibleReadVerseUpdateWithWhereUniqueWithoutUserInput = {
+    where: BibleReadVerseWhereUniqueInput
+    data: XOR<BibleReadVerseUpdateWithoutUserInput, BibleReadVerseUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BibleReadVerseUpdateManyWithWhereWithoutUserInput = {
+    where: BibleReadVerseScalarWhereInput
+    data: XOR<BibleReadVerseUpdateManyMutationInput, BibleReadVerseUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BibleReadVerseScalarWhereInput = {
+    AND?: BibleReadVerseScalarWhereInput | BibleReadVerseScalarWhereInput[]
+    OR?: BibleReadVerseScalarWhereInput[]
+    NOT?: BibleReadVerseScalarWhereInput | BibleReadVerseScalarWhereInput[]
+    id?: StringFilter<"BibleReadVerse"> | string
+    userId?: StringFilter<"BibleReadVerse"> | string
+    bookName?: StringFilter<"BibleReadVerse"> | string
+    chapter?: IntFilter<"BibleReadVerse"> | number
+    verse?: IntFilter<"BibleReadVerse"> | number
+    readAt?: DateTimeFilter<"BibleReadVerse"> | Date | string
+  }
+
   export type UserCreateWithoutNewsInput = {
     id?: string
     login: string
@@ -22073,6 +28407,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsInput = {
@@ -22096,6 +28434,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsInput = {
@@ -22135,6 +28477,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsInput = {
@@ -22158,6 +28504,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMinisterioInput = {
@@ -22181,6 +28531,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMinisterioInput = {
@@ -22204,6 +28558,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMinisterioInput = {
@@ -22243,6 +28601,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMinisterioInput = {
@@ -22266,6 +28628,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAgendaInput = {
@@ -22289,6 +28655,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAgendaInput = {
@@ -22312,6 +28682,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAgendaInput = {
@@ -22351,6 +28725,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAgendaInput = {
@@ -22374,6 +28752,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutDoacaoInput = {
@@ -22397,6 +28779,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDoacaoInput = {
@@ -22420,6 +28806,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDoacaoInput = {
@@ -22459,6 +28849,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDoacaoInput = {
@@ -22482,6 +28876,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutEnderecoInput = {
@@ -22505,6 +28903,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnderecoInput = {
@@ -22528,6 +28930,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnderecoInput = {
@@ -22567,6 +28973,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnderecoInput = {
@@ -22590,6 +29000,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutContatoInput = {
@@ -22613,6 +29027,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutContatoInput = {
@@ -22636,6 +29054,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutContatoInput = {
@@ -22675,6 +29097,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContatoInput = {
@@ -22698,6 +29124,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSobreInput = {
@@ -22721,6 +29151,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSobreInput = {
@@ -22744,6 +29178,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSobreInput = {
@@ -22783,6 +29221,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSobreInput = {
@@ -22806,6 +29248,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSobreLiderInput = {
@@ -22829,6 +29275,10 @@ export namespace Prisma {
     sobre?: SobreCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSobreLiderInput = {
@@ -22852,6 +29302,10 @@ export namespace Prisma {
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSobreLiderInput = {
@@ -22891,6 +29345,10 @@ export namespace Prisma {
     sobre?: SobreUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSobreLiderInput = {
@@ -22914,6 +29372,10 @@ export namespace Prisma {
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRefreshTokenInput = {
@@ -22937,6 +29399,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokenInput = {
@@ -22960,6 +29426,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokenInput = {
@@ -22999,6 +29469,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokenInput = {
@@ -23022,6 +29496,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPasswordResetTokenInput = {
@@ -23045,6 +29523,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPasswordResetTokenInput = {
@@ -23068,6 +29550,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPasswordResetTokenInput = {
@@ -23107,6 +29593,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPasswordResetTokenInput = {
@@ -23130,6 +29620,10 @@ export namespace Prisma {
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutTestemunhosInput = {
@@ -23153,6 +29647,10 @@ export namespace Prisma {
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTestemunhosInput = {
@@ -23176,6 +29674,10 @@ export namespace Prisma {
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTestemunhosInput = {
@@ -23215,6 +29717,10 @@ export namespace Prisma {
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTestemunhosInput = {
@@ -23238,6 +29744,506 @@ export namespace Prisma {
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBibleFavoritesInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaCreateNestedManyWithoutUserInput
+    contato?: ContatoCreateNestedManyWithoutUserInput
+    doacao?: DoacaoCreateNestedManyWithoutUserInput
+    endereco?: EnderecoCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioCreateNestedManyWithoutUserInput
+    news?: NewCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
+    sobre?: SobreCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBibleFavoritesInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
+    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
+    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
+    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
+    news?: NewUncheckedCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBibleFavoritesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBibleFavoritesInput, UserUncheckedCreateWithoutBibleFavoritesInput>
+  }
+
+  export type UserUpsertWithoutBibleFavoritesInput = {
+    update: XOR<UserUpdateWithoutBibleFavoritesInput, UserUncheckedUpdateWithoutBibleFavoritesInput>
+    create: XOR<UserCreateWithoutBibleFavoritesInput, UserUncheckedCreateWithoutBibleFavoritesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBibleFavoritesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBibleFavoritesInput, UserUncheckedUpdateWithoutBibleFavoritesInput>
+  }
+
+  export type UserUpdateWithoutBibleFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUpdateManyWithoutUserNestedInput
+    contato?: ContatoUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
+    news?: NewUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
+    sobre?: SobreUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBibleFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
+    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewUncheckedUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBibleReadingPlanInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaCreateNestedManyWithoutUserInput
+    contato?: ContatoCreateNestedManyWithoutUserInput
+    doacao?: DoacaoCreateNestedManyWithoutUserInput
+    endereco?: EnderecoCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioCreateNestedManyWithoutUserInput
+    news?: NewCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
+    sobre?: SobreCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBibleReadingPlanInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
+    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
+    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
+    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
+    news?: NewUncheckedCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBibleReadingPlanInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBibleReadingPlanInput, UserUncheckedCreateWithoutBibleReadingPlanInput>
+  }
+
+  export type UserUpsertWithoutBibleReadingPlanInput = {
+    update: XOR<UserUpdateWithoutBibleReadingPlanInput, UserUncheckedUpdateWithoutBibleReadingPlanInput>
+    create: XOR<UserCreateWithoutBibleReadingPlanInput, UserUncheckedCreateWithoutBibleReadingPlanInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBibleReadingPlanInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBibleReadingPlanInput, UserUncheckedUpdateWithoutBibleReadingPlanInput>
+  }
+
+  export type UserUpdateWithoutBibleReadingPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUpdateManyWithoutUserNestedInput
+    contato?: ContatoUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
+    news?: NewUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
+    sobre?: SobreUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBibleReadingPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
+    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewUncheckedUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBibleReadChaptersInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaCreateNestedManyWithoutUserInput
+    contato?: ContatoCreateNestedManyWithoutUserInput
+    doacao?: DoacaoCreateNestedManyWithoutUserInput
+    endereco?: EnderecoCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioCreateNestedManyWithoutUserInput
+    news?: NewCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
+    sobre?: SobreCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBibleReadChaptersInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
+    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
+    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
+    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
+    news?: NewUncheckedCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBibleReadChaptersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBibleReadChaptersInput, UserUncheckedCreateWithoutBibleReadChaptersInput>
+  }
+
+  export type UserUpsertWithoutBibleReadChaptersInput = {
+    update: XOR<UserUpdateWithoutBibleReadChaptersInput, UserUncheckedUpdateWithoutBibleReadChaptersInput>
+    create: XOR<UserCreateWithoutBibleReadChaptersInput, UserUncheckedCreateWithoutBibleReadChaptersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBibleReadChaptersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBibleReadChaptersInput, UserUncheckedUpdateWithoutBibleReadChaptersInput>
+  }
+
+  export type UserUpdateWithoutBibleReadChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUpdateManyWithoutUserNestedInput
+    contato?: ContatoUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
+    news?: NewUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
+    sobre?: SobreUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBibleReadChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
+    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewUncheckedUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBibleReadVersesInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaCreateNestedManyWithoutUserInput
+    contato?: ContatoCreateNestedManyWithoutUserInput
+    doacao?: DoacaoCreateNestedManyWithoutUserInput
+    endereco?: EnderecoCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioCreateNestedManyWithoutUserInput
+    news?: NewCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
+    sobre?: SobreCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBibleReadVersesInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    ministryRole?: $Enums.MinistryRole | null
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
+    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
+    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
+    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
+    news?: NewUncheckedCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBibleReadVersesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBibleReadVersesInput, UserUncheckedCreateWithoutBibleReadVersesInput>
+  }
+
+  export type UserUpsertWithoutBibleReadVersesInput = {
+    update: XOR<UserUpdateWithoutBibleReadVersesInput, UserUncheckedUpdateWithoutBibleReadVersesInput>
+    create: XOR<UserCreateWithoutBibleReadVersesInput, UserUncheckedCreateWithoutBibleReadVersesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBibleReadVersesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBibleReadVersesInput, UserUncheckedUpdateWithoutBibleReadVersesInput>
+  }
+
+  export type UserUpdateWithoutBibleReadVersesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUpdateManyWithoutUserNestedInput
+    contato?: ContatoUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
+    news?: NewUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
+    sobre?: SobreUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBibleReadVersesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
+    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
+    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
+    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewUncheckedUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAuditLogsInput = {
@@ -23261,6 +30267,10 @@ export namespace Prisma {
     sobre?: SobreCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -23284,6 +30294,10 @@ export namespace Prisma {
     sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
     sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
     testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -23323,6 +30337,10 @@ export namespace Prisma {
     sobre?: SobreUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -23346,6 +30364,10 @@ export namespace Prisma {
     sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
     sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
     testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AgendaCreateManyUserInput = {
@@ -23483,6 +30505,30 @@ export namespace Prisma {
     timestamp?: Date | string
     ipAddress?: string | null
     userAgent?: string | null
+  }
+
+  export type BibleFavoriteCreateManyUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BibleReadChapterCreateManyUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    readAt?: Date | string
+  }
+
+  export type BibleReadVerseCreateManyUserInput = {
+    id?: string
+    bookName: string
+    chapter: number
+    verse: number
+    readAt?: Date | string
   }
 
   export type AgendaUpdateWithoutUserInput = {
@@ -23894,6 +30940,78 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BibleFavoriteUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleFavoriteUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleFavoriteUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadChapterUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadVerseUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadVerseUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BibleReadVerseUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookName?: StringFieldUpdateOperationsInput | string
+    chapter?: IntFieldUpdateOperationsInput | number
+    verse?: IntFieldUpdateOperationsInput | number
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
