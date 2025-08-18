@@ -23,10 +23,16 @@ export default function RemoveAgenda({ id }: RemoveAgendaProps) {
       }
     }
 
-    window.addEventListener('showRemoveModal', handleShowRemoveModal as EventListener)
-    
+    window.addEventListener(
+      'showRemoveModal',
+      handleShowRemoveModal as EventListener,
+    )
+
     return () => {
-      window.removeEventListener('showRemoveModal', handleShowRemoveModal as EventListener)
+      window.removeEventListener(
+        'showRemoveModal',
+        handleShowRemoveModal as EventListener,
+      )
     }
   }, [id, setShowModal])
 

@@ -69,7 +69,9 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
           <button
             onClick={() => {
               // Usar o sistema de modal global
-              const event = new CustomEvent('showRemoveModal', { detail: { id } })
+              const event = new CustomEvent('showRemoveModal', {
+                detail: { id },
+              })
               window.dispatchEvent(event)
             }}
             className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
