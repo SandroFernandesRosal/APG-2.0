@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
-import { Toaster } from 'react-hot-toast'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import UserComponent from '@/components/User'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -32,29 +33,22 @@ export default function RootLayout({
           </Header>
           {children}
           <Footer />
-          <Toaster
+          <ToastContainer
             position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#363636',
-                color: '#fff',
-              },
-              success: {
-                duration: 3000,
-                iconTheme: {
-                  primary: '#10B981',
-                  secondary: '#fff',
-                },
-              },
-              error: {
-                duration: 5000,
-                iconTheme: {
-                  primary: '#EF4444',
-                  secondary: '#fff',
-                },
-              },
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            toastStyle={{
+              borderRadius: '8px',
+              fontSize: '14px',
             }}
+            toastClassName="custom-toast"
           />
         </Providers>
       </body>

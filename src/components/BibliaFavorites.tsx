@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Heart, Star } from 'lucide-react'
-import { toast } from 'react-hot-toast'
+import { Heart, Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { toast } from 'react-toastify'
 import { ConfirmModal } from './ConfirmModal'
 
 interface BibleFavorite {
@@ -26,6 +26,34 @@ export function BibliaFavorites() {
   const [favorites, setFavorites] = useState<FavoriteWithText[]>([])
   const [showFavorites, setShowFavorites] = useState(false)
   const [showResetModal, setShowResetModal] = useState(false)
+
+  // Estados para paginação
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(5) // 5 favoritos por página
+
+  // Calcular dados de paginação
+  const totalPages = Math.ceil(favorites.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentFavorites = favorites.slice(startIndex, endIndex)
+
+  // Resetar para primeira página quando favoritos mudam ou itemsPerPage muda
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [favorites.length, itemsPerPage])
+
+  // Funções de navegação
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)))
+  }
+
+  const goToPreviousPage = () => {
+    goToPage(currentPage - 1)
+  }
+
+  const goToNextPage = () => {
+    goToPage(currentPage + 1)
+  }
 
   // Carregar favoritos da API
   const loadFavorites = async () => {
@@ -168,10 +196,18 @@ export function BibliaFavorites() {
     <>
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-            <Star className="w-5 h-5 text-yellow-500 fill-current" />
-            Favoritos
-          </h3>
+          <div className="flex items-center gap-3">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
+              <Star className="w-5 h-5 text-yellow-500 fill-current" />
+              Favoritos
+            </h3>
+            {showFavorites && favorites.length > 0 && (
+              <span className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md">
+                {startIndex + 1}-{Math.min(endIndex, favorites.length)} de{' '}
+                {favorites.length}
+              </span>
+            )}
+          </div>
           <div className="flex gap-2">
             <button
               onClick={() => setShowFavorites(!showFavorites)}
@@ -196,7 +232,7 @@ export function BibliaFavorites() {
 
         {showFavorites && (
           <div className="space-y-4">
-            {favorites.length === 0 ? (
+            {currentFavorites.length === 0 ? (
               <div className="text-center py-8">
                 <Heart className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                 <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">
@@ -208,7 +244,7 @@ export function BibliaFavorites() {
                 </p>
               </div>
             ) : (
-              favorites.map((favorite) => (
+              currentFavorites.map((favorite) => (
                 <div
                   key={favorite.id}
                   className="group relative p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl border-l-4 border-yellow-500 shadow-sm hover:shadow-md transition-all duration-200"
@@ -257,6 +293,90 @@ export function BibliaFavorites() {
                   </div>
                 </div>
               ))
+            )}
+
+            {/* Controles de Paginação */}
+            {favorites.length > 0 && (
+              <div className="flex flex-col items-center gap-3 mt-6">
+                {/* Informação e controles */}
+                <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                  <span>
+                    Página {currentPage} de {totalPages} • {favorites.length}{' '}
+                    favoritos no total
+                  </span>
+
+                  {/* Seletor de itens por página */}
+                  <div className="flex items-center gap-2">
+                    <span>Mostrar:</span>
+                    <select
+                      value={itemsPerPage}
+                      onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                      className="px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    >
+                      <option value={3}>3 por página</option>
+                      <option value={5}>5 por página</option>
+                      <option value={10}>10 por página</option>
+                      <option value={15}>15 por página</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Controles de navegação */}
+                {totalPages > 1 && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={goToPreviousPage}
+                      disabled={currentPage === 1}
+                      className="px-3 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Anterior
+                    </button>
+
+                    {/* Botões de páginas */}
+                    <div className="flex items-center gap-1">
+                      {Array.from(
+                        { length: Math.min(5, totalPages) },
+                        (_, i) => {
+                          let pageNumber
+                          if (totalPages <= 5) {
+                            pageNumber = i + 1
+                          } else if (currentPage <= 3) {
+                            pageNumber = i + 1
+                          } else if (currentPage >= totalPages - 2) {
+                            pageNumber = totalPages - 4 + i
+                          } else {
+                            pageNumber = currentPage - 2 + i
+                          }
+
+                          return (
+                            <button
+                              key={pageNumber}
+                              onClick={() => goToPage(pageNumber)}
+                              className={`px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                                currentPage === pageNumber
+                                  ? 'bg-yellow-500 text-white'
+                                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
+                              }`}
+                            >
+                              {pageNumber}
+                            </button>
+                          )
+                        },
+                      )}
+                    </div>
+
+                    <button
+                      onClick={goToNextPage}
+                      disabled={currentPage === totalPages}
+                      className="px-3 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      Próxima
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}

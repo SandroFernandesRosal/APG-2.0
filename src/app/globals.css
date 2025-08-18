@@ -2,6 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Toast Styles */
+.custom-toast {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid !important;
+}
+
+/* Success Toast - Light Theme */
+.custom-toast[data-type="success"] {
+  background-color: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+  color: #065f46 !important;
+}
+
+/* Success Toast - Dark Theme */
+[data-theme="dark"] .custom-toast[data-type="success"],
+.dark .custom-toast[data-type="success"],
+html[class*="dark"] .custom-toast[data-type="success"] {
+  background-color: rgba(6, 95, 70, 0.2) !important;
+  border-color: #047857 !important;
+  color: #a7f3d0 !important;
+}
+
+/* Error Toast - Light Theme */
+.custom-toast[data-type="error"] {
+  background-color: #fef2f2 !important;
+  border-color: #fecaca !important;
+  color: #991b1b !important;
+}
+
+/* Error Toast - Dark Theme */
+[data-theme="dark"] .custom-toast[data-type="error"],
+.dark .custom-toast[data-type="error"],
+html[class*="dark"] .custom-toast[data-type="error"] {
+  background-color: rgba(153, 27, 27, 0.2) !important;
+  border-color: #dc2626 !important;
+  color: #fecaca !important;
+}
+
+/* Warning Toast - Light Theme */
+.custom-toast[data-type="warning"] {
+  background-color: #fffbeb !important;
+  border-color: #fed7aa !important;
+  color: #92400e !important;
+}
+
+/* Warning Toast - Dark Theme */
+[data-theme="dark"] .custom-toast[data-type="warning"],
+.dark .custom-toast[data-type="warning"],
+html[class*="dark"] .custom-toast[data-type="warning"] {
+  background-color: rgba(146, 64, 14, 0.2) !important;
+  border-color: #ea580c !important;
+  color: #fed7aa !important;
+}
+
+/* Info Toast - Light Theme */
+.custom-toast[data-type="info"] {
+  background-color: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  color: #1e40af !important;
+}
+
+/* Info Toast - Dark Theme */
+[data-theme="dark"] .custom-toast[data-type="info"],
+.dark .custom-toast[data-type="info"],
+html[class*="dark"] .custom-toast[data-type="info"] {
+  background-color: rgba(30, 64, 175, 0.2) !important;
+  border-color: #3b82f6 !important;
+  color: #bfdbfe !important;
+}
+
+/* Progress Bar Colors */
+.custom-toast[data-type="success"] .Toastify__progress-bar {
+  background-color: #10b981 !important;
+}
+
+.dark .custom-toast[data-type="success"] .Toastify__progress-bar {
+  background-color: #34d399 !important;
+}
+
+.custom-toast[data-type="error"] .Toastify__progress-bar {
+  background-color: #ef4444 !important;
+}
+
+.dark .custom-toast[data-type="error"] .Toastify__progress-bar {
+  background-color: #f87171 !important;
+}
+
+.custom-toast[data-type="warning"] .Toastify__progress-bar {
+  background-color: #f59e0b !important;
+}
+
+.dark .custom-toast[data-type="warning"] .Toastify__progress-bar {
+  background-color: #fbbf24 !important;
+}
+
+.custom-toast[data-type="info"] .Toastify__progress-bar {
+  background-color: #3b82f6 !important;
+}
+
+.dark .custom-toast[data-type="info"] .Toastify__progress-bar {
+  background-color: #60a5fa !important;
+}
+
 
 .switch svg {
   padding: 3px;
