@@ -57,7 +57,7 @@ export default function ItemTestemunho({
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 mb-6">
+    <div className="w-full max-w-7xl mx-auto px-4 mb-6">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden transform transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
         {/* Header do Card */}
         <div className="bg-white dark:bg-slate-800 p-6 border-b border-gray-200 dark:border-gray-700">
