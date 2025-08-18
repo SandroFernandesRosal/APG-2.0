@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 
 interface EditSobreContentProps {
   setOpenEdit: (open: string | null) => void
@@ -59,6 +60,8 @@ export default function EditSobreContent({
         coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
+        toast.error('Erro ao enviar imagem. Tente novamente.')
+        setIsEditing(false)
         return
       }
     } else {
@@ -80,14 +83,20 @@ export default function EditSobreContent({
       })
 
       if (response.ok) {
+        toast.success('História editada com sucesso!')
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
         return response.json()
+      } else {
+        toast.error('Erro ao editar história. Tente novamente.')
       }
 
       console.error('Erro ao editar notícia:', response.statusText)
     } catch (error) {
       console.error('Erro ao editar notícia:', error)
+      toast.error('Erro ao editar história. Tente novamente.')
+    } finally {
+      setIsEditing(false)
     }
 
     return null

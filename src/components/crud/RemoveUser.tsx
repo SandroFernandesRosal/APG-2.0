@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useShowModal } from '@/store/useStore'
 import ShowModal from '../showModal'
+import { toast } from 'react-toastify'
 
 interface RemoveUser {
   id: string
@@ -29,14 +30,17 @@ export default function RemoveUser({ id }: RemoveUser) {
       })
 
       if (response.ok) {
+        toast.success('Usuário removido com sucesso!')
         Cookies.remove('tokennn')
         router.push('/')
         window.location.href = '/'
       } else {
         console.error('Erro ao remover usuário:', response.statusText)
+        toast.error('Erro ao remover usuário. Tente novamente.')
       }
     } catch (error) {
       console.error('Erro ao remover usuário:', error)
+      toast.error('Erro ao remover usuário. Tente novamente.')
     } finally {
       setIsDeleting(false)
     }

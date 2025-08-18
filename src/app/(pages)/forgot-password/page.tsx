@@ -1,6 +1,7 @@
 'use client'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 export default function ForgotPasswordPage() {
   const [login, setLogin] = useState<string>('')
@@ -22,17 +23,17 @@ export default function ForgotPasswordPage() {
 
       if (response.ok) {
         console.log('email enviado')
-        alert('email enviado com sucesso!')
+        toast.success('Email enviado com sucesso!')
         router.push('/login')
       } else if (response.status === 404) {
-        alert(`Não existe usuário com esse email: ${login}`)
+        toast.error(`Não existe usuário com esse email: ${login}`)
       } else {
         console.log('Erro. Email não enviado')
-        alert(data?.message || 'Erro ao enviar email.')
+        toast.error(data?.message || 'Erro ao enviar email.')
       }
     } catch (error) {
       console.error('Erro ao solicitar redefinição de senha:', error)
-      alert('Erro ao solicitar redefinição de senha. Tente novamente.')
+      toast.error('Erro ao solicitar redefinição de senha. Tente novamente.')
     }
   }
 

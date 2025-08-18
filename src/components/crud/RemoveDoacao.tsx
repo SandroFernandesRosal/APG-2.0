@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import ShowModal from '../showModal'
+import { toast } from 'react-toastify'
 
 interface RemoveDoacaoProps {
   id: string
@@ -29,15 +30,19 @@ export default function RemoveDoacao({ id }: RemoveDoacaoProps) {
       })
 
       if (response.ok) {
+        toast.success('Doação removida com sucesso!')
         router.push('/')
         window.location.href = '/'
       } else {
         console.error('Erro ao remover doação:', response.statusText)
+        toast.error('Erro ao remover doação. Tente novamente.')
       }
     } catch (error) {
       console.error('Erro ao remover doação:', error)
+      toast.error('Erro ao remover doação. Tente novamente.')
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 

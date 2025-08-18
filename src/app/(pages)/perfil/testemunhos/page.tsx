@@ -1,9 +1,19 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { format } from 'date-fns'
-import { FaSpinner } from 'react-icons/fa'
+import {
+  FaSpinner,
+  FaCheck,
+  FaTrash,
+  FaTimes,
+  FaUser,
+  FaCalendarAlt,
+  FaClock,
+  FaChurch,
+} from 'react-icons/fa'
 import { useToken } from '@/hooks/useToken'
 
 interface Testemunho {
@@ -22,8 +32,8 @@ export default function AdminTestemunhosPage() {
   const [loading, setLoading] = useState(true)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
-
   const [approvingId, setApprovingId] = useState<string | null>(null)
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
 
   const router = useRouter()
   const token = useToken()
@@ -36,6 +46,20 @@ export default function AdminTestemunhosPage() {
       return format(date, 'dd/MM/yyyy HH:mm')
     } catch {
       return ''
+    }
+  }
+
+  function getIgrejaLabel(ministryRole?: string): string {
+    if (!ministryRole) return 'Membro sem igreja'
+    switch (ministryRole) {
+      case 'VILADAPENHA':
+        return 'APG Vila da Penha'
+      case 'TOMAZINHO':
+        return 'APG Tomazinho'
+      case 'MARIAHELENA':
+        return 'APG Vila Maria Helena'
+      default:
+        return 'APG ' + ministryRole
     }
   }
 
@@ -84,11 +108,11 @@ export default function AdminTestemunhosPage() {
         body: JSON.stringify({ isPublic: true }),
       })
       setTestemunhos((prev) => prev.filter((t) => t.id !== id))
-
+      toast.success('Testemunho aprovado com sucesso!')
       router.refresh()
     } catch (error) {
       console.error('Erro ao aprovar testemunho:', error)
-      alert('Falha ao aprovar o testemunho.')
+      toast.error('Falha ao aprovar o testemunho.')
     } finally {
       setApprovingId(null)
     }
@@ -111,180 +135,246 @@ export default function AdminTestemunhosPage() {
       }
     } catch (error) {
       console.error('Erro ao deletar:', error)
-      alert('Erro ao deletar o testemunho.')
+      toast.error('Erro ao deletar o testemunho.')
       setShowModal(false)
     }
+  }
+
+  const handleImageError = (imageUrl: string) => {
+    setImageErrors((prev) => new Set(prev).add(imageUrl))
+  }
+
+  const isImageError = (imageUrl: string) => {
+    return imageErrors.has(imageUrl)
   }
 
   if (loading) {
     return (
       <div className="pt-24 pb-10 md:pt-52 min-h-screen flex items-center justify-center">
-        <FaSpinner className="animate-spin text-2xl" />
+        <div className="flex flex-col items-center space-y-4">
+          <div className="relative">
+            <FaSpinner className="animate-spin text-4xl text-primary dark:text-secundary" />
+            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary dark:border-t-secundary animate-spin"></div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 font-medium">
+            Carregando testemunhos...
+          </p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="pt-24 pb-10 md:pt-52 min-h-screen flex flex-col items-center gap-5 w-full">
-      <h1 className="text-2xl font-bold mb-4">Testemunhos Pendentes</h1>
+    <div className="pt-24 pb-10 md:pt-[110px] min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex gap-4 items-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary to-secundary rounded-full mb-4 shadow-lg">
+              <FaUser className="text-2xl text-white" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              Testemunhos Pendentes
+            </h1>
+          </div>
 
-      {testemunhos.length === 0 ? (
-        <p className="text-gray-500">Nenhum testemunho pendente.</p>
-      ) : (
-        <ul className="flex flex-col gap-4 w-full items-center">
-          {testemunhos.map((t) => (
-            <li
-              key={t.id}
-              className="flex flex-col border[1px] rounded-lg p-4 bg-bglightsecundary dark:bg-bgdarksecundary w-[90%] md:w-[80%] lg:w-[70%] border-zinc-300 dark:border-zinc-800 border-[1px]"
-            >
-              <div className="flex items-center gap-4 relative mb-5">
-                {t.avatarUrl && (
-                  <Image
-                    width={80}
-                    height={80}
-                    src={t.avatarUrl}
-                    alt={t.name}
-                    className="p-[2px] mr-1 rounded-full border-[1px] border-primary dark:border-secundary"
-                  />
-                )}
-                <div>
-                  <p className="text-lg font-bold">
-                    {t.name}
-                    <span className="text-sm font-normal text-zinc-600">
-                      {t.ministryRole
-                        ? ` - APG ${
-                            t.ministryRole === 'VILADAPENHA'
-                              ? 'Vila da Penha'
-                              : t.ministryRole === 'TOMAZINHO'
-                                ? 'Tomazinho'
-                                : 'Vila Maria Helena'
-                          }`
-                        : ' - Membro sem igreja'}
-                    </span>
-                  </p>
-                  <div className="text-xs flex flex-col">
-                    <span>Postado: {formatDate(t.createdAt)}</span>
+          <div className="mt-4 inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-md">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              {testemunhos.length} testemunho
+              {testemunhos.length !== 1 ? 's' : ''} pendente
+              {testemunhos.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+        </div>
+
+        {testemunhos.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full mb-6">
+              <FaCheck className="text-3xl text-gray-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              Nenhum testemunho pendente
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Todos os testemunhos foram revisados e aprovados!
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
+            {testemunhos.map((t, index) => (
+              <div
+                key={t.id}
+                className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* Header do Card */}
+                <div className="bg-white dark:bg-slate-800 p-6 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center space-x-4">
+                    <div className="relative">
+                      {t.avatarUrl && !isImageError(t.avatarUrl) ? (
+                        <Image
+                          width={64}
+                          height={64}
+                          src={t.avatarUrl}
+                          alt={t.name}
+                          className="rounded-full border-2 border-gray-200 dark:border-gray-600 shadow-lg"
+                          onError={() => handleImageError(t.avatarUrl)}
+                        />
+                      ) : (
+                        <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-200 dark:border-gray-600">
+                          <FaUser className="text-2xl text-gray-400 dark:text-gray-500" />
+                        </div>
+                      )}
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center">
+                        <FaChurch className="text-xs text-white" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                        {t.name}
+                      </h3>
+                      <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+                        <FaChurch className="text-sm" />
+                        <span className="text-sm font-medium">
+                          {getIgrejaLabel(t.ministryRole)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Conteúdo */}
+                <div className="p-6">
+                  {/* Informações de Data */}
+                  <div className="flex items-center space-x-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center space-x-1">
+                      <FaCalendarAlt className="text-primary dark:text-secundary" />
+                      <span>Postado: {formatDate(t.createdAt)}</span>
+                    </div>
                     {t.updatedAt && t.createdAt !== t.updatedAt && (
-                      <span>Última atualização: {formatDate(t.updatedAt)}</span>
+                      <div className="flex items-center space-x-1">
+                        <FaClock className="text-primary dark:text-secundary" />
+                        <span>Atualizado: {formatDate(t.updatedAt)}</span>
+                      </div>
                     )}
+                  </div>
+
+                  {/* Texto do Testemunho */}
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 mb-4">
+                    <p className="text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">
+                      {t.content}
+                    </p>
+                  </div>
+
+                  {/* Imagem do Testemunho */}
+                  {t.coverUrl && (
+                    <div className="mb-6">
+                      <div className="w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg bg-gray-100 dark:bg-gray-700">
+                        {!isImageError(t.coverUrl) ? (
+                          <Image
+                            src={t.coverUrl}
+                            alt="Foto do testemunho"
+                            width={800}
+                            height={600}
+                            className="w-full h-auto max-h-96 object-contain"
+                            sizes="(max-width: 768px) 100vw, 800px"
+                            onError={() => handleImageError(t.coverUrl)}
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-full h-48 bg-gray-200 dark:bg-gray-600">
+                            <div className="text-center">
+                              <svg
+                                className="w-12 h-12 mx-auto text-gray-400 mb-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                ></path>
+                              </svg>
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
+                                Imagem não disponível
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Botões de Ação */}
+                  <div className="flex justify-end gap-3">
+                    <button
+                      onClick={() => handleAprovar(t.id)}
+                      disabled={approvingId === t.id}
+                      className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {approvingId === t.id ? (
+                        <>
+                          <FaSpinner className="animate-spin text-sm" />
+                          <span>Aprovando...</span>
+                        </>
+                      ) : (
+                        <>
+                          <FaCheck className="text-sm" />
+                          <span>Aprovar</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setSelectedId(t.id)
+                        setShowModal(true)
+                      }}
+                      className="flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                    >
+                      <FaTrash className="text-sm" />
+                      <span>Excluir</span>
+                    </button>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-              <p className="mb-4 whitespace-pre-wrap">{t.content}</p>
-
-              {t.coverUrl && (
-                <div className="relative w-full max-w-md h-64 mb-4 flex self-center ">
-                  <Image
-                    src={t.coverUrl}
-                    alt="Foto testemunho"
-                    fill
-                    className="rounded-lg object-contain"
-                  />
-                </div>
-              )}
-
-              <div className="flex gap-3 items-center">
-                <button
-                  onClick={() => handleAprovar(t.id)}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={approvingId === t.id}
-                >
-                  {approvingId === t.id ? (
-                    <>
-                      <FaSpinner className="animate-spin" />
-                      Aprovando...
-                    </>
-                  ) : (
-                    <>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Aprovar
-                    </>
-                  )}
-                </button>
-
-                <button
-                  onClick={() => {
-                    setSelectedId(t.id)
-                    setShowModal(true)
-                  }}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  title="Excluir testemunho"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Deletar
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-
+      {/* Modal de Confirmação */}
       {showModal && selectedId && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-bglightsecundary dark:bg-bgdarksecundary rounded-xl p-6 max-w-md w-full border-zinc-300 dark:border-zinc-700 border-[1px]">
-            <h2 className="text-lg font-semibold mb-4">Excluir testemunho</h2>
-            <p className="mb-6">
-              Tem certeza que deseja excluir este testemunho?
-            </p>
-            <div className="flex justify-end gap-3">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 scale-100">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full mb-4">
+                <FaTrash className="text-2xl text-red-600 dark:text-red-400" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Excluir Testemunho
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                Tem certeza que deseja excluir este testemunho? Esta ação não
+                pode ser desfeita.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-300"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Cancelar
+                <FaTimes />
+                <span>Cancelar</span>
               </button>
               <button
                 onClick={() => handleDelete(selectedId)}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Deletar
+                <FaTrash />
+                <span>Confirmar Exclusão</span>
               </button>
             </div>
           </div>

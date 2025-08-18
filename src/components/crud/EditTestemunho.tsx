@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { UserIgreja } from '@/data/types/userigreja'
 import { createPortal } from 'react-dom'
+import { toast } from 'react-toastify'
 
 interface EditTestemunhoProps {
   setOpenEdit: (value: string | null) => void
@@ -68,6 +69,9 @@ export default function EditTestemunho({
         coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao carregar arquivo:', error)
+        toast.error('Erro ao carregar arquivo. Tente novamente.')
+        setIsEdit(false)
+        return
       }
     }
 
@@ -91,16 +95,20 @@ export default function EditTestemunho({
       const newss = await response.json()
 
       if (response.ok && newss) {
+        toast.success('Testemunho editado com sucesso!')
         setOpenEdit(null)
         router.push('/testemunhos')
         window.location.href = '/testemunhos'
         return newss
+      } else {
+        toast.error('Erro ao editar testemunho. Tente novamente.')
       }
 
       console.log(newss)
       return null
     } catch (error) {
       console.error('Erro ao editar testemunho:', error)
+      toast.error('Erro ao editar testemunho. Tente novamente.')
     } finally {
       setIsEdit(false)
     }

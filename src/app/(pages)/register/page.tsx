@@ -2,6 +2,7 @@
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { useState, useRef, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
 
@@ -86,7 +87,7 @@ export default function RegisterIgreja() {
       const user = await response.json()
 
       if (response.ok && !user.error) {
-        alert(
+        toast.success(
           isSuperAdmin
             ? 'Administrador criado com sucesso!'
             : 'Registo concluído com sucesso!',

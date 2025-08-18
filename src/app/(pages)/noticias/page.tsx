@@ -2,16 +2,20 @@
 import SelectLocal from '@/components/SelectLocal'
 import News from '@/components/news'
 
-import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
-import AddNew from '@/components/crud/AddNew'
+import { FaPlus } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 import NoticiasHeader from '@/components/noticias-header'
 
 export default function Noticias() {
-  const [openNew, setOpenNew] = useState(false)
   const token = useToken()
+  const router = useRouter()
 
   const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
+
+  const handleAddNews = () => {
+    router.push('/usuarios')
+  }
 
   return (
     <main className="mb-8  mt-20 flex flex-col items-center justify-center  gap-4  md:mt-[145px]   md:items-start   lg:mt-[160px] ">
@@ -19,23 +23,13 @@ export default function Noticias() {
         <NoticiasHeader />
 
         {podeAdicionar && (
-          <>
-            {openNew === false && (
-              <div
-                className="rounded-md mb-2 border-[1px] border-primary/50 hover:border-secundary hover:bg-primary dark:hover:bg-primary hover:text-white  px-2 text-primary dark:text-secundary  dark:hover:text-white dark:border-secundary/50 md:px-3  md:text-lg md:font-bold cursor-pointer"
-                onClick={() => setOpenNew(true)}
-              >
-                Adicionar Notícia
-              </div>
-            )}
-
-            {openNew && (
-              <div className="md:min-w-[35%] w-full">
-                {' '}
-                <AddNew openNew={openNew} setOpenNew={setOpenNew} />
-              </div>
-            )}
-          </>
+          <button
+            className="flex items-center gap-2 px-6 py-3 bg-primary dark:bg-gray-600 text-white font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-gray-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mb-4"
+            onClick={handleAddNews}
+          >
+            <FaPlus className="text-sm" />
+            Adicionar Notícia
+          </button>
         )}
 
         <SelectLocal onChange={(newLocal) => console.log(newLocal)} />

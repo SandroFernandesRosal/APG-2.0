@@ -8,6 +8,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 import { useToken } from '@/hooks/useToken'
 import DatePicker, { registerLocale } from 'react-datepicker'
+import { toast } from 'react-toastify'
 
 import { ptBR } from 'date-fns/locale'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -60,15 +61,19 @@ export default function AddAgenda({ setOpenAgenda }: AddAgendaProps) {
       const agenda = await response.json()
 
       if (response.status === 200 && agenda) {
+        toast.success('Evento criado com sucesso!')
         setOpenAgenda(false)
         router.push('/')
         window.location.href = '/'
         return agenda
+      } else {
+        toast.error('Erro ao criar evento. Tente novamente.')
       }
 
       console.log(agenda)
     } catch (error) {
       console.error('Erro ao criar evento:', error)
+      toast.error('Erro ao criar evento. Tente novamente.')
     } finally {
       setIsSubmitting(false)
     }

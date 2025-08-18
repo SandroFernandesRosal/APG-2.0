@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FaSignOutAlt } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 interface LogoutIgrejaProps {
   className?: string
@@ -38,11 +39,12 @@ export default function LogoutIgreja({
       const data = await response.json()
       console.log('Dados da resposta:', data)
 
+      toast.success('Logout realizado com sucesso!')
       router.push('/login')
       window.location.href = '/login'
     } catch (error) {
       console.error('Falha no logout:', error)
-
+      toast.error('Erro ao fazer logout. Tente novamente.')
       window.location.href = '/login'
     } finally {
       setLoading(false)

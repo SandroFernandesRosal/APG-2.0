@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 interface EditDoacaoProps {
   setOpenEdit: (open: string | null) => void
@@ -62,16 +63,25 @@ export default function EditDoacao({
         }),
       })
 
-      if (response.ok) {
+      const doacao = await response.json()
+
+      if (response.ok && doacao) {
+        toast.success('Doação editada com sucesso!')
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
+        return doacao
       } else {
-        console.error('Erro ao editar doação:', await response.text())
+        toast.error('Erro ao editar doação. Tente novamente.')
       }
+
+      console.log(doacao)
     } catch (error) {
       console.error('Erro ao editar doação:', error)
+      toast.error('Erro ao editar doação. Tente novamente.')
     }
+
+    return null
   }
 
   return (

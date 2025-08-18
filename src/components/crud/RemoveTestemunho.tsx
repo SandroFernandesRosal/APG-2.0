@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { useShowModal, useDataTestemunho } from '@/store/useStore'
+import { useShowModal } from '@/store/useStore'
 import ShowModal from '../showModal'
 import Cookies from 'js-cookie'
-import { Testemunho } from '@/data/types/testemunho'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 interface RemoveTestemunhoProps {
   id: string
@@ -15,10 +15,6 @@ export default function RemoveTestemunho({ id }: RemoveTestemunhoProps) {
   const { showModal, setShowModal } = useShowModal() as {
     showModal: string | null
     setShowModal: React.Dispatch<React.SetStateAction<string | null>>
-  }
-
-  const { setDataTestemunho } = useDataTestemunho() as {
-    setDataTestemunho: React.Dispatch<React.SetStateAction<Testemunho[]>>
   }
 
   const token = Cookies.get('tokennn')
@@ -40,19 +36,19 @@ export default function RemoveTestemunho({ id }: RemoveTestemunhoProps) {
       })
 
       if (response.ok) {
-        setDataTestemunho((prev: Testemunho[]) => {
-          return prev.filter((t) => t.id !== id)
-        })
-        setShowModal(null)
-        router.push('/testemunhos')
-        window.location.href = '/testemunhos'
+        toast.success('Testemunho removido com sucesso!')
+        router.push('/')
+        window.location.href = '/'
       } else {
         console.error('Erro ao remover testemunho:', response.statusText)
+        toast.error('Erro ao remover testemunho. Tente novamente.')
       }
     } catch (error) {
       console.error('Erro ao remover testemunho:', error)
+      toast.error('Erro ao remover testemunho. Tente novamente.')
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 

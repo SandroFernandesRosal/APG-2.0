@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 interface AddContatoProps {
   setOpenContato: (open: boolean) => void
@@ -41,15 +42,19 @@ export default function AddContatos({ setOpenContato }: AddContatoProps) {
       const contato = await response.json()
 
       if (response.status === 200 && contato) {
+        toast.success('Contato criado com sucesso!')
         setOpenContato(false)
         router.push('/')
         window.location.href = '/'
         return contato
+      } else {
+        toast.error('Erro ao criar contato. Tente novamente.')
       }
 
       console.log(contato)
     } catch (error) {
       console.error('Erro ao criar contato:', error)
+      toast.error('Erro ao criar contato. Tente novamente.')
     } finally {
       setIsSubmitting(false)
     }

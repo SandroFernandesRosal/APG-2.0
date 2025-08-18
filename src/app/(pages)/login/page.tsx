@@ -5,6 +5,7 @@ import { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import LogoutIgreja from '@/components/LogoutIgreja'
 import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 export default function Register() {
   const [login, setLogin] = useState<string>('')
@@ -62,16 +63,21 @@ export default function Register() {
 
       if (!response.ok) {
         setIsLogged(false)
-        setError(user.error || 'Erro ao fazer login.')
+        const errorMessage = user.error || 'Erro ao fazer login.'
+        setError(errorMessage)
+        toast.error(errorMessage)
         return
       }
 
       if (response.status === 200) {
+        toast.success('Login realizado com sucesso!')
         router.push('/')
         window.location.href = '/'
       }
     } catch {
-      setError('Erro ao fazer login. Tente novamente mais tarde.')
+      const errorMessage = 'Erro ao fazer login. Tente novamente mais tarde.'
+      setError(errorMessage)
+      toast.error(errorMessage)
     }
   }
 

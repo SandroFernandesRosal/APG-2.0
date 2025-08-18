@@ -3,6 +3,7 @@
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent } from 'react'
+import { toast } from 'react-toastify'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
 
@@ -82,10 +83,10 @@ export default function EditMinisterio({
         setOpenEdit(null)
         window.location.reload()
       } else {
-        alert(data.error || 'Erro ao editar usuário')
+        toast.error(data.error || 'Erro ao editar usuário')
       }
     } catch {
-      alert('Erro ao editar usuário')
+      toast.error('Erro ao editar usuário')
     }
     setIsEditing(false)
   }

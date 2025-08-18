@@ -6,6 +6,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
 interface AddNewProps {
@@ -52,19 +53,19 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
     const mediaFile = mediaInput?.files?.[0]
 
     if (!mediaFile) {
-      alert('Você precisa adicionar uma imagem ou um vídeo.')
+      toast.error('Você precisa adicionar uma imagem ou um vídeo.')
       setIsSubmitting(false)
       return
     }
 
     if (!title.trim()) {
-      alert('Você precisa adicionar um título.')
+      toast.error('Você precisa adicionar um título.')
       setIsSubmitting(false)
       return
     }
 
     if (!content.trim()) {
-      alert('Você precisa adicionar um conteúdo.')
+      toast.error('Você precisa adicionar um conteúdo.')
       setIsSubmitting(false)
       return
     }

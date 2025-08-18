@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useShowModal } from '@/store/useStore'
 import ShowModal from '../showModal'
+import { toast } from 'react-toastify'
 
 interface RemoveEnderecoProps {
   id: string
@@ -29,15 +30,19 @@ export default function RemoveEndereco({ id }: RemoveEnderecoProps) {
       })
 
       if (response.ok) {
+        toast.success('Endereço removido com sucesso!')
         router.push('/')
         window.location.href = '/'
       } else {
         console.error('Erro ao remover endereço:', response.statusText)
+        toast.error('Erro ao remover endereço. Tente novamente.')
       }
     } catch (error) {
       console.error('Erro ao remover endereço:', error)
+      toast.error('Erro ao remover endereço. Tente novamente.')
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 

@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
+import { toast } from 'react-toastify'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import Image from 'next/image'
@@ -53,7 +54,7 @@ export default function AddMinisterio({
     const fileToUpload = fileInput?.files?.[0]
 
     if (!fileToUpload) {
-      alert('Você precisa adicionar uma imagem.')
+      toast.error('Você precisa adicionar uma imagem.')
       setIsSubmitting(false)
       return
     }

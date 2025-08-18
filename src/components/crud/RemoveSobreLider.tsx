@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useShowModal } from '@/store/useStore'
 import ShowModal from '../showModal'
+import { toast } from 'react-toastify'
 
 interface RemoveSobreLiderProps {
   id: string
@@ -29,15 +30,19 @@ export default function RemoveSobreLider({ id }: RemoveSobreLiderProps) {
       })
 
       if (response.ok) {
-        router.push('/quemsomos')
-        window.location.href = '/quemsomos'
+        toast.success('Líder removido com sucesso!')
+        router.push('/')
+        window.location.href = '/'
       } else {
         console.error('Erro ao remover líder:', response.statusText)
+        toast.error('Erro ao remover líder. Tente novamente.')
       }
     } catch (error) {
       console.error('Erro ao remover líder:', error)
+      toast.error('Erro ao remover líder. Tente novamente.')
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 

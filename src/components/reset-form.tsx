@@ -2,6 +2,7 @@
 
 import { useState, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 interface ResetPasswordFormProps {
   token: string
@@ -32,7 +33,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
       if (response.ok) {
         console.log('Senha redefinida com sucesso')
-        alert('Senha redefinida com sucesso!')
+        toast.success('Senha redefinida com sucesso!')
         router.push('/login/igreja')
       } else {
         const data = await response.json()
