@@ -5,6 +5,7 @@ import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, ChangeEvent, FormEvent } from 'react'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 import { useToken } from '@/hooks/useToken'
 
 interface AddTestemunhoProps {
@@ -88,17 +89,19 @@ export default function AddTestemunho({
       })
 
       if (response.ok) {
+        toast.success('Testemunho enviado com sucesso!')
         setOpen(false)
         window.location.href = '/testemunhos'
       } else {
         const errorData = await response.json()
         console.error('Erro ao criar testemunho:', errorData)
-        alert(
+        toast.error(
           `Erro: ${errorData.error || 'Não foi possível enviar o testemunho.'}`,
         )
       }
     } catch (error) {
       console.error('Erro durante requisição:', error)
+      toast.error('Erro ao enviar testemunho. Tente novamente.')
     } finally {
       setIsSubmitting(false)
     }

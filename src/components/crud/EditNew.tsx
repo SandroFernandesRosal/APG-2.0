@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocal } from '../../store/useStore'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
 
@@ -103,7 +104,7 @@ export default function EditNew({
 
     // Verificar se pelo menos um dos dois (imagem ou vídeo) está presente
     if (!coverUrl && !newVideoUrl) {
-      alert('Você precisa ter pelo menos uma imagem ou um vídeo.')
+      toast.error('Você precisa ter pelo menos uma imagem ou um vídeo.')
       setIsEditing(false)
       return
     }

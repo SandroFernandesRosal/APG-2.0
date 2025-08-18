@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useShowModal } from '@/store/useStore'
 import ShowModal from '../showModal'
+import { toast } from 'react-toastify'
 
 interface RemoveSobreContentProps {
   id: string
@@ -29,15 +30,19 @@ export default function RemoveSobreContent({ id }: RemoveSobreContentProps) {
       })
 
       if (response.ok) {
-        router.push('/quemsomos')
-        window.location.href = '/quemsomos'
+        toast.success('Conteúdo removido com sucesso!')
+        router.push('/')
+        window.location.href = '/'
       } else {
-        console.error('Erro ao remover história:', response.statusText)
+        console.error('Erro ao remover conteúdo:', response.statusText)
+        toast.error('Erro ao remover conteúdo. Tente novamente.')
       }
     } catch (error) {
-      console.error('Erro ao remover história:', error)
+      console.error('Erro ao remover conteúdo:', error)
+      toast.error('Erro ao remover conteúdo. Tente novamente.')
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 

@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { toast } from 'react-toastify'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import Image from 'next/image'
 
@@ -31,7 +32,7 @@ export default function AddSobreLider({ setOpen }: AddSobreLiderProps) {
     const fileToUpload = fileInput?.files?.[0]
 
     if (!fileToUpload) {
-      alert('Você precisa adicionar uma imagem.')
+      toast.error('Você precisa adicionar uma imagem.')
       setIsSubmitting(false)
       return
     }

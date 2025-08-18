@@ -5,6 +5,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 interface EditEnderecoProps {
   setOpenEdit: (open: string | null) => void
@@ -57,16 +58,20 @@ export default function EditEndereco({
 
       const endereco = await response.json()
 
-      if (response.ok) {
+      if (response.ok && endereco) {
+        toast.success('Endereço editado com sucesso!')
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
         return endereco
+      } else {
+        toast.error('Erro ao editar endereço. Tente novamente.')
       }
 
-      console.error('Erro na resposta:', endereco)
+      console.log(endereco)
     } catch (error) {
       console.error('Erro ao editar endereço:', error)
+      toast.error('Erro ao editar endereço. Tente novamente.')
     }
 
     return null

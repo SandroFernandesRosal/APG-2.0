@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 
 interface EditSobreLiderProps {
   setOpenEdit: (open: string | null) => void
@@ -58,6 +59,8 @@ export default function EditSobreLider({
         coverUrl = uploadData.fileUrl
       } catch (error) {
         console.error('Erro ao enviar imagem:', error)
+        toast.error('Erro ao enviar imagem. Tente novamente.')
+        setIsEditing(false)
         return
       }
     } else {
@@ -79,15 +82,21 @@ export default function EditSobreLider({
       })
 
       if (response.status === 200) {
+        toast.success('Líder editado com sucesso!')
         setOpenEdit(null)
         router.push('/quemsomos')
         window.location.href = '/quemsomos'
         return response.json()
+      } else {
+        toast.error('Erro ao editar líder. Tente novamente.')
       }
 
       console.error('Erro ao editar um líder:', response.statusText)
     } catch (error) {
       console.error('Erro ao editar um líder:', error)
+      toast.error('Erro ao editar líder. Tente novamente.')
+    } finally {
+      setIsEditing(false)
     }
 
     return null

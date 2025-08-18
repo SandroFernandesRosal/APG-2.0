@@ -2,6 +2,7 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 
@@ -43,14 +44,17 @@ export default function AddEndereco({ setOpenEndereco }: AddEnderecoProps) {
       const endereco = await response.json()
 
       if (response.ok) {
+        toast.success('Endereço criado com sucesso!')
         setOpenEndereco(false)
         router.push('/')
         window.location.href = '/'
       } else {
+        toast.error('Erro ao criar endereço. Tente novamente.')
         console.error('Erro:', endereco)
       }
     } catch (error) {
       console.error('Erro ao criar endereço:', error)
+      toast.error('Erro ao criar endereço. Tente novamente.')
     } finally {
       setIsSubmitting(false)
     }

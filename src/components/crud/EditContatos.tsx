@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 interface EditContatoProps {
   setOpenEdit: (open: string | null) => void
@@ -55,15 +56,19 @@ export default function EditContatos({
       const contato = await response.json()
 
       if (response.ok && contato) {
+        toast.success('Contato editado com sucesso!')
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
         return contato
+      } else {
+        toast.error('Erro ao editar contato. Tente novamente.')
       }
 
       console.log(contato)
     } catch (error) {
       console.error('Erro ao editar contato:', error)
+      toast.error('Erro ao editar contato. Tente novamente.')
     }
 
     return null

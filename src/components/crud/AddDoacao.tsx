@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 interface AddDoacaoProps {
   setOpenDoacao: (open: boolean) => void
@@ -47,15 +48,19 @@ export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
       const doacao = await response.json()
 
       if (response.status === 200 && doacao) {
+        toast.success('Doação criada com sucesso!')
         setOpenDoacao(false)
         router.push('/')
         window.location.href = '/'
         return doacao
+      } else {
+        toast.error('Erro ao criar doação. Tente novamente.')
       }
 
       console.log(doacao)
     } catch (error) {
       console.error('Erro ao criar doação:', error)
+      toast.error('Erro ao criar doação. Tente novamente.')
     } finally {
       setIsSubmitting(false)
     }

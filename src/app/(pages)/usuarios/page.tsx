@@ -10,6 +10,7 @@ import {
   FaFilter,
 } from 'react-icons/fa'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { toast } from 'react-toastify'
 
 type User = {
   id: string
@@ -267,7 +268,9 @@ export default function UsuariosPage() {
       })
       if (!res.ok) {
         const err = await res.json()
-        setError(err.error || 'Erro desconhecido')
+        const errorMessage = err.error || 'Erro desconhecido'
+        setError(errorMessage)
+        toast.error(errorMessage)
         setSaving(false)
         return
       }
@@ -275,11 +278,14 @@ export default function UsuariosPage() {
       setUsers((prev) =>
         prev.map((u) => (u.id === selectedUser.id ? { ...u, cargo } : u)),
       )
+      toast.success('Cargo atualizado com sucesso!')
       setShowModal(false)
       setCargo([])
       setSelectedUser(null)
     } catch {
-      setError('Erro de rede')
+      const errorMessage = 'Erro de rede'
+      setError(errorMessage)
+      toast.error(errorMessage)
     } finally {
       setSaving(false)
     }
@@ -297,7 +303,9 @@ export default function UsuariosPage() {
       })
       if (!res.ok) {
         const err = await res.json()
-        setError(err.error || 'Erro desconhecido')
+        const errorMessage = err.error || 'Erro desconhecido'
+        setError(errorMessage)
+        toast.error(errorMessage)
         setSaving(false)
         return
       }
@@ -307,11 +315,14 @@ export default function UsuariosPage() {
           u.id === selectedUser.id ? { ...u, ministryRole: igreja || null } : u,
         ),
       )
+      toast.success('Igreja atualizada com sucesso!')
       setShowIgrejaModal(false)
       setIgreja('')
       setSelectedUser(null)
     } catch {
-      setError('Erro de rede')
+      const errorMessage = 'Erro de rede'
+      setError(errorMessage)
+      toast.error(errorMessage)
     } finally {
       setSaving(false)
     }
@@ -329,7 +340,9 @@ export default function UsuariosPage() {
       })
       if (!res.ok) {
         const err = await res.json()
-        setError(err.error || 'Erro desconhecido')
+        const errorMessage = err.error || 'Erro desconhecido'
+        setError(errorMessage)
+        toast.error(errorMessage)
         setSaving(false)
         return
       }
@@ -339,11 +352,14 @@ export default function UsuariosPage() {
           u.id === selectedUser.id ? { ...u, role: funcao } : u,
         ),
       )
+      toast.success('Função atualizada com sucesso!')
       setShowFuncaoModal(false)
       setFuncao('MEMBRO')
       setSelectedUser(null)
     } catch {
-      setError('Erro de rede')
+      const errorMessage = 'Erro de rede'
+      setError(errorMessage)
+      toast.error(errorMessage)
     } finally {
       setSaving(false)
     }

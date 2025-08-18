@@ -9,6 +9,7 @@ import DatePicker, { registerLocale } from 'react-datepicker'
 import { ptBR } from 'date-fns/locale'
 import { format, parseISO } from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
+import { toast } from 'react-toastify'
 
 registerLocale('pt-BR', ptBR)
 
@@ -59,15 +60,19 @@ export default function EditAgenda({
       const agenda = await response.json()
 
       if (response.ok && agenda) {
+        toast.success('Evento editado com sucesso!')
         setOpenEdit(null)
         router.push('/')
         window.location.href = '/'
         return agenda
+      } else {
+        toast.error('Erro ao editar evento. Tente novamente.')
       }
 
       console.log(agenda)
     } catch (error) {
       console.error('Erro ao editar evento:', error)
+      toast.error('Erro ao editar evento. Tente novamente.')
     }
 
     return null

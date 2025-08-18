@@ -1,6 +1,7 @@
 'use client'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
+import { toast } from 'react-toastify'
 
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
@@ -80,7 +81,7 @@ export default function EditUser({ id, nome, email, img }: EditUserProps) {
       })
 
       if (response.ok) {
-        alert('Perfil atualizado! Por favor, faça login novamente.')
+        toast.success('Perfil atualizado! Por favor, faça login novamente.')
         const logoutResponse = await fetch('/api/auth/logout', {
           method: 'POST',
           headers: {

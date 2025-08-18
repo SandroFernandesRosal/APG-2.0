@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, FormEvent, use } from 'react'
+import { toast } from 'react-toastify'
 
 interface ResetPasswordComponentProps {
   params: Promise<{ token: string }>
@@ -31,15 +32,16 @@ export default function ResetPasswordComponent({
 
       if (response.ok) {
         console.log('Senha redefinida com sucesso')
+        toast.success('Senha redefinida com sucesso!')
       } else {
         const data = await response.json()
-        console.error(
-          'Erro ao redefinir a senha:',
-          data.error || 'Erro desconhecido',
-        )
+        const errorMessage = data.error || 'Erro desconhecido'
+        console.error('Erro ao redefinir a senha:', errorMessage)
+        toast.error(errorMessage)
       }
     } catch (error) {
       console.error('Erro ao redefinir a senha', error)
+      toast.error('Erro ao redefinir a senha. Tente novamente.')
     }
   }
 

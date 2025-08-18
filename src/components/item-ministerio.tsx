@@ -15,7 +15,6 @@ export default function ItemMinisterio({
   avatarUrl,
 }: Ministerio) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const [showRemove, setShowRemove] = useState(false)
   const token = useToken()
 
   const podeGerenciar =
@@ -71,7 +70,11 @@ export default function ItemMinisterio({
             </svg>
           </button>
           <button
-            onClick={() => setShowRemove(true)}
+            onClick={() => {
+              // Usar o sistema de modal global
+              const event = new CustomEvent('showRemoveModal', { detail: { id } })
+              window.dispatchEvent(event)
+            }}
             className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
             title="Remover"
           >
@@ -101,7 +104,7 @@ export default function ItemMinisterio({
           role={ministryRole}
         />
       )}
-      {showRemove && <RemoveMinisterio id={id} />}
+      <RemoveMinisterio id={id} />
     </div>
   )
 }

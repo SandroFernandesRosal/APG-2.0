@@ -6,6 +6,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 
 interface AddSobreContentProps {
   setOpen: (open: boolean) => void
@@ -34,7 +35,7 @@ export default function AddSobreContent({ setOpen }: AddSobreContentProps) {
     let coverUrl = ''
 
     if (!fileToUpload) {
-      alert('Você precisa adicionar uma imagem.')
+      toast.error('Você precisa adicionar uma imagem.')
       setIsSubmitting(false)
       return
     }

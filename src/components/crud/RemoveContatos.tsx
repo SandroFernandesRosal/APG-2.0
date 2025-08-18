@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useShowModal } from '@/store/useStore'
 import ShowModal from '../showModal'
+import { toast } from 'react-toastify'
 
 interface RemoveContatoProps {
   id: string
@@ -29,15 +30,19 @@ export default function RemoveContatos({ id }: RemoveContatoProps) {
       })
 
       if (response.ok) {
+        toast.success('Contato removido com sucesso!')
         router.push('/')
         window.location.href = '/'
       } else {
         console.error('Erro ao remover contato:', response.statusText)
+        toast.error('Erro ao remover contato. Tente novamente.')
       }
     } catch (error) {
       console.error('Erro ao remover contato:', error)
+      toast.error('Erro ao remover contato. Tente novamente.')
     } finally {
       setIsDeleting(false)
+      setShowModal(null)
     }
   }
 
