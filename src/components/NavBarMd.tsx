@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BiNews, BiHomeHeart } from 'react-icons/bi'
+import { BiNews, BiHomeHeart, BiBook } from 'react-icons/bi'
 
 import { AiOutlineSchedule } from 'react-icons/ai'
 import { BsFillPersonLinesFill } from 'react-icons/bs'
@@ -30,6 +30,12 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
       icon: BsFillPersonLinesFill,
       label: 'Ministério',
       color: 'from-purple-500 to-purple-600',
+    },
+    {
+      href: '/biblia',
+      icon: BiBook,
+      label: 'Bíblia',
+      color: 'from-yellow-500 to-yellow-600',
     },
     {
       href: '/doacao',
