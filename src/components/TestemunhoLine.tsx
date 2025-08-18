@@ -294,7 +294,7 @@ export default function TestemunhoLine({ userIgreja }: { userIgreja: User }) {
               </div>
 
               {/* Controles de Paginação Elaborados */}
-              <div className="w-full max-w-6xl mx-auto px-4 mt-8">
+              <div className="w-full max-w-7xl mx-auto px-4 mt-8">
                 <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                   {/* Header da Paginação */}
                   <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-600">
