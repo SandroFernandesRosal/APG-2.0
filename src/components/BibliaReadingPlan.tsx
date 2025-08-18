@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Calendar, Target, BookOpen, CheckCircle, Clock } from 'lucide-react'
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-toastify'
 import { ConfirmModal } from './ConfirmModal'
 
 interface ReadingPlan {
@@ -415,14 +415,14 @@ export function BibliaReadingPlan() {
 
         {/* Estatísticas Gerais */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+          <div className="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              <BookOpen className="w-4 h-4 text-blue-600" />
+              <BookOpen className="w-4 h-4 text-blue-700 dark:text-blue-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Capítulos Lidos
               </span>
             </div>
-            <div className="text-2xl font-bold text-blue-600">
+            <div className="text-2xl font-bold text-blue-700 dark:text-blue-600">
               {chaptersPercentage}%
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -430,14 +430,14 @@ export function BibliaReadingPlan() {
             </div>
           </div>
 
-          <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+          <div className="bg-purple-100 dark:bg-purple-900/20 p-4 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              <CheckCircle className="w-4 h-4 text-purple-600" />
+              <CheckCircle className="w-4 h-4 text-purple-700 dark:text-purple-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Versículos Lidos
               </span>
             </div>
-            <div className="text-2xl font-bold text-purple-600">
+            <div className="text-2xl font-bold text-purple-700 dark:text-purple-600">
               {versesPercentage}%
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -446,14 +446,14 @@ export function BibliaReadingPlan() {
           </div>
 
           {readingPlan && (
-            <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+            <div className="bg-green-100 dark:bg-green-900/20 p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
-                <Clock className="w-4 h-4 text-green-600" />
+                <Clock className="w-4 h-4 text-green-700 dark:text-green-600" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Dias Restantes
                 </span>
               </div>
-              <div className="text-2xl font-bold text-green-600">
+              <div className="text-2xl font-bold text-green-700 dark:text-green-600">
                 {daysRemaining}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -466,20 +466,20 @@ export function BibliaReadingPlan() {
             <div
               className={`p-4 rounded-lg ${
                 isOnTrack
-                  ? 'bg-green-50 dark:bg-green-900/20'
-                  : 'bg-red-50 dark:bg-red-900/20'
+                  ? 'bg-green-100 dark:bg-green-900/20'
+                  : 'bg-red-100 dark:bg-red-900/20'
               }`}
             >
               <div className="flex items-center gap-2 mb-2">
                 <Target
-                  className={`w-4 h-4 ${isOnTrack ? 'text-green-600' : 'text-red-600'}`}
+                  className={`w-4 h-4 ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
                 />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Status
                 </span>
               </div>
               <div
-                className={`text-lg font-bold ${isOnTrack ? 'text-green-600' : 'text-red-600'}`}
+                className={`text-lg font-bold ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
               >
                 {isOnTrack ? 'No Ritmo!' : 'Atrasado'}
               </div>
@@ -493,14 +493,14 @@ export function BibliaReadingPlan() {
         {/* Objetivos Diários */}
         {readingPlan && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+            <div className="bg-orange-100 dark:bg-orange-900/20 p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
-                <Target className="w-4 h-4 text-orange-600" />
+                <Target className="w-4 h-4 text-orange-700 dark:text-orange-600" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Capítulos/Dia
                 </span>
               </div>
-              <div className="text-2xl font-bold text-orange-600">
+              <div className="text-2xl font-bold text-orange-700 dark:text-orange-600">
                 {chaptersPerDay}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -516,14 +516,14 @@ export function BibliaReadingPlan() {
               </div>
             </div>
 
-            <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
+            <div className="bg-yellow-100 dark:bg-yellow-900/20 p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
-                <BookOpen className="w-4 h-4 text-yellow-600" />
+                <BookOpen className="w-4 h-4 text-yellow-700 dark:text-yellow-600" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Versículos/Dia
                 </span>
               </div>
-              <div className="text-2xl font-bold text-yellow-600">
+              <div className="text-2xl font-bold text-yellow-700 dark:text-yellow-600">
                 {versesPerDay}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -543,9 +543,9 @@ export function BibliaReadingPlan() {
 
         {/* Progresso Atual vs Esperado */}
         {readingPlan && expectedChaptersByToday > 0 && (
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-lg mb-4">
+          <div className="bg-indigo-100 dark:bg-indigo-900/20 p-4 rounded-lg mb-4">
             <div className="flex items-center gap-2 mb-3">
-              <Calendar className="w-4 h-4 text-indigo-600" />
+              <Calendar className="w-4 h-4 text-indigo-700 dark:text-indigo-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Progresso Atual vs Esperado
               </span>
@@ -555,11 +555,11 @@ export function BibliaReadingPlan() {
                 <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                   Capítulos:
                 </div>
-                <div className="text-lg font-bold text-indigo-600">
+                <div className="text-lg font-bold text-indigo-700 dark:text-indigo-600">
                   {totalReadChapters} / {expectedChaptersByToday}
                 </div>
                 <div
-                  className={`text-xs ${isOnTrack ? 'text-green-600' : 'text-red-600'}`}
+                  className={`text-xs ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
                 >
                   {isOnTrack
                     ? `✅ ${totalReadChapters - expectedChaptersByToday} à frente`
@@ -570,14 +570,14 @@ export function BibliaReadingPlan() {
                 <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                   Versículos:
                 </div>
-                <div className="text-lg font-bold text-indigo-600">
+                <div className="text-lg font-bold text-indigo-700 dark:text-indigo-600">
                   {totalReadVerses} / {expectedVersesByToday}
                 </div>
                 <div
                   className={`text-xs ${
                     totalReadVerses >= expectedVersesByToday
-                      ? 'text-green-600'
-                      : 'text-red-600'
+                      ? 'text-green-700 dark:text-green-600'
+                      : 'text-red-700 dark:text-red-600'
                   }`}
                 >
                   {totalReadVerses >= expectedVersesByToday

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { CheckCircle, Circle } from 'lucide-react'
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-toastify'
 
 interface Verse {
   number: number
