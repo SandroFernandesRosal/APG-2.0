@@ -71,7 +71,11 @@ export function VerseDisplay({ verses, bookName, chapter }: VerseDisplayProps) {
       const response = await fetch('/api/bible/read-verses')
       if (response.ok) {
         const data = await response.json()
-        console.log('📖 Versículos lidos carregados:', data.length, 'versículos')
+        console.log(
+          '📖 Versículos lidos carregados:',
+          data.length,
+          'versículos',
+        )
         setReadVerses(data)
       } else if (response.status === 401) {
         // Usuário não autenticado, não mostrar erro
