@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Heart, Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Heart, Star, ChevronLeft, ChevronRight, LogIn } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { ConfirmModal } from './ConfirmModal'
+import { useToken } from '@/hooks/useToken'
 
 interface BibleFavorite {
   id: string
@@ -26,6 +27,8 @@ export function BibliaFavorites() {
   const [favorites, setFavorites] = useState<FavoriteWithText[]>([])
   const [showFavorites, setShowFavorites] = useState(false)
   const [showResetModal, setShowResetModal] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Estados para paginação
   const [currentPage, setCurrentPage] = useState(1)
@@ -55,8 +58,28 @@ export function BibliaFavorites() {
     goToPage(currentPage + 1)
   }
 
+  // Verificar autenticação
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/login/me', {
+          credentials: 'include',
+        })
+        setIsAuthenticated(response.ok)
+      } catch {
+        setIsAuthenticated(false)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkAuth()
+  }, [])
+
   // Carregar favoritos da API
   const loadFavorites = async () => {
+    if (!isAuthenticated) return
+
     try {
       const response = await fetch('/api/bible/favorites')
       if (response.ok) {
@@ -99,20 +122,26 @@ export function BibliaFavorites() {
   }
 
   useEffect(() => {
-    loadFavorites()
-  }, [])
+    if (isAuthenticated) {
+      loadFavorites()
+    }
+  }, [isAuthenticated])
 
   // Recarregar favoritos a cada 60 segundos para manter sincronizado
   useEffect(() => {
+    if (!isAuthenticated) return
+
     const interval = setInterval(() => {
       loadFavorites()
     }, 60000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [isAuthenticated])
 
   // Escutar eventos de atualização de favoritos
   useEffect(() => {
+    if (!isAuthenticated) return
+
     const handleFavoritesUpdated = () => {
       loadFavorites()
     }
@@ -122,10 +151,12 @@ export function BibliaFavorites() {
     return () => {
       window.removeEventListener('favoritesUpdated', handleFavoritesUpdated)
     }
-  }, [])
+  }, [isAuthenticated])
 
   // Escutar eventos de reset de favoritos para atualizar versículos
   useEffect(() => {
+    if (!isAuthenticated) return
+
     const handleFavoritesReset = () => {
       loadFavorites()
       // Disparar evento para atualizar versículos
@@ -137,7 +168,7 @@ export function BibliaFavorites() {
     return () => {
       window.removeEventListener('favoritesReset', handleFavoritesReset)
     }
-  }, [])
+  }, [isAuthenticated])
 
   const removeFromFavorites = async (id: string) => {
     try {
@@ -196,207 +227,168 @@ export function BibliaFavorites() {
     <>
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500 fill-current" />
-              Favoritos
-            </h3>
-            {showFavorites && favorites.length > 0 && (
-              <span className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md">
-                {startIndex + 1}-{Math.min(endIndex, favorites.length)} de{' '}
-                {favorites.length}
-              </span>
-            )}
-          </div>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
+            <Heart className="w-5 h-5 text-red-500" />
+            Favoritos
+          </h3>
           <div className="flex gap-2">
-            <button
-              onClick={() => setShowFavorites(!showFavorites)}
-              className="px-4 py-2 text-sm bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-2"
-            >
-              <Star className="w-4 h-4" />
-              {showFavorites ? 'Ocultar' : `Ver (${favorites.length})`}
-            </button>
-
-            {/* Botão de Reset de Favoritos */}
-            {favorites.length > 0 && (
-              <button
-                onClick={() => setShowResetModal(true)}
-                className="px-3 py-2 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md"
-                title="Resetar todos os favoritos"
-              >
-                🗑️ Reset Favoritos
-              </button>
+            {isAuthenticated ? (
+              <>
+                <button
+                  onClick={() => setShowFavorites(!showFavorites)}
+                  className="px-3 py-1 text-sm bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                >
+                  Ver ({favorites.length})
+                </button>
+                {favorites.length > 0 && (
+                  <button
+                    onClick={() => setShowResetModal(true)}
+                    className="px-3 py-1 text-sm bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
+                    title="Limpar todos os favoritos"
+                  >
+                    🗑️ Limpar
+                  </button>
+                )}
+              </>
+            ) : (
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <LogIn className="w-4 h-4" />
+                <span>Faça login para salvar favoritos</span>
+              </div>
             )}
           </div>
         </div>
 
-        {showFavorites && (
+        {isLoading ? (
+          <div className="text-center py-4">
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-500 mx-auto"></div>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Carregando...</p>
+          </div>
+        ) : !isAuthenticated ? (
+          <div className="text-center py-8">
+            <Heart className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+            <h4 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Favoritos da Bíblia
+            </h4>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Faça login para salvar seus versículos favoritos e acessá-los facilmente.
+            </p>
+            <a
+              href="/login"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+            >
+              <LogIn className="w-4 h-4" />
+              Fazer Login
+            </a>
+          </div>
+        ) : showFavorites ? (
           <div className="space-y-4">
-            {currentFavorites.length === 0 ? (
+            {favorites.length === 0 ? (
               <div className="text-center py-8">
-                <Heart className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">
-                  Nenhum versículo favorito ainda
-                </p>
-                <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
-                  Selecione um versículo e clique em &ldquo;Favoritar&rdquo;
-                  para adicionar
+                <Star className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                <h4 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nenhum favorito ainda
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Marque versículos como favoritos enquanto lê a Bíblia para vê-los aqui.
                 </p>
               </div>
             ) : (
-              currentFavorites.map((favorite) => (
-                <div
-                  key={favorite.id}
-                  className="group relative p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl border-l-4 border-yellow-500 shadow-sm hover:shadow-md transition-all duration-200"
-                >
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 px-2 py-1 rounded-md shadow-sm">
-                        {favorite.bookName} {favorite.chapter}
-                        {favorite.verse && `:${favorite.verse}`}
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeFromFavorites(favorite.id)}
-                      className="px-3 py-1 text-xs bg-red-500 text-white rounded-md hover:bg-red-600 transition-all duration-200 flex items-center gap-1 shadow-sm hover:shadow-md"
-                      title="Remover dos favoritos"
-                    >
-                      <Star className="w-3 h-3" />
-                      <span>Desfavoritar</span>
-                    </button>
-                  </div>
-
-                  {/* Texto do versículo */}
-                  {favorite.text && (
-                    <div className="text-sm text-gray-800 dark:text-gray-200 mb-3 leading-relaxed italic">
-                      &ldquo;{favorite.text}&rdquo;
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-between">
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      Adicionado em{' '}
-                      {new Date(favorite.createdAt).toLocaleDateString(
-                        'pt-BR',
-                        {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                        },
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-yellow-600 dark:text-yellow-400">
-                      <Star className="w-3 h-3 fill-current" />
-                      Favorito
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-
-            {/* Controles de Paginação */}
-            {favorites.length > 0 && (
-              <div className="flex flex-col items-center gap-3 mt-6">
-                {/* Informação e controles */}
-                <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                  <span>
-                    Página {currentPage} de {totalPages} • {favorites.length}{' '}
-                    favoritos no total
-                  </span>
-
-                  {/* Seletor de itens por página */}
+              <>
+                {/* Controles de paginação */}
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span>Mostrar:</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Mostrar:
+                    </span>
                     <select
                       value={itemsPerPage}
                       onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                      className="px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-white"
                     >
-                      <option value={3}>3 por página</option>
-                      <option value={5}>5 por página</option>
-                      <option value={10}>10 por página</option>
-                      <option value={15}>15 por página</option>
+                      <option value={5}>5</option>
+                      <option value={10}>10</option>
+                      <option value={20}>20</option>
                     </select>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      por página
+                    </span>
                   </div>
-                </div>
 
-                {/* Controles de navegação */}
-                {totalPages > 1 && (
                   <div className="flex items-center gap-2">
                     <button
                       onClick={goToPreviousPage}
                       disabled={currentPage === 1}
-                      className="px-3 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                      className="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <ChevronLeft className="w-4 h-4" />
-                      Anterior
                     </button>
-
-                    {/* Botões de páginas */}
-                    <div className="flex items-center gap-1">
-                      {Array.from(
-                        { length: Math.min(5, totalPages) },
-                        (_, i) => {
-                          let pageNumber: number
-                          if (totalPages <= 5) {
-                            pageNumber = i + 1
-                          } else if (currentPage <= 3) {
-                            pageNumber = i + 1
-                          } else if (currentPage >= totalPages - 2) {
-                            pageNumber = totalPages - 4 + i
-                          } else {
-                            pageNumber = currentPage - 2 + i
-                          }
-
-                          return (
-                            <button
-                              key={pageNumber}
-                              onClick={() => goToPage(pageNumber)}
-                              className={`px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
-                                currentPage === pageNumber
-                                  ? 'bg-yellow-500 text-white'
-                                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
-                              }`}
-                            >
-                              {pageNumber}
-                            </button>
-                          )
-                        },
-                      )}
-                    </div>
-
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Página {currentPage} de {totalPages}
+                    </span>
                     <button
                       onClick={goToNextPage}
                       disabled={currentPage === totalPages}
-                      className="px-3 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                      className="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Próxima
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
-                )}
-              </div>
+                </div>
+
+                {/* Lista de favoritos */}
+                <div className="space-y-3">
+                  {currentFavorites.map((favorite) => (
+                    <div
+                      key={favorite.id}
+                      className="p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Star className="w-4 h-4 text-yellow-500" />
+                            <span className="font-medium text-gray-800 dark:text-white">
+                              {favorite.bookName} {favorite.chapter}
+                              {favorite.verse && `:${favorite.verse}`}
+                            </span>
+                          </div>
+                          {favorite.text && (
+                            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                              "{favorite.text}"
+                            </p>
+                          )}
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                            Adicionado em{' '}
+                            {new Date(favorite.createdAt).toLocaleDateString(
+                              'pt-BR',
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
+          </div>
+        ) : (
+          <div className="text-center py-4">
+            <p className="text-gray-600 dark:text-gray-400">
+              Você tem {favorites.length} favorito{favorites.length !== 1 ? 's' : ''} salvo{favorites.length !== 1 ? 's' : ''}.
+            </p>
           </div>
         )}
       </div>
 
-      {/* Modal de Confirmação */}
+      {/* Modal de confirmação para limpar favoritos */}
       <ConfirmModal
         isOpen={showResetModal}
         onClose={() => setShowResetModal(false)}
         onConfirm={handleResetFavorites}
-        title="Resetar Favoritos"
-        message={`⚠️ ATENÇÃO: Esta ação irá remover TODOS os seus favoritos!
-
-• Todos os versículos favoritados serão removidos
-• Esta ação NÃO pode ser desfeita
-
-Tem certeza que deseja continuar?`}
-        confirmText="Resetar Favoritos"
+        title="Limpar Favoritos"
+        message="Tem certeza que deseja remover todos os seus favoritos? Esta ação não pode ser desfeita."
+        confirmText="Limpar Todos"
         cancelText="Cancelar"
-        type="danger"
       />
     </>
   )
