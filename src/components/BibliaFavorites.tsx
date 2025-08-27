@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { Heart, Star, ChevronLeft, ChevronRight, LogIn } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { ConfirmModal } from './ConfirmModal'
-import { useToken } from '@/hooks/useToken'
 
 interface BibleFavorite {
   id: string
@@ -262,7 +261,9 @@ export function BibliaFavorites() {
         {isLoading ? (
           <div className="text-center py-4">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-500 mx-auto"></div>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">Carregando...</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">
+              Carregando...
+            </p>
           </div>
         ) : !isAuthenticated ? (
           <div className="text-center py-8">
@@ -271,7 +272,8 @@ export function BibliaFavorites() {
               Favoritos da Bíblia
             </h4>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Faça login para salvar seus versículos favoritos e acessá-los facilmente.
+              Faça login para salvar seus versículos favoritos e acessá-los
+              facilmente.
             </p>
             <a
               href="/login"
@@ -290,7 +292,8 @@ export function BibliaFavorites() {
                   Nenhum favorito ainda
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Marque versículos como favoritos enquanto lê a Bíblia para vê-los aqui.
+                  Marque versículos como favoritos enquanto lê a Bíblia para
+                  vê-los aqui.
                 </p>
               </div>
             ) : (
@@ -345,16 +348,25 @@ export function BibliaFavorites() {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <Star className="w-4 h-4 text-yellow-500" />
-                            <span className="font-medium text-gray-800 dark:text-white">
-                              {favorite.bookName} {favorite.chapter}
-                              {favorite.verse && `:${favorite.verse}`}
-                            </span>
+                          <div className="flex items-center justify-between mb-1">
+                            <div className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-500" />
+                              <span className="font-medium text-gray-800 dark:text-white">
+                                {favorite.bookName} {favorite.chapter}
+                                {favorite.verse && `:${favorite.verse}`}
+                              </span>
+                            </div>
+                            <button
+                              onClick={() => removeFromFavorites(favorite.id)}
+                              className="text-red-500 hover:text-red-700 text-sm transition-colors"
+                              title="Remover dos favoritos"
+                            >
+                              ×
+                            </button>
                           </div>
                           {favorite.text && (
                             <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                              "{favorite.text}"
+                              &ldquo;{favorite.text}&rdquo;
                             </p>
                           )}
                           <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
@@ -374,7 +386,9 @@ export function BibliaFavorites() {
         ) : (
           <div className="text-center py-4">
             <p className="text-gray-600 dark:text-gray-400">
-              Você tem {favorites.length} favorito{favorites.length !== 1 ? 's' : ''} salvo{favorites.length !== 1 ? 's' : ''}.
+              Você tem {favorites.length} favorito
+              {favorites.length !== 1 ? 's' : ''} salvo
+              {favorites.length !== 1 ? 's' : ''}.
             </p>
           </div>
         )}
