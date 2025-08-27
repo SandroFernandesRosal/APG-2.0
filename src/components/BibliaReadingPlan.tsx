@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Calendar, Target, BookOpen, CheckCircle, Clock } from 'lucide-react'
+import { Calendar, Target, BookOpen, CheckCircle, LogIn } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { ConfirmModal } from './ConfirmModal'
 
@@ -45,9 +45,34 @@ export function BibliaReadingPlan() {
   const [showResetModal, setShowResetModal] = useState(false)
   const [totalDays, setTotalDays] = useState(365)
   const [loading, setLoading] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true)
+
+  // Verificar autenticação
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/login/me', {
+          credentials: 'include',
+        })
+        setIsAuthenticated(response.ok)
+      } catch {
+        setIsAuthenticated(false)
+      } finally {
+        setIsLoadingAuth(false)
+      }
+    }
+
+    checkAuth()
+  }, [])
 
   // Carregar plano de leitura e capítulos lidos
   const loadReadingData = async () => {
+    if (!isAuthenticated) {
+      console.log('❌ Usuário não autenticado, não carregando dados')
+      return
+    }
+
     try {
       console.log('🔄 Carregando dados de leitura...')
 
@@ -60,7 +85,7 @@ export function BibliaReadingPlan() {
 
       if (planResponse.ok) {
         const plan = await planResponse.json()
-        console.log('📋 Plano carregado:', plan)
+        console.log('📋 Plano carregado:', plan ? 'Sim' : 'Não')
         setReadingPlan(plan)
       } else {
         console.log('❌ Erro ao carregar plano:', planResponse.status)
@@ -71,6 +96,7 @@ export function BibliaReadingPlan() {
         console.log(
           '📖 Capítulos carregados:',
           chapters.length,
+          'capítulos',
           chapters.slice(0, 3),
         )
         setReadChapters(chapters)
@@ -83,6 +109,7 @@ export function BibliaReadingPlan() {
         console.log(
           '📖 Versículos carregados:',
           verses.length,
+          'versículos',
           verses.slice(0, 3),
         )
         setReadVerses(verses)
@@ -91,17 +118,19 @@ export function BibliaReadingPlan() {
       }
     } catch (error) {
       console.error('Erro ao carregar dados de leitura:', error)
-      toast.error('Erro ao carregar dados de leitura')
     }
   }
 
   useEffect(() => {
-    loadReadingData()
-  }, [])
+    if (isAuthenticated) {
+      loadReadingData()
+    }
+  }, [isAuthenticated])
 
   // Escutar eventos de atualização de versículos lidos
   useEffect(() => {
     const handleVersesUpdated = () => {
+      console.log('🔄 Evento versesUpdated recebido, recarregando dados...')
       loadReadingData()
     }
 
@@ -110,7 +139,7 @@ export function BibliaReadingPlan() {
     return () => {
       window.removeEventListener('versesUpdated', handleVersesUpdated)
     }
-  }, [])
+  }, [isAuthenticated])
 
   // Escutar eventos de reset de leitura para atualizar versículos
   useEffect(() => {
@@ -138,9 +167,11 @@ export function BibliaReadingPlan() {
       (totalReadVerses / TOTAL_BIBLE_VERSES) * 100,
     )
 
-    console.log('🔍 Dados carregados:', {
+    console.log('🔍 Calculando estatísticas:', {
       totalReadChapters,
       totalReadVerses,
+      chaptersPercentage,
+      versesPercentage,
       readChapters: readChapters.slice(0, 3), // Primeiros 3 para debug
       readVerses: readVerses.slice(0, 3), // Primeiros 3 para debug
     })
@@ -382,345 +413,443 @@ export function BibliaReadingPlan() {
             Plano de Leitura
           </h3>
           <div className="flex gap-2">
-            {!readingPlan ? (
-              <button
-                onClick={() => setShowCreatePlan(!showCreatePlan)}
-                className="px-3 py-1 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-              >
-                Criar Plano
-              </button>
-            ) : (
+            {isAuthenticated ? (
               <>
-                <button
-                  onClick={() => setShowPlan(!showPlan)}
-                  className="px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  {showPlan ? 'Ocultar' : 'Ver Plano'}
-                </button>
-
-                {/* Botão de Reset de Leitura */}
-                {(totalReadChapters > 0 || totalReadVerses > 0) && (
+                {!readingPlan ? (
                   <button
-                    onClick={() => setShowResetModal(true)}
-                    className="px-3 py-1 text-sm bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
-                    title="Resetar dados de leitura (mantém o plano)"
+                    onClick={() => setShowCreatePlan(!showCreatePlan)}
+                    className="px-3 py-1 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
                   >
-                    🔄 Reset Leitura
+                    Criar Plano
                   </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setShowPlan(!showPlan)}
+                      className="px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                    >
+                      {showPlan ? 'Ocultar' : 'Ver Plano'}
+                    </button>
+
+                    {/* Botão de Reset de Leitura */}
+                    {(totalReadChapters > 0 || totalReadVerses > 0) && (
+                      <button
+                        onClick={() => setShowResetModal(true)}
+                        className="px-3 py-1 text-sm bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
+                        title="Resetar dados de leitura (mantém o plano)"
+                      >
+                        🔄 Reset Leitura
+                      </button>
+                    )}
+                  </>
                 )}
               </>
+            ) : (
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <LogIn className="w-4 h-4" />
+                <span>Faça login para criar planos</span>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Estatísticas Gerais */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <BookOpen className="w-4 h-4 text-blue-700 dark:text-blue-600" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Capítulos Lidos
-              </span>
-            </div>
-            <div className="text-2xl font-bold text-blue-700 dark:text-blue-600">
-              {chaptersPercentage}%
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              {totalReadChapters} de {TOTAL_BIBLE_CHAPTERS} capítulos
-            </div>
+        {isLoadingAuth ? (
+          <div className="text-center py-4">
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">
+              Carregando...
+            </p>
           </div>
-
-          <div className="bg-purple-100 dark:bg-purple-900/20 p-4 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <CheckCircle className="w-4 h-4 text-purple-700 dark:text-purple-600" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Versículos Lidos
-              </span>
-            </div>
-            <div className="text-2xl font-bold text-purple-700 dark:text-purple-600">
-              {versesPercentage}%
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              {totalReadVerses} de {TOTAL_BIBLE_VERSES} versículos
-            </div>
-          </div>
-
-          {readingPlan && (
-            <div className="bg-green-100 dark:bg-green-900/20 p-4 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <Clock className="w-4 h-4 text-green-700 dark:text-green-600" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Dias Restantes
-                </span>
-              </div>
-              <div className="text-2xl font-bold text-green-700 dark:text-green-600">
-                {daysRemaining}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                até {new Date(readingPlan.endDate).toLocaleDateString('pt-BR')}
-              </div>
-            </div>
-          )}
-
-          {readingPlan && (
-            <div
-              className={`p-4 rounded-lg ${
-                isOnTrack
-                  ? 'bg-green-100 dark:bg-green-900/20'
-                  : 'bg-red-100 dark:bg-red-900/20'
-              }`}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <Target
-                  className={`w-4 h-4 ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
-                />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Status
-                </span>
-              </div>
-              <div
-                className={`text-lg font-bold ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
-              >
-                {isOnTrack ? 'No Ritmo!' : 'Atrasado'}
-              </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                {progressMessage}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Objetivos Diários */}
-        {readingPlan && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-orange-100 dark:bg-orange-900/20 p-4 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <Target className="w-4 h-4 text-orange-700 dark:text-orange-600" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Capítulos/Dia
-                </span>
-              </div>
-              <div className="text-2xl font-bold text-orange-700 dark:text-orange-600">
-                {chaptersPerDay}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                para terminar no prazo
-              </div>
-              {expectedChaptersByToday > 0 && (
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Esperado até hoje: {expectedChaptersByToday} capítulos
-                </div>
-              )}
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Restantes: {TOTAL_BIBLE_CHAPTERS - totalReadChapters} capítulos
-              </div>
-            </div>
-
-            <div className="bg-yellow-100 dark:bg-yellow-900/20 p-4 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <BookOpen className="w-4 h-4 text-yellow-700 dark:text-yellow-600" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Versículos/Dia
-                </span>
-              </div>
-              <div className="text-2xl font-bold text-yellow-700 dark:text-yellow-600">
-                {versesPerDay}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                para terminar no prazo
-              </div>
-              {expectedVersesByToday > 0 && (
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Esperado até hoje: {expectedVersesByToday} versículos
-                </div>
-              )}
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Restantes: {TOTAL_BIBLE_VERSES - totalReadVerses} versículos
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Progresso Atual vs Esperado */}
-        {readingPlan && expectedChaptersByToday > 0 && (
-          <div className="bg-indigo-100 dark:bg-indigo-900/20 p-4 rounded-lg mb-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Calendar className="w-4 h-4 text-indigo-700 dark:text-indigo-600" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Progresso Atual vs Esperado
-              </span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                  Capítulos:
-                </div>
-                <div className="text-lg font-bold text-indigo-700 dark:text-indigo-600">
-                  {totalReadChapters} / {expectedChaptersByToday}
-                </div>
-                <div
-                  className={`text-xs ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
-                >
-                  {isOnTrack
-                    ? `✅ ${totalReadChapters - expectedChaptersByToday} à frente`
-                    : `⚠️ ${expectedChaptersByToday - totalReadChapters} atrasados`}
-                </div>
-              </div>
-              <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                  Versículos:
-                </div>
-                <div className="text-lg font-bold text-indigo-700 dark:text-indigo-600">
-                  {totalReadVerses} / {expectedVersesByToday}
-                </div>
-                <div
-                  className={`text-xs ${
-                    totalReadVerses >= expectedVersesByToday
-                      ? 'text-green-700 dark:text-green-600'
-                      : 'text-red-700 dark:text-red-600'
-                  }`}
-                >
-                  {totalReadVerses >= expectedVersesByToday
-                    ? `✅ ${totalReadVerses - expectedVersesByToday} à frente`
-                    : `⚠️ ${expectedVersesByToday - totalReadVerses} atrasados`}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Criar Plano */}
-        {showCreatePlan && (
-          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4">
-            <h4 className="font-medium text-gray-800 dark:text-white mb-3">
-              Criar Novo Plano de Leitura
+        ) : !isAuthenticated ? (
+          <div className="text-center py-8">
+            <Target className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+            <h4 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Plano de Leitura da Bíblia
             </h4>
-            <div className="space-y-3">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Em quantos dias você quer terminar a Bíblia?
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  max="3650"
-                  value={totalDays}
-                  onChange={(e) => setTotalDays(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Aproximadamente {Math.ceil(TOTAL_BIBLE_CHAPTERS / totalDays)}{' '}
-                  capítulos por dia
-                </p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Faça login para criar seu plano de leitura personalizado e
+              acompanhar seu progresso.
+            </p>
+            <a
+              href="/login"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              <LogIn className="w-4 h-4" />
+              Fazer Login
+            </a>
+          </div>
+        ) : (
+          <>
+            {/* Estatísticas Gerais */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+              {/* Capítulos Lidos */}
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-5 h-5 text-blue-600" />
+                    <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                      Capítulos Lidos
+                    </span>
+                  </div>
+                  <span className="text-lg font-bold text-blue-600">
+                    {totalReadChapters}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs text-blue-600 dark:text-blue-400">
+                    <span>Progresso</span>
+                    <span>{chaptersPercentage}%</span>
+                  </div>
+                  <div className="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
+                    <div
+                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${chaptersPercentage}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-xs text-blue-600 dark:text-blue-400">
+                    {totalReadChapters} de {TOTAL_BIBLE_CHAPTERS} capítulos
+                  </p>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={createReadingPlan}
-                  disabled={loading}
-                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 transition-colors"
-                >
-                  {loading ? 'Criando...' : 'Criar Plano'}
-                </button>
-                <button
-                  onClick={() => setShowCreatePlan(false)}
-                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
-                >
-                  Cancelar
-                </button>
+
+              {/* Versículos Lidos */}
+              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <span className="text-sm font-medium text-green-800 dark:text-green-200">
+                      Versículos Lidos
+                    </span>
+                  </div>
+                  <span className="text-lg font-bold text-green-600">
+                    {totalReadVerses}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs text-green-600 dark:text-green-400">
+                    <span>Progresso</span>
+                    <span>{versesPercentage}%</span>
+                  </div>
+                  <div className="w-full bg-green-200 dark:bg-green-800 rounded-full h-2">
+                    <div
+                      className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${versesPercentage}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-xs text-green-600 dark:text-green-400">
+                    {totalReadVerses} de {TOTAL_BIBLE_VERSES} versículos
+                  </p>
+                </div>
+              </div>
+
+              {/* Plano Ativo */}
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-purple-600" />
+                    <span className="text-sm font-medium text-purple-800 dark:text-purple-200">
+                      Plano Ativo
+                    </span>
+                  </div>
+                  <span className="text-lg font-bold text-purple-600">
+                    {readingPlan ? 'Sim' : 'Não'}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  {readingPlan ? (
+                    <>
+                      <div className="flex justify-between text-xs text-purple-600 dark:text-purple-400">
+                        <span>Duração</span>
+                        <span>{readingPlan.totalDays} dias</span>
+                      </div>
+                      <div className="flex justify-between text-xs text-purple-600 dark:text-purple-400">
+                        <span>Por dia</span>
+                        <span>{readingPlan.chaptersPerDay} cap.</span>
+                      </div>
+                      {daysRemaining > 0 && (
+                        <div className="flex justify-between text-xs text-purple-600 dark:text-purple-400">
+                          <span>Dias restantes</span>
+                          <span>{daysRemaining} dias</span>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-xs text-purple-600 dark:text-purple-400">
+                      Nenhum plano ativo
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Progresso Geral */}
+              <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-5 h-5 text-orange-600" />
+                    <span className="text-sm font-medium text-orange-800 dark:text-orange-200">
+                      Progresso Geral
+                    </span>
+                  </div>
+                  <span className="text-lg font-bold text-orange-600">
+                    {Math.round((chaptersPercentage + versesPercentage) / 2)}%
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-full bg-orange-200 dark:bg-orange-800 rounded-full h-2">
+                    <div
+                      className="bg-orange-600 h-2 rounded-full transition-all duration-300"
+                      style={{
+                        width: `${Math.round((chaptersPercentage + versesPercentage) / 2)}%`,
+                      }}
+                    ></div>
+                  </div>
+                  <p className="text-xs text-orange-600 dark:text-orange-400">
+                    {totalReadChapters} cap. + {totalReadVerses} vers.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+
+            {/* Objetivos Diários e Status */}
+            {readingPlan && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="bg-orange-100 dark:bg-orange-900/20 p-4 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Target className="w-4 h-4 text-orange-700 dark:text-orange-600" />
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Capítulos/Dia
+                    </span>
+                  </div>
+                  <div className="text-2xl font-bold text-orange-700 dark:text-orange-600">
+                    {chaptersPerDay}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    para terminar no prazo
+                  </div>
+                  {expectedChaptersByToday > 0 && (
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      Esperado até hoje: {expectedChaptersByToday} capítulos
+                    </div>
+                  )}
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Restantes: {TOTAL_BIBLE_CHAPTERS - totalReadChapters}{' '}
+                    capítulos
+                  </div>
+                </div>
+
+                <div className="bg-yellow-100 dark:bg-yellow-900/20 p-4 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen className="w-4 h-4 text-yellow-700 dark:text-yellow-600" />
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Versículos/Dia
+                    </span>
+                  </div>
+                  <div className="text-2xl font-bold text-yellow-700 dark:text-yellow-600">
+                    {versesPerDay}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    para terminar no prazo
+                  </div>
+                  {expectedVersesByToday > 0 && (
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      Esperado até hoje: {expectedVersesByToday} versículos
+                    </div>
+                  )}
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Restantes: {TOTAL_BIBLE_VERSES - totalReadVerses} versículos
+                  </div>
+                </div>
+
+                {/* Status do Progresso */}
+                {progressMessage && (
+                  <div
+                    className={`p-4 rounded-lg ${
+                      isOnTrack
+                        ? 'bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
+                        : 'bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Target
+                        className={`w-4 h-4 ${
+                          isOnTrack
+                            ? 'text-green-700 dark:text-green-600'
+                            : 'text-red-700 dark:text-red-600'
+                        }`}
+                      />
+                      <span
+                        className={`text-sm font-medium ${
+                          isOnTrack
+                            ? 'text-green-800 dark:text-green-200'
+                            : 'text-red-800 dark:text-red-200'
+                        }`}
+                      >
+                        Status do Progresso
+                      </span>
+                    </div>
+                    <p
+                      className={`text-sm ${
+                        isOnTrack
+                          ? 'text-green-700 dark:text-green-600'
+                          : 'text-red-700 dark:text-red-600'
+                      }`}
+                    >
+                      {progressMessage}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Progresso Atual vs Esperado */}
+            {readingPlan && expectedChaptersByToday > 0 && (
+              <div className="bg-indigo-100 dark:bg-indigo-900/20 p-4 rounded-lg mb-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Calendar className="w-4 h-4 text-indigo-700 dark:text-indigo-600" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Progresso Atual vs Esperado
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                      Capítulos:
+                    </div>
+                    <div className="text-lg font-bold text-indigo-700 dark:text-indigo-600">
+                      {totalReadChapters} / {expectedChaptersByToday}
+                    </div>
+                    <div
+                      className={`text-xs ${isOnTrack ? 'text-green-700 dark:text-green-600' : 'text-red-700 dark:text-red-600'}`}
+                    >
+                      {isOnTrack
+                        ? `✅ ${totalReadChapters - expectedChaptersByToday} à frente`
+                        : `⚠️ ${expectedChaptersByToday - totalReadChapters} atrasados`}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                      Versículos:
+                    </div>
+                    <div className="text-lg font-bold text-indigo-700 dark:text-indigo-600">
+                      {totalReadVerses} / {expectedVersesByToday}
+                    </div>
+                    <div
+                      className={`text-xs ${
+                        totalReadVerses >= expectedVersesByToday
+                          ? 'text-green-700 dark:text-green-600'
+                          : 'text-red-700 dark:text-red-600'
+                      }`}
+                    >
+                      {totalReadVerses >= expectedVersesByToday
+                        ? `✅ ${totalReadVerses - expectedVersesByToday} à frente`
+                        : `⚠️ ${expectedVersesByToday - totalReadVerses} atrasados`}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Criar Plano */}
+            {showCreatePlan && (
+              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4">
+                <h4 className="font-medium text-gray-800 dark:text-white mb-3">
+                  Criar Novo Plano de Leitura
+                </h4>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Em quantos dias você quer terminar a Bíblia?
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="3650"
+                      value={totalDays}
+                      onChange={(e) => setTotalDays(Number(e.target.value))}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                    />
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      Aproximadamente{' '}
+                      {Math.ceil(TOTAL_BIBLE_CHAPTERS / totalDays)} capítulos
+                      por dia
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={createReadingPlan}
+                      disabled={loading}
+                      className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 transition-colors"
+                    >
+                      {loading ? 'Criando...' : 'Criar Plano'}
+                    </button>
+                    <button
+                      onClick={() => setShowCreatePlan(false)}
+                      className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Detalhes do Plano */}
+            {showPlan && readingPlan && (
+              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <div className="flex justify-between items-start mb-3">
+                  <h4 className="font-medium text-gray-800 dark:text-white">
+                    Detalhes do Plano
+                  </h4>
+                  <button
+                    onClick={deleteReadingPlan}
+                    className="text-red-500 hover:text-red-700 text-sm transition-colors"
+                  >
+                    Deletar Plano
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Início:
+                    </span>
+                    <span className="ml-2 text-gray-800 dark:text-white">
+                      {new Date(readingPlan.startDate).toLocaleDateString(
+                        'pt-BR',
+                      )}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Fim:
+                    </span>
+                    <span className="ml-2 text-gray-800 dark:text-white">
+                      {new Date(readingPlan.endDate).toLocaleDateString(
+                        'pt-BR',
+                      )}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Duração:
+                    </span>
+                    <span className="ml-2 text-gray-800 dark:text-white">
+                      {readingPlan.totalDays} dias
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Capítulos por dia:
+                    </span>
+                    <span className="ml-2 text-gray-800 dark:text-white">
+                      {readingPlan.chaptersPerDay}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         )}
-
-        {/* Detalhes do Plano */}
-        {showPlan && readingPlan && (
-          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-            <div className="flex justify-between items-start mb-3">
-              <h4 className="font-medium text-gray-800 dark:text-white">
-                Detalhes do Plano
-              </h4>
-              <button
-                onClick={deleteReadingPlan}
-                className="text-red-500 hover:text-red-700 text-sm transition-colors"
-              >
-                Deletar Plano
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="text-gray-600 dark:text-gray-400">
-                  Início:
-                </span>
-                <span className="ml-2 text-gray-800 dark:text-white">
-                  {new Date(readingPlan.startDate).toLocaleDateString('pt-BR')}
-                </span>
-              </div>
-              <div>
-                <span className="text-gray-600 dark:text-gray-400">Fim:</span>
-                <span className="ml-2 text-gray-800 dark:text-white">
-                  {new Date(readingPlan.endDate).toLocaleDateString('pt-BR')}
-                </span>
-              </div>
-              <div>
-                <span className="text-gray-600 dark:text-gray-400">
-                  Duração:
-                </span>
-                <span className="ml-2 text-gray-800 dark:text-white">
-                  {readingPlan.totalDays} dias
-                </span>
-              </div>
-              <div>
-                <span className="text-gray-600 dark:text-gray-400">
-                  Capítulos por dia:
-                </span>
-                <span className="ml-2 text-gray-800 dark:text-white">
-                  {readingPlan.chaptersPerDay}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Barra de Progresso */}
-        <div className="mt-4">
-          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
-            <span>Progresso Geral</span>
-            <span>{versesPercentage}%</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${versesPercentage}%` }}
-            ></div>
-          </div>
-
-          {readingPlan && expectedChaptersByToday > 0 && (
-            <div className="mt-3">
-              <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
-                <span>Progresso vs Esperado</span>
-                <span>
-                  {totalReadChapters} / {expectedChaptersByToday} capítulos
-                </span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    isOnTrack ? 'bg-green-500' : 'bg-red-500'
-                  }`}
-                  style={{
-                    width: `${Math.min(100, (totalReadChapters / expectedChaptersByToday) * 100)}%`,
-                  }}
-                ></div>
-              </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                {isOnTrack
-                  ? `✅ ${totalReadChapters - expectedChaptersByToday} capítulos à frente!`
-                  : `⚠️ ${expectedChaptersByToday - totalReadChapters} capítulos atrasados`}
-              </div>
-            </div>
-          )}
-        </div>
       </div>
 
       {/* Modal de Confirmação */}

@@ -51,28 +51,39 @@ export function VerseDisplay({ verses, bookName, chapter }: VerseDisplayProps) {
       if (response.ok) {
         const data = await response.json()
         setFavorites(data)
+      } else if (response.status === 401) {
+        // Usuário não autenticado, não mostrar erro
+        setFavorites([])
+      } else {
+        console.error('Erro ao carregar favoritos:', response.status)
+        toast.error('Erro ao carregar favoritos')
       }
     } catch (error) {
       console.error('Erro ao carregar favoritos:', error)
-      toast.error('Erro ao carregar favoritos')
+      setFavorites([])
     }
   }
 
   // Carregar versículos lidos da API
   const loadReadVerses = async () => {
     try {
+      console.log('🔄 Carregando versículos lidos...')
       const response = await fetch('/api/bible/read-verses')
       if (response.ok) {
         const data = await response.json()
-        console.log('📖 Versículos lidos carregados:', data)
+        console.log('📖 Versículos lidos carregados:', data.length, 'versículos')
         setReadVerses(data)
+      } else if (response.status === 401) {
+        // Usuário não autenticado, não mostrar erro
+        console.log('❌ Usuário não autenticado, não carregando versículos')
+        setReadVerses([])
       } else {
         console.error('❌ Erro ao carregar versículos lidos:', response.status)
         toast.error('Erro ao carregar versículos lidos')
       }
     } catch (error) {
       console.error('❌ Erro ao carregar versículos lidos:', error)
-      toast.error('Erro ao carregar versículos lidos')
+      setReadVerses([])
     }
   }
 
@@ -142,6 +153,8 @@ export function VerseDisplay({ verses, bookName, chapter }: VerseDisplayProps) {
         window.dispatchEvent(new CustomEvent('favoritesUpdated'))
 
         toast.success('Versículo adicionado aos favoritos!')
+      } else if (response.status === 401) {
+        toast.error('Faça login para salvar favoritos')
       } else {
         const error = await response.json()
         toast.error(error.error || 'Erro ao adicionar favorito')
@@ -176,6 +189,8 @@ export function VerseDisplay({ verses, bookName, chapter }: VerseDisplayProps) {
         window.dispatchEvent(new CustomEvent('favoritesUpdated'))
 
         toast.success('Versículo removido dos favoritos!')
+      } else if (response.status === 401) {
+        toast.error('Faça login para gerenciar favoritos')
       } else {
         const error = await response.json()
         toast.error(error.error || 'Erro ao remover favorito')
@@ -221,12 +236,16 @@ export function VerseDisplay({ verses, bookName, chapter }: VerseDisplayProps) {
         )
 
         if (response.ok) {
+          console.log('✅ Versículo desmarcado como lido com sucesso')
           await loadReadVerses()
 
           // Disparar evento customizado para notificar outros componentes
+          console.log('🔄 Disparando evento versesUpdated...')
           window.dispatchEvent(new CustomEvent('versesUpdated'))
 
           toast.success('Versículo desmarcado como lido!')
+        } else if (response.status === 401) {
+          toast.error('Faça login para marcar versículos como lidos')
         } else {
           const error = await response.json()
           toast.error(error.error || 'Erro ao desmarcar versículo')
@@ -246,12 +265,16 @@ export function VerseDisplay({ verses, bookName, chapter }: VerseDisplayProps) {
         })
 
         if (response.ok) {
+          console.log('✅ Versículo marcado como lido com sucesso')
           await loadReadVerses()
 
           // Disparar evento customizado para notificar outros componentes
+          console.log('🔄 Disparando evento versesUpdated...')
           window.dispatchEvent(new CustomEvent('versesUpdated'))
 
           toast.success('Versículo marcado como lido!')
+        } else if (response.status === 401) {
+          toast.error('Faça login para marcar versículos como lidos')
         } else {
           const error = await response.json()
           toast.error(error.error || 'Erro ao marcar versículo como lido')
