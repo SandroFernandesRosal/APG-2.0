@@ -16,7 +16,7 @@ import { useToken } from '@/hooks/useToken'
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 import MinisterioHeader from './ministerio-header'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { getIgrejaLabelFromId } from '@/lib/getIgrejaLabel'
 
 export default function CarouselMinisterio({
   titleproducts,
@@ -184,7 +184,7 @@ export default function CarouselMinisterio({
                             : ''}
                         </p>
                         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                          {getIgrejaLabel(product.igrejaId || '')}
+                          {getIgrejaLabelFromId(product.igrejaId || '')}
                         </span>
                       </div>
                       {podeEditarRemover(product) && (

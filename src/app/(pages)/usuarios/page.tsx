@@ -9,7 +9,7 @@ import {
   FaUserShield,
   FaFilter,
 } from 'react-icons/fa'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { getIgrejaLabelFromId } from '@/lib/getIgrejaLabel'
 import { toast } from 'react-toastify'
 import { useIgrejas } from '@/hooks/useIgrejas'
 
@@ -674,7 +674,7 @@ export default function UsuariosPage() {
                     </button>
                   </td>
                   <td data-label="Igreja" className="py-2 text-center ">
-                    {getIgrejaLabel(u.igrejaId || '') ?? (
+                    {getIgrejaLabelFromId(u.igrejaId || '') ?? (
                       <span className="text-gray-400">Sem Igreja</span>
                     )}
                     <button

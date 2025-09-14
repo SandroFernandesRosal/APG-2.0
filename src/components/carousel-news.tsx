@@ -16,7 +16,12 @@ import AddNew from './crud/AddNew'
 import EditNew from './crud/EditNew'
 import RemoveNew from './crud/RemoveNew'
 import NoticiasHeader from './noticias-header'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+// Função para buscar nome da igreja por ID usando as igrejas já carregadas
+const getIgrejaNameById = (igrejaId: string | null, igrejas: any[]) => {
+  if (!igrejaId) return 'Igreja não encontrada'
+  const igreja = igrejas.find(i => i.id === igrejaId)
+  return igreja ? igreja.nome : 'Igreja não encontrada'
+}
 
 export default function CarouselNews({
   titleproducts,
@@ -70,12 +75,12 @@ export default function CarouselNews({
   const podeAdicionar =
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.igrejaId === local.toUpperCase()))
+      (token.role === 'ADMIN' && token.igrejaId === currentIgreja?.id))
 
-  const podeEditarRemover = (role: string) =>
+  const podeEditarRemover = (igrejaId: string | null) =>
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.igrejaId === role))
+      (token.role === 'ADMIN' && token.igrejaId === igrejaId))
 
   // Encontrar igreja pelo slug
   const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
@@ -218,7 +223,7 @@ export default function CarouselNews({
                           )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                           <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
-                            {getIgrejaLabel(product.igrejaId || '')}
+                            {getIgrejaNameById(product.igrejaId, igrejas)}
                           </span>
                         </Link>
                       </div>
@@ -307,7 +312,7 @@ export default function CarouselNews({
           videoUrl={selectedProduct.videoUrl}
           setOpenEdit={setOpenEdit}
           destacar={selectedProduct.destaque}
-          role={selectedProduct.igrejaId || undefined}
+          igrejaId={selectedProduct.igrejaId || null}
         />
       )}
 

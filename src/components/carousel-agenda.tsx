@@ -14,7 +14,7 @@ import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
 import AgendaHeader from './agenda-header'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { getIgrejaLabelFromId } from '@/lib/getIgrejaLabel'
 import { Clock, MapPin } from 'lucide-react'
 
 export default function CarouselAgenda({ title }: { title: string }) {
@@ -220,7 +220,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                             <p className="flex items-center gap-2">
                               <MapPin size={24} />
                               <span>
-                                {getIgrejaLabel(product.igrejaId || '')}
+                                {getIgrejaLabelFromId(product.igrejaId || '')}
                               </span>
                             </p>
                           </div>
