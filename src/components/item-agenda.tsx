@@ -7,7 +7,7 @@ import EditAgenda from './crud/EditAgenda'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 import { Clock, MapPin } from 'lucide-react'
 
-export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
+export default function ItemAgenda({ id, day, name, hour, igrejaId }: Agenda) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const token = useToken()
 
@@ -40,7 +40,7 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
           </p>
           <p className="flex items-center gap-2">
             <MapPin size={24} />
-            <span>{getIgrejaLabel(role)}</span>
+            <span>{getIgrejaLabel(igrejaId || '')}</span>
           </p>
         </div>
       </div>
@@ -99,7 +99,7 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
           title={name}
           hora={hour}
           dia={day}
-          role={role}
+          role={igrejaId || undefined}
         />
       )}
       <RemoveAgenda id={id} />

@@ -5,5 +5,6 @@ export interface Agenda {
   hour: string
   createdAt: string
   updatedAt: string
-  role: string
+  role?: string
+  igrejaId: string | null
 }

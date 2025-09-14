@@ -2,6 +2,7 @@
 import { Agenda } from '@/data/types/agenda'
 import { useEffect, useState } from 'react'
 import { useDataAgenda, useLocal, useSearch } from '@/store/useStore'
+import { useIgrejas } from '@/hooks/useIgrejas'
 
 import ItemAgenda from './item-agenda'
 import SkeletonNew from './skeleton/SkeletonNew'
@@ -16,6 +17,7 @@ export default function Eventos() {
   const { dataAgenda, setDataAgenda } = useDataAgenda()
   const { search } = useSearch()
   const { local } = useLocal()
+  const { igrejas } = useIgrejas()
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -181,8 +183,11 @@ export default function Eventos() {
     return buttons
   }
 
+  // Encontrar igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
+
   const filteredAgenda = Array.isArray(dataAgenda)
-    ? dataAgenda.filter((item) => item.role === local.toUpperCase())
+    ? dataAgenda.filter((item) => item.igrejaId === currentIgreja?.id)
     : []
 
   return (
@@ -208,7 +213,7 @@ export default function Eventos() {
                 hour={product.hour}
                 createdAt={product.createdAt}
                 updatedAt={product.updatedAt}
-                role={product.role}
+                igrejaId={product.igrejaId}
               />
             ))
           : Array.from({ length: itemsPerPage }).map((_, index) => (

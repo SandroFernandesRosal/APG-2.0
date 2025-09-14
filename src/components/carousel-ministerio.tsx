@@ -255,7 +255,7 @@ export default function CarouselMinisterio({
           lugar={selectedProduct.igrejaId || ''}
           id={selectedProduct.id}
           setOpenEdit={setOpenEdit}
-          role={selectedProduct.igrejaId}
+          role={selectedProduct.igrejaId || undefined}
         />
       )}
     </>
