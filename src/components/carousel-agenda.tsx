@@ -55,7 +55,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
 
   const filteredAgenda = dataAgenda.filter(
-    (item: Agenda) => item.role?.toUpperCase() === local.toUpperCase(),
+    (item: Agenda) => item.igrejaId === local,
   )
 
   const podeEditarRemover = (item: Agenda) => {
@@ -219,7 +219,9 @@ export default function CarouselAgenda({ title }: { title: string }) {
                             </p>
                             <p className="flex items-center gap-2">
                               <MapPin size={24} />
-                              <span>{getIgrejaLabel(product.role)}</span>
+                              <span>
+                                {getIgrejaLabel(product.igrejaId || '')}
+                              </span>
                             </p>
                           </div>
                         </div>
@@ -242,7 +244,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
           hora={selectedProduct.hour}
           dia={selectedProduct.day}
           setOpenEdit={setOpenEdit}
-          role={selectedProduct.role}
+          igrejaId={selectedProduct.igrejaId}
         />
       )}
     </>

@@ -19,7 +19,7 @@ interface EditAgendaProps {
   title: string
   hora: string
   dia: string
-  role?: string
+  igrejaId?: string | null
 }
 
 export default function EditAgenda({
@@ -28,7 +28,7 @@ export default function EditAgenda({
   title,
   hora,
   dia,
-  role,
+  igrejaId,
 }: EditAgendaProps) {
   const [day, setDay] = useState<Date | null>(parseISO(dia))
   const [name, setName] = useState<string>(title)
@@ -53,7 +53,7 @@ export default function EditAgenda({
           day: day ? format(day, 'yyyy-MM-dd') : dia,
           name: name || title,
           hour: hour || hora,
-          role,
+          igrejaId: igrejaId || null,
         }),
       })
 

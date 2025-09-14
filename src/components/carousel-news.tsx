@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { New } from '@/data/types/new'
 import { useEffect, useState } from 'react'
 import { useData, useLocal, useShowModal } from '@/store/useStore'
+import { useIgrejas } from '@/hooks/useIgrejas'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
@@ -24,6 +25,7 @@ export default function CarouselNews({
 }) {
   const { data, setData } = useData()
   const { local, setLocal } = useLocal()
+  const { igrejas } = useIgrejas()
   const [loading, setLoading] = useState(true)
   const [localLoading, setLocalLoading] = useState(false)
   const [page, setPage] = useState('')
@@ -75,9 +77,12 @@ export default function CarouselNews({
     (token.role === 'SUPERADMIN' ||
       (token.role === 'ADMIN' && token.igrejaId === role))
 
+  // Encontrar igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
+
   const filteredNews = data.filter((item: New) => {
     if (local === 'todas') return true
-    return item.role === local.toUpperCase()
+    return item.igrejaId === currentIgreja?.id
   })
 
   const settings = {
@@ -213,7 +218,7 @@ export default function CarouselNews({
                           )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                           <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
-                            {getIgrejaLabel(product.role)}
+                            {getIgrejaLabel(product.igrejaId || '')}
                           </span>
                         </Link>
                       </div>
@@ -237,7 +242,7 @@ export default function CarouselNews({
                         </div>
                       </div>
 
-                      {podeEditarRemover(product.role) && (
+                      {podeEditarRemover(product.igrejaId || '') && (
                         <div className="absolute top-2 left-2 flex gap-2">
                           <button
                             onClick={() => {
@@ -302,7 +307,7 @@ export default function CarouselNews({
           videoUrl={selectedProduct.videoUrl}
           setOpenEdit={setOpenEdit}
           destacar={selectedProduct.destaque}
-          role={selectedProduct.role}
+          role={selectedProduct.igrejaId || undefined}
         />
       )}
 

@@ -32,6 +32,7 @@ interface EditMinisterioProps {
   titulo: string[] | undefined
   img: string
   role?: string
+  igrejaId?: string | null
 }
 
 export default function EditMinisterio({
@@ -40,12 +41,12 @@ export default function EditMinisterio({
   nome,
   titulo,
   img,
-  role,
+  igrejaId,
 }: EditMinisterioProps) {
   const [title, setTitle] = useState<string[]>(
     titulo ? titulo.map((t: string) => t.trim()) : [],
   )
-  const [igreja] = useState<string>(role || '')
+  const [igreja] = useState<string>(igrejaId || '')
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
   const token = useToken()
@@ -72,7 +73,7 @@ export default function EditMinisterio({
         },
         body: JSON.stringify({
           cargo: title,
-          igrejaId: igreja || null,
+          igrejaId: igrejaId || null,
         }),
       })
       const data = await response.json()

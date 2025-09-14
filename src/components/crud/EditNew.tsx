@@ -18,6 +18,7 @@ interface EditNewProps {
   conteudo: string
   destacar: boolean
   role?: string
+  igrejaId?: string | null
 }
 
 export default function EditNew({
@@ -29,6 +30,7 @@ export default function EditNew({
   conteudo,
   destacar,
   role,
+  igrejaId,
 }: EditNewProps) {
   console.log('EditNew - Props recebidas:', {
     id,
@@ -123,7 +125,7 @@ export default function EditNew({
           videoUrl: newVideoUrl || undefined,
           page: local.toLowerCase(),
           destaque,
-          role,
+          igrejaId: igrejaId || null,
         }),
       })
 

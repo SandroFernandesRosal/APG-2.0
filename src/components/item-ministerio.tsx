@@ -16,7 +16,7 @@ export default function ItemMinisterio({
 }: Ministerio) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const token = useToken()
-  const igrejaName = useIgrejaName(igrejaId)
+  const igrejaName = useIgrejaName(igrejaId || null)
 
   const podeGerenciar =
     token &&

@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { New } from '@/data/types/new'
 import { useEffect, useState } from 'react'
 import { useData, useLocal } from '@/store/useStore'
+import { useIgrejas } from '@/hooks/useIgrejas'
 import SkeletonHighlight from './skeleton/SkeletonHighlight'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { FaCameraRetro } from 'react-icons/fa6'
@@ -67,6 +68,7 @@ const PrevArrow = ({ className, style, onClick }: ArrowProps) => {
 export default function CarouselHighlight() {
   const { data, setData } = useData()
   const { local } = useLocal()
+  const { igrejas } = useIgrejas()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -86,10 +88,13 @@ export default function CarouselHighlight() {
       })
   }, [setData, local])
 
+  // Encontrar igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
+
   const highlightedNews = data
     .filter(
       (item: New) =>
-        item.destaque === true && item.role === local.toUpperCase(),
+        item.destaque === true && item.igrejaId === currentIgreja?.id,
     )
     .slice(0, 8)
 
@@ -153,7 +158,7 @@ export default function CarouselHighlight() {
                 <Link
                   aria-hidden="true"
                   tabIndex={-1}
-                  href={`/noticias/${item.role.toLowerCase()}/${item.url}`}
+                  href={`/noticias/${currentIgreja?.slug || 'igreja'}/${item.url}`}
                   className="group flex justify-center items-center h-[300px] md:h-[500px]  overflow-hidden w-full  relative"
                 >
                   {item.coverUrl ? (

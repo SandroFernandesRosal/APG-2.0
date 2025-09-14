@@ -2,6 +2,7 @@
 import { New } from '@/data/types/new'
 import { useEffect, useState } from 'react'
 import { useData, useLocal, useSearch, useDataSearch } from '@/store/useStore'
+import { useIgrejas } from '@/hooks/useIgrejas'
 
 import ResultLength from './ResultLength'
 import ItemNew from './item-new'
@@ -18,6 +19,7 @@ export default function News() {
   const { search } = useSearch()
   const { dataSearch, setDataSearch } = useDataSearch()
   const { local } = useLocal()
+  const { igrejas } = useIgrejas()
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -198,12 +200,15 @@ export default function News() {
     return buttons
   }
 
+  // Encontrar igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
+
   const filteredDataSearch = dataSearch.filter(
-    (item: New) => item.role === local.toUpperCase(),
+    (item: New) => item.igrejaId === currentIgreja?.id,
   )
 
   const filteredData = data.filter(
-    (item: New) => item.role === local.toUpperCase(),
+    (item: New) => item.igrejaId === currentIgreja?.id,
   )
 
   return (
@@ -235,7 +240,7 @@ export default function News() {
                 page={product.page}
                 updatedAt={product.updatedAt}
                 url={product.url}
-                role={product.role}
+                igrejaId={product.igrejaId}
               />
             ))
           ) : (
@@ -260,7 +265,7 @@ export default function News() {
                 page={product.page}
                 updatedAt={product.updatedAt}
                 url={product.url}
-                role={product.role}
+                igrejaId={product.igrejaId}
               />
             ))
           ) : (
