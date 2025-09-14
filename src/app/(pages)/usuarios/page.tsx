@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fa'
 import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
 import { toast } from 'react-toastify'
+import { useIgrejas } from '@/hooks/useIgrejas'
 
 type User = {
   id: string
@@ -49,6 +50,7 @@ export default function UsuariosPage() {
   const [filteredUsers, setFilteredUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const token = useToken()
+  const { igrejas } = useIgrejas()
 
   // Estados para filtros
   const [filterIgreja, setFilterIgreja] = useState<string>('')
@@ -214,9 +216,7 @@ export default function UsuariosPage() {
         usersData.filter((u) => {
           if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
           if (token?.role === 'ADMIN')
-            return (
-              u.role !== 'SUPERADMIN' && u.igrejaId === token.igrejaId
-            )
+            return u.role !== 'SUPERADMIN' && u.igrejaId === token.igrejaId
           return false
         }),
       )
@@ -552,8 +552,8 @@ export default function UsuariosPage() {
               >
                 <option value="">Todas as igrejas</option>
                 {igrejas.map((igreja) => (
-                  <option key={igreja} value={igreja}>
-                    {getIgrejaLabel(igreja)}
+                  <option key={igreja.id} value={igreja.id}>
+                    {igreja.nome}
                   </option>
                 ))}
               </select>
@@ -598,10 +598,7 @@ export default function UsuariosPage() {
             users.filter((u) => {
               if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
               if (token?.role === 'ADMIN')
-                return (
-                  u.role !== 'SUPERADMIN' &&
-                  u.igrejaId === token.igrejaId
-                )
+                return u.role !== 'SUPERADMIN' && u.igrejaId === token.igrejaId
               return false
             }).length
           }{' '}
@@ -830,9 +827,9 @@ export default function UsuariosPage() {
               onChange={(e) => setIgreja(e.target.value)}
             >
               <option value="">Sem igreja</option>
-              {igrejas.map((i) => (
-                <option key={i} value={i}>
-                  {i}
+              {igrejas.map((igreja) => (
+                <option key={igreja.id} value={igreja.id}>
+                  {igreja.nome}
                 </option>
               ))}
             </select>

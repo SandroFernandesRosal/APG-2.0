@@ -35,7 +35,7 @@ export default function Noticias() {
         )}
 
         <SelectLocal onChange={(newLocal) => console.log(newLocal)} />
-        
+
         {/* Links para páginas dinâmicas das igrejas */}
         {!loading && igrejas.length > 0 && (
           <div className="w-full mt-6">

@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useToken } from '@/hooks/useToken'
-import { MapPin, Clock, Users } from 'lucide-react'
+// Removido: useState não é mais necessário
+import { MapPin } from 'lucide-react'
 
 interface ItemEnderecoProps {
   id: string
@@ -24,20 +23,6 @@ export default function ItemEndereco({
   cidade,
   cep,
 }: ItemEnderecoProps) {
-  const [copiedId, setCopiedId] = useState<string | null>(null)
-
-  const handleCopy = async (text: string, id: string) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopiedId(id)
-      setTimeout(() => {
-        setCopiedId(null)
-      }, 2000)
-    } catch (err) {
-      console.error('Erro ao copiar endereço:', err)
-    }
-  }
-
   const openGoogleMaps = () => {
     const enderecoFormatado = `${rua}, ${numero || ''}, ${cidade || ''}, ${cep}`
     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoFormatado)}`
@@ -60,7 +45,9 @@ export default function ItemEndereco({
         <div className="flex items-center gap-2 text-base">
           <MapPin className="w-5 h-5 text-primary dark:text-secundary" />
           <span className="font-semibold">Endereço:</span>
-          <span>{rua}, {numero}</span>
+          <span>
+            {rua}, {numero}
+          </span>
         </div>
         <div className="flex items-center gap-2 text-base">
           <MapPin className="w-5 h-5 text-primary dark:text-secundary" />

@@ -90,7 +90,10 @@ export default function EnderecosHeader() {
               <LocationCard
                 key={igreja.id}
                 title={`${igreja.tipo || 'Filial'} - ${igreja.nome}`}
-                description={igreja.descricao || `Levando a Palavra e o amor à comunidade local.`}
+                description={
+                  igreja.descricao ||
+                  `Levando a Palavra e o amor à comunidade local.`
+                }
                 delay={`delay-${(index + 1) * 100}`}
               />
             ))

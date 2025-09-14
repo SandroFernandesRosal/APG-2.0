@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useToken } from '@/hooks/useToken'
 import {
   BadgeCent,
   Church,

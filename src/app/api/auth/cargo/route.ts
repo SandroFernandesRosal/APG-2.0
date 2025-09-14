@@ -34,8 +34,7 @@ export async function GET(req: NextRequest) {
         ? users
         : users.filter(
             (u) =>
-              u.igrejaId === requestingUser.igrejaId ||
-              u.igrejaId === null,
+              u.igrejaId === requestingUser.igrejaId || u.igrejaId === null,
           )
 
     return NextResponse.json(filteredUsers)

@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+// Removido: useState e useEffect não são utilizados
 import { MapPin } from 'lucide-react'
 import { useIgrejas } from '@/hooks/useIgrejas'
 import Link from 'next/link'
@@ -79,7 +79,10 @@ export default function IgrejasHeader() {
               <LocationCard
                 key={igreja.id}
                 title={`${igreja.tipo || 'Filial'} - ${igreja.nome}`}
-                description={igreja.descricao || `Levando a Palavra e o amor à comunidade local.`}
+                description={
+                  igreja.descricao ||
+                  `Levando a Palavra e o amor à comunidade local.`
+                }
                 delay={`delay-${(index + 1) * 100}`}
                 href={`/igrejas/${igreja.slug}`}
               />

@@ -3,7 +3,7 @@
 import Cookies from 'js-cookie'
 import { useState, FormEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
+// Removido: useLocal não é mais necessário
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 import { useToken } from '@/hooks/useToken'
@@ -26,7 +26,6 @@ export default function AddAgenda({ setOpenAgenda }: AddAgendaProps) {
   const [hour, setHour] = useState<string>('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const { local } = useLocal()
   const token = useToken()
   // Removido: sistema antigo de role
   const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
