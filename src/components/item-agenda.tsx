@@ -99,7 +99,7 @@ export default function ItemAgenda({ id, day, name, hour, igrejaId }: Agenda) {
           title={name}
           hora={hour}
           dia={day}
-          role={igrejaId || undefined}
+          igrejaId={igrejaId || null}
         />
       )}
       <RemoveAgenda id={id} />
