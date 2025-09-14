@@ -102,7 +102,7 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
           videoUrl: videoUrl || undefined,
           page: 'noticias',
           // Removido: role do sistema antigo
-          igrejaId, // Nova estrutura
+          igrejaId: igrejaId || null, // Nova estrutura
           destaque,
         }),
       })
@@ -173,7 +173,7 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
                   imagem ou vídeo
                 </p>
                 <p className="text-xs text-blue-500 dark:text-blue-500">
-                  MP4, MOV, JPG, PNG (até 50MB)
+                  MP4, MOV, JPG, PNG (até 10MB)
                 </p>
               </div>
               <input

@@ -19,11 +19,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
     }
 
-    const MAX_SIZE = 50 * 1024 * 1024
+    const MAX_SIZE = 10 * 1024 * 1024 // Reduzido para 10MB
     if (file.size > MAX_SIZE) {
       return NextResponse.json(
-        { error: 'File size exceeds 50MB limit' },
-        { status: 400 },
+        { error: 'Arquivo muito grande. Tamanho máximo: 10MB' },
+        { status: 413 },
       )
     }
 

@@ -62,26 +62,28 @@ export async function POST(req: NextRequest) {
       isPublic: z.coerce.boolean().default(false),
       destaque: z.coerce.boolean().default(false),
       page: z.string(),
-      igrejaId: z.string().uuid(),
+      igrejaId: z.string().uuid().nullable(),
     })
 
     const data = schema.parse(body)
     console.log('Dados validados:', data)
 
-    // Verificar se igreja existe
-    const igreja = await prisma.igreja.findUnique({
-      where: { id: data.igrejaId },
-    })
+    // Verificar se igreja existe (apenas se igrejaId foi fornecido)
+    if (data.igrejaId) {
+      const igreja = await prisma.igreja.findUnique({
+        where: { id: data.igrejaId },
+      })
 
-    if (!igreja) {
-      return NextResponse.json(
-        { error: 'Igreja não encontrada' },
-        { status: 400 },
-      )
+      if (!igreja) {
+        return NextResponse.json(
+          { error: 'Igreja não encontrada' },
+          { status: 400 },
+        )
+      }
     }
 
-    // Verificar se ADMIN pode postar nesta igreja
-    if (user.role === 'ADMIN' && userData?.igrejaId !== data.igrejaId) {
+    // Verificar se ADMIN pode postar nesta igreja (apenas se igrejaId foi fornecido)
+    if (user.role === 'ADMIN' && data.igrejaId && userData?.igrejaId !== data.igrejaId) {
       console.log('ADMIN tentando postar em igreja diferente')
       return NextResponse.json(
         { error: 'ADMIN só pode postar na sua igreja' },
