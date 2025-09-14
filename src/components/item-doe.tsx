@@ -1,8 +1,5 @@
 'use client'
 
-import { Doacao } from '@/data/types/doacao'
-import EditDoacao from './crud/EditDoacao'
-import RemoveDoacao from './crud/RemoveDoacao'
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
 import {
@@ -14,6 +11,20 @@ import {
   KeyRound,
 } from 'lucide-react'
 
+interface ItemDoeProps {
+  id: string
+  local: string
+  banco: string
+  conta: string
+  agencia: string
+  nomebanco: string
+  pix: string
+  nomepix: string
+  isAdmin: boolean
+  updatedAt: string
+  createdAt: string
+}
+
 export default function ItemDoe({
   id,
   local,
@@ -23,9 +34,7 @@ export default function ItemDoe({
   nomebanco,
   pix,
   nomepix,
-}: Doacao) {
-  const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const token = useToken()
+}: ItemDoeProps) {
   const [copiedId, setCopiedId] = useState<string | null>(null)
 
   const handleCopy = async (text: string, id: string) => {
@@ -40,38 +49,11 @@ export default function ItemDoe({
     }
   }
 
-  const podeGerenciar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
-
   return (
     <div
       key={id}
       className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-xl border border-zinc-300 dark:border-zinc-800 min-h-[420px] max-w-xs w-full  p-0 overflow-hidden group transition-all"
     >
-      {podeGerenciar && (
-        <div className="absolute top-3 right-3 flex gap-2 z-20">
-          <button
-            onClick={() => setOpenEdit(id)}
-            className="p-2 rounded-full bg-white/90 dark:bg-slate-700/80 hover:bg-primary/10 text-blue-600 shadow-md transition"
-            title="Editar"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-              <path
-                fillRule="evenodd"
-                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-          <RemoveDoacao id={id} />
-        </div>
-      )}
-
       <div className="flex items-center gap-2 mt-6 mb-2 px-6">
         <Church className="w-7 h-7 text-primary dark:text-secundary" />
         <span className="bg-primary/90 dark:bg-secundary/80 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
@@ -126,20 +108,6 @@ export default function ItemDoe({
           {nomepix}
         </span>
       </div>
-
-      {openEdit === id && (
-        <EditDoacao
-          localInitial={local}
-          bancoInitial={banco}
-          contaInitial={conta}
-          agenciaInitial={agencia}
-          nomebancoInitial={nomebanco}
-          pixInitial={pix}
-          nomepixInitial={nomepix}
-          id={id}
-          setOpenEdit={setOpenEdit}
-        />
-      )}
     </div>
   )
 }

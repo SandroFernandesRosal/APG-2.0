@@ -11,14 +11,14 @@ const bodySchema = z.object({
   avatarUrl: z.string(),
   content: z.string(),
   isPublic: z.coerce.boolean().default(false),
-  ministryRole: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']).optional(),
+  igrejaId: z.string().uuid().optional(),
 })
 
 const bodySchemaUser = z.object({
   userId: z.string().uuid(),
   name: z.string(),
   avatarUrl: z.string(),
-  ministryRole: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']).optional(),
+  igrejaId: z.string().uuid().optional(),
 })
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
@@ -54,13 +54,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   })
 
   const body = await req.json()
-  const { name, coverUrl, avatarUrl, content, isPublic, ministryRole } =
+  const { name, coverUrl, avatarUrl, content, isPublic, igrejaId } =
     bodySchema.parse(body)
 
   if (
     member.role === 'ADMIN' &&
-    ministryRole !== member.ministryRole &&
-    ministryRole !== null
+    igrejaId !== member.igrejaId &&
+    igrejaId !== null
   ) {
     return NextResponse.json(
       { error: 'ADMIN só pode criar testemunho para sua igreja ou sem igreja' },
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       content,
       isPublic,
       userId: member.sub,
-      ministryRole: ministryRole ?? null,
+      igrejaId: igrejaId ?? null,
     },
   })
 
@@ -110,7 +110,7 @@ export async function PUT(req: NextRequest): Promise<NextResponse> {
   }
 
   const body = await req.json()
-  const { userId, name, avatarUrl, ministryRole } = bodySchemaUser.parse(body)
+  const { userId, name, avatarUrl, igrejaId } = bodySchemaUser.parse(body)
 
   if (user.role === 'ADMIN' || user.role === 'SUPERADMIN') {
     const testemunhos = await prisma.testemunho.findMany({
@@ -119,7 +119,7 @@ export async function PUT(req: NextRequest): Promise<NextResponse> {
 
     if (user.role === 'ADMIN') {
       const naoPermitido = testemunhos.some(
-        (t) => t.ministryRole !== user.ministryRole && t.ministryRole !== null,
+        (t) => t.igrejaId !== user.igrejaId && t.igrejaId !== null,
       )
       if (naoPermitido) {
         return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
@@ -132,7 +132,7 @@ export async function PUT(req: NextRequest): Promise<NextResponse> {
   try {
     await prisma.testemunho.updateMany({
       where: { userId },
-      data: { name, avatarUrl, ministryRole },
+      data: { name, avatarUrl, igrejaId },
     })
 
     return NextResponse.json({ message: 'Postagens atualizadas com sucesso' })

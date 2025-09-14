@@ -9,14 +9,14 @@ export default async function EditPerfil() {
     return <div>Usuário não encontrado</div>
   }
 
-  const { name, avatarUrl, login, id, ministryRole, role } = user
+  const { name, avatarUrl, login, id, igrejaId, role } = user
   return (
     <EditUser
       nome={name}
       img={avatarUrl}
       email={login}
       id={id}
-      ministryRole={ministryRole}
+      igrejaId={igrejaId}
       role={role}
     />
   )

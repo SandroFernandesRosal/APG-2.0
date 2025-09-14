@@ -5,22 +5,23 @@ import Image from 'next/image'
 import { Ministerio } from '@/data/types/ministerio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 import EditMinisterio from './crud/EditMinisterio'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { useIgrejaName } from '@/hooks/useIgrejaName'
 
 export default function ItemMinisterio({
   id,
   cargo,
   name,
-  ministryRole,
+  igrejaId,
   avatarUrl,
 }: Ministerio) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const token = useToken()
+  const igrejaName = useIgrejaName(igrejaId)
 
   const podeGerenciar =
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.ministryRole === ministryRole))
+      (token.role === 'ADMIN' && token.igrejaId === igrejaId))
 
   return (
     <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] w-[47%] max-w-[300px] overflow-hidden group relative items-center justify-center border-[1px] border-zinc-300 dark:border-zinc-800">
@@ -45,7 +46,7 @@ export default function ItemMinisterio({
             : 'Sem Cargo'}
         </p>
         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          {getIgrejaLabel(ministryRole || '')}
+          {igrejaName || 'Carregando...'}
         </span>
       </div>
       {podeGerenciar && (
@@ -100,10 +101,10 @@ export default function ItemMinisterio({
           nome={name}
           titulo={cargo ?? []}
           img={avatarUrl ?? '/img/Placeholder.png'}
-          lugar={ministryRole ?? ''}
+          lugar={igrejaName || ''}
           id={id}
           setOpenEdit={setOpenEdit}
-          role={ministryRole}
+          igrejaId={igrejaId}
         />
       )}
       <RemoveMinisterio id={id} />

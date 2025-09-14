@@ -25,6 +25,9 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: 'desc' },
     skip: offset,
     take: itemsPerPage,
+    include: {
+      igreja: true, // Incluir dados da igreja
+    },
   })
 
   return NextResponse.json(news)
@@ -45,7 +48,7 @@ export async function POST(req: NextRequest) {
     // Buscar dados completos do usuário para auditoria
     const userData = await prisma.user.findUnique({
       where: { id: user.sub },
-      select: { name: true },
+      select: { name: true, igrejaId: true },
     })
 
     const body = await req.json()
@@ -59,13 +62,26 @@ export async function POST(req: NextRequest) {
       isPublic: z.coerce.boolean().default(false),
       destaque: z.coerce.boolean().default(false),
       page: z.string(),
-      role: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),
+      igrejaId: z.string().uuid(),
     })
 
     const data = schema.parse(body)
     console.log('Dados validados:', data)
 
-    if (user.role === 'ADMIN' && user.ministryRole !== data.role) {
+    // Verificar se igreja existe
+    const igreja = await prisma.igreja.findUnique({
+      where: { id: data.igrejaId },
+    })
+
+    if (!igreja) {
+      return NextResponse.json(
+        { error: 'Igreja não encontrada' },
+        { status: 400 },
+      )
+    }
+
+    // Verificar se ADMIN pode postar nesta igreja
+    if (user.role === 'ADMIN' && userData?.igrejaId !== data.igrejaId) {
       console.log('ADMIN tentando postar em igreja diferente')
       return NextResponse.json(
         { error: 'ADMIN só pode postar na sua igreja' },
@@ -80,7 +96,14 @@ export async function POST(req: NextRequest) {
     console.log('Tentando criar no banco...')
     const created = await prisma.new.create({
       data: {
-        ...data,
+        content: data.content,
+        coverUrl: data.coverUrl,
+        videoUrl: data.videoUrl,
+        title: data.title,
+        isPublic: data.isPublic,
+        destaque: data.destaque,
+        page: data.page,
+        igrejaId: data.igrejaId,
         userId: user.sub,
         url: slug,
       },

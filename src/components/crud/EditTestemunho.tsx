@@ -17,7 +17,7 @@ interface EditTestemunhoProps {
   name: string
   avatarUrl?: string
   userIgreja: UserIgreja
-  ministryRole?: string
+  igrejaId?: string | null
 }
 
 export default function EditTestemunho({
@@ -27,7 +27,7 @@ export default function EditTestemunho({
   conteudo,
   name,
   avatarUrl,
-  ministryRole,
+  igrejaId,
 }: EditTestemunhoProps) {
   const [content, setContent] = useState(conteudo)
   const [preview, setPreview] = useState<string | null>(null)
@@ -88,7 +88,7 @@ export default function EditTestemunho({
           content,
           coverUrl,
           isPublic: false,
-          ministryRole: ministryRole || null,
+          igrejaId: igrejaId || null,
         }),
       })
 

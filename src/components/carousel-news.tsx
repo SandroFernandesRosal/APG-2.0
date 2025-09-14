@@ -68,12 +68,12 @@ export default function CarouselNews({
   const podeAdicionar =
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.ministryRole === local.toUpperCase()))
+      (token.role === 'ADMIN' && token.igrejaId === local.toUpperCase()))
 
   const podeEditarRemover = (role: string) =>
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.ministryRole === role))
+      (token.role === 'ADMIN' && token.igrejaId === role))
 
   const filteredNews = data.filter((item: New) => {
     if (local === 'todas') return true

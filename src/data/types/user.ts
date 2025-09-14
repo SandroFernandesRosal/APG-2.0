@@ -6,7 +6,7 @@ export interface User {
   sub?: string
   userId: string
   role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
-  ministryRole?: 'VILADAPENHA' | 'TOMAZINHO' | 'MARIAHELENA' | null
+  igrejaId?: string | null // Nova estrutura
   password?: string
   cargo?: string
 }

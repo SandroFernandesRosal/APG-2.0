@@ -8,14 +8,7 @@ const paramsSchema = z.object({
 })
 
 const bodySchema = z.object({
-  ministryRole: z
-    .union([
-      z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),
-      z.literal(''),
-      z.null(),
-      z.undefined(),
-    ])
-    .transform((val) => (val === '' || val === undefined ? null : val)),
+  igrejaId: z.string().uuid().nullable(),
 })
 
 export async function PUT(
@@ -33,7 +26,7 @@ export async function PUT(
 
     const { id: userIdToUpdate } = paramsSchema.parse(await params)
     const body = await req.json()
-    const { ministryRole: newMinistryRole } = bodySchema.parse(body)
+    const { igrejaId: newIgrejaId } = bodySchema.parse(body)
 
     const userToUpdate = await prisma.user.findUnique({
       where: { id: userIdToUpdate },
@@ -48,12 +41,12 @@ export async function PUT(
 
     if (
       adminUser.role === 'ADMIN' &&
-      adminUser.ministryRole !== userToUpdate.ministryRole
+      adminUser.igrejaId !== userToUpdate.igrejaId
     ) {
       return NextResponse.json(
         {
           error:
-            'Não autorizado a alterar ministryRole de usuários de outra igreja.',
+            'Não autorizado a alterar igrejaId de usuários de outra igreja.',
         },
         { status: 403 },
       )
@@ -62,7 +55,7 @@ export async function PUT(
     const updatedUser = await prisma.user.update({
       where: { id: userIdToUpdate },
       data: {
-        ministryRole: newMinistryRole,
+        igrejaId: newIgrejaId,
       },
     })
 

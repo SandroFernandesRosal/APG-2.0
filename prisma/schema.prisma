@@ -17,10 +17,32 @@ enum UserRole {
   MEMBRO
 }
 
-enum MinistryRole {
-  VILADAPENHA
-  TOMAZINHO
-  MARIAHELENA
+
+model Igreja {
+  id          String   @id @default(uuid())
+  nome        String   // Vila da Penha, Tomazinho, etc.
+  slug        String   @unique // vila-da-penha, tomazinho, etc.
+  ativa       Boolean  @default(true)
+  // Campos de endereço
+  endereco    String?  // Endereço completo da igreja
+  descricao   String?  // Descrição do ponto de encontro
+  tipo        String?  // "Sede" ou "Filial"
+  // Campos de doação
+  banco       String?  // Nome do banco
+  conta       String?  // Número da conta
+  agencia     String?  // Agência
+  nomebanco   String?  // Nome do beneficiário (banco)
+  pix         String?  // Chave PIX
+  nomepix     String?  // Nome do beneficiário (PIX)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relacionamentos
+  users       User[]
+  news        New[]
+  ministerios Ministerio[]
+  agendas     Agenda[]
+  testemunhos Testemunho[]
 }
 
 
@@ -45,12 +67,10 @@ model User {
   avatarUrl           String?
   password            String
   role                UserRole              @default(MEMBRO)
-  ministryRole        MinistryRole? 
+  igrejaId            String? // Nova estrutura
   expires             DateTime?
   agenda              Agenda[]
   contato             Contato[]
-  doacao              Doacao[]
-  endereco            Endereco[]
   ministerio          Ministerio[]
   cargo              CargoRole[]
   news                New[]
@@ -64,6 +84,9 @@ model User {
   bibleReadingPlan    BibleReadingPlan?
   bibleReadChapters   BibleReadChapter[]
   bibleReadVerses     BibleReadVerse[]
+  
+  // Relacionamentos
+  igreja              Igreja? @relation(fields: [igrejaId], references: [id])
 }
 
 model New {
@@ -79,8 +102,9 @@ model New {
   updatedAt DateTime      @updatedAt
   destaque  Boolean       @default(false)
   url       String        @unique
-  role      MinistryRole
+  igrejaId  String? // Nova estrutura
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?       @relation(fields: [igrejaId], references: [id])
 }
 
 model Ministerio {
@@ -93,8 +117,9 @@ model Ministerio {
   createdAt DateTime      @default(now())
   coverUrl  String
   updatedAt DateTime      @updatedAt
-  role      MinistryRole
+  igrejaId  String? // Nova estrutura
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?       @relation(fields: [igrejaId], references: [id])
 }
 
 model Agenda {
@@ -107,39 +132,11 @@ model Agenda {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   destaque  Boolean       @default(false)
-  role      MinistryRole
+  igrejaId  String? // Nova estrutura
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?       @relation(fields: [igrejaId], references: [id])
 }
 
-model Doacao {
-  id        String   @id @default(uuid())
-  userId    String
-  local     String
-  banco     String
-  conta     String
-  agencia   String
-  nomebanco String
-  pix       String
-  nomepix   String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model Endereco {
-  id        String   @id @default(uuid())
-  userId    String
-  local     String
-  rua       String
-  cep       String
-  isPublic  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  numero    String?
-  cidade    String?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 
 model Contato {
   id        String   @id @default(uuid())
@@ -206,8 +203,9 @@ model Testemunho {
   updatedAt DateTime @updatedAt
   isPublic  Boolean  @default(true)
   coverUrl  String?
-  ministryRole  MinistryRole?
+  igrejaId  String? // Nova estrutura
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?  @relation(fields: [igrejaId], references: [id])
 }
 
 model BibleFavorite {
@@ -277,7 +275,7 @@ model BibleReadVerse {
 model AuditLog {
   id          String      @id @default(cuid())
   action      String      // CREATE, UPDATE, DELETE
-  entityType  String      // "User", "New", "Testemunho", "Contato", "Doacao", "Agenda", "Endereco", "Sobre", "SobreLider"
+  entityType  String      // "User", "New", "Testemunho", "Contato", "Agenda", "Sobre", "SobreLider", "Igreja"
   entityId    String      // ID da entidade modificada
   userId      String      // Quem fez a ação
   userName    String      // Nome do usuário (para facilitar consultas)

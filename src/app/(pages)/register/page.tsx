@@ -5,12 +5,14 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
+import IgrejaSelect from '@/components/IgrejaSelect'
 
 export default function RegisterIgreja() {
   const [name, setName] = useState<string>('')
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [ministryRole, setMinistryRole] = useState<string>('')
+  // Removido: sistema antigo de ministryRole
+  const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
 
   const [error, setError] = useState<string | boolean>(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -30,7 +32,7 @@ export default function RegisterIgreja() {
     setIsSubmitting(true)
     setError(false)
 
-    if (isSuperAdmin && !ministryRole) {
+    if (isSuperAdmin && !igrejaId) {
       setError('Ao criar um ADMIN, é obrigatório selecionar uma igreja.')
       setIsSubmitting(false)
       return
@@ -72,9 +74,10 @@ export default function RegisterIgreja() {
         role,
       }
 
-      if (ministryRole) {
-        payload.ministryRole = ministryRole
+      if (igrejaId) {
+        payload.igrejaId = igrejaId
       }
+      // Removido: lógica do sistema antigo
 
       const response = await fetch('/api/auth/register', {
         method: 'POST',
@@ -182,28 +185,20 @@ export default function RegisterIgreja() {
           />
 
           <label
-            htmlFor="ministryRole"
+            htmlFor="igrejaId"
             className="font-bold text-sm self-start ml-[13%] mt-2"
           >
             Igreja {isSuperAdmin ? '(Obrigatório)' : '(Opcional)'}
           </label>
-          <select
-            id="ministryRole"
-            name="ministryRole"
-            className="input"
-            value={ministryRole}
-            onChange={(e) => setMinistryRole(e.target.value)}
-            required={isSuperAdmin}
-          >
-            <option value="">
-              {isSuperAdmin
+          <IgrejaSelect
+            value={igrejaId}
+            onChange={setIgrejaId}
+            placeholder={
+              isSuperAdmin
                 ? 'Selecione uma igreja...'
-                : 'Nenhuma / Não sou membro'}
-            </option>
-            <option value="VILADAPENHA">Vila da Penha</option>
-            <option value="TOMAZINHO">Tomazinho</option>
-            <option value="MARIAHELENA">Maria Helena</option>
-          </select>
+                : 'Nenhuma / Não sou membro'
+            }
+          />
 
           {error && (
             <p className="font-bold text-red-500 text-center">{error}</p>

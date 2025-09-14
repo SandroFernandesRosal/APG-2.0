@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
         login: true,
         avatarUrl: true,
         role: true,
-        ministryRole: true,
+        igrejaId: true,
       },
     })
 

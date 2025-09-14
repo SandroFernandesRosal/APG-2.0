@@ -7,6 +7,7 @@ import { useLocal } from '../../store/useStore'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 import { useToken } from '@/hooks/useToken'
+import IgrejaSelect from '@/components/IgrejaSelect'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import { toast } from 'react-toastify'
 
@@ -27,16 +28,13 @@ export default function AddAgenda({ setOpenAgenda }: AddAgendaProps) {
 
   const { local } = useLocal()
   const token = useToken()
-  const [role, setRole] = useState<string>(
-    token?.role === 'ADMIN' ? (token.ministryRole ?? '') : local,
-  )
+  // Removido: sistema antigo de role
+  const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
   const router = useRouter()
   const cookieToken = Cookies.get('tokennn')
 
   useEffect(() => {
-    if (token?.role === 'ADMIN') {
-      setRole(token.ministryRole ?? '')
-    }
+    // Removido: lógica do sistema antigo
   }, [token])
 
   async function handleSubmit(event: FormEvent) {
@@ -54,7 +52,8 @@ export default function AddAgenda({ setOpenAgenda }: AddAgendaProps) {
           day: selectedDate?.toISOString().split('T')[0], // formato YYYY-MM-DD
           name,
           hour,
-          role,
+          // Removido: role do sistema antigo
+          igrejaId, // Nova estrutura
         }),
       })
 
@@ -160,25 +159,17 @@ export default function AddAgenda({ setOpenAgenda }: AddAgendaProps) {
 
             <div>
               <label
-                htmlFor="role"
+                htmlFor="igreja"
                 className={`block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ${token?.role === 'ADMIN' ? 'hidden' : ''}`}
               >
                 Selecione a igreja
               </label>
-              <select
-                id="role"
-                name="role"
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
+              <IgrejaSelect
+                value={igrejaId}
+                onChange={setIgrejaId}
                 disabled={token?.role === 'ADMIN'}
-              >
-                <option value="">Selecione...</option>
-                <option value="VILADAPENHA">Vila da Penha</option>
-                <option value="MARIAHELENA">Maria Helena</option>
-                <option value="TOMAZINHO">Tomazinho</option>
-              </select>
+                placeholder="Selecione a igreja..."
+              />
             </div>
           </div>
         </div>

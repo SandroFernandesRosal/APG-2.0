@@ -66,7 +66,7 @@ export default function CarouselMinisterio({
 
   const filteredMinisterios = dataMinisterio
     .filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
-    .filter((item: Ministerio) => item.ministryRole === local.toUpperCase())
+    .filter((item: Ministerio) => item.igrejaId === local.toUpperCase())
 
   const podeAdicionar =
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
@@ -76,7 +76,7 @@ export default function CarouselMinisterio({
     if (token.role === 'SUPERADMIN') return true
     if (
       token.role === 'ADMIN' &&
-      token.ministryRole?.toUpperCase() === item.ministryRole?.toUpperCase()
+      token.igrejaId?.toUpperCase() === item.igrejaId?.toUpperCase()
     )
       return true
 
@@ -184,7 +184,7 @@ export default function CarouselMinisterio({
                             : ''}
                         </p>
                         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                          {getIgrejaLabel(product.ministryRole || '')}
+                          {getIgrejaLabel(product.igrejaId || '')}
                         </span>
                       </div>
                       {podeEditarRemover(product) && (
@@ -252,10 +252,10 @@ export default function CarouselMinisterio({
           nome={selectedProduct.name}
           titulo={selectedProduct.cargo}
           img={selectedProduct.avatarUrl || ''}
-          lugar={selectedProduct.ministryRole || ''}
+          lugar={selectedProduct.igrejaId || ''}
           id={selectedProduct.id}
           setOpenEdit={setOpenEdit}
-          role={selectedProduct.ministryRole}
+          role={selectedProduct.igrejaId}
         />
       )}
     </>

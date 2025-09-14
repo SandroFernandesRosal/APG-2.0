@@ -10,8 +10,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
   const where: Record<string, unknown> = { isPublic: false }
 
-  if (user.role === 'ADMIN' && user.ministryRole) {
-    where.OR = [{ ministryRole: user.ministryRole }, { ministryRole: null }]
+  if (user.role === 'ADMIN' && user.igrejaId) {
+    where.OR = [{ igrejaId: user.igrejaId }, { igrejaId: null }]
   }
 
   const testemunhos = await prisma.testemunho.findMany({

@@ -6,6 +6,7 @@ import { useState, useRef, FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
+import IgrejaSelect from '@/components/IgrejaSelect'
 
 const CARGOS = [
   'PASTOR',
@@ -21,11 +22,7 @@ const CARGOS = [
   'AUXILIAR',
 ]
 
-const IGREJAS = [
-  { key: 'VILADAPENHA', label: 'Vila da Penha' },
-  { key: 'TOMAZINHO', label: 'Tomazinho' },
-  { key: 'MARIAHELENA', label: 'Vila Maria Helena' },
-]
+// Removido - agora usa IgrejaSelect dinâmico
 
 interface EditMinisterioProps {
   setOpenEdit: (open: string | null) => void
@@ -75,7 +72,7 @@ export default function EditMinisterio({
         },
         body: JSON.stringify({
           cargo: title,
-          ministryRole: igreja || null,
+          igrejaId: igreja || null,
         }),
       })
       const data = await response.json()

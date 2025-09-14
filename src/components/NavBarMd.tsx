@@ -20,9 +20,9 @@ export default function NavBarMd({ activePage, handleClick }: NavBarMdProps) {
       color: 'from-blue-500 to-blue-600',
     },
     {
-      href: '/enderecos',
+      href: '/igrejas',
       icon: FaMapMarkerAlt,
-      label: 'Endereços',
+      label: 'Igrejas',
       color: 'from-green-500 to-green-600',
     },
     {

@@ -18,7 +18,7 @@ type User = {
   login: string
   avatarUrl: string
   role: 'ADMIN' | 'SUPERADMIN' | 'MEMBRO'
-  ministryRole: string | null
+  igrejaId: string | null
   cargo?: string[]
 }
 
@@ -36,7 +36,8 @@ const cargos = [
   'AUXILIAR',
 ]
 
-const igrejas = ['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']
+// Removido: sistema antigo de igrejas fixas
+// Agora usa sistema dinâmico via API
 
 const funcoes = [
   { value: 'ADMIN', label: 'Administrador' },
@@ -73,7 +74,7 @@ export default function UsuariosPage() {
     total: users.filter((u) => {
       if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
       if (token?.role === 'ADMIN')
-        return u.role !== 'SUPERADMIN' && u.ministryRole === token.ministryRole
+        return u.role !== 'SUPERADMIN' && u.igrejaId === token.igrejaId
       return false
     }).length,
     pastores: users.filter((u) => {
@@ -87,7 +88,7 @@ export default function UsuariosPage() {
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
+          u.igrejaId === token.igrejaId &&
           u.cargo &&
           u.cargo.some((c) => c.includes('PASTOR'))
         )
@@ -101,7 +102,7 @@ export default function UsuariosPage() {
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
+          u.igrejaId === token.igrejaId &&
           u.cargo &&
           u.cargo.includes('DIACONO')
         )
@@ -115,7 +116,7 @@ export default function UsuariosPage() {
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
+          u.igrejaId === token.igrejaId &&
           u.role === 'MEMBRO'
         )
       }
@@ -124,18 +125,18 @@ export default function UsuariosPage() {
     admins: users.filter((u) => {
       if (token?.role === 'SUPERADMIN') return u.role === 'ADMIN'
       if (token?.role === 'ADMIN')
-        return u.role === 'ADMIN' && u.ministryRole === token.ministryRole
+        return u.role === 'ADMIN' && u.igrejaId === token.igrejaId
       return false
     }).length,
     semIgreja: users.filter((u) => {
       if (token?.role === 'SUPERADMIN') {
-        return u.role !== 'SUPERADMIN' && !u.ministryRole
+        return u.role !== 'SUPERADMIN' && !u.igrejaId
       }
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
-          !u.ministryRole
+          u.igrejaId === token.igrejaId &&
+          !u.igrejaId
         )
       }
       return false
@@ -147,7 +148,7 @@ export default function UsuariosPage() {
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
+          u.igrejaId === token.igrejaId &&
           (!u.cargo || u.cargo.length === 0)
         )
       }
@@ -166,7 +167,7 @@ export default function UsuariosPage() {
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
+          u.igrejaId === token.igrejaId &&
           u.cargo &&
           u.cargo.length > 0 &&
           !u.cargo.some((c) => c.includes('PASTOR')) &&
@@ -184,7 +185,7 @@ export default function UsuariosPage() {
       if (token?.role === 'ADMIN') {
         return (
           u.role !== 'SUPERADMIN' &&
-          u.ministryRole === token.ministryRole &&
+          u.igrejaId === token.igrejaId &&
           u.cargo &&
           u.cargo.includes('PRESBITERO')
         )
@@ -214,7 +215,7 @@ export default function UsuariosPage() {
           if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
           if (token?.role === 'ADMIN')
             return (
-              u.role !== 'SUPERADMIN' && u.ministryRole === token.ministryRole
+              u.role !== 'SUPERADMIN' && u.igrejaId === token.igrejaId
             )
           return false
         }),
@@ -229,12 +230,12 @@ export default function UsuariosPage() {
     let filtered = users.filter((u) => {
       if (token?.role === 'SUPERADMIN') return u.role !== 'SUPERADMIN'
       if (token?.role === 'ADMIN')
-        return u.role !== 'SUPERADMIN' && u.ministryRole === token.ministryRole
+        return u.role !== 'SUPERADMIN' && u.igrejaId === token.igrejaId
       return false
     })
 
     if (filterIgreja) {
-      filtered = filtered.filter((u) => u.ministryRole === filterIgreja)
+      filtered = filtered.filter((u) => u.igrejaId === filterIgreja)
     }
 
     if (filterCargo) {
@@ -299,7 +300,7 @@ export default function UsuariosPage() {
       const res = await fetch(`/api/auth/igreja/${selectedUser.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ministryRole: igreja || null }),
+        body: JSON.stringify({ igrejaId: igreja || null }),
       })
       if (!res.ok) {
         const err = await res.json()
@@ -312,7 +313,7 @@ export default function UsuariosPage() {
 
       setUsers((prev) =>
         prev.map((u) =>
-          u.id === selectedUser.id ? { ...u, ministryRole: igreja || null } : u,
+          u.id === selectedUser.id ? { ...u, igrejaId: igreja || null } : u,
         ),
       )
       toast.success('Igreja atualizada com sucesso!')
@@ -599,7 +600,7 @@ export default function UsuariosPage() {
               if (token?.role === 'ADMIN')
                 return (
                   u.role !== 'SUPERADMIN' &&
-                  u.ministryRole === token.ministryRole
+                  u.igrejaId === token.igrejaId
                 )
               return false
             }).length
@@ -676,14 +677,14 @@ export default function UsuariosPage() {
                     </button>
                   </td>
                   <td data-label="Igreja" className="py-2 text-center ">
-                    {getIgrejaLabel(u.ministryRole || '') ?? (
+                    {getIgrejaLabel(u.igrejaId || '') ?? (
                       <span className="text-gray-400">Sem Igreja</span>
                     )}
                     <button
                       className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                       onClick={() => {
                         setSelectedUser(u)
-                        setIgreja(u.ministryRole ?? '')
+                        setIgreja(u.igrejaId ?? '')
                         setShowIgrejaModal(true)
                       }}
                       title="Editar igreja"

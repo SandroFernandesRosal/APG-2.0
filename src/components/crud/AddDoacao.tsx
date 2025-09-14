@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import IgrejaSelect from './IgrejaSelect'
 
 interface AddDoacaoProps {
   setOpenDoacao: (open: boolean) => void
 }
 
 export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
-  const [local, setLocal] = useState<string>('')
+  const [igrejaId, setIgrejaId] = useState<string>('')
   const [banco, setBanco] = useState<string>('')
   const [conta, setConta] = useState<string>('')
   const [agencia, setAgencia] = useState<string>('')
@@ -28,14 +29,14 @@ export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('/api/doacao', {
-        method: 'POST',
+      const response = await fetch('/api/igrejas', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          local,
+          id: igrejaId,
           banco,
           conta,
           agencia,
@@ -48,13 +49,13 @@ export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
       const doacao = await response.json()
 
       if (response.status === 200 && doacao) {
-        toast.success('Doação criada com sucesso!')
+        toast.success('Dados de doação atualizados com sucesso!')
         setOpenDoacao(false)
         router.push('/')
         window.location.href = '/'
         return doacao
       } else {
-        toast.error('Erro ao criar doação. Tente novamente.')
+        toast.error('Erro ao atualizar dados de doação. Tente novamente.')
       }
 
       console.log(doacao)
@@ -77,7 +78,7 @@ export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
         {/* Header */}
         <div className="flex items-center justify-between w-full p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
           <h1 className="text-xl font-bold text-gray-800 dark:text-white">
-            Adicionar Doação
+            Configurar Doações da Igreja
           </h1>
           <button
             type="button"
@@ -94,18 +95,15 @@ export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
           <div className="space-y-4">
             <div>
               <label
-                htmlFor="local"
+                htmlFor="igreja"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                Local
+                Igreja
               </label>
-              <input
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                type="text"
-                name="local"
-                id="local"
-                placeholder="Digite um local"
-                onChange={(e) => setLocal(e.target.value)}
+              <IgrejaSelect
+                value={igrejaId}
+                onChange={setIgrejaId}
+                placeholder="Selecione uma igreja"
                 required
               />
             </div>
@@ -237,10 +235,10 @@ export default function AddDoacao({ setOpenDoacao }: AddDoacaoProps) {
             {isSubmitting ? (
               <>
                 <FaSpinner className="animate-spin" />
-                <span>Adicionando...</span>
+                <span>Atualizando...</span>
               </>
             ) : (
-              <span>Adicionar Doação</span>
+              <span>Atualizar Dados</span>
             )}
           </button>
         </div>

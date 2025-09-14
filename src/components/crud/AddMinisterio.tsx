@@ -11,6 +11,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
+import IgrejaSelect from '@/components/IgrejaSelect'
 
 interface AddMinisterioProps {
   openMinisterio: boolean
@@ -33,15 +34,9 @@ export default function AddMinisterio({
 
   const decodedToken = useToken()
 
-  const [role, setRole] = useState<string>(
-    decodedToken?.role === 'ADMIN' ? (decodedToken.ministryRole ?? '') : local,
-  )
+  const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
 
-  useEffect(() => {
-    if (decodedToken?.role === 'ADMIN') {
-      setRole(decodedToken.ministryRole ?? '')
-    }
-  }, [decodedToken])
+  // Removido: lógica do sistema antigo
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -89,8 +84,8 @@ export default function AddMinisterio({
         body: JSON.stringify({
           name,
           title,
-          local: role,
-          role,
+          local: 'Igreja selecionada', // Usar igreja selecionada
+          igrejaId, // Nova estrutura
           coverUrl,
         }),
       })
@@ -236,20 +231,12 @@ export default function AddMinisterio({
               >
                 Selecione a igreja
               </label>
-              <select
-                id="igreja"
-                name="igreja"
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
+              <IgrejaSelect
+                value={igrejaId}
+                onChange={setIgrejaId}
                 disabled={decodedToken?.role === 'ADMIN'}
-              >
-                <option value="">Selecione...</option>
-                <option value="VILADAPENHA">Vila da Penha</option>
-                <option value="MARIAHELENA">Maria Helena</option>
-                <option value="TOMAZINHO">Tomazinho</option>
-              </select>
+                placeholder="Selecione a igreja..."
+              />
             </div>
           </div>
         </div>

@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Igreja
+ * 
+ */
+export type Igreja = $Result.DefaultSelection<Prisma.$IgrejaPayload>
+/**
  * Model User
  * 
  */
@@ -33,16 +38,6 @@ export type Ministerio = $Result.DefaultSelection<Prisma.$MinisterioPayload>
  * 
  */
 export type Agenda = $Result.DefaultSelection<Prisma.$AgendaPayload>
-/**
- * Model Doacao
- * 
- */
-export type Doacao = $Result.DefaultSelection<Prisma.$DoacaoPayload>
-/**
- * Model Endereco
- * 
- */
-export type Endereco = $Result.DefaultSelection<Prisma.$EnderecoPayload>
 /**
  * Model Contato
  * 
@@ -112,15 +107,6 @@ export namespace $Enums {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
-export const MinistryRole: {
-  VILADAPENHA: 'VILADAPENHA',
-  TOMAZINHO: 'TOMAZINHO',
-  MARIAHELENA: 'MARIAHELENA'
-};
-
-export type MinistryRole = (typeof MinistryRole)[keyof typeof MinistryRole]
-
-
 export const CargoRole: {
   PASTOR: 'PASTOR',
   DIACONO: 'DIACONO',
@@ -143,10 +129,6 @@ export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
 
-export type MinistryRole = $Enums.MinistryRole
-
-export const MinistryRole: typeof $Enums.MinistryRole
-
 export type CargoRole = $Enums.CargoRole
 
 export const CargoRole: typeof $Enums.CargoRole
@@ -158,8 +140,8 @@ export const CargoRole: typeof $Enums.CargoRole
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Igrejas
+ * const igrejas = await prisma.igreja.findMany()
  * ```
  *
  *
@@ -179,8 +161,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Igrejas
+   * const igrejas = await prisma.igreja.findMany()
    * ```
    *
    *
@@ -277,6 +259,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.igreja`: Exposes CRUD operations for the **Igreja** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Igrejas
+    * const igrejas = await prisma.igreja.findMany()
+    * ```
+    */
+  get igreja(): Prisma.IgrejaDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -315,26 +307,6 @@ export class PrismaClient<
     * ```
     */
   get agenda(): Prisma.AgendaDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.doacao`: Exposes CRUD operations for the **Doacao** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Doacaos
-    * const doacaos = await prisma.doacao.findMany()
-    * ```
-    */
-  get doacao(): Prisma.DoacaoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.endereco`: Exposes CRUD operations for the **Endereco** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Enderecos
-    * const enderecos = await prisma.endereco.findMany()
-    * ```
-    */
-  get endereco(): Prisma.EnderecoDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.contato`: Exposes CRUD operations for the **Contato** model.
@@ -885,12 +857,11 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Igreja: 'Igreja',
     User: 'User',
     New: 'New',
     Ministerio: 'Ministerio',
     Agenda: 'Agenda',
-    Doacao: 'Doacao',
-    Endereco: 'Endereco',
     Contato: 'Contato',
     Sobre: 'Sobre',
     SobreLider: 'SobreLider',
@@ -920,10 +891,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "new" | "ministerio" | "agenda" | "doacao" | "endereco" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "passwordResetToken" | "testemunho" | "bibleFavorite" | "bibleReadingPlan" | "bibleReadChapter" | "bibleReadVerse" | "auditLog"
+      modelProps: "igreja" | "user" | "new" | "ministerio" | "agenda" | "contato" | "sobre" | "sobreLider" | "refreshToken" | "passwordResetToken" | "testemunho" | "bibleFavorite" | "bibleReadingPlan" | "bibleReadChapter" | "bibleReadVerse" | "auditLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Igreja: {
+        payload: Prisma.$IgrejaPayload<ExtArgs>
+        fields: Prisma.IgrejaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IgrejaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IgrejaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>
+          }
+          findFirst: {
+            args: Prisma.IgrejaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IgrejaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>
+          }
+          findMany: {
+            args: Prisma.IgrejaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>[]
+          }
+          create: {
+            args: Prisma.IgrejaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>
+          }
+          createMany: {
+            args: Prisma.IgrejaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IgrejaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>[]
+          }
+          delete: {
+            args: Prisma.IgrejaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>
+          }
+          update: {
+            args: Prisma.IgrejaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>
+          }
+          deleteMany: {
+            args: Prisma.IgrejaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IgrejaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IgrejaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>[]
+          }
+          upsert: {
+            args: Prisma.IgrejaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IgrejaPayload>
+          }
+          aggregate: {
+            args: Prisma.IgrejaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIgreja>
+          }
+          groupBy: {
+            args: Prisma.IgrejaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IgrejaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IgrejaCountArgs<ExtArgs>
+            result: $Utils.Optional<IgrejaCountAggregateOutputType> | number
+          }
+        }
+      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -1217,154 +1262,6 @@ export namespace Prisma {
           count: {
             args: Prisma.AgendaCountArgs<ExtArgs>
             result: $Utils.Optional<AgendaCountAggregateOutputType> | number
-          }
-        }
-      }
-      Doacao: {
-        payload: Prisma.$DoacaoPayload<ExtArgs>
-        fields: Prisma.DoacaoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DoacaoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DoacaoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>
-          }
-          findFirst: {
-            args: Prisma.DoacaoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DoacaoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>
-          }
-          findMany: {
-            args: Prisma.DoacaoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>[]
-          }
-          create: {
-            args: Prisma.DoacaoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>
-          }
-          createMany: {
-            args: Prisma.DoacaoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DoacaoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>[]
-          }
-          delete: {
-            args: Prisma.DoacaoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>
-          }
-          update: {
-            args: Prisma.DoacaoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>
-          }
-          deleteMany: {
-            args: Prisma.DoacaoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DoacaoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DoacaoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>[]
-          }
-          upsert: {
-            args: Prisma.DoacaoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoacaoPayload>
-          }
-          aggregate: {
-            args: Prisma.DoacaoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDoacao>
-          }
-          groupBy: {
-            args: Prisma.DoacaoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DoacaoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DoacaoCountArgs<ExtArgs>
-            result: $Utils.Optional<DoacaoCountAggregateOutputType> | number
-          }
-        }
-      }
-      Endereco: {
-        payload: Prisma.$EnderecoPayload<ExtArgs>
-        fields: Prisma.EnderecoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.EnderecoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.EnderecoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
-          }
-          findFirst: {
-            args: Prisma.EnderecoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.EnderecoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
-          }
-          findMany: {
-            args: Prisma.EnderecoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>[]
-          }
-          create: {
-            args: Prisma.EnderecoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
-          }
-          createMany: {
-            args: Prisma.EnderecoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.EnderecoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>[]
-          }
-          delete: {
-            args: Prisma.EnderecoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
-          }
-          update: {
-            args: Prisma.EnderecoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
-          }
-          deleteMany: {
-            args: Prisma.EnderecoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.EnderecoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.EnderecoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>[]
-          }
-          upsert: {
-            args: Prisma.EnderecoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
-          }
-          aggregate: {
-            args: Prisma.EnderecoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEndereco>
-          }
-          groupBy: {
-            args: Prisma.EnderecoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EnderecoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.EnderecoCountArgs<ExtArgs>
-            result: $Utils.Optional<EnderecoCountAggregateOutputType> | number
           }
         }
       }
@@ -2266,12 +2163,11 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    igreja?: IgrejaOmit
     user?: UserOmit
     new?: NewOmit
     ministerio?: MinisterioOmit
     agenda?: AgendaOmit
-    doacao?: DoacaoOmit
-    endereco?: EnderecoOmit
     contato?: ContatoOmit
     sobre?: SobreOmit
     sobreLider?: SobreLiderOmit
@@ -2373,14 +2269,79 @@ export namespace Prisma {
 
 
   /**
+   * Count Type IgrejaCountOutputType
+   */
+
+  export type IgrejaCountOutputType = {
+    users: number
+    news: number
+    ministerios: number
+    agendas: number
+    testemunhos: number
+  }
+
+  export type IgrejaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | IgrejaCountOutputTypeCountUsersArgs
+    news?: boolean | IgrejaCountOutputTypeCountNewsArgs
+    ministerios?: boolean | IgrejaCountOutputTypeCountMinisteriosArgs
+    agendas?: boolean | IgrejaCountOutputTypeCountAgendasArgs
+    testemunhos?: boolean | IgrejaCountOutputTypeCountTestemunhosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * IgrejaCountOutputType without action
+   */
+  export type IgrejaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IgrejaCountOutputType
+     */
+    select?: IgrejaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * IgrejaCountOutputType without action
+   */
+  export type IgrejaCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * IgrejaCountOutputType without action
+   */
+  export type IgrejaCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewWhereInput
+  }
+
+  /**
+   * IgrejaCountOutputType without action
+   */
+  export type IgrejaCountOutputTypeCountMinisteriosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MinisterioWhereInput
+  }
+
+  /**
+   * IgrejaCountOutputType without action
+   */
+  export type IgrejaCountOutputTypeCountAgendasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AgendaWhereInput
+  }
+
+  /**
+   * IgrejaCountOutputType without action
+   */
+  export type IgrejaCountOutputTypeCountTestemunhosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TestemunhoWhereInput
+  }
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
   export type UserCountOutputType = {
     agenda: number
     contato: number
-    doacao: number
-    endereco: number
     ministerio: number
     news: number
     PasswordResetToken: number
@@ -2397,8 +2358,6 @@ export namespace Prisma {
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | UserCountOutputTypeCountAgendaArgs
     contato?: boolean | UserCountOutputTypeCountContatoArgs
-    doacao?: boolean | UserCountOutputTypeCountDoacaoArgs
-    endereco?: boolean | UserCountOutputTypeCountEnderecoArgs
     ministerio?: boolean | UserCountOutputTypeCountMinisterioArgs
     news?: boolean | UserCountOutputTypeCountNewsArgs
     PasswordResetToken?: boolean | UserCountOutputTypeCountPasswordResetTokenArgs
@@ -2435,20 +2394,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountContatoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContatoWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountDoacaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DoacaoWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountEnderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EnderecoWhereInput
   }
 
   /**
@@ -2534,6 +2479,1318 @@ export namespace Prisma {
    */
 
   /**
+   * Model Igreja
+   */
+
+  export type AggregateIgreja = {
+    _count: IgrejaCountAggregateOutputType | null
+    _min: IgrejaMinAggregateOutputType | null
+    _max: IgrejaMaxAggregateOutputType | null
+  }
+
+  export type IgrejaMinAggregateOutputType = {
+    id: string | null
+    nome: string | null
+    slug: string | null
+    ativa: boolean | null
+    endereco: string | null
+    descricao: string | null
+    tipo: string | null
+    banco: string | null
+    conta: string | null
+    agencia: string | null
+    nomebanco: string | null
+    pix: string | null
+    nomepix: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IgrejaMaxAggregateOutputType = {
+    id: string | null
+    nome: string | null
+    slug: string | null
+    ativa: boolean | null
+    endereco: string | null
+    descricao: string | null
+    tipo: string | null
+    banco: string | null
+    conta: string | null
+    agencia: string | null
+    nomebanco: string | null
+    pix: string | null
+    nomepix: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IgrejaCountAggregateOutputType = {
+    id: number
+    nome: number
+    slug: number
+    ativa: number
+    endereco: number
+    descricao: number
+    tipo: number
+    banco: number
+    conta: number
+    agencia: number
+    nomebanco: number
+    pix: number
+    nomepix: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IgrejaMinAggregateInputType = {
+    id?: true
+    nome?: true
+    slug?: true
+    ativa?: true
+    endereco?: true
+    descricao?: true
+    tipo?: true
+    banco?: true
+    conta?: true
+    agencia?: true
+    nomebanco?: true
+    pix?: true
+    nomepix?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IgrejaMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    slug?: true
+    ativa?: true
+    endereco?: true
+    descricao?: true
+    tipo?: true
+    banco?: true
+    conta?: true
+    agencia?: true
+    nomebanco?: true
+    pix?: true
+    nomepix?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IgrejaCountAggregateInputType = {
+    id?: true
+    nome?: true
+    slug?: true
+    ativa?: true
+    endereco?: true
+    descricao?: true
+    tipo?: true
+    banco?: true
+    conta?: true
+    agencia?: true
+    nomebanco?: true
+    pix?: true
+    nomepix?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IgrejaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Igreja to aggregate.
+     */
+    where?: IgrejaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Igrejas to fetch.
+     */
+    orderBy?: IgrejaOrderByWithRelationInput | IgrejaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IgrejaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Igrejas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Igrejas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Igrejas
+    **/
+    _count?: true | IgrejaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IgrejaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IgrejaMaxAggregateInputType
+  }
+
+  export type GetIgrejaAggregateType<T extends IgrejaAggregateArgs> = {
+        [P in keyof T & keyof AggregateIgreja]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIgreja[P]>
+      : GetScalarType<T[P], AggregateIgreja[P]>
+  }
+
+
+
+
+  export type IgrejaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IgrejaWhereInput
+    orderBy?: IgrejaOrderByWithAggregationInput | IgrejaOrderByWithAggregationInput[]
+    by: IgrejaScalarFieldEnum[] | IgrejaScalarFieldEnum
+    having?: IgrejaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IgrejaCountAggregateInputType | true
+    _min?: IgrejaMinAggregateInputType
+    _max?: IgrejaMaxAggregateInputType
+  }
+
+  export type IgrejaGroupByOutputType = {
+    id: string
+    nome: string
+    slug: string
+    ativa: boolean
+    endereco: string | null
+    descricao: string | null
+    tipo: string | null
+    banco: string | null
+    conta: string | null
+    agencia: string | null
+    nomebanco: string | null
+    pix: string | null
+    nomepix: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: IgrejaCountAggregateOutputType | null
+    _min: IgrejaMinAggregateOutputType | null
+    _max: IgrejaMaxAggregateOutputType | null
+  }
+
+  type GetIgrejaGroupByPayload<T extends IgrejaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IgrejaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IgrejaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IgrejaGroupByOutputType[P]>
+            : GetScalarType<T[P], IgrejaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IgrejaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    slug?: boolean
+    ativa?: boolean
+    endereco?: boolean
+    descricao?: boolean
+    tipo?: boolean
+    banco?: boolean
+    conta?: boolean
+    agencia?: boolean
+    nomebanco?: boolean
+    pix?: boolean
+    nomepix?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    users?: boolean | Igreja$usersArgs<ExtArgs>
+    news?: boolean | Igreja$newsArgs<ExtArgs>
+    ministerios?: boolean | Igreja$ministeriosArgs<ExtArgs>
+    agendas?: boolean | Igreja$agendasArgs<ExtArgs>
+    testemunhos?: boolean | Igreja$testemunhosArgs<ExtArgs>
+    _count?: boolean | IgrejaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["igreja"]>
+
+  export type IgrejaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    slug?: boolean
+    ativa?: boolean
+    endereco?: boolean
+    descricao?: boolean
+    tipo?: boolean
+    banco?: boolean
+    conta?: boolean
+    agencia?: boolean
+    nomebanco?: boolean
+    pix?: boolean
+    nomepix?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["igreja"]>
+
+  export type IgrejaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    slug?: boolean
+    ativa?: boolean
+    endereco?: boolean
+    descricao?: boolean
+    tipo?: boolean
+    banco?: boolean
+    conta?: boolean
+    agencia?: boolean
+    nomebanco?: boolean
+    pix?: boolean
+    nomepix?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["igreja"]>
+
+  export type IgrejaSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    slug?: boolean
+    ativa?: boolean
+    endereco?: boolean
+    descricao?: boolean
+    tipo?: boolean
+    banco?: boolean
+    conta?: boolean
+    agencia?: boolean
+    nomebanco?: boolean
+    pix?: boolean
+    nomepix?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "slug" | "ativa" | "endereco" | "descricao" | "tipo" | "banco" | "conta" | "agencia" | "nomebanco" | "pix" | "nomepix" | "createdAt" | "updatedAt", ExtArgs["result"]["igreja"]>
+  export type IgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | Igreja$usersArgs<ExtArgs>
+    news?: boolean | Igreja$newsArgs<ExtArgs>
+    ministerios?: boolean | Igreja$ministeriosArgs<ExtArgs>
+    agendas?: boolean | Igreja$agendasArgs<ExtArgs>
+    testemunhos?: boolean | Igreja$testemunhosArgs<ExtArgs>
+    _count?: boolean | IgrejaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type IgrejaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type IgrejaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $IgrejaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Igreja"
+    objects: {
+      users: Prisma.$UserPayload<ExtArgs>[]
+      news: Prisma.$NewPayload<ExtArgs>[]
+      ministerios: Prisma.$MinisterioPayload<ExtArgs>[]
+      agendas: Prisma.$AgendaPayload<ExtArgs>[]
+      testemunhos: Prisma.$TestemunhoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nome: string
+      slug: string
+      ativa: boolean
+      endereco: string | null
+      descricao: string | null
+      tipo: string | null
+      banco: string | null
+      conta: string | null
+      agencia: string | null
+      nomebanco: string | null
+      pix: string | null
+      nomepix: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["igreja"]>
+    composites: {}
+  }
+
+  type IgrejaGetPayload<S extends boolean | null | undefined | IgrejaDefaultArgs> = $Result.GetResult<Prisma.$IgrejaPayload, S>
+
+  type IgrejaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IgrejaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IgrejaCountAggregateInputType | true
+    }
+
+  export interface IgrejaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Igreja'], meta: { name: 'Igreja' } }
+    /**
+     * Find zero or one Igreja that matches the filter.
+     * @param {IgrejaFindUniqueArgs} args - Arguments to find a Igreja
+     * @example
+     * // Get one Igreja
+     * const igreja = await prisma.igreja.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IgrejaFindUniqueArgs>(args: SelectSubset<T, IgrejaFindUniqueArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Igreja that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IgrejaFindUniqueOrThrowArgs} args - Arguments to find a Igreja
+     * @example
+     * // Get one Igreja
+     * const igreja = await prisma.igreja.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IgrejaFindUniqueOrThrowArgs>(args: SelectSubset<T, IgrejaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Igreja that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaFindFirstArgs} args - Arguments to find a Igreja
+     * @example
+     * // Get one Igreja
+     * const igreja = await prisma.igreja.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IgrejaFindFirstArgs>(args?: SelectSubset<T, IgrejaFindFirstArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Igreja that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaFindFirstOrThrowArgs} args - Arguments to find a Igreja
+     * @example
+     * // Get one Igreja
+     * const igreja = await prisma.igreja.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IgrejaFindFirstOrThrowArgs>(args?: SelectSubset<T, IgrejaFindFirstOrThrowArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Igrejas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Igrejas
+     * const igrejas = await prisma.igreja.findMany()
+     * 
+     * // Get first 10 Igrejas
+     * const igrejas = await prisma.igreja.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const igrejaWithIdOnly = await prisma.igreja.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IgrejaFindManyArgs>(args?: SelectSubset<T, IgrejaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Igreja.
+     * @param {IgrejaCreateArgs} args - Arguments to create a Igreja.
+     * @example
+     * // Create one Igreja
+     * const Igreja = await prisma.igreja.create({
+     *   data: {
+     *     // ... data to create a Igreja
+     *   }
+     * })
+     * 
+     */
+    create<T extends IgrejaCreateArgs>(args: SelectSubset<T, IgrejaCreateArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Igrejas.
+     * @param {IgrejaCreateManyArgs} args - Arguments to create many Igrejas.
+     * @example
+     * // Create many Igrejas
+     * const igreja = await prisma.igreja.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IgrejaCreateManyArgs>(args?: SelectSubset<T, IgrejaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Igrejas and returns the data saved in the database.
+     * @param {IgrejaCreateManyAndReturnArgs} args - Arguments to create many Igrejas.
+     * @example
+     * // Create many Igrejas
+     * const igreja = await prisma.igreja.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Igrejas and only return the `id`
+     * const igrejaWithIdOnly = await prisma.igreja.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IgrejaCreateManyAndReturnArgs>(args?: SelectSubset<T, IgrejaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Igreja.
+     * @param {IgrejaDeleteArgs} args - Arguments to delete one Igreja.
+     * @example
+     * // Delete one Igreja
+     * const Igreja = await prisma.igreja.delete({
+     *   where: {
+     *     // ... filter to delete one Igreja
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IgrejaDeleteArgs>(args: SelectSubset<T, IgrejaDeleteArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Igreja.
+     * @param {IgrejaUpdateArgs} args - Arguments to update one Igreja.
+     * @example
+     * // Update one Igreja
+     * const igreja = await prisma.igreja.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IgrejaUpdateArgs>(args: SelectSubset<T, IgrejaUpdateArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Igrejas.
+     * @param {IgrejaDeleteManyArgs} args - Arguments to filter Igrejas to delete.
+     * @example
+     * // Delete a few Igrejas
+     * const { count } = await prisma.igreja.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IgrejaDeleteManyArgs>(args?: SelectSubset<T, IgrejaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Igrejas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Igrejas
+     * const igreja = await prisma.igreja.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IgrejaUpdateManyArgs>(args: SelectSubset<T, IgrejaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Igrejas and returns the data updated in the database.
+     * @param {IgrejaUpdateManyAndReturnArgs} args - Arguments to update many Igrejas.
+     * @example
+     * // Update many Igrejas
+     * const igreja = await prisma.igreja.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Igrejas and only return the `id`
+     * const igrejaWithIdOnly = await prisma.igreja.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IgrejaUpdateManyAndReturnArgs>(args: SelectSubset<T, IgrejaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Igreja.
+     * @param {IgrejaUpsertArgs} args - Arguments to update or create a Igreja.
+     * @example
+     * // Update or create a Igreja
+     * const igreja = await prisma.igreja.upsert({
+     *   create: {
+     *     // ... data to create a Igreja
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Igreja we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IgrejaUpsertArgs>(args: SelectSubset<T, IgrejaUpsertArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Igrejas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaCountArgs} args - Arguments to filter Igrejas to count.
+     * @example
+     * // Count the number of Igrejas
+     * const count = await prisma.igreja.count({
+     *   where: {
+     *     // ... the filter for the Igrejas we want to count
+     *   }
+     * })
+    **/
+    count<T extends IgrejaCountArgs>(
+      args?: Subset<T, IgrejaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IgrejaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Igreja.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IgrejaAggregateArgs>(args: Subset<T, IgrejaAggregateArgs>): Prisma.PrismaPromise<GetIgrejaAggregateType<T>>
+
+    /**
+     * Group by Igreja.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IgrejaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IgrejaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IgrejaGroupByArgs['orderBy'] }
+        : { orderBy?: IgrejaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IgrejaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIgrejaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Igreja model
+   */
+  readonly fields: IgrejaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Igreja.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IgrejaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends Igreja$usersArgs<ExtArgs> = {}>(args?: Subset<T, Igreja$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    news<T extends Igreja$newsArgs<ExtArgs> = {}>(args?: Subset<T, Igreja$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ministerios<T extends Igreja$ministeriosArgs<ExtArgs> = {}>(args?: Subset<T, Igreja$ministeriosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    agendas<T extends Igreja$agendasArgs<ExtArgs> = {}>(args?: Subset<T, Igreja$agendasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    testemunhos<T extends Igreja$testemunhosArgs<ExtArgs> = {}>(args?: Subset<T, Igreja$testemunhosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestemunhoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Igreja model
+   */
+  interface IgrejaFieldRefs {
+    readonly id: FieldRef<"Igreja", 'String'>
+    readonly nome: FieldRef<"Igreja", 'String'>
+    readonly slug: FieldRef<"Igreja", 'String'>
+    readonly ativa: FieldRef<"Igreja", 'Boolean'>
+    readonly endereco: FieldRef<"Igreja", 'String'>
+    readonly descricao: FieldRef<"Igreja", 'String'>
+    readonly tipo: FieldRef<"Igreja", 'String'>
+    readonly banco: FieldRef<"Igreja", 'String'>
+    readonly conta: FieldRef<"Igreja", 'String'>
+    readonly agencia: FieldRef<"Igreja", 'String'>
+    readonly nomebanco: FieldRef<"Igreja", 'String'>
+    readonly pix: FieldRef<"Igreja", 'String'>
+    readonly nomepix: FieldRef<"Igreja", 'String'>
+    readonly createdAt: FieldRef<"Igreja", 'DateTime'>
+    readonly updatedAt: FieldRef<"Igreja", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Igreja findUnique
+   */
+  export type IgrejaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * Filter, which Igreja to fetch.
+     */
+    where: IgrejaWhereUniqueInput
+  }
+
+  /**
+   * Igreja findUniqueOrThrow
+   */
+  export type IgrejaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * Filter, which Igreja to fetch.
+     */
+    where: IgrejaWhereUniqueInput
+  }
+
+  /**
+   * Igreja findFirst
+   */
+  export type IgrejaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * Filter, which Igreja to fetch.
+     */
+    where?: IgrejaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Igrejas to fetch.
+     */
+    orderBy?: IgrejaOrderByWithRelationInput | IgrejaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Igrejas.
+     */
+    cursor?: IgrejaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Igrejas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Igrejas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Igrejas.
+     */
+    distinct?: IgrejaScalarFieldEnum | IgrejaScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja findFirstOrThrow
+   */
+  export type IgrejaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * Filter, which Igreja to fetch.
+     */
+    where?: IgrejaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Igrejas to fetch.
+     */
+    orderBy?: IgrejaOrderByWithRelationInput | IgrejaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Igrejas.
+     */
+    cursor?: IgrejaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Igrejas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Igrejas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Igrejas.
+     */
+    distinct?: IgrejaScalarFieldEnum | IgrejaScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja findMany
+   */
+  export type IgrejaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * Filter, which Igrejas to fetch.
+     */
+    where?: IgrejaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Igrejas to fetch.
+     */
+    orderBy?: IgrejaOrderByWithRelationInput | IgrejaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Igrejas.
+     */
+    cursor?: IgrejaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Igrejas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Igrejas.
+     */
+    skip?: number
+    distinct?: IgrejaScalarFieldEnum | IgrejaScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja create
+   */
+  export type IgrejaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Igreja.
+     */
+    data: XOR<IgrejaCreateInput, IgrejaUncheckedCreateInput>
+  }
+
+  /**
+   * Igreja createMany
+   */
+  export type IgrejaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Igrejas.
+     */
+    data: IgrejaCreateManyInput | IgrejaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Igreja createManyAndReturn
+   */
+  export type IgrejaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Igrejas.
+     */
+    data: IgrejaCreateManyInput | IgrejaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Igreja update
+   */
+  export type IgrejaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Igreja.
+     */
+    data: XOR<IgrejaUpdateInput, IgrejaUncheckedUpdateInput>
+    /**
+     * Choose, which Igreja to update.
+     */
+    where: IgrejaWhereUniqueInput
+  }
+
+  /**
+   * Igreja updateMany
+   */
+  export type IgrejaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Igrejas.
+     */
+    data: XOR<IgrejaUpdateManyMutationInput, IgrejaUncheckedUpdateManyInput>
+    /**
+     * Filter which Igrejas to update
+     */
+    where?: IgrejaWhereInput
+    /**
+     * Limit how many Igrejas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Igreja updateManyAndReturn
+   */
+  export type IgrejaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * The data used to update Igrejas.
+     */
+    data: XOR<IgrejaUpdateManyMutationInput, IgrejaUncheckedUpdateManyInput>
+    /**
+     * Filter which Igrejas to update
+     */
+    where?: IgrejaWhereInput
+    /**
+     * Limit how many Igrejas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Igreja upsert
+   */
+  export type IgrejaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Igreja to update in case it exists.
+     */
+    where: IgrejaWhereUniqueInput
+    /**
+     * In case the Igreja found by the `where` argument doesn't exist, create a new Igreja with this data.
+     */
+    create: XOR<IgrejaCreateInput, IgrejaUncheckedCreateInput>
+    /**
+     * In case the Igreja was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IgrejaUpdateInput, IgrejaUncheckedUpdateInput>
+  }
+
+  /**
+   * Igreja delete
+   */
+  export type IgrejaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    /**
+     * Filter which Igreja to delete.
+     */
+    where: IgrejaWhereUniqueInput
+  }
+
+  /**
+   * Igreja deleteMany
+   */
+  export type IgrejaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Igrejas to delete
+     */
+    where?: IgrejaWhereInput
+    /**
+     * Limit how many Igrejas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Igreja.users
+   */
+  export type Igreja$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja.news
+   */
+  export type Igreja$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the New
+     */
+    select?: NewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the New
+     */
+    omit?: NewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewInclude<ExtArgs> | null
+    where?: NewWhereInput
+    orderBy?: NewOrderByWithRelationInput | NewOrderByWithRelationInput[]
+    cursor?: NewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewScalarFieldEnum | NewScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja.ministerios
+   */
+  export type Igreja$ministeriosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ministerio
+     */
+    select?: MinisterioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ministerio
+     */
+    omit?: MinisterioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MinisterioInclude<ExtArgs> | null
+    where?: MinisterioWhereInput
+    orderBy?: MinisterioOrderByWithRelationInput | MinisterioOrderByWithRelationInput[]
+    cursor?: MinisterioWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MinisterioScalarFieldEnum | MinisterioScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja.agendas
+   */
+  export type Igreja$agendasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AgendaInclude<ExtArgs> | null
+    where?: AgendaWhereInput
+    orderBy?: AgendaOrderByWithRelationInput | AgendaOrderByWithRelationInput[]
+    cursor?: AgendaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AgendaScalarFieldEnum | AgendaScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja.testemunhos
+   */
+  export type Igreja$testemunhosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testemunho
+     */
+    select?: TestemunhoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Testemunho
+     */
+    omit?: TestemunhoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TestemunhoInclude<ExtArgs> | null
+    where?: TestemunhoWhereInput
+    orderBy?: TestemunhoOrderByWithRelationInput | TestemunhoOrderByWithRelationInput[]
+    cursor?: TestemunhoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TestemunhoScalarFieldEnum | TestemunhoScalarFieldEnum[]
+  }
+
+  /**
+   * Igreja without action
+   */
+  export type IgrejaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
@@ -2550,7 +3807,7 @@ export namespace Prisma {
     avatarUrl: string | null
     password: string | null
     role: $Enums.UserRole | null
-    ministryRole: $Enums.MinistryRole | null
+    igrejaId: string | null
     expires: Date | null
   }
 
@@ -2561,7 +3818,7 @@ export namespace Prisma {
     avatarUrl: string | null
     password: string | null
     role: $Enums.UserRole | null
-    ministryRole: $Enums.MinistryRole | null
+    igrejaId: string | null
     expires: Date | null
   }
 
@@ -2572,7 +3829,7 @@ export namespace Prisma {
     avatarUrl: number
     password: number
     role: number
-    ministryRole: number
+    igrejaId: number
     expires: number
     cargo: number
     _all: number
@@ -2586,7 +3843,7 @@ export namespace Prisma {
     avatarUrl?: true
     password?: true
     role?: true
-    ministryRole?: true
+    igrejaId?: true
     expires?: true
   }
 
@@ -2597,7 +3854,7 @@ export namespace Prisma {
     avatarUrl?: true
     password?: true
     role?: true
-    ministryRole?: true
+    igrejaId?: true
     expires?: true
   }
 
@@ -2608,7 +3865,7 @@ export namespace Prisma {
     avatarUrl?: true
     password?: true
     role?: true
-    ministryRole?: true
+    igrejaId?: true
     expires?: true
     cargo?: true
     _all?: true
@@ -2693,7 +3950,7 @@ export namespace Prisma {
     avatarUrl: string | null
     password: string
     role: $Enums.UserRole
-    ministryRole: $Enums.MinistryRole | null
+    igrejaId: string | null
     expires: Date | null
     cargo: $Enums.CargoRole[]
     _count: UserCountAggregateOutputType | null
@@ -2722,13 +3979,11 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     expires?: boolean
     cargo?: boolean
     agenda?: boolean | User$agendaArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
-    doacao?: boolean | User$doacaoArgs<ExtArgs>
-    endereco?: boolean | User$enderecoArgs<ExtArgs>
     ministerio?: boolean | User$ministerioArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
     PasswordResetToken?: boolean | User$PasswordResetTokenArgs<ExtArgs>
@@ -2741,6 +3996,7 @@ export namespace Prisma {
     bibleReadingPlan?: boolean | User$bibleReadingPlanArgs<ExtArgs>
     bibleReadChapters?: boolean | User$bibleReadChaptersArgs<ExtArgs>
     bibleReadVerses?: boolean | User$bibleReadVersesArgs<ExtArgs>
+    igreja?: boolean | User$igrejaArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2751,9 +4007,10 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     expires?: boolean
     cargo?: boolean
+    igreja?: boolean | User$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2763,9 +4020,10 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     expires?: boolean
     cargo?: boolean
+    igreja?: boolean | User$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2775,17 +4033,15 @@ export namespace Prisma {
     avatarUrl?: boolean
     password?: boolean
     role?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     expires?: boolean
     cargo?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "ministryRole" | "expires" | "cargo", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "login" | "name" | "avatarUrl" | "password" | "role" | "igrejaId" | "expires" | "cargo", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | User$agendaArgs<ExtArgs>
     contato?: boolean | User$contatoArgs<ExtArgs>
-    doacao?: boolean | User$doacaoArgs<ExtArgs>
-    endereco?: boolean | User$enderecoArgs<ExtArgs>
     ministerio?: boolean | User$ministerioArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
     PasswordResetToken?: boolean | User$PasswordResetTokenArgs<ExtArgs>
@@ -2798,18 +4054,21 @@ export namespace Prisma {
     bibleReadingPlan?: boolean | User$bibleReadingPlanArgs<ExtArgs>
     bibleReadChapters?: boolean | User$bibleReadChaptersArgs<ExtArgs>
     bibleReadVerses?: boolean | User$bibleReadVersesArgs<ExtArgs>
+    igreja?: boolean | User$igrejaArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    igreja?: boolean | User$igrejaArgs<ExtArgs>
+  }
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    igreja?: boolean | User$igrejaArgs<ExtArgs>
+  }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
       agenda: Prisma.$AgendaPayload<ExtArgs>[]
       contato: Prisma.$ContatoPayload<ExtArgs>[]
-      doacao: Prisma.$DoacaoPayload<ExtArgs>[]
-      endereco: Prisma.$EnderecoPayload<ExtArgs>[]
       ministerio: Prisma.$MinisterioPayload<ExtArgs>[]
       news: Prisma.$NewPayload<ExtArgs>[]
       PasswordResetToken: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
@@ -2822,6 +4081,7 @@ export namespace Prisma {
       bibleReadingPlan: Prisma.$BibleReadingPlanPayload<ExtArgs> | null
       bibleReadChapters: Prisma.$BibleReadChapterPayload<ExtArgs>[]
       bibleReadVerses: Prisma.$BibleReadVersePayload<ExtArgs>[]
+      igreja: Prisma.$IgrejaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2830,7 +4090,7 @@ export namespace Prisma {
       avatarUrl: string | null
       password: string
       role: $Enums.UserRole
-      ministryRole: $Enums.MinistryRole | null
+      igrejaId: string | null
       expires: Date | null
       cargo: $Enums.CargoRole[]
     }, ExtArgs["result"]["user"]>
@@ -3229,8 +4489,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     agenda<T extends User$agendaArgs<ExtArgs> = {}>(args?: Subset<T, User$agendaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contato<T extends User$contatoArgs<ExtArgs> = {}>(args?: Subset<T, User$contatoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContatoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    doacao<T extends User$doacaoArgs<ExtArgs> = {}>(args?: Subset<T, User$doacaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    endereco<T extends User$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, User$enderecoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ministerio<T extends User$ministerioArgs<ExtArgs> = {}>(args?: Subset<T, User$ministerioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinisterioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     PasswordResetToken<T extends User$PasswordResetTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$PasswordResetTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3243,6 +4501,7 @@ export namespace Prisma {
     bibleReadingPlan<T extends User$bibleReadingPlanArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleReadingPlanArgs<ExtArgs>>): Prisma__BibleReadingPlanClient<$Result.GetResult<Prisma.$BibleReadingPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bibleReadChapters<T extends User$bibleReadChaptersArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleReadChaptersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     bibleReadVerses<T extends User$bibleReadVersesArgs<ExtArgs> = {}>(args?: Subset<T, User$bibleReadVersesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibleReadVersePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    igreja<T extends User$igrejaArgs<ExtArgs> = {}>(args?: Subset<T, User$igrejaArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3278,7 +4537,7 @@ export namespace Prisma {
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
-    readonly ministryRole: FieldRef<"User", 'MinistryRole'>
+    readonly igrejaId: FieldRef<"User", 'String'>
     readonly expires: FieldRef<"User", 'DateTime'>
     readonly cargo: FieldRef<"User", 'CargoRole[]'>
   }
@@ -3530,6 +4789,10 @@ export namespace Prisma {
      */
     data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3600,6 +4863,10 @@ export namespace Prisma {
      * Limit how many Users to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3714,54 +4981,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContatoScalarFieldEnum | ContatoScalarFieldEnum[]
-  }
-
-  /**
-   * User.doacao
-   */
-  export type User$doacaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    where?: DoacaoWhereInput
-    orderBy?: DoacaoOrderByWithRelationInput | DoacaoOrderByWithRelationInput[]
-    cursor?: DoacaoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DoacaoScalarFieldEnum | DoacaoScalarFieldEnum[]
-  }
-
-  /**
-   * User.endereco
-   */
-  export type User$enderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    where?: EnderecoWhereInput
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    cursor?: EnderecoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
   }
 
   /**
@@ -4048,6 +5267,25 @@ export namespace Prisma {
   }
 
   /**
+   * User.igreja
+   */
+  export type User$igrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    where?: IgrejaWhereInput
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4089,7 +5327,7 @@ export namespace Prisma {
     updatedAt: Date | null
     destaque: boolean | null
     url: string | null
-    role: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type NewMaxAggregateOutputType = {
@@ -4105,7 +5343,7 @@ export namespace Prisma {
     updatedAt: Date | null
     destaque: boolean | null
     url: string | null
-    role: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type NewCountAggregateOutputType = {
@@ -4121,7 +5359,7 @@ export namespace Prisma {
     updatedAt: number
     destaque: number
     url: number
-    role: number
+    igrejaId: number
     _all: number
   }
 
@@ -4139,7 +5377,7 @@ export namespace Prisma {
     updatedAt?: true
     destaque?: true
     url?: true
-    role?: true
+    igrejaId?: true
   }
 
   export type NewMaxAggregateInputType = {
@@ -4155,7 +5393,7 @@ export namespace Prisma {
     updatedAt?: true
     destaque?: true
     url?: true
-    role?: true
+    igrejaId?: true
   }
 
   export type NewCountAggregateInputType = {
@@ -4171,7 +5409,7 @@ export namespace Prisma {
     updatedAt?: true
     destaque?: true
     url?: true
-    role?: true
+    igrejaId?: true
     _all?: true
   }
 
@@ -4260,7 +5498,7 @@ export namespace Prisma {
     updatedAt: Date
     destaque: boolean
     url: string
-    role: $Enums.MinistryRole
+    igrejaId: string | null
     _count: NewCountAggregateOutputType | null
     _min: NewMinAggregateOutputType | null
     _max: NewMaxAggregateOutputType | null
@@ -4293,8 +5531,9 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | New$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
   export type NewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4310,8 +5549,9 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | New$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
   export type NewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4327,8 +5567,9 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | New$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["new"]>
 
   export type NewSelectScalar = {
@@ -4344,24 +5585,28 @@ export namespace Prisma {
     updatedAt?: boolean
     destaque?: boolean
     url?: boolean
-    role?: boolean
+    igrejaId?: boolean
   }
 
-  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "videoUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url" | "role", ExtArgs["result"]["new"]>
+  export type NewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coverUrl" | "videoUrl" | "content" | "title" | "createdAt" | "isPublic" | "page" | "updatedAt" | "destaque" | "url" | "igrejaId", ExtArgs["result"]["new"]>
   export type NewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | New$igrejaArgs<ExtArgs>
   }
   export type NewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | New$igrejaArgs<ExtArgs>
   }
   export type NewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | New$igrejaArgs<ExtArgs>
   }
 
   export type $NewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "New"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      igreja: Prisma.$IgrejaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4376,7 +5621,7 @@ export namespace Prisma {
       updatedAt: Date
       destaque: boolean
       url: string
-      role: $Enums.MinistryRole
+      igrejaId: string | null
     }, ExtArgs["result"]["new"]>
     composites: {}
   }
@@ -4772,6 +6017,7 @@ export namespace Prisma {
   export interface Prisma__NewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    igreja<T extends New$igrejaArgs<ExtArgs> = {}>(args?: Subset<T, New$igrejaArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4813,7 +6059,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"New", 'DateTime'>
     readonly destaque: FieldRef<"New", 'Boolean'>
     readonly url: FieldRef<"New", 'String'>
-    readonly role: FieldRef<"New", 'MinistryRole'>
+    readonly igrejaId: FieldRef<"New", 'String'>
   }
     
 
@@ -5210,6 +6456,25 @@ export namespace Prisma {
   }
 
   /**
+   * New.igreja
+   */
+  export type New$igrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    where?: IgrejaWhereInput
+  }
+
+  /**
    * New without action
    */
   export type NewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5248,7 +6513,7 @@ export namespace Prisma {
     createdAt: Date | null
     coverUrl: string | null
     updatedAt: Date | null
-    role: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type MinisterioMaxAggregateOutputType = {
@@ -5261,7 +6526,7 @@ export namespace Prisma {
     createdAt: Date | null
     coverUrl: string | null
     updatedAt: Date | null
-    role: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type MinisterioCountAggregateOutputType = {
@@ -5274,7 +6539,7 @@ export namespace Prisma {
     createdAt: number
     coverUrl: number
     updatedAt: number
-    role: number
+    igrejaId: number
     _all: number
   }
 
@@ -5289,7 +6554,7 @@ export namespace Prisma {
     createdAt?: true
     coverUrl?: true
     updatedAt?: true
-    role?: true
+    igrejaId?: true
   }
 
   export type MinisterioMaxAggregateInputType = {
@@ -5302,7 +6567,7 @@ export namespace Prisma {
     createdAt?: true
     coverUrl?: true
     updatedAt?: true
-    role?: true
+    igrejaId?: true
   }
 
   export type MinisterioCountAggregateInputType = {
@@ -5315,7 +6580,7 @@ export namespace Prisma {
     createdAt?: true
     coverUrl?: true
     updatedAt?: true
-    role?: true
+    igrejaId?: true
     _all?: true
   }
 
@@ -5401,7 +6666,7 @@ export namespace Prisma {
     createdAt: Date
     coverUrl: string
     updatedAt: Date
-    role: $Enums.MinistryRole
+    igrejaId: string | null
     _count: MinisterioCountAggregateOutputType | null
     _min: MinisterioMinAggregateOutputType | null
     _max: MinisterioMaxAggregateOutputType | null
@@ -5431,8 +6696,9 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Ministerio$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["ministerio"]>
 
   export type MinisterioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5445,8 +6711,9 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Ministerio$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["ministerio"]>
 
   export type MinisterioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5459,8 +6726,9 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Ministerio$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["ministerio"]>
 
   export type MinisterioSelectScalar = {
@@ -5473,24 +6741,28 @@ export namespace Prisma {
     createdAt?: boolean
     coverUrl?: boolean
     updatedAt?: boolean
-    role?: boolean
+    igrejaId?: boolean
   }
 
-  export type MinisterioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title" | "local" | "isPublic" | "createdAt" | "coverUrl" | "updatedAt" | "role", ExtArgs["result"]["ministerio"]>
+  export type MinisterioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "title" | "local" | "isPublic" | "createdAt" | "coverUrl" | "updatedAt" | "igrejaId", ExtArgs["result"]["ministerio"]>
   export type MinisterioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Ministerio$igrejaArgs<ExtArgs>
   }
   export type MinisterioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Ministerio$igrejaArgs<ExtArgs>
   }
   export type MinisterioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Ministerio$igrejaArgs<ExtArgs>
   }
 
   export type $MinisterioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ministerio"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      igreja: Prisma.$IgrejaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5502,7 +6774,7 @@ export namespace Prisma {
       createdAt: Date
       coverUrl: string
       updatedAt: Date
-      role: $Enums.MinistryRole
+      igrejaId: string | null
     }, ExtArgs["result"]["ministerio"]>
     composites: {}
   }
@@ -5898,6 +7170,7 @@ export namespace Prisma {
   export interface Prisma__MinisterioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    igreja<T extends Ministerio$igrejaArgs<ExtArgs> = {}>(args?: Subset<T, Ministerio$igrejaArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5936,7 +7209,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Ministerio", 'DateTime'>
     readonly coverUrl: FieldRef<"Ministerio", 'String'>
     readonly updatedAt: FieldRef<"Ministerio", 'DateTime'>
-    readonly role: FieldRef<"Ministerio", 'MinistryRole'>
+    readonly igrejaId: FieldRef<"Ministerio", 'String'>
   }
     
 
@@ -6333,6 +7606,25 @@ export namespace Prisma {
   }
 
   /**
+   * Ministerio.igreja
+   */
+  export type Ministerio$igrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    where?: IgrejaWhereInput
+  }
+
+  /**
    * Ministerio without action
    */
   export type MinisterioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6371,7 +7663,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     destaque: boolean | null
-    role: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type AgendaMaxAggregateOutputType = {
@@ -6384,7 +7676,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     destaque: boolean | null
-    role: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type AgendaCountAggregateOutputType = {
@@ -6397,7 +7689,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     destaque: number
-    role: number
+    igrejaId: number
     _all: number
   }
 
@@ -6412,7 +7704,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     destaque?: true
-    role?: true
+    igrejaId?: true
   }
 
   export type AgendaMaxAggregateInputType = {
@@ -6425,7 +7717,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     destaque?: true
-    role?: true
+    igrejaId?: true
   }
 
   export type AgendaCountAggregateInputType = {
@@ -6438,7 +7730,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     destaque?: true
-    role?: true
+    igrejaId?: true
     _all?: true
   }
 
@@ -6524,7 +7816,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     destaque: boolean
-    role: $Enums.MinistryRole
+    igrejaId: string | null
     _count: AgendaCountAggregateOutputType | null
     _min: AgendaMinAggregateOutputType | null
     _max: AgendaMaxAggregateOutputType | null
@@ -6554,8 +7846,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Agenda$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["agenda"]>
 
   export type AgendaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6568,8 +7861,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Agenda$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["agenda"]>
 
   export type AgendaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6582,8 +7876,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
-    role?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Agenda$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["agenda"]>
 
   export type AgendaSelectScalar = {
@@ -6596,24 +7891,28 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     destaque?: boolean
-    role?: boolean
+    igrejaId?: boolean
   }
 
-  export type AgendaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "name" | "hour" | "isPublic" | "createdAt" | "updatedAt" | "destaque" | "role", ExtArgs["result"]["agenda"]>
+  export type AgendaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "name" | "hour" | "isPublic" | "createdAt" | "updatedAt" | "destaque" | "igrejaId", ExtArgs["result"]["agenda"]>
   export type AgendaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Agenda$igrejaArgs<ExtArgs>
   }
   export type AgendaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Agenda$igrejaArgs<ExtArgs>
   }
   export type AgendaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Agenda$igrejaArgs<ExtArgs>
   }
 
   export type $AgendaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Agenda"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      igreja: Prisma.$IgrejaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6625,7 +7924,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       destaque: boolean
-      role: $Enums.MinistryRole
+      igrejaId: string | null
     }, ExtArgs["result"]["agenda"]>
     composites: {}
   }
@@ -7021,6 +8320,7 @@ export namespace Prisma {
   export interface Prisma__AgendaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    igreja<T extends Agenda$igrejaArgs<ExtArgs> = {}>(args?: Subset<T, Agenda$igrejaArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7059,7 +8359,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Agenda", 'DateTime'>
     readonly updatedAt: FieldRef<"Agenda", 'DateTime'>
     readonly destaque: FieldRef<"Agenda", 'Boolean'>
-    readonly role: FieldRef<"Agenda", 'MinistryRole'>
+    readonly igrejaId: FieldRef<"Agenda", 'String'>
   }
     
 
@@ -7456,6 +8756,25 @@ export namespace Prisma {
   }
 
   /**
+   * Agenda.igreja
+   */
+  export type Agenda$igrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    where?: IgrejaWhereInput
+  }
+
+  /**
    * Agenda without action
    */
   export type AgendaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7471,2278 +8790,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AgendaInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Doacao
-   */
-
-  export type AggregateDoacao = {
-    _count: DoacaoCountAggregateOutputType | null
-    _min: DoacaoMinAggregateOutputType | null
-    _max: DoacaoMaxAggregateOutputType | null
-  }
-
-  export type DoacaoMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    local: string | null
-    banco: string | null
-    conta: string | null
-    agencia: string | null
-    nomebanco: string | null
-    pix: string | null
-    nomepix: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DoacaoMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    local: string | null
-    banco: string | null
-    conta: string | null
-    agencia: string | null
-    nomebanco: string | null
-    pix: string | null
-    nomepix: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DoacaoCountAggregateOutputType = {
-    id: number
-    userId: number
-    local: number
-    banco: number
-    conta: number
-    agencia: number
-    nomebanco: number
-    pix: number
-    nomepix: number
-    isPublic: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type DoacaoMinAggregateInputType = {
-    id?: true
-    userId?: true
-    local?: true
-    banco?: true
-    conta?: true
-    agencia?: true
-    nomebanco?: true
-    pix?: true
-    nomepix?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DoacaoMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    local?: true
-    banco?: true
-    conta?: true
-    agencia?: true
-    nomebanco?: true
-    pix?: true
-    nomepix?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DoacaoCountAggregateInputType = {
-    id?: true
-    userId?: true
-    local?: true
-    banco?: true
-    conta?: true
-    agencia?: true
-    nomebanco?: true
-    pix?: true
-    nomepix?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type DoacaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Doacao to aggregate.
-     */
-    where?: DoacaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doacaos to fetch.
-     */
-    orderBy?: DoacaoOrderByWithRelationInput | DoacaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DoacaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doacaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doacaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Doacaos
-    **/
-    _count?: true | DoacaoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DoacaoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DoacaoMaxAggregateInputType
-  }
-
-  export type GetDoacaoAggregateType<T extends DoacaoAggregateArgs> = {
-        [P in keyof T & keyof AggregateDoacao]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDoacao[P]>
-      : GetScalarType<T[P], AggregateDoacao[P]>
-  }
-
-
-
-
-  export type DoacaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DoacaoWhereInput
-    orderBy?: DoacaoOrderByWithAggregationInput | DoacaoOrderByWithAggregationInput[]
-    by: DoacaoScalarFieldEnum[] | DoacaoScalarFieldEnum
-    having?: DoacaoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DoacaoCountAggregateInputType | true
-    _min?: DoacaoMinAggregateInputType
-    _max?: DoacaoMaxAggregateInputType
-  }
-
-  export type DoacaoGroupByOutputType = {
-    id: string
-    userId: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic: boolean
-    createdAt: Date
-    updatedAt: Date
-    _count: DoacaoCountAggregateOutputType | null
-    _min: DoacaoMinAggregateOutputType | null
-    _max: DoacaoMaxAggregateOutputType | null
-  }
-
-  type GetDoacaoGroupByPayload<T extends DoacaoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DoacaoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DoacaoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DoacaoGroupByOutputType[P]>
-            : GetScalarType<T[P], DoacaoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DoacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    banco?: boolean
-    conta?: boolean
-    agencia?: boolean
-    nomebanco?: boolean
-    pix?: boolean
-    nomepix?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["doacao"]>
-
-  export type DoacaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    banco?: boolean
-    conta?: boolean
-    agencia?: boolean
-    nomebanco?: boolean
-    pix?: boolean
-    nomepix?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["doacao"]>
-
-  export type DoacaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    banco?: boolean
-    conta?: boolean
-    agencia?: boolean
-    nomebanco?: boolean
-    pix?: boolean
-    nomepix?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["doacao"]>
-
-  export type DoacaoSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    banco?: boolean
-    conta?: boolean
-    agencia?: boolean
-    nomebanco?: boolean
-    pix?: boolean
-    nomepix?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type DoacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "local" | "banco" | "conta" | "agencia" | "nomebanco" | "pix" | "nomepix" | "isPublic" | "createdAt" | "updatedAt", ExtArgs["result"]["doacao"]>
-  export type DoacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type DoacaoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type DoacaoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $DoacaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Doacao"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      local: string
-      banco: string
-      conta: string
-      agencia: string
-      nomebanco: string
-      pix: string
-      nomepix: string
-      isPublic: boolean
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["doacao"]>
-    composites: {}
-  }
-
-  type DoacaoGetPayload<S extends boolean | null | undefined | DoacaoDefaultArgs> = $Result.GetResult<Prisma.$DoacaoPayload, S>
-
-  type DoacaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DoacaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DoacaoCountAggregateInputType | true
-    }
-
-  export interface DoacaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Doacao'], meta: { name: 'Doacao' } }
-    /**
-     * Find zero or one Doacao that matches the filter.
-     * @param {DoacaoFindUniqueArgs} args - Arguments to find a Doacao
-     * @example
-     * // Get one Doacao
-     * const doacao = await prisma.doacao.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DoacaoFindUniqueArgs>(args: SelectSubset<T, DoacaoFindUniqueArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Doacao that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DoacaoFindUniqueOrThrowArgs} args - Arguments to find a Doacao
-     * @example
-     * // Get one Doacao
-     * const doacao = await prisma.doacao.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DoacaoFindUniqueOrThrowArgs>(args: SelectSubset<T, DoacaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Doacao that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoFindFirstArgs} args - Arguments to find a Doacao
-     * @example
-     * // Get one Doacao
-     * const doacao = await prisma.doacao.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DoacaoFindFirstArgs>(args?: SelectSubset<T, DoacaoFindFirstArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Doacao that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoFindFirstOrThrowArgs} args - Arguments to find a Doacao
-     * @example
-     * // Get one Doacao
-     * const doacao = await prisma.doacao.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DoacaoFindFirstOrThrowArgs>(args?: SelectSubset<T, DoacaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Doacaos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Doacaos
-     * const doacaos = await prisma.doacao.findMany()
-     * 
-     * // Get first 10 Doacaos
-     * const doacaos = await prisma.doacao.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const doacaoWithIdOnly = await prisma.doacao.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DoacaoFindManyArgs>(args?: SelectSubset<T, DoacaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Doacao.
-     * @param {DoacaoCreateArgs} args - Arguments to create a Doacao.
-     * @example
-     * // Create one Doacao
-     * const Doacao = await prisma.doacao.create({
-     *   data: {
-     *     // ... data to create a Doacao
-     *   }
-     * })
-     * 
-     */
-    create<T extends DoacaoCreateArgs>(args: SelectSubset<T, DoacaoCreateArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Doacaos.
-     * @param {DoacaoCreateManyArgs} args - Arguments to create many Doacaos.
-     * @example
-     * // Create many Doacaos
-     * const doacao = await prisma.doacao.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DoacaoCreateManyArgs>(args?: SelectSubset<T, DoacaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Doacaos and returns the data saved in the database.
-     * @param {DoacaoCreateManyAndReturnArgs} args - Arguments to create many Doacaos.
-     * @example
-     * // Create many Doacaos
-     * const doacao = await prisma.doacao.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Doacaos and only return the `id`
-     * const doacaoWithIdOnly = await prisma.doacao.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DoacaoCreateManyAndReturnArgs>(args?: SelectSubset<T, DoacaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Doacao.
-     * @param {DoacaoDeleteArgs} args - Arguments to delete one Doacao.
-     * @example
-     * // Delete one Doacao
-     * const Doacao = await prisma.doacao.delete({
-     *   where: {
-     *     // ... filter to delete one Doacao
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DoacaoDeleteArgs>(args: SelectSubset<T, DoacaoDeleteArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Doacao.
-     * @param {DoacaoUpdateArgs} args - Arguments to update one Doacao.
-     * @example
-     * // Update one Doacao
-     * const doacao = await prisma.doacao.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DoacaoUpdateArgs>(args: SelectSubset<T, DoacaoUpdateArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Doacaos.
-     * @param {DoacaoDeleteManyArgs} args - Arguments to filter Doacaos to delete.
-     * @example
-     * // Delete a few Doacaos
-     * const { count } = await prisma.doacao.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DoacaoDeleteManyArgs>(args?: SelectSubset<T, DoacaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Doacaos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Doacaos
-     * const doacao = await prisma.doacao.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DoacaoUpdateManyArgs>(args: SelectSubset<T, DoacaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Doacaos and returns the data updated in the database.
-     * @param {DoacaoUpdateManyAndReturnArgs} args - Arguments to update many Doacaos.
-     * @example
-     * // Update many Doacaos
-     * const doacao = await prisma.doacao.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Doacaos and only return the `id`
-     * const doacaoWithIdOnly = await prisma.doacao.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DoacaoUpdateManyAndReturnArgs>(args: SelectSubset<T, DoacaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Doacao.
-     * @param {DoacaoUpsertArgs} args - Arguments to update or create a Doacao.
-     * @example
-     * // Update or create a Doacao
-     * const doacao = await prisma.doacao.upsert({
-     *   create: {
-     *     // ... data to create a Doacao
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Doacao we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DoacaoUpsertArgs>(args: SelectSubset<T, DoacaoUpsertArgs<ExtArgs>>): Prisma__DoacaoClient<$Result.GetResult<Prisma.$DoacaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Doacaos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoCountArgs} args - Arguments to filter Doacaos to count.
-     * @example
-     * // Count the number of Doacaos
-     * const count = await prisma.doacao.count({
-     *   where: {
-     *     // ... the filter for the Doacaos we want to count
-     *   }
-     * })
-    **/
-    count<T extends DoacaoCountArgs>(
-      args?: Subset<T, DoacaoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DoacaoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Doacao.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DoacaoAggregateArgs>(args: Subset<T, DoacaoAggregateArgs>): Prisma.PrismaPromise<GetDoacaoAggregateType<T>>
-
-    /**
-     * Group by Doacao.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoacaoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DoacaoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DoacaoGroupByArgs['orderBy'] }
-        : { orderBy?: DoacaoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DoacaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDoacaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Doacao model
-   */
-  readonly fields: DoacaoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Doacao.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DoacaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Doacao model
-   */
-  interface DoacaoFieldRefs {
-    readonly id: FieldRef<"Doacao", 'String'>
-    readonly userId: FieldRef<"Doacao", 'String'>
-    readonly local: FieldRef<"Doacao", 'String'>
-    readonly banco: FieldRef<"Doacao", 'String'>
-    readonly conta: FieldRef<"Doacao", 'String'>
-    readonly agencia: FieldRef<"Doacao", 'String'>
-    readonly nomebanco: FieldRef<"Doacao", 'String'>
-    readonly pix: FieldRef<"Doacao", 'String'>
-    readonly nomepix: FieldRef<"Doacao", 'String'>
-    readonly isPublic: FieldRef<"Doacao", 'Boolean'>
-    readonly createdAt: FieldRef<"Doacao", 'DateTime'>
-    readonly updatedAt: FieldRef<"Doacao", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Doacao findUnique
-   */
-  export type DoacaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Doacao to fetch.
-     */
-    where: DoacaoWhereUniqueInput
-  }
-
-  /**
-   * Doacao findUniqueOrThrow
-   */
-  export type DoacaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Doacao to fetch.
-     */
-    where: DoacaoWhereUniqueInput
-  }
-
-  /**
-   * Doacao findFirst
-   */
-  export type DoacaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Doacao to fetch.
-     */
-    where?: DoacaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doacaos to fetch.
-     */
-    orderBy?: DoacaoOrderByWithRelationInput | DoacaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Doacaos.
-     */
-    cursor?: DoacaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doacaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doacaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Doacaos.
-     */
-    distinct?: DoacaoScalarFieldEnum | DoacaoScalarFieldEnum[]
-  }
-
-  /**
-   * Doacao findFirstOrThrow
-   */
-  export type DoacaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Doacao to fetch.
-     */
-    where?: DoacaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doacaos to fetch.
-     */
-    orderBy?: DoacaoOrderByWithRelationInput | DoacaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Doacaos.
-     */
-    cursor?: DoacaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doacaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doacaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Doacaos.
-     */
-    distinct?: DoacaoScalarFieldEnum | DoacaoScalarFieldEnum[]
-  }
-
-  /**
-   * Doacao findMany
-   */
-  export type DoacaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Doacaos to fetch.
-     */
-    where?: DoacaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doacaos to fetch.
-     */
-    orderBy?: DoacaoOrderByWithRelationInput | DoacaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Doacaos.
-     */
-    cursor?: DoacaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doacaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doacaos.
-     */
-    skip?: number
-    distinct?: DoacaoScalarFieldEnum | DoacaoScalarFieldEnum[]
-  }
-
-  /**
-   * Doacao create
-   */
-  export type DoacaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Doacao.
-     */
-    data: XOR<DoacaoCreateInput, DoacaoUncheckedCreateInput>
-  }
-
-  /**
-   * Doacao createMany
-   */
-  export type DoacaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Doacaos.
-     */
-    data: DoacaoCreateManyInput | DoacaoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Doacao createManyAndReturn
-   */
-  export type DoacaoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * The data used to create many Doacaos.
-     */
-    data: DoacaoCreateManyInput | DoacaoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Doacao update
-   */
-  export type DoacaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Doacao.
-     */
-    data: XOR<DoacaoUpdateInput, DoacaoUncheckedUpdateInput>
-    /**
-     * Choose, which Doacao to update.
-     */
-    where: DoacaoWhereUniqueInput
-  }
-
-  /**
-   * Doacao updateMany
-   */
-  export type DoacaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Doacaos.
-     */
-    data: XOR<DoacaoUpdateManyMutationInput, DoacaoUncheckedUpdateManyInput>
-    /**
-     * Filter which Doacaos to update
-     */
-    where?: DoacaoWhereInput
-    /**
-     * Limit how many Doacaos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Doacao updateManyAndReturn
-   */
-  export type DoacaoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * The data used to update Doacaos.
-     */
-    data: XOR<DoacaoUpdateManyMutationInput, DoacaoUncheckedUpdateManyInput>
-    /**
-     * Filter which Doacaos to update
-     */
-    where?: DoacaoWhereInput
-    /**
-     * Limit how many Doacaos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Doacao upsert
-   */
-  export type DoacaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Doacao to update in case it exists.
-     */
-    where: DoacaoWhereUniqueInput
-    /**
-     * In case the Doacao found by the `where` argument doesn't exist, create a new Doacao with this data.
-     */
-    create: XOR<DoacaoCreateInput, DoacaoUncheckedCreateInput>
-    /**
-     * In case the Doacao was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DoacaoUpdateInput, DoacaoUncheckedUpdateInput>
-  }
-
-  /**
-   * Doacao delete
-   */
-  export type DoacaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-    /**
-     * Filter which Doacao to delete.
-     */
-    where: DoacaoWhereUniqueInput
-  }
-
-  /**
-   * Doacao deleteMany
-   */
-  export type DoacaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Doacaos to delete
-     */
-    where?: DoacaoWhereInput
-    /**
-     * Limit how many Doacaos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Doacao without action
-   */
-  export type DoacaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doacao
-     */
-    select?: DoacaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doacao
-     */
-    omit?: DoacaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoacaoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Endereco
-   */
-
-  export type AggregateEndereco = {
-    _count: EnderecoCountAggregateOutputType | null
-    _min: EnderecoMinAggregateOutputType | null
-    _max: EnderecoMaxAggregateOutputType | null
-  }
-
-  export type EnderecoMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    local: string | null
-    rua: string | null
-    cep: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    numero: string | null
-    cidade: string | null
-  }
-
-  export type EnderecoMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    local: string | null
-    rua: string | null
-    cep: string | null
-    isPublic: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    numero: string | null
-    cidade: string | null
-  }
-
-  export type EnderecoCountAggregateOutputType = {
-    id: number
-    userId: number
-    local: number
-    rua: number
-    cep: number
-    isPublic: number
-    createdAt: number
-    updatedAt: number
-    numero: number
-    cidade: number
-    _all: number
-  }
-
-
-  export type EnderecoMinAggregateInputType = {
-    id?: true
-    userId?: true
-    local?: true
-    rua?: true
-    cep?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    numero?: true
-    cidade?: true
-  }
-
-  export type EnderecoMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    local?: true
-    rua?: true
-    cep?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    numero?: true
-    cidade?: true
-  }
-
-  export type EnderecoCountAggregateInputType = {
-    id?: true
-    userId?: true
-    local?: true
-    rua?: true
-    cep?: true
-    isPublic?: true
-    createdAt?: true
-    updatedAt?: true
-    numero?: true
-    cidade?: true
-    _all?: true
-  }
-
-  export type EnderecoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Endereco to aggregate.
-     */
-    where?: EnderecoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Enderecos to fetch.
-     */
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EnderecoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Enderecos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Enderecos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Enderecos
-    **/
-    _count?: true | EnderecoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EnderecoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EnderecoMaxAggregateInputType
-  }
-
-  export type GetEnderecoAggregateType<T extends EnderecoAggregateArgs> = {
-        [P in keyof T & keyof AggregateEndereco]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEndereco[P]>
-      : GetScalarType<T[P], AggregateEndereco[P]>
-  }
-
-
-
-
-  export type EnderecoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EnderecoWhereInput
-    orderBy?: EnderecoOrderByWithAggregationInput | EnderecoOrderByWithAggregationInput[]
-    by: EnderecoScalarFieldEnum[] | EnderecoScalarFieldEnum
-    having?: EnderecoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EnderecoCountAggregateInputType | true
-    _min?: EnderecoMinAggregateInputType
-    _max?: EnderecoMaxAggregateInputType
-  }
-
-  export type EnderecoGroupByOutputType = {
-    id: string
-    userId: string
-    local: string
-    rua: string
-    cep: string
-    isPublic: boolean
-    createdAt: Date
-    updatedAt: Date
-    numero: string | null
-    cidade: string | null
-    _count: EnderecoCountAggregateOutputType | null
-    _min: EnderecoMinAggregateOutputType | null
-    _max: EnderecoMaxAggregateOutputType | null
-  }
-
-  type GetEnderecoGroupByPayload<T extends EnderecoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EnderecoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EnderecoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EnderecoGroupByOutputType[P]>
-            : GetScalarType<T[P], EnderecoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EnderecoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    rua?: boolean
-    cep?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    numero?: boolean
-    cidade?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["endereco"]>
-
-  export type EnderecoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    rua?: boolean
-    cep?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    numero?: boolean
-    cidade?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["endereco"]>
-
-  export type EnderecoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    rua?: boolean
-    cep?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    numero?: boolean
-    cidade?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["endereco"]>
-
-  export type EnderecoSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    local?: boolean
-    rua?: boolean
-    cep?: boolean
-    isPublic?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    numero?: boolean
-    cidade?: boolean
-  }
-
-  export type EnderecoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "local" | "rua" | "cep" | "isPublic" | "createdAt" | "updatedAt" | "numero" | "cidade", ExtArgs["result"]["endereco"]>
-  export type EnderecoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type EnderecoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type EnderecoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $EnderecoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Endereco"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      local: string
-      rua: string
-      cep: string
-      isPublic: boolean
-      createdAt: Date
-      updatedAt: Date
-      numero: string | null
-      cidade: string | null
-    }, ExtArgs["result"]["endereco"]>
-    composites: {}
-  }
-
-  type EnderecoGetPayload<S extends boolean | null | undefined | EnderecoDefaultArgs> = $Result.GetResult<Prisma.$EnderecoPayload, S>
-
-  type EnderecoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EnderecoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EnderecoCountAggregateInputType | true
-    }
-
-  export interface EnderecoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Endereco'], meta: { name: 'Endereco' } }
-    /**
-     * Find zero or one Endereco that matches the filter.
-     * @param {EnderecoFindUniqueArgs} args - Arguments to find a Endereco
-     * @example
-     * // Get one Endereco
-     * const endereco = await prisma.endereco.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EnderecoFindUniqueArgs>(args: SelectSubset<T, EnderecoFindUniqueArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Endereco that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EnderecoFindUniqueOrThrowArgs} args - Arguments to find a Endereco
-     * @example
-     * // Get one Endereco
-     * const endereco = await prisma.endereco.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EnderecoFindUniqueOrThrowArgs>(args: SelectSubset<T, EnderecoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Endereco that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoFindFirstArgs} args - Arguments to find a Endereco
-     * @example
-     * // Get one Endereco
-     * const endereco = await prisma.endereco.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EnderecoFindFirstArgs>(args?: SelectSubset<T, EnderecoFindFirstArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Endereco that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoFindFirstOrThrowArgs} args - Arguments to find a Endereco
-     * @example
-     * // Get one Endereco
-     * const endereco = await prisma.endereco.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EnderecoFindFirstOrThrowArgs>(args?: SelectSubset<T, EnderecoFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Enderecos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Enderecos
-     * const enderecos = await prisma.endereco.findMany()
-     * 
-     * // Get first 10 Enderecos
-     * const enderecos = await prisma.endereco.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const enderecoWithIdOnly = await prisma.endereco.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends EnderecoFindManyArgs>(args?: SelectSubset<T, EnderecoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Endereco.
-     * @param {EnderecoCreateArgs} args - Arguments to create a Endereco.
-     * @example
-     * // Create one Endereco
-     * const Endereco = await prisma.endereco.create({
-     *   data: {
-     *     // ... data to create a Endereco
-     *   }
-     * })
-     * 
-     */
-    create<T extends EnderecoCreateArgs>(args: SelectSubset<T, EnderecoCreateArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Enderecos.
-     * @param {EnderecoCreateManyArgs} args - Arguments to create many Enderecos.
-     * @example
-     * // Create many Enderecos
-     * const endereco = await prisma.endereco.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EnderecoCreateManyArgs>(args?: SelectSubset<T, EnderecoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Enderecos and returns the data saved in the database.
-     * @param {EnderecoCreateManyAndReturnArgs} args - Arguments to create many Enderecos.
-     * @example
-     * // Create many Enderecos
-     * const endereco = await prisma.endereco.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Enderecos and only return the `id`
-     * const enderecoWithIdOnly = await prisma.endereco.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends EnderecoCreateManyAndReturnArgs>(args?: SelectSubset<T, EnderecoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Endereco.
-     * @param {EnderecoDeleteArgs} args - Arguments to delete one Endereco.
-     * @example
-     * // Delete one Endereco
-     * const Endereco = await prisma.endereco.delete({
-     *   where: {
-     *     // ... filter to delete one Endereco
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EnderecoDeleteArgs>(args: SelectSubset<T, EnderecoDeleteArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Endereco.
-     * @param {EnderecoUpdateArgs} args - Arguments to update one Endereco.
-     * @example
-     * // Update one Endereco
-     * const endereco = await prisma.endereco.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EnderecoUpdateArgs>(args: SelectSubset<T, EnderecoUpdateArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Enderecos.
-     * @param {EnderecoDeleteManyArgs} args - Arguments to filter Enderecos to delete.
-     * @example
-     * // Delete a few Enderecos
-     * const { count } = await prisma.endereco.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EnderecoDeleteManyArgs>(args?: SelectSubset<T, EnderecoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Enderecos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Enderecos
-     * const endereco = await prisma.endereco.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EnderecoUpdateManyArgs>(args: SelectSubset<T, EnderecoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Enderecos and returns the data updated in the database.
-     * @param {EnderecoUpdateManyAndReturnArgs} args - Arguments to update many Enderecos.
-     * @example
-     * // Update many Enderecos
-     * const endereco = await prisma.endereco.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Enderecos and only return the `id`
-     * const enderecoWithIdOnly = await prisma.endereco.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends EnderecoUpdateManyAndReturnArgs>(args: SelectSubset<T, EnderecoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Endereco.
-     * @param {EnderecoUpsertArgs} args - Arguments to update or create a Endereco.
-     * @example
-     * // Update or create a Endereco
-     * const endereco = await prisma.endereco.upsert({
-     *   create: {
-     *     // ... data to create a Endereco
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Endereco we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EnderecoUpsertArgs>(args: SelectSubset<T, EnderecoUpsertArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Enderecos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoCountArgs} args - Arguments to filter Enderecos to count.
-     * @example
-     * // Count the number of Enderecos
-     * const count = await prisma.endereco.count({
-     *   where: {
-     *     // ... the filter for the Enderecos we want to count
-     *   }
-     * })
-    **/
-    count<T extends EnderecoCountArgs>(
-      args?: Subset<T, EnderecoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EnderecoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Endereco.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EnderecoAggregateArgs>(args: Subset<T, EnderecoAggregateArgs>): Prisma.PrismaPromise<GetEnderecoAggregateType<T>>
-
-    /**
-     * Group by Endereco.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EnderecoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EnderecoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EnderecoGroupByArgs['orderBy'] }
-        : { orderBy?: EnderecoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EnderecoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnderecoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Endereco model
-   */
-  readonly fields: EnderecoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Endereco.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EnderecoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Endereco model
-   */
-  interface EnderecoFieldRefs {
-    readonly id: FieldRef<"Endereco", 'String'>
-    readonly userId: FieldRef<"Endereco", 'String'>
-    readonly local: FieldRef<"Endereco", 'String'>
-    readonly rua: FieldRef<"Endereco", 'String'>
-    readonly cep: FieldRef<"Endereco", 'String'>
-    readonly isPublic: FieldRef<"Endereco", 'Boolean'>
-    readonly createdAt: FieldRef<"Endereco", 'DateTime'>
-    readonly updatedAt: FieldRef<"Endereco", 'DateTime'>
-    readonly numero: FieldRef<"Endereco", 'String'>
-    readonly cidade: FieldRef<"Endereco", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Endereco findUnique
-   */
-  export type EnderecoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * Filter, which Endereco to fetch.
-     */
-    where: EnderecoWhereUniqueInput
-  }
-
-  /**
-   * Endereco findUniqueOrThrow
-   */
-  export type EnderecoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * Filter, which Endereco to fetch.
-     */
-    where: EnderecoWhereUniqueInput
-  }
-
-  /**
-   * Endereco findFirst
-   */
-  export type EnderecoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * Filter, which Endereco to fetch.
-     */
-    where?: EnderecoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Enderecos to fetch.
-     */
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Enderecos.
-     */
-    cursor?: EnderecoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Enderecos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Enderecos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Enderecos.
-     */
-    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
-  }
-
-  /**
-   * Endereco findFirstOrThrow
-   */
-  export type EnderecoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * Filter, which Endereco to fetch.
-     */
-    where?: EnderecoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Enderecos to fetch.
-     */
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Enderecos.
-     */
-    cursor?: EnderecoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Enderecos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Enderecos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Enderecos.
-     */
-    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
-  }
-
-  /**
-   * Endereco findMany
-   */
-  export type EnderecoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * Filter, which Enderecos to fetch.
-     */
-    where?: EnderecoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Enderecos to fetch.
-     */
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Enderecos.
-     */
-    cursor?: EnderecoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Enderecos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Enderecos.
-     */
-    skip?: number
-    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
-  }
-
-  /**
-   * Endereco create
-   */
-  export type EnderecoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Endereco.
-     */
-    data: XOR<EnderecoCreateInput, EnderecoUncheckedCreateInput>
-  }
-
-  /**
-   * Endereco createMany
-   */
-  export type EnderecoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Enderecos.
-     */
-    data: EnderecoCreateManyInput | EnderecoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Endereco createManyAndReturn
-   */
-  export type EnderecoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * The data used to create many Enderecos.
-     */
-    data: EnderecoCreateManyInput | EnderecoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Endereco update
-   */
-  export type EnderecoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Endereco.
-     */
-    data: XOR<EnderecoUpdateInput, EnderecoUncheckedUpdateInput>
-    /**
-     * Choose, which Endereco to update.
-     */
-    where: EnderecoWhereUniqueInput
-  }
-
-  /**
-   * Endereco updateMany
-   */
-  export type EnderecoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Enderecos.
-     */
-    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyInput>
-    /**
-     * Filter which Enderecos to update
-     */
-    where?: EnderecoWhereInput
-    /**
-     * Limit how many Enderecos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Endereco updateManyAndReturn
-   */
-  export type EnderecoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * The data used to update Enderecos.
-     */
-    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyInput>
-    /**
-     * Filter which Enderecos to update
-     */
-    where?: EnderecoWhereInput
-    /**
-     * Limit how many Enderecos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Endereco upsert
-   */
-  export type EnderecoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Endereco to update in case it exists.
-     */
-    where: EnderecoWhereUniqueInput
-    /**
-     * In case the Endereco found by the `where` argument doesn't exist, create a new Endereco with this data.
-     */
-    create: XOR<EnderecoCreateInput, EnderecoUncheckedCreateInput>
-    /**
-     * In case the Endereco was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EnderecoUpdateInput, EnderecoUncheckedUpdateInput>
-  }
-
-  /**
-   * Endereco delete
-   */
-  export type EnderecoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
-    /**
-     * Filter which Endereco to delete.
-     */
-    where: EnderecoWhereUniqueInput
-  }
-
-  /**
-   * Endereco deleteMany
-   */
-  export type EnderecoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Enderecos to delete
-     */
-    where?: EnderecoWhereInput
-    /**
-     * Limit how many Enderecos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Endereco without action
-   */
-  export type EnderecoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Endereco
-     */
-    select?: EnderecoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Endereco
-     */
-    omit?: EnderecoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EnderecoInclude<ExtArgs> | null
   }
 
 
@@ -15186,7 +14233,7 @@ export namespace Prisma {
     updatedAt: Date | null
     isPublic: boolean | null
     coverUrl: string | null
-    ministryRole: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type TestemunhoMaxAggregateOutputType = {
@@ -15199,7 +14246,7 @@ export namespace Prisma {
     updatedAt: Date | null
     isPublic: boolean | null
     coverUrl: string | null
-    ministryRole: $Enums.MinistryRole | null
+    igrejaId: string | null
   }
 
   export type TestemunhoCountAggregateOutputType = {
@@ -15212,7 +14259,7 @@ export namespace Prisma {
     updatedAt: number
     isPublic: number
     coverUrl: number
-    ministryRole: number
+    igrejaId: number
     _all: number
   }
 
@@ -15227,7 +14274,7 @@ export namespace Prisma {
     updatedAt?: true
     isPublic?: true
     coverUrl?: true
-    ministryRole?: true
+    igrejaId?: true
   }
 
   export type TestemunhoMaxAggregateInputType = {
@@ -15240,7 +14287,7 @@ export namespace Prisma {
     updatedAt?: true
     isPublic?: true
     coverUrl?: true
-    ministryRole?: true
+    igrejaId?: true
   }
 
   export type TestemunhoCountAggregateInputType = {
@@ -15253,7 +14300,7 @@ export namespace Prisma {
     updatedAt?: true
     isPublic?: true
     coverUrl?: true
-    ministryRole?: true
+    igrejaId?: true
     _all?: true
   }
 
@@ -15339,7 +14386,7 @@ export namespace Prisma {
     updatedAt: Date
     isPublic: boolean
     coverUrl: string | null
-    ministryRole: $Enums.MinistryRole | null
+    igrejaId: string | null
     _count: TestemunhoCountAggregateOutputType | null
     _min: TestemunhoMinAggregateOutputType | null
     _max: TestemunhoMaxAggregateOutputType | null
@@ -15369,8 +14416,9 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Testemunho$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["testemunho"]>
 
   export type TestemunhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15383,8 +14431,9 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Testemunho$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["testemunho"]>
 
   export type TestemunhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15397,8 +14446,9 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Testemunho$igrejaArgs<ExtArgs>
   }, ExtArgs["result"]["testemunho"]>
 
   export type TestemunhoSelectScalar = {
@@ -15411,24 +14461,28 @@ export namespace Prisma {
     updatedAt?: boolean
     isPublic?: boolean
     coverUrl?: boolean
-    ministryRole?: boolean
+    igrejaId?: boolean
   }
 
-  export type TestemunhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "avatarUrl" | "content" | "createdAt" | "updatedAt" | "isPublic" | "coverUrl" | "ministryRole", ExtArgs["result"]["testemunho"]>
+  export type TestemunhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "avatarUrl" | "content" | "createdAt" | "updatedAt" | "isPublic" | "coverUrl" | "igrejaId", ExtArgs["result"]["testemunho"]>
   export type TestemunhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Testemunho$igrejaArgs<ExtArgs>
   }
   export type TestemunhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Testemunho$igrejaArgs<ExtArgs>
   }
   export type TestemunhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    igreja?: boolean | Testemunho$igrejaArgs<ExtArgs>
   }
 
   export type $TestemunhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Testemunho"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      igreja: Prisma.$IgrejaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15440,7 +14494,7 @@ export namespace Prisma {
       updatedAt: Date
       isPublic: boolean
       coverUrl: string | null
-      ministryRole: $Enums.MinistryRole | null
+      igrejaId: string | null
     }, ExtArgs["result"]["testemunho"]>
     composites: {}
   }
@@ -15836,6 +14890,7 @@ export namespace Prisma {
   export interface Prisma__TestemunhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    igreja<T extends Testemunho$igrejaArgs<ExtArgs> = {}>(args?: Subset<T, Testemunho$igrejaArgs<ExtArgs>>): Prisma__IgrejaClient<$Result.GetResult<Prisma.$IgrejaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15874,7 +14929,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Testemunho", 'DateTime'>
     readonly isPublic: FieldRef<"Testemunho", 'Boolean'>
     readonly coverUrl: FieldRef<"Testemunho", 'String'>
-    readonly ministryRole: FieldRef<"Testemunho", 'MinistryRole'>
+    readonly igrejaId: FieldRef<"Testemunho", 'String'>
   }
     
 
@@ -16268,6 +15323,25 @@ export namespace Prisma {
      * Limit how many Testemunhos to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Testemunho.igreja
+   */
+  export type Testemunho$igrejaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Igreja
+     */
+    select?: IgrejaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Igreja
+     */
+    omit?: IgrejaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IgrejaInclude<ExtArgs> | null
+    where?: IgrejaWhereInput
   }
 
   /**
@@ -21911,6 +20985,27 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const IgrejaScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    slug: 'slug',
+    ativa: 'ativa',
+    endereco: 'endereco',
+    descricao: 'descricao',
+    tipo: 'tipo',
+    banco: 'banco',
+    conta: 'conta',
+    agencia: 'agencia',
+    nomebanco: 'nomebanco',
+    pix: 'pix',
+    nomepix: 'nomepix',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IgrejaScalarFieldEnum = (typeof IgrejaScalarFieldEnum)[keyof typeof IgrejaScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     login: 'login',
@@ -21918,7 +21013,7 @@ export namespace Prisma {
     avatarUrl: 'avatarUrl',
     password: 'password',
     role: 'role',
-    ministryRole: 'ministryRole',
+    igrejaId: 'igrejaId',
     expires: 'expires',
     cargo: 'cargo'
   };
@@ -21939,7 +21034,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     destaque: 'destaque',
     url: 'url',
-    role: 'role'
+    igrejaId: 'igrejaId'
   };
 
   export type NewScalarFieldEnum = (typeof NewScalarFieldEnum)[keyof typeof NewScalarFieldEnum]
@@ -21955,7 +21050,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     coverUrl: 'coverUrl',
     updatedAt: 'updatedAt',
-    role: 'role'
+    igrejaId: 'igrejaId'
   };
 
   export type MinisterioScalarFieldEnum = (typeof MinisterioScalarFieldEnum)[keyof typeof MinisterioScalarFieldEnum]
@@ -21971,44 +21066,10 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     destaque: 'destaque',
-    role: 'role'
+    igrejaId: 'igrejaId'
   };
 
   export type AgendaScalarFieldEnum = (typeof AgendaScalarFieldEnum)[keyof typeof AgendaScalarFieldEnum]
-
-
-  export const DoacaoScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    local: 'local',
-    banco: 'banco',
-    conta: 'conta',
-    agencia: 'agencia',
-    nomebanco: 'nomebanco',
-    pix: 'pix',
-    nomepix: 'nomepix',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type DoacaoScalarFieldEnum = (typeof DoacaoScalarFieldEnum)[keyof typeof DoacaoScalarFieldEnum]
-
-
-  export const EnderecoScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    local: 'local',
-    rua: 'rua',
-    cep: 'cep',
-    isPublic: 'isPublic',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    numero: 'numero',
-    cidade: 'cidade'
-  };
-
-  export type EnderecoScalarFieldEnum = (typeof EnderecoScalarFieldEnum)[keyof typeof EnderecoScalarFieldEnum]
 
 
   export const ContatoScalarFieldEnum: {
@@ -22086,7 +21147,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     isPublic: 'isPublic',
     coverUrl: 'coverUrl',
-    ministryRole: 'ministryRole'
+    igrejaId: 'igrejaId'
   };
 
   export type TestemunhoScalarFieldEnum = (typeof TestemunhoScalarFieldEnum)[keyof typeof TestemunhoScalarFieldEnum]
@@ -22222,30 +21283,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'UserRole'
+   * Reference to a field of type 'Boolean'
    */
-  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
-    
-
-
-  /**
-   * Reference to a field of type 'UserRole[]'
-   */
-  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'MinistryRole'
-   */
-  export type EnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole'>
-    
-
-
-  /**
-   * Reference to a field of type 'MinistryRole[]'
-   */
-  export type ListEnumMinistryRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MinistryRole[]'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -22264,6 +21304,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'CargoRole[]'
    */
   export type ListEnumCargoRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CargoRole[]'>
@@ -22274,13 +21328,6 @@ export namespace Prisma {
    * Reference to a field of type 'CargoRole'
    */
   export type EnumCargoRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CargoRole'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -22329,6 +21376,123 @@ export namespace Prisma {
    */
 
 
+  export type IgrejaWhereInput = {
+    AND?: IgrejaWhereInput | IgrejaWhereInput[]
+    OR?: IgrejaWhereInput[]
+    NOT?: IgrejaWhereInput | IgrejaWhereInput[]
+    id?: StringFilter<"Igreja"> | string
+    nome?: StringFilter<"Igreja"> | string
+    slug?: StringFilter<"Igreja"> | string
+    ativa?: BoolFilter<"Igreja"> | boolean
+    endereco?: StringNullableFilter<"Igreja"> | string | null
+    descricao?: StringNullableFilter<"Igreja"> | string | null
+    tipo?: StringNullableFilter<"Igreja"> | string | null
+    banco?: StringNullableFilter<"Igreja"> | string | null
+    conta?: StringNullableFilter<"Igreja"> | string | null
+    agencia?: StringNullableFilter<"Igreja"> | string | null
+    nomebanco?: StringNullableFilter<"Igreja"> | string | null
+    pix?: StringNullableFilter<"Igreja"> | string | null
+    nomepix?: StringNullableFilter<"Igreja"> | string | null
+    createdAt?: DateTimeFilter<"Igreja"> | Date | string
+    updatedAt?: DateTimeFilter<"Igreja"> | Date | string
+    users?: UserListRelationFilter
+    news?: NewListRelationFilter
+    ministerios?: MinisterioListRelationFilter
+    agendas?: AgendaListRelationFilter
+    testemunhos?: TestemunhoListRelationFilter
+  }
+
+  export type IgrejaOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    slug?: SortOrder
+    ativa?: SortOrder
+    endereco?: SortOrderInput | SortOrder
+    descricao?: SortOrderInput | SortOrder
+    tipo?: SortOrderInput | SortOrder
+    banco?: SortOrderInput | SortOrder
+    conta?: SortOrderInput | SortOrder
+    agencia?: SortOrderInput | SortOrder
+    nomebanco?: SortOrderInput | SortOrder
+    pix?: SortOrderInput | SortOrder
+    nomepix?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    users?: UserOrderByRelationAggregateInput
+    news?: NewOrderByRelationAggregateInput
+    ministerios?: MinisterioOrderByRelationAggregateInput
+    agendas?: AgendaOrderByRelationAggregateInput
+    testemunhos?: TestemunhoOrderByRelationAggregateInput
+  }
+
+  export type IgrejaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: IgrejaWhereInput | IgrejaWhereInput[]
+    OR?: IgrejaWhereInput[]
+    NOT?: IgrejaWhereInput | IgrejaWhereInput[]
+    nome?: StringFilter<"Igreja"> | string
+    ativa?: BoolFilter<"Igreja"> | boolean
+    endereco?: StringNullableFilter<"Igreja"> | string | null
+    descricao?: StringNullableFilter<"Igreja"> | string | null
+    tipo?: StringNullableFilter<"Igreja"> | string | null
+    banco?: StringNullableFilter<"Igreja"> | string | null
+    conta?: StringNullableFilter<"Igreja"> | string | null
+    agencia?: StringNullableFilter<"Igreja"> | string | null
+    nomebanco?: StringNullableFilter<"Igreja"> | string | null
+    pix?: StringNullableFilter<"Igreja"> | string | null
+    nomepix?: StringNullableFilter<"Igreja"> | string | null
+    createdAt?: DateTimeFilter<"Igreja"> | Date | string
+    updatedAt?: DateTimeFilter<"Igreja"> | Date | string
+    users?: UserListRelationFilter
+    news?: NewListRelationFilter
+    ministerios?: MinisterioListRelationFilter
+    agendas?: AgendaListRelationFilter
+    testemunhos?: TestemunhoListRelationFilter
+  }, "id" | "slug">
+
+  export type IgrejaOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    slug?: SortOrder
+    ativa?: SortOrder
+    endereco?: SortOrderInput | SortOrder
+    descricao?: SortOrderInput | SortOrder
+    tipo?: SortOrderInput | SortOrder
+    banco?: SortOrderInput | SortOrder
+    conta?: SortOrderInput | SortOrder
+    agencia?: SortOrderInput | SortOrder
+    nomebanco?: SortOrderInput | SortOrder
+    pix?: SortOrderInput | SortOrder
+    nomepix?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IgrejaCountOrderByAggregateInput
+    _max?: IgrejaMaxOrderByAggregateInput
+    _min?: IgrejaMinOrderByAggregateInput
+  }
+
+  export type IgrejaScalarWhereWithAggregatesInput = {
+    AND?: IgrejaScalarWhereWithAggregatesInput | IgrejaScalarWhereWithAggregatesInput[]
+    OR?: IgrejaScalarWhereWithAggregatesInput[]
+    NOT?: IgrejaScalarWhereWithAggregatesInput | IgrejaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Igreja"> | string
+    nome?: StringWithAggregatesFilter<"Igreja"> | string
+    slug?: StringWithAggregatesFilter<"Igreja"> | string
+    ativa?: BoolWithAggregatesFilter<"Igreja"> | boolean
+    endereco?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    descricao?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    tipo?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    banco?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    conta?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    agencia?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    nomebanco?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    pix?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    nomepix?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Igreja"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Igreja"> | Date | string
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -22339,13 +21503,11 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
-    ministryRole?: EnumMinistryRoleNullableFilter<"User"> | $Enums.MinistryRole | null
+    igrejaId?: StringNullableFilter<"User"> | string | null
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
     cargo?: EnumCargoRoleNullableListFilter<"User">
     agenda?: AgendaListRelationFilter
     contato?: ContatoListRelationFilter
-    doacao?: DoacaoListRelationFilter
-    endereco?: EnderecoListRelationFilter
     ministerio?: MinisterioListRelationFilter
     news?: NewListRelationFilter
     PasswordResetToken?: PasswordResetTokenListRelationFilter
@@ -22358,6 +21520,7 @@ export namespace Prisma {
     bibleReadingPlan?: XOR<BibleReadingPlanNullableScalarRelationFilter, BibleReadingPlanWhereInput> | null
     bibleReadChapters?: BibleReadChapterListRelationFilter
     bibleReadVerses?: BibleReadVerseListRelationFilter
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -22367,13 +21530,11 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
-    ministryRole?: SortOrderInput | SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
     cargo?: SortOrder
     agenda?: AgendaOrderByRelationAggregateInput
     contato?: ContatoOrderByRelationAggregateInput
-    doacao?: DoacaoOrderByRelationAggregateInput
-    endereco?: EnderecoOrderByRelationAggregateInput
     ministerio?: MinisterioOrderByRelationAggregateInput
     news?: NewOrderByRelationAggregateInput
     PasswordResetToken?: PasswordResetTokenOrderByRelationAggregateInput
@@ -22386,6 +21547,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanOrderByWithRelationInput
     bibleReadChapters?: BibleReadChapterOrderByRelationAggregateInput
     bibleReadVerses?: BibleReadVerseOrderByRelationAggregateInput
+    igreja?: IgrejaOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -22398,13 +21560,11 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
-    ministryRole?: EnumMinistryRoleNullableFilter<"User"> | $Enums.MinistryRole | null
+    igrejaId?: StringNullableFilter<"User"> | string | null
     expires?: DateTimeNullableFilter<"User"> | Date | string | null
     cargo?: EnumCargoRoleNullableListFilter<"User">
     agenda?: AgendaListRelationFilter
     contato?: ContatoListRelationFilter
-    doacao?: DoacaoListRelationFilter
-    endereco?: EnderecoListRelationFilter
     ministerio?: MinisterioListRelationFilter
     news?: NewListRelationFilter
     PasswordResetToken?: PasswordResetTokenListRelationFilter
@@ -22417,6 +21577,7 @@ export namespace Prisma {
     bibleReadingPlan?: XOR<BibleReadingPlanNullableScalarRelationFilter, BibleReadingPlanWhereInput> | null
     bibleReadChapters?: BibleReadChapterListRelationFilter
     bibleReadVerses?: BibleReadVerseListRelationFilter
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }, "id" | "login">
 
   export type UserOrderByWithAggregationInput = {
@@ -22426,7 +21587,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
-    ministryRole?: SortOrderInput | SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     expires?: SortOrderInput | SortOrder
     cargo?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -22444,7 +21605,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
-    ministryRole?: EnumMinistryRoleNullableWithAggregatesFilter<"User"> | $Enums.MinistryRole | null
+    igrejaId?: StringNullableWithAggregatesFilter<"User"> | string | null
     expires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     cargo?: EnumCargoRoleNullableListFilter<"User">
   }
@@ -22465,8 +21626,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
     url?: StringFilter<"New"> | string
-    role?: EnumMinistryRoleFilter<"New"> | $Enums.MinistryRole
+    igrejaId?: StringNullableFilter<"New"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }
 
   export type NewOrderByWithRelationInput = {
@@ -22482,8 +21644,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    igreja?: IgrejaOrderByWithRelationInput
   }
 
   export type NewWhereUniqueInput = Prisma.AtLeast<{
@@ -22502,8 +21665,9 @@ export namespace Prisma {
     page?: StringFilter<"New"> | string
     updatedAt?: DateTimeFilter<"New"> | Date | string
     destaque?: BoolFilter<"New"> | boolean
-    role?: EnumMinistryRoleFilter<"New"> | $Enums.MinistryRole
+    igrejaId?: StringNullableFilter<"New"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }, "id" | "url">
 
   export type NewOrderByWithAggregationInput = {
@@ -22519,7 +21683,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     _count?: NewCountOrderByAggregateInput
     _max?: NewMaxOrderByAggregateInput
     _min?: NewMinOrderByAggregateInput
@@ -22541,7 +21705,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"New"> | Date | string
     destaque?: BoolWithAggregatesFilter<"New"> | boolean
     url?: StringWithAggregatesFilter<"New"> | string
-    role?: EnumMinistryRoleWithAggregatesFilter<"New"> | $Enums.MinistryRole
+    igrejaId?: StringNullableWithAggregatesFilter<"New"> | string | null
   }
 
   export type MinisterioWhereInput = {
@@ -22557,8 +21721,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Ministerio"> | Date | string
     coverUrl?: StringFilter<"Ministerio"> | string
     updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
-    role?: EnumMinistryRoleFilter<"Ministerio"> | $Enums.MinistryRole
+    igrejaId?: StringNullableFilter<"Ministerio"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }
 
   export type MinisterioOrderByWithRelationInput = {
@@ -22571,8 +21736,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    igreja?: IgrejaOrderByWithRelationInput
   }
 
   export type MinisterioWhereUniqueInput = Prisma.AtLeast<{
@@ -22588,8 +21754,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Ministerio"> | Date | string
     coverUrl?: StringFilter<"Ministerio"> | string
     updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
-    role?: EnumMinistryRoleFilter<"Ministerio"> | $Enums.MinistryRole
+    igrejaId?: StringNullableFilter<"Ministerio"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }, "id">
 
   export type MinisterioOrderByWithAggregationInput = {
@@ -22602,7 +21769,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     _count?: MinisterioCountOrderByAggregateInput
     _max?: MinisterioMaxOrderByAggregateInput
     _min?: MinisterioMinOrderByAggregateInput
@@ -22621,7 +21788,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Ministerio"> | Date | string
     coverUrl?: StringWithAggregatesFilter<"Ministerio"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ministerio"> | Date | string
-    role?: EnumMinistryRoleWithAggregatesFilter<"Ministerio"> | $Enums.MinistryRole
+    igrejaId?: StringNullableWithAggregatesFilter<"Ministerio"> | string | null
   }
 
   export type AgendaWhereInput = {
@@ -22637,8 +21804,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeFilter<"Agenda"> | Date | string
     destaque?: BoolFilter<"Agenda"> | boolean
-    role?: EnumMinistryRoleFilter<"Agenda"> | $Enums.MinistryRole
+    igrejaId?: StringNullableFilter<"Agenda"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }
 
   export type AgendaOrderByWithRelationInput = {
@@ -22651,8 +21819,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    igreja?: IgrejaOrderByWithRelationInput
   }
 
   export type AgendaWhereUniqueInput = Prisma.AtLeast<{
@@ -22668,8 +21837,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeFilter<"Agenda"> | Date | string
     destaque?: BoolFilter<"Agenda"> | boolean
-    role?: EnumMinistryRoleFilter<"Agenda"> | $Enums.MinistryRole
+    igrejaId?: StringNullableFilter<"Agenda"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }, "id">
 
   export type AgendaOrderByWithAggregationInput = {
@@ -22682,7 +21852,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     _count?: AgendaCountOrderByAggregateInput
     _max?: AgendaMaxOrderByAggregateInput
     _min?: AgendaMinOrderByAggregateInput
@@ -22701,177 +21871,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Agenda"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Agenda"> | Date | string
     destaque?: BoolWithAggregatesFilter<"Agenda"> | boolean
-    role?: EnumMinistryRoleWithAggregatesFilter<"Agenda"> | $Enums.MinistryRole
-  }
-
-  export type DoacaoWhereInput = {
-    AND?: DoacaoWhereInput | DoacaoWhereInput[]
-    OR?: DoacaoWhereInput[]
-    NOT?: DoacaoWhereInput | DoacaoWhereInput[]
-    id?: StringFilter<"Doacao"> | string
-    userId?: StringFilter<"Doacao"> | string
-    local?: StringFilter<"Doacao"> | string
-    banco?: StringFilter<"Doacao"> | string
-    conta?: StringFilter<"Doacao"> | string
-    agencia?: StringFilter<"Doacao"> | string
-    nomebanco?: StringFilter<"Doacao"> | string
-    pix?: StringFilter<"Doacao"> | string
-    nomepix?: StringFilter<"Doacao"> | string
-    isPublic?: BoolFilter<"Doacao"> | boolean
-    createdAt?: DateTimeFilter<"Doacao"> | Date | string
-    updatedAt?: DateTimeFilter<"Doacao"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type DoacaoOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    banco?: SortOrder
-    conta?: SortOrder
-    agencia?: SortOrder
-    nomebanco?: SortOrder
-    pix?: SortOrder
-    nomepix?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type DoacaoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: DoacaoWhereInput | DoacaoWhereInput[]
-    OR?: DoacaoWhereInput[]
-    NOT?: DoacaoWhereInput | DoacaoWhereInput[]
-    userId?: StringFilter<"Doacao"> | string
-    local?: StringFilter<"Doacao"> | string
-    banco?: StringFilter<"Doacao"> | string
-    conta?: StringFilter<"Doacao"> | string
-    agencia?: StringFilter<"Doacao"> | string
-    nomebanco?: StringFilter<"Doacao"> | string
-    pix?: StringFilter<"Doacao"> | string
-    nomepix?: StringFilter<"Doacao"> | string
-    isPublic?: BoolFilter<"Doacao"> | boolean
-    createdAt?: DateTimeFilter<"Doacao"> | Date | string
-    updatedAt?: DateTimeFilter<"Doacao"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type DoacaoOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    banco?: SortOrder
-    conta?: SortOrder
-    agencia?: SortOrder
-    nomebanco?: SortOrder
-    pix?: SortOrder
-    nomepix?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: DoacaoCountOrderByAggregateInput
-    _max?: DoacaoMaxOrderByAggregateInput
-    _min?: DoacaoMinOrderByAggregateInput
-  }
-
-  export type DoacaoScalarWhereWithAggregatesInput = {
-    AND?: DoacaoScalarWhereWithAggregatesInput | DoacaoScalarWhereWithAggregatesInput[]
-    OR?: DoacaoScalarWhereWithAggregatesInput[]
-    NOT?: DoacaoScalarWhereWithAggregatesInput | DoacaoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Doacao"> | string
-    userId?: StringWithAggregatesFilter<"Doacao"> | string
-    local?: StringWithAggregatesFilter<"Doacao"> | string
-    banco?: StringWithAggregatesFilter<"Doacao"> | string
-    conta?: StringWithAggregatesFilter<"Doacao"> | string
-    agencia?: StringWithAggregatesFilter<"Doacao"> | string
-    nomebanco?: StringWithAggregatesFilter<"Doacao"> | string
-    pix?: StringWithAggregatesFilter<"Doacao"> | string
-    nomepix?: StringWithAggregatesFilter<"Doacao"> | string
-    isPublic?: BoolWithAggregatesFilter<"Doacao"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"Doacao"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Doacao"> | Date | string
-  }
-
-  export type EnderecoWhereInput = {
-    AND?: EnderecoWhereInput | EnderecoWhereInput[]
-    OR?: EnderecoWhereInput[]
-    NOT?: EnderecoWhereInput | EnderecoWhereInput[]
-    id?: StringFilter<"Endereco"> | string
-    userId?: StringFilter<"Endereco"> | string
-    local?: StringFilter<"Endereco"> | string
-    rua?: StringFilter<"Endereco"> | string
-    cep?: StringFilter<"Endereco"> | string
-    isPublic?: BoolFilter<"Endereco"> | boolean
-    createdAt?: DateTimeFilter<"Endereco"> | Date | string
-    updatedAt?: DateTimeFilter<"Endereco"> | Date | string
-    numero?: StringNullableFilter<"Endereco"> | string | null
-    cidade?: StringNullableFilter<"Endereco"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type EnderecoOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    rua?: SortOrder
-    cep?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    numero?: SortOrderInput | SortOrder
-    cidade?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type EnderecoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: EnderecoWhereInput | EnderecoWhereInput[]
-    OR?: EnderecoWhereInput[]
-    NOT?: EnderecoWhereInput | EnderecoWhereInput[]
-    userId?: StringFilter<"Endereco"> | string
-    local?: StringFilter<"Endereco"> | string
-    rua?: StringFilter<"Endereco"> | string
-    cep?: StringFilter<"Endereco"> | string
-    isPublic?: BoolFilter<"Endereco"> | boolean
-    createdAt?: DateTimeFilter<"Endereco"> | Date | string
-    updatedAt?: DateTimeFilter<"Endereco"> | Date | string
-    numero?: StringNullableFilter<"Endereco"> | string | null
-    cidade?: StringNullableFilter<"Endereco"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type EnderecoOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    rua?: SortOrder
-    cep?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    numero?: SortOrderInput | SortOrder
-    cidade?: SortOrderInput | SortOrder
-    _count?: EnderecoCountOrderByAggregateInput
-    _max?: EnderecoMaxOrderByAggregateInput
-    _min?: EnderecoMinOrderByAggregateInput
-  }
-
-  export type EnderecoScalarWhereWithAggregatesInput = {
-    AND?: EnderecoScalarWhereWithAggregatesInput | EnderecoScalarWhereWithAggregatesInput[]
-    OR?: EnderecoScalarWhereWithAggregatesInput[]
-    NOT?: EnderecoScalarWhereWithAggregatesInput | EnderecoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Endereco"> | string
-    userId?: StringWithAggregatesFilter<"Endereco"> | string
-    local?: StringWithAggregatesFilter<"Endereco"> | string
-    rua?: StringWithAggregatesFilter<"Endereco"> | string
-    cep?: StringWithAggregatesFilter<"Endereco"> | string
-    isPublic?: BoolWithAggregatesFilter<"Endereco"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"Endereco"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Endereco"> | Date | string
-    numero?: StringNullableWithAggregatesFilter<"Endereco"> | string | null
-    cidade?: StringNullableWithAggregatesFilter<"Endereco"> | string | null
+    igrejaId?: StringNullableWithAggregatesFilter<"Agenda"> | string | null
   }
 
   export type ContatoWhereInput = {
@@ -23212,8 +22212,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
     isPublic?: BoolFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableFilter<"Testemunho"> | string | null
-    ministryRole?: EnumMinistryRoleNullableFilter<"Testemunho"> | $Enums.MinistryRole | null
+    igrejaId?: StringNullableFilter<"Testemunho"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }
 
   export type TestemunhoOrderByWithRelationInput = {
@@ -23226,8 +22227,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
-    ministryRole?: SortOrderInput | SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    igreja?: IgrejaOrderByWithRelationInput
   }
 
   export type TestemunhoWhereUniqueInput = Prisma.AtLeast<{
@@ -23243,8 +22245,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
     isPublic?: BoolFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableFilter<"Testemunho"> | string | null
-    ministryRole?: EnumMinistryRoleNullableFilter<"Testemunho"> | $Enums.MinistryRole | null
+    igrejaId?: StringNullableFilter<"Testemunho"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    igreja?: XOR<IgrejaNullableScalarRelationFilter, IgrejaWhereInput> | null
   }, "id">
 
   export type TestemunhoOrderByWithAggregationInput = {
@@ -23257,7 +22260,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
-    ministryRole?: SortOrderInput | SortOrder
+    igrejaId?: SortOrderInput | SortOrder
     _count?: TestemunhoCountOrderByAggregateInput
     _max?: TestemunhoMaxOrderByAggregateInput
     _min?: TestemunhoMinOrderByAggregateInput
@@ -23276,7 +22279,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Testemunho"> | Date | string
     isPublic?: BoolWithAggregatesFilter<"Testemunho"> | boolean
     coverUrl?: StringNullableWithAggregatesFilter<"Testemunho"> | string | null
-    ministryRole?: EnumMinistryRoleNullableWithAggregatesFilter<"Testemunho"> | $Enums.MinistryRole | null
+    igrejaId?: StringNullableWithAggregatesFilter<"Testemunho"> | string | null
   }
 
   export type BibleFavoriteWhereInput = {
@@ -23635,6 +22638,152 @@ export namespace Prisma {
     userAgent?: StringNullableWithAggregatesFilter<"AuditLog"> | string | null
   }
 
+  export type IgrejaCreateInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutIgrejaInput
+    news?: NewCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUncheckedCreateInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
+    news?: NewUncheckedCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioUncheckedCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaUncheckedCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutIgrejaNestedInput
+    news?: NewUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutIgrejaNestedInput
+  }
+
+  export type IgrejaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
+    news?: NewUncheckedUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUncheckedUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUncheckedUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutIgrejaNestedInput
+  }
+
+  export type IgrejaCreateManyInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IgrejaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IgrejaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     login: string
@@ -23642,13 +22791,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -23661,6 +22807,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -23670,13 +22817,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -23698,13 +22843,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -23717,6 +22859,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -23726,13 +22869,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -23754,7 +22895,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
   }
@@ -23766,7 +22907,6 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
   }
@@ -23778,7 +22918,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
   }
@@ -23795,8 +22935,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-    role: $Enums.MinistryRole
     user: UserCreateNestedOneWithoutNewsInput
+    igreja?: IgrejaCreateNestedOneWithoutNewsInput
   }
 
   export type NewUncheckedCreateInput = {
@@ -23812,7 +22952,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type NewUpdateInput = {
@@ -23827,8 +22967,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
     user?: UserUpdateOneRequiredWithoutNewsNestedInput
+    igreja?: IgrejaUpdateOneWithoutNewsNestedInput
   }
 
   export type NewUncheckedUpdateInput = {
@@ -23844,7 +22984,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewCreateManyInput = {
@@ -23860,7 +23000,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type NewUpdateManyMutationInput = {
@@ -23875,7 +23015,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type NewUncheckedUpdateManyInput = {
@@ -23891,7 +23030,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MinisterioCreateInput = {
@@ -23903,8 +23042,8 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-    role: $Enums.MinistryRole
     user: UserCreateNestedOneWithoutMinisterioInput
+    igreja?: IgrejaCreateNestedOneWithoutMinisteriosInput
   }
 
   export type MinisterioUncheckedCreateInput = {
@@ -23917,7 +23056,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type MinisterioUpdateInput = {
@@ -23929,8 +23068,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
     user?: UserUpdateOneRequiredWithoutMinisterioNestedInput
+    igreja?: IgrejaUpdateOneWithoutMinisteriosNestedInput
   }
 
   export type MinisterioUncheckedUpdateInput = {
@@ -23943,7 +23082,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MinisterioCreateManyInput = {
@@ -23956,7 +23095,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type MinisterioUpdateManyMutationInput = {
@@ -23968,7 +23107,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type MinisterioUncheckedUpdateManyInput = {
@@ -23981,7 +23119,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AgendaCreateInput = {
@@ -23993,8 +23131,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-    role: $Enums.MinistryRole
     user: UserCreateNestedOneWithoutAgendaInput
+    igreja?: IgrejaCreateNestedOneWithoutAgendasInput
   }
 
   export type AgendaUncheckedCreateInput = {
@@ -24007,7 +23145,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type AgendaUpdateInput = {
@@ -24019,8 +23157,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
     user?: UserUpdateOneRequiredWithoutAgendaNestedInput
+    igreja?: IgrejaUpdateOneWithoutAgendasNestedInput
   }
 
   export type AgendaUncheckedUpdateInput = {
@@ -24033,7 +23171,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AgendaCreateManyInput = {
@@ -24046,7 +23184,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type AgendaUpdateManyMutationInput = {
@@ -24058,7 +23196,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
   }
 
   export type AgendaUncheckedUpdateManyInput = {
@@ -24071,201 +23208,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
-  }
-
-  export type DoacaoCreateInput = {
-    id?: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutDoacaoInput
-  }
-
-  export type DoacaoUncheckedCreateInput = {
-    id?: string
-    userId: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoacaoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutDoacaoNestedInput
-  }
-
-  export type DoacaoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoacaoCreateManyInput = {
-    id?: string
-    userId: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoacaoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoacaoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EnderecoCreateInput = {
-    id?: string
-    local: string
-    rua: string
-    cep: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    numero?: string | null
-    cidade?: string | null
-    user: UserCreateNestedOneWithoutEnderecoInput
-  }
-
-  export type EnderecoUncheckedCreateInput = {
-    id?: string
-    userId: string
-    local: string
-    rua: string
-    cep: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    numero?: string | null
-    cidade?: string | null
-  }
-
-  export type EnderecoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutEnderecoNestedInput
-  }
-
-  export type EnderecoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EnderecoCreateManyInput = {
-    id?: string
-    userId: string
-    local: string
-    rua: string
-    cep: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    numero?: string | null
-    cidade?: string | null
-  }
-
-  export type EnderecoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EnderecoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContatoCreateInput = {
@@ -24622,8 +23565,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
-    ministryRole?: $Enums.MinistryRole | null
     user: UserCreateNestedOneWithoutTestemunhosInput
+    igreja?: IgrejaCreateNestedOneWithoutTestemunhosInput
   }
 
   export type TestemunhoUncheckedCreateInput = {
@@ -24636,7 +23579,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
   }
 
   export type TestemunhoUpdateInput = {
@@ -24648,8 +23591,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     user?: UserUpdateOneRequiredWithoutTestemunhosNestedInput
+    igreja?: IgrejaUpdateOneWithoutTestemunhosNestedInput
   }
 
   export type TestemunhoUncheckedUpdateInput = {
@@ -24662,7 +23605,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TestemunhoCreateManyInput = {
@@ -24675,7 +23618,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
   }
 
   export type TestemunhoUpdateManyMutationInput = {
@@ -24687,7 +23630,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
   }
 
   export type TestemunhoUncheckedUpdateManyInput = {
@@ -24700,7 +23642,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BibleFavoriteCreateInput = {
@@ -25091,6 +24033,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -25106,18 +24053,189 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type NewListRelationFilter = {
+    every?: NewWhereInput
+    some?: NewWhereInput
+    none?: NewWhereInput
+  }
+
+  export type MinisterioListRelationFilter = {
+    every?: MinisterioWhereInput
+    some?: MinisterioWhereInput
+    none?: MinisterioWhereInput
+  }
+
+  export type AgendaListRelationFilter = {
+    every?: AgendaWhereInput
+    some?: AgendaWhereInput
+    none?: AgendaWhereInput
+  }
+
+  export type TestemunhoListRelationFilter = {
+    every?: TestemunhoWhereInput
+    some?: TestemunhoWhereInput
+    none?: TestemunhoWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MinisterioOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AgendaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TestemunhoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IgrejaCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    slug?: SortOrder
+    ativa?: SortOrder
+    endereco?: SortOrder
+    descricao?: SortOrder
+    tipo?: SortOrder
+    banco?: SortOrder
+    conta?: SortOrder
+    agencia?: SortOrder
+    nomebanco?: SortOrder
+    pix?: SortOrder
+    nomepix?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IgrejaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    slug?: SortOrder
+    ativa?: SortOrder
+    endereco?: SortOrder
+    descricao?: SortOrder
+    tipo?: SortOrder
+    banco?: SortOrder
+    conta?: SortOrder
+    agencia?: SortOrder
+    nomebanco?: SortOrder
+    pix?: SortOrder
+    nomepix?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IgrejaMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    slug?: SortOrder
+    ativa?: SortOrder
+    endereco?: SortOrder
+    descricao?: SortOrder
+    tipo?: SortOrder
+    banco?: SortOrder
+    conta?: SortOrder
+    agencia?: SortOrder
+    nomebanco?: SortOrder
+    pix?: SortOrder
+    nomepix?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type EnumUserRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
     notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
-  }
-
-  export type EnumMinistryRoleNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMinistryRoleNullableFilter<$PrismaModel> | $Enums.MinistryRole | null
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -25139,40 +24257,10 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type AgendaListRelationFilter = {
-    every?: AgendaWhereInput
-    some?: AgendaWhereInput
-    none?: AgendaWhereInput
-  }
-
   export type ContatoListRelationFilter = {
     every?: ContatoWhereInput
     some?: ContatoWhereInput
     none?: ContatoWhereInput
-  }
-
-  export type DoacaoListRelationFilter = {
-    every?: DoacaoWhereInput
-    some?: DoacaoWhereInput
-    none?: DoacaoWhereInput
-  }
-
-  export type EnderecoListRelationFilter = {
-    every?: EnderecoWhereInput
-    some?: EnderecoWhereInput
-    none?: EnderecoWhereInput
-  }
-
-  export type MinisterioListRelationFilter = {
-    every?: MinisterioWhereInput
-    some?: MinisterioWhereInput
-    none?: MinisterioWhereInput
-  }
-
-  export type NewListRelationFilter = {
-    every?: NewWhereInput
-    some?: NewWhereInput
-    none?: NewWhereInput
   }
 
   export type PasswordResetTokenListRelationFilter = {
@@ -25197,12 +24285,6 @@ export namespace Prisma {
     every?: SobreLiderWhereInput
     some?: SobreLiderWhereInput
     none?: SobreLiderWhereInput
-  }
-
-  export type TestemunhoListRelationFilter = {
-    every?: TestemunhoWhereInput
-    some?: TestemunhoWhereInput
-    none?: TestemunhoWhereInput
   }
 
   export type AuditLogListRelationFilter = {
@@ -25234,32 +24316,12 @@ export namespace Prisma {
     none?: BibleReadVerseWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type AgendaOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type IgrejaNullableScalarRelationFilter = {
+    is?: IgrejaWhereInput | null
+    isNot?: IgrejaWhereInput | null
   }
 
   export type ContatoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DoacaoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EnderecoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MinisterioOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NewOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25276,10 +24338,6 @@ export namespace Prisma {
   }
 
   export type SobreLiderOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TestemunhoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25306,7 +24364,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    ministryRole?: SortOrder
+    igrejaId?: SortOrder
     expires?: SortOrder
     cargo?: SortOrder
   }
@@ -25318,7 +24376,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    ministryRole?: SortOrder
+    igrejaId?: SortOrder
     expires?: SortOrder
   }
 
@@ -25329,44 +24387,8 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    ministryRole?: SortOrder
+    igrejaId?: SortOrder
     expires?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -25377,16 +24399,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumUserRoleFilter<$PrismaModel>
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
-  }
-
-  export type EnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
-    _max?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -25401,29 +24413,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type EnumMinistryRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMinistryRoleFilter<$PrismaModel> | $Enums.MinistryRole
   }
 
   export type UserScalarRelationFilter = {
@@ -25444,7 +24433,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type NewMaxOrderByAggregateInput = {
@@ -25460,7 +24449,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type NewMinOrderByAggregateInput = {
@@ -25476,39 +24465,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     destaque?: SortOrder
     url?: SortOrder
-    role?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type EnumMinistryRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMinistryRoleWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMinistryRoleFilter<$PrismaModel>
-    _max?: NestedEnumMinistryRoleFilter<$PrismaModel>
+    igrejaId?: SortOrder
   }
 
   export type MinisterioCountOrderByAggregateInput = {
@@ -25521,7 +24478,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type MinisterioMaxOrderByAggregateInput = {
@@ -25534,7 +24491,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type MinisterioMinOrderByAggregateInput = {
@@ -25547,7 +24504,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     coverUrl?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type AgendaCountOrderByAggregateInput = {
@@ -25560,7 +24517,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type AgendaMaxOrderByAggregateInput = {
@@ -25573,7 +24530,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
-    role?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type AgendaMinOrderByAggregateInput = {
@@ -25586,91 +24543,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     destaque?: SortOrder
-    role?: SortOrder
-  }
-
-  export type DoacaoCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    banco?: SortOrder
-    conta?: SortOrder
-    agencia?: SortOrder
-    nomebanco?: SortOrder
-    pix?: SortOrder
-    nomepix?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DoacaoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    banco?: SortOrder
-    conta?: SortOrder
-    agencia?: SortOrder
-    nomebanco?: SortOrder
-    pix?: SortOrder
-    nomepix?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DoacaoMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    banco?: SortOrder
-    conta?: SortOrder
-    agencia?: SortOrder
-    nomebanco?: SortOrder
-    pix?: SortOrder
-    nomepix?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type EnderecoCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    rua?: SortOrder
-    cep?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    numero?: SortOrder
-    cidade?: SortOrder
-  }
-
-  export type EnderecoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    rua?: SortOrder
-    cep?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    numero?: SortOrder
-    cidade?: SortOrder
-  }
-
-  export type EnderecoMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    local?: SortOrder
-    rua?: SortOrder
-    cep?: SortOrder
-    isPublic?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    numero?: SortOrder
-    cidade?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type ContatoCountOrderByAggregateInput = {
@@ -25833,7 +24706,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrder
-    ministryRole?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type TestemunhoMaxOrderByAggregateInput = {
@@ -25846,7 +24719,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrder
-    ministryRole?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type TestemunhoMinOrderByAggregateInput = {
@@ -25859,7 +24732,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     isPublic?: SortOrder
     coverUrl?: SortOrder
-    ministryRole?: SortOrder
+    igrejaId?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -26179,6 +25052,232 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type UserCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<UserCreateWithoutIgrejaInput, UserUncheckedCreateWithoutIgrejaInput> | UserCreateWithoutIgrejaInput[] | UserUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutIgrejaInput | UserCreateOrConnectWithoutIgrejaInput[]
+    createMany?: UserCreateManyIgrejaInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type NewCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<NewCreateWithoutIgrejaInput, NewUncheckedCreateWithoutIgrejaInput> | NewCreateWithoutIgrejaInput[] | NewUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: NewCreateOrConnectWithoutIgrejaInput | NewCreateOrConnectWithoutIgrejaInput[]
+    createMany?: NewCreateManyIgrejaInputEnvelope
+    connect?: NewWhereUniqueInput | NewWhereUniqueInput[]
+  }
+
+  export type MinisterioCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<MinisterioCreateWithoutIgrejaInput, MinisterioUncheckedCreateWithoutIgrejaInput> | MinisterioCreateWithoutIgrejaInput[] | MinisterioUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: MinisterioCreateOrConnectWithoutIgrejaInput | MinisterioCreateOrConnectWithoutIgrejaInput[]
+    createMany?: MinisterioCreateManyIgrejaInputEnvelope
+    connect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+  }
+
+  export type AgendaCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<AgendaCreateWithoutIgrejaInput, AgendaUncheckedCreateWithoutIgrejaInput> | AgendaCreateWithoutIgrejaInput[] | AgendaUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: AgendaCreateOrConnectWithoutIgrejaInput | AgendaCreateOrConnectWithoutIgrejaInput[]
+    createMany?: AgendaCreateManyIgrejaInputEnvelope
+    connect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+  }
+
+  export type TestemunhoCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<TestemunhoCreateWithoutIgrejaInput, TestemunhoUncheckedCreateWithoutIgrejaInput> | TestemunhoCreateWithoutIgrejaInput[] | TestemunhoUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutIgrejaInput | TestemunhoCreateOrConnectWithoutIgrejaInput[]
+    createMany?: TestemunhoCreateManyIgrejaInputEnvelope
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<UserCreateWithoutIgrejaInput, UserUncheckedCreateWithoutIgrejaInput> | UserCreateWithoutIgrejaInput[] | UserUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutIgrejaInput | UserCreateOrConnectWithoutIgrejaInput[]
+    createMany?: UserCreateManyIgrejaInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type NewUncheckedCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<NewCreateWithoutIgrejaInput, NewUncheckedCreateWithoutIgrejaInput> | NewCreateWithoutIgrejaInput[] | NewUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: NewCreateOrConnectWithoutIgrejaInput | NewCreateOrConnectWithoutIgrejaInput[]
+    createMany?: NewCreateManyIgrejaInputEnvelope
+    connect?: NewWhereUniqueInput | NewWhereUniqueInput[]
+  }
+
+  export type MinisterioUncheckedCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<MinisterioCreateWithoutIgrejaInput, MinisterioUncheckedCreateWithoutIgrejaInput> | MinisterioCreateWithoutIgrejaInput[] | MinisterioUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: MinisterioCreateOrConnectWithoutIgrejaInput | MinisterioCreateOrConnectWithoutIgrejaInput[]
+    createMany?: MinisterioCreateManyIgrejaInputEnvelope
+    connect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+  }
+
+  export type AgendaUncheckedCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<AgendaCreateWithoutIgrejaInput, AgendaUncheckedCreateWithoutIgrejaInput> | AgendaCreateWithoutIgrejaInput[] | AgendaUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: AgendaCreateOrConnectWithoutIgrejaInput | AgendaCreateOrConnectWithoutIgrejaInput[]
+    createMany?: AgendaCreateManyIgrejaInputEnvelope
+    connect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+  }
+
+  export type TestemunhoUncheckedCreateNestedManyWithoutIgrejaInput = {
+    create?: XOR<TestemunhoCreateWithoutIgrejaInput, TestemunhoUncheckedCreateWithoutIgrejaInput> | TestemunhoCreateWithoutIgrejaInput[] | TestemunhoUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutIgrejaInput | TestemunhoCreateOrConnectWithoutIgrejaInput[]
+    createMany?: TestemunhoCreateManyIgrejaInputEnvelope
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type UserUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<UserCreateWithoutIgrejaInput, UserUncheckedCreateWithoutIgrejaInput> | UserCreateWithoutIgrejaInput[] | UserUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutIgrejaInput | UserCreateOrConnectWithoutIgrejaInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutIgrejaInput | UserUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: UserCreateManyIgrejaInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutIgrejaInput | UserUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutIgrejaInput | UserUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type NewUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<NewCreateWithoutIgrejaInput, NewUncheckedCreateWithoutIgrejaInput> | NewCreateWithoutIgrejaInput[] | NewUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: NewCreateOrConnectWithoutIgrejaInput | NewCreateOrConnectWithoutIgrejaInput[]
+    upsert?: NewUpsertWithWhereUniqueWithoutIgrejaInput | NewUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: NewCreateManyIgrejaInputEnvelope
+    set?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    disconnect?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    delete?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    connect?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    update?: NewUpdateWithWhereUniqueWithoutIgrejaInput | NewUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: NewUpdateManyWithWhereWithoutIgrejaInput | NewUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: NewScalarWhereInput | NewScalarWhereInput[]
+  }
+
+  export type MinisterioUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<MinisterioCreateWithoutIgrejaInput, MinisterioUncheckedCreateWithoutIgrejaInput> | MinisterioCreateWithoutIgrejaInput[] | MinisterioUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: MinisterioCreateOrConnectWithoutIgrejaInput | MinisterioCreateOrConnectWithoutIgrejaInput[]
+    upsert?: MinisterioUpsertWithWhereUniqueWithoutIgrejaInput | MinisterioUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: MinisterioCreateManyIgrejaInputEnvelope
+    set?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    disconnect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    delete?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    connect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    update?: MinisterioUpdateWithWhereUniqueWithoutIgrejaInput | MinisterioUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: MinisterioUpdateManyWithWhereWithoutIgrejaInput | MinisterioUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
+  }
+
+  export type AgendaUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<AgendaCreateWithoutIgrejaInput, AgendaUncheckedCreateWithoutIgrejaInput> | AgendaCreateWithoutIgrejaInput[] | AgendaUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: AgendaCreateOrConnectWithoutIgrejaInput | AgendaCreateOrConnectWithoutIgrejaInput[]
+    upsert?: AgendaUpsertWithWhereUniqueWithoutIgrejaInput | AgendaUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: AgendaCreateManyIgrejaInputEnvelope
+    set?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    disconnect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    delete?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    connect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    update?: AgendaUpdateWithWhereUniqueWithoutIgrejaInput | AgendaUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: AgendaUpdateManyWithWhereWithoutIgrejaInput | AgendaUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
+  }
+
+  export type TestemunhoUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<TestemunhoCreateWithoutIgrejaInput, TestemunhoUncheckedCreateWithoutIgrejaInput> | TestemunhoCreateWithoutIgrejaInput[] | TestemunhoUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutIgrejaInput | TestemunhoCreateOrConnectWithoutIgrejaInput[]
+    upsert?: TestemunhoUpsertWithWhereUniqueWithoutIgrejaInput | TestemunhoUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: TestemunhoCreateManyIgrejaInputEnvelope
+    set?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    disconnect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    delete?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    update?: TestemunhoUpdateWithWhereUniqueWithoutIgrejaInput | TestemunhoUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: TestemunhoUpdateManyWithWhereWithoutIgrejaInput | TestemunhoUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<UserCreateWithoutIgrejaInput, UserUncheckedCreateWithoutIgrejaInput> | UserCreateWithoutIgrejaInput[] | UserUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutIgrejaInput | UserCreateOrConnectWithoutIgrejaInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutIgrejaInput | UserUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: UserCreateManyIgrejaInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutIgrejaInput | UserUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutIgrejaInput | UserUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type NewUncheckedUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<NewCreateWithoutIgrejaInput, NewUncheckedCreateWithoutIgrejaInput> | NewCreateWithoutIgrejaInput[] | NewUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: NewCreateOrConnectWithoutIgrejaInput | NewCreateOrConnectWithoutIgrejaInput[]
+    upsert?: NewUpsertWithWhereUniqueWithoutIgrejaInput | NewUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: NewCreateManyIgrejaInputEnvelope
+    set?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    disconnect?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    delete?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    connect?: NewWhereUniqueInput | NewWhereUniqueInput[]
+    update?: NewUpdateWithWhereUniqueWithoutIgrejaInput | NewUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: NewUpdateManyWithWhereWithoutIgrejaInput | NewUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: NewScalarWhereInput | NewScalarWhereInput[]
+  }
+
+  export type MinisterioUncheckedUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<MinisterioCreateWithoutIgrejaInput, MinisterioUncheckedCreateWithoutIgrejaInput> | MinisterioCreateWithoutIgrejaInput[] | MinisterioUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: MinisterioCreateOrConnectWithoutIgrejaInput | MinisterioCreateOrConnectWithoutIgrejaInput[]
+    upsert?: MinisterioUpsertWithWhereUniqueWithoutIgrejaInput | MinisterioUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: MinisterioCreateManyIgrejaInputEnvelope
+    set?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    disconnect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    delete?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    connect?: MinisterioWhereUniqueInput | MinisterioWhereUniqueInput[]
+    update?: MinisterioUpdateWithWhereUniqueWithoutIgrejaInput | MinisterioUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: MinisterioUpdateManyWithWhereWithoutIgrejaInput | MinisterioUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
+  }
+
+  export type AgendaUncheckedUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<AgendaCreateWithoutIgrejaInput, AgendaUncheckedCreateWithoutIgrejaInput> | AgendaCreateWithoutIgrejaInput[] | AgendaUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: AgendaCreateOrConnectWithoutIgrejaInput | AgendaCreateOrConnectWithoutIgrejaInput[]
+    upsert?: AgendaUpsertWithWhereUniqueWithoutIgrejaInput | AgendaUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: AgendaCreateManyIgrejaInputEnvelope
+    set?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    disconnect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    delete?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    connect?: AgendaWhereUniqueInput | AgendaWhereUniqueInput[]
+    update?: AgendaUpdateWithWhereUniqueWithoutIgrejaInput | AgendaUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: AgendaUpdateManyWithWhereWithoutIgrejaInput | AgendaUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
+  }
+
+  export type TestemunhoUncheckedUpdateManyWithoutIgrejaNestedInput = {
+    create?: XOR<TestemunhoCreateWithoutIgrejaInput, TestemunhoUncheckedCreateWithoutIgrejaInput> | TestemunhoCreateWithoutIgrejaInput[] | TestemunhoUncheckedCreateWithoutIgrejaInput[]
+    connectOrCreate?: TestemunhoCreateOrConnectWithoutIgrejaInput | TestemunhoCreateOrConnectWithoutIgrejaInput[]
+    upsert?: TestemunhoUpsertWithWhereUniqueWithoutIgrejaInput | TestemunhoUpsertWithWhereUniqueWithoutIgrejaInput[]
+    createMany?: TestemunhoCreateManyIgrejaInputEnvelope
+    set?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    disconnect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    delete?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    connect?: TestemunhoWhereUniqueInput | TestemunhoWhereUniqueInput[]
+    update?: TestemunhoUpdateWithWhereUniqueWithoutIgrejaInput | TestemunhoUpdateWithWhereUniqueWithoutIgrejaInput[]
+    updateMany?: TestemunhoUpdateManyWithWhereWithoutIgrejaInput | TestemunhoUpdateManyWithWhereWithoutIgrejaInput[]
+    deleteMany?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
+  }
+
   export type UserCreatecargoInput = {
     set: $Enums.CargoRole[]
   }
@@ -26195,20 +25294,6 @@ export namespace Prisma {
     connectOrCreate?: ContatoCreateOrConnectWithoutUserInput | ContatoCreateOrConnectWithoutUserInput[]
     createMany?: ContatoCreateManyUserInputEnvelope
     connect?: ContatoWhereUniqueInput | ContatoWhereUniqueInput[]
-  }
-
-  export type DoacaoCreateNestedManyWithoutUserInput = {
-    create?: XOR<DoacaoCreateWithoutUserInput, DoacaoUncheckedCreateWithoutUserInput> | DoacaoCreateWithoutUserInput[] | DoacaoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DoacaoCreateOrConnectWithoutUserInput | DoacaoCreateOrConnectWithoutUserInput[]
-    createMany?: DoacaoCreateManyUserInputEnvelope
-    connect?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-  }
-
-  export type EnderecoCreateNestedManyWithoutUserInput = {
-    create?: XOR<EnderecoCreateWithoutUserInput, EnderecoUncheckedCreateWithoutUserInput> | EnderecoCreateWithoutUserInput[] | EnderecoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutUserInput | EnderecoCreateOrConnectWithoutUserInput[]
-    createMany?: EnderecoCreateManyUserInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
   }
 
   export type MinisterioCreateNestedManyWithoutUserInput = {
@@ -26294,6 +25379,12 @@ export namespace Prisma {
     connect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
   }
 
+  export type IgrejaCreateNestedOneWithoutUsersInput = {
+    create?: XOR<IgrejaCreateWithoutUsersInput, IgrejaUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutUsersInput
+    connect?: IgrejaWhereUniqueInput
+  }
+
   export type AgendaUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
@@ -26306,20 +25397,6 @@ export namespace Prisma {
     connectOrCreate?: ContatoCreateOrConnectWithoutUserInput | ContatoCreateOrConnectWithoutUserInput[]
     createMany?: ContatoCreateManyUserInputEnvelope
     connect?: ContatoWhereUniqueInput | ContatoWhereUniqueInput[]
-  }
-
-  export type DoacaoUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<DoacaoCreateWithoutUserInput, DoacaoUncheckedCreateWithoutUserInput> | DoacaoCreateWithoutUserInput[] | DoacaoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DoacaoCreateOrConnectWithoutUserInput | DoacaoCreateOrConnectWithoutUserInput[]
-    createMany?: DoacaoCreateManyUserInputEnvelope
-    connect?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-  }
-
-  export type EnderecoUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<EnderecoCreateWithoutUserInput, EnderecoUncheckedCreateWithoutUserInput> | EnderecoCreateWithoutUserInput[] | EnderecoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutUserInput | EnderecoCreateOrConnectWithoutUserInput[]
-    createMany?: EnderecoCreateManyUserInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
   }
 
   export type MinisterioUncheckedCreateNestedManyWithoutUserInput = {
@@ -26405,20 +25482,8 @@ export namespace Prisma {
     connect?: BibleReadVerseWhereUniqueInput | BibleReadVerseWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type EnumUserRoleFieldUpdateOperationsInput = {
     set?: $Enums.UserRole
-  }
-
-  export type NullableEnumMinistryRoleFieldUpdateOperationsInput = {
-    set?: $Enums.MinistryRole | null
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -26456,34 +25521,6 @@ export namespace Prisma {
     update?: ContatoUpdateWithWhereUniqueWithoutUserInput | ContatoUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ContatoUpdateManyWithWhereWithoutUserInput | ContatoUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ContatoScalarWhereInput | ContatoScalarWhereInput[]
-  }
-
-  export type DoacaoUpdateManyWithoutUserNestedInput = {
-    create?: XOR<DoacaoCreateWithoutUserInput, DoacaoUncheckedCreateWithoutUserInput> | DoacaoCreateWithoutUserInput[] | DoacaoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DoacaoCreateOrConnectWithoutUserInput | DoacaoCreateOrConnectWithoutUserInput[]
-    upsert?: DoacaoUpsertWithWhereUniqueWithoutUserInput | DoacaoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: DoacaoCreateManyUserInputEnvelope
-    set?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    disconnect?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    delete?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    connect?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    update?: DoacaoUpdateWithWhereUniqueWithoutUserInput | DoacaoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: DoacaoUpdateManyWithWhereWithoutUserInput | DoacaoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: DoacaoScalarWhereInput | DoacaoScalarWhereInput[]
-  }
-
-  export type EnderecoUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EnderecoCreateWithoutUserInput, EnderecoUncheckedCreateWithoutUserInput> | EnderecoCreateWithoutUserInput[] | EnderecoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutUserInput | EnderecoCreateOrConnectWithoutUserInput[]
-    upsert?: EnderecoUpsertWithWhereUniqueWithoutUserInput | EnderecoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EnderecoCreateManyUserInputEnvelope
-    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    update?: EnderecoUpdateWithWhereUniqueWithoutUserInput | EnderecoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EnderecoUpdateManyWithWhereWithoutUserInput | EnderecoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
   }
 
   export type MinisterioUpdateManyWithoutUserNestedInput = {
@@ -26650,6 +25687,16 @@ export namespace Prisma {
     deleteMany?: BibleReadVerseScalarWhereInput | BibleReadVerseScalarWhereInput[]
   }
 
+  export type IgrejaUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<IgrejaCreateWithoutUsersInput, IgrejaUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutUsersInput
+    upsert?: IgrejaUpsertWithoutUsersInput
+    disconnect?: IgrejaWhereInput | boolean
+    delete?: IgrejaWhereInput | boolean
+    connect?: IgrejaWhereUniqueInput
+    update?: XOR<XOR<IgrejaUpdateToOneWithWhereWithoutUsersInput, IgrejaUpdateWithoutUsersInput>, IgrejaUncheckedUpdateWithoutUsersInput>
+  }
+
   export type AgendaUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AgendaCreateWithoutUserInput, AgendaUncheckedCreateWithoutUserInput> | AgendaCreateWithoutUserInput[] | AgendaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AgendaCreateOrConnectWithoutUserInput | AgendaCreateOrConnectWithoutUserInput[]
@@ -26676,34 +25723,6 @@ export namespace Prisma {
     update?: ContatoUpdateWithWhereUniqueWithoutUserInput | ContatoUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ContatoUpdateManyWithWhereWithoutUserInput | ContatoUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ContatoScalarWhereInput | ContatoScalarWhereInput[]
-  }
-
-  export type DoacaoUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<DoacaoCreateWithoutUserInput, DoacaoUncheckedCreateWithoutUserInput> | DoacaoCreateWithoutUserInput[] | DoacaoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DoacaoCreateOrConnectWithoutUserInput | DoacaoCreateOrConnectWithoutUserInput[]
-    upsert?: DoacaoUpsertWithWhereUniqueWithoutUserInput | DoacaoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: DoacaoCreateManyUserInputEnvelope
-    set?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    disconnect?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    delete?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    connect?: DoacaoWhereUniqueInput | DoacaoWhereUniqueInput[]
-    update?: DoacaoUpdateWithWhereUniqueWithoutUserInput | DoacaoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: DoacaoUpdateManyWithWhereWithoutUserInput | DoacaoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: DoacaoScalarWhereInput | DoacaoScalarWhereInput[]
-  }
-
-  export type EnderecoUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EnderecoCreateWithoutUserInput, EnderecoUncheckedCreateWithoutUserInput> | EnderecoCreateWithoutUserInput[] | EnderecoUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutUserInput | EnderecoCreateOrConnectWithoutUserInput[]
-    upsert?: EnderecoUpsertWithWhereUniqueWithoutUserInput | EnderecoUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EnderecoCreateManyUserInputEnvelope
-    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    update?: EnderecoUpdateWithWhereUniqueWithoutUserInput | EnderecoUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EnderecoUpdateManyWithWhereWithoutUserInput | EnderecoUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
   }
 
   export type MinisterioUncheckedUpdateManyWithoutUserNestedInput = {
@@ -26876,16 +25895,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type EnumMinistryRoleFieldUpdateOperationsInput = {
-    set?: $Enums.MinistryRole
+  export type IgrejaCreateNestedOneWithoutNewsInput = {
+    create?: XOR<IgrejaCreateWithoutNewsInput, IgrejaUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutNewsInput
+    connect?: IgrejaWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutNewsNestedInput = {
@@ -26896,10 +25909,26 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsInput, UserUpdateWithoutNewsInput>, UserUncheckedUpdateWithoutNewsInput>
   }
 
+  export type IgrejaUpdateOneWithoutNewsNestedInput = {
+    create?: XOR<IgrejaCreateWithoutNewsInput, IgrejaUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutNewsInput
+    upsert?: IgrejaUpsertWithoutNewsInput
+    disconnect?: IgrejaWhereInput | boolean
+    delete?: IgrejaWhereInput | boolean
+    connect?: IgrejaWhereUniqueInput
+    update?: XOR<XOR<IgrejaUpdateToOneWithWhereWithoutNewsInput, IgrejaUpdateWithoutNewsInput>, IgrejaUncheckedUpdateWithoutNewsInput>
+  }
+
   export type UserCreateNestedOneWithoutMinisterioInput = {
     create?: XOR<UserCreateWithoutMinisterioInput, UserUncheckedCreateWithoutMinisterioInput>
     connectOrCreate?: UserCreateOrConnectWithoutMinisterioInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type IgrejaCreateNestedOneWithoutMinisteriosInput = {
+    create?: XOR<IgrejaCreateWithoutMinisteriosInput, IgrejaUncheckedCreateWithoutMinisteriosInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutMinisteriosInput
+    connect?: IgrejaWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutMinisterioNestedInput = {
@@ -26910,10 +25939,26 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMinisterioInput, UserUpdateWithoutMinisterioInput>, UserUncheckedUpdateWithoutMinisterioInput>
   }
 
+  export type IgrejaUpdateOneWithoutMinisteriosNestedInput = {
+    create?: XOR<IgrejaCreateWithoutMinisteriosInput, IgrejaUncheckedCreateWithoutMinisteriosInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutMinisteriosInput
+    upsert?: IgrejaUpsertWithoutMinisteriosInput
+    disconnect?: IgrejaWhereInput | boolean
+    delete?: IgrejaWhereInput | boolean
+    connect?: IgrejaWhereUniqueInput
+    update?: XOR<XOR<IgrejaUpdateToOneWithWhereWithoutMinisteriosInput, IgrejaUpdateWithoutMinisteriosInput>, IgrejaUncheckedUpdateWithoutMinisteriosInput>
+  }
+
   export type UserCreateNestedOneWithoutAgendaInput = {
     create?: XOR<UserCreateWithoutAgendaInput, UserUncheckedCreateWithoutAgendaInput>
     connectOrCreate?: UserCreateOrConnectWithoutAgendaInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type IgrejaCreateNestedOneWithoutAgendasInput = {
+    create?: XOR<IgrejaCreateWithoutAgendasInput, IgrejaUncheckedCreateWithoutAgendasInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutAgendasInput
+    connect?: IgrejaWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutAgendaNestedInput = {
@@ -26924,32 +25969,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAgendaInput, UserUpdateWithoutAgendaInput>, UserUncheckedUpdateWithoutAgendaInput>
   }
 
-  export type UserCreateNestedOneWithoutDoacaoInput = {
-    create?: XOR<UserCreateWithoutDoacaoInput, UserUncheckedCreateWithoutDoacaoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDoacaoInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutDoacaoNestedInput = {
-    create?: XOR<UserCreateWithoutDoacaoInput, UserUncheckedCreateWithoutDoacaoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDoacaoInput
-    upsert?: UserUpsertWithoutDoacaoInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDoacaoInput, UserUpdateWithoutDoacaoInput>, UserUncheckedUpdateWithoutDoacaoInput>
-  }
-
-  export type UserCreateNestedOneWithoutEnderecoInput = {
-    create?: XOR<UserCreateWithoutEnderecoInput, UserUncheckedCreateWithoutEnderecoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEnderecoInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutEnderecoNestedInput = {
-    create?: XOR<UserCreateWithoutEnderecoInput, UserUncheckedCreateWithoutEnderecoInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEnderecoInput
-    upsert?: UserUpsertWithoutEnderecoInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEnderecoInput, UserUpdateWithoutEnderecoInput>, UserUncheckedUpdateWithoutEnderecoInput>
+  export type IgrejaUpdateOneWithoutAgendasNestedInput = {
+    create?: XOR<IgrejaCreateWithoutAgendasInput, IgrejaUncheckedCreateWithoutAgendasInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutAgendasInput
+    upsert?: IgrejaUpsertWithoutAgendasInput
+    disconnect?: IgrejaWhereInput | boolean
+    delete?: IgrejaWhereInput | boolean
+    connect?: IgrejaWhereUniqueInput
+    update?: XOR<XOR<IgrejaUpdateToOneWithWhereWithoutAgendasInput, IgrejaUpdateWithoutAgendasInput>, IgrejaUncheckedUpdateWithoutAgendasInput>
   }
 
   export type UserCreateNestedOneWithoutContatoInput = {
@@ -27028,12 +26055,28 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type IgrejaCreateNestedOneWithoutTestemunhosInput = {
+    create?: XOR<IgrejaCreateWithoutTestemunhosInput, IgrejaUncheckedCreateWithoutTestemunhosInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutTestemunhosInput
+    connect?: IgrejaWhereUniqueInput
+  }
+
   export type UserUpdateOneRequiredWithoutTestemunhosNestedInput = {
     create?: XOR<UserCreateWithoutTestemunhosInput, UserUncheckedCreateWithoutTestemunhosInput>
     connectOrCreate?: UserCreateOrConnectWithoutTestemunhosInput
     upsert?: UserUpsertWithoutTestemunhosInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTestemunhosInput, UserUpdateWithoutTestemunhosInput>, UserUncheckedUpdateWithoutTestemunhosInput>
+  }
+
+  export type IgrejaUpdateOneWithoutTestemunhosNestedInput = {
+    create?: XOR<IgrejaCreateWithoutTestemunhosInput, IgrejaUncheckedCreateWithoutTestemunhosInput>
+    connectOrCreate?: IgrejaCreateOrConnectWithoutTestemunhosInput
+    upsert?: IgrejaUpsertWithoutTestemunhosInput
+    disconnect?: IgrejaWhereInput | boolean
+    delete?: IgrejaWhereInput | boolean
+    connect?: IgrejaWhereUniqueInput
+    update?: XOR<XOR<IgrejaUpdateToOneWithWhereWithoutTestemunhosInput, IgrejaUpdateWithoutTestemunhosInput>, IgrejaUncheckedUpdateWithoutTestemunhosInput>
   }
 
   export type UserCreateNestedOneWithoutBibleFavoritesInput = {
@@ -27136,6 +26179,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -27150,29 +26198,15 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
-  }
-
-  export type NestedEnumMinistryRoleNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMinistryRoleNullableFilter<$PrismaModel> | $Enums.MinistryRole | null
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -27203,6 +26237,14 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -27231,63 +26273,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumUserRoleFilter<$PrismaModel>
-    _max?: NestedEnumUserRoleFilter<$PrismaModel>
-  }
-
-  export type NestedEnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMinistryRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
-    _max?: NestedEnumMinistryRoleNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedEnumMinistryRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMinistryRoleFilter<$PrismaModel> | $Enums.MinistryRole
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -27302,22 +26287,46 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
-  export type NestedEnumMinistryRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MinistryRole | EnumMinistryRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MinistryRole[] | ListEnumMinistryRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMinistryRoleWithAggregatesFilter<$PrismaModel> | $Enums.MinistryRole
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMinistryRoleFilter<$PrismaModel>
-    _max?: NestedEnumMinistryRoleFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -27397,6 +26406,370 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type UserCreateWithoutIgrejaInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaCreateNestedManyWithoutUserInput
+    contato?: ContatoCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioCreateNestedManyWithoutUserInput
+    news?: NewCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
+    sobre?: SobreCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIgrejaInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
+    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
+    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
+    news?: NewUncheckedCreateNestedManyWithoutUserInput
+    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
+    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
+    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
+    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIgrejaInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIgrejaInput, UserUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type UserCreateManyIgrejaInputEnvelope = {
+    data: UserCreateManyIgrejaInput | UserCreateManyIgrejaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NewCreateWithoutIgrejaInput = {
+    id?: string
+    coverUrl?: string | null
+    videoUrl?: string | null
+    content: string
+    title: string
+    createdAt?: Date | string
+    isPublic?: boolean
+    page: string
+    updatedAt?: Date | string
+    destaque?: boolean
+    url: string
+    user: UserCreateNestedOneWithoutNewsInput
+  }
+
+  export type NewUncheckedCreateWithoutIgrejaInput = {
+    id?: string
+    userId: string
+    coverUrl?: string | null
+    videoUrl?: string | null
+    content: string
+    title: string
+    createdAt?: Date | string
+    isPublic?: boolean
+    page: string
+    updatedAt?: Date | string
+    destaque?: boolean
+    url: string
+  }
+
+  export type NewCreateOrConnectWithoutIgrejaInput = {
+    where: NewWhereUniqueInput
+    create: XOR<NewCreateWithoutIgrejaInput, NewUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type NewCreateManyIgrejaInputEnvelope = {
+    data: NewCreateManyIgrejaInput | NewCreateManyIgrejaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MinisterioCreateWithoutIgrejaInput = {
+    id?: string
+    name: string
+    title: string
+    local: string
+    isPublic?: boolean
+    createdAt?: Date | string
+    coverUrl: string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMinisterioInput
+  }
+
+  export type MinisterioUncheckedCreateWithoutIgrejaInput = {
+    id?: string
+    userId: string
+    name: string
+    title: string
+    local: string
+    isPublic?: boolean
+    createdAt?: Date | string
+    coverUrl: string
+    updatedAt?: Date | string
+  }
+
+  export type MinisterioCreateOrConnectWithoutIgrejaInput = {
+    where: MinisterioWhereUniqueInput
+    create: XOR<MinisterioCreateWithoutIgrejaInput, MinisterioUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type MinisterioCreateManyIgrejaInputEnvelope = {
+    data: MinisterioCreateManyIgrejaInput | MinisterioCreateManyIgrejaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AgendaCreateWithoutIgrejaInput = {
+    id?: string
+    day: string
+    name: string
+    hour: string
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    destaque?: boolean
+    user: UserCreateNestedOneWithoutAgendaInput
+  }
+
+  export type AgendaUncheckedCreateWithoutIgrejaInput = {
+    id?: string
+    userId: string
+    day: string
+    name: string
+    hour: string
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    destaque?: boolean
+  }
+
+  export type AgendaCreateOrConnectWithoutIgrejaInput = {
+    where: AgendaWhereUniqueInput
+    create: XOR<AgendaCreateWithoutIgrejaInput, AgendaUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type AgendaCreateManyIgrejaInputEnvelope = {
+    data: AgendaCreateManyIgrejaInput | AgendaCreateManyIgrejaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TestemunhoCreateWithoutIgrejaInput = {
+    id?: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+    user: UserCreateNestedOneWithoutTestemunhosInput
+  }
+
+  export type TestemunhoUncheckedCreateWithoutIgrejaInput = {
+    id?: string
+    userId: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+  }
+
+  export type TestemunhoCreateOrConnectWithoutIgrejaInput = {
+    where: TestemunhoWhereUniqueInput
+    create: XOR<TestemunhoCreateWithoutIgrejaInput, TestemunhoUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type TestemunhoCreateManyIgrejaInputEnvelope = {
+    data: TestemunhoCreateManyIgrejaInput | TestemunhoCreateManyIgrejaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutIgrejaInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutIgrejaInput, UserUncheckedUpdateWithoutIgrejaInput>
+    create: XOR<UserCreateWithoutIgrejaInput, UserUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutIgrejaInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutIgrejaInput, UserUncheckedUpdateWithoutIgrejaInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutIgrejaInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutIgrejaInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    login?: StringFilter<"User"> | string
+    name?: StringNullableFilter<"User"> | string | null
+    avatarUrl?: StringNullableFilter<"User"> | string | null
+    password?: StringFilter<"User"> | string
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    igrejaId?: StringNullableFilter<"User"> | string | null
+    expires?: DateTimeNullableFilter<"User"> | Date | string | null
+    cargo?: EnumCargoRoleNullableListFilter<"User">
+  }
+
+  export type NewUpsertWithWhereUniqueWithoutIgrejaInput = {
+    where: NewWhereUniqueInput
+    update: XOR<NewUpdateWithoutIgrejaInput, NewUncheckedUpdateWithoutIgrejaInput>
+    create: XOR<NewCreateWithoutIgrejaInput, NewUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type NewUpdateWithWhereUniqueWithoutIgrejaInput = {
+    where: NewWhereUniqueInput
+    data: XOR<NewUpdateWithoutIgrejaInput, NewUncheckedUpdateWithoutIgrejaInput>
+  }
+
+  export type NewUpdateManyWithWhereWithoutIgrejaInput = {
+    where: NewScalarWhereInput
+    data: XOR<NewUpdateManyMutationInput, NewUncheckedUpdateManyWithoutIgrejaInput>
+  }
+
+  export type NewScalarWhereInput = {
+    AND?: NewScalarWhereInput | NewScalarWhereInput[]
+    OR?: NewScalarWhereInput[]
+    NOT?: NewScalarWhereInput | NewScalarWhereInput[]
+    id?: StringFilter<"New"> | string
+    userId?: StringFilter<"New"> | string
+    coverUrl?: StringNullableFilter<"New"> | string | null
+    videoUrl?: StringNullableFilter<"New"> | string | null
+    content?: StringFilter<"New"> | string
+    title?: StringFilter<"New"> | string
+    createdAt?: DateTimeFilter<"New"> | Date | string
+    isPublic?: BoolFilter<"New"> | boolean
+    page?: StringFilter<"New"> | string
+    updatedAt?: DateTimeFilter<"New"> | Date | string
+    destaque?: BoolFilter<"New"> | boolean
+    url?: StringFilter<"New"> | string
+    igrejaId?: StringNullableFilter<"New"> | string | null
+  }
+
+  export type MinisterioUpsertWithWhereUniqueWithoutIgrejaInput = {
+    where: MinisterioWhereUniqueInput
+    update: XOR<MinisterioUpdateWithoutIgrejaInput, MinisterioUncheckedUpdateWithoutIgrejaInput>
+    create: XOR<MinisterioCreateWithoutIgrejaInput, MinisterioUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type MinisterioUpdateWithWhereUniqueWithoutIgrejaInput = {
+    where: MinisterioWhereUniqueInput
+    data: XOR<MinisterioUpdateWithoutIgrejaInput, MinisterioUncheckedUpdateWithoutIgrejaInput>
+  }
+
+  export type MinisterioUpdateManyWithWhereWithoutIgrejaInput = {
+    where: MinisterioScalarWhereInput
+    data: XOR<MinisterioUpdateManyMutationInput, MinisterioUncheckedUpdateManyWithoutIgrejaInput>
+  }
+
+  export type MinisterioScalarWhereInput = {
+    AND?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
+    OR?: MinisterioScalarWhereInput[]
+    NOT?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
+    id?: StringFilter<"Ministerio"> | string
+    userId?: StringFilter<"Ministerio"> | string
+    name?: StringFilter<"Ministerio"> | string
+    title?: StringFilter<"Ministerio"> | string
+    local?: StringFilter<"Ministerio"> | string
+    isPublic?: BoolFilter<"Ministerio"> | boolean
+    createdAt?: DateTimeFilter<"Ministerio"> | Date | string
+    coverUrl?: StringFilter<"Ministerio"> | string
+    updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
+    igrejaId?: StringNullableFilter<"Ministerio"> | string | null
+  }
+
+  export type AgendaUpsertWithWhereUniqueWithoutIgrejaInput = {
+    where: AgendaWhereUniqueInput
+    update: XOR<AgendaUpdateWithoutIgrejaInput, AgendaUncheckedUpdateWithoutIgrejaInput>
+    create: XOR<AgendaCreateWithoutIgrejaInput, AgendaUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type AgendaUpdateWithWhereUniqueWithoutIgrejaInput = {
+    where: AgendaWhereUniqueInput
+    data: XOR<AgendaUpdateWithoutIgrejaInput, AgendaUncheckedUpdateWithoutIgrejaInput>
+  }
+
+  export type AgendaUpdateManyWithWhereWithoutIgrejaInput = {
+    where: AgendaScalarWhereInput
+    data: XOR<AgendaUpdateManyMutationInput, AgendaUncheckedUpdateManyWithoutIgrejaInput>
+  }
+
+  export type AgendaScalarWhereInput = {
+    AND?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
+    OR?: AgendaScalarWhereInput[]
+    NOT?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
+    id?: StringFilter<"Agenda"> | string
+    userId?: StringFilter<"Agenda"> | string
+    day?: StringFilter<"Agenda"> | string
+    name?: StringFilter<"Agenda"> | string
+    hour?: StringFilter<"Agenda"> | string
+    isPublic?: BoolFilter<"Agenda"> | boolean
+    createdAt?: DateTimeFilter<"Agenda"> | Date | string
+    updatedAt?: DateTimeFilter<"Agenda"> | Date | string
+    destaque?: BoolFilter<"Agenda"> | boolean
+    igrejaId?: StringNullableFilter<"Agenda"> | string | null
+  }
+
+  export type TestemunhoUpsertWithWhereUniqueWithoutIgrejaInput = {
+    where: TestemunhoWhereUniqueInput
+    update: XOR<TestemunhoUpdateWithoutIgrejaInput, TestemunhoUncheckedUpdateWithoutIgrejaInput>
+    create: XOR<TestemunhoCreateWithoutIgrejaInput, TestemunhoUncheckedCreateWithoutIgrejaInput>
+  }
+
+  export type TestemunhoUpdateWithWhereUniqueWithoutIgrejaInput = {
+    where: TestemunhoWhereUniqueInput
+    data: XOR<TestemunhoUpdateWithoutIgrejaInput, TestemunhoUncheckedUpdateWithoutIgrejaInput>
+  }
+
+  export type TestemunhoUpdateManyWithWhereWithoutIgrejaInput = {
+    where: TestemunhoScalarWhereInput
+    data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyWithoutIgrejaInput>
+  }
+
+  export type TestemunhoScalarWhereInput = {
+    AND?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
+    OR?: TestemunhoScalarWhereInput[]
+    NOT?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
+    id?: StringFilter<"Testemunho"> | string
+    userId?: StringFilter<"Testemunho"> | string
+    name?: StringFilter<"Testemunho"> | string
+    avatarUrl?: StringFilter<"Testemunho"> | string
+    content?: StringFilter<"Testemunho"> | string
+    createdAt?: DateTimeFilter<"Testemunho"> | Date | string
+    updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
+    isPublic?: BoolFilter<"Testemunho"> | boolean
+    coverUrl?: StringNullableFilter<"Testemunho"> | string | null
+    igrejaId?: StringNullableFilter<"Testemunho"> | string | null
+  }
+
   export type AgendaCreateWithoutUserInput = {
     id?: string
     day: string
@@ -27406,7 +26779,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-    role: $Enums.MinistryRole
+    igreja?: IgrejaCreateNestedOneWithoutAgendasInput
   }
 
   export type AgendaUncheckedCreateWithoutUserInput = {
@@ -27418,7 +26791,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type AgendaCreateOrConnectWithoutUserInput = {
@@ -27463,78 +26836,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type DoacaoCreateWithoutUserInput = {
-    id?: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoacaoUncheckedCreateWithoutUserInput = {
-    id?: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoacaoCreateOrConnectWithoutUserInput = {
-    where: DoacaoWhereUniqueInput
-    create: XOR<DoacaoCreateWithoutUserInput, DoacaoUncheckedCreateWithoutUserInput>
-  }
-
-  export type DoacaoCreateManyUserInputEnvelope = {
-    data: DoacaoCreateManyUserInput | DoacaoCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EnderecoCreateWithoutUserInput = {
-    id?: string
-    local: string
-    rua: string
-    cep: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    numero?: string | null
-    cidade?: string | null
-  }
-
-  export type EnderecoUncheckedCreateWithoutUserInput = {
-    id?: string
-    local: string
-    rua: string
-    cep: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    numero?: string | null
-    cidade?: string | null
-  }
-
-  export type EnderecoCreateOrConnectWithoutUserInput = {
-    where: EnderecoWhereUniqueInput
-    create: XOR<EnderecoCreateWithoutUserInput, EnderecoUncheckedCreateWithoutUserInput>
-  }
-
-  export type EnderecoCreateManyUserInputEnvelope = {
-    data: EnderecoCreateManyUserInput | EnderecoCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type MinisterioCreateWithoutUserInput = {
     id?: string
     name: string
@@ -27544,7 +26845,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-    role: $Enums.MinistryRole
+    igreja?: IgrejaCreateNestedOneWithoutMinisteriosInput
   }
 
   export type MinisterioUncheckedCreateWithoutUserInput = {
@@ -27556,7 +26857,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type MinisterioCreateOrConnectWithoutUserInput = {
@@ -27581,7 +26882,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-    role: $Enums.MinistryRole
+    igreja?: IgrejaCreateNestedOneWithoutNewsInput
   }
 
   export type NewUncheckedCreateWithoutUserInput = {
@@ -27596,7 +26897,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type NewCreateOrConnectWithoutUserInput = {
@@ -27726,7 +27027,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
-    ministryRole?: $Enums.MinistryRole | null
+    igreja?: IgrejaCreateNestedOneWithoutTestemunhosInput
   }
 
   export type TestemunhoUncheckedCreateWithoutUserInput = {
@@ -27738,7 +27039,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
   }
 
   export type TestemunhoCreateOrConnectWithoutUserInput = {
@@ -27894,6 +27195,55 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IgrejaCreateWithoutUsersInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    news?: NewCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUncheckedCreateWithoutUsersInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    news?: NewUncheckedCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioUncheckedCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaUncheckedCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaCreateOrConnectWithoutUsersInput = {
+    where: IgrejaWhereUniqueInput
+    create: XOR<IgrejaCreateWithoutUsersInput, IgrejaUncheckedCreateWithoutUsersInput>
+  }
+
   export type AgendaUpsertWithWhereUniqueWithoutUserInput = {
     where: AgendaWhereUniqueInput
     update: XOR<AgendaUpdateWithoutUserInput, AgendaUncheckedUpdateWithoutUserInput>
@@ -27908,22 +27258,6 @@ export namespace Prisma {
   export type AgendaUpdateManyWithWhereWithoutUserInput = {
     where: AgendaScalarWhereInput
     data: XOR<AgendaUpdateManyMutationInput, AgendaUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AgendaScalarWhereInput = {
-    AND?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
-    OR?: AgendaScalarWhereInput[]
-    NOT?: AgendaScalarWhereInput | AgendaScalarWhereInput[]
-    id?: StringFilter<"Agenda"> | string
-    userId?: StringFilter<"Agenda"> | string
-    day?: StringFilter<"Agenda"> | string
-    name?: StringFilter<"Agenda"> | string
-    hour?: StringFilter<"Agenda"> | string
-    isPublic?: BoolFilter<"Agenda"> | boolean
-    createdAt?: DateTimeFilter<"Agenda"> | Date | string
-    updatedAt?: DateTimeFilter<"Agenda"> | Date | string
-    destaque?: BoolFilter<"Agenda"> | boolean
-    role?: EnumMinistryRoleFilter<"Agenda"> | $Enums.MinistryRole
   }
 
   export type ContatoUpsertWithWhereUniqueWithoutUserInput = {
@@ -27957,72 +27291,6 @@ export namespace Prisma {
     instagram?: StringFilter<"Contato"> | string
   }
 
-  export type DoacaoUpsertWithWhereUniqueWithoutUserInput = {
-    where: DoacaoWhereUniqueInput
-    update: XOR<DoacaoUpdateWithoutUserInput, DoacaoUncheckedUpdateWithoutUserInput>
-    create: XOR<DoacaoCreateWithoutUserInput, DoacaoUncheckedCreateWithoutUserInput>
-  }
-
-  export type DoacaoUpdateWithWhereUniqueWithoutUserInput = {
-    where: DoacaoWhereUniqueInput
-    data: XOR<DoacaoUpdateWithoutUserInput, DoacaoUncheckedUpdateWithoutUserInput>
-  }
-
-  export type DoacaoUpdateManyWithWhereWithoutUserInput = {
-    where: DoacaoScalarWhereInput
-    data: XOR<DoacaoUpdateManyMutationInput, DoacaoUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type DoacaoScalarWhereInput = {
-    AND?: DoacaoScalarWhereInput | DoacaoScalarWhereInput[]
-    OR?: DoacaoScalarWhereInput[]
-    NOT?: DoacaoScalarWhereInput | DoacaoScalarWhereInput[]
-    id?: StringFilter<"Doacao"> | string
-    userId?: StringFilter<"Doacao"> | string
-    local?: StringFilter<"Doacao"> | string
-    banco?: StringFilter<"Doacao"> | string
-    conta?: StringFilter<"Doacao"> | string
-    agencia?: StringFilter<"Doacao"> | string
-    nomebanco?: StringFilter<"Doacao"> | string
-    pix?: StringFilter<"Doacao"> | string
-    nomepix?: StringFilter<"Doacao"> | string
-    isPublic?: BoolFilter<"Doacao"> | boolean
-    createdAt?: DateTimeFilter<"Doacao"> | Date | string
-    updatedAt?: DateTimeFilter<"Doacao"> | Date | string
-  }
-
-  export type EnderecoUpsertWithWhereUniqueWithoutUserInput = {
-    where: EnderecoWhereUniqueInput
-    update: XOR<EnderecoUpdateWithoutUserInput, EnderecoUncheckedUpdateWithoutUserInput>
-    create: XOR<EnderecoCreateWithoutUserInput, EnderecoUncheckedCreateWithoutUserInput>
-  }
-
-  export type EnderecoUpdateWithWhereUniqueWithoutUserInput = {
-    where: EnderecoWhereUniqueInput
-    data: XOR<EnderecoUpdateWithoutUserInput, EnderecoUncheckedUpdateWithoutUserInput>
-  }
-
-  export type EnderecoUpdateManyWithWhereWithoutUserInput = {
-    where: EnderecoScalarWhereInput
-    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type EnderecoScalarWhereInput = {
-    AND?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
-    OR?: EnderecoScalarWhereInput[]
-    NOT?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
-    id?: StringFilter<"Endereco"> | string
-    userId?: StringFilter<"Endereco"> | string
-    local?: StringFilter<"Endereco"> | string
-    rua?: StringFilter<"Endereco"> | string
-    cep?: StringFilter<"Endereco"> | string
-    isPublic?: BoolFilter<"Endereco"> | boolean
-    createdAt?: DateTimeFilter<"Endereco"> | Date | string
-    updatedAt?: DateTimeFilter<"Endereco"> | Date | string
-    numero?: StringNullableFilter<"Endereco"> | string | null
-    cidade?: StringNullableFilter<"Endereco"> | string | null
-  }
-
   export type MinisterioUpsertWithWhereUniqueWithoutUserInput = {
     where: MinisterioWhereUniqueInput
     update: XOR<MinisterioUpdateWithoutUserInput, MinisterioUncheckedUpdateWithoutUserInput>
@@ -28039,22 +27307,6 @@ export namespace Prisma {
     data: XOR<MinisterioUpdateManyMutationInput, MinisterioUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type MinisterioScalarWhereInput = {
-    AND?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
-    OR?: MinisterioScalarWhereInput[]
-    NOT?: MinisterioScalarWhereInput | MinisterioScalarWhereInput[]
-    id?: StringFilter<"Ministerio"> | string
-    userId?: StringFilter<"Ministerio"> | string
-    name?: StringFilter<"Ministerio"> | string
-    title?: StringFilter<"Ministerio"> | string
-    local?: StringFilter<"Ministerio"> | string
-    isPublic?: BoolFilter<"Ministerio"> | boolean
-    createdAt?: DateTimeFilter<"Ministerio"> | Date | string
-    coverUrl?: StringFilter<"Ministerio"> | string
-    updatedAt?: DateTimeFilter<"Ministerio"> | Date | string
-    role?: EnumMinistryRoleFilter<"Ministerio"> | $Enums.MinistryRole
-  }
-
   export type NewUpsertWithWhereUniqueWithoutUserInput = {
     where: NewWhereUniqueInput
     update: XOR<NewUpdateWithoutUserInput, NewUncheckedUpdateWithoutUserInput>
@@ -28069,25 +27321,6 @@ export namespace Prisma {
   export type NewUpdateManyWithWhereWithoutUserInput = {
     where: NewScalarWhereInput
     data: XOR<NewUpdateManyMutationInput, NewUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type NewScalarWhereInput = {
-    AND?: NewScalarWhereInput | NewScalarWhereInput[]
-    OR?: NewScalarWhereInput[]
-    NOT?: NewScalarWhereInput | NewScalarWhereInput[]
-    id?: StringFilter<"New"> | string
-    userId?: StringFilter<"New"> | string
-    coverUrl?: StringNullableFilter<"New"> | string | null
-    videoUrl?: StringNullableFilter<"New"> | string | null
-    content?: StringFilter<"New"> | string
-    title?: StringFilter<"New"> | string
-    createdAt?: DateTimeFilter<"New"> | Date | string
-    isPublic?: BoolFilter<"New"> | boolean
-    page?: StringFilter<"New"> | string
-    updatedAt?: DateTimeFilter<"New"> | Date | string
-    destaque?: BoolFilter<"New"> | boolean
-    url?: StringFilter<"New"> | string
-    role?: EnumMinistryRoleFilter<"New"> | $Enums.MinistryRole
   }
 
   export type PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput = {
@@ -28218,22 +27451,6 @@ export namespace Prisma {
   export type TestemunhoUpdateManyWithWhereWithoutUserInput = {
     where: TestemunhoScalarWhereInput
     data: XOR<TestemunhoUpdateManyMutationInput, TestemunhoUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type TestemunhoScalarWhereInput = {
-    AND?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
-    OR?: TestemunhoScalarWhereInput[]
-    NOT?: TestemunhoScalarWhereInput | TestemunhoScalarWhereInput[]
-    id?: StringFilter<"Testemunho"> | string
-    userId?: StringFilter<"Testemunho"> | string
-    name?: StringFilter<"Testemunho"> | string
-    avatarUrl?: StringFilter<"Testemunho"> | string
-    content?: StringFilter<"Testemunho"> | string
-    createdAt?: DateTimeFilter<"Testemunho"> | Date | string
-    updatedAt?: DateTimeFilter<"Testemunho"> | Date | string
-    isPublic?: BoolFilter<"Testemunho"> | boolean
-    coverUrl?: StringNullableFilter<"Testemunho"> | string | null
-    ministryRole?: EnumMinistryRoleNullableFilter<"Testemunho"> | $Enums.MinistryRole | null
   }
 
   export type AuditLogUpsertWithWhereUniqueWithoutUserInput = {
@@ -28386,6 +27603,61 @@ export namespace Prisma {
     readAt?: DateTimeFilter<"BibleReadVerse"> | Date | string
   }
 
+  export type IgrejaUpsertWithoutUsersInput = {
+    update: XOR<IgrejaUpdateWithoutUsersInput, IgrejaUncheckedUpdateWithoutUsersInput>
+    create: XOR<IgrejaCreateWithoutUsersInput, IgrejaUncheckedCreateWithoutUsersInput>
+    where?: IgrejaWhereInput
+  }
+
+  export type IgrejaUpdateToOneWithWhereWithoutUsersInput = {
+    where?: IgrejaWhereInput
+    data: XOR<IgrejaUpdateWithoutUsersInput, IgrejaUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type IgrejaUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    news?: NewUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutIgrejaNestedInput
+  }
+
+  export type IgrejaUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    news?: NewUncheckedUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUncheckedUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUncheckedUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutIgrejaNestedInput
+  }
+
   export type UserCreateWithoutNewsInput = {
     id?: string
     login: string
@@ -28393,13 +27665,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -28411,6 +27680,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutNewsInput = {
@@ -28420,13 +27690,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28443,6 +27711,55 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutNewsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+  }
+
+  export type IgrejaCreateWithoutNewsInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUncheckedCreateWithoutNewsInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioUncheckedCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaUncheckedCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaCreateOrConnectWithoutNewsInput = {
+    where: IgrejaWhereUniqueInput
+    create: XOR<IgrejaCreateWithoutNewsInput, IgrejaUncheckedCreateWithoutNewsInput>
   }
 
   export type UserUpsertWithoutNewsInput = {
@@ -28463,13 +27780,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -28481,6 +27795,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsInput = {
@@ -28490,13 +27805,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -28510,6 +27823,61 @@ export namespace Prisma {
     bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type IgrejaUpsertWithoutNewsInput = {
+    update: XOR<IgrejaUpdateWithoutNewsInput, IgrejaUncheckedUpdateWithoutNewsInput>
+    create: XOR<IgrejaCreateWithoutNewsInput, IgrejaUncheckedCreateWithoutNewsInput>
+    where?: IgrejaWhereInput
+  }
+
+  export type IgrejaUpdateToOneWithWhereWithoutNewsInput = {
+    where?: IgrejaWhereInput
+    data: XOR<IgrejaUpdateWithoutNewsInput, IgrejaUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type IgrejaUpdateWithoutNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutIgrejaNestedInput
+  }
+
+  export type IgrejaUncheckedUpdateWithoutNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUncheckedUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUncheckedUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutIgrejaNestedInput
+  }
+
   export type UserCreateWithoutMinisterioInput = {
     id?: string
     login: string
@@ -28517,13 +27885,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -28535,6 +27900,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutMinisterioInput = {
@@ -28544,13 +27910,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28567,6 +27931,55 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutMinisterioInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutMinisterioInput, UserUncheckedCreateWithoutMinisterioInput>
+  }
+
+  export type IgrejaCreateWithoutMinisteriosInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutIgrejaInput
+    news?: NewCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUncheckedCreateWithoutMinisteriosInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
+    news?: NewUncheckedCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaUncheckedCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaCreateOrConnectWithoutMinisteriosInput = {
+    where: IgrejaWhereUniqueInput
+    create: XOR<IgrejaCreateWithoutMinisteriosInput, IgrejaUncheckedCreateWithoutMinisteriosInput>
   }
 
   export type UserUpsertWithoutMinisterioInput = {
@@ -28587,13 +28000,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -28605,6 +28015,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMinisterioInput = {
@@ -28614,13 +28025,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -28634,6 +28043,61 @@ export namespace Prisma {
     bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type IgrejaUpsertWithoutMinisteriosInput = {
+    update: XOR<IgrejaUpdateWithoutMinisteriosInput, IgrejaUncheckedUpdateWithoutMinisteriosInput>
+    create: XOR<IgrejaCreateWithoutMinisteriosInput, IgrejaUncheckedCreateWithoutMinisteriosInput>
+    where?: IgrejaWhereInput
+  }
+
+  export type IgrejaUpdateToOneWithWhereWithoutMinisteriosInput = {
+    where?: IgrejaWhereInput
+    data: XOR<IgrejaUpdateWithoutMinisteriosInput, IgrejaUncheckedUpdateWithoutMinisteriosInput>
+  }
+
+  export type IgrejaUpdateWithoutMinisteriosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutIgrejaNestedInput
+    news?: NewUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutIgrejaNestedInput
+  }
+
+  export type IgrejaUncheckedUpdateWithoutMinisteriosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
+    news?: NewUncheckedUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUncheckedUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutIgrejaNestedInput
+  }
+
   export type UserCreateWithoutAgendaInput = {
     id?: string
     login: string
@@ -28641,12 +28105,9 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -28659,6 +28120,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutAgendaInput = {
@@ -28668,12 +28130,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28691,6 +28151,55 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutAgendaInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutAgendaInput, UserUncheckedCreateWithoutAgendaInput>
+  }
+
+  export type IgrejaCreateWithoutAgendasInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutIgrejaInput
+    news?: NewCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUncheckedCreateWithoutAgendasInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
+    news?: NewUncheckedCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioUncheckedCreateNestedManyWithoutIgrejaInput
+    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaCreateOrConnectWithoutAgendasInput = {
+    where: IgrejaWhereUniqueInput
+    create: XOR<IgrejaCreateWithoutAgendasInput, IgrejaUncheckedCreateWithoutAgendasInput>
   }
 
   export type UserUpsertWithoutAgendaInput = {
@@ -28711,12 +28220,9 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -28729,6 +28235,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAgendaInput = {
@@ -28738,12 +28245,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -28758,252 +28263,59 @@ export namespace Prisma {
     bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutDoacaoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
-    expires?: Date | string | null
-    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
-    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
-    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
-    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
-    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
-    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+  export type IgrejaUpsertWithoutAgendasInput = {
+    update: XOR<IgrejaUpdateWithoutAgendasInput, IgrejaUncheckedUpdateWithoutAgendasInput>
+    create: XOR<IgrejaCreateWithoutAgendasInput, IgrejaUncheckedCreateWithoutAgendasInput>
+    where?: IgrejaWhereInput
   }
 
-  export type UserUncheckedCreateWithoutDoacaoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
-    expires?: Date | string | null
-    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
-    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
-    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
-    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
-    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
+  export type IgrejaUpdateToOneWithWhereWithoutAgendasInput = {
+    where?: IgrejaWhereInput
+    data: XOR<IgrejaUpdateWithoutAgendasInput, IgrejaUncheckedUpdateWithoutAgendasInput>
   }
 
-  export type UserCreateOrConnectWithoutDoacaoInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDoacaoInput, UserUncheckedCreateWithoutDoacaoInput>
-  }
-
-  export type UserUpsertWithoutDoacaoInput = {
-    update: XOR<UserUpdateWithoutDoacaoInput, UserUncheckedUpdateWithoutDoacaoInput>
-    create: XOR<UserCreateWithoutDoacaoInput, UserUncheckedCreateWithoutDoacaoInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDoacaoInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDoacaoInput, UserUncheckedUpdateWithoutDoacaoInput>
-  }
-
-  export type UserUpdateWithoutDoacaoInput = {
+  export type IgrejaUpdateWithoutAgendasInput = {
     id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
-    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
-    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
-    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
-    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutIgrejaNestedInput
+    news?: NewUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutIgrejaNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutDoacaoInput = {
+  export type IgrejaUncheckedUpdateWithoutAgendasInput = {
     id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
-    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
-    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
-    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
-    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutEnderecoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
-    expires?: Date | string | null
-    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaCreateNestedManyWithoutUserInput
-    contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioCreateNestedManyWithoutUserInput
-    news?: NewCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
-    sobre?: SobreCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderCreateNestedManyWithoutUserInput
-    testemunhos?: TestemunhoCreateNestedManyWithoutUserInput
-    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
-    bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
-    bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
-    bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
-    bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutEnderecoInput = {
-    id?: string
-    login: string
-    name?: string | null
-    avatarUrl?: string | null
-    password: string
-    role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
-    expires?: Date | string | null
-    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
-    news?: NewUncheckedCreateNestedManyWithoutUserInput
-    PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sobre?: SobreUncheckedCreateNestedManyWithoutUserInput
-    sobreLider?: SobreLiderUncheckedCreateNestedManyWithoutUserInput
-    testemunhos?: TestemunhoUncheckedCreateNestedManyWithoutUserInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
-    bibleFavorites?: BibleFavoriteUncheckedCreateNestedManyWithoutUserInput
-    bibleReadingPlan?: BibleReadingPlanUncheckedCreateNestedOneWithoutUserInput
-    bibleReadChapters?: BibleReadChapterUncheckedCreateNestedManyWithoutUserInput
-    bibleReadVerses?: BibleReadVerseUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutEnderecoInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutEnderecoInput, UserUncheckedCreateWithoutEnderecoInput>
-  }
-
-  export type UserUpsertWithoutEnderecoInput = {
-    update: XOR<UserUpdateWithoutEnderecoInput, UserUncheckedUpdateWithoutEnderecoInput>
-    create: XOR<UserCreateWithoutEnderecoInput, UserUncheckedCreateWithoutEnderecoInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutEnderecoInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutEnderecoInput, UserUncheckedUpdateWithoutEnderecoInput>
-  }
-
-  export type UserUpdateWithoutEnderecoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaUpdateManyWithoutUserNestedInput
-    contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
-    news?: NewUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sobre?: SobreUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
-    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
-    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
-    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
-    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
-    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutEnderecoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    login?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
-    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
-    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewUncheckedUpdateManyWithoutUserNestedInput
-    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
-    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
-    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
-    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
-    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
-    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
-    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
+    news?: NewUncheckedUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUncheckedUpdateManyWithoutIgrejaNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutIgrejaNestedInput
   }
 
   export type UserCreateWithoutContatoInput = {
@@ -29013,12 +28325,9 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29031,6 +28340,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutContatoInput = {
@@ -29040,12 +28350,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29083,12 +28391,9 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29101,6 +28406,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContatoInput = {
@@ -29110,12 +28416,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29137,13 +28441,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29155,6 +28456,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutSobreInput = {
@@ -29164,13 +28466,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29207,13 +28507,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29225,6 +28522,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSobreInput = {
@@ -29234,13 +28532,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29261,13 +28557,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29279,6 +28572,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutSobreLiderInput = {
@@ -29288,13 +28582,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29331,13 +28623,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29349,6 +28638,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSobreLiderInput = {
@@ -29358,13 +28648,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29385,13 +28673,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29403,6 +28688,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokenInput = {
@@ -29412,13 +28698,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29455,13 +28739,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29473,6 +28754,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokenInput = {
@@ -29482,13 +28764,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29509,13 +28789,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -29527,6 +28804,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutPasswordResetTokenInput = {
@@ -29536,13 +28814,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     refreshToken?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29579,13 +28855,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -29597,6 +28870,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPasswordResetTokenInput = {
@@ -29606,13 +28880,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29633,13 +28905,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29651,6 +28920,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutTestemunhosInput = {
@@ -29660,13 +28930,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29683,6 +28951,55 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutTestemunhosInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutTestemunhosInput, UserUncheckedCreateWithoutTestemunhosInput>
+  }
+
+  export type IgrejaCreateWithoutTestemunhosInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutIgrejaInput
+    news?: NewCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaUncheckedCreateWithoutTestemunhosInput = {
+    id?: string
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string | null
+    descricao?: string | null
+    tipo?: string | null
+    banco?: string | null
+    conta?: string | null
+    agencia?: string | null
+    nomebanco?: string | null
+    pix?: string | null
+    nomepix?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
+    news?: NewUncheckedCreateNestedManyWithoutIgrejaInput
+    ministerios?: MinisterioUncheckedCreateNestedManyWithoutIgrejaInput
+    agendas?: AgendaUncheckedCreateNestedManyWithoutIgrejaInput
+  }
+
+  export type IgrejaCreateOrConnectWithoutTestemunhosInput = {
+    where: IgrejaWhereUniqueInput
+    create: XOR<IgrejaCreateWithoutTestemunhosInput, IgrejaUncheckedCreateWithoutTestemunhosInput>
   }
 
   export type UserUpsertWithoutTestemunhosInput = {
@@ -29703,13 +29020,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29721,6 +29035,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTestemunhosInput = {
@@ -29730,13 +29045,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29750,6 +29063,61 @@ export namespace Prisma {
     bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type IgrejaUpsertWithoutTestemunhosInput = {
+    update: XOR<IgrejaUpdateWithoutTestemunhosInput, IgrejaUncheckedUpdateWithoutTestemunhosInput>
+    create: XOR<IgrejaCreateWithoutTestemunhosInput, IgrejaUncheckedCreateWithoutTestemunhosInput>
+    where?: IgrejaWhereInput
+  }
+
+  export type IgrejaUpdateToOneWithWhereWithoutTestemunhosInput = {
+    where?: IgrejaWhereInput
+    data: XOR<IgrejaUpdateWithoutTestemunhosInput, IgrejaUncheckedUpdateWithoutTestemunhosInput>
+  }
+
+  export type IgrejaUpdateWithoutTestemunhosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutIgrejaNestedInput
+    news?: NewUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUpdateManyWithoutIgrejaNestedInput
+  }
+
+  export type IgrejaUncheckedUpdateWithoutTestemunhosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    ativa?: BoolFieldUpdateOperationsInput | boolean
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: NullableStringFieldUpdateOperationsInput | string | null
+    banco?: NullableStringFieldUpdateOperationsInput | string | null
+    conta?: NullableStringFieldUpdateOperationsInput | string | null
+    agencia?: NullableStringFieldUpdateOperationsInput | string | null
+    nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
+    pix?: NullableStringFieldUpdateOperationsInput | string | null
+    nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
+    news?: NewUncheckedUpdateManyWithoutIgrejaNestedInput
+    ministerios?: MinisterioUncheckedUpdateManyWithoutIgrejaNestedInput
+    agendas?: AgendaUncheckedUpdateManyWithoutIgrejaNestedInput
+  }
+
   export type UserCreateWithoutBibleFavoritesInput = {
     id?: string
     login: string
@@ -29757,13 +29125,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29775,6 +29140,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutBibleFavoritesInput = {
@@ -29784,13 +29150,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29827,13 +29191,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29845,6 +29206,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBibleFavoritesInput = {
@@ -29854,13 +29216,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29881,13 +29241,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -29899,6 +29256,7 @@ export namespace Prisma {
     bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutBibleReadingPlanInput = {
@@ -29908,13 +29266,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29951,13 +29307,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -29969,6 +29322,7 @@ export namespace Prisma {
     bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBibleReadingPlanInput = {
@@ -29978,13 +29332,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30005,13 +29357,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -30023,6 +29372,7 @@ export namespace Prisma {
     bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutBibleReadChaptersInput = {
@@ -30032,13 +29382,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -30075,13 +29423,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -30093,6 +29438,7 @@ export namespace Prisma {
     bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBibleReadChaptersInput = {
@@ -30102,13 +29448,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30129,13 +29473,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -30147,6 +29488,7 @@ export namespace Prisma {
     bibleFavorites?: BibleFavoriteCreateNestedManyWithoutUserInput
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutBibleReadVersesInput = {
@@ -30156,13 +29498,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -30199,13 +29539,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -30217,6 +29554,7 @@ export namespace Prisma {
     bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBibleReadVersesInput = {
@@ -30226,13 +29564,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30253,13 +29589,10 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaCreateNestedManyWithoutUserInput
     contato?: ContatoCreateNestedManyWithoutUserInput
-    doacao?: DoacaoCreateNestedManyWithoutUserInput
-    endereco?: EnderecoCreateNestedManyWithoutUserInput
     ministerio?: MinisterioCreateNestedManyWithoutUserInput
     news?: NewCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -30271,6 +29604,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanCreateNestedOneWithoutUserInput
     bibleReadChapters?: BibleReadChapterCreateNestedManyWithoutUserInput
     bibleReadVerses?: BibleReadVerseCreateNestedManyWithoutUserInput
+    igreja?: IgrejaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -30280,13 +29614,11 @@ export namespace Prisma {
     avatarUrl?: string | null
     password: string
     role?: $Enums.UserRole
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
     expires?: Date | string | null
     cargo?: UserCreatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedCreateNestedManyWithoutUserInput
     contato?: ContatoUncheckedCreateNestedManyWithoutUserInput
-    doacao?: DoacaoUncheckedCreateNestedManyWithoutUserInput
-    endereco?: EnderecoUncheckedCreateNestedManyWithoutUserInput
     ministerio?: MinisterioUncheckedCreateNestedManyWithoutUserInput
     news?: NewUncheckedCreateNestedManyWithoutUserInput
     PasswordResetToken?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -30323,13 +29655,10 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUpdateManyWithoutUserNestedInput
     contato?: ContatoUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUpdateManyWithoutUserNestedInput
     news?: NewUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -30341,6 +29670,7 @@ export namespace Prisma {
     bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
     bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
     bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+    igreja?: IgrejaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -30350,13 +29680,11 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
     agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
     contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
-    doacao?: DoacaoUncheckedUpdateManyWithoutUserNestedInput
-    endereco?: EnderecoUncheckedUpdateManyWithoutUserNestedInput
     ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
     news?: NewUncheckedUpdateManyWithoutUserNestedInput
     PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30370,6 +29698,282 @@ export namespace Prisma {
     bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type UserCreateManyIgrejaInput = {
+    id?: string
+    login: string
+    name?: string | null
+    avatarUrl?: string | null
+    password: string
+    role?: $Enums.UserRole
+    expires?: Date | string | null
+    cargo?: UserCreatecargoInput | $Enums.CargoRole[]
+  }
+
+  export type NewCreateManyIgrejaInput = {
+    id?: string
+    userId: string
+    coverUrl?: string | null
+    videoUrl?: string | null
+    content: string
+    title: string
+    createdAt?: Date | string
+    isPublic?: boolean
+    page: string
+    updatedAt?: Date | string
+    destaque?: boolean
+    url: string
+  }
+
+  export type MinisterioCreateManyIgrejaInput = {
+    id?: string
+    userId: string
+    name: string
+    title: string
+    local: string
+    isPublic?: boolean
+    createdAt?: Date | string
+    coverUrl: string
+    updatedAt?: Date | string
+  }
+
+  export type AgendaCreateManyIgrejaInput = {
+    id?: string
+    userId: string
+    day: string
+    name: string
+    hour: string
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    destaque?: boolean
+  }
+
+  export type TestemunhoCreateManyIgrejaInput = {
+    id?: string
+    userId: string
+    name: string
+    avatarUrl: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    coverUrl?: string | null
+  }
+
+  export type UserUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUpdateManyWithoutUserNestedInput
+    contato?: ContatoUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUpdateManyWithoutUserNestedInput
+    news?: NewUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUpdateManyWithoutUserNestedInput
+    sobre?: SobreUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+    agenda?: AgendaUncheckedUpdateManyWithoutUserNestedInput
+    contato?: ContatoUncheckedUpdateManyWithoutUserNestedInput
+    ministerio?: MinisterioUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewUncheckedUpdateManyWithoutUserNestedInput
+    PasswordResetToken?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+    refreshToken?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    sobre?: SobreUncheckedUpdateManyWithoutUserNestedInput
+    sobreLider?: SobreLiderUncheckedUpdateManyWithoutUserNestedInput
+    testemunhos?: TestemunhoUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    bibleFavorites?: BibleFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadingPlan?: BibleReadingPlanUncheckedUpdateOneWithoutUserNestedInput
+    bibleReadChapters?: BibleReadChapterUncheckedUpdateManyWithoutUserNestedInput
+    bibleReadVerses?: BibleReadVerseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cargo?: UserUpdatecargoInput | $Enums.CargoRole[]
+  }
+
+  export type NewUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    page?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutNewsNestedInput
+  }
+
+  export type NewUncheckedUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    page?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewUncheckedUpdateManyWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    page?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    destaque?: BoolFieldUpdateOperationsInput | boolean
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MinisterioUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    local?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMinisterioNestedInput
+  }
+
+  export type MinisterioUncheckedUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    local?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MinisterioUncheckedUpdateManyWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    local?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AgendaUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    hour?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    destaque?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutAgendaNestedInput
+  }
+
+  export type AgendaUncheckedUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    day?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    hour?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    destaque?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AgendaUncheckedUpdateManyWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    day?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    hour?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    destaque?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type TestemunhoUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutTestemunhosNestedInput
+  }
+
+  export type TestemunhoUncheckedUpdateWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TestemunhoUncheckedUpdateManyWithoutIgrejaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type AgendaCreateManyUserInput = {
     id?: string
     day: string
@@ -30379,7 +29983,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     destaque?: boolean
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type ContatoCreateManyUserInput = {
@@ -30393,32 +29997,6 @@ export namespace Prisma {
     instagram: string
   }
 
-  export type DoacaoCreateManyUserInput = {
-    id?: string
-    local: string
-    banco: string
-    conta: string
-    agencia: string
-    nomebanco: string
-    pix: string
-    nomepix: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EnderecoCreateManyUserInput = {
-    id?: string
-    local: string
-    rua: string
-    cep: string
-    isPublic?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    numero?: string | null
-    cidade?: string | null
-  }
-
   export type MinisterioCreateManyUserInput = {
     id?: string
     name: string
@@ -30428,7 +30006,7 @@ export namespace Prisma {
     createdAt?: Date | string
     coverUrl: string
     updatedAt?: Date | string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type NewCreateManyUserInput = {
@@ -30443,7 +30021,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     destaque?: boolean
     url: string
-    role: $Enums.MinistryRole
+    igrejaId?: string | null
   }
 
   export type PasswordResetTokenCreateManyUserInput = {
@@ -30489,7 +30067,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     isPublic?: boolean
     coverUrl?: string | null
-    ministryRole?: $Enums.MinistryRole | null
+    igrejaId?: string | null
   }
 
   export type AuditLogCreateManyUserInput = {
@@ -30540,7 +30118,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igreja?: IgrejaUpdateOneWithoutAgendasNestedInput
   }
 
   export type AgendaUncheckedUpdateWithoutUserInput = {
@@ -30552,7 +30130,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AgendaUncheckedUpdateManyWithoutUserInput = {
@@ -30564,7 +30142,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContatoUpdateWithoutUserInput = {
@@ -30600,84 +30178,6 @@ export namespace Prisma {
     instagram?: StringFieldUpdateOperationsInput | string
   }
 
-  export type DoacaoUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoacaoUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoacaoUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    banco?: StringFieldUpdateOperationsInput | string
-    conta?: StringFieldUpdateOperationsInput | string
-    agencia?: StringFieldUpdateOperationsInput | string
-    nomebanco?: StringFieldUpdateOperationsInput | string
-    pix?: StringFieldUpdateOperationsInput | string
-    nomepix?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EnderecoUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EnderecoUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EnderecoUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    local?: StringFieldUpdateOperationsInput | string
-    rua?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    isPublic?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    numero?: NullableStringFieldUpdateOperationsInput | string | null
-    cidade?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type MinisterioUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -30687,7 +30187,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igreja?: IgrejaUpdateOneWithoutMinisteriosNestedInput
   }
 
   export type MinisterioUncheckedUpdateWithoutUserInput = {
@@ -30699,7 +30199,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MinisterioUncheckedUpdateManyWithoutUserInput = {
@@ -30711,7 +30211,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewUpdateWithoutUserInput = {
@@ -30726,7 +30226,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igreja?: IgrejaUpdateOneWithoutNewsNestedInput
   }
 
   export type NewUncheckedUpdateWithoutUserInput = {
@@ -30741,7 +30241,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewUncheckedUpdateManyWithoutUserInput = {
@@ -30756,7 +30256,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     destaque?: BoolFieldUpdateOperationsInput | boolean
     url?: StringFieldUpdateOperationsInput | string
-    role?: EnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PasswordResetTokenUpdateWithoutUserInput = {
@@ -30870,7 +30370,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igreja?: IgrejaUpdateOneWithoutTestemunhosNestedInput
   }
 
   export type TestemunhoUncheckedUpdateWithoutUserInput = {
@@ -30882,7 +30382,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TestemunhoUncheckedUpdateManyWithoutUserInput = {
@@ -30894,7 +30394,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ministryRole?: NullableEnumMinistryRoleFieldUpdateOperationsInput | $Enums.MinistryRole | null
+    igrejaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AuditLogUpdateWithoutUserInput = {

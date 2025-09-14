@@ -8,5 +8,5 @@ export interface Testemunho {
   createdAt: string
   updatedAt: string
   userId: string
-  ministryRole?: string
+  igrejaId?: string | null
 }

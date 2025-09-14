@@ -9,6 +9,7 @@ import { useLocal } from '../../store/useStore'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
+import IgrejaSelect from '@/components/IgrejaSelect'
 interface AddNewProps {
   openNew: boolean
   setOpenNew: (open: boolean) => void
@@ -28,18 +29,12 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
   const { local } = useLocal()
   const token = useToken()
 
-  const [role, setRole] = useState<string>(
-    token?.role === 'ADMIN' ? (token.ministryRole ?? '') : local,
-  )
+  const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
 
   const router = useRouter()
   const cookieToken = Cookies.get('tokennn')
 
-  useEffect(() => {
-    if (token?.role === 'ADMIN') {
-      setRole(token.ministryRole ?? '')
-    }
-  }, [token])
+  // Removido: lógica do sistema antigo
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -110,7 +105,8 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
           coverUrl: coverUrl || undefined,
           videoUrl: videoUrl || undefined,
           page: local.toLowerCase(),
-          role,
+          // Removido: role do sistema antigo
+          igrejaId, // Nova estrutura
           destaque,
         }),
       })
@@ -266,25 +262,17 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
 
             <div>
               <label
-                htmlFor="role"
+                htmlFor="igreja"
                 className={`block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ${token?.role === 'ADMIN' ? 'hidden' : ''}`}
               >
                 Selecione a igreja
               </label>
-              <select
-                id="role"
-                name="role"
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
+              <IgrejaSelect
+                value={igrejaId}
+                onChange={setIgrejaId}
                 disabled={token?.role === 'ADMIN'}
-              >
-                <option value="">Selecione...</option>
-                <option value="VILADAPENHA">Vila da Penha</option>
-                <option value="MARIAHELENA">Maria Helena</option>
-                <option value="TOMAZINHO">Tomazinho</option>
-              </select>
+                placeholder="Selecione a igreja..."
+              />
             </div>
 
             <div className="flex items-center space-x-3">

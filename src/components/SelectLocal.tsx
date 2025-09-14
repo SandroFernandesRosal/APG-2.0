@@ -3,21 +3,17 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLocal } from '../store/useStore'
 import { MapPin, Check, ChevronDown } from 'lucide-react'
+import { useIgrejas } from '@/hooks/useIgrejas'
 
 interface SelectLocalProps {
   onChange: (newLocal: string) => void
 }
 
-const ROLES = [
-  { key: 'VILADAPENHA', label: 'Vila da Penha' },
-  { key: 'MARIAHELENA', label: 'Vila Maria Helena' },
-  { key: 'TOMAZINHO', label: 'Tomazinho' },
-]
-
 export default function SelectLocal({ onChange }: SelectLocalProps) {
   const { local, setLocal } = useLocal()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const { igrejas, loading } = useIgrejas()
 
   // Lógica para fechar o dropdown ao clicar fora dele
   useEffect(() => {
@@ -42,8 +38,9 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
   }
 
   const getSelectedLabel = () => {
-    const selectedRole = ROLES.find((r) => r.key === local)
-    return selectedRole ? selectedRole.label : 'Selecione um local'
+    if (loading) return 'Carregando...'
+    const selectedIgreja = igrejas.find((igreja) => igreja.slug === local)
+    return selectedIgreja ? selectedIgreja.nome : 'Selecione um local'
   }
 
   return (
@@ -81,24 +78,28 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
         style={{ display: isOpen ? 'block' : 'none' }}
       >
         <div className="py-1" role="none">
-          {ROLES.map((role) => (
-            <button
-              key={role.key}
-              onClick={() => handleLocalSelection(role.key)}
-              className="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 block w-full text-left px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-              id={`menu-item-${role.key}`}
-            >
-              <span className="flex items-center justify-between">
-                {role.label}
+          {loading ? (
+            <div className="px-4 py-2 text-sm text-gray-500">Carregando igrejas...</div>
+          ) : (
+            igrejas.map((igreja) => (
+              <button
+                key={igreja.id}
+                onClick={() => handleLocalSelection(igreja.slug)}
+                className="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 block w-full text-left px-4 py-2 text-sm"
+                role="menuitem"
+                tabIndex={-1}
+                id={`menu-item-${igreja.slug}`}
+              >
+                <span className="flex items-center justify-between">
+                  {igreja.nome}
 
-                {local === role.key && (
-                  <Check className="h-5 w-5 text-primary dark:text-secundary" />
-                )}
-              </span>
-            </button>
-          ))}
+                  {local === igreja.slug && (
+                    <Check className="h-5 w-5 text-primary dark:text-secundary" />
+                  )}
+                </span>
+              </button>
+            ))
+          )}
         </div>
       </div>
     </div>

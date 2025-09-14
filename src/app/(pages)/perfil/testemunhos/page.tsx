@@ -24,7 +24,7 @@ interface Testemunho {
   coverUrl: string
   createdAt: string
   updatedAt?: string
-  ministryRole?: string
+  igrejaId?: string | null
 }
 
 export default function AdminTestemunhosPage() {
@@ -49,19 +49,7 @@ export default function AdminTestemunhosPage() {
     }
   }
 
-  function getIgrejaLabel(ministryRole?: string): string {
-    if (!ministryRole) return 'Membro sem igreja'
-    switch (ministryRole) {
-      case 'VILADAPENHA':
-        return 'APG Vila da Penha'
-      case 'TOMAZINHO':
-        return 'APG Tomazinho'
-      case 'MARIAHELENA':
-        return 'APG Vila Maria Helena'
-      default:
-        return 'APG ' + ministryRole
-    }
-  }
+  // Removido: função hardcoded - agora usa useIgrejaName
 
   useEffect(() => {
     if (token) {
@@ -236,7 +224,7 @@ export default function AdminTestemunhosPage() {
                       <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                         <FaChurch className="text-sm" />
                         <span className="text-sm font-medium">
-                          {getIgrejaLabel(t.ministryRole)}
+                          {t.igrejaId ? 'Igreja ID: ' + t.igrejaId : 'Membro sem igreja'}
                         </span>
                       </div>
                     </div>

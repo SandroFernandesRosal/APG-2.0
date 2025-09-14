@@ -16,10 +16,24 @@ enum UserRole {
   MEMBRO
 }
 
-enum MinistryRole {
-  VILADAPENHA
-  TOMAZINHO
-  MARIAHELENA
+model Igreja {
+  id        String   @id @default(uuid())
+  nome      String // Vila da Penha, Tomazinho, etc.
+  slug      String   @unique // vila-da-penha, tomazinho, etc.
+  ativa     Boolean  @default(true)
+  // Campos de endereço
+  endereco  String? // Endereço completo da igreja
+  descricao String? // Descrição do ponto de encontro
+  tipo      String? // "Sede" ou "Filial"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  users       User[]
+  news        New[]
+  ministerios Ministerio[]
+  agendas     Agenda[]
+  testemunhos Testemunho[]
 }
 
 enum CargoRole {
@@ -43,7 +57,8 @@ model User {
   avatarUrl          String?
   password           String
   role               UserRole             @default(MEMBRO)
-  ministryRole       MinistryRole?
+  ministryRole       String? // Agora aceita slug
+  igrejaId           String? // Nova estrutura
   expires            DateTime?
   agenda             Agenda[]
   contato            Contato[]
@@ -62,51 +77,60 @@ model User {
   bibleReadingPlan   BibleReadingPlan?
   bibleReadChapters  BibleReadChapter[]
   bibleReadVerses    BibleReadVerse[]
+
+  // Relacionamentos
+  igreja Igreja? @relation(fields: [igrejaId], references: [id])
 }
 
 model New {
-  id        String       @id @default(uuid())
+  id        String   @id @default(uuid())
   userId    String
   coverUrl  String?
   videoUrl  String?
   content   String
   title     String
-  createdAt DateTime     @default(now())
-  isPublic  Boolean      @default(true)
+  createdAt DateTime @default(now())
+  isPublic  Boolean  @default(true)
   page      String
-  updatedAt DateTime     @updatedAt
-  destaque  Boolean      @default(false)
-  url       String       @unique
-  role      MinistryRole
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @updatedAt
+  destaque  Boolean  @default(false)
+  url       String   @unique
+  role      String // Agora aceita slug
+  igrejaId  String? // Nova estrutura
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?  @relation(fields: [igrejaId], references: [id])
 }
 
 model Ministerio {
-  id        String       @id @default(uuid())
+  id        String   @id @default(uuid())
   userId    String
   name      String
   title     String
   local     String
-  isPublic  Boolean      @default(true)
-  createdAt DateTime     @default(now())
+  isPublic  Boolean  @default(true)
+  createdAt DateTime @default(now())
   coverUrl  String
-  updatedAt DateTime     @updatedAt
-  role      MinistryRole
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @updatedAt
+  role      String // Agora aceita slug
+  igrejaId  String? // Nova estrutura
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?  @relation(fields: [igrejaId], references: [id])
 }
 
 model Agenda {
-  id        String       @id @default(uuid())
+  id        String   @id @default(uuid())
   userId    String
   day       String
   name      String
   hour      String
-  isPublic  Boolean      @default(true)
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  destaque  Boolean      @default(false)
-  role      MinistryRole
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPublic  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  destaque  Boolean  @default(false)
+  role      String // Agora aceita slug
+  igrejaId  String? // Nova estrutura
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja    Igreja?  @relation(fields: [igrejaId], references: [id])
 }
 
 model Doacao {
@@ -195,17 +219,19 @@ model PasswordResetToken {
 }
 
 model Testemunho {
-  id           String        @id @default(uuid())
+  id           String   @id @default(uuid())
   userId       String
   name         String
   avatarUrl    String
   content      String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  isPublic     Boolean       @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  isPublic     Boolean  @default(true)
   coverUrl     String?
-  ministryRole MinistryRole?
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ministryRole String? // Agora aceita slug
+  igrejaId     String? // Nova estrutura
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igreja       Igreja?  @relation(fields: [igrejaId], references: [id])
 }
 
 model BibleFavorite {
