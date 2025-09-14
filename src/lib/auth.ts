@@ -12,9 +12,8 @@ function getTokenFromHeader(req: NextRequest): string | null {
 
 // Função para buscar token do sistema de credentials
 function getTokenFromCredentials(req: NextRequest): string | null {
-  // Usar o sistema de credentials padrão do Next.js
-  // O Next.js automaticamente gerencia os cookies de autenticação
-  return req.cookies.get('credentials')?.value || null
+  // Buscar token do cookie atual do sistema
+  return req.cookies.get('tokennn')?.value || null
 }
 
 // Função para validar token JWT
