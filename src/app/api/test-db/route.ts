@@ -23,7 +23,7 @@ export async function GET() {
           coverUrl: true,
           videoUrl: true,
           content: true,
-          role: true,
+          igrejaId: true,
         },
       })
       console.log('Estrutura da tabela New:', sampleNews)
