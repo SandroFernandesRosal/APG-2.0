@@ -104,10 +104,10 @@ export default function Footer() {
             Doações
           </Link>
           <Link
-            href="/enderecos"
+            href="/igrejas"
             className="hover:text-primary dark:hover:text-secundary transition-colors"
           >
-            Contato
+            Igrejas
           </Link>
           <Link
             href="/testemunhos"

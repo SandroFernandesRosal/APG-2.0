@@ -9,5 +9,5 @@ export interface New {
   page: string
   updatedAt: string
   url: string
-  role: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
+  igrejaId: string | null // Nova estrutura
 }

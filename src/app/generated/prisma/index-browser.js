@@ -120,6 +120,24 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.IgrejaScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  slug: 'slug',
+  ativa: 'ativa',
+  endereco: 'endereco',
+  descricao: 'descricao',
+  tipo: 'tipo',
+  banco: 'banco',
+  conta: 'conta',
+  agencia: 'agencia',
+  nomebanco: 'nomebanco',
+  pix: 'pix',
+  nomepix: 'nomepix',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   login: 'login',
@@ -127,7 +145,7 @@ exports.Prisma.UserScalarFieldEnum = {
   avatarUrl: 'avatarUrl',
   password: 'password',
   role: 'role',
-  ministryRole: 'ministryRole',
+  igrejaId: 'igrejaId',
   expires: 'expires',
   cargo: 'cargo'
 };
@@ -145,7 +163,7 @@ exports.Prisma.NewScalarFieldEnum = {
   updatedAt: 'updatedAt',
   destaque: 'destaque',
   url: 'url',
-  role: 'role'
+  igrejaId: 'igrejaId'
 };
 
 exports.Prisma.MinisterioScalarFieldEnum = {
@@ -158,7 +176,7 @@ exports.Prisma.MinisterioScalarFieldEnum = {
   createdAt: 'createdAt',
   coverUrl: 'coverUrl',
   updatedAt: 'updatedAt',
-  role: 'role'
+  igrejaId: 'igrejaId'
 };
 
 exports.Prisma.AgendaScalarFieldEnum = {
@@ -171,35 +189,7 @@ exports.Prisma.AgendaScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   destaque: 'destaque',
-  role: 'role'
-};
-
-exports.Prisma.DoacaoScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  local: 'local',
-  banco: 'banco',
-  conta: 'conta',
-  agencia: 'agencia',
-  nomebanco: 'nomebanco',
-  pix: 'pix',
-  nomepix: 'nomepix',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.EnderecoScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  local: 'local',
-  rua: 'rua',
-  cep: 'cep',
-  isPublic: 'isPublic',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  numero: 'numero',
-  cidade: 'cidade'
+  igrejaId: 'igrejaId'
 };
 
 exports.Prisma.ContatoScalarFieldEnum = {
@@ -262,7 +252,7 @@ exports.Prisma.TestemunhoScalarFieldEnum = {
   updatedAt: 'updatedAt',
   isPublic: 'isPublic',
   coverUrl: 'coverUrl',
-  ministryRole: 'ministryRole'
+  igrejaId: 'igrejaId'
 };
 
 exports.Prisma.BibleFavoriteScalarFieldEnum = {
@@ -350,12 +340,6 @@ exports.UserRole = exports.$Enums.UserRole = {
   MEMBRO: 'MEMBRO'
 };
 
-exports.MinistryRole = exports.$Enums.MinistryRole = {
-  VILADAPENHA: 'VILADAPENHA',
-  TOMAZINHO: 'TOMAZINHO',
-  MARIAHELENA: 'MARIAHELENA'
-};
-
 exports.CargoRole = exports.$Enums.CargoRole = {
   PASTOR: 'PASTOR',
   DIACONO: 'DIACONO',
@@ -371,12 +355,11 @@ exports.CargoRole = exports.$Enums.CargoRole = {
 };
 
 exports.Prisma.ModelName = {
+  Igreja: 'Igreja',
   User: 'User',
   New: 'New',
   Ministerio: 'Ministerio',
   Agenda: 'Agenda',
-  Doacao: 'Doacao',
-  Endereco: 'Endereco',
   Contato: 'Contato',
   Sobre: 'Sobre',
   SobreLider: 'SobreLider',

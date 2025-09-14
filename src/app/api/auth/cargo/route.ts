@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
         name: true,
         avatarUrl: true,
         role: true,
-        ministryRole: true,
+        igrejaId: true,
         cargo: true,
       },
       orderBy: {
@@ -34,8 +34,8 @@ export async function GET(req: NextRequest) {
         ? users
         : users.filter(
             (u) =>
-              u.ministryRole === requestingUser.ministryRole ||
-              u.ministryRole === null,
+              u.igrejaId === requestingUser.igrejaId ||
+              u.igrejaId === null,
           )
 
     return NextResponse.json(filteredUsers)

@@ -7,7 +7,7 @@ import { useToken } from '@/hooks/useToken'
 import RemoveNew from './crud/RemoveNew'
 import EditNew from './crud/EditNew'
 import { useState } from 'react'
-import { getIgrejaLabel } from '@/lib/getIgrejaLabel'
+import { useIgrejaName } from '@/hooks/useIgrejaName'
 import { FaCameraRetro } from 'react-icons/fa'
 import { useShowModal } from '@/store/useStore'
 
@@ -21,16 +21,17 @@ export default function ItemNew({
   createdAt,
   destaque,
   url,
-  role,
+  igrejaId,
 }: New) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const { showModal, setShowModal } = useShowModal()
   const token = useToken()
+  const igrejaName = useIgrejaName(igrejaId)
 
   const podeGerenciar =
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.ministryRole === role))
+      (token.role === 'ADMIN' && token.igrejaId === igrejaId))
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -82,7 +83,7 @@ export default function ItemNew({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
-            {getIgrejaLabel(role)}
+            {igrejaName || 'Carregando...'}
           </span>
         </Link>
       </div>
@@ -155,7 +156,7 @@ export default function ItemNew({
           videoUrl={videoUrl}
           setOpenEdit={setOpenEdit}
           destacar={destaque}
-          role={role}
+          igrejaId={igrejaId}
         />
       )}
       {showModal === id && <RemoveNew id={id} />}

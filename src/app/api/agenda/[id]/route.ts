@@ -44,7 +44,7 @@ export async function PUT(
     )
   }
 
-  if (user.role === 'ADMIN' && agenda.role !== user.ministryRole) {
+  if (user.role === 'ADMIN' && agenda.igrejaId !== user.igrejaId) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 
@@ -104,7 +104,7 @@ export async function DELETE(
     )
   }
 
-  if (user.role === 'ADMIN' && agenda.role !== user.ministryRole) {
+  if (user.role === 'ADMIN' && agenda.igrejaId !== user.igrejaId) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
 

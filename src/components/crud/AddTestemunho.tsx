@@ -65,7 +65,7 @@ export default function AddTestemunho({
         content: string
         coverUrl: string
         avatarUrl: string
-        ministryRole?: string
+        igrejaId?: string | null
       } = {
         name,
         content,
@@ -74,9 +74,9 @@ export default function AddTestemunho({
       }
 
       // --- CORREÇÃO AQUI ---
-      // A lógica agora envia o ministryRole se o membro logado tiver um.
-      if (decodedToken?.ministryRole) {
-        bodyPayload.ministryRole = decodedToken.ministryRole
+      // A lógica agora envia o igrejaId se o membro logado tiver um.
+      if (decodedToken?.igrejaId) {
+        bodyPayload.igrejaId = decodedToken.igrejaId
       }
 
       const response = await fetch('/api/testemunhos', {

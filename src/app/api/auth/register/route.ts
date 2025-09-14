@@ -35,25 +35,21 @@ export async function POST(req: Request) {
           message: 'A senha deve conter pelo menos uma letra',
         }),
       role: z.enum(['SUPERADMIN', 'ADMIN', 'MEMBRO']).optional(),
-      ministryRole: z
-        .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
-        .optional(),
+      igrejaId: z.string().uuid().optional(),
     })
     .refine(
       (data) => {
-        if (data.role === 'ADMIN') return !!data.ministryRole
-        if (data.role === 'SUPERADMIN') return !data.ministryRole
+        if (data.role === 'ADMIN') return !!data.igrejaId
         return true
       },
       {
-        message:
-          'ADMIN precisa de ministryRole e SUPERADMIN não pode ter ministryRole',
-        path: ['ministryRole'],
+        message: 'ADMIN precisa de igreja',
+        path: ['igrejaId'],
       },
     )
 
   try {
-    const { login, name, avatarUrl, password, role, ministryRole } =
+    const { login, name, avatarUrl, password, role, igrejaId } =
       userSchema.parse(await req.json())
 
     const existingUser = await prisma.user.findUnique({
@@ -70,6 +66,25 @@ export async function POST(req: Request) {
     const hashedPassword = await bcrypt.hash(password, 10)
     const refreshToken = uuidv4()
 
+    // Verificar se igreja existe
+    if (!igrejaId) {
+      return NextResponse.json(
+        { error: 'Igreja é obrigatória' },
+        { status: 400 },
+      )
+    }
+
+    const igreja = await prisma.igreja.findUnique({
+      where: { id: igrejaId },
+    })
+
+    if (!igreja) {
+      return NextResponse.json(
+        { error: 'Igreja não encontrada' },
+        { status: 400 },
+      )
+    }
+
     const user = await prisma.user.create({
       data: {
         login,
@@ -78,7 +93,7 @@ export async function POST(req: Request) {
         password: hashedPassword,
         role: role || 'MEMBRO',
         cargo: [],
-        ministryRole: ministryRole || null,
+        igrejaId, // Nova estrutura
       },
     })
 

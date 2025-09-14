@@ -1,131 +1,87 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { Endereco } from '@/data/types/endereco'
-import EditEndereco from './crud/EditEndereco'
-import RemoveEndereco from './crud/RemoveEndereco'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { User } from '@/data/types/user'
-import 'leaflet/dist/leaflet.css'
-import L from 'leaflet'
 
-const HouseIcon = new L.Icon({
-  iconUrl:
-    'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconSize: [22, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-})
+import { useState } from 'react'
+import { useToken } from '@/hooks/useToken'
+import { MapPin, Clock, Users } from 'lucide-react'
 
-export interface ItemEnderecoProps {
-  item: Endereco
-  token: User | null
-  openEdit: string | null
-  setOpenEdit: (id: string | null) => void
-  setSelectedProduct: (product: Endereco | null) => void
+interface ItemEnderecoProps {
+  id: string
+  local: string
+  rua: string
+  numero?: string
+  cidade?: string
+  cep: string
+  isAdmin: boolean
+  updatedAt: string
+  createdAt: string
 }
 
 export default function ItemEndereco({
-  item,
-  token,
-  openEdit,
-  setOpenEdit,
-  setSelectedProduct,
+  id,
+  local,
+  rua,
+  numero,
+  cidade,
+  cep,
 }: ItemEnderecoProps) {
-  const [coordinates, setCoordinates] = useState<[number, number] | null>(null)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
 
-  useEffect(() => {
-    geocodeAddress(item)
-  }, [item])
-
-  const geocodeAddress = async (endereco: Endereco) => {
-    const { rua, numero, local, cidade, cep } = endereco
-    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      enderecoFormatado,
-    )}`
-
+  const handleCopy = async (text: string, id: string) => {
     try {
-      const response = await fetch(url)
-      const data = await response.json()
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0]
-        setCoordinates([parseFloat(lat), parseFloat(lon)])
-      }
-    } catch (error) {
-      console.error('Erro ao geocodificar endereço:', error)
+      await navigator.clipboard.writeText(text)
+      setCopiedId(id)
+      setTimeout(() => {
+        setCopiedId(null)
+      }, 2000)
+    } catch (err) {
+      console.error('Erro ao copiar endereço:', err)
     }
   }
 
-  const openGoogleMaps = (coords: Endereco) => {
-    const { rua, numero, local, cidade, cep } = coords
-    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
-    const url = `https://www.google.com/maps/search/?api=1&query=${enderecoFormatado}`
+  const openGoogleMaps = () => {
+    const enderecoFormatado = `${rua}, ${numero || ''}, ${cidade || ''}, ${cep}`
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoFormatado)}`
     window.open(url, '_blank')
   }
 
   return (
     <div
-      className={`flex justify-between h-[400px] border-[1px] border-zinc-300 dark:border-zinc-800 ${token && 'mb-20 md:mb-24'}`}
-      key={item.id}
+      key={id}
+      className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-xl border border-zinc-300 dark:border-zinc-800 min-h-[420px] max-w-xs w-full p-0 overflow-hidden group transition-all"
     >
-      <div className="flex justify-center items-center h-[50%]">
-        {coordinates ? (
-          <MapContainer
-            center={coordinates}
-            zoom={13}
-            className="h-full w-full"
-          >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={coordinates} icon={HouseIcon}>
-              <Popup>
-                {item.local}, {item.rua}, {item.numero}, {item.cidade},{' '}
-                {item.cep}
-              </Popup>
-            </Marker>
-          </MapContainer>
-        ) : (
-          <p>Carregando mapa...</p>
-        )}
+      <div className="flex items-center gap-2 mt-6 mb-2 px-6">
+        <MapPin className="w-7 h-7 text-primary dark:text-secundary" />
+        <span className="bg-primary/90 dark:bg-secundary/80 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+          {local}
+        </span>
       </div>
-      <div className="px-2 gap-1 flex md:text-xl justify-evenly py-1 h-[50%] flex-col items-center">
-        <h1 className="text-primary dark:text-secundary text-xl">
-          {item.local}
-        </h1>
-        <h2 className="text-center">
-          {item.rua}, {item.numero}, {item.cidade}
-        </h2>
-        <span className="">CEP: {item.cep}</span>
 
-        <button onClick={() => openGoogleMaps(item)} className="button mb-0">
-          Abrir mapa
+      <div className="flex flex-col gap-2 px-6">
+        <div className="flex items-center gap-2 text-base">
+          <MapPin className="w-5 h-5 text-primary dark:text-secundary" />
+          <span className="font-semibold">Endereço:</span>
+          <span>{rua}, {numero}</span>
+        </div>
+        <div className="flex items-center gap-2 text-base">
+          <MapPin className="w-5 h-5 text-primary dark:text-secundary" />
+          <span className="font-semibold">Cidade:</span>
+          <span>{cidade}</span>
+        </div>
+        <div className="flex items-center gap-2 text-base">
+          <MapPin className="w-5 h-5 text-primary dark:text-secundary" />
+          <span className="font-semibold">CEP:</span>
+          <span>{cep}</span>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center bg-gradient-to-r from-primary/10 via-white to-secundary/10 dark:from-bgdarksecundary dark:via-slate-800 dark:to-bgdark p-4 mt-4 rounded-b-2xl">
+        <button
+          onClick={openGoogleMaps}
+          className="w-full px-4 py-2 bg-primary dark:bg-secundary text-white rounded-lg hover:bg-primary/90 dark:hover:bg-secundary/90 transition-colors"
+        >
+          Ver no Google Maps
         </button>
       </div>
-      {token?.role === 'ADMIN' && (
-        <div className="my-4 flex w-full flex-1 items-end justify-around text-white">
-          {openEdit !== item.id ? (
-            <button
-              className="button"
-              onClick={() => {
-                setOpenEdit(item.id)
-                setSelectedProduct(item)
-              }}
-            >
-              Editar
-            </button>
-          ) : (
-            <EditEndereco
-              localInitial={item.local}
-              ruaInitial={item.rua}
-              cepInitial={item.cep}
-              id={item.id}
-              numeroInitial={item.numero}
-              cidadeInitial={item.cidade}
-              setOpenEdit={setOpenEdit}
-            />
-          )}
-          <RemoveEndereco id={item.id} />
-        </div>
-      )}
     </div>
   )
 }

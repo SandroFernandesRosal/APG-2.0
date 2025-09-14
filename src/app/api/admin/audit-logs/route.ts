@@ -122,7 +122,7 @@ export async function GET(req: NextRequest) {
               id: boolean
               name: boolean
               role: boolean
-              ministryRole: boolean
+              igrejaId: boolean
             }
           }
         }
@@ -148,7 +148,7 @@ export async function GET(req: NextRequest) {
               id: true,
               name: true,
               role: true,
-              ministryRole: true,
+              igrejaId: true,
             },
           },
         },

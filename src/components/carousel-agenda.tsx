@@ -61,7 +61,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
   const podeEditarRemover = (item: Agenda) => {
     if (!token) return false
     if (token.role === 'SUPERADMIN') return true
-    if (token.role === 'ADMIN' && token.ministryRole === item.role) return true
+    if (token.role === 'ADMIN' && token.igrejaId === item.igrejaId) return true
     return false
   }
 

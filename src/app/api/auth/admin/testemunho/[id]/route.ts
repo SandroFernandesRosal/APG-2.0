@@ -38,8 +38,8 @@ export async function PUT(
 
   if (
     admin.role === 'ADMIN' &&
-    testemunho.ministryRole !== admin.ministryRole &&
-    testemunho.ministryRole !== null
+    testemunho.igrejaId !== admin.igrejaId &&
+    testemunho.igrejaId !== null
   ) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
@@ -96,8 +96,8 @@ export async function DELETE(
 
   if (
     admin.role === 'ADMIN' &&
-    testemunho.ministryRole !== admin.ministryRole &&
-    testemunho.ministryRole !== null
+    testemunho.igrejaId !== admin.igrejaId &&
+    testemunho.igrejaId !== null
   ) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }

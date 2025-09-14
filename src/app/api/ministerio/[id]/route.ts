@@ -22,14 +22,7 @@ const bodySchema = z.object({
       if (!val) return [] // Se for null, undefined ou '', transforma num array vazio.
       return [val] // Se for um valor único, envolve-o num array.
     }),
-  ministryRole: z
-    .union([
-      z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),
-      z.literal(''),
-      z.null(),
-      z.undefined(),
-    ])
-    .transform((val) => (val === '' || val === undefined ? null : val)),
+  igrejaId: z.string().uuid().optional(),
 })
 
 export async function GET(
@@ -46,7 +39,7 @@ export async function GET(
         name: true,
         avatarUrl: true,
         cargo: true,
-        ministryRole: true,
+        igrejaId: true,
       },
     })
 
@@ -81,20 +74,20 @@ export async function PUT(
 
     const { id } = paramsSchema.parse(await params)
     const body = await req.json()
-    const { cargo, ministryRole } = bodySchema.parse(body)
+    const { cargo, igrejaId } = bodySchema.parse(body)
 
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
         cargo,
-        ministryRole,
+        igrejaId,
       },
       select: {
         id: true,
         name: true,
         avatarUrl: true,
         cargo: true,
-        ministryRole: true,
+        igrejaId: true,
       },
     })
 

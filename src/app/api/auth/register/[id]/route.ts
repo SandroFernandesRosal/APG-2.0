@@ -28,7 +28,7 @@ export async function GET(
       login: true,
       avatarUrl: true,
       role: true,
-      ministryRole: true,
+      igrejaId: true,
       cargo: true,
     },
   })
@@ -62,9 +62,7 @@ export async function PUT(
     name: z.string(),
     avatarUrl: z.string(),
     password: z.string(),
-    ministryRole: z
-      .enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA'])
-      .optional(),
+    igrejaId: z.string().uuid().optional(),
     cargo: z
       .array(
         z.enum([
@@ -100,14 +98,14 @@ export async function PUT(
       userAuth.sub !== id &&
       !(
         userAuth.role === 'ADMIN' &&
-        (userToUpdate.ministryRole === userAuth.ministryRole ||
-          userToUpdate.ministryRole === null)
+        (userToUpdate.igrejaId === userAuth.igrejaId ||
+          userToUpdate.igrejaId === null)
       )
     ) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
     }
 
-    const { name, avatarUrl, password, ministryRole, cargo } = bodySchema.parse(
+    const { name, avatarUrl, password, igrejaId, cargo } = bodySchema.parse(
       await req.json(),
     )
 
@@ -119,7 +117,7 @@ export async function PUT(
         name,
         avatarUrl,
         password: hashedPassword,
-        ministryRole: ministryRole || null,
+        igrejaId: igrejaId || null,
         cargo: cargo || [],
       },
     })
@@ -127,7 +125,7 @@ export async function PUT(
     await prisma.testemunho.updateMany({
       where: { userId: id },
       data: {
-        ministryRole: ministryRole || null,
+        igrejaId: igrejaId || null,
       },
     })
 
@@ -192,8 +190,8 @@ export async function DELETE(
       userAuth.role !== 'SUPERADMIN' &&
       !(
         userAuth.role === 'ADMIN' &&
-        (userToDelete.ministryRole === userAuth.ministryRole ||
-          userToDelete.ministryRole === null)
+        (userToDelete.igrejaId === userAuth.igrejaId ||
+          userToDelete.igrejaId === null)
       )
     ) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })

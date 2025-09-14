@@ -1,37 +1,17 @@
 'use client'
 import { useToken } from '@/hooks/useToken'
 import ItemDoe from './item-doe'
-import { useEffect, useState } from 'react'
-import { Doacao } from '@/data/types/doacao'
+import { useState } from 'react'
+import { useIgrejas } from '@/hooks/useIgrejas'
 import AddDoacao from './crud/AddDoacao'
 import SkeletonDoe from './skeleton/SkeletonDoe'
 
 export default function Doe() {
-  const [data, setData] = useState<Doacao[]>([])
-  const [loading, setLoading] = useState(true)
+  const { igrejas, loading } = useIgrejas({ showInactive: false })
   const [openDoacao, setOpenDoacao] = useState(false)
   const token = useToken()
 
   const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/doacao')
-        if (!response.ok) {
-          throw new Error('Erro ao buscar doações')
-        }
-        const result = await response.json()
-        setData(result)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
 
   return (
     <div className="mb-4 flex w-[100vw] flex-col items-center">
@@ -42,7 +22,7 @@ export default function Doe() {
               className="button cursor-pointer"
               onClick={() => setOpenDoacao(true)}
             >
-              Adicionar igreja
+              Configurar Doações
             </div>
           )}
 
@@ -56,23 +36,23 @@ export default function Doe() {
 
       <div className="relative -top-[30px] mb-5 flex w-full flex-wrap justify-center gap-x-5 p-1 px-2 pt-10 md:gap-x-5 gap-4">
         {!loading ? (
-          data.length < 1 ? (
+          igrejas.length < 1 ? (
             <p>Nenhuma igreja cadastrada.</p>
           ) : (
-            data.map((item) => (
+            igrejas.map((igreja) => (
               <ItemDoe
-                key={item.id}
-                id={item.id}
-                local={item.local}
-                banco={item.banco}
-                conta={item.conta}
-                agencia={item.agencia}
-                nomebanco={item.nomebanco}
-                pix={item.pix}
-                nomepix={item.nomepix}
-                isAdmin={item.isAdmin}
-                updatedAt={item.updatedAt}
-                createdAt={item.createdAt}
+                key={igreja.id}
+                id={igreja.id}
+                local={igreja.nome}
+                banco={igreja.banco || ''}
+                conta={igreja.conta || ''}
+                agencia={igreja.agencia || ''}
+                nomebanco={igreja.nomebanco || ''}
+                pix={igreja.pix || ''}
+                nomepix={igreja.nomepix || ''}
+                isAdmin={false}
+                updatedAt={igreja.updatedAt}
+                createdAt={igreja.createdAt}
               />
             ))
           )

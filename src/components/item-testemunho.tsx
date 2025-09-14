@@ -6,6 +6,7 @@ import { UserIgreja } from '@/data/types/userigreja'
 import { Testemunho } from '@/data/types/testemunho'
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
+import { useIgrejaName } from '@/hooks/useIgrejaName'
 import { useShowModal } from '@/store/useStore'
 import {
   FaUser,
@@ -28,33 +29,21 @@ export default function ItemTestemunho({
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const { showModal, setShowModal } = useShowModal()
   const token = useToken()
+  const igrejaName = useIgrejaName(item.igrejaId || null)
 
   const podeGerenciar =
     token &&
     (token.role === 'SUPERADMIN' ||
       token.sub === item.userId ||
       (token.role === 'ADMIN' &&
-        (token.ministryRole === item.ministryRole ||
-          item.ministryRole === null)))
+        (token.igrejaId === item.igrejaId || item.igrejaId === null)))
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString)
     return format(date, 'dd/MM/yyyy HH:mm')
   }
 
-  function getIgrejaLabel(ministryRole?: string): string {
-    if (!ministryRole) return 'Membro sem igreja'
-    switch (ministryRole) {
-      case 'VILADAPENHA':
-        return 'APG Vila da Penha'
-      case 'TOMAZINHO':
-        return 'APG Tomazinho'
-      case 'MARIAHELENA':
-        return 'APG Vila Maria Helena'
-      default:
-        return 'APG ' + ministryRole
-    }
-  }
+  // Removido: função hardcoded - agora usa useIgrejaName
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 mb-6">
@@ -87,7 +76,7 @@ export default function ItemTestemunho({
               <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                 <FaChurch className="text-sm" />
                 <span className="text-sm font-medium">
-                  {getIgrejaLabel(item.ministryRole)}
+                  {igrejaName || 'Membro sem igreja'}
                 </span>
               </div>
             </div>
@@ -156,7 +145,7 @@ export default function ItemTestemunho({
                     conteudo={item.content}
                     userIgreja={userIgreja}
                     setOpenEdit={setOpenEdit}
-                    ministryRole={item.ministryRole}
+                    igrejaId={item.igrejaId}
                   />
                 </div>
               )}

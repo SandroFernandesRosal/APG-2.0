@@ -74,7 +74,7 @@ export async function PUT(
     // 4. Lógica de Permissão Avançada
     if (
       adminUser.role === 'ADMIN' &&
-      adminUser.ministryRole !== userToUpdate.ministryRole
+      adminUser.igrejaId !== userToUpdate.igrejaId
     ) {
       return NextResponse.json(
         {

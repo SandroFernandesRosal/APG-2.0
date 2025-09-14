@@ -183,7 +183,7 @@ export default function Ministerioo() {
 
   const filteredUsuarios = dataMinisterio
     .filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
-    .filter((item: Ministerio) => item.ministryRole === local.toUpperCase())
+    .filter((item: Ministerio) => item.igrejaId === local)
 
   return (
     <div className="flex flex-col items-center self-center mb-4 w-full">
@@ -205,7 +205,7 @@ export default function Ministerioo() {
                 name={user.name}
                 avatarUrl={user.avatarUrl ?? ''}
                 cargo={user.cargo}
-                ministryRole={user.ministryRole}
+                igrejaId={user.igrejaId}
               />
             ))
           : Array.from({ length: itemsPerPage }).map((_, index) => (

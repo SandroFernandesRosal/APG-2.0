@@ -4,5 +4,5 @@ export interface Ministerio {
   id: string
 
   name: string
-  ministryRole?: 'VILADAPENHA' | 'MARIAHELENA' | 'TOMAZINHO'
+  igrejaId?: string | null
 }

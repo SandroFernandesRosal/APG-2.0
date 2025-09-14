@@ -14,7 +14,7 @@ export default function ItemAgenda({ id, day, name, hour, role }: Agenda) {
   const podeGerenciar =
     token &&
     (token.role === 'SUPERADMIN' ||
-      (token.role === 'ADMIN' && token.ministryRole === role))
+      (token.role === 'ADMIN' && token.igrejaId === igrejaId))
 
   const dataBR = new Date(day).toLocaleDateString('pt-BR')
 

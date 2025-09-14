@@ -35,7 +35,7 @@ interface AuditLog {
     id: string
     name: string
     role: string
-    ministryRole: string
+    igrejaId: string
   }
 }
 
@@ -178,7 +178,7 @@ export default function HistoricoPage() {
       email: 'E-mail',
       password: 'Senha',
       role: 'Cargo',
-      ministryRole: 'Função Ministerial',
+      igrejaId: 'Função Ministerial',
       church: 'Igreja',
 
       // Campos de notícias

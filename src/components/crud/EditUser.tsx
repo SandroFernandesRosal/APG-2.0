@@ -13,7 +13,7 @@ interface EditUserProps {
   nome: string
   email: string
   img?: string
-  ministryRole?: string | null
+  igrejaId?: string | null
   role: 'ADMIN' | 'MEMBRO' | 'SUPERADMIN'
 }
 

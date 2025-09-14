@@ -16,7 +16,7 @@ const bodySchema = z.object({
   isPublic: z.coerce.boolean().default(false),
   destaque: z.coerce.boolean().default(false),
   page: z.string(),
-  role: z.enum(['VILADAPENHA', 'TOMAZINHO', 'MARIAHELENA']),
+  igrejaId: z.string().uuid().nullable(),
 })
 
 export async function GET(

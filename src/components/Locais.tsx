@@ -1,118 +1,98 @@
 'use client'
-import { Endereco } from '@/data/types/endereco'
-import { useEffect, useState } from 'react'
-import { useToken } from '@/hooks/useToken'
-import ItemEndereco from './ItemEndereco'
-import AddEndereco from './crud/AddEndereco'
-import SkeletonEndereco from './skeleton/SkeletonEndereco'
-import EditEndereco from './crud/EditEndereco'
+import { useIgrejas } from '@/hooks/useIgrejas'
+import Link from 'next/link'
+import { MapPin } from 'lucide-react'
 
 export default function Locais() {
-  const [data, setData] = useState<Endereco[]>([])
-  const [loading, setLoading] = useState(true)
-  const [openEndereco, setOpenEndereco] = useState(false)
-  const [openEdit, setOpenEdit] = useState<string | null>(null)
-  const [selectedProduct, setSelectedProduct] = useState<Endereco | null>(null)
-  const [coordinates, setCoordinates] = useState<{
-    [key: string]: [number, number]
-  }>({})
-  const token = useToken()
-  const podeAdicionar = token?.role === 'ADMIN' || token?.role === 'SUPERADMIN'
-
-  useEffect(() => {
-    const fetchEnderecos = async () => {
-      setLoading(true)
-      try {
-        const response = await fetch('/api/endereco')
-        if (!response.ok) throw new Error('Erro ao buscar endereços')
-        const data = await response.json()
-        setData(data)
-        data.forEach((endereco: Endereco) => {
-          geocodeAddress(endereco)
-        })
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchEnderecos()
-  }, [])
-
-  const geocodeAddress = async (endereco: Endereco) => {
-    const { rua, numero, local, cidade, cep } = endereco
-    const enderecoFormatado = `${rua}, ${numero}, ${local}, ${cidade}, ${cep}`
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      enderecoFormatado,
-    )}`
-
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0]
-        setCoordinates((prev) => ({
-          ...prev,
-          [endereco.id]: [parseFloat(lat), parseFloat(lon)],
-        }))
-      }
-    } catch (error) {
-      console.error('Erro ao geocodificar endereço:', error)
-    }
-  }
+  const { igrejas, loading } = useIgrejas({ showInactive: false })
 
   return (
-    <section className="mb-5 flex w-[100vw] flex-col items-center">
-      {podeAdicionar && (
-        <>
-          {!openEndereco && (
-            <div className="button" onClick={() => setOpenEndereco(true)}>
-              Adicionar endereço
-            </div>
-          )}
+    <section className="mb-5 flex w-full flex-col items-center">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Conheça Nossas Igrejas
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Cada uma de nossas igrejas tem sua própria identidade e comunidade.
+            Clique em uma igreja para conhecer mais sobre ela.
+          </p>
+        </div>
 
-          {openEndereco && (
-            <div className="md:min-w-[35%]">
-              <AddEndereco setOpenEndereco={setOpenEndereco} />
-            </div>
-          )}
-        </>
-      )}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="animate-pulse bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
+              >
+                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-4"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mx-auto mb-2"></div>
+                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mx-auto mb-4"></div>
+                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+              </div>
+            ))}
+          </div>
+        ) : igrejas.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {igrejas.map((igreja) => (
+              <Link
+                key={igreja.id}
+                href={`/igrejas/${igreja.slug}`}
+                className="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                  </div>
 
-      <div className="relative -top-[30px] mb-2 flex w-full flex-wrap justify-center gap-x-5 p-1 px-2 pt-10 md:gap-x-5">
-        {!loading ? (
-          data.length < 1 ? (
-            <p>Nenhum endereço cadastrado.</p>
-          ) : (
-            data.map((item) => (
-              <ItemEndereco
-                key={item.id}
-                item={item}
-                openEdit={openEdit}
-                setOpenEdit={setOpenEdit}
-                setSelectedProduct={setSelectedProduct}
-                coordinates={coordinates[item.id]}
-                token={token}
-              />
-            ))
-          )
+                  <div className="mb-2">
+                    <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full mb-2">
+                      {igreja.tipo || 'Filial'}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {igreja.nome}
+                  </h3>
+
+                  {igreja.descricao && (
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                      {igreja.descricao}
+                    </p>
+                  )}
+
+                  {igreja.endereco && (
+                    <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
+                      <MapPin className="w-4 h-4" />
+                      <span className="truncate">{igreja.endereco}</span>
+                    </div>
+                  )}
+
+                  <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <p className="text-blue-600 dark:text-blue-400 text-sm font-medium group-hover:text-blue-800 dark:group-hover:text-blue-300">
+                      Ver detalhes →
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         ) : (
-          <SkeletonEndereco />
+          <div className="text-center py-12">
+            <div className="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-12 h-12 text-gray-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              Nenhuma igreja cadastrada
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400">
+              As igrejas aparecerão aqui quando forem cadastradas.
+            </p>
+          </div>
         )}
       </div>
-
-      {openEdit && selectedProduct && (
-        <EditEndereco
-          localInitial={selectedProduct.local}
-          ruaInitial={selectedProduct.rua}
-          cepInitial={selectedProduct.cep}
-          id={selectedProduct.id}
-          numeroInitial={selectedProduct.numero}
-          cidadeInitial={selectedProduct.cidade}
-          setOpenEdit={setOpenEdit}
-        />
-      )}
     </section>
   )
 }
