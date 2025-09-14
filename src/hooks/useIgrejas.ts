@@ -28,7 +28,7 @@ interface UseIgrejasOptions {
 
 export function useIgrejas(options: UseIgrejasOptions = {}) {
   const { showInactive = false, autoFetch = true } = options
-  
+
   const [igrejas, setIgrejas] = useState<Igreja[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -37,17 +37,15 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
     try {
       setLoading(true)
       setError(null)
-      
-      const url = showInactive 
-        ? '/api/igrejas' 
-        : '/api/igrejas?ativa=true'
-      
+
+      const url = showInactive ? '/api/igrejas' : '/api/igrejas?ativa=true'
+
       const response = await fetch(url)
-      
+
       if (!response.ok) {
         throw new Error('Erro ao carregar igrejas')
       }
-      
+
       const data = await response.json()
       setIgrejas(data)
     } catch (err) {
@@ -59,14 +57,21 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
   }
 
   const getIgrejaById = (id: string): Igreja | undefined => {
-    return igrejas.find(igreja => igreja.id === id)
+    return igrejas.find((igreja) => igreja.id === id)
   }
 
   const getIgrejaBySlug = (slug: string): Igreja | undefined => {
-    return igrejas.find(igreja => igreja.slug === slug)
+    return igrejas.find((igreja) => igreja.slug === slug)
   }
 
-  const createIgreja = async (data: { nome: string; slug: string; ativa?: boolean; endereco?: string; descricao?: string; tipo?: string }) => {
+  const createIgreja = async (data: {
+    nome: string
+    slug: string
+    ativa?: boolean
+    endereco?: string
+    descricao?: string
+    tipo?: string
+  }) => {
     try {
       const response = await fetch('/api/igrejas', {
         method: 'POST',
@@ -82,7 +87,7 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
       }
 
       const newIgreja = await response.json()
-      setIgrejas(prev => [...prev, newIgreja])
+      setIgrejas((prev) => [...prev, newIgreja])
       return newIgreja
     } catch (err) {
       console.error('Erro ao criar igreja:', err)
@@ -90,7 +95,17 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
     }
   }
 
-  const updateIgreja = async (id: string, data: Partial<{ nome: string; slug: string; ativa: boolean; endereco?: string; descricao?: string; tipo?: string }>) => {
+  const updateIgreja = async (
+    id: string,
+    data: Partial<{
+      nome: string
+      slug: string
+      ativa: boolean
+      endereco?: string
+      descricao?: string
+      tipo?: string
+    }>,
+  ) => {
     try {
       const response = await fetch(`/api/igrejas/${id}`, {
         method: 'PUT',
@@ -106,9 +121,9 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
       }
 
       const updatedIgreja = await response.json()
-      setIgrejas(prev => prev.map(igreja => 
-        igreja.id === id ? updatedIgreja : igreja
-      ))
+      setIgrejas((prev) =>
+        prev.map((igreja) => (igreja.id === id ? updatedIgreja : igreja)),
+      )
       return updatedIgreja
     } catch (err) {
       console.error('Erro ao atualizar igreja:', err)
@@ -128,9 +143,9 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
       }
 
       const updatedIgreja = await response.json()
-      setIgrejas(prev => prev.map(igreja => 
-        igreja.id === id ? updatedIgreja : igreja
-      ))
+      setIgrejas((prev) =>
+        prev.map((igreja) => (igreja.id === id ? updatedIgreja : igreja)),
+      )
       return updatedIgreja
     } catch (err) {
       console.error('Erro ao desativar igreja:', err)
@@ -154,6 +169,6 @@ export function useIgrejas(options: UseIgrejasOptions = {}) {
     createIgreja,
     updateIgreja,
     deleteIgreja,
-    refetch: fetchIgrejas
+    refetch: fetchIgrejas,
   }
 }

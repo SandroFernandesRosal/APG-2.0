@@ -6,7 +6,7 @@ import { useState, useRef, FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
-import IgrejaSelect from '@/components/IgrejaSelect'
+// Removido: IgrejaSelect não é mais necessário
 
 const CARGOS = [
   'PASTOR',
@@ -22,7 +22,7 @@ const CARGOS = [
   'AUXILIAR',
 ]
 
-// Removido - agora usa IgrejaSelect dinâmico
+// Removido - agora usa sistema dinâmico de igrejas
 
 interface EditMinisterioProps {
   setOpenEdit: (open: string | null) => void
@@ -45,7 +45,7 @@ export default function EditMinisterio({
   const [title, setTitle] = useState<string[]>(
     titulo ? titulo.map((t: string) => t.trim()) : [],
   )
-  const [igreja, setIgreja] = useState<string>(role || '')
+  const [igreja] = useState<string>(role || '')
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
   const token = useToken()
@@ -163,31 +163,13 @@ export default function EditMinisterio({
                 </div>
               </div>
 
-              {/* Grupo de Botões de Rádio para Igreja */}
+              {/* Campo de Igreja (readonly para não-SUPERADMIN) */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-textlight dark:text-textdark">
                   Igreja
                 </label>
-                <div className="p-3 border rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
-                  <div className="flex flex-col gap-2">
-                    {IGREJAS.map((ig) => (
-                      <label
-                        key={ig.key}
-                        className={`flex items-center justify-between cursor-pointer text-textlight dark:text-textdark p-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 ${token?.role !== 'SUPERADMIN' ? 'opacity-50 cursor-not-allowed' : ''}`}
-                      >
-                        <span className="text-sm">{ig.label}</span>
-                        <input
-                          type="radio"
-                          name="igreja"
-                          value={ig.key}
-                          checked={igreja === ig.key}
-                          onChange={(e) => setIgreja(e.target.value)}
-                          disabled={token?.role !== 'SUPERADMIN'}
-                          className="h-4 w-4 border-gray-300 bg-gray-100 text-primary focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                      </label>
-                    ))}
-                  </div>
+                <div className="w-full p-3 text-textlight dark:text-textdark font-medium text-center cursor-not-allowed bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-600">
+                  {igreja || 'Sem igreja definida'}
                 </div>
               </div>
             </div>

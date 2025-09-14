@@ -3,9 +3,8 @@
 'use client'
 
 import Cookies from 'js-cookie'
-import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
 import { toast } from 'react-toastify'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
@@ -28,15 +27,12 @@ export default function AddMinisterio({
   const [preview, setPreview] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const { local } = useLocal()
   const router = useRouter()
   const cookieToken = Cookies.get('tokennn')
 
   const decodedToken = useToken()
 
   const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
-
-  // Removido: lógica do sistema antigo
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()

@@ -3,9 +3,8 @@
 import Cookies from 'js-cookie'
 import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useState, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
+import { useState, useRef, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLocal } from '../../store/useStore'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
@@ -26,15 +25,12 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  const { local } = useLocal()
   const token = useToken()
 
   const [igrejaId, setIgrejaId] = useState<string>('') // Nova estrutura
 
   const router = useRouter()
   const cookieToken = Cookies.get('tokennn')
-
-  // Removido: lógica do sistema antigo
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -104,7 +100,7 @@ export default function AddNew({ setOpenNew }: AddNewProps) {
           content,
           coverUrl: coverUrl || undefined,
           videoUrl: videoUrl || undefined,
-          page: local.toLowerCase(),
+          page: 'noticias',
           // Removido: role do sistema antigo
           igrejaId, // Nova estrutura
           destaque,

@@ -224,7 +224,9 @@ export default function AdminTestemunhosPage() {
                       <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                         <FaChurch className="text-sm" />
                         <span className="text-sm font-medium">
-                          {t.igrejaId ? 'Igreja ID: ' + t.igrejaId : 'Membro sem igreja'}
+                          {t.igrejaId
+                            ? 'Igreja ID: ' + t.igrejaId
+                            : 'Membro sem igreja'}
                         </span>
                       </div>
                     </div>

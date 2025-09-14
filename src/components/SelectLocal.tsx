@@ -79,7 +79,9 @@ export default function SelectLocal({ onChange }: SelectLocalProps) {
       >
         <div className="py-1" role="none">
           {loading ? (
-            <div className="px-4 py-2 text-sm text-gray-500">Carregando igrejas...</div>
+            <div className="px-4 py-2 text-sm text-gray-500">
+              Carregando igrejas...
+            </div>
           ) : (
             igrejas.map((igreja) => (
               <button
