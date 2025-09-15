@@ -3,6 +3,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { New } from '@/data/types/new'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FaCalendarAlt, FaChurch } from 'react-icons/fa'
 import { useIgrejas } from '@/hooks/useIgrejas'
 
@@ -68,16 +69,16 @@ export default function NoticiaPage() {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">404</h1>
           <p className="text-gray-600 mb-4">Notícia não encontrada</p>
-          <a href="/noticias" className="text-primary hover:underline">
+          <Link href="/noticias" className="text-primary hover:underline">
             Voltar para notícias
-          </a>
+          </Link>
         </div>
       </div>
     )
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 mt-[120px]">
+    <main className="min-h-screen  py-8 pt-28">
       <div className="max-w-4xl mx-auto px-4">
         <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           {noticia.coverUrl && (
