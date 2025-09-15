@@ -253,49 +253,93 @@ export default function NavBar({
                   </Link>
 
                   {userRole === 'ADMIN' || userRole === 'SUPERADMIN' ? (
-                    <Link
-                      href={'/usuarios'}
-                      className="flex flex-col items-center justify-center p-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                      onClick={handleMenu}
-                    >
-                      <svg
-                        className="w-5 h-5 mb-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <>
+                      <Link
+                        href={'/usuarios'}
+                        className="flex flex-col items-center justify-center p-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                        onClick={handleMenu}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
-                        />
-                      </svg>
-                      <span className="text-xs font-bold">Usuários</span>
-                    </Link>
+                        <svg
+                          className="w-5 h-5 mb-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                          />
+                        </svg>
+                        <span className="text-xs font-bold">Usuários</span>
+                      </Link>
+                      <Link
+                        href={'/admin/igrejas'}
+                        className="flex flex-col items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                        onClick={handleMenu}
+                      >
+                        <svg
+                          className="w-5 h-5 mb-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                          />
+                        </svg>
+                        <span className="text-xs font-bold">Igrejas</span>
+                      </Link>
+                    </>
                   ) : null}
 
                   {userRole === 'SUPERADMIN' ? (
-                    <Link
-                      href={'/admin/historico'}
-                      className="flex flex-col items-center justify-center p-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                      onClick={handleMenu}
-                    >
-                      <svg
-                        className="w-5 h-5 mb-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <>
+                      <Link
+                        href={'/admin/igrejas'}
+                        className="flex flex-col items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                        onClick={handleMenu}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <span className="text-xs font-bold">Histórico</span>
-                    </Link>
+                        <svg
+                          className="w-5 h-5 mb-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                          />
+                        </svg>
+                        <span className="text-xs font-bold">Igrejas</span>
+                      </Link>
+                      <Link
+                        href={'/admin/historico'}
+                        className="flex flex-col items-center justify-center p-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                        onClick={handleMenu}
+                      >
+                        <svg
+                          className="w-5 h-5 mb-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span className="text-xs font-bold">Histórico</span>
+                      </Link>
+                    </>
                   ) : null}
 
                   <LogoutIgreja

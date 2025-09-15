@@ -25,6 +25,12 @@ const createIgrejaSchema = z.object({
   nomebanco: z.string().optional(),
   pix: z.string().optional(),
   nomepix: z.string().optional(),
+  // Campos de contato
+  telefone: z.string().optional(),
+  whatsapp: z.string().optional(),
+  facebook: z.string().url().optional().or(z.literal('')),
+  youtube: z.string().url().optional().or(z.literal('')),
+  instagram: z.string().url().optional().or(z.literal('')),
 })
 
 const updateIgrejaSchema = z.object({
@@ -50,6 +56,12 @@ const updateIgrejaSchema = z.object({
   nomebanco: z.string().optional(),
   pix: z.string().optional(),
   nomepix: z.string().optional(),
+  // Campos de contato
+  telefone: z.string().optional(),
+  whatsapp: z.string().optional(),
+  facebook: z.string().url().optional().or(z.literal('')),
+  youtube: z.string().url().optional().or(z.literal('')),
+  instagram: z.string().url().optional().or(z.literal('')),
 })
 
 // GET - Listar todas as igrejas
@@ -160,6 +172,79 @@ export async function PUT(req: NextRequest) {
     }
 
     console.error('Erro ao atualizar igreja:', error)
+    return NextResponse.json(
+      { error: 'Erro interno do servidor' },
+      { status: 500 },
+    )
+  }
+}
+
+// DELETE - Deletar igreja (apenas SUPERADMIN)
+export async function DELETE(req: NextRequest) {
+  try {
+    const user = await authMiddleware(req)
+
+    if (!user || user.role !== 'SUPERADMIN') {
+      return NextResponse.json(
+        { error: 'Apenas SUPERADMIN pode deletar igrejas' },
+        { status: 403 },
+      )
+    }
+
+    const { searchParams } = new URL(req.url)
+    const id = searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'ID da igreja é obrigatório' },
+        { status: 400 },
+      )
+    }
+
+    // Verificar se a igreja tem dados relacionados
+    const igreja = await prisma.igreja.findUnique({
+      where: { id },
+      include: {
+        users: true,
+        news: true,
+        ministerios: true,
+        agendas: true,
+        testemunhos: true,
+      },
+    })
+
+    if (!igreja) {
+      return NextResponse.json(
+        { error: 'Igreja não encontrada' },
+        { status: 404 },
+      )
+    }
+
+    // Verificar se tem dados relacionados
+    const hasRelatedData =
+      igreja.users.length > 0 ||
+      igreja.news.length > 0 ||
+      igreja.ministerios.length > 0 ||
+      igreja.agendas.length > 0 ||
+      igreja.testemunhos.length > 0
+
+    if (hasRelatedData) {
+      return NextResponse.json(
+        {
+          error:
+            'Não é possível deletar igreja com dados relacionados. Desative-a em vez de deletar.',
+        },
+        { status: 400 },
+      )
+    }
+
+    await prisma.igreja.delete({
+      where: { id },
+    })
+
+    return NextResponse.json({ message: 'Igreja deletada com sucesso' })
+  } catch (error) {
+    console.error('Erro ao deletar igreja:', error)
     return NextResponse.json(
       { error: 'Erro interno do servidor' },
       { status: 500 },

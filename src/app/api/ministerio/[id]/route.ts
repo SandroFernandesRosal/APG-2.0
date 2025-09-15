@@ -120,3 +120,62 @@ export async function PUT(
     )
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const userAuth = await authMiddleware(req)
+    if (
+      !userAuth ||
+      (userAuth.role !== 'ADMIN' && userAuth.role !== 'SUPERADMIN')
+    ) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    }
+
+    const { id } = paramsSchema.parse(await params)
+
+    // Verificar se o usuário existe
+    const existingUser = await prisma.user.findUnique({
+      where: { id },
+    })
+
+    if (!existingUser) {
+      return NextResponse.json(
+        { error: 'Usuário não encontrado' },
+        { status: 404 },
+      )
+    }
+
+    // Remover o usuário
+    await prisma.user.delete({
+      where: { id },
+    })
+
+    return NextResponse.json({
+      message: 'Usuário removido com sucesso',
+    })
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
+    }
+
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'code' in error &&
+      (error as { code?: string }).code === 'P2025'
+    ) {
+      return NextResponse.json(
+        { error: 'Usuário não encontrado' },
+        { status: 404 },
+      )
+    }
+
+    return NextResponse.json(
+      { error: 'Erro interno do servidor' },
+      { status: 500 },
+    )
+  }
+}

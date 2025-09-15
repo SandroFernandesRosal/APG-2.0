@@ -14,7 +14,6 @@ import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
 import AgendaHeader from './agenda-header'
-import { getIgrejaLabelFromId } from '@/lib/getIgrejaLabel'
 import { Clock, MapPin } from 'lucide-react'
 
 export default function CarouselAgenda({ title }: { title: string }) {
@@ -44,19 +43,53 @@ export default function CarouselAgenda({ title }: { title: string }) {
       }
     }
     fetchAgendaData()
-  }, [local, setDataAgenda])
+  }, [setDataAgenda])
 
   const handleLocalChange = (newLocal: string) => {
     setLocalLoading(true)
     setLocal(newLocal)
   }
 
-  const podeAdicionar =
-    token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
+  // Buscar o ID da igreja baseado no slug
+  const [currentIgreja, setCurrentIgreja] = useState<{
+    id: string
+    nome?: string
+  } | null>(null)
 
-  const filteredAgenda = dataAgenda.filter(
-    (item: Agenda) => item.igrejaId === local,
-  )
+  const podeAdicionar =
+    token &&
+    (token.role === 'SUPERADMIN' ||
+      (token.role === 'ADMIN' && token.igrejaId === currentIgreja?.id))
+
+  useEffect(() => {
+    const fetchIgreja = async () => {
+      try {
+        const response = await fetch(`/api/igrejas/slug/${local}`)
+        if (response.ok) {
+          const igreja = await response.json()
+          setCurrentIgreja(igreja)
+        }
+      } catch (error) {
+        console.error('Erro ao buscar igreja:', error)
+      } finally {
+        setLocalLoading(false) // Adicionar aqui para parar o loading
+      }
+    }
+    fetchIgreja()
+  }, [local])
+
+  const filteredAgenda = currentIgreja
+    ? dataAgenda.filter((item: Agenda) => item.igrejaId === currentIgreja.id)
+    : []
+
+  // Função para buscar nome da igreja sem fazer API calls extras
+  const getIgrejaNameById = (igrejaId: string | null) => {
+    if (!igrejaId) return 'Igreja não encontrada'
+    if (currentIgreja && igrejaId === currentIgreja.id) {
+      return currentIgreja.nome || 'Igreja não encontrada'
+    }
+    return 'Igreja não encontrada'
+  }
 
   const podeEditarRemover = (item: Agenda) => {
     if (!token) return false
@@ -219,9 +252,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                             </p>
                             <p className="flex items-center gap-2">
                               <MapPin size={24} />
-                              <span>
-                                {getIgrejaLabelFromId(product.igrejaId || '')}
-                              </span>
+                              <span>{getIgrejaNameById(product.igrejaId)}</span>
                             </p>
                           </div>
                         </div>

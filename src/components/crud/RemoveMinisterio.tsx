@@ -1,5 +1,5 @@
 'use client'
-import Cookies from 'js-cookie'
+
 import { useRouter } from 'next/navigation'
 import { useShowModal } from '@/store/useStore'
 import { useState, useEffect } from 'react'
@@ -13,7 +13,7 @@ interface RemoveMinisterioProps {
 export default function RemoveMinisterio({ id }: RemoveMinisterioProps) {
   const { showModal, setShowModal } = useShowModal()
   const router = useRouter()
-  const token = Cookies.get('tokennn')
+
   const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export default function RemoveMinisterio({ id }: RemoveMinisterioProps) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
         },
+        credentials: 'include',
       })
 
       if (response.ok) {

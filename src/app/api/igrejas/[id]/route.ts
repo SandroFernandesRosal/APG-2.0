@@ -20,6 +20,12 @@ const updateIgrejaSchema = z.object({
   nomebanco: z.string().optional(),
   pix: z.string().optional(),
   nomepix: z.string().optional(),
+  // Campos de contato
+  telefone: z.string().optional(),
+  whatsapp: z.string().optional(),
+  facebook: z.string().url().optional().or(z.literal('')),
+  youtube: z.string().url().optional().or(z.literal('')),
+  instagram: z.string().url().optional().or(z.literal('')),
 })
 
 // GET - Buscar igreja por ID
@@ -122,7 +128,7 @@ export async function PUT(
   }
 }
 
-// DELETE - Desativar igreja (apenas SUPERADMIN)
+// DELETE - Deletar igreja (apenas SUPERADMIN)
 export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -132,7 +138,7 @@ export async function DELETE(
 
     if (!user || user.role !== 'SUPERADMIN') {
       return NextResponse.json(
-        { error: 'Apenas SUPERADMIN pode desativar igrejas' },
+        { error: 'Apenas SUPERADMIN pode deletar igrejas' },
         { status: 403 },
       )
     }
@@ -151,31 +157,62 @@ export async function DELETE(
       )
     }
 
-    // Verificar se há usuários vinculados a esta igreja
-    const usersCount = await prisma.user.count({
-      where: { igrejaId: id },
-    })
+    // Verificar se há dependências vinculadas a esta igreja
+    const [
+      usersCount,
+      newsCount,
+      ministeriosCount,
+      agendasCount,
+      testemunhosCount,
+    ] = await Promise.all([
+      prisma.user.count({ where: { igrejaId: id } }),
+      prisma.new.count({ where: { igrejaId: id } }),
+      prisma.ministerio.count({ where: { igrejaId: id } }),
+      prisma.agenda.count({ where: { igrejaId: id } }),
+      prisma.testemunho.count({ where: { igrejaId: id } }),
+    ])
 
-    if (usersCount > 0) {
+    const totalDependencies =
+      usersCount +
+      newsCount +
+      ministeriosCount +
+      agendasCount +
+      testemunhosCount
+
+    if (totalDependencies > 0) {
+      const dependencies = []
+      if (usersCount > 0) dependencies.push(`${usersCount} usuário(s)`)
+      if (newsCount > 0) dependencies.push(`${newsCount} notícia(s)`)
+      if (ministeriosCount > 0)
+        dependencies.push(`${ministeriosCount} ministério(s)`)
+      if (agendasCount > 0) dependencies.push(`${agendasCount} evento(s)`)
+      if (testemunhosCount > 0)
+        dependencies.push(`${testemunhosCount} testemunho(s)`)
+
       return NextResponse.json(
-        { error: 'Não é possível desativar igreja com usuários vinculados' },
+        {
+          error: 'Não é possível deletar igreja com dependências vinculadas',
+          details: `Esta igreja possui: ${dependencies.join(', ')}`,
+        },
         { status: 400 },
       )
     }
 
-    // Desativar igreja (soft delete)
-    const updatedIgreja = await prisma.igreja.update({
+    // Deletar igreja permanentemente
+    const deletedIgreja = await prisma.igreja.delete({
       where: { id },
-      data: { ativa: false },
     })
 
-    return NextResponse.json(updatedIgreja)
+    return NextResponse.json({
+      message: 'Igreja deletada com sucesso',
+      igreja: deletedIgreja,
+    })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
     }
 
-    console.error('Erro ao desativar igreja:', error)
+    console.error('Erro ao deletar igreja:', error)
     return NextResponse.json(
       { error: 'Erro interno do servidor' },
       { status: 500 },

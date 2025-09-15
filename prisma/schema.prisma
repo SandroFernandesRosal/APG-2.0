@@ -34,6 +34,12 @@ model Igreja {
   nomebanco   String?  // Nome do beneficiário (banco)
   pix         String?  // Chave PIX
   nomepix     String?  // Nome do beneficiário (PIX)
+  // Campos de contato
+  telefone    String?  // Número de telefone
+  whatsapp    String?  // WhatsApp
+  facebook    String?  // Facebook
+  youtube     String?  // YouTube
+  instagram   String?  // Instagram
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   

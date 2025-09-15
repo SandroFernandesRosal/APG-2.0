@@ -12,11 +12,11 @@ import { useDataMinisterio, useLocal, useShowModal } from '@/store/useStore'
 import SkeletonNew from './skeleton/SkeletonNew'
 import SelectLocal from './SelectLocal'
 import { useToken } from '@/hooks/useToken'
+import { useIgrejas } from '@/hooks/useIgrejas'
 
 import EditMinisterio from './crud/EditMinisterio'
 import RemoveMinisterio from './crud/RemoveMinisterio'
 import MinisterioHeader from './ministerio-header'
-import { getIgrejaLabelFromId } from '@/lib/getIgrejaLabel'
 
 export default function CarouselMinisterio({
   titleproducts,
@@ -27,6 +27,7 @@ export default function CarouselMinisterio({
 }) {
   const { dataMinisterio, setDataMinisterio } = useDataMinisterio()
   const { local, setLocal } = useLocal()
+  const { igrejas } = useIgrejas({ showInactive: false })
   const [loading, setLoading] = useState(true)
   const [localLoading, setLocalLoading] = useState(false)
 
@@ -64,9 +65,12 @@ export default function CarouselMinisterio({
     setLocal(newLocal)
   }
 
+  // Encontrar a igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
+
   const filteredMinisterios = dataMinisterio
     .filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
-    .filter((item: Ministerio) => item.igrejaId === local.toUpperCase())
+    .filter((item: Ministerio) => item.igrejaId === currentIgreja?.id)
 
   const podeAdicionar =
     token && (token.role === 'SUPERADMIN' || token.role === 'ADMIN')
@@ -152,7 +156,9 @@ export default function CarouselMinisterio({
             </div>
           ) : filteredMinisterios.length === 0 ? (
             <div className="flex flex-col h-40 my-5 border border-dashed border-zinc-300 dark:border-zinc-700 p-5 rounded-lg justify-center items-center text-gray-500">
-              <p>Nenhum membro cadastrado para {local}.</p>
+              <p>
+                Nenhum membro cadastrado para {currentIgreja?.nome || local}.
+              </p>
             </div>
           ) : (
             <div className="w-full mt-5">
@@ -184,7 +190,9 @@ export default function CarouselMinisterio({
                             : ''}
                         </p>
                         <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                          {getIgrejaLabelFromId(product.igrejaId || '')}
+                          {igrejas.find(
+                            (igreja) => igreja.id === product.igrejaId,
+                          )?.nome || 'Igreja não encontrada'}
                         </span>
                       </div>
                       {podeEditarRemover(product) && (
@@ -252,10 +260,13 @@ export default function CarouselMinisterio({
           nome={selectedProduct.name}
           titulo={selectedProduct.cargo}
           img={selectedProduct.avatarUrl || ''}
-          lugar={selectedProduct.igrejaId || ''}
+          lugar={
+            igrejas.find((igreja) => igreja.id === selectedProduct.igrejaId)
+              ?.nome || 'Sem igreja definida'
+          }
           id={selectedProduct.id}
           setOpenEdit={setOpenEdit}
-          role={selectedProduct.igrejaId || undefined}
+          igrejaId={selectedProduct.igrejaId}
         />
       )}
     </>

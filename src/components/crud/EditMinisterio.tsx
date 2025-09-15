@@ -4,7 +4,7 @@ import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useState, useRef, FormEvent } from 'react'
 import { toast } from 'react-toastify'
-import { useToken } from '@/hooks/useToken'
+
 import Image from 'next/image'
 // Removido: IgrejaSelect não é mais necessário
 
@@ -39,6 +39,7 @@ export default function EditMinisterio({
   setOpenEdit,
   id,
   nome,
+  lugar,
   titulo,
   img,
   igrejaId,
@@ -46,10 +47,9 @@ export default function EditMinisterio({
   const [title, setTitle] = useState<string[]>(
     titulo ? titulo.map((t: string) => t.trim()) : [],
   )
-  const [igreja] = useState<string>(igrejaId || '')
+  const [igreja] = useState<string>(lugar || '')
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<HTMLFormElement | null>(null)
-  const token = useToken()
 
   const handleCargoChange = (cargoSelecionado: string) => {
     if (title.includes(cargoSelecionado)) {
@@ -69,8 +69,8 @@ export default function EditMinisterio({
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
         },
+        credentials: 'include',
         body: JSON.stringify({
           cargo: title,
           igrejaId: igrejaId || null,
