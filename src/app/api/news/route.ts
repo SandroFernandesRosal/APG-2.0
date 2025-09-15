@@ -83,7 +83,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Verificar se ADMIN pode postar nesta igreja (apenas se igrejaId foi fornecido)
-    if (user.role === 'ADMIN' && data.igrejaId && userData?.igrejaId !== data.igrejaId) {
+    if (
+      user.role === 'ADMIN' &&
+      data.igrejaId &&
+      userData?.igrejaId !== data.igrejaId
+    ) {
       console.log('ADMIN tentando postar em igreja diferente')
       return NextResponse.json(
         { error: 'ADMIN só pode postar na sua igreja' },
