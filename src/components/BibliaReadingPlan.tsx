@@ -613,7 +613,7 @@ export function BibliaReadingPlan() {
             {/* Objetivos Diários e Status */}
             {readingPlan && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div className="bg-orange-100 dark:bg-orange-900/20 p-4 rounded-lg">
+                <div className="bg-orange-100 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
                   <div className="flex items-center gap-2 mb-2">
                     <Target className="w-4 h-4 text-orange-700 dark:text-orange-600" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -637,7 +637,7 @@ export function BibliaReadingPlan() {
                   </div>
                 </div>
 
-                <div className="bg-yellow-100 dark:bg-yellow-900/20 p-4 rounded-lg">
+                <div className="bg-yellow-100 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-200 dark:border-yellow-800">
                   <div className="flex items-center gap-2 mb-2">
                     <BookOpen className="w-4 h-4 text-yellow-700 dark:text-yellow-600" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
