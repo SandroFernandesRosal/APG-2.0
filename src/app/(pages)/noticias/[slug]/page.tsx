@@ -42,7 +42,6 @@ async function getNewsByIgreja(slug: string) {
   const news = await prisma.new.findMany({
     where: {
       igrejaId: igreja.id,
-      isPublic: true,
     },
     orderBy: { createdAt: 'desc' },
     include: {
@@ -64,8 +63,8 @@ export default async function NewsByIgrejaPage({ params }: NewsPageProps) {
   const { igreja, news } = result
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 py-8 pt-28">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
@@ -123,7 +122,7 @@ export default async function NewsByIgrejaPage({ params }: NewsPageProps) {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {news.map((item) => (
               <ItemNew
                 key={item.id}
@@ -138,6 +137,7 @@ export default async function NewsByIgrejaPage({ params }: NewsPageProps) {
                 updatedAt={item.updatedAt.toISOString()}
                 url={item.url}
                 igrejaId={item.igrejaId}
+                igreja={item.igreja ? { slug: item.igreja.slug } : undefined}
               />
             ))}
           </div>

@@ -10,4 +10,7 @@ export interface New {
   updatedAt: string
   url: string
   igrejaId: string | null // Nova estrutura
+  igreja?: {
+    slug: string
+  }
 }

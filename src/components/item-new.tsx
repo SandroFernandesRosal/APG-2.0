@@ -13,7 +13,6 @@ import { useShowModal } from '@/store/useStore'
 
 export default function ItemNew({
   id,
-  page,
   coverUrl,
   videoUrl,
   title,
@@ -22,6 +21,7 @@ export default function ItemNew({
   destaque,
   url,
   igrejaId,
+  igreja,
 }: New) {
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const { showModal, setShowModal } = useShowModal()
@@ -42,10 +42,10 @@ export default function ItemNew({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative w-[47%] max-w-[300px] border-[1px] border-zinc-300 dark:border-zinc-800">
+    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[450px] overflow-hidden group relative w-full max-w-[350px] border-[1px] border-zinc-300 dark:border-zinc-800">
       <div className="h-48 relative overflow-hidden">
         <Link
-          href={`/noticias/${page.toLowerCase()}/${url}`}
+          href={`/noticias/${igreja?.slug || 'noticias'}/${url}`}
           className="block h-full w-full"
           tabIndex={-1}
         >
@@ -87,19 +87,19 @@ export default function ItemNew({
           </span>
         </Link>
       </div>
-      <div className="p-4 flex flex-col flex-grow">
-        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2 line-clamp-2">
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 line-clamp-2">
           {title}
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 flex-grow line-clamp-3">
+        <p className="text-base text-gray-600 dark:text-gray-300 flex-grow line-clamp-4">
           {content}
         </p>
-        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+        <div className="mt-5 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
             <span>{formatDate(createdAt)}</span>
             <Link
-              href={`/noticias/${page.toLowerCase()}/${url}`}
-              className="font-semibold text-primary dark:text-secundary hover:underline"
+              href={`/noticias/${igreja?.slug || 'noticias'}/${url}`}
+              className="font-semibold text-primary dark:text-secundary hover:underline text-sm"
             >
               Ler mais
             </Link>
