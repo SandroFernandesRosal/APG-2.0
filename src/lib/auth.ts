@@ -23,9 +23,12 @@ function validateJWT(token: string) {
     return decoded as {
       role: string
       sub: string
+      id?: string
       igrejaId?: string | null
+      [key: string]: unknown
     }
-  } catch {
+  } catch (error) {
+    console.error('Erro ao decodificar JWT:', error)
     return null
   }
 }
@@ -65,8 +68,14 @@ export async function authMiddleware(req: NextRequest) {
 
   // 3. Validar JWT localmente primeiro (mais rápido)
   const decoded = validateJWT(token)
+
   if (decoded) {
-    return decoded
+    // Mapear corretamente os campos do token
+    return {
+      role: decoded.role,
+      sub: decoded.sub || decoded.id,
+      igrejaId: decoded.igrejaId,
+    }
   }
 
   // 4. Se JWT inválido, tentar buscar via API /me (para tokens externos)

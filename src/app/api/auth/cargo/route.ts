@@ -5,6 +5,7 @@ import { authMiddleware } from '@/lib/auth'
 export async function GET(req: NextRequest) {
   try {
     const requestingUser = await authMiddleware(req)
+
     if (
       !requestingUser ||
       (requestingUser.role !== 'ADMIN' && requestingUser.role !== 'SUPERADMIN')
