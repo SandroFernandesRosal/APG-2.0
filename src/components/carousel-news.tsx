@@ -17,9 +17,12 @@ import EditNew from './crud/EditNew'
 import RemoveNew from './crud/RemoveNew'
 import NoticiasHeader from './noticias-header'
 // Função para buscar nome da igreja por ID usando as igrejas já carregadas
-const getIgrejaNameById = (igrejaId: string | null, igrejas: any[]) => {
+const getIgrejaNameById = (
+  igrejaId: string | null,
+  igrejas: { id: string; nome: string }[],
+) => {
   if (!igrejaId) return 'Igreja não encontrada'
-  const igreja = igrejas.find(i => i.id === igrejaId)
+  const igreja = igrejas.find((i) => i.id === igrejaId)
   return igreja ? igreja.nome : 'Igreja não encontrada'
 }
 
@@ -68,9 +71,8 @@ export default function CarouselNews({
     return `${day} de ${month} de ${year}`
   }
 
-  const convertLocalToLowercase = (local: string) => {
-    return local.toLowerCase()
-  }
+  // Encontrar igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
 
   const podeAdicionar =
     token &&
@@ -81,9 +83,6 @@ export default function CarouselNews({
     token &&
     (token.role === 'SUPERADMIN' ||
       (token.role === 'ADMIN' && token.igrejaId === igrejaId))
-
-  // Encontrar igreja pelo slug
-  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
 
   const filteredNews = data.filter((item: New) => {
     if (local === 'todas') return true
@@ -185,7 +184,7 @@ export default function CarouselNews({
                     <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800">
                       <div className="h-48 relative overflow-hidden">
                         <Link
-                          href={`/noticias/${convertLocalToLowercase(product.page)}/${product.url}`}
+                          href={`/noticias/${currentIgreja?.slug || 'geral'}/${product.url}`}
                           className="block h-full w-full"
                           tabIndex={-1}
                         >
@@ -222,7 +221,7 @@ export default function CarouselNews({
                             </div>
                           )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                          <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+                          <span className="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10 mr-16">
                             {getIgrejaNameById(product.igrejaId, igrejas)}
                           </span>
                         </Link>
@@ -238,7 +237,7 @@ export default function CarouselNews({
                           <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
                             <span>{formatDate(product.createdAt)}</span>
                             <Link
-                              href={`/noticias/${convertLocalToLowercase(product.page)}/${product.url}`}
+                              href={`/noticias/${currentIgreja?.slug || 'geral'}/${product.url}`}
                               className="font-semibold text-primary dark:text-secundary hover:underline"
                             >
                               Ler mais
@@ -248,7 +247,7 @@ export default function CarouselNews({
                       </div>
 
                       {podeEditarRemover(product.igrejaId || '') && (
-                        <div className="absolute top-2 left-2 flex gap-2">
+                        <div className="absolute top-2 left-2 flex gap-2 z-20 p-1">
                           <button
                             onClick={() => {
                               setOpenEdit(product.id)

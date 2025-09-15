@@ -134,6 +134,11 @@ exports.Prisma.IgrejaScalarFieldEnum = {
   nomebanco: 'nomebanco',
   pix: 'pix',
   nomepix: 'nomepix',
+  telefone: 'telefone',
+  whatsapp: 'whatsapp',
+  facebook: 'facebook',
+  youtube: 'youtube',
+  instagram: 'instagram',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

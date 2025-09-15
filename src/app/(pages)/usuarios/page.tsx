@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useToken } from '@/hooks/useToken'
 import Image from 'next/image'
 import {
@@ -9,7 +9,6 @@ import {
   FaUserShield,
   FaFilter,
 } from 'react-icons/fa'
-import { getIgrejaLabelFromId } from '@/lib/getIgrejaLabel'
 import { toast } from 'react-toastify'
 import { useIgrejas } from '@/hooks/useIgrejas'
 
@@ -49,6 +48,7 @@ export default function UsuariosPage() {
   const [users, setUsers] = useState<User[]>([])
   const [filteredUsers, setFilteredUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
+  const [igrejaNames, setIgrejaNames] = useState<Record<string, string>>({})
   const token = useToken()
   const { igrejas } = useIgrejas()
 
@@ -196,6 +196,17 @@ export default function UsuariosPage() {
     }).length,
   }
 
+  // Carregar nomes das igrejas
+  useEffect(() => {
+    if (igrejas.length > 0) {
+      const namesMap: Record<string, string> = {}
+      igrejas.forEach((igreja) => {
+        namesMap[igreja.id] = igreja.nome
+      })
+      setIgrejaNames(namesMap)
+    }
+  }, [igrejas])
+
   useEffect(() => {
     async function fetchUsers() {
       setLoading(true)
@@ -254,6 +265,14 @@ export default function UsuariosPage() {
     setFilterIgreja('')
     setFilterCargo('')
   }
+
+  // Função memoizada para obter nome da igreja
+  const getIgrejaName = useMemo(() => {
+    return (igrejaId: string | null) => {
+      if (!igrejaId) return 'Sem Igreja'
+      return igrejaNames[igrejaId] || 'Igreja não encontrada'
+    }
+  }, [igrejaNames])
 
   async function handleSaveCargo() {
     if (!selectedUser) return
@@ -672,9 +691,9 @@ export default function UsuariosPage() {
                     </button>
                   </td>
                   <td data-label="Igreja" className="py-2 text-center ">
-                    {getIgrejaLabelFromId(u.igrejaId || '') ?? (
-                      <span className="text-gray-400">Sem Igreja</span>
-                    )}
+                    <span className={u.igrejaId ? '' : 'text-gray-400'}>
+                      {getIgrejaName(u.igrejaId)}
+                    </span>
                     <button
                       className="ml-2 text-blue-500 hover:text-blue-700 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                       onClick={() => {

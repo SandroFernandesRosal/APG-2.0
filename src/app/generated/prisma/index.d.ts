@@ -2502,6 +2502,11 @@ export namespace Prisma {
     nomebanco: string | null
     pix: string | null
     nomepix: string | null
+    telefone: string | null
+    whatsapp: string | null
+    facebook: string | null
+    youtube: string | null
+    instagram: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2520,6 +2525,11 @@ export namespace Prisma {
     nomebanco: string | null
     pix: string | null
     nomepix: string | null
+    telefone: string | null
+    whatsapp: string | null
+    facebook: string | null
+    youtube: string | null
+    instagram: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2538,6 +2548,11 @@ export namespace Prisma {
     nomebanco: number
     pix: number
     nomepix: number
+    telefone: number
+    whatsapp: number
+    facebook: number
+    youtube: number
+    instagram: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2558,6 +2573,11 @@ export namespace Prisma {
     nomebanco?: true
     pix?: true
     nomepix?: true
+    telefone?: true
+    whatsapp?: true
+    facebook?: true
+    youtube?: true
+    instagram?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2576,6 +2596,11 @@ export namespace Prisma {
     nomebanco?: true
     pix?: true
     nomepix?: true
+    telefone?: true
+    whatsapp?: true
+    facebook?: true
+    youtube?: true
+    instagram?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2594,6 +2619,11 @@ export namespace Prisma {
     nomebanco?: true
     pix?: true
     nomepix?: true
+    telefone?: true
+    whatsapp?: true
+    facebook?: true
+    youtube?: true
+    instagram?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2685,6 +2715,11 @@ export namespace Prisma {
     nomebanco: string | null
     pix: string | null
     nomepix: string | null
+    telefone: string | null
+    whatsapp: string | null
+    facebook: string | null
+    youtube: string | null
+    instagram: string | null
     createdAt: Date
     updatedAt: Date
     _count: IgrejaCountAggregateOutputType | null
@@ -2720,6 +2755,11 @@ export namespace Prisma {
     nomebanco?: boolean
     pix?: boolean
     nomepix?: boolean
+    telefone?: boolean
+    whatsapp?: boolean
+    facebook?: boolean
+    youtube?: boolean
+    instagram?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Igreja$usersArgs<ExtArgs>
@@ -2744,6 +2784,11 @@ export namespace Prisma {
     nomebanco?: boolean
     pix?: boolean
     nomepix?: boolean
+    telefone?: boolean
+    whatsapp?: boolean
+    facebook?: boolean
+    youtube?: boolean
+    instagram?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["igreja"]>
@@ -2762,6 +2807,11 @@ export namespace Prisma {
     nomebanco?: boolean
     pix?: boolean
     nomepix?: boolean
+    telefone?: boolean
+    whatsapp?: boolean
+    facebook?: boolean
+    youtube?: boolean
+    instagram?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["igreja"]>
@@ -2780,11 +2830,16 @@ export namespace Prisma {
     nomebanco?: boolean
     pix?: boolean
     nomepix?: boolean
+    telefone?: boolean
+    whatsapp?: boolean
+    facebook?: boolean
+    youtube?: boolean
+    instagram?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type IgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "slug" | "ativa" | "endereco" | "descricao" | "tipo" | "banco" | "conta" | "agencia" | "nomebanco" | "pix" | "nomepix" | "createdAt" | "updatedAt", ExtArgs["result"]["igreja"]>
+  export type IgrejaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "slug" | "ativa" | "endereco" | "descricao" | "tipo" | "banco" | "conta" | "agencia" | "nomebanco" | "pix" | "nomepix" | "telefone" | "whatsapp" | "facebook" | "youtube" | "instagram" | "createdAt" | "updatedAt", ExtArgs["result"]["igreja"]>
   export type IgrejaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Igreja$usersArgs<ExtArgs>
     news?: boolean | Igreja$newsArgs<ExtArgs>
@@ -2819,6 +2874,11 @@ export namespace Prisma {
       nomebanco: string | null
       pix: string | null
       nomepix: string | null
+      telefone: string | null
+      whatsapp: string | null
+      facebook: string | null
+      youtube: string | null
+      instagram: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["igreja"]>
@@ -3262,6 +3322,11 @@ export namespace Prisma {
     readonly nomebanco: FieldRef<"Igreja", 'String'>
     readonly pix: FieldRef<"Igreja", 'String'>
     readonly nomepix: FieldRef<"Igreja", 'String'>
+    readonly telefone: FieldRef<"Igreja", 'String'>
+    readonly whatsapp: FieldRef<"Igreja", 'String'>
+    readonly facebook: FieldRef<"Igreja", 'String'>
+    readonly youtube: FieldRef<"Igreja", 'String'>
+    readonly instagram: FieldRef<"Igreja", 'String'>
     readonly createdAt: FieldRef<"Igreja", 'DateTime'>
     readonly updatedAt: FieldRef<"Igreja", 'DateTime'>
   }
@@ -20999,6 +21064,11 @@ export namespace Prisma {
     nomebanco: 'nomebanco',
     pix: 'pix',
     nomepix: 'nomepix',
+    telefone: 'telefone',
+    whatsapp: 'whatsapp',
+    facebook: 'facebook',
+    youtube: 'youtube',
+    instagram: 'instagram',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -21393,6 +21463,11 @@ export namespace Prisma {
     nomebanco?: StringNullableFilter<"Igreja"> | string | null
     pix?: StringNullableFilter<"Igreja"> | string | null
     nomepix?: StringNullableFilter<"Igreja"> | string | null
+    telefone?: StringNullableFilter<"Igreja"> | string | null
+    whatsapp?: StringNullableFilter<"Igreja"> | string | null
+    facebook?: StringNullableFilter<"Igreja"> | string | null
+    youtube?: StringNullableFilter<"Igreja"> | string | null
+    instagram?: StringNullableFilter<"Igreja"> | string | null
     createdAt?: DateTimeFilter<"Igreja"> | Date | string
     updatedAt?: DateTimeFilter<"Igreja"> | Date | string
     users?: UserListRelationFilter
@@ -21416,6 +21491,11 @@ export namespace Prisma {
     nomebanco?: SortOrderInput | SortOrder
     pix?: SortOrderInput | SortOrder
     nomepix?: SortOrderInput | SortOrder
+    telefone?: SortOrderInput | SortOrder
+    whatsapp?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    youtube?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
@@ -21442,6 +21522,11 @@ export namespace Prisma {
     nomebanco?: StringNullableFilter<"Igreja"> | string | null
     pix?: StringNullableFilter<"Igreja"> | string | null
     nomepix?: StringNullableFilter<"Igreja"> | string | null
+    telefone?: StringNullableFilter<"Igreja"> | string | null
+    whatsapp?: StringNullableFilter<"Igreja"> | string | null
+    facebook?: StringNullableFilter<"Igreja"> | string | null
+    youtube?: StringNullableFilter<"Igreja"> | string | null
+    instagram?: StringNullableFilter<"Igreja"> | string | null
     createdAt?: DateTimeFilter<"Igreja"> | Date | string
     updatedAt?: DateTimeFilter<"Igreja"> | Date | string
     users?: UserListRelationFilter
@@ -21465,6 +21550,11 @@ export namespace Prisma {
     nomebanco?: SortOrderInput | SortOrder
     pix?: SortOrderInput | SortOrder
     nomepix?: SortOrderInput | SortOrder
+    telefone?: SortOrderInput | SortOrder
+    whatsapp?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    youtube?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: IgrejaCountOrderByAggregateInput
@@ -21489,6 +21579,11 @@ export namespace Prisma {
     nomebanco?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
     pix?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
     nomepix?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    telefone?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    whatsapp?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    facebook?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    youtube?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
+    instagram?: StringNullableWithAggregatesFilter<"Igreja"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Igreja"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Igreja"> | Date | string
   }
@@ -22652,6 +22747,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutIgrejaInput
@@ -22675,6 +22775,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
@@ -22698,6 +22803,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutIgrejaNestedInput
@@ -22721,6 +22831,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
@@ -22744,6 +22859,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -22762,6 +22882,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22780,6 +22905,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24133,6 +24263,11 @@ export namespace Prisma {
     nomebanco?: SortOrder
     pix?: SortOrder
     nomepix?: SortOrder
+    telefone?: SortOrder
+    whatsapp?: SortOrder
+    facebook?: SortOrder
+    youtube?: SortOrder
+    instagram?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -24151,6 +24286,11 @@ export namespace Prisma {
     nomebanco?: SortOrder
     pix?: SortOrder
     nomepix?: SortOrder
+    telefone?: SortOrder
+    whatsapp?: SortOrder
+    facebook?: SortOrder
+    youtube?: SortOrder
+    instagram?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -24169,6 +24309,11 @@ export namespace Prisma {
     nomebanco?: SortOrder
     pix?: SortOrder
     nomepix?: SortOrder
+    telefone?: SortOrder
+    whatsapp?: SortOrder
+    facebook?: SortOrder
+    youtube?: SortOrder
+    instagram?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27209,6 +27354,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     news?: NewCreateNestedManyWithoutIgrejaInput
@@ -27231,6 +27381,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     news?: NewUncheckedCreateNestedManyWithoutIgrejaInput
@@ -27628,6 +27783,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     news?: NewUpdateManyWithoutIgrejaNestedInput
@@ -27650,6 +27810,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     news?: NewUncheckedUpdateManyWithoutIgrejaNestedInput
@@ -27727,6 +27892,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutIgrejaInput
@@ -27749,6 +27919,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
@@ -27848,6 +28023,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutIgrejaNestedInput
@@ -27870,6 +28050,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
@@ -27947,6 +28132,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutIgrejaInput
@@ -27969,6 +28159,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
@@ -28068,6 +28263,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutIgrejaNestedInput
@@ -28090,6 +28290,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
@@ -28167,6 +28372,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutIgrejaInput
@@ -28189,6 +28399,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
@@ -28288,6 +28503,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutIgrejaNestedInput
@@ -28310,6 +28530,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput
@@ -28967,6 +29192,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutIgrejaInput
@@ -28989,6 +29219,11 @@ export namespace Prisma {
     nomebanco?: string | null
     pix?: string | null
     nomepix?: string | null
+    telefone?: string | null
+    whatsapp?: string | null
+    facebook?: string | null
+    youtube?: string | null
+    instagram?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutIgrejaInput
@@ -29088,6 +29323,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutIgrejaNestedInput
@@ -29110,6 +29350,11 @@ export namespace Prisma {
     nomebanco?: NullableStringFieldUpdateOperationsInput | string | null
     pix?: NullableStringFieldUpdateOperationsInput | string | null
     nomepix?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    youtube?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutIgrejaNestedInput

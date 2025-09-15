@@ -17,6 +17,12 @@ interface Igreja {
   nomebanco?: string
   pix?: string
   nomepix?: string
+  // Campos de contato
+  telefone?: string
+  whatsapp?: string
+  facebook?: string
+  youtube?: string
+  instagram?: string
   createdAt: string
   updatedAt: string
 }
