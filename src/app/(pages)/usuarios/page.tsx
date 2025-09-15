@@ -200,9 +200,7 @@ export default function UsuariosPage() {
     async function fetchUsers() {
       setLoading(true)
       const res = await fetch('/api/auth/cargo', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: 'include',
       })
       const data = await res.json()
       const usersData = Array.isArray(data)
