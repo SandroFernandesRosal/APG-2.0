@@ -14,7 +14,7 @@ import AddAgenda from './crud/AddAgenda'
 import EditAgenda from './crud/EditAgenda'
 import RemoveAgenda from './crud/RemoveAgenda'
 import AgendaHeader from './agenda-header'
-import { Clock, MapPin } from 'lucide-react'
+import { Clock, MapPin, Calendar } from 'lucide-react'
 
 export default function CarouselAgenda({ title }: { title: string }) {
   const { dataAgenda, setDataAgenda } = useDataAgenda()
@@ -183,7 +183,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
                   )
                   return (
                     <div key={product.id} className="p-3">
-                      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[450px] overflow-hidden group relative flex-col border-[1px] border-zinc-300 dark:border-zinc-800 ">
+                      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex min-h-[450px] overflow-hidden group relative flex-col border-[1px] border-zinc-300 dark:border-zinc-800">
                         {podeEditarRemover(product) && (
                           <div className="absolute top-2 right-2 flex gap-2 z-10">
                             <button
@@ -232,28 +232,83 @@ export default function CarouselAgenda({ title }: { title: string }) {
                           </div>
                         )}
 
-                        <div className="flex flex-col flex-1 text-center border-r border-gray-200 dark:border-gray-700 w-full bg-bglightsecundary dark:bg-bgdarksecundary h-40">
-                          <div className="bg-primary text-white text-sm font-semibold py-1"></div>
-                          <div className="flex-grow flex items-center justify-center">
-                            <span className="text-xl font-bold text-gray-700 dark:text-gray-200">
-                              {dataBR}
-                            </span>
+                        {/* Header com data destacada */}
+                        <div className="relative h-40 bg-gradient-to-br from-primary via-primary/95 to-primary/90 dark:from-secundary dark:via-secundary/95 dark:to-secundary/90 overflow-hidden">
+                          {/* Padrão decorativo sutil */}
+                          <div className="absolute inset-0 opacity-10">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -mr-16 -mt-16"></div>
+                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12"></div>
+                          </div>
+
+                          {/* Padrão de grid de calendário */}
+                          <div className="absolute inset-0 opacity-5">
+                            <div className="absolute top-1/4 left-0 right-0 h-px bg-white"></div>
+                            <div className="absolute top-2/4 left-0 right-0 h-px bg-white"></div>
+                            <div className="absolute top-3/4 left-0 right-0 h-px bg-white"></div>
+                            <div className="absolute top-0 bottom-0 left-1/4 w-px bg-white"></div>
+                            <div className="absolute top-0 bottom-0 left-2/4 w-px bg-white"></div>
+                            <div className="absolute top-0 bottom-0 left-3/4 w-px bg-white"></div>
+                          </div>
+
+                          {/* Linha decorativa no topo */}
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+
+                          {/* Ícone de calendário decorativo */}
+                          <div className="absolute top-3 right-3 opacity-20">
+                            <Calendar className="w-8 h-8 text-white" />
+                          </div>
+
+                          {/* Conteúdo da data */}
+                          <div className="relative h-full flex flex-col items-center justify-center px-4">
+                            <div className="flex items-baseline gap-2 mb-1">
+                              <span className="text-5xl font-extrabold text-white leading-none drop-shadow-lg">
+                                {dataBR.split('/')[0]}
+                              </span>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-bold text-white/95 uppercase tracking-wider leading-tight">
+                                  {new Date(product.day).toLocaleDateString(
+                                    'pt-BR',
+                                    { month: 'short' },
+                                  )}
+                                </span>
+                                <span className="text-xs text-white/80 font-medium mt-0.5">
+                                  {dataBR.split('/')[2]}
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
 
-                        <div className="p-4 flex flex-col w-full h-full flex-1 justify-around">
-                          <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                            {product.name}
-                          </h3>
-                          <div className="mt-2 space-y-1 text-gray-500 dark:text-gray-400 text-xl">
-                            <p className="flex items-center gap-2">
-                              <Clock size={24} />
-                              <span>{product.hour}</span>
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <MapPin size={24} />
-                              <span>{getIgrejaNameById(product.igrejaId)}</span>
-                            </p>
+                        {/* Conteúdo principal */}
+                        <div className="p-5 flex flex-col flex-1 justify-between bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-800 dark:to-slate-900/50">
+                          {/* Título do evento */}
+                          <div className="mb-4">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-primary dark:group-hover:text-secundary transition-colors">
+                              {product.name}
+                            </h3>
+                          </div>
+
+                          {/* Informações do evento */}
+                          <div className="space-y-3 mt-auto">
+                            {/* Horário */}
+                            <div className="flex items-center gap-3 p-2.5 rounded-lg bg-blue-100 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/30 transition-colors">
+                              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 flex items-center justify-center shadow-sm">
+                                <Clock className="w-4 h-4 text-white" />
+                              </div>
+                              <span className="text-base font-semibold text-gray-700 dark:text-gray-200">
+                                {product.hour}
+                              </span>
+                            </div>
+
+                            {/* Localização */}
+                            <div className="flex items-center gap-3 p-2.5 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-100 dark:border-green-900/30 transition-colors">
+                              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 flex items-center justify-center shadow-sm">
+                                <MapPin className="w-4 h-4 text-white" />
+                              </div>
+                              <span className="text-base font-semibold text-gray-700 dark:text-gray-200 truncate flex-1">
+                                {getIgrejaNameById(product.igrejaId)}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
