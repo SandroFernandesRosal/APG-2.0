@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import LogoutIgreja from '@/components/LogoutIgreja'
-import { FaSpinner } from 'react-icons/fa'
+import { FaSpinner, FaEnvelope, FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import Image from 'next/image'
+import { useTheme } from 'next-themes'
 
 export default function Register() {
   const [login, setLogin] = useState<string>('')
@@ -17,6 +19,7 @@ export default function Register() {
   const [isLogged, setIsLogged] = useState(false)
 
   const router = useRouter()
+  const { theme } = useTheme()
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -125,61 +128,152 @@ export default function Register() {
   }
 
   return (
-    <div className="flex w-full justify-center min-h-screen pt-28 md:pt-[185px]">
-      <div className="flex flex-col items-center border-[1px] border-zinc-400 dark:border-zinc-700 w-[70%] max-w-[500px] h-full rounded-md">
-        <h1 className="mt-2 text-xl font-bold text-primary dark:text-secundary mb-5">
-          Login
-        </h1>
+    <div className="flex w-full justify-center items-center min-h-screen pt-28 md:pt-[185px] pb-8 px-4">
+      <div className="w-full max-w-md">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-primary to-primary/80 dark:from-secundary dark:to-secundary/80 px-6 py-8 text-center">
+            <div className="flex justify-center mb-2">
+              {theme === 'dark' ? (
+                <Image
+                  src="/img/logob.png"
+                  height={80}
+                  width={80}
+                  priority
+                  quality={100}
+                  alt="logo do site"
+                  className="object-contain"
+                />
+              ) : (
+                <Image
+                  src="/img/logob.png"
+                  height={80}
+                  width={80}
+                  priority
+                  quality={100}
+                  alt="logo do site"
+                  className="object-contain"
+                />
+              )}
+            </div>
+            <p className="text-white/90 text-sm">Faça login para continuar</p>
+          </div>
 
-        <form
-          className="flex w-full flex-col items-center gap-3 rounded-xl p-3 md:mb-5"
-          onSubmit={handleSubmit}
-        >
-          <p className="font-bold text-red-800">{error}</p>
-
-          <input
-            className="input"
-            type="text"
-            name="login"
-            placeholder="Digite seu e-mail"
-            onChange={(e) => setLogin(e.target.value.toLowerCase())}
-          />
-
-          <input
-            className="input"
-            type="password"
-            name="password"
-            placeholder="Digite sua senha"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button
-            type="submit"
-            className="button !mb-0 flex items-center gap-2"
+          {/* Form */}
+          <form
+            className="flex w-full flex-col gap-5 p-6 md:p-8"
+            onSubmit={handleSubmit}
           >
-            {isLogged ? (
-              <>
-                <FaSpinner className="animate-spin" />
-                Entrando...
-              </>
-            ) : (
-              'Entrar'
+            {error && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
+                <p className="text-sm font-medium text-red-800 dark:text-red-200 text-center">
+                  {error}
+                </p>
+              </div>
             )}
-          </button>
 
-          <Link
-            href={'/forgot-password-adm'}
-            className="font-bold text-primary dark:text-secundary"
-          >
-            Esqueceu a senha?
-          </Link>
-          <Link
-            href={'/register'}
-            className="font-bold text-primary dark:text-secundary"
-          >
-            Ainda não tem conta? Crie uma agora mesmo!
-          </Link>
-        </form>
+            {/* Email Input */}
+            <div className="space-y-2">
+              <label
+                htmlFor="login"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                E-mail
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaEnvelope className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="login"
+                  name="login"
+                  type="email"
+                  required
+                  value={login}
+                  placeholder="seu@email.com"
+                  onChange={(e) => setLogin(e.target.value.toLowerCase())}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Password Input */}
+            <div className="space-y-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Senha
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaLock className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  value={password}
+                  placeholder="••••••••"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Forgot Password Link */}
+            <div className="flex justify-end">
+              <Link
+                href={'/forgot-password'}
+                className="text-sm font-medium text-primary dark:text-secundary hover:underline transition-colors"
+              >
+                Esqueceu a senha?
+              </Link>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLogged}
+              className="w-full bg-gradient-to-r from-primary to-primary/90 dark:from-secundary dark:to-secundary/90 text-white font-semibold py-3 px-4 rounded-lg hover:from-primary/90 hover:to-primary dark:hover:from-secundary/90 dark:hover:to-secundary shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLogged ? (
+                <>
+                  <FaSpinner className="animate-spin" />
+                  <span>Entrando...</span>
+                </>
+              ) : (
+                <span>Entrar</span>
+              )}
+            </button>
+
+            {/* Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">
+                  ou
+                </span>
+              </div>
+            </div>
+
+            {/* Register Link */}
+            <div className="text-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Ainda não tem conta?{' '}
+                <Link
+                  href={'/register'}
+                  className="font-semibold text-primary dark:text-secundary hover:underline transition-colors"
+                >
+                  Crie uma agora mesmo!
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
