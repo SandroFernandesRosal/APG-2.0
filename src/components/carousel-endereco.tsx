@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useIgrejas } from '@/hooks/useIgrejas'
 import SkeletonNew from './skeleton/SkeletonNew'
 import EnderecosHeader from './enderecos-header'
-import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaExternalLinkAlt } from 'react-icons/fa'
 import Link from 'next/link'
 
 export default function CarouselEndereco() {
@@ -73,17 +73,37 @@ export default function CarouselEndereco() {
                     <div key={igreja.id} className="p-2">
                       <Link href={`/igrejas/${igreja.slug}`}>
                         <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-auto min-h-[450px] overflow-hidden group relative border-[1px] border-zinc-300 dark:border-zinc-800 cursor-pointer">
-                          <div className="h-56 w-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 flex items-center justify-center">
-                            <div className="text-center">
-                              <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                                <FaMapMarkerAlt className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                          <div className="h-56 w-full relative overflow-hidden rounded-t-lg">
+                            {igreja.endereco ? (
+                              <>
+                                <iframe
+                                  width="100%"
+                                  height="100%"
+                                  style={{ border: 0 }}
+                                  loading="lazy"
+                                  allowFullScreen
+                                  referrerPolicy="no-referrer-when-downgrade"
+                                  src={`https://www.google.com/maps?q=${encodeURIComponent(igreja.endereco)}&output=embed`}
+                                  className="absolute inset-0 w-full h-full"
+                                />
+                                <div className="absolute inset-0 bg-black/10 dark:bg-black/30 pointer-events-none rounded-t-lg" />
+                              </>
+                            ) : (
+                              <div className="h-full w-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 flex items-center justify-center">
+                                <div className="text-center">
+                                  <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <FaMapMarkerAlt className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                                  </div>
+                                </div>
                               </div>
-                              <div className="px-4">
-                                <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full mb-2">
-                                  {igreja.tipo || 'Filial'}
+                            )}
+                            {igreja.tipo && (
+                              <div className="absolute top-2 left-2">
+                                <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full shadow-md">
+                                  {igreja.tipo}
                                 </span>
                               </div>
-                            </div>
+                            )}
                           </div>
                           <div className="p-4 flex flex-col flex-grow">
                             <h3 className="text-xl font-bold text-primary dark:text-secundary mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -107,9 +127,11 @@ export default function CarouselEndereco() {
                                     openGoogleMaps(igreja.endereco)
                                   }
                                 }}
-                                className="button w-full"
+                                className="w-full px-4 py-3 bg-gradient-to-r from-primary to-primary/90 dark:from-secundary dark:to-secundary/90 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-primary/90 hover:to-primary dark:hover:from-secundary/90 dark:hover:to-secundary transition-all duration-300 flex items-center justify-center gap-2 group"
                               >
-                                Ver no Google Maps
+                                <FaMapMarkerAlt className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                <span>Ver no Google Maps</span>
+                                <FaExternalLinkAlt className="w-3 h-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                               </button>
                             </div>
                           </div>

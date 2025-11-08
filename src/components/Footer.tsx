@@ -27,48 +27,44 @@ export default function Footer() {
   return (
     <footer className="relative z-20 w-full bg-gradient-to-t from-primary/10 via-bglight/80 to-white dark:from-secundary/10 dark:via-bgdark/80 dark:to-bgdark border-t-2 border-solid border-y-primary dark:border-y-secundary pt-10 pb-4 px-2">
       <div className="max-w-6xl mx-auto flex flex-col gap-8 items-center">
-        {/* Logo + Contatos lado a lado em telas grandes */}
-        <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          {/* Logo e nome */}
-          <Link
-            href="/"
-            onClick={() => handleClick('/')}
-            className="transition-transform hover:scale-105 duration-200 drop-shadow-lg mb-2 flex flex-col items-center  justify-center mx-5"
-          >
-            {theme === 'dark' ? (
-              <Image
-                src={logob}
-                height={90}
-                width={90}
-                priority
-                quality={100}
-                alt="logo do site"
-                className="w-24 h-24 object-contain"
-              />
-            ) : (
-              <Image
-                src={logo}
-                height={90}
-                width={90}
-                priority
-                quality={100}
-                alt="logo do site"
-                className="w-24 h-24 object-contain"
-              />
-            )}
-            <span className="mt-2 text-xl font-extrabold tracking-widest text-primary dark:text-secundary drop-shadow-sm select-none text-center md:text-left">
-              MINISTÉRIO ALCANÇADOS PELA GRAÇA
-            </span>
-          </Link>
-          {/* Contatos */}
-          <div className="w-full md:w-auto flex flex-col items-center md:items-end">
-            <h2 className="text-primary dark:text-secundary font-bold text-lg mb-2 tracking-wide uppercase">
-              Contatos
-            </h2>
-            <div className="w-full flex flex-wrap justify-center md:justify-end gap-5">
-              <Contatos />
-            </div>
-          </div>
+        {/* Logo e nome */}
+        <Link
+          href="/"
+          onClick={() => handleClick('/')}
+          className="transition-transform hover:scale-105 duration-200 drop-shadow-lg flex flex-col items-center justify-center"
+        >
+          {theme === 'dark' ? (
+            <Image
+              src={logob}
+              height={90}
+              width={90}
+              priority
+              quality={100}
+              alt="logo do site"
+              className="w-24 h-24 object-contain"
+            />
+          ) : (
+            <Image
+              src={logo}
+              height={90}
+              width={90}
+              priority
+              quality={100}
+              alt="logo do site"
+              className="w-24 h-24 object-contain"
+            />
+          )}
+          <span className="mt-2 text-xl font-extrabold tracking-widest text-primary dark:text-secundary drop-shadow-sm select-none text-center">
+            MINISTÉRIO ALCANÇADOS PELA GRAÇA
+          </span>
+        </Link>
+
+        {/* Contatos */}
+        <div className="w-full flex flex-col items-center">
+          <h2 className="text-primary dark:text-secundary font-bold text-xl mb-4 tracking-wide uppercase">
+            Contatos
+          </h2>
+          <Contatos />
         </div>
 
         {/* Navegação rápida */}
