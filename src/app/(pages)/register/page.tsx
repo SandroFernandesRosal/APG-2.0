@@ -1,11 +1,18 @@
 'use client'
-import { FaCameraRetro, FaSpinner } from 'react-icons/fa'
+import {
+  FaCameraRetro,
+  FaSpinner,
+  FaUser,
+  FaEnvelope,
+  FaLock,
+} from 'react-icons/fa'
 import { useState, useRef, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { useToken } from '@/hooks/useToken'
 import IgrejaSelect from '@/components/IgrejaSelect'
+import { useTheme } from 'next-themes'
 
 export default function RegisterIgreja() {
   const [name, setName] = useState<string>('')
@@ -23,6 +30,7 @@ export default function RegisterIgreja() {
   const formRef = useRef<HTMLFormElement>(null)
   const token = useToken()
   const router = useRouter()
+  const { theme } = useTheme()
 
   const isSuperAdmin = token?.role === 'SUPERADMIN'
   const role = isSuperAdmin ? 'ADMIN' : 'MEMBRO'
@@ -121,114 +129,203 @@ export default function RegisterIgreja() {
   }
 
   return (
-    <div className="mt-[80px] flex w-full justify-center md:mt-[140px]">
-      <div className="my-10 flex min-h-screen w-[100vw] flex-col items-center md:rounded-xl">
-        <h1 className="mt-2 text-lg font-bold text-primary dark:text-secundary">
-          {isSuperAdmin ? 'Criar Novo Admin' : 'Registre-se'}
-        </h1>
-        <p className="mb-5 text-xl">preencha os campos abaixo</p>
-        <form
-          ref={formRef}
-          className="flex w-[75%] max-w-[500px] flex-col items-center gap-3 p-3 md:mb-5 border-[1px] border-zinc-400 dark:border-zinc-700 rounded-md py-5"
-          onSubmit={handleSubmit}
-        >
-          <label
-            htmlFor="avatarUrl"
-            className="flex cursor-pointer flex-col items-center gap-2 font-bold"
+    <div className="flex w-full justify-center items-center min-h-screen pt-28 md:pt-[185px] pb-8 px-4">
+      <div className="w-full max-w-md">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-primary to-primary/80 dark:from-secundary dark:to-secundary/80 px-6 py-8 text-center">
+            <div className="flex justify-center mb-2">
+              {theme === 'dark' ? (
+                <Image
+                  src="/img/logob.png"
+                  height={80}
+                  width={80}
+                  priority
+                  quality={100}
+                  alt="logo do site"
+                  className="object-contain"
+                />
+              ) : (
+                <Image
+                  src="/img/logob.png"
+                  height={80}
+                  width={80}
+                  priority
+                  quality={100}
+                  alt="logo do site"
+                  className="object-contain"
+                />
+              )}
+            </div>
+            <h1 className="text-2xl font-bold text-white mb-1">
+              {isSuperAdmin ? 'Criar Novo Admin' : 'Registre-se'}
+            </h1>
+            <p className="text-white/90 text-sm">Preencha os campos abaixo</p>
+          </div>
+
+          {/* Form */}
+          <form
+            ref={formRef}
+            className="flex w-full flex-col gap-5 p-6 md:p-8"
+            onSubmit={handleSubmit}
           >
-            <p className="flex gap-2 my-4">
-              <FaCameraRetro className="text-xl text-primary dark:text-secundary" />{' '}
-              Anexar foto de perfil (opcional)
-            </p>
-            {preview ? (
-              <Image
-                src={preview}
-                alt="Preview"
-                width={150}
-                height={150}
-                className="h-[150px] w-[150px] rounded-full border-2 border-primary dark:border-secundary mb-4 p-1 object-cover"
-              />
-            ) : (
-              <div className="h-[150px] w-[150px] rounded-full border-2 border-dashed border-zinc-400 mb-4 flex items-center justify-center text-zinc-500 text-sm p-2 text-center">
-                Pré-visualização da imagem
+            {error && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
+                <p className="text-sm font-medium text-red-800 dark:text-red-200 text-center">
+                  {error}
+                </p>
               </div>
             )}
-          </label>
 
-          <input
-            className="input"
-            type="text"
-            name="name"
-            required
-            placeholder={isSuperAdmin ? 'Nome do novo utilizador' : 'Seu nome'}
-            onChange={(e) => setName(e.target.value)}
-          />
+            {/* Profile Picture Upload */}
+            <div className="flex flex-col items-center gap-3">
+              <label
+                htmlFor="avatarUrl"
+                className="flex cursor-pointer flex-col items-center gap-2"
+              >
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <FaCameraRetro className="text-primary dark:text-secundary" />
+                  <span>Anexar foto de perfil (opcional)</span>
+                </div>
+                {preview ? (
+                  <Image
+                    src={preview}
+                    alt="Preview"
+                    width={150}
+                    height={150}
+                    className="h-[150px] w-[150px] rounded-full border-4 border-primary/30 dark:border-secundary/30 mb-2 p-1 object-cover shadow-lg"
+                  />
+                ) : (
+                  <div className="h-[150px] w-[150px] rounded-full border-2 border-dashed border-gray-300 dark:border-gray-600 mb-2 flex items-center justify-center text-gray-400 dark:text-gray-500 text-xs p-4 text-center bg-gray-50 dark:bg-gray-700/50">
+                    Pré-visualização da imagem
+                  </div>
+                )}
+              </label>
+              <input
+                className="hidden"
+                type="file"
+                name="avatarUrl"
+                id="avatarUrl"
+                accept="image/*"
+                onChange={onFileSelected}
+              />
+            </div>
 
-          <input
-            className="input"
-            type="text"
-            name="login"
-            required
-            placeholder={
-              isSuperAdmin ? 'Email do novo utilizador' : 'Seu email'
-            }
-            onChange={(e) => setLogin(e.target.value.toLowerCase())}
-          />
+            {/* Name Input */}
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                {isSuperAdmin ? 'Nome do novo utilizador' : 'Seu nome'}
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaUser className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  value={name}
+                  placeholder={
+                    isSuperAdmin ? 'Nome do novo utilizador' : 'Seu nome'
+                  }
+                  onChange={(e) => setName(e.target.value)}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
 
-          <input
-            className="input"
-            type="password"
-            name="password"
-            required
-            placeholder="Crie uma senha"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            {/* Email Input */}
+            <div className="space-y-2">
+              <label
+                htmlFor="login"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                {isSuperAdmin ? 'Email do novo utilizador' : 'Seu email'}
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaEnvelope className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="login"
+                  name="login"
+                  type="email"
+                  required
+                  value={login}
+                  placeholder={
+                    isSuperAdmin ? 'Email do novo utilizador' : 'seu@email.com'
+                  }
+                  onChange={(e) => setLogin(e.target.value.toLowerCase())}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
 
-          <label
-            htmlFor="igrejaId"
-            className="font-bold text-sm self-start ml-[13%] mt-2"
-          >
-            Igreja {isSuperAdmin ? '(Obrigatório)' : '(Opcional)'}
-          </label>
-          <IgrejaSelect
-            value={igrejaId}
-            onChange={setIgrejaId}
-            placeholder={
-              isSuperAdmin
-                ? 'Selecione uma igreja...'
-                : 'Nenhuma / Não sou membro'
-            }
-          />
+            {/* Password Input */}
+            <div className="space-y-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Senha
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaLock className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  value={password}
+                  placeholder="Crie uma senha"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secundary focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
 
-          {error && (
-            <p className="font-bold text-red-500 text-center">{error}</p>
-          )}
+            {/* Igreja Select */}
+            <div className="space-y-2">
+              <label
+                htmlFor="igrejaId"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Igreja {isSuperAdmin ? '(Obrigatório)' : '(Opcional)'}
+              </label>
+              <IgrejaSelect
+                value={igrejaId}
+                onChange={setIgrejaId}
+                placeholder={
+                  isSuperAdmin
+                    ? 'Selecione uma igreja...'
+                    : 'Nenhuma / Não sou membro'
+                }
+              />
+            </div>
 
-          <input
-            className="invisible h-0 w-0"
-            type="file"
-            name="avatarUrl"
-            id="avatarUrl"
-            onChange={onFileSelected}
-          />
-
-          <button
-            type="submit"
-            className="button flex items-center gap-2"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <FaSpinner className="animate-spin" />
-                Cadastrando...
-              </>
-            ) : isSuperAdmin ? (
-              'Criar Admin'
-            ) : (
-              'Cadastrar'
-            )}
-          </button>
-        </form>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-primary to-primary/90 dark:from-secundary dark:to-secundary/90 text-white font-semibold py-3 px-4 rounded-lg hover:from-primary/90 hover:to-primary dark:hover:from-secundary/90 dark:hover:to-secundary shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+            >
+              {isSubmitting ? (
+                <>
+                  <FaSpinner className="animate-spin" />
+                  <span>Cadastrando...</span>
+                </>
+              ) : (
+                <span>{isSuperAdmin ? 'Criar Admin' : 'Cadastrar'}</span>
+              )}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )
