@@ -225,14 +225,35 @@ export default function IgrejaPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Localização */}
-              <div>
+              <div className="lg:col-span-1">
                 <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
                   <FaMapMarkerAlt className="text-primary" />
                   Localização
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 pl-8">
-                  {igreja.endereco || 'Não informado'}
-                </p>
+                {igreja.endereco ? (
+                  <div className="space-y-3">
+                    <div className="h-48 w-full relative overflow-hidden rounded-lg">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        loading="lazy"
+                        allowFullScreen
+                        referrerPolicy="no-referrer-when-downgrade"
+                        src={`https://www.google.com/maps?q=${encodeURIComponent(igreja.endereco)}&output=embed`}
+                        className="absolute inset-0 w-full h-full"
+                      />
+                      <div className="absolute inset-0 bg-black/10 dark:bg-black/30 pointer-events-none rounded-lg" />
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {igreja.endereco}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-gray-600 dark:text-gray-400 pl-8">
+                    Não informado
+                  </p>
+                )}
               </div>
 
               {/* Dados Bancários */}

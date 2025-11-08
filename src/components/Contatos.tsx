@@ -7,11 +7,13 @@ export default function Contatos() {
   const { igrejas, loading } = useIgrejas({ showInactive: false })
 
   return (
-    <div>
-      <div className="m-2 flex w-full flex-wrap justify-center gap-5">
+    <div className="w-full">
+      <div className="flex flex-wrap justify-center gap-4">
         {!loading ? (
           igrejas && igrejas.length < 1 ? (
-            <p>Nenhuma igreja cadastrada.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              Nenhuma igreja cadastrada.
+            </p>
           ) : (
             igrejas.map((igreja) => (
               <Socials
