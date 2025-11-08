@@ -18,7 +18,7 @@ export default function ItemAgenda({ id, day, name, hour, igrejaId }: Agenda) {
       (token.role === 'ADMIN' && token.igrejaId === igrejaId))
 
   const dataBR = new Date(day).toLocaleDateString('pt-BR')
-  const [dia, mes, ano] = dataBR.split('/')
+  const [dia, ano] = dataBR.split('/')
   const diaNumero = dia
   const mesNome = new Date(day).toLocaleDateString('pt-BR', { month: 'short' })
 
@@ -31,7 +31,7 @@ export default function ItemAgenda({ id, day, name, hour, igrejaId }: Agenda) {
           <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -mr-16 -mt-16"></div>
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12"></div>
         </div>
-        
+
         {/* Padrão de grid de calendário */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-1/4 left-0 right-0 h-px bg-white"></div>
@@ -41,15 +41,15 @@ export default function ItemAgenda({ id, day, name, hour, igrejaId }: Agenda) {
           <div className="absolute top-0 bottom-0 left-2/4 w-px bg-white"></div>
           <div className="absolute top-0 bottom-0 left-3/4 w-px bg-white"></div>
         </div>
-        
+
         {/* Linha decorativa no topo */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-        
+
         {/* Ícone de calendário decorativo */}
         <div className="absolute top-3 right-3 opacity-20">
           <Calendar className="w-8 h-8 text-white" />
         </div>
-        
+
         {/* Conteúdo da data */}
         <div className="relative h-full flex flex-col items-center justify-center px-4">
           <div className="flex items-baseline gap-2 mb-1">
