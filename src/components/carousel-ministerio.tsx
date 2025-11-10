@@ -1,6 +1,12 @@
 'use client'
 
-import { FaArrowRight, FaPlus, FaMapMarkerAlt, FaEdit, FaTrash } from 'react-icons/fa'
+import {
+  FaArrowRight,
+  FaPlus,
+  FaMapMarkerAlt,
+  FaEdit,
+  FaTrash,
+} from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -168,7 +174,7 @@ export default function CarouselMinisterio({
                     <div className="relative bg-gradient-to-br from-white via-white to-gray-50 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200/60 dark:border-gray-700/60 transition-all duration-500 flex flex-col overflow-hidden group h-[460px]">
                       {/* Background decorativo animado */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secundary/5 dark:from-primary/10 dark:to-secundary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      
+
                       {/* Header com padrão igual ao card de eventos */}
                       <div className="relative h-40 bg-gradient-to-br from-primary via-primary/95 to-primary/90 dark:from-secundary dark:via-secundary/95 dark:to-secundary/90 overflow-hidden">
                         {/* Padrão decorativo sutil */}
@@ -205,10 +211,11 @@ export default function CarouselMinisterio({
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary dark:group-hover:text-secundary transition-colors duration-300">
                           {product.name}
                         </h3>
-                        
+
                         {/* Cargo com badges modernos */}
                         <div className="mb-4">
-                          {Array.isArray(product.cargo) && product.cargo.length > 0 ? (
+                          {Array.isArray(product.cargo) &&
+                          product.cargo.length > 0 ? (
                             <div className="flex flex-wrap gap-2 justify-center">
                               {product.cargo.map((cargo, index) => (
                                 <span
@@ -241,7 +248,7 @@ export default function CarouselMinisterio({
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Botões de ação */}
                       {podeEditarRemover(product) && (
                         <div className="absolute top-3 right-3 flex gap-2 z-20">
