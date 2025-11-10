@@ -1,6 +1,6 @@
 'use client'
 
-import { FaArrowRight, FaPlus } from 'react-icons/fa'
+import { FaArrowRight, FaPlus, FaMapMarkerAlt, FaEdit, FaTrash } from 'react-icons/fa'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -89,7 +89,7 @@ export default function CarouselMinisterio({
 
   const settings = {
     dots: true,
-    infinite: filteredMinisterios.length > 3,
+    infinite: filteredMinisterios.length > 2,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -165,80 +165,105 @@ export default function CarouselMinisterio({
               <Slider {...settings}>
                 {filteredMinisterios.map((product: Ministerio) => (
                   <div key={product.id} className="p-2">
-                    <div className="bg-white dark:bg-slate-800/50 rounded-lg shadow-md hover:shadow-xl border-[1px] border-zinc-300 dark:border-zinc-800 transition-shadow duration-300 flex flex-col h-[420px] overflow-hidden group relative">
-                      <div className="h-3/5 relative overflow-hidden flex items-center justify-center">
-                        <Image
-                          src={product.avatarUrl || '/img/Placeholder.png'}
-                          width={160}
-                          height={160}
-                          alt={product.name || 'Líder'}
-                          quality={100}
-                          className="relative z-10 h-40 w-40 object-cover object-center rounded-full border-4 border-primary mx-auto mt-6 p-1 dark:border-secundary group-hover:scale-105 transition-transform duration-300"
-                        />
+                    <div className="relative bg-gradient-to-br from-white via-white to-gray-50 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200/60 dark:border-gray-700/60 transition-all duration-500 flex flex-col overflow-hidden group h-[460px]">
+                      {/* Background decorativo animado */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secundary/5 dark:from-primary/10 dark:to-secundary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      
+                      {/* Header com padrão igual ao card de eventos */}
+                      <div className="relative h-40 bg-gradient-to-br from-primary via-primary/95 to-primary/90 dark:from-secundary dark:via-secundary/95 dark:to-secundary/90 overflow-hidden">
+                        {/* Padrão decorativo sutil */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -mr-16 -mt-16"></div>
+                          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12"></div>
+                        </div>
                       </div>
-                      <div className="border-b-[1px] border-zinc-300 dark:border-zinc-800 w-[70%] mx-auto"></div>
-                      <div className="p-4 flex flex-col flex-grow text-center items-center justify-around">
-                        <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+
+                      {/* Avatar em destaque */}
+                      <div className="relative -mt-20 flex justify-center mb-4 z-10">
+                        <div className="relative group/avatar">
+                          {/* Borda com gradiente */}
+                          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secundary rounded-full p-0.5">
+                            <div className="w-full h-full bg-white dark:bg-slate-800 rounded-full"></div>
+                          </div>
+                          {/* Imagem */}
+                          <div className="relative">
+                            <Image
+                              src={product.avatarUrl || '/img/Placeholder.png'}
+                              width={130}
+                              height={130}
+                              alt={product.name || 'Líder'}
+                              quality={100}
+                              className="relative w-32 h-32 object-cover rounded-full border-4 border-white dark:border-slate-800 group-hover/avatar:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Conteúdo */}
+                      <div className="px-5 pb-6 flex flex-col flex-grow text-center relative z-10">
+                        {/* Nome */}
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary dark:group-hover:text-secundary transition-colors duration-300">
                           {product.name}
                         </h3>
-                        <p className="text-base text-primary dark:text-secundary font-semibold">
-                          {Array.isArray(product.cargo) &&
-                          product.cargo.length > 0
-                            ? product.cargo
-                                .map((c) => c.replace(/_/g, ' '))
-                                .join(', ')
-                            : ''}
-                        </p>
-                        <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                          {igrejas.find(
-                            (igreja) => igreja.id === product.igrejaId,
-                          )?.nome || 'Igreja não encontrada'}
-                        </span>
+                        
+                        {/* Cargo com badges modernos */}
+                        <div className="mb-4">
+                          {Array.isArray(product.cargo) && product.cargo.length > 0 ? (
+                            <div className="flex flex-wrap gap-2 justify-center">
+                              {product.cargo.map((cargo, index) => (
+                                <span
+                                  key={index}
+                                  className="inline-flex items-center px-3.5 py-1.5 bg-gradient-to-r from-primary/10 to-secundary/10 dark:from-primary/20 dark:to-secundary/20 text-primary dark:text-secundary font-bold text-xs uppercase tracking-wide rounded-full border border-primary/20 dark:border-secundary/30 shadow-sm backdrop-blur-sm"
+                                >
+                                  {cargo.replace(/_/g, ' ')}
+                                </span>
+                              ))}
+                            </div>
+                          ) : null}
+                        </div>
+
+                        {/* Divisor elegante */}
+                        <div className="flex items-center justify-center my-4">
+                          <div className="h-px w-20 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+                          <div className="mx-2 w-1.5 h-1.5 rounded-full bg-primary/40 dark:bg-secundary/40"></div>
+                          <div className="h-px w-20 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+                        </div>
+
+                        {/* Localização */}
+                        <div className="mt-auto pt-2">
+                          <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-gray-100/80 dark:bg-gray-700/60 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-600/50 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+                            <FaMapMarkerAlt className="w-4 h-4 text-primary dark:text-secundary flex-shrink-0" />
+                            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                              {igrejas.find(
+                                (igreja) => igreja.id === product.igrejaId,
+                              )?.nome || 'Igreja não encontrada'}
+                            </span>
+                          </div>
+                        </div>
                       </div>
+                      
+                      {/* Botões de ação */}
                       {podeEditarRemover(product) && (
-                        <div className="absolute top-2 left-2 flex gap-2 z-10">
+                        <div className="absolute top-3 right-3 flex gap-2 z-20">
                           <button
                             onClick={() => {
                               setOpenEdit(product.id)
                               setSelectedProduct(product)
                             }}
-                            className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-blue-600 shadow-md transition"
+                            className="p-2.5 rounded-xl bg-white/90 dark:bg-slate-700/90 backdrop-blur-sm hover:bg-white dark:hover:bg-slate-600 text-blue-600 dark:text-blue-400 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-blue-200/50 dark:border-blue-600/50"
                             title="Editar"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                              <path
-                                fillRule="evenodd"
-                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                            <FaEdit className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => {
                               setShowModal(product.id)
                               setSelectedProduct(product)
                             }}
-                            className="p-2 rounded-full bg-white/80 dark:bg-slate-700/80 hover:bg-white text-red-600 shadow-md transition"
+                            className="p-2.5 rounded-xl bg-white/90 dark:bg-slate-700/90 backdrop-blur-sm hover:bg-white dark:hover:bg-slate-600 text-red-600 dark:text-red-400 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-red-200/50 dark:border-red-600/50"
                             title="Remover"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                            <FaTrash className="w-4 h-4" />
                           </button>
                         </div>
                       )}

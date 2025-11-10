@@ -5,6 +5,7 @@ import { useDataMinisterio, useLocal, useSearch } from '@/store/useStore'
 import ItemMinisterio from './item-ministerio'
 import SkeletonNew from './skeleton/SkeletonNew'
 import { Ministerio } from '@/data/types/ministerio'
+import { useIgrejas } from '@/hooks/useIgrejas'
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -16,6 +17,7 @@ export default function Ministerioo() {
   const { dataMinisterio, setDataMinisterio } = useDataMinisterio()
   const { search } = useSearch()
   const { local } = useLocal()
+  const { igrejas } = useIgrejas({ showInactive: false })
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -24,27 +26,39 @@ export default function Ministerioo() {
   const [itemsPerPage, setItemsPerPage] = useState(10)
 
   const fetchMinisterio = async (page: number, perPage: number) => {
-    const offset = (page - 1) * perPage
     setLoading(page === 1)
     setLoadingMore(page > 1)
 
     try {
-      const response = await fetch(
-        `/api/ministerio?offset=${offset}&limit=${perPage}`,
-      )
-      if (!response.ok) throw new Error('Erro ao buscar ministérios')
+      // Usar a mesma API do carousel
+      const response = await fetch(`/api/auth/register`, {
+        cache: 'no-store',
+      })
+      if (!response.ok) throw new Error('Erro ao buscar membros')
       const data = await response.json()
 
+      // Filtrar apenas membros com cargo
+      const membrosComCargo = Array.isArray(data)
+        ? data.filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
+        : []
+
+      // Aplicar paginação
+      const startIndex = (page - 1) * perPage
+      const endIndex = startIndex + perPage
+      const paginatedData = membrosComCargo.slice(startIndex, endIndex)
+
       if (page === 1) {
-        setDataMinisterio(Array.isArray(data) ? data : [])
+        setDataMinisterio(paginatedData)
       } else {
-        setDataMinisterio((prevData: Ministerio[]) => [...prevData, ...data])
+        setDataMinisterio((prevData: Ministerio[]) => [
+          ...prevData,
+          ...paginatedData,
+        ])
       }
 
       // Calcular total de páginas
-      const totalItems = data.length + (page - 1) * perPage
-      setTotalItems(totalItems)
-      setTotalPages(Math.ceil(totalItems / perPage))
+      setTotalItems(membrosComCargo.length)
+      setTotalPages(Math.ceil(membrosComCargo.length / perPage))
 
       setCurrentPage(page)
     } catch (err) {
@@ -62,7 +76,7 @@ export default function Ministerioo() {
     if (!search) {
       fetchMinisterio(1, itemsPerPage)
     }
-  }, [setDataMinisterio, local, itemsPerPage, search])
+  }, [local, itemsPerPage, search])
 
   const loadMore = () => {
     if (!loadingMore && currentPage < totalPages && !search) {
@@ -181,9 +195,12 @@ export default function Ministerioo() {
     return buttons
   }
 
+  // Encontrar a igreja pelo slug
+  const currentIgreja = igrejas.find((igreja) => igreja.slug === local)
+
   const filteredUsuarios = dataMinisterio
     .filter((item: Ministerio) => item.cargo && item.cargo.length > 0)
-    .filter((item: Ministerio) => item.igrejaId === local)
+    .filter((item: Ministerio) => item.igrejaId === currentIgreja?.id)
 
   return (
     <div className="flex flex-col items-center self-center mb-4 w-full">

@@ -51,16 +51,7 @@ export default function QuemSomos() {
             </div>
           ) : (
             <>
-              {dataSobreLider.length > 0 ? (
-                <LiderQuemSomos dataSobreLider={dataSobreLider} />
-              ) : (
-                <div className="flex flex-col items-center">
-                  <LiderQuemSomos dataSobreLider={dataSobreLider} />{' '}
-                  <p className="text-gray-500 text-sm mb-4">
-                    Nenhum líder adicionado.
-                  </p>
-                </div>
-              )}
+              <LiderQuemSomos dataSobreLider={dataSobreLider} />
 
               {dataSobre.length > 0 ? (
                 <ContentQuemSomos dataSobre={dataSobre} />

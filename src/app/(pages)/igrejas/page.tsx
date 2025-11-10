@@ -24,7 +24,7 @@ export default function Igrejas() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 mt-20">
+      <main className="min-h-screen bg-bglight dark:bg-bgdark py-8 mt-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -35,16 +35,23 @@ export default function Igrejas() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 mt-20">
+    <main className="min-h-screen bg-bglight dark:bg-bgdark py-8 mt-20">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-            Nossas Igrejas
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Conheça nossos pontos de encontro e participe das atividades em cada
-            localidade
-          </p>
+        <div className="mb-12">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200/50 dark:border-gray-700/50 p-6 md:p-8">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-secundary/10 dark:text-secundary">
+                <FaChurch className="w-6 h-6" />
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
+                Nossas Igrejas
+              </h1>
+            </div>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Conheça nossos pontos de encontro e participe das atividades em
+              cada localidade
+            </p>
+          </div>
         </div>
 
         {igrejas.length === 0 ? (
@@ -62,7 +69,7 @@ export default function Igrejas() {
             {igrejas.map((igreja) => (
               <div
                 key={igreja.id}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col min-h-[600px]"
               >
                 {/* Header da Igreja */}
                 <div className="bg-gradient-to-r from-primary to-secundary p-6 text-white">
@@ -77,7 +84,7 @@ export default function Igrejas() {
                   )}
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   {/* Endereço */}
                   {igreja.endereco && (
                     <div className="mb-4">
@@ -108,76 +115,64 @@ export default function Igrejas() {
                   )}
 
                   {/* Dados Bancários */}
-                  {(igreja.banco || igreja.conta || igreja.agencia) && (
-                    <div className="mb-4">
-                      <h3 className="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
-                        <Landmark className="text-primary" />
-                        Dados Bancários
-                      </h3>
-                      <div className="space-y-2">
-                        {igreja.banco && (
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              Banco:
-                            </span>
-                            <span className="text-sm font-medium text-gray-800 dark:text-white">
-                              {igreja.banco}
-                            </span>
-                          </div>
-                        )}
-                        {igreja.conta && (
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              Conta:
-                            </span>
-                            <span className="text-sm font-medium text-gray-800 dark:text-white">
-                              {igreja.conta}
-                            </span>
-                          </div>
-                        )}
-                        {igreja.agencia && (
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              Agência:
-                            </span>
-                            <span className="text-sm font-medium text-gray-800 dark:text-white">
-                              {igreja.agencia}
-                            </span>
-                          </div>
-                        )}
-                        {igreja.nomebanco && (
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              Titular:
-                            </span>
-                            <span className="text-sm font-medium text-gray-800 dark:text-white">
-                              {igreja.nomebanco}
-                            </span>
-                          </div>
-                        )}
+                  <div className="mb-4">
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
+                      <Landmark className="text-primary" />
+                      Dados Bancários
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Banco:
+                        </span>
+                        <span className="text-sm font-medium text-gray-800 dark:text-white">
+                          {igreja.banco || 'Não informado'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Conta:
+                        </span>
+                        <span className="text-sm font-medium text-gray-800 dark:text-white">
+                          {igreja.conta || 'Não informado'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Agência:
+                        </span>
+                        <span className="text-sm font-medium text-gray-800 dark:text-white">
+                          {igreja.agencia || 'Não informado'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Titular:
+                        </span>
+                        <span className="text-sm font-medium text-gray-800 dark:text-white">
+                          {igreja.nomebanco || 'Não informado'}
+                        </span>
                       </div>
                     </div>
-                  )}
+                  </div>
 
                   {/* PIX */}
-                  {igreja.pix && (
-                    <div className="mb-4">
-                      <h3 className="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
-                        <KeyRound className="text-primary" />
-                        Chave PIX
-                      </h3>
-                      <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <p className="text-sm font-medium text-gray-800 dark:text-white">
-                              {igreja.pix}
-                            </p>
-                            {igreja.nomepix && (
-                              <p className="text-xs text-gray-600 dark:text-gray-400">
-                                {igreja.nomepix}
-                              </p>
-                            )}
-                          </div>
+                  <div className="mb-4">
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
+                      <KeyRound className="text-primary" />
+                      Chave PIX
+                    </h3>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="text-sm font-medium text-gray-800 dark:text-white">
+                            {igreja.pix || 'Não informado'}
+                          </p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            {igreja.nomepix || 'Não informado'}
+                          </p>
+                        </div>
+                        {igreja.pix && (
                           <button
                             onClick={() => handleCopy(igreja.pix!, igreja.id)}
                             className="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors"
@@ -185,18 +180,18 @@ export default function Igrejas() {
                           >
                             <Copy className="w-4 h-4" />
                           </button>
-                        </div>
-                        {copiedId === igreja.id && (
-                          <p className="text-xs text-green-600 mt-1">
-                            ✓ PIX copiado!
-                          </p>
                         )}
                       </div>
+                      {copiedId === igreja.id && (
+                        <p className="text-xs text-green-600 mt-1">
+                          ✓ PIX copiado!
+                        </p>
+                      )}
                     </div>
-                  )}
+                  </div>
 
                   {/* Links para páginas específicas */}
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
                     <div className="grid grid-cols-1 gap-2">
                       <Link
                         href={`/igrejas/${igreja.slug}`}

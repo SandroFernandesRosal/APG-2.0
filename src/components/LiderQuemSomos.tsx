@@ -2,11 +2,10 @@
 import Image from 'next/image'
 import { Suspense, useState } from 'react'
 import { useToken } from '@/hooks/useToken'
-import AddSobreLider from './crud/AddSobreLider'
 import RemoveSobreLider from './crud/RemoveSobreLider'
 import EditSobreLider from './crud/EditSobreLider'
 import { SobreLider } from '@/data/types/sobrelider'
-import { FaCameraRetro, FaPlus } from 'react-icons/fa'
+import { FaCameraRetro } from 'react-icons/fa'
 
 interface LiderQuemSomosProps {
   dataSobreLider: SobreLider[]
@@ -15,32 +14,11 @@ interface LiderQuemSomosProps {
 export default function LiderQuemSomos({
   dataSobreLider,
 }: LiderQuemSomosProps) {
-  const [open, setOpen] = useState(false)
   const [openEdit, setOpenEdit] = useState<string | null>(null)
   const token = useToken()
 
   return (
     <Suspense fallback={<div>Carregando...</div>}>
-      {token?.role === 'SUPERADMIN' && (
-        <>
-          {open === false && (
-            <button
-              className="!flex !items-center !gap-2 !px-6 !py-3 !bg-primary dark:!bg-secundary !text-white !font-semibold !rounded-lg hover:!bg-primary/90 dark:hover:!bg-secundary/90 !transition-all !duration-200 !shadow-lg hover:!shadow-xl !transform hover:!scale-105 !mb-4"
-              onClick={() => setOpen(true)}
-            >
-              <FaPlus className="text-sm" />
-              Adicionar líder
-            </button>
-          )}
-
-          {open && (
-            <div className="md:min-w-[35%]">
-              <AddSobreLider setOpen={setOpen} />
-            </div>
-          )}
-        </>
-      )}
-
       <div className=" flex flex-wrap justify-center gap-4 w-full">
         {dataSobreLider &&
           dataSobreLider.map((product) => (
