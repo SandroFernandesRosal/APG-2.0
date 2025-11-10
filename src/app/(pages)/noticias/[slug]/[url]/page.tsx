@@ -82,22 +82,24 @@ export default function NoticiaPage() {
       <div className="max-w-4xl mx-auto px-4">
         <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           {noticia.coverUrl && (
-            <div className="relative h-96 w-full">
+            <div className="relative w-full">
               <Image
                 src={noticia.coverUrl}
                 alt={noticia.title}
-                fill
-                className="object-cover"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
                 priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 896px"
               />
             </div>
           )}
 
           {noticia.videoUrl && !noticia.coverUrl && (
-            <div className="relative h-96 w-full">
+            <div className="relative w-full aspect-video">
               <video
                 src={noticia.videoUrl}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 controls
                 preload="metadata"
               />

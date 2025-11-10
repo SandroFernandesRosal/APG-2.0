@@ -187,6 +187,32 @@ height: 100vh !important;
   }
 }
 
+/* Animação de zoom automático para hero banner (afastando a imagem, sempre preenchendo) */
+@keyframes slow-zoom {
+  0%, 100% {
+    transform: scale(1.15);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 20s ease-in-out infinite;
+  animation-fill-mode: both;
+  will-change: transform;
+}
+
+/* Scrollbar hide para thumbnails */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 
 @media (max-width: 897px) {
   table, thead, tbody, th, td, tr {

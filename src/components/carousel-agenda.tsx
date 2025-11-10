@@ -100,7 +100,7 @@ export default function CarouselAgenda({ title }: { title: string }) {
 
   const settings = {
     dots: true,
-    infinite: filteredAgenda.length > 3,
+    infinite: filteredAgenda.length > 2,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,

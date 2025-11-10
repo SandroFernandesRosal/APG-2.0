@@ -29,10 +29,10 @@ export default function CarouselDoacao() {
 
   const settings = {
     dots: true,
-    infinite: igrejas.length > 3,
+    infinite: igrejas.length > 2,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     autoplay: true,
     initialSlide: 0,
     arrows: true,
@@ -41,7 +41,7 @@ export default function CarouselDoacao() {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
           infinite: igrejas.length > 2,
           dots: true,
           arrows: true,
@@ -126,7 +126,7 @@ export default function CarouselDoacao() {
                 {igrejas.map((igreja) => (
                   <div
                     key={igreja.id}
-                    className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-lg border border-zinc-300 dark:border-zinc-800 min-h-[420px]  w-full p-0 overflow-hidden group transition-all"
+                    className="relative flex flex-col justify-between bg-gradient-to-br from-primary/10 via-white to-secundary/10 dark:from-bgdark dark:via-slate-800 dark:to-bgdarksecundary rounded-2xl shadow-lg border border-zinc-300 dark:border-zinc-800 min-h-[420px] w-full max-w-[320px] mx-auto p-0 overflow-hidden group transition-all"
                   >
                     <div className="flex items-center gap-2 mt-6 mb-2 px-6">
                       <Church className="w-7 h-7 text-primary dark:text-secundary" />
