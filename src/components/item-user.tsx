@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import LogoutIgreja from './LogoutIgreja'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { BiNews, BiHomeHeart, BiBook } from 'react-icons/bi'
 import { AiOutlineSchedule } from 'react-icons/ai'
@@ -37,12 +37,26 @@ export default function ItemUser({
   handleClick,
 }: userProps) {
   const [open, setOpen] = useState(false)
+  const [isLoadingToken, setIsLoadingToken] = useState(true)
   const { theme, setTheme } = useTheme()
   const token = useToken()
 
   // Usar o estado controlado se fornecido, senão usar o estado interno
   const modalOpen = isOpen !== undefined ? isOpen : open
   const toggleModal = onToggle || (() => setOpen(!open))
+
+  // Mostrar loading quando o modal abrir
+  useEffect(() => {
+    if (modalOpen) {
+      setIsLoadingToken(true)
+      // Aguardar um tempo mínimo para garantir que o loading seja visível
+      const timer = setTimeout(() => {
+        setIsLoadingToken(false)
+      }, 800)
+
+      return () => clearTimeout(timer)
+    }
+  }, [modalOpen])
 
   const handleThemeChange = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
@@ -267,153 +281,174 @@ export default function ItemUser({
               </div>
 
               {/* User Actions - Apenas para usuários autenticados */}
-              {token && (
+              {/* Sempre mostrar a seção de configurações, com loading ou conteúdo */}
+              {isLoadingToken || !token ? (
                 <div className="p-4">
                   <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
                     Configurações
                   </h3>
                   <div className="grid grid-cols-2 gap-2">
-                    <Link
-                      href={'/perfil'}
-                      className="flex flex-col items-center justify-center p-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                    >
-                      <svg
-                        className="w-5 h-5 mb-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    {/* Skeleton loading para os botões */}
+                    {[...Array(4)].map((_, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-col items-center justify-center p-2 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                      <span className="text-xs font-bold">Perfil</span>
-                    </Link>
-
-                    {(role === 'SUPERADMIN' || role === 'ADMIN') && (
-                      <>
-                        <Link
-                          href={'/usuarios'}
-                          className="flex flex-col items-center justify-center p-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                          <svg
-                            className="w-5 h-5 mb-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
-                            />
-                          </svg>
-                          <span className="text-xs font-bold">Usuários</span>
-                        </Link>
-                        <Link
-                          href={'/admin/igrejas'}
-                          className="flex flex-col items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                          <svg
-                            className="w-5 h-5 mb-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                            />
-                          </svg>
-                          <span className="text-xs font-bold">Igrejas</span>
-                        </Link>
-                      </>
-                    )}
-
-                    {role === 'SUPERADMIN' && (
-                      <>
-                        <Link
-                          href={'/admin/historico'}
-                          className="flex flex-col items-center justify-center p-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                          <svg
-                            className="w-5 h-5 mb-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <span className="text-xs font-bold">Histórico</span>
-                        </Link>
-                        <Link
-                          href={'/manual'}
-                          className="flex flex-col items-center justify-center p-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                          <svg
-                            className="w-5 h-5 mb-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                            />
-                          </svg>
-                          <span className="text-xs font-bold">Manual</span>
-                        </Link>
-                      </>
-                    )}
-
-                    <LogoutIgreja
-                      className="flex flex-col items-center justify-center p-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
-                      showIcon={true}
-                    />
-
-                    <div
-                      className="flex flex-col items-center justify-center p-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-white rounded-lg transition-colors cursor-pointer border border-gray-200 dark:border-transparent group"
-                      onClick={handleThemeChange}
-                    >
-                      <div className="w-6 h-6 mb-1 flex items-center justify-center">
-                        {theme === 'dark' ? (
-                          <svg
-                            className="w-6 h-6 text-yellow-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle cx="12" cy="12" r="5" />
-                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                          </svg>
-                        ) : (
-                          <svg
-                            className="w-6 h-6 text-purple-800"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 mb-1 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                        <div className="h-3 w-16 bg-gray-300 dark:bg-gray-600 rounded"></div>
                       </div>
-                      <span className="text-xs font-bold">Tema</span>
-                    </div>
+                    ))}
                   </div>
                 </div>
+              ) : (
+                token && (
+                  <div className="p-4">
+                    <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
+                      Configurações
+                    </h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link
+                        href={'/perfil'}
+                        className="flex flex-col items-center justify-center p-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                      >
+                        <svg
+                          className="w-5 h-5 mb-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          />
+                        </svg>
+                        <span className="text-xs font-bold">Perfil</span>
+                      </Link>
+
+                      {(role === 'SUPERADMIN' || role === 'ADMIN') && (
+                        <>
+                          <Link
+                            href={'/usuarios'}
+                            className="flex flex-col items-center justify-center p-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                          >
+                            <svg
+                              className="w-5 h-5 mb-1"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                              />
+                            </svg>
+                            <span className="text-xs font-bold">Usuários</span>
+                          </Link>
+                          <Link
+                            href={'/admin/igrejas'}
+                            className="flex flex-col items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                          >
+                            <svg
+                              className="w-5 h-5 mb-1"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                              />
+                            </svg>
+                            <span className="text-xs font-bold">Igrejas</span>
+                          </Link>
+                        </>
+                      )}
+
+                      {role === 'SUPERADMIN' && (
+                        <>
+                          <Link
+                            href={'/admin/historico'}
+                            className="flex flex-col items-center justify-center p-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                          >
+                            <svg
+                              className="w-5 h-5 mb-1"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span className="text-xs font-bold">Histórico</span>
+                          </Link>
+                          <Link
+                            href={'/manual'}
+                            className="flex flex-col items-center justify-center p-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                          >
+                            <svg
+                              className="w-5 h-5 mb-1"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                              />
+                            </svg>
+                            <span className="text-xs font-bold">Manual</span>
+                          </Link>
+                        </>
+                      )}
+
+                      <LogoutIgreja
+                        className="flex flex-col items-center justify-center p-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                        showIcon={true}
+                      />
+
+                      <div
+                        className="flex flex-col items-center justify-center p-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-white rounded-lg transition-colors cursor-pointer border border-gray-200 dark:border-transparent group"
+                        onClick={handleThemeChange}
+                      >
+                        <div className="w-6 h-6 mb-1 flex items-center justify-center">
+                          {theme === 'dark' ? (
+                            <svg
+                              className="w-6 h-6 text-yellow-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle cx="12" cy="12" r="5" />
+                              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                            </svg>
+                          ) : (
+                            <svg
+                              className="w-6 h-6 text-purple-800"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                            </svg>
+                          )}
+                        </div>
+                        <span className="text-xs font-bold">Tema</span>
+                      </div>
+                    </div>
+                  </div>
+                )
               )}
 
               {/* Footer Section */}
