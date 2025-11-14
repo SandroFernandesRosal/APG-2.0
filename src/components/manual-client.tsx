@@ -9,7 +9,11 @@ import {
   FaList,
   FaChevronRight,
   FaTimes,
+  FaDownload,
 } from 'react-icons/fa'
+import html2pdf from 'html2pdf.js'
+
+import jsPDF from 'jspdf'
 
 interface ManualSection {
   id: string
@@ -24,11 +28,12 @@ interface ManualClientProps {
 }
 
 export default function ManualClient({ manualContent }: ManualClientProps) {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [activeSection, setActiveSection] = useState<string>('')
   const [sections, setSections] = useState<ManualSection[]>([])
   const [showSidebar, setShowSidebar] = useState(true)
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
   const router = useRouter()
   const token = useToken()
 
@@ -38,7 +43,12 @@ export default function ManualClient({ manualContent }: ManualClientProps) {
         router.push('/login')
         return
       }
-      parseManual(manualContent)
+      setLoading(true)
+      // Usar setTimeout para garantir que o loading seja renderizado
+      setTimeout(() => {
+        parseManual(manualContent)
+        setLoading(false)
+      }, 100)
     }
   }, [token, router, manualContent])
 
@@ -129,6 +139,17 @@ export default function ManualClient({ manualContent }: ManualClientProps) {
       }
       // Conteúdo
       else {
+        // Pular linhas do índice
+        if (
+          trimmedLine.includes('📋 Índice') ||
+          trimmedLine === '## 📋 Índice' ||
+          trimmedLine.match(/^\d+\.\s*\[/) ||
+          (trimmedLine.includes('Guia Completo') &&
+            trimmedLine.includes('Usuários'))
+        ) {
+          return
+        }
+
         if (currentSubsection) {
           subsectionContent.push(line)
         } else if (currentSection) {
@@ -341,6 +362,219 @@ export default function ManualClient({ manualContent }: ManualClientProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [sections])
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const stripHTML = (_html: string) => {
+    const tmp = document.createElement('div')
+    tmp.innerHTML = _html
+
+    // Adicionar espaços antes de elementos de bloco para preservar separação
+    const blockElements = tmp.querySelectorAll(
+      'p, div, li, h1, h2, h3, h4, h5, h6',
+    )
+    blockElements.forEach((el) => {
+      el.insertAdjacentText('beforebegin', ' ')
+      el.insertAdjacentText('afterend', ' ')
+    })
+
+    // Substituir BR por espaço
+    const brElements = tmp.querySelectorAll('br')
+    brElements.forEach((br) => {
+      br.replaceWith(document.createTextNode(' '))
+    })
+
+    // Extrair texto
+    let text = tmp.textContent || tmp.innerText || ''
+
+    // Normalizar espaços múltiplos em espaços únicos
+    text = text.replace(/[ \t\n\r]+/g, ' ')
+
+    return text.trim()
+  }
+
+  const downloadPDF = async () => {
+    setIsGeneratingPDF(true)
+    // Encontrar o elemento que contém o conteúdo do manual
+    const contentElement = document.querySelector('main.flex-1') as HTMLElement
+
+    if (!contentElement) {
+      alert('Erro ao encontrar conteúdo do manual.')
+      setIsGeneratingPDF(false)
+      return
+    }
+
+    // Carregar logo
+    let logoData: string | null = null
+    let logoWidth = 0
+    const logoHeight = 15
+
+    try {
+      const logoUrl = '/img/logo.png'
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+
+      await new Promise((resolve, reject) => {
+        img.onload = resolve
+        img.onerror = reject
+        img.src = logoUrl
+      })
+
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      canvas.width = img.width
+      canvas.height = img.height
+      ctx?.drawImage(img, 0, 0)
+      logoData = canvas.toDataURL('image/png')
+      logoWidth = (img.width / img.height) * logoHeight
+    } catch (error) {
+      console.warn('Erro ao carregar logo:', error)
+    }
+
+    // Configurações para o PDF
+    // Margem superior maior para logo (15mm) + margem padrão
+    const opt = {
+      margin: [15, 10, 10, 10] as [number, number, number, number], // top, right, bottom, left - margem inferior menor
+      filename: 'Manual_do_Sistema_APG_2.0.pdf',
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        windowHeight: contentElement.scrollHeight,
+        windowWidth: contentElement.scrollWidth,
+        letterRendering: true,
+      },
+      jsPDF: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait' as const,
+      },
+      pagebreak: {
+        mode: ['avoid-all', 'css', 'legacy'],
+        before: '.page-break-before',
+        after: '.page-break-after',
+        avoid: [
+          '.manual-content p',
+          '.manual-content li',
+          '.manual-content h1',
+          '.manual-content h2',
+          '.manual-content h3',
+          '.manual-content h4',
+          '.manual-content h5',
+          '.manual-content h6',
+        ],
+      },
+    }
+
+    // Adicionar estilos CSS para evitar quebras de página
+    const style = document.createElement('style')
+    style.id = 'pdf-pagebreak-styles'
+    style.textContent = `
+      .manual-content p {
+        page-break-inside: avoid !important;
+        break-inside: avoid-page !important;
+        orphans: 4 !important;
+        widows: 4 !important;
+        margin-bottom: 0.5em !important;
+      }
+      .manual-content li {
+        page-break-inside: avoid !important;
+        break-inside: avoid-page !important;
+        orphans: 3 !important;
+        widows: 3 !important;
+      }
+      .manual-content ul,
+      .manual-content ol {
+        page-break-inside: avoid !important;
+        break-inside: avoid-page !important;
+        margin-bottom: 1em !important;
+      }
+      .manual-content h1,
+      .manual-content h2,
+      .manual-content h3,
+      .manual-content h4,
+      .manual-content h5,
+      .manual-content h6 {
+        page-break-after: avoid !important;
+        break-after: avoid-page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid-page !important;
+        margin-top: 1em !important;
+        margin-bottom: 0.5em !important;
+      }
+      .manual-content > div {
+        page-break-inside: avoid !important;
+        break-inside: avoid-page !important;
+      }
+      .manual-content {
+        page-break-inside: auto !important;
+      }
+    `
+    // Remover estilo anterior se existir
+    const existingStyle = document.getElementById('pdf-pagebreak-styles')
+    if (existingStyle) {
+      existingStyle.remove()
+    }
+    document.head.appendChild(style)
+
+    try {
+      // Gerar PDF usando html2pdf e adicionar logo/números usando callback
+      await html2pdf()
+        .set(opt)
+        .from(contentElement)
+        .toPdf()
+        .get('pdf')
+        .then((pdf: jsPDF) => {
+          // @ts-expect-error - getNumberOfPages existe mas não está na tipagem
+          const totalPages = pdf.getNumberOfPages()
+          const pageWidth = pdf.internal.pageSize.getWidth()
+          const pageHeight = pdf.internal.pageSize.getHeight()
+
+          // Adicionar logo e número de página em cada página
+          for (let i = 1; i <= totalPages; i++) {
+            pdf.setPage(i)
+
+            // Adicionar logo no topo (centralizado) - menor para não ocupar muito espaço
+            if (logoData) {
+              const logoX = (pageWidth - logoWidth) / 2
+              // Logo menor (10mm ao invés de 15mm) posicionado em 2mm do topo
+              const smallLogoHeight = 10
+              const smallLogoWidth = (logoWidth / logoHeight) * smallLogoHeight
+              pdf.addImage(
+                logoData,
+                'PNG',
+                logoX,
+                2,
+                smallLogoWidth,
+                smallLogoHeight,
+              )
+            }
+
+            // Adicionar número da página no rodapé (centralizado)
+            pdf.setFontSize(10)
+            pdf.setTextColor(100, 100, 100)
+            pdf.setFont('helvetica', 'normal')
+            const pageText = `Página ${i} de ${totalPages}`
+            const textWidth = pdf.getTextWidth(pageText)
+            pdf.text(pageText, (pageWidth - textWidth) / 2, pageHeight - 8)
+          }
+
+          // Salvar PDF
+          pdf.save('Manual_do_Sistema_APG_2.0.pdf')
+          return pdf
+        })
+    } catch (error) {
+      console.error('Erro ao gerar PDF:', error)
+      alert('Erro ao gerar PDF. Por favor, tente novamente.')
+    } finally {
+      // Remover estilo após gerar PDF ou em caso de erro
+      if (document.head.contains(style)) {
+        document.head.removeChild(style)
+      }
+      setIsGeneratingPDF(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bglight dark:bg-bgdark">
@@ -371,17 +605,30 @@ export default function ManualClient({ manualContent }: ManualClientProps) {
                 </p>
               </div>
             </div>
-            <button
-              onClick={() => setShowSidebar(!showSidebar)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              aria-label="Toggle sidebar"
-            >
-              {showSidebar ? (
-                <FaTimes className="text-xl text-gray-700 dark:text-gray-300" />
-              ) : (
-                <FaList className="text-xl text-gray-700 dark:text-gray-300" />
-              )}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={downloadPDF}
+                disabled={isGeneratingPDF}
+                className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                title="Baixar manual em PDF"
+              >
+                <FaDownload className="text-lg" />
+                <span className="hidden sm:inline">
+                  {isGeneratingPDF ? 'Gerando PDF...' : 'Baixar PDF'}
+                </span>
+              </button>
+              <button
+                onClick={() => setShowSidebar(!showSidebar)}
+                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                aria-label="Toggle sidebar"
+              >
+                {showSidebar ? (
+                  <FaTimes className="text-xl text-gray-700 dark:text-gray-300" />
+                ) : (
+                  <FaList className="text-xl text-gray-700 dark:text-gray-300" />
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Search Bar */}
@@ -530,7 +777,14 @@ export default function ManualClient({ manualContent }: ManualClientProps) {
           {/* Main Content */}
           <main className="flex-1 min-w-0">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 md:p-8">
-              {filteredSections.length === 0 ? (
+              {loading ? (
+                <div className="text-center py-12">
+                  <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary dark:border-secundary mx-auto mb-4"></div>
+                  <p className="text-textlight dark:text-textdark text-lg">
+                    Carregando manual...
+                  </p>
+                </div>
+              ) : filteredSections.length === 0 ? (
                 <div className="text-center py-12">
                   <FaSearch className="text-6xl text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                   <p className="text-textlight dark:text-textdark text-lg">
